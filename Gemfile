@@ -4,7 +4,13 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.7'
 # Use jdbcsqlite3 as the database for Active Record
-gem 'activerecord-jdbcsqlite3-adapter'
+# gem 'activerecord-jdbcsqlite3-adapter'
+# MongoDB Adapter ( ~> 4.0)
+gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
+
+# JSON parsing and conversion
+gem "multi_json"
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
