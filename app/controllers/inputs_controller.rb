@@ -1,7 +1,7 @@
 class InputsController < ApplicationController
 
 	def index
-		@inputs = Input.all
+		@inputs = Input.all.order_by(:name.asc)
 
     respond_to do |format|
       format.json do
