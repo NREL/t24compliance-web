@@ -6,5 +6,6 @@ class Input
   field :parents, type: Array
   field :children, type: Array
   field :notes, type: String  # catch-all
+  field :data_fields, type: Array
 
 end

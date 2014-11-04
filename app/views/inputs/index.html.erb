@@ -1,24 +1,87 @@
 <h2> Inputs </h2>
 
-<table class="table table-striped">
-	<tr>
-		<th>&nbsp</th>
-		<th>Name</th>
-		<th>Display Name</th>
-		<th>Parent(s)</th>
-		<th>Children</th>
-		<th>Notes</th>
-	</tr>
 
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<% @inputs.each_with_index do |i, index| %>
-		<tr>
-			<td><%= "#{index+1}." %></td>
-			<td><%= i.name %></td>
-			<td><%= i.display_name %></td>
-			<td><%= i.parents.nil? ? '' : i.parents.join(',') %></td>
-			<td><%= i.children.nil? ? '' : i.children.join(',') %></td>
-			<td><%= i.notes %></td>
-		</tr>
+	  <div class="panel panel-default">
+	    <div class="panel-heading" role="tab" id="heading<%= index %>">
+	      <h4 class="panel-title">
+	        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= index %>" aria-expanded="true" aria-controls="collapse<%= index %>">
+	          <%= index+1 %>. <%= i.display_name %>
+	        </a>
+	      </h4>
+	    </div>
+	     <div id="collapse<%= index %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= index %>">
+	      <div class="panel-body">
+	        <table class="table table-striped">
+					  <tr><th>Name</th><td><%= i.name %></td></tr>
+						<tr><th>Display Name</th><td><%= i.display_name %></td></tr>
+						<tr><th>Parent(s)</th><td><%= i.parents.nil? ? '' : i.parents.join(',') %></td></tr>
+						<tr><th>Children</th><td><%= i.children.nil? ? '' : i.children.join(',') %></td></tr>
+						<tr><th>Notes</th><td><%= i.notes %></td></tr>
+						<tr><th>Data Fields</th>
+							<td>
+								<% unless i.data_fields.nil? %>
+								<table class="table table-striped">
+									<tr>
+										<th>Name</th>
+										<th>Display Name</th>
+										<th>Data Type</th>
+										<th>Input Type</th>
+										<th>Units</th>
+										<th>Validation</th>
+										<th>Default Value ID</th>
+										<th>Enums</th>
+									</tr>
+									<% i.data_fields.each do |df| %>
+									<tr>
+										<td><%= df['name'] %></td>
+										<td><%= df['display_name'] %></td>
+										<td><%= df['data_type'] %></td>
+										<td><%= df['input_type'] %></td>
+										<td><%= df['units'] %></td>
+										<td><%= df['validation'] %></td>
+										<td><%= df['default_value_id'] %></td>
+										<td>
+											<% unless !df.key?('enumerations') %>
+											<div class="panel panel-default">
+										    <div class="panel-heading" role="tab" id="heading<%= df['name'] %>">
+										      <h4 class="panel-title">
+										        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= df['name'] %>" aria-expanded="true" aria-controls="collapse<%= df['name'] %>">
+										          Enumerations
+										        </a>
+										      </h4>
+										    </div>
+										    <div id="collapse<%= df['name'] %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= df['name'] %>">
+	      									<div class="panel-body">
+														<table class="table table-striped">
+															<tr>
+																<th>ID</th>
+																<th>Value</th>
+															</tr>
+															<% df['enumerations'].each do |enum| %>
+																<tr>
+																	<td><%= enum.keys.first %></td>
+																	<td><%= enum[enum.keys.first] %></td>
+																</tr>
+															<% end %>
+														</table>
+							  					</div>
+										    </div>
+										  </div>
+											<% end %>
+										</td>
+									</tr>
+									<% end %>
+								</table>
+								<% end %>
+							</td>
+						</tr>
+					</table>
+	      </div>
+	    </div>
+	  </div>
 	<% end %>
+</div>
 
-</table>
+

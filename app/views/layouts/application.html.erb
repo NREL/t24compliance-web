@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CbeccComWeb</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>CBECC-Com Web</title>
+  <!-- TODO: add controller-specific javascripts -->
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= yield :head %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <div class="fluid-container pad-all-20">
+  <%#= render 'layouts/nav' %>
+  <div class="row-fluid header-row">
+      <h1 class="sitename"><%= link_to 'CBECC-Com Web', root_path, :class => 'sitename' %></h1>
+  </div>
+  <div id="blue-line-and-fade" class="row-fluid header-row">
+    <hr class='top-blue'>
+    <div class="below-header"></div>
+  </div>
+
+  <div class="row-fluid header-row">
+    <!-- notices -->
+    <%= render 'layouts/flash_messages' if !flash.empty? %>
+  </div>
+
+  <%= yield %>
+
+  </div>
 
 </body>
 </html>

@@ -7,6 +7,10 @@ namespace :import do
   	
   	# current mongo object
    	obj = nil
+   	# data_fields array
+   	data_fields = []
+   	# field hash
+   	field = {}
 
 
 		File.open(filename, 'r:iso-8859-1').each_line.with_index do |line, index|
@@ -20,7 +24,7 @@ namespace :import do
 			# 31 spaces:  Dependent select (enum values depend on other field) Should be "When [clause]" or "else"
 			# 31 spaces:  Store data if it starts with 'Children:' or 'Parent(s):'
 
-			 # puts index
+			# puts index
 
 			if index > 2
 				
@@ -34,16 +38,19 @@ namespace :import do
 
 				# count top-levels
 				if num_spaces == 0 && line[0..19] != '--------------------' && !line.blank?
-					puts "Top-Level found: #{line}"
+					#puts "Top-Level found: #{line}"
 					unless obj.nil?
-						#save previous
+						# TODO: don't forget to push last field and add data_fields to obj before saving 
+						# save previous
+						obj.data_fields = data_fields
 						obj.save!
 					end
 					obj = Input.new
+					data_fields = []
 					data = line.scan(/\w+/) 
 					obj.name = data[0]
 					obj.display_name = data[1]
-					puts line.gsub(data[1], '').gsub(data[0], '').strip
+					#puts line.gsub(data[1], '').gsub(data[0], '').strip
 					# gsub order matters here
 					obj.notes = line.gsub(data[1], '').gsub(data[0], '').strip
 
@@ -57,7 +64,50 @@ namespace :import do
 						elsif line.strip.start_with?('Children')
 							obj.children = line.gsub('Children:', '').delete(' ').gsub(/\r\n/, '').split('/')
 						end
+					when 6
+						# start a field associated with this top-level
+						# first save previous field
+						if !field.empty?
+							data_fields << field
+							field = {}
+						end
+
+						data = line.scan(/\w+/) 
+						field['name'] = data[0]
+						field['display_name'] = data[1]
+						field['data_type'] = data[2]
+
+						# input type
+						field['input_type'] = data.find_index('input').nil? ? nil : data[data.find_index('input')-1]
+
+						# units
+						field['units'] = line[/Units:(.*)input/,1]
+						#puts " line #{index}, Units: #{field['units']}"
+						unless field['units'].nil?
+							field['units'] = field['units'].gsub(field['input_type'], '').strip
+						end
+
+						# validation (everything after input)
+						field['validation'] = line[/input(.*)/,1]
+
+						# TODO: other field before units?
+					when 38
+						# store default value
+						unless field.empty?
+							field['default_value_id'] = line[/default:(.*)/,1].strip
+						end
+					when 44
+						# store enumerations
+						if !field['enumerations']
+							field['enumerations'] = []
+						end
+						data = line.split(':')
+						enum_hash = {}
+						enum_hash[data[0].strip] = data[1].gsub('"', '').strip
+						field['enumerations'] << enum_hash
+
 					else
+						# skip line
 					end # end case
 
 				end	# end if num_spaces == 0
