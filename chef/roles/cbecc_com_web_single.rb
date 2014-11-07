@@ -16,5 +16,10 @@ default_attributes(
     },
     :nginx => {
         :default_site_enabled => false
+    },
+    :mongodb => {
+        # RHEL overrides to the wrong user
+        :user => 'mongodb',
+        :group => 'mongodb'
     }
 )
