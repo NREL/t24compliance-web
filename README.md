@@ -14,3 +14,6 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 1. clone this repository
 1. If using rbenv, set jruby-1.7.9 in cofee-rails directory `rbenv local jruby-1.7.9`
 1. bundle
+
+
+## System Configuration (Using Chef)
