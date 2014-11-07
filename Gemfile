@@ -43,7 +43,8 @@ gem 'puma'
 # gem 'unicorn'
 
 # Use Capistrano for deployment
+gem 'capistrano-rbenv', group: :development
 gem 'capistrano-rails', group: :development
-gem 'capistrano-puma', group: :development
+gem 'capistrano3-puma', group: :development
 
 
