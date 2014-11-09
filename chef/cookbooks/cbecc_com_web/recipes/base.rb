@@ -12,7 +12,7 @@ if node['platform'] == 'redhat'
       :mongodb => {
           # RHEL overrides to the wrong user so force username/group to be mongodb
           :user => 'mongodb',
-          :group => 'mongodb'
+          :group => 'mongodb',
 
           # Use mongodb-org even on RHEL
           :install_method => 'mongodb-org',
