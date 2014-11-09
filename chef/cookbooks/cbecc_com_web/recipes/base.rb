@@ -16,7 +16,7 @@ if node['platform'] == 'redhat'
 
           # Use mongodb-org even on RHEL
           :install_method => 'mongodb-org',
-          :package_name] => 'mongodb-org'
+          :package_name => 'mongodb-org'
       }
   )
 end
