@@ -29,6 +29,7 @@ directory "/var/www" do
   #action :create
 end
 
+# set the gid sticky bit so that any subfolder would be part of the deploy group
 bash "chmod-setgid" do
   code "chmod g+s /var/www"
 end
