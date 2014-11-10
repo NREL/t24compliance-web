@@ -160,6 +160,7 @@ GEM
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   autoprefixer-rails
