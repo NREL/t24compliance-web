@@ -16,3 +16,9 @@
 /tmp
 
 .ruby-version
+
+.idea
+
+Berksfile.lock
+Gemfile.lock
+.vagrant

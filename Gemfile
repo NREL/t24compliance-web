@@ -32,6 +32,10 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',                              group: :doc
 
+# use puma to run the web app in jruby
+gem 'puma'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -39,6 +43,8 @@ gem 'sdoc', '~> 0.4.0',                              group: :doc
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
+gem 'capistrano-rbenv', group: :development
+gem 'capistrano-rails', group: :development
+gem 'capistrano3-puma', group: :development
+gem 'capistrano3-nginx', group: :development
 
