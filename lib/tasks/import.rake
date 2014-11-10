@@ -44,9 +44,11 @@ namespace :import do
 					unless obj.nil?
 						# TODO: don't forget to push last field and add data_fields to obj before saving 
 						# save previous
+						data_fields << field
 						obj.data_fields = data_fields
 						obj.save!
 					end
+					ignore_enums = false
 					obj = Input.new
 					data_fields = []
 					data = line.scan(/\w+/) 
@@ -82,6 +84,7 @@ namespace :import do
 							data_fields << field
 							field = {}
 						end
+						ignore_enums = false
 
 						data = line.scan(/\w+/) 
 						field['name'] = data[0]
