@@ -46,7 +46,6 @@ The CBECC-Com web app runs on JRuby and Rails 4.
   ```
   cap vagrant puma:make_dirs
   cap vagrant puma:nginx_config_no_sudo
-  cap vagrant deploy
   ```
 
   ```
