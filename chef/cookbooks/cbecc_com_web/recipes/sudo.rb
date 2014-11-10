@@ -45,7 +45,7 @@ end
 if node[:nginx]
   sudo 'deploy' do
     group 'deploy'
-    commands [ "#{node[:nginx][:binary]}", "/sbin/service nginx start", "/sbin/service nginx stop", "/sbin/service nginx restart"]
+    commands [ "#{node[:nginx][:binary]}", "/sbin/service nginx start", "/sbin/service nginx stop", "/sbin/service nginx restart", "/sbin/service nginx configtest", "/sbin/service nginx status"]
     nopasswd true
   end
 end
