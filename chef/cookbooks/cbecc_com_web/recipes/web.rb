@@ -12,10 +12,18 @@
 
     only_if "getent passwd #{u}"
   end
+
+  group "rbenv" do
+    members u
+    append true
+
+    only_if "getent passwd #{u}"
+  end
 end
 
 # setup the www directory
 directory "/var/www" do
+  #user 'www-data'
   group 'deploy'
   mode '0775'
   #action :create
