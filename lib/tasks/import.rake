@@ -26,6 +26,9 @@ namespace :import do
 			# 31 spaces:  Dependent select (enum values depend on other field) Should be "When [clause]" or "else"
 			# 31 spaces:  Store data if it starts with 'Children:' or 'Parent(s):'
 
+			# TODO:  this will not pull in enumerations that do not have an 'else' state.  Must import those separated.
+			# Example:  Space -> InteriorLightingSpecificationMethod
+
 			# puts index
 
 			if index > 2
@@ -153,6 +156,37 @@ namespace :import do
 
   end
 
+  desc "fix broken enumerations"
+  task :fix_broken_enums => :environment do
+
+  	# Space -> InteriorLightingSpecificationMethod
+	  input = Input.find_by(name: 'Spc')
+	  input.data_fields.each do |df|
+	  	if df['name'] == 'IntLtgSpecMthd'
+	  		df['enumerations'] = []
+	  		enum_hash = {}
+	  		enum_hash['cbecc_id'] = '1'
+				enum_hash['name'] = 'AreaCategoryMethod'
+				df['enumerations'] << enum_hash
+	  		df['conditional_logic'] = true
+	  	end
+	  end
+	  input.save!
+	  # IntLtgSys ->
+	  # Space -> InteriorLightingSpecificationMethod
+	  input = Input.find_by(name: 'IntLtgSys')
+	  input.data_fields.each do |df|
+	  	if df['name'] == 'IntLtgSpecMthd'
+	  		df['enumerations'] = []
+	  		enum_hash = {}
+	  		enum_hash['cbecc_id'] = '1'
+				enum_hash['name'] = 'AreaCategoryMethod'
+				df['enumerations'] << enum_hash
+	  		df['conditional_logic'] = true
+	  	end
+	  end
+	  input.save!
+	end
 
   desc "import input fields from json cache"
   task :input_fields_json => :environment do
