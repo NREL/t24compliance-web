@@ -44,7 +44,10 @@ namespace :import do
 					unless obj.nil?
 						# TODO: don't forget to push last field and add data_fields to obj before saving 
 						# save previous
-						data_fields << field
+						if !field.empty?
+							data_fields << field
+							field = {}
+						end
 						obj.data_fields = data_fields
 						obj.save!
 					end
