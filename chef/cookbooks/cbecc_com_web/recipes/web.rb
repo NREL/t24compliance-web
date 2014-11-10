@@ -43,14 +43,14 @@ end
   end
 end
 
-cron 'cbecc_com_json_backup' do
-  minute '0'
-  hour '*/12'
-  user 'nlong'
-  command %Q{
-    cd /home/nlong &&  curl -SL http://localhost/inputs.json -o inputs_$(date +%Y%m%d_%H%M%S).json
-  }
-end
+# cron 'cbecc_com_json_backup' do
+#   minute '0'
+#   hour '6'
+#   user 'root'
+#   command %Q{
+#     cd ~ && curl -SL http://localhost/inputs.json -o inputs_$(date +%Y%m%d_%H%M%S).json
+#   }
+# end
 
 # set ip tables
 include_recipe "iptables"
