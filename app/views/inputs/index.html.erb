@@ -45,17 +45,22 @@
 													<th>Enum Default ID</th>
 													<th>Enumerations</th>
 													<th>Expose to App </th>
+													<th>Set as Constant</th>
+													<th>Comments</th>
 												</tr>
 												<% i.data_fields.each do |df| %>
 												<tr>
 													<td><%= df['name'] %></td>
 													<td><%= df['display_name'] %></td>
-													<td><%= df['data_type'] %></td>
+													<td><%= df['data_type'] %> <% if df['data_type'].include? 'Array' %>(<%= df['array_length'] %>)<% end %></td>
 													<td><%= df['input_type'] %></td>
 													<td><%= df['units'] %></td>
 													<td><%= df['validation'] %></td>
 													<td><%= df['default_value_id'] %></td>
 													<td>
+														<% if df['conditional_logic'] %>
+															<p class="red">Conditional Logic</p>
+														<% end %>
 														<% unless !df.key?('enumerations') %>
 														<div class="panel panel-default">
 													    <div class="panel-heading" role="tab" id="heading<% index %>-<%= df['name'] %>">
@@ -68,14 +73,9 @@
 													    <div id="collapse<%= index %>-<%= df['name'] %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= index %>-<%= df['name'] %>">
 				      									<div class="panel-body">
 																	<table class="table table-striped">
-																		<tr>
-																			<th>ID</th>
-																			<th>Value</th>
-																		</tr>
 																		<% df['enumerations'].each do |enum| %>
 																			<tr>
-																				<td><%= enum.keys.first %></td>
-																				<td><%= enum[enum.keys.first] %></td>
+																				<td><%= enum['name'] %></td>
 																			</tr>
 																		<% end %>
 																	</table>
@@ -84,7 +84,9 @@
 													  </div>
 														<% end %>
 													</td>
-													<td><span class="pad-left-sm"><%= df['exposed'] ? 'TRUE' : nil %></span></td>
+													<td><span class="pad-left-sm"><%= df['exposed'] ? 'X' : nil %></span></td>
+													<td><%= df['constant_value'] %></td>
+													<td><%= df['comments'] %></td>
 												</tr>
 												<% end %>
 											</table>

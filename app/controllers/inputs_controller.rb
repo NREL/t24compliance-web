@@ -46,7 +46,8 @@ class InputsController < ApplicationController
 					df['set_as_constant'] = false
 				end
 
-				df['constant_value'] =  params[df['name'] + '_constant']
+				df['constant_value'] = params[df['name'] + '_constant']
+				df['comments'] = params[df['name'] + '_comments']
 
 			end
 			@input.save!
