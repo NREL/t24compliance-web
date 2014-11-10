@@ -5,6 +5,13 @@ staging:
       hosts:
         - localhost:27017
       options:
+vagrant:
+  sessions:
+    default:
+      database: cbecc_com_web_vagrant
+      hosts:
+        - localhost:27017
+      options:
 production:
   sessions:
     default:
