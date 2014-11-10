@@ -22,3 +22,30 @@
 	text-align: center;
 	border-right: 1px solid #ddd;
 }
+
+.edittable th,
+.edittable td {
+  padding: 8px;
+  line-height: 25px;
+}
+
+.edittable {
+  input {
+    width: 350px;
+  }
+  input[type=checkbox]{
+    width: 30px;
+  }
+  .cb-label {
+    font-weight:normal;
+    width:320px;
+    margin:5px 0 0;
+  }
+  textarea {
+    width: 350px;
+    height: 100px;
+  }
+  select {
+    width:  350px;
+  }
+}

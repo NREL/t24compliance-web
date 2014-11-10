@@ -1,5 +1,9 @@
 class InputsController < ApplicationController
 
+	def dashboard
+
+	end
+
 	def index
 		@inputs = Input.all.order_by(:name.asc)
 

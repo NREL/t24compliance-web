@@ -1,0 +1,48 @@
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table class="edittable">
+  <% @project_fields.each do |df| %>
+
+    <!-- check if field is exposed (add to form) -->
+    <% if df['exposed'] %>
+
+      <!-- what kind of field? -->
+      <% case df['data_type'] %>
+        <% when 'Enumeration' %>
+          <tr>
+            <th><%= label_tag(df['display_name']) %></th>
+            <td><%= select_tag(df['name'], df['enumerations']) %></td>
+           </tr>
+        <% else %>
+          <tr>
+            <th><%= label_tag(df['display_name']) %></th>
+            <td><%= text_field_tag(df['name']) %></td>
+          </tr>
+      <% end %>
+
+
+
+    <% elsif df['set_as_constant'] %>
+
+
+    <% end %>
+
+
+  <% end %>
+  </table>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
