@@ -8,15 +8,7 @@
 Chef::Log.warn "Current platform is: #{node['platform']}"
 
 if node['platform'] == 'redhat'
-  override_attributes(
-      :mongodb => {
-          # RHEL overrides to the wrong user so force username/group to be mongodb
-          :user => 'mongodb',
-          :group => 'mongodb',
-
-          # Use mongodb-org even on RHEL
-          :install_method => 'mongodb-org',
-          :package_name => 'mongodb-org'
-      }
-  )
+  # On RHEL use the mongodb-org package as well
+  node.override[:mongodb][:install_method] = 'mongodb-org'
+  node.override[:mongodb][:package_name] = 'mongodb-org'
 end
