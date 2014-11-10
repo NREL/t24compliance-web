@@ -38,15 +38,26 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 
 ## Deployment
 
-### Vagrant
+### Vagrant / Staging
 
 * Start the vagrant machine and make sure provision runs
 * Configure nginx and puma
 
-```
-cap vagrant puma:make_dirs
-cap vagrant puma:config
-cap vagrant puma:nginx_config
+  ```
+  cap vagrant puma:make_dirs
+  cap vagrant puma:nginx_config_no_sudo
+  cap vagrant deploy
+  ```
 
-cap vagrant deploy
-```
+  ```
+  cap staging puma:make_dirs
+  cap staging puma:nginx_config_no_sudo
+  ```
+* Deploy the application
+
+  ```
+  cap vagrant deploy
+  # or
+  cap staging deploy
+  ```
+  

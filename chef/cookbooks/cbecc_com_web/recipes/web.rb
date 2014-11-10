@@ -32,3 +32,13 @@ end
 bash "chmod-setgid" do
   code "chmod g+s /var/www"
 end
+
+# setup the www directory
+%w(/etc/nginx/sites-available /etc/nginx/sites-enabled).each do |d|
+  directory d do
+    #user 'www-data'
+    group 'deploy'
+    mode '0775'
+    #action :create
+  end
+end
