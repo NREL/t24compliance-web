@@ -5,6 +5,20 @@
 @import "bootstrap";
 
 
-.pad-all-20 {
+.pad-all-sm {
 	padding:20px;
+}
+
+.pad-left-sm {
+	padding-left: 30px;
+}
+
+.save-btn {
+  text-align:center;
+  padding: 20px 10px;
+}
+
+.multicol-header{
+	text-align: center;
+	border-right: 1px solid #ddd;
 }

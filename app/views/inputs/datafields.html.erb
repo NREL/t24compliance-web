@@ -1,0 +1,75 @@
+<h2> Edit Datafields for <%=@input.name %></h2>
+ <div class="pad-all-sm">
+ 		<%= link_to 'Back to Inputs Index' , inputs_path %>
+ 	</div>
+	<%= form_tag input_datafields_path, :method => :post do |f| %>
+	<%= hidden_field_tag 'input_id', @input.id %>
+	  <table class="table table-striped">
+			<tr>
+				<th colspan="8" class="multicol-header">CBECC Fields</th>
+				<th colspan="3" class="multicol-header">NREL Fields</th>
+			<tr>
+				<th>Name</th>
+				<th>Display Name</th>
+				<th>Data Type</th>
+				<th>Input Type</th>
+				<th>Units</th>
+				<th>Validation</th>
+				<th>Enum Default ID</th>
+				<th>Enumerations</th>
+				<th>Expose to Form</th>
+				<th>Set Field as Constant</th>
+				<th>Constant Value</th>
+			</tr>
+
+			<% @input.data_fields.each do |df| %>
+				<tr>
+					<td><%= df['name'] %></td>
+					<td><%= df['display_name'] %></td>
+					<td><%= df['data_type'] %></td>
+					<td><%= df['input_type'] %></td>
+					<td><%= df['units'] %></td>
+					<td><%= df['validation'] %></td>
+					<td><%= df['default_value_id'] %></td>
+				
+					<td>
+						<% unless !df.key?('enumerations') %>
+						<div class="panel panel-default">
+					    <div class="panel-heading" role="tab" id="heading-<%= df['name'] %>">
+					      <h4 class="panel-title">
+					        <a data-toggle="collapse" href="#collapse-<%= df['name'] %>" aria-expanded="true" aria-controls="collapse-<%= df['name'] %>">
+					          Enumerations
+					        </a>
+					      </h4>
+					    </div>
+					    <div id="collapse-<%= df['name'] %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<%= df['name'] %>">
+								<div class="panel-body">
+									<table class="table table-striped">
+										<tr>
+											<th>ID</th>
+											<th>Value</th>
+										</tr>
+										<% df['enumerations'].each do |enum| %>
+											<tr>
+												<td><%= enum.keys.first %></td>
+												<td><%= enum[enum.keys.first] %></td>
+											</tr>
+										<% end %>
+									</table>
+		  					</div>
+					    </div>
+					  </div>
+						<% end %>
+					</td>
+					<% exp_checked_status = df['exposed'] ? true:false %>
+					<% const_checked_status = df['set_as_constant'] ? true:false %>
+					<td><span class="pad-left-sm"><%= check_box_tag('exposed_fields[]', df['name'], exp_checked_status) %></span></td>
+					<td><span class="pad-left-sm"><%= check_box_tag('set_as_constant_fields[]', df['name'], const_checked_status) %></span></td>
+					<td><%= text_field_tag(df['name']+ '_constant', df['constant_value']) %></td>
+				</tr>
+			<% end %>
+		</table>
+		<div class="save-btn">
+    	<%= submit_tag "Save Changes", class: "btn btn-primary" %>
+    </div>
+	<% end %> 

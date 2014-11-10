@@ -33,7 +33,7 @@
 									<div id="collapse<%= index %>df" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= index %>df">
 	      						<div class="panel-body">
 							
-								
+											<div class="pad-all-sm"><%= link_to 'Edit Data Fields', input_datafields_path(i.id) %></div>
 											<table class="table table-striped">
 												<tr>
 													<th>Name</th>
@@ -44,6 +44,7 @@
 													<th>Validation</th>
 													<th>Enum Default ID</th>
 													<th>Enumerations</th>
+													<th>Expose to App </th>
 												</tr>
 												<% i.data_fields.each do |df| %>
 												<tr>
@@ -83,6 +84,7 @@
 													  </div>
 														<% end %>
 													</td>
+													<td><span class="pad-left-sm"><%= df['exposed'] ? 'TRUE' : nil %></span></td>
 												</tr>
 												<% end %>
 											</table>

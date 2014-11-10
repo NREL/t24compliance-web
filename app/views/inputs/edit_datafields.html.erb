@@ -1,0 +1,60 @@
+<h2> Edit Datafields for <%=@input.name %></h2>
+
+ <table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Display Name</th>
+		<th>Data Type</th>
+		<th>Input Type</th>
+		<th>Units</th>
+		<th>Validation</th>
+		<th>Enum Default ID</th>
+		<th>Enumerations</th>
+		<th>Expose to App</td>
+	</tr>
+		<%= form_tag datafields_path, :method => :post do |f| %>
+		<% @input.data_fields.each do |df| %>
+			<tr>
+				<td><%= df['name'] %></td>
+				<td><%= df['display_name'] %></td>
+				<td><%= df['data_type'] %></td>
+				<td><%= df['input_type'] %></td>
+				<td><%= df['units'] %></td>
+				<td><%= df['validation'] %></td>
+				<td><%= df['default_value_id'] %></td>
+			
+				<td>
+					<% unless !df.key?('enumerations') %>
+					<div class="panel panel-default">
+				    <div class="panel-heading" role="tab" id="heading-<%= df['name'] %>">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" href="#collapse-<%= df['name'] %>" aria-expanded="true" aria-controls="collapse-<%= df['name'] %>">
+				          Enumerations
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapse-<%= df['name'] %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-<%= df['name'] %>">
+							<div class="panel-body">
+								<table class="table table-striped">
+									<tr>
+										<th>ID</th>
+										<th>Value</th>
+									</tr>
+									<% df['enumerations'].each do |enum| %>
+										<tr>
+											<td><%= enum.keys.first %></td>
+											<td><%= enum[enum.keys.first] %></td>
+										</tr>
+									<% end %>
+								</table>
+	  					</div>
+				    </div>
+				  </div>
+					<% end %>
+				</td>
+				<% checked_status = df['exposed'] ? true:false %>
+				<td><span class="pad-left-sm"><%= check_box_tag(df['name'], '1', checked_status, class: 'input pad-left-sm')  %></span></td>
+			</tr>
+		<% end %>
+		<% end %> 
+	</table>
