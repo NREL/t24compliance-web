@@ -117,6 +117,7 @@ namespace :import do
 
 						# validation (everything after input)
 						field['validation'] = line[/input(.*)/,1]
+            field['validation'].chomp!.strip! if field['validation']
 
 						# TODO: other field before units?
 					when 38
@@ -150,6 +151,12 @@ namespace :import do
 			obj.save!
 		end
 
+  end
+
+
+  desc "import input fields from json cache"
+  task :input_fields_json => :environment do
+    Input.import_from_json('lib/assets/cbecc_inputs.json')
   end
 end
 
