@@ -14,15 +14,16 @@ set :use_sudo, false
 set :stages, [:vagrant, :staging, :development, :production]
 set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/#{fetch(:application)}"
+set :ssh_options, {forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)}
+
+# If you want to be able to connect to web server via puma (not nginx),
+# then use tcp. unix socket is faster (10%-ish) and preferred
 #set :puma_bind, "tcp://127.0.0.1:9292"
 set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log, "#{release_path}/log/puma.access.log"
-set :ssh_options, {forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)}
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
 set :puma_init_active_record, false # Change to true if using ActiveRecord
 
 ## Defaults:
@@ -63,7 +64,7 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'deploy:restart' # , 'puma:start'
+      before 'deploy:restart', 'puma:start'
       invoke 'deploy'
     end
   end
@@ -71,7 +72,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # invoke 'puma:restart'
+      invoke 'puma:restart'
     end
   end
 
@@ -80,7 +81,3 @@ namespace :deploy do
   after :finishing, :cleanup
   after :finishing, :restart
 end
-
-# ps aux | grep puma    # Get puma pid
-# kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma

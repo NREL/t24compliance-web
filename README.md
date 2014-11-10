@@ -35,3 +35,18 @@ The CBECC-Com web app runs on JRuby and Rails 4.
   ```
 
 * Log into the server and run `sudo chef-client`
+
+## Deployment
+
+### Vagrant
+
+* Start the vagrant machine and make sure provision runs
+* Configure nginx and puma
+
+```
+cap vagrant puma:make_dirs
+cap vagrant puma:config
+cap vagrant puma:nginx_config
+
+cap vagrant deploy
+```
