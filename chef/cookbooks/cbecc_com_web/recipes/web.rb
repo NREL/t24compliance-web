@@ -42,3 +42,7 @@ end
     #action :create
   end
 end
+
+# set ip tables
+include_recipe "iptables"
+iptables_rule "default_ip_rules"

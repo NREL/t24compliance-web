@@ -11,7 +11,7 @@ depends 'java'
 depends 'nginx'
 depends 'application_nginx'
 depends 'rbenv'
-
+depends 'iptables'
 
 %w{ redhat centos }.each do |os|
   supports os
