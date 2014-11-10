@@ -15,7 +15,7 @@ class Input
       json.each do |input|
         # If you don't delete the _id, then it will override the existing (? i think)
         input.delete :_id
-        logger.info input
+        logger.info "Importing '#{input[:name]}'"
 
         a = Input.new(input)
         a.save!
