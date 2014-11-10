@@ -9,6 +9,7 @@ run_list([
             "recipe[mongodb]",
             "recipe[cbecc_com_web::sudo]",
             "recipe[cbecc_com_web::ruby]",
+            "recipe[cbecc_com_web::web]",
          ])
 
 default_attributes(
