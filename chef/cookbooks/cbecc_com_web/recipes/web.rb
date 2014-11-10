@@ -39,7 +39,6 @@ end
     #user 'www-data'
     group 'deploy'
     mode '0775'
-    #action :create
   end
 end
 

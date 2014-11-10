@@ -40,3 +40,12 @@ sudo 'comvault' do
   group 'cvadmin'
   nopasswd true
 end
+
+# Allow deploy group to be able to restart nginx with sudo (if nginx recipe)
+if node[:nginx]
+  sudo 'deploy' do
+    group 'deploy'
+    commands [ "#{node[:nginx][:binary]}", "/sbin/service nginx start", "/sbin/service nginx stop", "/sbin/service nginx restart"]
+    nopasswd true
+  end
+end

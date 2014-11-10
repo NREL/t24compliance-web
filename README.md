@@ -52,11 +52,20 @@ The CBECC-Com web app runs on JRuby and Rails 4.
   cap staging puma:make_dirs
   cap staging puma:nginx_config_no_sudo
   ```
+
 * Deploy the application
 
   ```
   cap vagrant deploy
   # or
   cap staging deploy
+  ```
+
+* Restart nginx (if you changed the site config)
+
+  ```
+  cap vagrant nginx:restart
+  # or
+  cap staging nginx:restart
   ```
   
