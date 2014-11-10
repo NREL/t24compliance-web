@@ -11,5 +11,7 @@ require 'capistrano/rbenv'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 
+require 'capistrano/nginx'
+
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
