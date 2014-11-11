@@ -11,4 +11,8 @@ if node['platform'] == 'redhat'
   # On RHEL use the mongodb-org package as well
   node.override[:mongodb][:install_method] = 'mongodb-org'
   node.override[:mongodb][:package_name] = 'mongodb-org'
+
+  # Install yum-cron on rhel to keep the system up to date
+  package 'yum-cron'
+
 end
