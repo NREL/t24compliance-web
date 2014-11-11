@@ -1,0 +1,97 @@
+<h1>Listing projects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Geometry input type</th>
+      <th>Climate zone</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Elevation</th>
+      <th>Street address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip code</th>
+      <th>Owner name</th>
+      <th>Owner title</th>
+      <th>Owner organization</th>
+      <th>Owner email</th>
+      <th>Owner phone</th>
+      <th>Architect name</th>
+      <th>Architect title</th>
+      <th>Architect organization</th>
+      <th>Architect email</th>
+      <th>Architect phone</th>
+      <th>Hvac engineer name</th>
+      <th>Hvac engineer title</th>
+      <th>Hvac engineer organization</th>
+      <th>Hvac engineer email</th>
+      <th>Hvac engineer phone</th>
+      <th>Weather station</th>
+      <th>Hvac auto sizing</th>
+      <th>Exceptional condition complete building</th>
+      <th>Exceptional condition exterior lighting</th>
+      <th>Exceptional condition no cooling system</th>
+      <th>Exceptional condition rated capacity</th>
+      <th>Exceptional condition water heater</th>
+      <th>Exceptional condition narrative</th>
+      <th>Run title</th>
+      <th>Compliance type</th>
+      <th>Compliance report pdf</th>
+      <th>Compliance report xml</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.geometry_input_type %></td>
+        <td><%= project.climate_zone %></td>
+        <td><%= project.latitude %></td>
+        <td><%= project.longitude %></td>
+        <td><%= project.elevation %></td>
+        <td><%= project.street_address %></td>
+        <td><%= project.city %></td>
+        <td><%= project.state %></td>
+        <td><%= project.zip_code %></td>
+        <td><%= project.owner_name %></td>
+        <td><%= project.owner_title %></td>
+        <td><%= project.owner_organization %></td>
+        <td><%= project.owner_email %></td>
+        <td><%= project.owner_phone %></td>
+        <td><%= project.architect_name %></td>
+        <td><%= project.architect_title %></td>
+        <td><%= project.architect_organization %></td>
+        <td><%= project.architect_email %></td>
+        <td><%= project.architect_phone %></td>
+        <td><%= project.hvac_engineer_name %></td>
+        <td><%= project.hvac_engineer_title %></td>
+        <td><%= project.hvac_engineer_organization %></td>
+        <td><%= project.hvac_engineer_email %></td>
+        <td><%= project.hvac_engineer_phone %></td>
+        <td><%= project.weather_station %></td>
+        <td><%= project.hvac_auto_sizing %></td>
+        <td><%= project.exceptional_condition_complete_building %></td>
+        <td><%= project.exceptional_condition_exterior_lighting %></td>
+        <td><%= project.exceptional_condition_no_cooling_system %></td>
+        <td><%= project.exceptional_condition_rated_capacity %></td>
+        <td><%= project.exceptional_condition_water_heater %></td>
+        <td><%= project.exceptional_condition_narrative %></td>
+        <td><%= project.run_title %></td>
+        <td><%= project.compliance_type %></td>
+        <td><%= project.compliance_report_pdf %></td>
+        <td><%= project.compliance_report_xml %></td>
+        <td><%= link_to 'Show', project %></td>
+        <td><%= link_to 'Edit', edit_project_path(project) %></td>
+        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project', new_project_path %>

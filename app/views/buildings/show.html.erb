@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @building.name %>
+</p>
+
+<p>
+  <strong>Function classification method:</strong>
+  <%= @building.function_classification_method %>
+</p>
+
+<p>
+  <strong>Relocatable public school building:</strong>
+  <%= @building.relocatable_public_school_building %>
+</p>
+
+<p>
+  <strong>Building azimuth:</strong>
+  <%= @building.building_azimuth %>
+</p>
+
+<p>
+  <strong>Total story count:</strong>
+  <%= @building.total_story_count %>
+</p>
+
+<p>
+  <strong>Above grade story count:</strong>
+  <%= @building.above_grade_story_count %>
+</p>
+
+<p>
+  <strong>Living unit count:</strong>
+  <%= @building.living_unit_count %>
+</p>
+
+<p>
+  <strong>Total floor area:</strong>
+  <%= @building.total_floor_area %>
+</p>
+
+<p>
+  <strong>Nonresidential floor area:</strong>
+  <%= @building.nonresidential_floor_area %>
+</p>
+
+<p>
+  <strong>Residential floor area:</strong>
+  <%= @building.residential_floor_area %>
+</p>
+
+<p>
+  <strong>Total conditioned volume:</strong>
+  <%= @building.total_conditioned_volume %>
+</p>
+
+<p>
+  <strong>Plant cooling capacity:</strong>
+  <%= @building.plant_cooling_capacity %>
+</p>
+
+<p>
+  <strong>Plant heating capacity:</strong>
+  <%= @building.plant_heating_capacity %>
+</p>
+
+<p>
+  <strong>Coil cooling capacity:</strong>
+  <%= @building.coil_cooling_capacity %>
+</p>
+
+<p>
+  <strong>Coil heating capacity:</strong>
+  <%= @building.coil_heating_capacity %>
+</p>
+
+<%= link_to 'Edit', edit_building_path(@building) %> |
+<%= link_to 'Back', buildings_path %>

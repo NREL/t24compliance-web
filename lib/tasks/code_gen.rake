@@ -16,7 +16,7 @@ namespace :code_gen do
 
   	# start with these:
   	# scaffolds = ['Proj', 'Bldg', 'Story', 'Spc']
-  	scaffolds = ['Proj']
+  	scaffolds = ['Proj', 'Bldg']
 
   	# for each scaffold do:
   	scaffolds.each do |s|
@@ -27,22 +27,27 @@ namespace :code_gen do
 
   		# always add a 'name:string' field
   		fields_str = 'name:string'
-
+			num = 0
   		# get fields (in a string name: type)
   		input.data_fields.each do |df|
-  			if df['data_type'].include? 'Array' 
-  				data_type = 'array'
-  			elsif df['data_type'].include? 'Enumeration'
-  				data_type = 'string'
-  			else 
-  				data_type = df['data_type'].downcase
-  			end
 
-  			fields_str = fields_str + ", #{df['db_field_name']}:#{data_type}"
+  			# only create fields marked as 'exposed'
+  			
+  			if df['exposed']
+  				num += 1
+	  			if df['data_type'].include? 'Array' 
+	  				data_type = 'array'
+	  			elsif df['data_type'].include? 'Enumeration'
+	  				data_type = 'string'
+	  			else 
+	  				data_type = df['data_type'].downcase
+	  			end
 
+	  			fields_str = fields_str + ", #{df['db_field_name']}:#{data_type}"
+	  		end
   		end
 
-  		puts "#{controller_name}: generating with #{input.data_fields.count} fields"
+  		puts "Generating scaffold for #{controller_name} with #{num} fields"
   		# puts "STRING: #{fields_str}"
   		
 

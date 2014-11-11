@@ -1,0 +1,77 @@
+<%= form_for(@building) do |f| %>
+  <% if @building.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@building.errors.count, "error") %> prohibited this building from being saved:</h2>
+
+      <ul>
+      <% @building.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :function_classification_method %><br>
+    <%= f.text_field :function_classification_method %>
+  </div>
+  <div class="field">
+    <%= f.label :relocatable_public_school_building %><br>
+    <%= f.text_field :relocatable_public_school_building %>
+  </div>
+  <div class="field">
+    <%= f.label :building_azimuth %><br>
+    <%= f.text_field :building_azimuth %>
+  </div>
+  <div class="field">
+    <%= f.label :total_story_count %><br>
+    <%= f.text_field :total_story_count %>
+  </div>
+  <div class="field">
+    <%= f.label :above_grade_story_count %><br>
+    <%= f.text_field :above_grade_story_count %>
+  </div>
+  <div class="field">
+    <%= f.label :living_unit_count %><br>
+    <%= f.text_field :living_unit_count %>
+  </div>
+  <div class="field">
+    <%= f.label :total_floor_area %><br>
+    <%= f.text_field :total_floor_area %>
+  </div>
+  <div class="field">
+    <%= f.label :nonresidential_floor_area %><br>
+    <%= f.text_field :nonresidential_floor_area %>
+  </div>
+  <div class="field">
+    <%= f.label :residential_floor_area %><br>
+    <%= f.text_field :residential_floor_area %>
+  </div>
+  <div class="field">
+    <%= f.label :total_conditioned_volume %><br>
+    <%= f.text_field :total_conditioned_volume %>
+  </div>
+  <div class="field">
+    <%= f.label :plant_cooling_capacity %><br>
+    <%= f.text_field :plant_cooling_capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :plant_heating_capacity %><br>
+    <%= f.text_field :plant_heating_capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :coil_cooling_capacity %><br>
+    <%= f.text_field :coil_cooling_capacity %>
+  </div>
+  <div class="field">
+    <%= f.label :coil_heating_capacity %><br>
+    <%= f.text_field :coil_heating_capacity %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
