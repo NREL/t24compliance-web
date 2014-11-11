@@ -55,12 +55,13 @@ namespace :import do
 						obj.save!
 					end
 					ignore_enums = false
-					obj = Input.new
+					
 					data_fields = []
 					data = line.scan(/\w+/) 
-					obj.name = data[0]
+					obj = Input.find_or_create_by(name: data[0])
+					puts "Object found: #{obj.name}"
 					obj.display_name = data[1]
-					#puts line.gsub(data[1], '').gsub(data[0], '').strip
+
 					# gsub order matters here
 					obj.notes = line.gsub(data[1], '').gsub(data[0], '').strip
 
@@ -95,6 +96,7 @@ namespace :import do
 						data = line.scan(/\w+/) 
 						field['name'] = data[0]
 						field['display_name'] = data[1]
+						field['db_field_name'] = data[1].underscore
 
 						# find if data is array, and # of values
 						if line.include?('#Vals:')
@@ -122,6 +124,17 @@ namespace :import do
 						field['validation'] = line[/input(.*)/,1]
             field['validation'].chomp!.strip! if field['validation']
 
+            # add existing NREL fields
+            if obj.data_fields
+	            obj.data_fields.each do |df|
+	            	if df['name'] == field['name']
+	            		field['exposed'] = df['exposed']
+	            		field['set_as_constant'] = df['set_as_constant']
+	            		field['constant_value'] = df['constant_value']
+	            		field['comments'] = df['comments']
+	            	end
+	            end
+	          end
 						# TODO: other field before units?
 					when 38
 						# store default value
@@ -151,6 +164,11 @@ namespace :import do
 
 		# save last object
 		unless obj.nil?
+			if !field.empty?
+				data_fields << field
+				field = {}
+			end
+			obj.data_fields = data_fields
 			obj.save!
 		end
 
