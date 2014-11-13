@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :simulations do
+    member do
+      post :run
+      get :run
+    end
+  end
+
   resources :buildings
 
   resources :projects

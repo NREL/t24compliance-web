@@ -1,9 +1,16 @@
-namespace :sim do
+class Simulation
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-  desc "import input fields"
-  task :docker_test => :environment do
+  field :filename, type: String
+  field :status, type: String
+
+  # Run the data point. The question I have here is whether or not this can be accessed from delayed_job
+  def run_docker
     require 'docker'
 
+    logger.info "I AM HERE"
+    logger.info "#{ENV.inspect}"
     if ENV['DOCKER_HOST']
       puts "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
     else
@@ -42,7 +49,7 @@ namespace :sim do
       c = Docker::Container.create('Cmd' => run_command,
                                    'Image' => 'nllong/cbecc-com:daemon',
                                    'AttachStdout' => true,
-                                   #'Volumes' => {"/var/cbecc-com-files/run" => {}}
+      #'Volumes' => {"/var/cbecc-com-files/run" => {}}
       )
 
       c.start('Binds' => ["#{File.dirname(sim_path)}:/var/cbecc-com-files/run/"])
@@ -53,8 +60,9 @@ namespace :sim do
       stdout, stderr = c.attach(:stream => false, :stdout => true, :stderr => true, :logs => true)
 
       puts stdout
-    ensure
-      Dir.chdir(current_dir)
+
+      # par
+
     end
 
 
