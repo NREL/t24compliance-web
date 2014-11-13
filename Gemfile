@@ -35,6 +35,8 @@ gem 'sdoc', '~> 0.4.0',                              group: :doc
 # use puma to run the web app in jruby
 gem 'puma'
 
+# For simulation of CBECC
+gem 'docker-api'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

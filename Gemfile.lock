@@ -37,10 +37,11 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    archive-tar-minitar (0.5.2)
     arel (5.0.1.20140414130214)
     autoprefixer-rails (3.1.2.20141016)
       execjs
-    bootstrap-sass (3.3.0.1)
+    bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     bson (2.3.0)
     bson (2.3.0-java)
@@ -72,7 +73,12 @@ GEM
     coffee-script-source (1.8.0)
     colorize (0.7.3)
     connection_pool (2.0.0)
+    docker-api (1.14.0)
+      archive-tar-minitar
+      excon (>= 0.38.0)
+      json
     erubis (2.7.0)
+    excon (0.41.0)
     execjs (2.2.2)
     hike (1.2.3)
     i18n (0.6.11)
@@ -87,7 +93,7 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
-    minitest (5.4.2)
+    minitest (5.4.3)
     moped (2.0.1)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -152,7 +158,7 @@ GEM
     thread_safe (0.3.4)
     thread_safe (0.3.4-java)
     tilt (1.4.1)
-    turbolinks (2.5.1)
+    turbolinks (2.5.2)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -172,6 +178,7 @@ DEPENDENCIES
   capistrano3-nginx
   capistrano3-puma
   coffee-rails (~> 4.0.0)
+  docker-api
   jbuilder (~> 2.0)
   jquery-rails
   mongoid!
