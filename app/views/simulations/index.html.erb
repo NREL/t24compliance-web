@@ -10,6 +10,7 @@
   <tbody>
     <% @simulations.each do |simulation| %>
       <tr>
+        <td><%= simulation.filename %></td>
         <td><%= link_to 'Show', simulation %></td>
         <td><%= link_to 'Edit', edit_simulation_path(simulation) %></td>
         <td><%= link_to 'Destroy', simulation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
