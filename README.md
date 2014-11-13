@@ -15,6 +15,11 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 1. Install bundler for jruby `gem install bundler`
 1. bundle
 
+## Running
+
+If you are going to be using your local machine to run CBECC-Com, then you will need to install boot2docker.
+
+
 ## System Configuration (Using Chef)
 
 * Update the roles/cookbooks in the /chef folder.

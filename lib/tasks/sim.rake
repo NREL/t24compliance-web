@@ -2,8 +2,6 @@ namespace :sim do
 
   desc "import input fields"
   task :docker_test => :environment do
-    require 'docker'
-
     if ENV['DOCKER_HOST']
       puts "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
     else
