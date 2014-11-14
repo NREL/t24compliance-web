@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<%= @simulation.inspect %>
+<%= link_to 'Run Simulation', run_simulation_path(@simulation) %> |
+<%= link_to 'pdf', @simulation.compliance_report_pdf_path %> |
+<%= link_to 'Edit', edit_simulation_path(@simulation) %> |
+<%= link_to 'Back', simulations_path %>
