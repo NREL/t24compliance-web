@@ -65,9 +65,9 @@ class Building
 				unless kids.nil? or kids.empty?
 					kids.each do |k|
 						if k == 'building'
-							xml << self.building
+							xml << self.building.to_sdd_xml
 						else
-							models = self[k.pluralize]
+							models = self.send(k.pluralize)
 							models.each do |m|
 								xml << m.to_sdd_xml
 							end
@@ -76,6 +76,6 @@ class Building
 				end
 			end
 		end
-		builder.to_xml
+		#builder.to_xml
 	end
 end
