@@ -1,0 +1,29 @@
+<h1>Listing heat_rejections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @heat_rejections.each do |heat_rejection| %>
+      <tr>
+        <td><%= heat_rejection.name %></td>
+        <td><%= heat_rejection.status %></td>
+        <td><%= heat_rejection.type %></td>
+        <td><%= link_to 'Show', heat_rejection %></td>
+        <td><%= link_to 'Edit', edit_heat_rejection_path(heat_rejection) %></td>
+        <td><%= link_to 'Destroy', heat_rejection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Heat rejection', new_heat_rejection_path %>

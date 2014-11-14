@@ -1,0 +1,29 @@
+<%= form_for(@interior_lighting_system) do |f| %>
+  <% if @interior_lighting_system.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@interior_lighting_system.errors.count, "error") %> prohibited this interior_lighting_system from being saved:</h2>
+
+      <ul>
+      <% @interior_lighting_system.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :parent_space_function %><br>
+    <%= f.text_field :parent_space_function %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

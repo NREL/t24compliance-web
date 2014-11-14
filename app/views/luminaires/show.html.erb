@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @luminaire.name %>
+</p>
+
+<p>
+  <strong>Fixture type:</strong>
+  <%= @luminaire.fixture_type %>
+</p>
+
+<p>
+  <strong>Lamp type:</strong>
+  <%= @luminaire.lamp_type %>
+</p>
+
+<%= link_to 'Edit', edit_luminaire_path(@luminaire) %> |
+<%= link_to 'Back', luminaires_path %>

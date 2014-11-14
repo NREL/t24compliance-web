@@ -1,0 +1,29 @@
+<%= form_for(@fenestration_construction) do |f| %>
+  <% if @fenestration_construction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fenestration_construction.errors.count, "error") %> prohibited this fenestration_construction from being saved:</h2>
+
+      <ul>
+      <% @fenestration_construction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :fenestration_type %><br>
+    <%= f.text_field :fenestration_type %>
+  </div>
+  <div class="field">
+    <%= f.label :assembly_context %><br>
+    <%= f.text_field :assembly_context %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

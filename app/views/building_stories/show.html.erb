@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @building_story.name %>
+</p>
+
+<p>
+  <strong>Multiplier:</strong>
+  <%= @building_story.multiplier %>
+</p>
+
+<p>
+  <strong>Z:</strong>
+  <%= @building_story.z %>
+</p>
+
+<p>
+  <strong>Floor to floor height:</strong>
+  <%= @building_story.floor_to_floor_height %>
+</p>
+
+<p>
+  <strong>Floor to ceiling height:</strong>
+  <%= @building_story.floor_to_ceiling_height %>
+</p>
+
+<%= link_to 'Edit', edit_building_story_path(@building_story) %> |
+<%= link_to 'Back', building_stories_path %>

@@ -1,0 +1,29 @@
+<%= form_for(@exterior_wall) do |f| %>
+  <% if @exterior_wall.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@exterior_wall.errors.count, "error") %> prohibited this exterior_wall from being saved:</h2>
+
+      <ul>
+      <% @exterior_wall.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :area %><br>
+    <%= f.text_field :area %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

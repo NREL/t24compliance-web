@@ -1,0 +1,25 @@
+<h1>Listing air_segments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @air_segments.each do |air_segment| %>
+      <tr>
+        <td><%= air_segment.name %></td>
+        <td><%= link_to 'Show', air_segment %></td>
+        <td><%= link_to 'Edit', edit_air_segment_path(air_segment) %></td>
+        <td><%= link_to 'Destroy', air_segment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Air segment', new_air_segment_path %>

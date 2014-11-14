@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @skylight.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @skylight.status %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @skylight.area %>
+</p>
+
+<%= link_to 'Edit', edit_skylight_path(@skylight) %> |
+<%= link_to 'Back', skylights_path %>

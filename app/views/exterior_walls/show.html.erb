@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @exterior_wall.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @exterior_wall.status %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @exterior_wall.area %>
+</p>
+
+<%= link_to 'Edit', edit_exterior_wall_path(@exterior_wall) %> |
+<%= link_to 'Back', exterior_walls_path %>

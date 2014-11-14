@@ -1,0 +1,29 @@
+<h1>Listing thermal_zones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Multiplier</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @thermal_zones.each do |thermal_zone| %>
+      <tr>
+        <td><%= thermal_zone.name %></td>
+        <td><%= thermal_zone.type %></td>
+        <td><%= thermal_zone.multiplier %></td>
+        <td><%= link_to 'Show', thermal_zone %></td>
+        <td><%= link_to 'Edit', edit_thermal_zone_path(thermal_zone) %></td>
+        <td><%= link_to 'Destroy', thermal_zone, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Thermal zone', new_thermal_zone_path %>

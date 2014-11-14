@@ -1,0 +1,29 @@
+<%= form_for(@water_heater) do |f| %>
+  <% if @water_heater.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@water_heater.errors.count, "error") %> prohibited this water_heater from being saved:</h2>
+
+      <ul>
+      <% @water_heater.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

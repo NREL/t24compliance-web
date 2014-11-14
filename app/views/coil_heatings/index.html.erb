@@ -1,0 +1,27 @@
+<h1>Listing coil_heatings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @coil_heatings.each do |coil_heating| %>
+      <tr>
+        <td><%= coil_heating.name %></td>
+        <td><%= coil_heating.type %></td>
+        <td><%= link_to 'Show', coil_heating %></td>
+        <td><%= link_to 'Edit', edit_coil_heating_path(coil_heating) %></td>
+        <td><%= link_to 'Destroy', coil_heating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coil heating', new_coil_heating_path %>

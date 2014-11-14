@@ -1,0 +1,27 @@
+<h1>Listing ceilings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ceilings.each do |ceiling| %>
+      <tr>
+        <td><%= ceiling.name %></td>
+        <td><%= ceiling.area %></td>
+        <td><%= link_to 'Show', ceiling %></td>
+        <td><%= link_to 'Edit', edit_ceiling_path(ceiling) %></td>
+        <td><%= link_to 'Destroy', ceiling, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ceiling', new_ceiling_path %>

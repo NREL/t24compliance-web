@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fan.name %>
+</p>
+
+<p>
+  <strong>Control method:</strong>
+  <%= @fan.control_method %>
+</p>
+
+<p>
+  <strong>Classification:</strong>
+  <%= @fan.classification %>
+</p>
+
+<%= link_to 'Edit', edit_fan_path(@fan) %> |
+<%= link_to 'Back', fans_path %>

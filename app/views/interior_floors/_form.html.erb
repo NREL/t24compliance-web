@@ -1,0 +1,33 @@
+<%= form_for(@interior_floor) do |f| %>
+  <% if @interior_floor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@interior_floor.errors.count, "error") %> prohibited this interior_floor from being saved:</h2>
+
+      <ul>
+      <% @interior_floor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :adjacent_space_reference %><br>
+    <%= f.text_field :adjacent_space_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :construct_assembly_reference %><br>
+    <%= f.text_field :construct_assembly_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :area %><br>
+    <%= f.text_field :area %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

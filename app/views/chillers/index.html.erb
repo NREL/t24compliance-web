@@ -1,0 +1,27 @@
+<h1>Listing chillers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chillers.each do |chiller| %>
+      <tr>
+        <td><%= chiller.name %></td>
+        <td><%= chiller.type %></td>
+        <td><%= link_to 'Show', chiller %></td>
+        <td><%= link_to 'Edit', edit_chiller_path(chiller) %></td>
+        <td><%= link_to 'Destroy', chiller, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chiller', new_chiller_path %>

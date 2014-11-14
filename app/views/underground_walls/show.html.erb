@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @underground_wall.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @underground_wall.status %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @underground_wall.area %>
+</p>
+
+<%= link_to 'Edit', edit_underground_wall_path(@underground_wall) %> |
+<%= link_to 'Back', underground_walls_path %>

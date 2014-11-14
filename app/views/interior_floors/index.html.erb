@@ -1,0 +1,31 @@
+<h1>Listing interior_floors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Adjacent space reference</th>
+      <th>Construct assembly reference</th>
+      <th>Area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interior_floors.each do |interior_floor| %>
+      <tr>
+        <td><%= interior_floor.name %></td>
+        <td><%= interior_floor.adjacent_space_reference %></td>
+        <td><%= interior_floor.construct_assembly_reference %></td>
+        <td><%= interior_floor.area %></td>
+        <td><%= link_to 'Show', interior_floor %></td>
+        <td><%= link_to 'Edit', edit_interior_floor_path(interior_floor) %></td>
+        <td><%= link_to 'Destroy', interior_floor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interior floor', new_interior_floor_path %>

@@ -1,0 +1,33 @@
+<h1>Listing building_stories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Multiplier</th>
+      <th>Z</th>
+      <th>Floor to floor height</th>
+      <th>Floor to ceiling height</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @building_stories.each do |building_story| %>
+      <tr>
+        <td><%= building_story.name %></td>
+        <td><%= building_story.multiplier %></td>
+        <td><%= building_story.z %></td>
+        <td><%= building_story.floor_to_floor_height %></td>
+        <td><%= building_story.floor_to_ceiling_height %></td>
+        <td><%= link_to 'Show', building_story %></td>
+        <td><%= link_to 'Edit', edit_building_story_path(building_story) %></td>
+        <td><%= link_to 'Destroy', building_story, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Building story', new_building_story_path %>

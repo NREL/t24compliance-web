@@ -1,0 +1,27 @@
+<h1>Listing schedule_weeks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @schedule_weeks.each do |schedule_week| %>
+      <tr>
+        <td><%= schedule_week.name %></td>
+        <td><%= schedule_week.type %></td>
+        <td><%= link_to 'Show', schedule_week %></td>
+        <td><%= link_to 'Edit', edit_schedule_week_path(schedule_week) %></td>
+        <td><%= link_to 'Destroy', schedule_week, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Schedule week', new_schedule_week_path %>

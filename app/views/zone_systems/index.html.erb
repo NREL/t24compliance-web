@@ -1,0 +1,29 @@
+<h1>Listing zone_systems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @zone_systems.each do |zone_system| %>
+      <tr>
+        <td><%= zone_system.name %></td>
+        <td><%= zone_system.status %></td>
+        <td><%= zone_system.type %></td>
+        <td><%= link_to 'Show', zone_system %></td>
+        <td><%= link_to 'Edit', edit_zone_system_path(zone_system) %></td>
+        <td><%= link_to 'Destroy', zone_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Zone system', new_zone_system_path %>

@@ -1,0 +1,29 @@
+<h1>Listing outside_air_controls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Economizer control method</th>
+      <th>Economizer integration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outside_air_controls.each do |outside_air_control| %>
+      <tr>
+        <td><%= outside_air_control.name %></td>
+        <td><%= outside_air_control.economizer_control_method %></td>
+        <td><%= outside_air_control.economizer_integration %></td>
+        <td><%= link_to 'Show', outside_air_control %></td>
+        <td><%= link_to 'Edit', edit_outside_air_control_path(outside_air_control) %></td>
+        <td><%= link_to 'Destroy', outside_air_control, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Outside air control', new_outside_air_control_path %>

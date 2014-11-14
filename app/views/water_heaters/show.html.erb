@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @water_heater.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @water_heater.status %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @water_heater.type %>
+</p>
+
+<%= link_to 'Edit', edit_water_heater_path(@water_heater) %> |
+<%= link_to 'Back', water_heaters_path %>

@@ -1,0 +1,29 @@
+<h1>Listing construct_assemblies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Compatible surface type</th>
+      <th>Material reference</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @construct_assemblies.each do |construct_assembly| %>
+      <tr>
+        <td><%= construct_assembly.name %></td>
+        <td><%= construct_assembly.compatible_surface_type %></td>
+        <td><%= construct_assembly.material_reference %></td>
+        <td><%= link_to 'Show', construct_assembly %></td>
+        <td><%= link_to 'Edit', edit_construct_assembly_path(construct_assembly) %></td>
+        <td><%= link_to 'Destroy', construct_assembly, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Construct assembly', new_construct_assembly_path %>

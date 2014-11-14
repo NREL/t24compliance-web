@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @outside_air_control.name %>
+</p>
+
+<p>
+  <strong>Economizer control method:</strong>
+  <%= @outside_air_control.economizer_control_method %>
+</p>
+
+<p>
+  <strong>Economizer integration:</strong>
+  <%= @outside_air_control.economizer_integration %>
+</p>
+
+<%= link_to 'Edit', edit_outside_air_control_path(@outside_air_control) %> |
+<%= link_to 'Back', outside_air_controls_path %>

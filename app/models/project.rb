@@ -1,7 +1,6 @@
 class Project
   include Mongoid::Document
 	include Mongoid::Timestamps
-
   field :name, type: String
   field :geometry_input_type, type: String
   field :climate_zone, type: String
@@ -66,7 +65,7 @@ class Project
 			'material',
 			'fenestration_construction',
 			'door_construction',
-			'space_function_defaults',
+			'space_function_default',
 			'luminaire',
 			'curve_linear',
 			'curve_quadratic',
@@ -141,6 +140,13 @@ class Project
 			end
 		end
 		builder.to_xml
+	end
+  
+	def xml_save
+		xml = self.to_sdd_xml
+		File.open("#{Rails.root}/data/xmls/#{self.id}.xml", "w") do |f|
+			f << xml
+		end
 	end
 
 	def climate_zone_enums

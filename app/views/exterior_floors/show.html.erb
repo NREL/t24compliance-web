@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @exterior_floor.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @exterior_floor.status %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @exterior_floor.area %>
+</p>
+
+<%= link_to 'Edit', edit_exterior_floor_path(@exterior_floor) %> |
+<%= link_to 'Back', exterior_floors_path %>

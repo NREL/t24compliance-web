@@ -1,0 +1,29 @@
+<h1>Listing luminaires</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Fixture type</th>
+      <th>Lamp type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @luminaires.each do |luminaire| %>
+      <tr>
+        <td><%= luminaire.name %></td>
+        <td><%= luminaire.fixture_type %></td>
+        <td><%= luminaire.lamp_type %></td>
+        <td><%= link_to 'Show', luminaire %></td>
+        <td><%= link_to 'Edit', edit_luminaire_path(luminaire) %></td>
+        <td><%= link_to 'Destroy', luminaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Luminaire', new_luminaire_path %>

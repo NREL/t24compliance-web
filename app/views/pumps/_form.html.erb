@@ -1,0 +1,33 @@
+<%= form_for(@pump) do |f| %>
+  <% if @pump.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pump.errors.count, "error") %> prohibited this pump from being saved:</h2>
+
+      <ul>
+      <% @pump.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :operation_control %><br>
+    <%= f.text_field :operation_control %>
+  </div>
+  <div class="field">
+    <%= f.label :speed_control %><br>
+    <%= f.text_field :speed_control %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

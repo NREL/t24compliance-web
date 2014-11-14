@@ -1,0 +1,27 @@
+<h1>Listing doors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @doors.each do |door| %>
+      <tr>
+        <td><%= door.name %></td>
+        <td><%= door.area %></td>
+        <td><%= link_to 'Show', door %></td>
+        <td><%= link_to 'Edit', edit_door_path(door) %></td>
+        <td><%= link_to 'Destroy', door, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Door', new_door_path %>

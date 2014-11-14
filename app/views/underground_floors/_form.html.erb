@@ -1,0 +1,29 @@
+<%= form_for(@underground_floor) do |f| %>
+  <% if @underground_floor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@underground_floor.errors.count, "error") %> prohibited this underground_floor from being saved:</h2>
+
+      <ul>
+      <% @underground_floor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :area %><br>
+    <%= f.text_field :area %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

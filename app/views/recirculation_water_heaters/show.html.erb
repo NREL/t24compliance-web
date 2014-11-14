@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @recirculation_water_heater.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @recirculation_water_heater.status %>
+</p>
+
+<p>
+  <strong>Element type:</strong>
+  <%= @recirculation_water_heater.element_type %>
+</p>
+
+<p>
+  <strong>Tank category:</strong>
+  <%= @recirculation_water_heater.tank_category %>
+</p>
+
+<%= link_to 'Edit', edit_recirculation_water_heater_path(@recirculation_water_heater) %> |
+<%= link_to 'Back', recirculation_water_heaters_path %>

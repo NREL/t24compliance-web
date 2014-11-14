@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @roof.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @roof.status %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @roof.area %>
+</p>
+
+<%= link_to 'Edit', edit_roof_path(@roof) %> |
+<%= link_to 'Back', roofs_path %>

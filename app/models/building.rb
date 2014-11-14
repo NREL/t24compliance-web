@@ -1,7 +1,6 @@
 class Building
   include Mongoid::Document
 	include Mongoid::Timestamps
-
   field :name, type: String
   field :function_classification_method, type: String
   field :relocatable_public_school_building, type: Integer

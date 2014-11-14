@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pump.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @pump.status %>
+</p>
+
+<p>
+  <strong>Operation control:</strong>
+  <%= @pump.operation_control %>
+</p>
+
+<p>
+  <strong>Speed control:</strong>
+  <%= @pump.speed_control %>
+</p>
+
+<%= link_to 'Edit', edit_pump_path(@pump) %> |
+<%= link_to 'Back', pumps_path %>

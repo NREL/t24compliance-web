@@ -1,0 +1,27 @@
+<h1>Listing external_shading_objects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @external_shading_objects.each do |external_shading_object| %>
+      <tr>
+        <td><%= external_shading_object.name %></td>
+        <td><%= external_shading_object.status %></td>
+        <td><%= link_to 'Show', external_shading_object %></td>
+        <td><%= link_to 'Edit', edit_external_shading_object_path(external_shading_object) %></td>
+        <td><%= link_to 'Destroy', external_shading_object, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New External shading object', new_external_shading_object_path %>

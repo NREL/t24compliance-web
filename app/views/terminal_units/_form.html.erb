@@ -1,0 +1,29 @@
+<%= form_for(@terminal_unit) do |f| %>
+  <% if @terminal_unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@terminal_unit.errors.count, "error") %> prohibited this terminal_unit from being saved:</h2>
+
+      <ul>
+      <% @terminal_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

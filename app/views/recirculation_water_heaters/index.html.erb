@@ -1,0 +1,31 @@
+<h1>Listing recirculation_water_heaters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Element type</th>
+      <th>Tank category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recirculation_water_heaters.each do |recirculation_water_heater| %>
+      <tr>
+        <td><%= recirculation_water_heater.name %></td>
+        <td><%= recirculation_water_heater.status %></td>
+        <td><%= recirculation_water_heater.element_type %></td>
+        <td><%= recirculation_water_heater.tank_category %></td>
+        <td><%= link_to 'Show', recirculation_water_heater %></td>
+        <td><%= link_to 'Edit', edit_recirculation_water_heater_path(recirculation_water_heater) %></td>
+        <td><%= link_to 'Destroy', recirculation_water_heater, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recirculation water heater', new_recirculation_water_heater_path %>
