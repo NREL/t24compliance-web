@@ -2,7 +2,6 @@ class Building
   include Mongoid::Document
 	include Mongoid::Timestamps
 
-
   field :name, type: String
   field :function_classification_method, type: String
   field :relocatable_public_school_building, type: Integer
@@ -25,6 +24,7 @@ class Building
 	has_many :thermal_zones
 	has_many :air_systems
 	has_many :zone_systems
+	belongs_to :project
 
 
 	def children_models
@@ -77,6 +77,7 @@ class Building
 					end
 				end
 			end
+		end
 		builder.to_xml
 	end
 end

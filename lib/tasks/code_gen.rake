@@ -116,7 +116,7 @@ namespace :code_gen do
 
   def mongoid_timestamps
 
-		"\tinclude Mongoid::Timestamps\n\n"
+		"\tinclude Mongoid::Timestamps\n"
   
   end
 
@@ -195,7 +195,8 @@ namespace :code_gen do
   	sdd_str = sdd_str + "\t\t\t\t\t\t" + "end\n"
   	sdd_str = sdd_str + "\t\t\t\t\t" + "end\n"
   	sdd_str = sdd_str + "\t\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t\t" + "end" + "\n"
+  	sdd_str = sdd_str + "\t\t\t" + "end\n"
+  	sdd_str = sdd_str + "\t\t" + "end\n"
   	sdd_str = sdd_str + "\t\t" + "builder.to_xml" + "\n"
   	sdd_str = sdd_str + "\tend\n"
 
@@ -207,7 +208,7 @@ namespace :code_gen do
   	unless input.parents.nil?
 	  	input.parents.each do |p|
 	  		model = Input.find_by(name: p)
-	  		relations_str = relations_str + "belongs_to :#{model.display_name.underscore}\n"
+	  		relations_str = relations_str + "\tbelongs_to :#{model.display_name.underscore}\n"
 	  	end
 	  end
 	  unless input.children.nil?
@@ -220,7 +221,38 @@ namespace :code_gen do
 	  		end
 	  	end
 	  end
+  	
+	  # check for missing relationships (some belongs_to are missing on the children models)
+	  relationships = add_missing_relationships
+	  relationships.each do |r|
+	  	if r['name'] == input.display_name.underscore
+	  		relations_str = relations_str + "\t" + r['relation'] + "\n"
+	  	end
+	  end
+
   	relations_str = relations_str + "\n"
+  end
+
+  def add_missing_relationships
+
+  	# model to apply to => relationship to add
+  	relationships = [
+  		{'name' => 'building', 'relation' =>  "belongs_to :project"},
+  		{'name' => 'schedule_day', 'relation' =>  "belongs_to :project"},
+  		{'name' => 'schedule_week', 'relation' =>  "belongs_to :project"},
+  		{'name' => 'schedule', 'relation' =>  "belongs_to :project"},
+  		{'name' => 'construct_assembly', 'relation' =>  "belongs_to :project"},
+			{'name' => 'material', 'relation' =>  "belongs_to :project"},
+			{'name' => 'fenestration_construction', 'relation' =>  "belongs_to :project"},
+			{'name' => 'door_construction', 'relation' =>  "belongs_to :project"},
+			{'name' => 'space_function_defaults', 'relation' =>  "belongs_to :project"},
+			{'name' => 'luminaire', 'relation' =>  "belongs_to :project"},
+			{'name' => 'curve_linear', 'relation' =>  "belongs_to :project"},
+			{'name' => 'curve_quadratic', 'relation' =>  "belongs_to :project"},
+			{'name' => 'curve_cubic', 'relation' =>  "belongs_to :project"},
+			{'name' => 'curve_double_quadratic','relation' =>  "belongs_to :project"},
+			{'name' => 'external_shading_object','relation' => "belongs_to :project"}
+  	]
   end
 
   def generate_enumerations(input)

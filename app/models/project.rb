@@ -2,7 +2,6 @@ class Project
   include Mongoid::Document
 	include Mongoid::Timestamps
 
-
   field :name, type: String
   field :geometry_input_type, type: String
   field :climate_zone, type: String
@@ -140,6 +139,7 @@ class Project
 					end
 				end
 			end
+		end
 		builder.to_xml
 	end
 
