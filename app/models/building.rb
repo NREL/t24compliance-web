@@ -18,7 +18,6 @@ class Building
   field :coil_cooling_capacity, type: Float
   field :coil_heating_capacity, type: Float
 
-
 	has_many :building_stories
 	has_many :external_shading_objects
 	has_many :thermal_zones
@@ -39,20 +38,20 @@ class Building
 
 	def xml_fields
 		xml_fields = [
-			'function_classification_method',
-			'relocatable_public_school_building',
-			'building_azimuth',
-			'total_story_count',
-			'above_grade_story_count',
-			'living_unit_count',
-			'total_floor_area',
-			'nonresidential_floor_area',
-			'residential_floor_area',
-			'total_conditioned_volume',
-			'plant_cooling_capacity',
-			'plant_heating_capacity',
-			'coil_cooling_capacity',
-			'coil_heating_capacity'
+			{"db_field_name"=>"function_classification_method", "xml_field_name"=>"FuncClassMthd"},
+			{"db_field_name"=>"relocatable_public_school_building", "xml_field_name"=>"RelocPubSchoolBldg"},
+			{"db_field_name"=>"building_azimuth", "xml_field_name"=>"BldgAz"},
+			{"db_field_name"=>"total_story_count", "xml_field_name"=>"TotStoryCnt"},
+			{"db_field_name"=>"above_grade_story_count", "xml_field_name"=>"AboveGrdStoryCnt"},
+			{"db_field_name"=>"living_unit_count", "xml_field_name"=>"LivingUnitCnt"},
+			{"db_field_name"=>"total_floor_area", "xml_field_name"=>"TotFlrArea"},
+			{"db_field_name"=>"nonresidential_floor_area", "xml_field_name"=>"NonResFlrArea"},
+			{"db_field_name"=>"residential_floor_area", "xml_field_name"=>"ResFlrArea"},
+			{"db_field_name"=>"total_conditioned_volume", "xml_field_name"=>"TotCondVol"},
+			{"db_field_name"=>"plant_cooling_capacity", "xml_field_name"=>"PlantClgCap"},
+			{"db_field_name"=>"plant_heating_capacity", "xml_field_name"=>"PlantHtgCap"},
+			{"db_field_name"=>"coil_cooling_capacity", "xml_field_name"=>"CoilClgCap"},
+			{"db_field_name"=>"coil_heating_capacity", "xml_field_name"=>"CoilHtgCap"}
 		]
 	end
 
@@ -60,7 +59,7 @@ class Building
 		builder = Nokogiri::XML::Builder.new do |xml|
 			xml.send(:Bldg) do
 				xml_fields.each do |field|
-					xml.send(:"#{field}", self[field])
+					xml.send(:"#{field['xml_field_name']}", self[field['db_field_name']])
 				end
 				# go through children if they have something to add, call their methods
 				kids = self.children_models

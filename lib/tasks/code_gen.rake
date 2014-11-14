@@ -111,8 +111,9 @@ namespace :code_gen do
 
   def inputs_to_scaffold
 
-  	#['Proj', 'Bldg']	
+  	['Proj', 'Bldg']	
 
+=begin
   	scaffolds = []
   	inputs = Input.all 
   	inputs.each do |input|
@@ -120,7 +121,7 @@ namespace :code_gen do
   	end
 
   	scaffolds
-
+=end
   end
 
   def mongoid_timestamps
@@ -131,10 +132,14 @@ namespace :code_gen do
 
   # used by generate_xml_fields_list and generate_sdd_xml
   def xml_fields(input)
+
   	xml_fields = []
   	input.data_fields.each do |df|
+  		f_hash = {}
   		if df['exposed'] or df['set_as_constant']
-  			xml_fields << df['db_field_name']
+  			f_hash['db_field_name'] = df['db_field_name']
+  			f_hash['xml_field_name'] = df['name'] 
+  			xml_fields << f_hash
   		end
   	end
   	xml_fields
@@ -160,7 +165,7 @@ namespace :code_gen do
 
   	xml_fields = xml_fields(input)
   	xml_fields.each do |f|
-  		xml_str = xml_str + "\t\t\t'#{f}',\n"
+  		xml_str = xml_str + "\t\t\t#{f},\n"
   	end
   	# remove last comma
   	xml_str = xml_str.chop.chop
@@ -188,7 +193,7 @@ namespace :code_gen do
   	sdd_str = sdd_str + "\t\t" + "builder = Nokogiri::XML::Builder.new do |xml|\n"
   	sdd_str = sdd_str + "\t\t\t" + "xml.send(:""#{input.name}"") do" + "\n"
   	sdd_str = sdd_str + "\t\t\t\t" +  "xml_fields.each do |field|" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t" + "xml.send(:" + '"#{field}"' + ", self[field])" + "\n"
+  	sdd_str = sdd_str + "\t\t\t\t\t" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
   	sdd_str = sdd_str + "\t\t\t\t" + "end" + "\n"
   	sdd_str = sdd_str + "\t\t\t\t" + "# go through children if they have something to add, call their methods\n"
   	sdd_str = sdd_str + "\t\t\t\t" + "kids = self.children_models" + "\n"

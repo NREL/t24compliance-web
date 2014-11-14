@@ -79,42 +79,42 @@ class Project
 
 	def xml_fields
 		xml_fields = [
-			'geometry_input_type',
-			'climate_zone',
-			'latitude',
-			'longitude',
-			'elevation',
-			'street_address',
-			'city',
-			'state',
-			'zip_code',
-			'owner_name',
-			'owner_title',
-			'owner_organization',
-			'owner_email',
-			'owner_phone',
-			'architect_name',
-			'architect_title',
-			'architect_organization',
-			'architect_email',
-			'architect_phone',
-			'hvac_engineer_name',
-			'hvac_engineer_title',
-			'hvac_engineer_organization',
-			'hvac_engineer_email',
-			'hvac_engineer_phone',
-			'weather_station',
-			'hvac_auto_sizing',
-			'exceptional_condition_complete_building',
-			'exceptional_condition_exterior_lighting',
-			'exceptional_condition_no_cooling_system',
-			'exceptional_condition_rated_capacity',
-			'exceptional_condition_water_heater',
-			'exceptional_condition_narrative',
-			'run_title',
-			'compliance_type',
-			'compliance_report_pdf',
-			'compliance_report_xml'
+			{"db_field_name"=>"geometry_input_type", "xml_field_name"=>"GeometryInpType"},
+			{"db_field_name"=>"climate_zone", "xml_field_name"=>"CliZn"},
+			{"db_field_name"=>"latitude", "xml_field_name"=>"Lat"},
+			{"db_field_name"=>"longitude", "xml_field_name"=>"Long"},
+			{"db_field_name"=>"elevation", "xml_field_name"=>"Elevation"},
+			{"db_field_name"=>"street_address", "xml_field_name"=>"StAddress"},
+			{"db_field_name"=>"city", "xml_field_name"=>"City"},
+			{"db_field_name"=>"state", "xml_field_name"=>"State"},
+			{"db_field_name"=>"zip_code", "xml_field_name"=>"ZipCode"},
+			{"db_field_name"=>"owner_name", "xml_field_name"=>"OwnerName"},
+			{"db_field_name"=>"owner_title", "xml_field_name"=>"OwnerTitle"},
+			{"db_field_name"=>"owner_organization", "xml_field_name"=>"OwnerOrg"},
+			{"db_field_name"=>"owner_email", "xml_field_name"=>"OwnerEmail"},
+			{"db_field_name"=>"owner_phone", "xml_field_name"=>"OwnerPhone"},
+			{"db_field_name"=>"architect_name", "xml_field_name"=>"ArchName"},
+			{"db_field_name"=>"architect_title", "xml_field_name"=>"ArchTitle"},
+			{"db_field_name"=>"architect_organization", "xml_field_name"=>"ArchOrg"},
+			{"db_field_name"=>"architect_email", "xml_field_name"=>"ArchEmail"},
+			{"db_field_name"=>"architect_phone", "xml_field_name"=>"ArchPhone"},
+			{"db_field_name"=>"hvac_engineer_name", "xml_field_name"=>"HVACEngrName"},
+			{"db_field_name"=>"hvac_engineer_title", "xml_field_name"=>"HVACEngrTitle"},
+			{"db_field_name"=>"hvac_engineer_organization", "xml_field_name"=>"HVACEngrOrg"},
+			{"db_field_name"=>"hvac_engineer_email", "xml_field_name"=>"HVACEngrEmail"},
+			{"db_field_name"=>"hvac_engineer_phone", "xml_field_name"=>"HVACEngrPhone"},
+			{"db_field_name"=>"weather_station", "xml_field_name"=>"WeatherStation"},
+			{"db_field_name"=>"hvac_auto_sizing", "xml_field_name"=>"HVACAutoSizing"},
+			{"db_field_name"=>"exceptional_condition_complete_building", "xml_field_name"=>"ExcptCondCompleteBldg"},
+			{"db_field_name"=>"exceptional_condition_exterior_lighting", "xml_field_name"=>"ExcptCondExtLtg"},
+			{"db_field_name"=>"exceptional_condition_no_cooling_system", "xml_field_name"=>"ExcptCondNoClgSys"},
+			{"db_field_name"=>"exceptional_condition_rated_capacity", "xml_field_name"=>"ExcptCondRtdCap"},
+			{"db_field_name"=>"exceptional_condition_water_heater", "xml_field_name"=>"ExcptCondWtrHtr"},
+			{"db_field_name"=>"exceptional_condition_narrative", "xml_field_name"=>"ExcptCondNarrative"},
+			{"db_field_name"=>"run_title", "xml_field_name"=>"RunTitle"},
+			{"db_field_name"=>"compliance_type", "xml_field_name"=>"CompType"},
+			{"db_field_name"=>"compliance_report_pdf", "xml_field_name"=>"CompReportPDF"},
+			{"db_field_name"=>"compliance_report_xml", "xml_field_name"=>"CompReportXML"}
 		]
 	end
 
@@ -122,7 +122,7 @@ class Project
 		builder = Nokogiri::XML::Builder.new do |xml|
 			xml.send(:Proj) do
 				xml_fields.each do |field|
-					xml.send(:"#{field}", self[field])
+					xml.send(:"#{field['xml_field_name']}", self[field['db_field_name']])
 				end
 				# go through children if they have something to add, call their methods
 				kids = self.children_models
