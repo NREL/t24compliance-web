@@ -96,6 +96,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    nokogiri (1.6.2.1-java)
     optionable (0.2.0)
     origin (2.1.1)
     puma (2.9.2)
@@ -176,6 +177,7 @@ DEPENDENCIES
   jquery-rails
   mongoid!
   multi_json
+  nokogiri
   puma
   rails (= 4.1.7)
   sass-rails (~> 4.0.3)
