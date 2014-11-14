@@ -132,6 +132,7 @@ namespace :import do
 	            		field['set_as_constant'] = df['set_as_constant']
 	            		field['constant_value'] = df['constant_value']
 	            		field['comments'] = df['comments']
+	            		field['conditional_control_field'] = df['conditional_control_field']
 	            	end
 	            end
 	          end

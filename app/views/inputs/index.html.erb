@@ -46,6 +46,7 @@
 													<th>Enumerations</th>
 													<th>Expose to App </th>
 													<th>Set as Constant</th>
+													<th>Conditional Control Field</th>
 													<th>Comments</th>
 												</tr>
 												<% i.data_fields.each do |df| %>
@@ -86,6 +87,7 @@
 													</td>
 													<td><span class="pad-left-sm"><%= df['exposed'] ? 'X' : nil %></span></td>
 													<td><%= df['constant_value'] %></td>
+													<td><%= df['conditional_control_field'] %></td>
 													<td><%= df['comments'] %></td>
 												</tr>
 												<% end %>

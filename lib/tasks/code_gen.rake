@@ -22,9 +22,9 @@ namespace :code_gen do
   		# get fields (in a string name: type)
   		input.data_fields.each do |df|
 
-  			# only create fields marked as 'exposed'
+  			# only create fields marked as 'exposed' or 'set_as_constant'
   			
-  			if df['exposed']
+  			if df['exposed'] or df['set_as_constant']
   				num += 1
 	  			if df['data_type'].include? 'Array' 
 	  				data_type = 'array'
@@ -110,8 +110,17 @@ namespace :code_gen do
   # HELPER METHODS
 
   def inputs_to_scaffold
-		# scaffolds = ['Proj', 'Bldg', 'Story', 'Spc']
-  	['Proj', 'Bldg']
+
+  	#['Proj', 'Bldg']	
+
+  	scaffolds = []
+  	inputs = Input.all 
+  	inputs.each do |input|
+  		scaffolds << input.name
+  	end
+
+  	scaffolds
+
   end
 
   def mongoid_timestamps
@@ -124,7 +133,7 @@ namespace :code_gen do
   def xml_fields(input)
   	xml_fields = []
   	input.data_fields.each do |df|
-  		if df['exposed']
+  		if df['exposed'] or df['set_as_constant']
   			xml_fields << df['db_field_name']
   		end
   	end

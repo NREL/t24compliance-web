@@ -48,11 +48,11 @@ class InputsController < ApplicationController
 
 				df['constant_value'] = params[df['name'] + '_constant']
 				df['comments'] = params[df['name'] + '_comments']
+				df['conditional_control_field'] = params[df['name'] + '_cond_control']
 
 			end
 			@input.save!
 		end
-
 
 		respond_to do |format|
 	    format.html

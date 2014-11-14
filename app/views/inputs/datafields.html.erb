@@ -20,6 +20,7 @@
 				<th>Expose to Form</th>
 				<th>Set as Constant</th>
 				<th>Constant Value</th>
+				<th>Conditional Control Field</th>
 				<th>Comments</th>
 			</tr>
 
@@ -65,6 +66,7 @@
 					<td><span class="pad-left-sm"><%= check_box_tag('exposed_fields[]', df['name'], exp_checked_status) %></span></td>
 					<td><span class="pad-left-sm"><%= check_box_tag('set_as_constant_fields[]', df['name'], const_checked_status) %></span></td>
 					<td><%= text_field_tag(df['name'] + '_constant', df['constant_value']) %></td>
+					<td><%= text_field_tag(df['name'] + '_cond_control', df['conditional_control_field']) %></td>
 					<td><%= text_area_tag(df['name'] + '_comments', df['comments']) %></td>
 				</tr>
 			<% end %>
