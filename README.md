@@ -6,10 +6,12 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 
 ## Install
 
-1. Install rbenv (https://github.com/sstephenson/rbenv) and ruby-build (https://github.com/sstephenson/ruby-build)
+1. Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build)
 1. rbenv install jruby-1.7.15
 1. If you don't have java installed on your machine already, install the Java Development Kit (JDK 7)
 1. Install mongo or `brew install mongodb` (not necessary if you will use remote Mongo server instead of restoring full dump locally).
+1. If you are going to run cbecc-com simulations, then install redis `brew install redis`
+    * Start the redis server `redis-server /usr/local/etc/redis.conf`
 1. Clone this repository
 1. Set your local folder to use jruby `rbenv local jruby-1.7.15` or the system `rbenv global jruby-1.7.15` (not recommended for local development)
 1. Install bundler for jruby `gem install bundler`
@@ -17,8 +19,14 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 
 ## Running
 
-If you are going to be using your local machine to run CBECC-Com, then you will need to install boot2docker.
+### CBECC-Com Simulations
 
+To run the web application only, then you can simply start mongo (`mongod`) and then rails (`rails s`). * Note that rails run in JRuby with Puma *
+The CBECC-Com simulations require the following
+
+* [boot2docker](https://github.com/boot2docker/boot2docker)
+* redis (`brew install redis`)
+* sidekiq (`bundle exec sidekiq`)
 
 ## System Configuration (Using Chef)
 
