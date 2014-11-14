@@ -38,6 +38,7 @@ gem 'puma'
 
 # For simulation of CBECC-Com Files
 gem 'docker-api', require: 'docker'
+gem 'sidekiq'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
