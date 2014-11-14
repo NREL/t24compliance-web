@@ -102,18 +102,12 @@ namespace :code_gen do
 
 	end
 
-	desc "add sdd xml converter to models"
-  task :generate_sdd_xml_writer	 => :environment do
-
-  end
-
   # HELPER METHODS
 
   def inputs_to_scaffold
 
-  	['Proj', 'Bldg']	
+  	# ['Proj', 'Bldg']	
 
-=begin
   	scaffolds = []
   	inputs = Input.all 
   	inputs.each do |input|
@@ -121,7 +115,6 @@ namespace :code_gen do
   	end
 
   	scaffolds
-=end
   end
 
   def mongoid_timestamps
