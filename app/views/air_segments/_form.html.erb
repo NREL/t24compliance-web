@@ -1,0 +1,21 @@
+<%= form_for(@air_segment) do |f| %>
+  <% if @air_segment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@air_segment.errors.count, "error") %> prohibited this air_segment from being saved:</h2>
+
+      <ul>
+      <% @air_segment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

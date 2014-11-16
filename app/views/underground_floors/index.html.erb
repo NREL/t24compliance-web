@@ -1,0 +1,29 @@
+<h1>Listing underground_floors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @underground_floors.each do |underground_floor| %>
+      <tr>
+        <td><%= underground_floor.name %></td>
+        <td><%= underground_floor.status %></td>
+        <td><%= underground_floor.area %></td>
+        <td><%= link_to 'Show', underground_floor %></td>
+        <td><%= link_to 'Edit', edit_underground_floor_path(underground_floor) %></td>
+        <td><%= link_to 'Destroy', underground_floor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Underground floor', new_underground_floor_path %>

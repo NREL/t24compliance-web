@@ -1,0 +1,21 @@
+<%= form_for(@curve_quadratic) do |f| %>
+  <% if @curve_quadratic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@curve_quadratic.errors.count, "error") %> prohibited this curve_quadratic from being saved:</h2>
+
+      <ul>
+      <% @curve_quadratic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

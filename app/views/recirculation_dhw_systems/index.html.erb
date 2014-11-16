@@ -1,0 +1,29 @@
+<h1>Listing recirculation_dhw_systems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recirculation_dhw_systems.each do |recirculation_dhw_system| %>
+      <tr>
+        <td><%= recirculation_dhw_system.name %></td>
+        <td><%= recirculation_dhw_system.status %></td>
+        <td><%= recirculation_dhw_system.type %></td>
+        <td><%= link_to 'Show', recirculation_dhw_system %></td>
+        <td><%= link_to 'Edit', edit_recirculation_dhw_system_path(recirculation_dhw_system) %></td>
+        <td><%= link_to 'Destroy', recirculation_dhw_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recirculation dhw system', new_recirculation_dhw_system_path %>

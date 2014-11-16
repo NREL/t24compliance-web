@@ -1,0 +1,29 @@
+<%= form_for(@luminaire) do |f| %>
+  <% if @luminaire.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@luminaire.errors.count, "error") %> prohibited this luminaire from being saved:</h2>
+
+      <ul>
+      <% @luminaire.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :fixture_type %><br>
+    <%= f.text_field :fixture_type %>
+  </div>
+  <div class="field">
+    <%= f.label :lamp_type %><br>
+    <%= f.text_field :lamp_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

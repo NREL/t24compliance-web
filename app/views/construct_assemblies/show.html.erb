@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @construct_assembly.name %>
+</p>
+
+<p>
+  <strong>Compatible surface type:</strong>
+  <%= @construct_assembly.compatible_surface_type %>
+</p>
+
+<p>
+  <strong>Material reference:</strong>
+  <%= @construct_assembly.material_reference %>
+</p>
+
+<%= link_to 'Edit', edit_construct_assembly_path(@construct_assembly) %> |
+<%= link_to 'Back', construct_assemblies_path %>

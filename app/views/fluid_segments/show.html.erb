@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fluid_segment.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @fluid_segment.type %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @fluid_segment.source %>
+</p>
+
+<%= link_to 'Edit', edit_fluid_segment_path(@fluid_segment) %> |
+<%= link_to 'Back', fluid_segments_path %>

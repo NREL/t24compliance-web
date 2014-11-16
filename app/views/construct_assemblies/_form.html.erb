@@ -1,0 +1,29 @@
+<%= form_for(@construct_assembly) do |f| %>
+  <% if @construct_assembly.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@construct_assembly.errors.count, "error") %> prohibited this construct_assembly from being saved:</h2>
+
+      <ul>
+      <% @construct_assembly.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :compatible_surface_type %><br>
+    <%= f.text_field :compatible_surface_type %>
+  </div>
+  <div class="field">
+    <%= f.label :material_reference %><br>
+    <%= f.text_field :material_reference %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

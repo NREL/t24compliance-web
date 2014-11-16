@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @thermal_zone.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @thermal_zone.type %>
+</p>
+
+<p>
+  <strong>Multiplier:</strong>
+  <%= @thermal_zone.multiplier %>
+</p>
+
+<%= link_to 'Edit', edit_thermal_zone_path(@thermal_zone) %> |
+<%= link_to 'Back', thermal_zones_path %>

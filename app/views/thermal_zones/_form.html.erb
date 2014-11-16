@@ -1,0 +1,29 @@
+<%= form_for(@thermal_zone) do |f| %>
+  <% if @thermal_zone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@thermal_zone.errors.count, "error") %> prohibited this thermal_zone from being saved:</h2>
+
+      <ul>
+      <% @thermal_zone.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :multiplier %><br>
+    <%= f.number_field :multiplier %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

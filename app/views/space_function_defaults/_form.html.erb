@@ -1,0 +1,29 @@
+<%= form_for(@space_function_default) do |f| %>
+  <% if @space_function_default.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@space_function_default.errors.count, "error") %> prohibited this space_function_default from being saved:</h2>
+
+      <ul>
+      <% @space_function_default.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :space_function %><br>
+    <%= f.text_field :space_function %>
+  </div>
+  <div class="field">
+    <%= f.label :function_schedule_group %><br>
+    <%= f.text_field :function_schedule_group %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

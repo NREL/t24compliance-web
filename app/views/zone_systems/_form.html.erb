@@ -1,0 +1,29 @@
+<%= form_for(@zone_system) do |f| %>
+  <% if @zone_system.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@zone_system.errors.count, "error") %> prohibited this zone_system from being saved:</h2>
+
+      <ul>
+      <% @zone_system.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

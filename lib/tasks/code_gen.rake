@@ -58,8 +58,8 @@ namespace :code_gen do
   		input = Input.find_by(name: s)
 
   		# rewrite model file
-  		File.open("#{Rails.root}/app/models/#{input.display_name.downcase}-tmp.rb", 'w') do |out| # 'w' for a new file, 'a' append to existing
-			  File.open("#{Rails.root}/app/models/#{input.display_name.downcase}.rb", 'r') do |f|
+  		File.open("#{Rails.root}/app/models/#{input.display_name.singularize.underscore}-tmp.rb", 'w') do |out| # 'w' for a new file, 'a' append to existing
+			  File.open("#{Rails.root}/app/models/#{input.display_name.singularize.underscore}.rb", 'r') do |f|
 			    f.each_line do |line|
 				    unless line.strip == 'end'
 				    	# don't print the last comma
@@ -84,6 +84,9 @@ namespace :code_gen do
 			  # add sdd_xml
 			  out.write(generate_sdd_xml(input))
 
+			  # add xml_save on Project model only
+			  out.write(generate_xml_save(input))
+
 			  # write enums
   			enums = generate_enumerations(input)
 			  enums.each do |e|
@@ -95,25 +98,19 @@ namespace :code_gen do
 			end
 
 			# replace files
-			`rm #{Rails.root}/app/models/#{input.display_name.downcase}.rb`
-			`mv #{Rails.root}/app/models/#{input.display_name.downcase}-tmp.rb #{Rails.root}/app/models/#{input.display_name.downcase}.rb`
+			`rm #{Rails.root}/app/models/#{input.display_name.singularize.underscore}.rb`
+			`mv #{Rails.root}/app/models/#{input.display_name.singularize.underscore}-tmp.rb #{Rails.root}/app/models/#{input.display_name.singularize.underscore}.rb`
 
   	end
 
 	end
 
-	desc "add sdd xml converter to models"
-  task :generate_sdd_xml_writer	 => :environment do
-
-  end
-
   # HELPER METHODS
 
   def inputs_to_scaffold
 
-  	['Proj', 'Bldg']	
+  	# ['Proj', 'Bldg']	
 
-=begin
   	scaffolds = []
   	inputs = Input.all 
   	inputs.each do |input|
@@ -121,7 +118,6 @@ namespace :code_gen do
   	end
 
   	scaffolds
-=end
   end
 
   def mongoid_timestamps
@@ -152,7 +148,7 @@ namespace :code_gen do
   			k_hash = {}
   			model = Input.find_by(name: c)
   			k_hash['xml_name'] = model.name
-  			k_hash['model_name'] = model.display_name.underscore
+  			k_hash['model_name'] = model.display_name.singularize.underscore
   			kids << k_hash
   		end
   	end
@@ -164,11 +160,13 @@ namespace :code_gen do
   	xml_str = xml_str + "\t\txml_fields = [\n"
 
   	xml_fields = xml_fields(input)
-  	xml_fields.each do |f|
-  		xml_str = xml_str + "\t\t\t#{f},\n"
-  	end
-  	# remove last comma
-  	xml_str = xml_str.chop.chop
+  	unless xml_fields.nil? or xml_fields.empty?
+	  	xml_fields.each do |f|
+	  		xml_str = xml_str + "\t\t\t#{f},\n"
+	  	end
+	  	# remove last comma
+	  	xml_str = xml_str.chop.chop
+	  end
   	xml_str = xml_str + "\n\t\t]\n"
   	xml_str = xml_str + "\tend\n\n"
   end
@@ -179,7 +177,6 @@ namespace :code_gen do
   	kids = children(input)
   	unless kids.nil? or kids.empty?
   		kids.each do |k|
-  			#kids_str = kids_str + "\t\t\t{xml_name: '" + k['xml_name'] + "', model_name: '" + k['model_name'] + "'},\n"
   			kids_str = kids_str + "\t\t\t'" + k['model_name'] + "',\n"
   		end
   		kids_str = kids_str.chop.chop
@@ -200,9 +197,11 @@ namespace :code_gen do
   	sdd_str = sdd_str + "\t\t\t\t" + "unless kids.nil? or kids.empty?" + "\n"
   	sdd_str = sdd_str + "\t\t\t\t\t" + "kids.each do |k|" + "\n"
   	sdd_str = sdd_str + "\t\t\t\t\t\t" + "if k == 'building'\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "xml << self.building\n"
+  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "unless self.building.nil?"
+  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "xml << self.building.to_sdd_xml\n"
+  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
   	sdd_str = sdd_str + "\t\t\t\t\t\t"	+ "else\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models = self[k.pluralize]"	 + "\n"
+  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
   	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models.each do |m|\n"
   	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "xml << m.to_sdd_xml\n"
   	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
@@ -216,20 +215,32 @@ namespace :code_gen do
 
   end
 
+  def generate_xml_save(input)
+  	if input.name == 'Proj'
+  		# only need this method on the Project model
+  		str = "\tdef xml_save\n"
+  		str = str + "\t\txml = self.to_sdd_xml" + "\n"
+  		str = str + "\t\t" + 'File.open("#{Rails.root}/data/xmls/#{self.id}.xml", "w") do |f|' + "\n"
+  		str = str + "\t\t\tf << xml" + "\n"
+  		str = str + "\t\tend\n"
+  		str = str + "\tend\n"
+  	end
+  end
+
   def generate_relationships(input)
   	relations_str = "\n"
 
   	unless input.parents.nil?
 	  	input.parents.each do |p|
 	  		model = Input.find_by(name: p)
-	  		relations_str = relations_str + "\tbelongs_to :#{model.display_name.underscore}\n"
+	  		relations_str = relations_str + "\tbelongs_to :#{model.display_name.singularize.underscore}\n"
 	  	end
 	  end
 	  unless input.children.nil?
 	  	input.children.each do |c|
 	  		model = Input.find_by(name: c)
 	  		if c == 'Bldg'
-	  			relations_str = relations_str + "\thas_one :" + model.display_name.underscore + "\n"
+	  			relations_str = relations_str + "\thas_one :" + model.display_name.singularize.underscore + "\n"
 	  		else
 	  			relations_str = relations_str + "\thas_many :" + model.display_name.underscore.pluralize + "\n"
 	  		end
@@ -239,7 +250,7 @@ namespace :code_gen do
 	  # check for missing relationships (some belongs_to are missing on the children models)
 	  relationships = add_missing_relationships
 	  relationships.each do |r|
-	  	if r['name'] == input.display_name.underscore
+	  	if r['name'] == input.display_name.singularize.underscore
 	  		relations_str = relations_str + "\t" + r['relation'] + "\n"
 	  	end
 	  end
@@ -259,7 +270,7 @@ namespace :code_gen do
 			{'name' => 'material', 'relation' =>  "belongs_to :project"},
 			{'name' => 'fenestration_construction', 'relation' =>  "belongs_to :project"},
 			{'name' => 'door_construction', 'relation' =>  "belongs_to :project"},
-			{'name' => 'space_function_defaults', 'relation' =>  "belongs_to :project"},
+			{'name' => 'space_function_default', 'relation' =>  "belongs_to :project"},
 			{'name' => 'luminaire', 'relation' =>  "belongs_to :project"},
 			{'name' => 'curve_linear', 'relation' =>  "belongs_to :project"},
 			{'name' => 'curve_quadratic', 'relation' =>  "belongs_to :project"},

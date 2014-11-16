@@ -1,0 +1,29 @@
+<h1>Listing exterior_walls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @exterior_walls.each do |exterior_wall| %>
+      <tr>
+        <td><%= exterior_wall.name %></td>
+        <td><%= exterior_wall.status %></td>
+        <td><%= exterior_wall.area %></td>
+        <td><%= link_to 'Show', exterior_wall %></td>
+        <td><%= link_to 'Edit', edit_exterior_wall_path(exterior_wall) %></td>
+        <td><%= link_to 'Destroy', exterior_wall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Exterior wall', new_exterior_wall_path %>

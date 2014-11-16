@@ -1,0 +1,27 @@
+<h1>Listing door_constructions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @door_constructions.each do |door_construction| %>
+      <tr>
+        <td><%= door_construction.name %></td>
+        <td><%= door_construction.type %></td>
+        <td><%= link_to 'Show', door_construction %></td>
+        <td><%= link_to 'Edit', edit_door_construction_path(door_construction) %></td>
+        <td><%= link_to 'Destroy', door_construction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Door construction', new_door_construction_path %>

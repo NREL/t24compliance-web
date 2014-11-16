@@ -1,0 +1,29 @@
+<h1>Listing interior_lighting_systems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Parent space function</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interior_lighting_systems.each do |interior_lighting_system| %>
+      <tr>
+        <td><%= interior_lighting_system.name %></td>
+        <td><%= interior_lighting_system.status %></td>
+        <td><%= interior_lighting_system.parent_space_function %></td>
+        <td><%= link_to 'Show', interior_lighting_system %></td>
+        <td><%= link_to 'Edit', edit_interior_lighting_system_path(interior_lighting_system) %></td>
+        <td><%= link_to 'Destroy', interior_lighting_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interior lighting system', new_interior_lighting_system_path %>

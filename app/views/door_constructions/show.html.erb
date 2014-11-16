@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @door_construction.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @door_construction.type %>
+</p>
+
+<%= link_to 'Edit', edit_door_construction_path(@door_construction) %> |
+<%= link_to 'Back', door_constructions_path %>

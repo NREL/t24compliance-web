@@ -1,0 +1,33 @@
+<%= form_for(@recirculation_water_heater) do |f| %>
+  <% if @recirculation_water_heater.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recirculation_water_heater.errors.count, "error") %> prohibited this recirculation_water_heater from being saved:</h2>
+
+      <ul>
+      <% @recirculation_water_heater.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :element_type %><br>
+    <%= f.text_field :element_type %>
+  </div>
+  <div class="field">
+    <%= f.label :tank_category %><br>
+    <%= f.text_field :tank_category %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

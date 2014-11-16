@@ -1,0 +1,27 @@
+<h1>Listing evaporative_coolers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @evaporative_coolers.each do |evaporative_cooler| %>
+      <tr>
+        <td><%= evaporative_cooler.name %></td>
+        <td><%= evaporative_cooler.type %></td>
+        <td><%= link_to 'Show', evaporative_cooler %></td>
+        <td><%= link_to 'Edit', edit_evaporative_cooler_path(evaporative_cooler) %></td>
+        <td><%= link_to 'Destroy', evaporative_cooler, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Evaporative cooler', new_evaporative_cooler_path %>

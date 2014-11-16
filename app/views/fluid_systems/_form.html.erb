@@ -1,0 +1,29 @@
+<%= form_for(@fluid_system) do |f| %>
+  <% if @fluid_system.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fluid_system.errors.count, "error") %> prohibited this fluid_system from being saved:</h2>
+
+      <ul>
+      <% @fluid_system.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

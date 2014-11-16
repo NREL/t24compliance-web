@@ -1,0 +1,29 @@
+<h1>Listing water_heaters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @water_heaters.each do |water_heater| %>
+      <tr>
+        <td><%= water_heater.name %></td>
+        <td><%= water_heater.status %></td>
+        <td><%= water_heater.type %></td>
+        <td><%= link_to 'Show', water_heater %></td>
+        <td><%= link_to 'Edit', edit_water_heater_path(water_heater) %></td>
+        <td><%= link_to 'Destroy', water_heater, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Water heater', new_water_heater_path %>

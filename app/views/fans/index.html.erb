@@ -1,0 +1,29 @@
+<h1>Listing fans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Control method</th>
+      <th>Classification</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fans.each do |fan| %>
+      <tr>
+        <td><%= fan.name %></td>
+        <td><%= fan.control_method %></td>
+        <td><%= fan.classification %></td>
+        <td><%= link_to 'Show', fan %></td>
+        <td><%= link_to 'Edit', edit_fan_path(fan) %></td>
+        <td><%= link_to 'Destroy', fan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fan', new_fan_path %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @heat_rejection.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @heat_rejection.status %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @heat_rejection.type %>
+</p>
+
+<%= link_to 'Edit', edit_heat_rejection_path(@heat_rejection) %> |
+<%= link_to 'Back', heat_rejections_path %>

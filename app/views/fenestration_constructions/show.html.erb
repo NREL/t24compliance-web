@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fenestration_construction.name %>
+</p>
+
+<p>
+  <strong>Fenestration type:</strong>
+  <%= @fenestration_construction.fenestration_type %>
+</p>
+
+<p>
+  <strong>Assembly context:</strong>
+  <%= @fenestration_construction.assembly_context %>
+</p>
+
+<%= link_to 'Edit', edit_fenestration_construction_path(@fenestration_construction) %> |
+<%= link_to 'Back', fenestration_constructions_path %>

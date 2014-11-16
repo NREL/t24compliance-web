@@ -1,0 +1,31 @@
+<h1>Listing spaces</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Floor area</th>
+      <th>Space function</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @spaces.each do |space| %>
+      <tr>
+        <td><%= space.name %></td>
+        <td><%= space.status %></td>
+        <td><%= space.floor_area %></td>
+        <td><%= space.space_function %></td>
+        <td><%= link_to 'Show', space %></td>
+        <td><%= link_to 'Edit', edit_space_path(space) %></td>
+        <td><%= link_to 'Destroy', space, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Space', new_space_path %>

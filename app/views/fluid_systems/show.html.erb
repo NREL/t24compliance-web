@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @fluid_system.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @fluid_system.status %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @fluid_system.type %>
+</p>
+
+<%= link_to 'Edit', edit_fluid_system_path(@fluid_system) %> |
+<%= link_to 'Back', fluid_systems_path %>

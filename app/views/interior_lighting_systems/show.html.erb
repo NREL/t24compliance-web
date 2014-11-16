@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @interior_lighting_system.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @interior_lighting_system.status %>
+</p>
+
+<p>
+  <strong>Parent space function:</strong>
+  <%= @interior_lighting_system.parent_space_function %>
+</p>
+
+<%= link_to 'Edit', edit_interior_lighting_system_path(@interior_lighting_system) %> |
+<%= link_to 'Back', interior_lighting_systems_path %>

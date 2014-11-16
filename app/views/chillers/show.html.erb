@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @chiller.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @chiller.type %>
+</p>
+
+<%= link_to 'Edit', edit_chiller_path(@chiller) %> |
+<%= link_to 'Back', chillers_path %>

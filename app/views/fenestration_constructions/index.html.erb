@@ -1,0 +1,29 @@
+<h1>Listing fenestration_constructions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Fenestration type</th>
+      <th>Assembly context</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fenestration_constructions.each do |fenestration_construction| %>
+      <tr>
+        <td><%= fenestration_construction.name %></td>
+        <td><%= fenestration_construction.fenestration_type %></td>
+        <td><%= fenestration_construction.assembly_context %></td>
+        <td><%= link_to 'Show', fenestration_construction %></td>
+        <td><%= link_to 'Edit', edit_fenestration_construction_path(fenestration_construction) %></td>
+        <td><%= link_to 'Destroy', fenestration_construction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fenestration construction', new_fenestration_construction_path %>

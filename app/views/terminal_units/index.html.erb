@@ -1,0 +1,29 @@
+<h1>Listing terminal_units</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @terminal_units.each do |terminal_unit| %>
+      <tr>
+        <td><%= terminal_unit.name %></td>
+        <td><%= terminal_unit.status %></td>
+        <td><%= terminal_unit.type %></td>
+        <td><%= link_to 'Show', terminal_unit %></td>
+        <td><%= link_to 'Edit', edit_terminal_unit_path(terminal_unit) %></td>
+        <td><%= link_to 'Destroy', terminal_unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Terminal unit', new_terminal_unit_path %>

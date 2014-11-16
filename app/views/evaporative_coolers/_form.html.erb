@@ -1,0 +1,25 @@
+<%= form_for(@evaporative_cooler) do |f| %>
+  <% if @evaporative_cooler.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evaporative_cooler.errors.count, "error") %> prohibited this evaporative_cooler from being saved:</h2>
+
+      <ul>
+      <% @evaporative_cooler.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<h1>Listing skylights</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @skylights.each do |skylight| %>
+      <tr>
+        <td><%= skylight.name %></td>
+        <td><%= skylight.status %></td>
+        <td><%= skylight.area %></td>
+        <td><%= link_to 'Show', skylight %></td>
+        <td><%= link_to 'Edit', edit_skylight_path(skylight) %></td>
+        <td><%= link_to 'Destroy', skylight, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Skylight', new_skylight_path %>

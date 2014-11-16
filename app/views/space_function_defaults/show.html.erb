@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @space_function_default.name %>
+</p>
+
+<p>
+  <strong>Space function:</strong>
+  <%= @space_function_default.space_function %>
+</p>
+
+<p>
+  <strong>Function schedule group:</strong>
+  <%= @space_function_default.function_schedule_group %>
+</p>
+
+<%= link_to 'Edit', edit_space_function_default_path(@space_function_default) %> |
+<%= link_to 'Back', space_function_defaults_path %>

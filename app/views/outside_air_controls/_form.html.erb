@@ -1,0 +1,29 @@
+<%= form_for(@outside_air_control) do |f| %>
+  <% if @outside_air_control.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@outside_air_control.errors.count, "error") %> prohibited this outside_air_control from being saved:</h2>
+
+      <ul>
+      <% @outside_air_control.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :economizer_control_method %><br>
+    <%= f.text_field :economizer_control_method %>
+  </div>
+  <div class="field">
+    <%= f.label :economizer_integration %><br>
+    <%= f.text_field :economizer_integration %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

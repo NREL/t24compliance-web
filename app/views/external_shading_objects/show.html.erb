@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @external_shading_object.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @external_shading_object.status %>
+</p>
+
+<%= link_to 'Edit', edit_external_shading_object_path(@external_shading_object) %> |
+<%= link_to 'Back', external_shading_objects_path %>

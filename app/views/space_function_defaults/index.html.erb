@@ -1,0 +1,29 @@
+<h1>Listing space_function_defaults</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Space function</th>
+      <th>Function schedule group</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @space_function_defaults.each do |space_function_default| %>
+      <tr>
+        <td><%= space_function_default.name %></td>
+        <td><%= space_function_default.space_function %></td>
+        <td><%= space_function_default.function_schedule_group %></td>
+        <td><%= link_to 'Show', space_function_default %></td>
+        <td><%= link_to 'Edit', edit_space_function_default_path(space_function_default) %></td>
+        <td><%= link_to 'Destroy', space_function_default, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Space function default', new_space_function_default_path %>
