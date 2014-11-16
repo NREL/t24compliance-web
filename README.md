@@ -12,6 +12,9 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 1. Install mongo or `brew install mongodb` (not necessary if you will use remote Mongo server instead of restoring full dump locally).
 1. If you are going to run cbecc-com simulations, then install redis `brew install redis`
     * Start the redis server `redis-server /usr/local/etc/redis.conf`
+1. Install node and bower to manage front end assets. Good article on angular/rails integration [here](http://angular-rails.com/bootstrap.html#an-empty-rails-app).
+    * `brew install node`
+    * `npm install -g bower`
 1. Clone this repository
 1. Set your local folder to use jruby `rbenv local jruby-1.7.15` or the system `rbenv global jruby-1.7.15` (not recommended for local development)
 1. Install bundler for jruby `gem install bundler`

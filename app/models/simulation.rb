@@ -2,6 +2,7 @@ class Simulation
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  field :name, type: String
   field :filename, type: String
   field :status, type: String
   field :cbecc_code, type: Integer

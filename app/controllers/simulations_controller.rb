@@ -4,25 +4,27 @@ class SimulationsController < ApplicationController
   # GET /simulations
   # GET /simulations.json
   def index
-    @simulations = Simulation.all
-  end
+    @simulations = params[:keywords] ? Simulation.where(name: /#{params[:keywords]}/) : Simulation.all
 
-  # GET /simulations/1
-  # GET /simulations/1.json
+  end
+  
+
+# GET /simulations/1
+# GET /simulations/1.json
   def show
   end
 
-  # GET /simulations/new
+# GET /simulations/new
   def new
     @simulation = Simulation.new
   end
 
-  # GET /simulations/1/edit
+# GET /simulations/1/edit
   def edit
   end
 
-  # POST /simulations
-  # POST /simulations.json
+# POST /simulations
+# POST /simulations.json
   def create
     @simulation = Simulation.new(simulation_params)
 
@@ -37,8 +39,8 @@ class SimulationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /simulations/1
-  # PATCH/PUT /simulations/1.json
+# PATCH/PUT /simulations/1
+# PATCH/PUT /simulations/1.json
   def update
     respond_to do |format|
       if @simulation.update(simulation_params)
@@ -51,8 +53,8 @@ class SimulationsController < ApplicationController
     end
   end
 
-  # DELETE /simulations/1
-  # DELETE /simulations/1.json
+# DELETE /simulations/1
+# DELETE /simulations/1.json
   def destroy
     @simulation.destroy
     respond_to do |format|
@@ -62,21 +64,20 @@ class SimulationsController < ApplicationController
   end
 
   def run
-    logger.info @simulation
     @simulation.run_docker
 
     redirect_to simulation_path(@simulation)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_simulation
-      @simulation = Simulation.find(params[:id])
-    end
+# Use callbacks to share common setup or constraints between actions.
+  def set_simulation
+    @simulation = Simulation.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def simulation_params
-      params.require(:simulation).permit(:filename)
-    end
+# Never trust parameters from the scary internet, only allow the white list through.
+  def simulation_params
+    params.require(:simulation).permit(:filename)
+  end
 
 end

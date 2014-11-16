@@ -4,8 +4,7 @@
   <title>CBECC-Com Web</title>
   <!-- TODO: add controller-specific javascripts -->
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= yield :head %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %><%= yield :head %>
   <%= csrf_meta_tags %>
 </head>
 <body>
