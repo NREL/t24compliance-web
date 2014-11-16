@@ -4,10 +4,10 @@ describe SimulationsController do
   render_views
   describe "index" do
     before do
-      Recipe.create!(name: 'Baked Potato w/ Cheese')
-      Recipe.create!(name: 'Garlic Mashed Potatoes')
-      Recipe.create!(name: 'Potatoes Au Gratin')
-      Recipe.create!(name: 'Baked Brussel Sprouts')
+      Simulation.create!(name: 'test 1')
+      Simulation.create!(name: 'test 2')
+      Simulation.create!(name: 'another test')
+      Simulation.create!(name: 'hmmm')
 
       xhr :get, :index, format: :json, keywords: keywords
     end
@@ -26,11 +26,11 @@ describe SimulationsController do
       it 'should return two results' do
         expect(results.size).to eq(2)
       end
-      it "should include 'Baked Potato w/ Cheese'" do
-        expect(results.map(&extract_name)).to include('Baked Potato w/ Cheese')
+      it "should include 'test 2'" do
+        expect(results.map(&extract_name)).to include('test 2')
       end
-      it "should include 'Baked Brussel Sprouts'" do
-        expect(results.map(&extract_name)).to include('Baked Brussel Sprouts')
+      it "should include 'another test'" do
+        expect(results.map(&extract_name)).to include('another test')
       end
     end
 
