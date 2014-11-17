@@ -11,8 +11,18 @@
 </p>
 
 <p>
+  <strong>Construct assembly reference:</strong>
+  <%= @exterior_wall.construct_assembly_reference %>
+</p>
+
+<p>
   <strong>Area:</strong>
   <%= @exterior_wall.area %>
+</p>
+
+<p>
+  <strong>Azimuth:</strong>
+  <%= @exterior_wall.azimuth %>
 </p>
 
 <%= link_to 'Edit', edit_exterior_wall_path(@exterior_wall) %> |

@@ -105,6 +105,32 @@ namespace :code_gen do
 
 	end
 
+	desc "save a test project"
+  task :save_test_project => :environment do
+  	p = Project.new
+  	p.zip_code = 80305
+  	p.building = Building.new
+  	# add stories
+  	p.building.total_story_count = 2
+  	p.building.above_grade_story_count = 2
+  	p.building.building_stories.create(name: 'story1', floor_to_floor_height: 10.7, z: 0)
+  	p.building.building_stories.create(name: 'story2', floor_to_ceiling_height: 10, z: 0)
+
+    # add spaces in each story
+    p.building.building_stories.each_with_index do |story, index|
+    	story.spaces.create(name: "spc#{index}", area: 5000, space_function: 'Office (Greater than 250 square feet in floor area)')
+    end
+    # add exterior walls on spaces
+    p.building.building_stories.spaces.each_with_index do |spc, index|
+    	spc.exterior_walls.create(name: "south_wall#{index}", area: 1000)
+    	spc.exterior_walls.create(name: "north_wall#{index}", area: 1000)
+    	spc.exterior_walls.create(name: "east_wall#{index}", area: 500)
+    	spc.exterior_walls.create(name: "west_wall#{index}", area: 500)
+    end
+    p.save
+
+	end
+
   # HELPER METHODS
 
   def inputs_to_scaffold
@@ -185,34 +211,53 @@ namespace :code_gen do
   end
 
   def generate_sdd_xml(input)
-  	# TODO:  also call children's methods, if any
-  	sdd_str = "\tdef to_sdd_xml\n"
-  	sdd_str = sdd_str + "\t\t" + "builder = Nokogiri::XML::Builder.new do |xml|\n"
-  	sdd_str = sdd_str + "\t\t\t" + "xml.send(:""#{input.name}"") do" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t" +  "xml_fields.each do |field|" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t" + "end" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t" + "# go through children if they have something to add, call their methods\n"
-  	sdd_str = sdd_str + "\t\t\t\t" + "kids = self.children_models" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t" + "unless kids.nil? or kids.empty?" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t" + "kids.each do |k|" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "if k == 'building'\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "unless self.building.nil?"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "xml << self.building.to_sdd_xml\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t"	+ "else\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models.each do |m|\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "xml << m.to_sdd_xml\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t" + "end\n"
-  	sdd_str = sdd_str + "\t\t" + "builder.to_xml" + "\n"
-  	sdd_str = sdd_str + "\tend\n"
-
+  	
+  	if input.name == 'Proj'
+	  	sdd_str = "\tdef to_sdd_xml\n"
+	  	sdd_str = sdd_str + "\t\t" + "builder = Nokogiri::XML::Builder.new do |xml|\n"
+	  	sdd_str = sdd_str + "\t\t\t" + "xml.send(:""#{input.name}"") do" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" +  "xml_fields.each do |field|" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "end" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "# go through children if they have something to add, call their methods\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "kids = self.children_models" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "unless kids.nil? or kids.empty?" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t" + "kids.each do |k|" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "if k == 'building'\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "unless self.building.nil?\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "self.building.to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t"	+ "else\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models.each do |m|\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "m.to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t" + "builder.to_xml" + "\n"
+	  	sdd_str = sdd_str + "\tend\n"
+	  else
+	  	sdd_str = "\tdef to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "\t\t" + "xml.send(:""#{input.name}"") do" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t" +  "xml_fields.each do |field|" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t" + "end" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t" + "# go through children if they have something to add, call their methods\n"
+	  	sdd_str = sdd_str + "\t\t\t" + "kids = self.children_models" + "\n"
+	    sdd_str = sdd_str + "\t\t\t" + "unless kids.nil? or kids.empty?" + "\n"
+	    sdd_str = sdd_str + "\t\t\t\t" + "kids.each do |k|" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t" + "models.each do |m|\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "m.to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "\t\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\t\t" + "end\n"
+	  	sdd_str = sdd_str + "\tend\n"
+	  end
   end
 
   def generate_xml_save(input)
@@ -291,16 +336,16 @@ namespace :code_gen do
 			# find enumerations
 				if df['data_type'] == 'Enumeration'
 				if df['exposed'] and !df['set_as_constant']
-					method_str = "\n\tdef #{df['db_field_name']}_enums\n\t\t[\n"
-					df['enumerations'].each do |e|
-						method_str = method_str + "\t\t\t'#{e['name']}',\n"
+					unless df['enumerations'].nil?
+						method_str = "\n\tdef #{df['db_field_name']}_enums\n\t\t[\n"
+
+						df['enumerations'].each do |e|
+							method_str = method_str + "\t\t\t'#{e['name']}',\n"
+						end
+						method_str = method_str.chop.chop
+						method_str = method_str + "\n\t\t]\n\tend\n"
+						enums << method_str
 					end
-					method_str = method_str.chop.chop
-					method_str = method_str + "\n\t\t]\n\tend\n"
-					enums << method_str
-					#puts df['name']
-					#puts method_str
-					#puts "************"
 				end
 			end
 		end

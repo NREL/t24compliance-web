@@ -69,6 +69,6 @@ class UndergroundWallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def underground_wall_params
-      params.require(:underground_wall).permit(:name, :status, :area)
+      params.require(:underground_wall).permit(:name, :status, :construct_assembly_reference, :area, :height)
     end
 end

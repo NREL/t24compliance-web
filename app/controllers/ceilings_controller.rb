@@ -69,6 +69,6 @@ class CeilingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ceiling_params
-      params.require(:ceiling).permit(:name, :area)
+      params.require(:ceiling).permit(:name, :area, :adjacent_space_reference, :construct_assembly_reference)
     end
 end

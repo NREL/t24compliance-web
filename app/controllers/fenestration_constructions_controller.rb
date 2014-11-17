@@ -69,6 +69,6 @@ class FenestrationConstructionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fenestration_construction_params
-      params.require(:fenestration_construction).permit(:name, :fenestration_type, :assembly_context)
+      params.require(:fenestration_construction).permit(:name, :fenestration_type, :fenestration_product_type, :assembly_context, :certification_method, :shgc, :u_factor, :visible_transmittance)
     end
 end

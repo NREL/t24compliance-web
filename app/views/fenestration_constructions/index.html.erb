@@ -5,7 +5,12 @@
     <tr>
       <th>Name</th>
       <th>Fenestration type</th>
+      <th>Fenestration product type</th>
       <th>Assembly context</th>
+      <th>Certification method</th>
+      <th>Shgc</th>
+      <th>U factor</th>
+      <th>Visible transmittance</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +20,12 @@
       <tr>
         <td><%= fenestration_construction.name %></td>
         <td><%= fenestration_construction.fenestration_type %></td>
+        <td><%= fenestration_construction.fenestration_product_type %></td>
         <td><%= fenestration_construction.assembly_context %></td>
+        <td><%= fenestration_construction.certification_method %></td>
+        <td><%= fenestration_construction.shgc %></td>
+        <td><%= fenestration_construction.u_factor %></td>
+        <td><%= fenestration_construction.visible_transmittance %></td>
         <td><%= link_to 'Show', fenestration_construction %></td>
         <td><%= link_to 'Edit', edit_fenestration_construction_path(fenestration_construction) %></td>
         <td><%= link_to 'Destroy', fenestration_construction, method: :delete, data: { confirm: 'Are you sure?' } %></td>

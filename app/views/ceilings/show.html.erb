@@ -10,5 +10,15 @@
   <%= @ceiling.area %>
 </p>
 
+<p>
+  <strong>Adjacent space reference:</strong>
+  <%= @ceiling.adjacent_space_reference %>
+</p>
+
+<p>
+  <strong>Construct assembly reference:</strong>
+  <%= @ceiling.construct_assembly_reference %>
+</p>
+
 <%= link_to 'Edit', edit_ceiling_path(@ceiling) %> |
 <%= link_to 'Back', ceilings_path %>

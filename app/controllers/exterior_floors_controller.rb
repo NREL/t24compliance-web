@@ -69,6 +69,6 @@ class ExteriorFloorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exterior_floor_params
-      params.require(:exterior_floor).permit(:name, :status, :area)
+      params.require(:exterior_floor).permit(:name, :status, :construct_assembly_reference, :area)
     end
 end

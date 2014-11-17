@@ -69,6 +69,6 @@ class SpacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def space_params
-      params.require(:space).permit(:name, :status, :floor_area, :space_function)
+      params.require(:space).permit(:name, :status, :thermal_zone_reference, :area, :space_function_defaults_reference, :space_function, :secondary_sidelit100_percent_controlled)
     end
 end

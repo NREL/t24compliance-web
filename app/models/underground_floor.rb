@@ -3,6 +3,7 @@ class UndergroundFloor
 	include Mongoid::Timestamps
   field :name, type: String
   field :status, type: String
+  field :construct_assembly_reference, type: Objectref
   field :area, type: Float
 
 	belongs_to :space
@@ -18,33 +19,27 @@ class UndergroundFloor
 	def xml_fields
 		xml_fields = [
 			{"db_field_name"=>"status", "xml_field_name"=>"Status"},
+			{"db_field_name"=>"construct_assembly_reference", "xml_field_name"=>"ConsAssmRef"},
 			{"db_field_name"=>"area", "xml_field_name"=>"Area"}
 		]
 	end
 
-	def to_sdd_xml
-		builder = Nokogiri::XML::Builder.new do |xml|
-			xml.send(:UndgrFlr) do
-				xml_fields.each do |field|
-					xml.send(:"#{field['xml_field_name']}", self[field['db_field_name']])
-				end
-				# go through children if they have something to add, call their methods
-				kids = self.children_models
-				unless kids.nil? or kids.empty?
-					kids.each do |k|
-						if k == 'building'
-							xml << self.building
-						else
-							models = self[k.pluralize]
-							models.each do |m|
-								xml << m.to_sdd_xml
-							end
-						end
+	def to_sdd_xml(xml)
+		xml.send(:UndgrFlr) do
+			xml_fields.each do |field|
+				xml.send(:"#{field['xml_field_name']}", self[field['db_field_name']])
+			end
+			# go through children if they have something to add, call their methods
+			kids = self.children_models
+			unless kids.nil? or kids.empty?
+				kids.each do |k|
+					models = self.send(k.pluralize)
+					models.each do |m|
+						m.to_sdd_xml(xml)
 					end
 				end
 			end
 		end
-		builder.to_xml
 	end
 
 	def status_enums

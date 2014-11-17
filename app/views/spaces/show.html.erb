@@ -11,13 +11,28 @@
 </p>
 
 <p>
-  <strong>Floor area:</strong>
-  <%= @space.floor_area %>
+  <strong>Thermal zone reference:</strong>
+  <%= @space.thermal_zone_reference %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @space.area %>
+</p>
+
+<p>
+  <strong>Space function defaults reference:</strong>
+  <%= @space.space_function_defaults_reference %>
 </p>
 
 <p>
   <strong>Space function:</strong>
   <%= @space.space_function %>
+</p>
+
+<p>
+  <strong>Secondary sidelit100 percent controlled:</strong>
+  <%= @space.secondary_sidelit100_percent_controlled %>
 </p>
 
 <%= link_to 'Edit', edit_space_path(@space) %> |

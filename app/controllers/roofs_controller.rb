@@ -69,6 +69,6 @@ class RoofsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def roof_params
-      params.require(:roof).permit(:name, :status, :area)
+      params.require(:roof).permit(:name, :status, :construct_assembly_reference, :area, :azimuth)
     end
 end

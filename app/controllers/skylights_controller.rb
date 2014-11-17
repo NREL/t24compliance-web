@@ -69,6 +69,6 @@ class SkylightsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def skylight_params
-      params.require(:skylight).permit(:name, :status, :area)
+      params.require(:skylight).permit(:name, :status, :fenestration_construction_reference, :area)
     end
 end

@@ -69,6 +69,6 @@ class MaterialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
-      params.require(:material).permit(:name, :code_category, :framing_material)
+      params.require(:material).permit(:name, :code_category, :code_item, :framing_material, :framing_configuration, :framing_depth, :cavity_insulation, :header_insulation, :cmu_weight, :cmu_fill, :spandrel_panel_insulation, :insulation_outside_waterproof_membrane)
     end
 end

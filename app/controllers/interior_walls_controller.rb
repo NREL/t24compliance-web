@@ -69,6 +69,6 @@ class InteriorWallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def interior_wall_params
-      params.require(:interior_wall).permit(:name)
+      params.require(:interior_wall).permit(:name, :status, :adjacent_space_reference, :construct_assembly_reference, :area)
     end
 end

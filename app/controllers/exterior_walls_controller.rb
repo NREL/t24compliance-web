@@ -69,6 +69,6 @@ class ExteriorWallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exterior_wall_params
-      params.require(:exterior_wall).permit(:name, :status, :area)
+      params.require(:exterior_wall).permit(:name, :status, :construct_assembly_reference, :area, :azimuth)
     end
 end

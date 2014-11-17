@@ -5,8 +5,11 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
-      <th>Floor area</th>
+      <th>Thermal zone reference</th>
+      <th>Area</th>
+      <th>Space function defaults reference</th>
       <th>Space function</th>
+      <th>Secondary sidelit100 percent controlled</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +19,11 @@
       <tr>
         <td><%= space.name %></td>
         <td><%= space.status %></td>
-        <td><%= space.floor_area %></td>
+        <td><%= space.thermal_zone_reference %></td>
+        <td><%= space.area %></td>
+        <td><%= space.space_function_defaults_reference %></td>
         <td><%= space.space_function %></td>
+        <td><%= space.secondary_sidelit100_percent_controlled %></td>
         <td><%= link_to 'Show', space %></td>
         <td><%= link_to 'Edit', edit_space_path(space) %></td>
         <td><%= link_to 'Destroy', space, method: :delete, data: { confirm: 'Are you sure?' } %></td>

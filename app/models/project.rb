@@ -128,13 +128,13 @@ class Project
 				unless kids.nil? or kids.empty?
 					kids.each do |k|
 						if k == 'building'
-              unless self.building.nil?
-							  xml.send(self.building.to_sdd_xml.doc.root.to_xml)
-              end
+							unless self.building.nil?
+								self.building.to_sdd_xml(xml)
+							end
 						else
 							models = self.send(k.pluralize)
 							models.each do |m|
-								xml << m.to_sdd_xml
+								m.to_sdd_xml(xml)
 							end
 						end
 					end
@@ -143,7 +143,6 @@ class Project
 		end
 		builder.to_xml
 	end
-
 	def xml_save
 		xml = self.to_sdd_xml
 		File.open("#{Rails.root}/data/xmls/#{self.id}.xml", "w") do |f|

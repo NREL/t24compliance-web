@@ -69,6 +69,6 @@ class UndergroundFloorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def underground_floor_params
-      params.require(:underground_floor).permit(:name, :status, :area)
+      params.require(:underground_floor).permit(:name, :status, :construct_assembly_reference, :area)
     end
 end

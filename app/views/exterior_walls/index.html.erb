@@ -5,7 +5,9 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
+      <th>Construct assembly reference</th>
       <th>Area</th>
+      <th>Azimuth</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +17,9 @@
       <tr>
         <td><%= exterior_wall.name %></td>
         <td><%= exterior_wall.status %></td>
+        <td><%= exterior_wall.construct_assembly_reference %></td>
         <td><%= exterior_wall.area %></td>
+        <td><%= exterior_wall.azimuth %></td>
         <td><%= link_to 'Show', exterior_wall %></td>
         <td><%= link_to 'Edit', edit_exterior_wall_path(exterior_wall) %></td>
         <td><%= link_to 'Destroy', exterior_wall, method: :delete, data: { confirm: 'Are you sure?' } %></td>
