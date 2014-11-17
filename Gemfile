@@ -9,10 +9,11 @@ gem 'rails', '4.1.7'
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 
 # JSON parsing and conversion
-gem "multi_json"
-gem "nokogiri"
+gem 'multi_json'
+gem 'nokogiri'
 
 # Use SCSS for stylesheets
+
 gem 'sass-rails', '~> 4.0.3'
 
 gem 'bootstrap-sass', '~> 3.3.0'
@@ -27,14 +28,14 @@ gem 'therubyrhino'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# remove turbolinks when using angular
+# gem 'turbolinks'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'bower-rails'
 
-# use puma to run the web app in jruby
-gem 'puma'
+gem 'angular-rails-templates'
 
 # For simulation of CBECC-Com Files
 gem 'docker-api', require: 'docker'
@@ -43,12 +44,31 @@ gem 'sidekiq'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# use puma to run the web app in jruby
+gem 'puma'
 
-# Use Capistrano for deployment
-gem 'capistrano-rbenv', group: :development
-gem 'capistrano-rails', group: :development
-gem 'capistrano3-puma', group: :development
-gem 'capistrano3-nginx', group: :development
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+end
+
+group :development do
+  # Use Capistrano for deployment
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
+  gem 'capistrano3-nginx'
+  gem 'capistrano-file-permissions'
+end
+
+group :test, :development do
+  gem 'rspec'
+  gem 'rspec-rails', '~> 2.0'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'teaspoon'
+  gem 'phantomjs'
+end
 
