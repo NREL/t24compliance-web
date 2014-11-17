@@ -58,6 +58,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano3-nginx'
+  gem 'capistrano-file-permissions'
 end
 
 group :test, :development do

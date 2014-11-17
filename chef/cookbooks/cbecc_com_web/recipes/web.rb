@@ -5,7 +5,7 @@
 #
 
 # add users in a deploy group
-%w(nlong vagrant kflemin).each do |u|
+%w(nlong vagrant kflemin apeterse).each do |u|
   group "deploy" do
     members u
     append true
@@ -19,6 +19,11 @@
 
     only_if "getent passwd #{u}"
   end
+end
+
+# configure deploy permissions
+directory "/tmp/cbecc-com-web" do
+
 end
 
 # setup the www directory
@@ -55,3 +60,5 @@ end
 # set ip tables
 include_recipe "iptables"
 iptables_rule "default_ip_rules"
+
+

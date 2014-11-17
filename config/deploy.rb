@@ -9,12 +9,15 @@ set :puma_workers, 0
 
 # Don't change these unless you know what you're doing
 set :pty, true
+#set :user, "deploy"
 set :group, "deploy"
 set :use_sudo, false
 set :stages, [:vagrant, :staging, :development, :production]
 set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/#{fetch(:application)}"
 set :ssh_options, {forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)}
+# set the tmp directory by user so users can deploy. Not sure if this works on windows (sorry)
+set :tmp_dir, "/home/#{`whoami`.chomp}/tmp"
 
 # If you want to be able to connect to web server via puma (not nginx),
 # then use tcp. unix socket is faster (10%-ish) and preferred
@@ -41,9 +44,16 @@ namespace :puma do
  desc 'Create Directories for Puma Pids and Socket'
  task :make_dirs do
    on roles(:app) do
+     # Make sure that these are assigned the deploy group write permission
+
      execute "mkdir #{shared_path}/tmp/sockets -p"
      execute "mkdir #{shared_path}/tmp/pids -p"
      execute "mkdir #{shared_path}/log -p"
+
+     set :file_permissions_paths, ["#{shared_path}/log", "#{shared_path}/tmp/pids", "#{shared_path}/tmp/sockets"]
+     # set :file_permissions_users, ["www-data"]
+     set :file_permissions_groups, ["deploy"]
+     set :file_permissions_chmod_mode, "0664"
    end
  end
  before :start, :make_dirs

@@ -58,6 +58,8 @@ GEM
     capistrano-bundler (1.1.3)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-file-permissions (0.1.0)
+      capistrano (>= 3.0.0)
     capistrano-rails (1.1.2)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -242,6 +244,7 @@ DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.0)
   bower-rails
+  capistrano-file-permissions
   capistrano-rails
   capistrano-rbenv
   capistrano3-nginx
