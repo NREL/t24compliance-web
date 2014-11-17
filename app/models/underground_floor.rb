@@ -3,7 +3,7 @@ class UndergroundFloor
 	include Mongoid::Timestamps
   field :name, type: String
   field :status, type: String
-  field :construct_assembly_reference, type: Objectref
+  field :construct_assembly_reference, type: String
   field :area, type: Float
 
 	belongs_to :space

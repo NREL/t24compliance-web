@@ -2,8 +2,8 @@ class InteriorFloor
   include Mongoid::Document
 	include Mongoid::Timestamps
   field :name, type: String
-  field :adjacent_space_reference, type: Objectref
-  field :construct_assembly_reference, type: Objectref
+  field :adjacent_space_reference, type: String
+  field :construct_assembly_reference, type: String
   field :area, type: Float
 
 	belongs_to :space

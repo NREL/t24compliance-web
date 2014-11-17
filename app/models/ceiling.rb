@@ -3,8 +3,8 @@ class Ceiling
 	include Mongoid::Timestamps
   field :name, type: String
   field :area, type: Float
-  field :adjacent_space_reference, type: Objectref
-  field :construct_assembly_reference, type: Objectref
+  field :adjacent_space_reference, type: String
+  field :construct_assembly_reference, type: String
 
 	belongs_to :space
 	has_many :poly_loops

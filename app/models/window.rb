@@ -3,7 +3,7 @@ class Window
 	include Mongoid::Timestamps
   field :name, type: String
   field :status, type: String
-  field :fenestration_construction_reference, type: Objectref
+  field :fenestration_construction_reference, type: String
   field :area, type: Float
 
 	belongs_to :exterior_wall

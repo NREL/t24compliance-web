@@ -3,9 +3,9 @@ class Space
 	include Mongoid::Timestamps
   field :name, type: String
   field :status, type: String
-  field :thermal_zone_reference, type: Objectref
+  field :thermal_zone_reference, type: String
   field :area, type: Float
-  field :space_function_defaults_reference, type: Objectref
+  field :space_function_defaults_reference, type: String
   field :space_function, type: String
   field :secondary_sidelit100_percent_controlled, type: Integer
 
