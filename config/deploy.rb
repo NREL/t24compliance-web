@@ -34,7 +34,7 @@ set :puma_init_active_record, false # Change to true if using ActiveRecord
 # set :branch,        :master
 # set :format,        :pretty
 # set :log_level,     :debug
-# set :keep_releases, 5
+set :keep_releases, 50
 
 ## Linked Files & Directories (Default None):
 #set :linked_files, %w{config/database.yml}

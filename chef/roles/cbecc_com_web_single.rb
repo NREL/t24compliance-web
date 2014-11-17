@@ -10,6 +10,8 @@ run_list([
             "recipe[cbecc_com_web::sudo]",
             "recipe[cbecc_com_web::ruby]",
             "recipe[cbecc_com_web::web]",
+            "recipe[docker]",
+            "recipe[cbecc_com_web::docker]",
          ])
 
 default_attributes(
