@@ -22,5 +22,6 @@
 Berksfile.lock
 Gemfile.lock
 .vagrant
+.DS_STORE
 
 /data/simulations/*

@@ -1,0 +1,25 @@
+<h2>Users</h2>
+
+<table class="tablesorter table table-striped">
+  <thead>
+  <tr>
+    <th>Email
+    <th>Role</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.email, user %></td>
+        <td><% user.roles.each do |role| %><%= role %> <% end %>
+        </td>
+        <td><%= link_to 'Edit', edit_user_path(user) %> | <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

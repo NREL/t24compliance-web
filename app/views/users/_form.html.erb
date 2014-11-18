@@ -1,0 +1,31 @@
+<%= bootstrap_form_for(@user, layout: :horizontal) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset>
+    <%= f.email_field :email, autofocus: true, control_col: "col-sm-4" %>
+  </fieldset>
+
+  <%= f.form_group :roles, label: { text: "Roles" } do %>
+
+        <% for role in User.valid_roles %>
+          <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {name: "user[roles][]" }%>
+          <%= label_tag "user_roles_#{role}", role, class: "user-label" %><br />
+        <% end %>
+        <%= hidden_field_tag "user[roles][]", "" %>
+
+  <% end %>
+
+  <%= f.form_group do %>
+    <%= f.submit "Update", class: "btn btn-small btn-primary" %>
+  <% end %>
+<% end %>
