@@ -9,7 +9,7 @@ set :puma_workers, 0
 
 # Don't change these unless you know what you're doing
 set :pty, true
-#set :user, "deploy"
+set :user, ask('User name:', 'vagrant or your user name')
 set :group, "deploy"
 set :use_sudo, false
 set :stages, [:vagrant, :staging, :development, :production]
@@ -17,7 +17,7 @@ set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/#{fetch(:application)}"
 set :ssh_options, {forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)}
 # set the tmp directory by user so users can deploy. Not sure if this works on windows (sorry)
-set :tmp_dir, "/home/#{`whoami`.chomp}/tmp"
+set :tmp_dir, "/home/#{fetch(:user)}/tmp"
 
 # If you want to be able to connect to web server via puma (not nginx),
 # then use tcp. unix socket is faster (10%-ish) and preferred
