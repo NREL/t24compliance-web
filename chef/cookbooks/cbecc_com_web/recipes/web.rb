@@ -4,8 +4,10 @@
 # Recipe:: web
 #
 
+
+
 # add users in a deploy group
-%w(nlong vagrant kflemin apeterse).each do |u|
+node[:cbecc_com_web][:deploy_users].each do |u|
   group "deploy" do
     members u
     append true
@@ -21,9 +23,11 @@
   end
 end
 
-# configure deploy permissions
-directory "/tmp/cbecc-com-web" do
-
+user 'deploy' do
+  gid 'deploy'
+  shell "/bin/bash"
+  system true
+  action :create
 end
 
 # setup the www directory
