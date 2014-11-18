@@ -6,6 +6,7 @@
 
 set :rbenv_custom_path, '/opt/rbenv'
 #set :rbenv_type, :system
+set :user, ask('User name:', 'vagrant or your user name')
 set :rbenv_ruby, 'jruby-1.7.15'
 set :rails_env, "staging"
 set :nginx_server_name, 'rordev-web.development.nrel.gov'
