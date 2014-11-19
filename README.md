@@ -61,7 +61,9 @@ The CBECC-Com simulations require the following
 
   ```
   cap vagrant puma:make_dirs
-  cap vagrant puma:nginx_config_no_sudo
+  cap vagrant nginx:site:add
+  cap vagrant nginx:site:enable
+  cap vagrant nginx:reload
   ```
 
   ```

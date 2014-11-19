@@ -28,11 +28,13 @@ set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log, "#{release_path}/log/puma.access.log"
 set :puma_init_active_record, false # Change to true if using ActiveRecord
 
+set :nginx_template, 'config/deploy/templates/nginx_conf.erb'
+set :nginx_config_name, fetch(:application)
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
-# set :format,        :pretty
-# set :log_level,     :debug
+
+set :log_level,     :debug
 set :keep_releases, 50
 
 ## Linked Files & Directories (Default None):

@@ -30,27 +30,27 @@ user 'deploy' do
   action :create
 end
 
-# setup the www directory
-directory "/var/www" do
-  #user 'www-data'
-  group 'deploy'
-  mode '0775'
-  #action :create
-end
+# # setup the www directory
+# directory "/var/www" do
+#   #user 'www-data'
+#   group 'deploy'
+#   mode '0775'
+#   #action :create
+# end
+#
+# # set the gid sticky bit so that any subfolder would be part of the deploy group
+# bash "chmod-setgid" do
+#   code "chmod g+s /var/www"
+# end
 
-# set the gid sticky bit so that any subfolder would be part of the deploy group
-bash "chmod-setgid" do
-  code "chmod g+s /var/www"
-end
-
-# setup the www directory
-%w(/etc/nginx/sites-available /etc/nginx/sites-enabled).each do |d|
-  directory d do
-    #user 'www-data'
-    group 'deploy'
-    mode '0775'
-  end
-end
+# # setup the www directory
+# %w(/etc/nginx/sites-available /etc/nginx/sites-enabled).each do |d|
+#   directory d do
+#     #user 'www-data'
+#     group 'deploy'
+#     mode '0775'
+#   end
+# end
 
 # cron 'cbecc_com_json_backup' do
 #   minute '0'
