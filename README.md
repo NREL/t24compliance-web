@@ -65,21 +65,6 @@ vagrant ssh
 sudo setenforce 0
 ```
 
-* Configure nginx and puma  
-
-
-  ```
-  bundle exec cap vagrant puma:make_dirs
-  bundle exec cap vagrant nginx:site:add
-  bundle exec cap vagrant nginx:site:enable
-  bundle exec cap vagrant nginx:reload
-  ```
-
-  ```
-  bundle exec cap staging puma:make_dirs
-  bundle exec cap staging puma:nginx_config_no_sudo
-  ```
-
 * Deploy the application
 
   ```
@@ -88,9 +73,12 @@ sudo setenforce 0
   bundle exec cap staging deploy
   ```
 
-* Restart nginx (if you changed the site config)
+* Configure and restart nginx (if you changed the site config)
 
   ```
+  bundle exec cap vagrant nginx:site:add
+  bundle exec cap vagrant nginx:site:enable
+  bundle exec cap vagrant nginx:reload
   bundle exec cap vagrant nginx:restart
   # or
   bundle exec cap staging nginx:restart
