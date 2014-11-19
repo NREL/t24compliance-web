@@ -4,8 +4,6 @@
 # Recipe:: web
 #
 
-
-
 # add users in a deploy group
 node[:cbecc_com_web][:deploy_users].each do |u|
   group "deploy" do
@@ -30,18 +28,17 @@ user 'deploy' do
   action :create
 end
 
-# # setup the www directory
-# directory "/var/www" do
-#   #user 'www-data'
-#   group 'deploy'
-#   mode '0775'
-#   #action :create
-# end
-#
-# # set the gid sticky bit so that any subfolder would be part of the deploy group
-# bash "chmod-setgid" do
-#   code "chmod g+s /var/www"
-# end
+# setup the www directory
+directory "/var/www" do
+#  user 'deploy'
+  group 'deploy'
+  mode '0775'
+end
+
+# set the gid sticky bit so that any subfolder would be part of the deploy group
+bash "chmod-setgid" do
+  code "chmod g+s /var/www"
+end
 
 # # setup the www directory
 # %w(/etc/nginx/sites-available /etc/nginx/sites-enabled).each do |d|
@@ -60,6 +57,8 @@ end
 #     cd ~ && curl -SL http://localhost/inputs.json -o inputs_$(date +%Y%m%d_%H%M%S).json
 #   }
 # end
+
+# Set an selinux bool to allow for the connection
 
 # set ip tables
 include_recipe "iptables"

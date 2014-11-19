@@ -52,7 +52,7 @@ namespace :puma do
      execute "mkdir #{shared_path}/log -p"
 
      set :file_permissions_paths, ["#{shared_path}/log", "#{shared_path}/tmp/pids", "#{shared_path}/tmp/sockets"]
-     # set :file_permissions_users, ["www-data"]
+     #set :file_permissions_users, ["www-data"]
      set :file_permissions_groups, ["deploy"]
      set :file_permissions_chmod_mode, "0664"
    end

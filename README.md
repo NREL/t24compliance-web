@@ -55,35 +55,44 @@ The CBECC-Com simulations require the following
 ## Deployment
 
 ### Vagrant / Staging
+*Note the use of `bundle exec` to protect against loading wrong gem dependencies*
 
 * Start the vagrant machine and make sure provision runs
-* Configure nginx and puma
+* [Vagrant Only] Log into the machine and manually make selinux permissive
+
+```
+vagrant ssh
+sudo setenforce 0
+```
+
+* Configure nginx and puma  
+
 
   ```
-  cap vagrant puma:make_dirs
-  cap vagrant nginx:site:add
-  cap vagrant nginx:site:enable
-  cap vagrant nginx:reload
+  bundle exec cap vagrant puma:make_dirs
+  bundle exec cap vagrant nginx:site:add
+  bundle exec cap vagrant nginx:site:enable
+  bundle exec cap vagrant nginx:reload
   ```
 
   ```
-  cap staging puma:make_dirs
-  cap staging puma:nginx_config_no_sudo
+  bundle exec cap staging puma:make_dirs
+  bundle exec cap staging puma:nginx_config_no_sudo
   ```
 
 * Deploy the application
 
   ```
-  cap vagrant deploy
+  bundle exec cap vagrant deploy
   # or
-  cap staging deploy
+  bundle exec cap staging deploy
   ```
 
 * Restart nginx (if you changed the site config)
 
   ```
-  cap vagrant nginx:restart
+  bundle exec cap vagrant nginx:restart
   # or
-  cap staging nginx:restart
+  bundle exec cap staging nginx:restart
   ```
   
