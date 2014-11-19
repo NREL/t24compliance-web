@@ -1,0 +1,16 @@
+<h2>User Account</h2>
+<h3 class="edit-name"><%= @user.email %> <% if current_user == @user %><%= link_to "[ edit ]", edit_user_registration_path(current_user), class: "edit-link" %><% else %><%= link_to "[ edit ]", edit_user_path(@user), class: "edit-link" %><% end %></h3>
+<table class="table table-striped">
+  <tr>
+    <th> Email</th>
+    <td><%= @user.email %></td>
+  </tr>
+  <tr>
+    <th>Roles</th>
+    <td>
+      <% @user.roles.each do |role| %>
+        <%= role %><br/>
+      <% end %>
+    </td>
+  </tr>
+</table>

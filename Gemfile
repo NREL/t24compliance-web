@@ -8,16 +8,21 @@ gem 'rails', '4.1.7'
 # MongoDB Adapter ( ~> 4.0)
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
 
+
 # JSON parsing and conversion
 gem 'multi_json'
 gem 'nokogiri'
 
+# user auth
+gem 'devise', '~> 3.4.1'
+gem 'cancancan', '~> 1.9'
+gem 'role_model'
+
 # Use SCSS for stylesheets
-
 gem 'sass-rails', '~> 4.0.3'
-
 gem 'bootstrap-sass', '~> 3.3.0'
 gem 'autoprefixer-rails'
+gem 'bootstrap_form'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
