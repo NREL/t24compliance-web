@@ -28,16 +28,11 @@ user 'deploy' do
   action :create
 end
 
-# setup the www directory
+# setup the www directory and the sticky bit
 directory "/var/www" do
 #  user 'deploy'
   group 'deploy'
-  mode '0775'
-end
-
-# set the gid sticky bit so that any subfolder would be part of the deploy group
-bash "chmod-setgid" do
-  code "chmod g+s /var/www"
+  mode '02775'
 end
 
 # # setup the www directory

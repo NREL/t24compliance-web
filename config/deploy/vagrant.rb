@@ -8,7 +8,6 @@ set :rbenv_custom_path, '/opt/rbenv'
 #set :rbenv_type, :system
 set :user, 'vagrant'
 set :rbenv_ruby, 'jruby-1.7.15'
-# override the temp dir
 set :tmp_dir, "/home/vagrant/tmp"
 set :ssh_options, {port: 2222, keys: ['~/.vagrant.d/insecure_private_key']}
 set :rails_env, "staging"
