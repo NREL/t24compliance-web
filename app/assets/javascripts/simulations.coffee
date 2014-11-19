@@ -10,7 +10,7 @@ queue.config([ '$routeProvider',
     $routeProvider
     .when('/',
       templateUrl: "index.html"
-      controller: 'RecipesController'
+      controller: 'SimulationsController'
     )
 ])
 
