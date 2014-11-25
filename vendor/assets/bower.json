@@ -7,6 +7,6 @@
     "angular-mocks": "latest",
     "bootstrap-sass-official": "latest",
     "angular-flash": "latest",
-    "underscore": "latest"
+    "lodash": "latest"
   }
 }

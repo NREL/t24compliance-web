@@ -18,6 +18,6 @@
 //= require angular-rails-templates
 //= require angular-resource/angular-resource
 //= require angular-flash/dist/angular-flash
-//= require underscore
+//= require lodash
 //= require_tree .
 
