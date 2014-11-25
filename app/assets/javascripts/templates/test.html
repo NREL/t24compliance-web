@@ -1,0 +1,28 @@
+<header class="row">
+  <h1 class="text-center col-md-6 col-md-offset-3">Find Projects</h1>
+</header>
+<section class="row">
+  <form>
+    <div class="form-group col-md-6 col-md-offset-3">
+      <label for="keywords" class="sr-only">Keywords</label>
+      <input ng-model="keywords" name="keywords" type="text" autofocus class="form-control" placeholder="Project name, e.g. Baked Potato">
+    </div>
+    <div class="form-group col-md-6 col-md-offset-3 text-center">
+      <button ng-click="search(keywords)" class="btn btn-primary btn-lg">Search</button>
+    </div>
+  </form>
+</section>
+<hr>
+<section class="row" ng-if="projects">
+  <ul class="list-unstyled">
+    <li ng-repeat="project in projects">
+      <section class="well col-md-6 col-md-offset-3">
+        <h1 class="h3 col-md-6 text-right" style="margin-top: 0"><a href="#">{{project.name}}</a></h1>
+        <div class="col-md-6">
+          <button class="btn btn-info">Edit</button>
+          <button class="btn btn-danger">Delete</button>
+        </div>
+      </section>
+    </li>
+  </ul>
+</section>

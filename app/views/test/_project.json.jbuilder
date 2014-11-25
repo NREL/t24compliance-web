@@ -1,0 +1,1 @@
+json.(project, :id, :name, :zip_code)

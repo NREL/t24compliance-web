@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+   get 'test' => 'test#test'
+
+
   devise_for :users
   resources :users
   get '/admin' => 'users#admin'
