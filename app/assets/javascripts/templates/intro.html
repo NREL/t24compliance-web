@@ -1,0 +1,35 @@
+	<div class="wizard-nav">
+		<a class="btn btn-primary active" ng-click="introPage()">Introduction</a>
+		<a class="btn btn-primary" ng-click="projectPage()">Project</a>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="heading">
+				<h2 class="inline-heading">Introduction | </h2>
+				<p class="inline-heading">This tool is a Title 24 Compliance Tool with Simplified Geometry.</p>
+			</div>
+			<div class="pad-left-10">
+				<p>You can travel back and forth in this navigation and continue editing your model. Save your model and return to your account page
+				later to finish it.</p>
+
+				<p><span class="bold-text">Project:</span> In this section you will add the project location and members of the project team.</p>
+
+				<p><span class="bold-text">Building:</span> This section allows you to describe the total square footage of your building and add stories to the building.</p>
+
+				<p><span class="bold-text">Constructions:</span> Define some default constructions for your building. These will be applied to the spaces as you make them, but you can edit and refine them at an individual surface level.</p>
+
+				<p><span class="bold-text">Spaces:</span> The first time you enter the spaces section on a project you will get a dialog that will help you quickly set up your basic spaces. Then you can refine and edit the spaces in a table view. In this section you will set constructions, space functions, lighting, loads, and other settings for each space.</p>
+
+				<p><span class="bold-text">Thermal Zones:</span> Create thermal zones and assign spaces to those thermal zones in this section.</p>
+
+				<p><span class="bold-text">Systems:</span> Add HVAC systems and plants to your building, refine their settings, and attach them to thermal zones. A limited number of systems are provided.</p>
+
+				<p><span class="bold-text">Review and Edit:</span> This section provides you with some feedback on fields you may have missed that are required and links back to those sections to allow you to complete your compliance check. </p>
+
+				<p><span class="bold-text">Check Compliance:</span> Run your compliance check and get a PDF Report.</p>
+
+					<input type="text" class="form-control" ng-model="myText" >
+			 			{{ myText }}
+			</div>
+		</div>
+	</div>

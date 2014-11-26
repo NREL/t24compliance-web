@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-   get 'test' => 'test#test'
+  root :to => "inputs#dashboard"
 
+  resources :tests, only: [:index, :show, :create, :update, :destroy]
 
   devise_for :users
   resources :users
@@ -130,5 +131,5 @@ Rails.application.routes.draw do
     match 'datafields' => 'inputs#datafields', :via => [:get, :post]
   end
 
-  root :to => "inputs#dashboard"
+
 end

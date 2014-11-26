@@ -1,0 +1,1 @@
+json.(test, :id, :name, :zip_code)
