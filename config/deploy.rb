@@ -9,7 +9,6 @@ set :puma_workers, 0
 
 # Don't change these unless you know what you're doing
 set :pty, true
-set :user, ask('User name:', 'vagrant or your user name')
 set :group, "deploy"
 set :use_sudo, false
 set :stages, [:vagrant, :staging, :development, :production]
@@ -17,7 +16,6 @@ set :deploy_via, :remote_cache
 set :deploy_to, "/var/www/#{fetch(:application)}"
 set :ssh_options, {forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)}
 # set the tmp directory by user so users can deploy. Not sure if this works on windows (sorry)
-set :tmp_dir, "/home/#{fetch(:user)}/tmp"
 
 # If you want to be able to connect to web server via puma (not nginx),
 # then use tcp. unix socket is faster (10%-ish) and preferred
@@ -29,11 +27,13 @@ set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log, "#{release_path}/log/puma.access.log"
 set :puma_init_active_record, false # Change to true if using ActiveRecord
 
+set :nginx_template, 'config/deploy/templates/nginx_conf.erb'
+set :nginx_config_name, fetch(:application)
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
-# set :format,        :pretty
-# set :log_level,     :debug
+
+set :log_level,     :debug
 set :keep_releases, 50
 
 ## Linked Files & Directories (Default None):
@@ -51,7 +51,7 @@ namespace :puma do
      execute "mkdir #{shared_path}/log -p"
 
      set :file_permissions_paths, ["#{shared_path}/log", "#{shared_path}/tmp/pids", "#{shared_path}/tmp/sockets"]
-     # set :file_permissions_users, ["www-data"]
+     #set :file_permissions_users, ["www-data"]
      set :file_permissions_groups, ["deploy"]
      set :file_permissions_chmod_mode, "0664"
    end

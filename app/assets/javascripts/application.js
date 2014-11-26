@@ -20,6 +20,7 @@
 //= require angular-flash/dist/angular-flash
 //= require testapp
 //= require ./templates
+//= require lodash
 //= require_tree .
 
 

@@ -4,7 +4,7 @@ class SimulationsController < ApplicationController
   # GET /simulations
   # GET /simulations.json
   def index
-    @simulations = params[:keywords] ? Simulation.where(name: /#{params[:keywords]}/) : Simulation.all
+    @simulations = params[:keywords] ? Simulation.where(filename: /#{params[:keywords]}/) : Simulation.all
 
   end
   
