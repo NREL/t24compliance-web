@@ -4,7 +4,8 @@ testapp = angular.module('testapp',[
   'ngResource',
   'controllers',
   'angular-flash.service',
-  'angular-flash.flash-alert-directive'
+  'angular-flash.flash-alert-directive',
+  'common.errorHandling'
 ])
 
 testapp.config([ '$routeProvider', 'flashProvider'

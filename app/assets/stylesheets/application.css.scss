@@ -15,6 +15,11 @@ $border-grey: #e0e4e6;
 $border-blue: #4BB7E9;
 $button-grey: #6b6b6b;
 $white: #ffffff;
+$error-text: #FF0000;
+
+.error {
+  color: $error-text;    
+}
 
 .navbar {
 

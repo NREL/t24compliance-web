@@ -29,7 +29,11 @@ controllers.controller("TestCtrl", [ '$scope', '$routeParams', '$resource', '$lo
         $location.path("/")
 
     $scope.save = ->
-      onError = (_httpResponse)-> flash.error = "Something went wrong"
+      console.log('hi! ')
+      onError = (_httpResponse)->  
+        $scope.errors = _httpResponse.data
+        flash.error = "Something went wrong" #+JSON.stringify(_httpResponse.data)
+      console.log($scope.errors)
       if $scope.test.id
         $scope.test.$save(
           ( ()-> $location.path("/tests/#{$scope.test.id}") ),
@@ -41,8 +45,11 @@ controllers.controller("TestCtrl", [ '$scope', '$routeParams', '$resource', '$lo
         )
 
     $scope.delete = ->
-      $scope.test.$delete()
-      $scope.back()
+      onError = (_httpResponse) -> flash.error = _httpResponse.data
+      $scope.test.$delete(
+        ( () -> $scope.back() ),
+        onError
+      )
 
 
 ])
