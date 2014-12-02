@@ -20,5 +20,35 @@
   <%= @exterior_floor.area %>
 </p>
 
+<p>
+  <strong>Exterior solar absorptance:</strong>
+  <%= @exterior_floor.exterior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Exterior thermal absorptance:</strong>
+  <%= @exterior_floor.exterior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Exterior visible absorptance:</strong>
+  <%= @exterior_floor.exterior_visible_absorptance %>
+</p>
+
+<p>
+  <strong>Interior solar absorptance:</strong>
+  <%= @exterior_floor.interior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Interior thermal absorptance:</strong>
+  <%= @exterior_floor.interior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Interior visible absorptance:</strong>
+  <%= @exterior_floor.interior_visible_absorptance %>
+</p>
+
 <%= link_to 'Edit', edit_exterior_floor_path(@exterior_floor) %> |
 <%= link_to 'Back', exterior_floors_path %>

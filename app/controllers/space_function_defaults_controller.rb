@@ -1,74 +1,47 @@
 class SpaceFunctionDefaultsController < ApplicationController
   before_action :set_space_function_default, only: [:show, :edit, :update, :destroy]
 
-  # GET /space_function_defaults
-  # GET /space_function_defaults.json
+  respond_to :html
+
   def index
     @space_function_defaults = SpaceFunctionDefault.all
+    respond_with(@space_function_defaults)
   end
 
-  # GET /space_function_defaults/1
-  # GET /space_function_defaults/1.json
   def show
+    respond_with(@space_function_default)
   end
 
-  # GET /space_function_defaults/new
   def new
     @space_function_default = SpaceFunctionDefault.new
+    respond_with(@space_function_default)
   end
 
-  # GET /space_function_defaults/1/edit
   def edit
   end
 
-  # POST /space_function_defaults
-  # POST /space_function_defaults.json
   def create
     @space_function_default = SpaceFunctionDefault.new(space_function_default_params)
-
-    respond_to do |format|
-      if @space_function_default.save
-        format.html { redirect_to @space_function_default, notice: 'Space function default was successfully created.' }
-        format.json { render :show, status: :created, location: @space_function_default }
-      else
-        format.html { render :new }
-        format.json { render json: @space_function_default.errors, status: :unprocessable_entity }
-      end
-    end
+    @space_function_default.save
+    respond_with(@space_function_default)
   end
 
-  # PATCH/PUT /space_function_defaults/1
-  # PATCH/PUT /space_function_defaults/1.json
   def update
-    respond_to do |format|
-      if @space_function_default.update(space_function_default_params)
-        format.html { redirect_to @space_function_default, notice: 'Space function default was successfully updated.' }
-        format.json { render :show, status: :ok, location: @space_function_default }
-      else
-        format.html { render :edit }
-        format.json { render json: @space_function_default.errors, status: :unprocessable_entity }
-      end
-    end
+    @space_function_default.update(space_function_default_params)
+    respond_with(@space_function_default)
   end
 
-  # DELETE /space_function_defaults/1
-  # DELETE /space_function_defaults/1.json
   def destroy
     @space_function_default.destroy
-    respond_to do |format|
-      format.html { redirect_to space_function_defaults_url, notice: 'Space function default was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@space_function_default)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_space_function_default
       @space_function_default = SpaceFunctionDefault.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def space_function_default_params
-      params.require(:space_function_default).permit(:name, :space_function, :function_schedule_group)
+      params.require(:space_function_default).permit(:name, :space_function, :function_schedule_group, :occupant_density, :occupant_sensible_heat_rate, :occupant_latent_heat_rate, :occupant_schedule_reference, :ventilation_per_person, :ventilation_per_area, :ventilation_air_changes_per_hour, :exhaust_per_area, :exhaust_air_changes_per_hour, :interior_lighting_power_density_regulated, :interior_lighting_regulated_schedule_reference, :interior_lighting_regulated_heat_gain_space_fraction, :interior_lighting_regulated_heat_gain_radiant_fraction, :interior_lighting_power_density_non_regulated, :interior_lighting_non_regulated_schedule_reference, :interior_lighting_non_regulated_heat_gain_space_fraction, :interior_lighting_non_regulated_heat_gain_radiant_fraction, :receptacle_power_density, :receptacle_schedule_reference, :receptacle_radiation_fraction, :receptacle_latent_fraction, :receptacle_lost_fraction, :gas_equipment_power_density, :gas_equipment_schedule_reference, :gas_equipment_radiation_fraction, :gas_equipment_latent_fraction, :gas_equipment_lost_fraction, :process_electrical_power_density, :process_electrical_schedule_reference, :process_electrical_radiation_fraction, :process_electrical_latent_fraction, :process_electrical_lost_fraction, :commercial_refrigeration_epd, :commercial_refrigeration_equipment_schedule_reference, :commercial_refrigeration_radiation_fraction, :commercial_refrigeration_latent_fraction, :commercial_refrigeration_lost_fraction, :elevator_count, :elevator_power, :elevator_schedule_reference, :elevator_radiation_fraction, :elevator_latent_fraction, :elevator_lost_fraction, :escalator_count, :escalator_power, :escalator_schedule_reference, :escalator_radiation_fraction, :escalator_latent_fraction, :escalator_lost_fraction, :process_gas_power_density, :process_gas_schedule_reference, :process_gas_radiation_fraction, :process_gas_latent_fraction, :process_gas_lost_fraction, :hot_water_heating_rate, :hot_water_heating_schedule_reference, :shw_fluid_segment_reference, :recirculation_dhw_system_reference, :infiltration_method, :design_infiltration_rate, :infiltration_schedule_reference, :infiltration_model_coefficient_a, :infiltration_model_coefficient_b, :infiltration_model_coefficient_c, :infiltration_model_coefficient_d)
     end
 end

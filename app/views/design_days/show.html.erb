@@ -5,5 +5,50 @@
   <%= @design_day.name %>
 </p>
 
+<p>
+  <strong>Type:</strong>
+  <%= @design_day.type %>
+</p>
+
+<p>
+  <strong>Design dry bulb:</strong>
+  <%= @design_day.design_dry_bulb %>
+</p>
+
+<p>
+  <strong>Design dry bulb range:</strong>
+  <%= @design_day.design_dry_bulb_range %>
+</p>
+
+<p>
+  <strong>Coincident wet bulb:</strong>
+  <%= @design_day.coincident_wet_bulb %>
+</p>
+
+<p>
+  <strong>Wind speed:</strong>
+  <%= @design_day.wind_speed %>
+</p>
+
+<p>
+  <strong>Wind direction:</strong>
+  <%= @design_day.wind_direction %>
+</p>
+
+<p>
+  <strong>Sky clearness:</strong>
+  <%= @design_day.sky_clearness %>
+</p>
+
+<p>
+  <strong>Month:</strong>
+  <%= @design_day.month %>
+</p>
+
+<p>
+  <strong>Month day:</strong>
+  <%= @design_day.month_day %>
+</p>
+
 <%= link_to 'Edit', edit_design_day_path(@design_day) %> |
 <%= link_to 'Back', design_days_path %>

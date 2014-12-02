@@ -7,6 +7,15 @@
       <th>Status</th>
       <th>Element type</th>
       <th>Tank category</th>
+      <th>Tank type</th>
+      <th>Input rating</th>
+      <th>Energy factor</th>
+      <th>Tank volume</th>
+      <th>Tank interior insulation r value</th>
+      <th>Tank exterior insulation r value</th>
+      <th>Ambient condition</th>
+      <th>Standby loss fraction</th>
+      <th>Thermal efficiency</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +27,15 @@
         <td><%= recirculation_water_heater.status %></td>
         <td><%= recirculation_water_heater.element_type %></td>
         <td><%= recirculation_water_heater.tank_category %></td>
+        <td><%= recirculation_water_heater.tank_type %></td>
+        <td><%= recirculation_water_heater.input_rating %></td>
+        <td><%= recirculation_water_heater.energy_factor %></td>
+        <td><%= recirculation_water_heater.tank_volume %></td>
+        <td><%= recirculation_water_heater.tank_interior_insulation_r_value %></td>
+        <td><%= recirculation_water_heater.tank_exterior_insulation_r_value %></td>
+        <td><%= recirculation_water_heater.ambient_condition %></td>
+        <td><%= recirculation_water_heater.standby_loss_fraction %></td>
+        <td><%= recirculation_water_heater.thermal_efficiency %></td>
         <td><%= link_to 'Show', recirculation_water_heater %></td>
         <td><%= link_to 'Edit', edit_recirculation_water_heater_path(recirculation_water_heater) %></td>
         <td><%= link_to 'Destroy', recirculation_water_heater, method: :delete, data: { confirm: 'Are you sure?' } %></td>

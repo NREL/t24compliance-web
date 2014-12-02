@@ -4,6 +4,9 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
+      <th>Operation</th>
+      <th>Door construction reference</th>
       <th>Area</th>
       <th colspan="3"></th>
     </tr>
@@ -13,6 +16,9 @@
     <% @doors.each do |door| %>
       <tr>
         <td><%= door.name %></td>
+        <td><%= door.status %></td>
+        <td><%= door.operation %></td>
+        <td><%= door.door_construction_reference %></td>
         <td><%= door.area %></td>
         <td><%= link_to 'Show', door %></td>
         <td><%= link_to 'Edit', edit_door_path(door) %></td>

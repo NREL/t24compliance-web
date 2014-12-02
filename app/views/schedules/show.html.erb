@@ -10,5 +10,20 @@
   <%= @schedule.type %>
 </p>
 
+<p>
+  <strong>End month:</strong>
+  <%= @schedule.end_month %>
+</p>
+
+<p>
+  <strong>End day:</strong>
+  <%= @schedule.end_day %>
+</p>
+
+<p>
+  <strong>Schedule week reference:</strong>
+  <%= @schedule.schedule_week_reference %>
+</p>
+
 <%= link_to 'Edit', edit_schedule_path(@schedule) %> |
 <%= link_to 'Back', schedules_path %>

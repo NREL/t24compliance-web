@@ -6,6 +6,25 @@
       <th>Name</th>
       <th>Status</th>
       <th>Type</th>
+      <th>Count</th>
+      <th>Fluid segment out reference</th>
+      <th>Fluid segment makeup reference</th>
+      <th>Storage capacity</th>
+      <th>Ef</th>
+      <th>Recovery efficiency</th>
+      <th>Thermal efficiency</th>
+      <th>Hir f plr curve reference</th>
+      <th>Fuel source</th>
+      <th>Off cycle fuel source</th>
+      <th>Off cycle parasitic losses</th>
+      <th>On cycle fuel source</th>
+      <th>On cycle parasitic losses</th>
+      <th>Tank off cycle loss coef</th>
+      <th>Capacity rated</th>
+      <th>Minimum capacity</th>
+      <th>Standby loss fraction</th>
+      <th>Electrical ignition</th>
+      <th>Draft fan power</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +35,25 @@
         <td><%= water_heater.name %></td>
         <td><%= water_heater.status %></td>
         <td><%= water_heater.type %></td>
+        <td><%= water_heater.count %></td>
+        <td><%= water_heater.fluid_segment_out_reference %></td>
+        <td><%= water_heater.fluid_segment_makeup_reference %></td>
+        <td><%= water_heater.storage_capacity %></td>
+        <td><%= water_heater.ef %></td>
+        <td><%= water_heater.recovery_efficiency %></td>
+        <td><%= water_heater.thermal_efficiency %></td>
+        <td><%= water_heater.hir_f_plr_curve_reference %></td>
+        <td><%= water_heater.fuel_source %></td>
+        <td><%= water_heater.off_cycle_fuel_source %></td>
+        <td><%= water_heater.off_cycle_parasitic_losses %></td>
+        <td><%= water_heater.on_cycle_fuel_source %></td>
+        <td><%= water_heater.on_cycle_parasitic_losses %></td>
+        <td><%= water_heater.tank_off_cycle_loss_coef %></td>
+        <td><%= water_heater.capacity_rated %></td>
+        <td><%= water_heater.minimum_capacity %></td>
+        <td><%= water_heater.standby_loss_fraction %></td>
+        <td><%= water_heater.electrical_ignition %></td>
+        <td><%= water_heater.draft_fan_power %></td>
         <td><%= link_to 'Show', water_heater %></td>
         <td><%= link_to 'Edit', edit_water_heater_path(water_heater) %></td>
         <td><%= link_to 'Destroy', water_heater, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -8,10 +8,13 @@ class Material
   field :framing_configuration, type: String
   field :framing_depth, type: String
   field :cavity_insulation, type: Float
+  field :cavity_insulation_option, type: String
+  field :composite_material_notes, type: String
   field :header_insulation, type: Float
   field :cmu_weight, type: String
   field :cmu_fill, type: String
   field :spandrel_panel_insulation, type: Float
+  field :icces_report_number, type: String
   field :insulation_outside_waterproof_membrane, type: Integer
 
 	belongs_to :project
@@ -31,10 +34,13 @@ class Material
 			{"db_field_name"=>"framing_configuration", "xml_field_name"=>"FrmConfig"},
 			{"db_field_name"=>"framing_depth", "xml_field_name"=>"FrmDepth"},
 			{"db_field_name"=>"cavity_insulation", "xml_field_name"=>"CavityIns"},
+			{"db_field_name"=>"cavity_insulation_option", "xml_field_name"=>"CavityInsOpt"},
+			{"db_field_name"=>"composite_material_notes", "xml_field_name"=>"CompositeMatNotes"},
 			{"db_field_name"=>"header_insulation", "xml_field_name"=>"HeaderIns"},
 			{"db_field_name"=>"cmu_weight", "xml_field_name"=>"CMUWt"},
 			{"db_field_name"=>"cmu_fill", "xml_field_name"=>"CMUFill"},
 			{"db_field_name"=>"spandrel_panel_insulation", "xml_field_name"=>"SpandrelPanelIns"},
+			{"db_field_name"=>"icces_report_number", "xml_field_name"=>"ICCESRptNum"},
 			{"db_field_name"=>"insulation_outside_waterproof_membrane", "xml_field_name"=>"InsOutsdWtrprfMemb"}
 		]
 	end
@@ -130,6 +136,12 @@ class Material
 			'7_25In',
 			'9_25In',
 			'11_25In'
+		]
+	end
+
+	def cavity_insulation_option_enums
+		[
+			'- specify -'
 		]
 	end
 

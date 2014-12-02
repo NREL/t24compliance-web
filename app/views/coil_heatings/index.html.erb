@@ -5,6 +5,29 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
+      <th>Fuel source</th>
+      <th>Fluid segment in reference</th>
+      <th>Fluid segment out reference</th>
+      <th>Fluid flow rate design</th>
+      <th>Capacity total gross rated</th>
+      <th>Capacity total net rated</th>
+      <th>Capacity total rated stage fraction</th>
+      <th>Furnace afue</th>
+      <th>Furnace thermal efficiency</th>
+      <th>Furnace ignition type</th>
+      <th>Furnace pilot fuel input</th>
+      <th>Condenser type</th>
+      <th>Heat pump hspf</th>
+      <th>Heat pump cop</th>
+      <th>Heat pump supplemental coil heating reference</th>
+      <th>Heat pump compressor lockout temperature</th>
+      <th>Heat pump supplemental temperature</th>
+      <th>Heat pump crankcase heat capacity</th>
+      <th>Heat pump crankcase control temperature</th>
+      <th>Heat pump defrost heat source</th>
+      <th>Heat pump defrost heat capacity</th>
+      <th>Heat pump defrost control</th>
+      <th>Auxilliary power</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +37,29 @@
       <tr>
         <td><%= coil_heating.name %></td>
         <td><%= coil_heating.type %></td>
+        <td><%= coil_heating.fuel_source %></td>
+        <td><%= coil_heating.fluid_segment_in_reference %></td>
+        <td><%= coil_heating.fluid_segment_out_reference %></td>
+        <td><%= coil_heating.fluid_flow_rate_design %></td>
+        <td><%= coil_heating.capacity_total_gross_rated %></td>
+        <td><%= coil_heating.capacity_total_net_rated %></td>
+        <td><%= coil_heating.capacity_total_rated_stage_fraction %></td>
+        <td><%= coil_heating.furnace_afue %></td>
+        <td><%= coil_heating.furnace_thermal_efficiency %></td>
+        <td><%= coil_heating.furnace_ignition_type %></td>
+        <td><%= coil_heating.furnace_pilot_fuel_input %></td>
+        <td><%= coil_heating.condenser_type %></td>
+        <td><%= coil_heating.heat_pump_hspf %></td>
+        <td><%= coil_heating.heat_pump_cop %></td>
+        <td><%= coil_heating.heat_pump_supplemental_coil_heating_reference %></td>
+        <td><%= coil_heating.heat_pump_compressor_lockout_temperature %></td>
+        <td><%= coil_heating.heat_pump_supplemental_temperature %></td>
+        <td><%= coil_heating.heat_pump_crankcase_heat_capacity %></td>
+        <td><%= coil_heating.heat_pump_crankcase_control_temperature %></td>
+        <td><%= coil_heating.heat_pump_defrost_heat_source %></td>
+        <td><%= coil_heating.heat_pump_defrost_heat_capacity %></td>
+        <td><%= coil_heating.heat_pump_defrost_control %></td>
+        <td><%= coil_heating.auxilliary_power %></td>
         <td><%= link_to 'Show', coil_heating %></td>
         <td><%= link_to 'Edit', edit_coil_heating_path(coil_heating) %></td>
         <td><%= link_to 'Destroy', coil_heating, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -5,6 +5,23 @@
     <tr>
       <th>Name</th>
       <th>Compatible surface type</th>
+      <th>Exterior solar absorptance</th>
+      <th>Exterior thermal absorptance</th>
+      <th>Exterior visible absorptance</th>
+      <th>Interior solar absorptance</th>
+      <th>Interior thermal absorptance</th>
+      <th>Interior visible absorptance</th>
+      <th>Slab type</th>
+      <th>Slab insulation orientation</th>
+      <th>Slab insulation thermal resistance</th>
+      <th>Field applied coating</th>
+      <th>Crrc initial reflectance</th>
+      <th>Crrc aged reflectance</th>
+      <th>Crrc initial emittance</th>
+      <th>Crrc aged emittance</th>
+      <th>Crrc initial sri</th>
+      <th>Crrc aged sri</th>
+      <th>Crrc product</th>
       <th>Material reference</th>
       <th colspan="3"></th>
     </tr>
@@ -15,6 +32,23 @@
       <tr>
         <td><%= construct_assembly.name %></td>
         <td><%= construct_assembly.compatible_surface_type %></td>
+        <td><%= construct_assembly.exterior_solar_absorptance %></td>
+        <td><%= construct_assembly.exterior_thermal_absorptance %></td>
+        <td><%= construct_assembly.exterior_visible_absorptance %></td>
+        <td><%= construct_assembly.interior_solar_absorptance %></td>
+        <td><%= construct_assembly.interior_thermal_absorptance %></td>
+        <td><%= construct_assembly.interior_visible_absorptance %></td>
+        <td><%= construct_assembly.slab_type %></td>
+        <td><%= construct_assembly.slab_insulation_orientation %></td>
+        <td><%= construct_assembly.slab_insulation_thermal_resistance %></td>
+        <td><%= construct_assembly.field_applied_coating %></td>
+        <td><%= construct_assembly.crrc_initial_reflectance %></td>
+        <td><%= construct_assembly.crrc_aged_reflectance %></td>
+        <td><%= construct_assembly.crrc_initial_emittance %></td>
+        <td><%= construct_assembly.crrc_aged_emittance %></td>
+        <td><%= construct_assembly.crrc_initial_sri %></td>
+        <td><%= construct_assembly.crrc_aged_sri %></td>
+        <td><%= construct_assembly.crrc_product_id %></td>
         <td><%= construct_assembly.material_reference %></td>
         <td><%= link_to 'Show', construct_assembly %></td>
         <td><%= link_to 'Edit', edit_construct_assembly_path(construct_assembly) %></td>

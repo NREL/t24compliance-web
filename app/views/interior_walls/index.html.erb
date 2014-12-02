@@ -8,6 +8,12 @@
       <th>Adjacent space reference</th>
       <th>Construct assembly reference</th>
       <th>Area</th>
+      <th>Exterior solar absorptance</th>
+      <th>Exterior thermal absorptance</th>
+      <th>Exterior visible absorptance</th>
+      <th>Interior solar absorptance</th>
+      <th>Interior thermal absorptance</th>
+      <th>Interior visible absorptance</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +26,12 @@
         <td><%= interior_wall.adjacent_space_reference %></td>
         <td><%= interior_wall.construct_assembly_reference %></td>
         <td><%= interior_wall.area %></td>
+        <td><%= interior_wall.exterior_solar_absorptance %></td>
+        <td><%= interior_wall.exterior_thermal_absorptance %></td>
+        <td><%= interior_wall.exterior_visible_absorptance %></td>
+        <td><%= interior_wall.interior_solar_absorptance %></td>
+        <td><%= interior_wall.interior_thermal_absorptance %></td>
+        <td><%= interior_wall.interior_visible_absorptance %></td>
         <td><%= link_to 'Show', interior_wall %></td>
         <td><%= link_to 'Edit', edit_interior_wall_path(interior_wall) %></td>
         <td><%= link_to 'Destroy', interior_wall, method: :delete, data: { confirm: 'Are you sure?' } %></td>

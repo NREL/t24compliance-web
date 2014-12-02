@@ -20,5 +20,25 @@
   <%= @underground_floor.area %>
 </p>
 
+<p>
+  <strong>Perimeter exposed:</strong>
+  <%= @underground_floor.perimeter_exposed %>
+</p>
+
+<p>
+  <strong>Interior solar absorptance:</strong>
+  <%= @underground_floor.interior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Interior thermal absorptance:</strong>
+  <%= @underground_floor.interior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Interior visible absorptance:</strong>
+  <%= @underground_floor.interior_visible_absorptance %>
+</p>
+
 <%= link_to 'Edit', edit_underground_floor_path(@underground_floor) %> |
 <%= link_to 'Back', underground_floors_path %>

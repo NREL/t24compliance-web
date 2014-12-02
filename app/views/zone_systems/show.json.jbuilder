@@ -1,1 +1,1 @@
-json.extract! @zone_system, :id, :name, :status, :type, :created_at, :updated_at
+json.extract! @zone_system, :id, :name, :status, :type, :description, :hvac_auto_sizing, :fan_control, :cooling_control, :count, :cooling_design_supply_air_temperature, :heating_design_supply_air_temperature, :exhaust_system_type, :exhaust_operation_mode, :exhaust_control_method, :air_distribution_type, :created_at, :updated_at

@@ -10,7 +10,7 @@
 		<th>Validation</th>
 		<th>Enum Default ID</th>
 		<th>Enumerations</th>
-		<th>Expose to App</td>
+		<th>Remove from App</td>
 	</tr>
 		<%= form_tag datafields_path, :method => :post do |f| %>
 		<% @input.data_fields.each do |df| %>
@@ -52,7 +52,7 @@
 				  </div>
 					<% end %>
 				</td>
-				<% checked_status = df['exposed'] ? true:false %>
+				<% checked_status = df['remove'] ? true:false %>
 				<td><span class="pad-left-sm"><%= check_box_tag(df['name'], '1', checked_status, class: 'input pad-left-sm')  %></span></td>
 			</tr>
 		<% end %>

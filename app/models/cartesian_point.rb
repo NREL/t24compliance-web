@@ -2,6 +2,7 @@ class CartesianPoint
   include Mongoid::Document
 	include Mongoid::Timestamps
   field :name, type: String
+  field :coordinate, type: Array
 
 	belongs_to :poly_loop
 
@@ -14,7 +15,7 @@ class CartesianPoint
 
 	def xml_fields
 		xml_fields = [
-
+			{"db_field_name"=>"coordinate", "xml_field_name"=>"Coord"}
 		]
 	end
 

@@ -1,74 +1,47 @@
 class EvaporativeCoolersController < ApplicationController
   before_action :set_evaporative_cooler, only: [:show, :edit, :update, :destroy]
 
-  # GET /evaporative_coolers
-  # GET /evaporative_coolers.json
+  respond_to :html
+
   def index
     @evaporative_coolers = EvaporativeCooler.all
+    respond_with(@evaporative_coolers)
   end
 
-  # GET /evaporative_coolers/1
-  # GET /evaporative_coolers/1.json
   def show
+    respond_with(@evaporative_cooler)
   end
 
-  # GET /evaporative_coolers/new
   def new
     @evaporative_cooler = EvaporativeCooler.new
+    respond_with(@evaporative_cooler)
   end
 
-  # GET /evaporative_coolers/1/edit
   def edit
   end
 
-  # POST /evaporative_coolers
-  # POST /evaporative_coolers.json
   def create
     @evaporative_cooler = EvaporativeCooler.new(evaporative_cooler_params)
-
-    respond_to do |format|
-      if @evaporative_cooler.save
-        format.html { redirect_to @evaporative_cooler, notice: 'Evaporative cooler was successfully created.' }
-        format.json { render :show, status: :created, location: @evaporative_cooler }
-      else
-        format.html { render :new }
-        format.json { render json: @evaporative_cooler.errors, status: :unprocessable_entity }
-      end
-    end
+    @evaporative_cooler.save
+    respond_with(@evaporative_cooler)
   end
 
-  # PATCH/PUT /evaporative_coolers/1
-  # PATCH/PUT /evaporative_coolers/1.json
   def update
-    respond_to do |format|
-      if @evaporative_cooler.update(evaporative_cooler_params)
-        format.html { redirect_to @evaporative_cooler, notice: 'Evaporative cooler was successfully updated.' }
-        format.json { render :show, status: :ok, location: @evaporative_cooler }
-      else
-        format.html { render :edit }
-        format.json { render json: @evaporative_cooler.errors, status: :unprocessable_entity }
-      end
-    end
+    @evaporative_cooler.update(evaporative_cooler_params)
+    respond_with(@evaporative_cooler)
   end
 
-  # DELETE /evaporative_coolers/1
-  # DELETE /evaporative_coolers/1.json
   def destroy
     @evaporative_cooler.destroy
-    respond_to do |format|
-      format.html { redirect_to evaporative_coolers_url, notice: 'Evaporative cooler was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@evaporative_cooler)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_evaporative_cooler
       @evaporative_cooler = EvaporativeCooler.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def evaporative_cooler_params
-      params.require(:evaporative_cooler).permit(:name, :type)
+      params.require(:evaporative_cooler).permit(:name, :type, :effectiveness, :pump_power, :indirect_dew_point_effectiveness, :secondary_fan_flow_capacity, :secondary_fan_total_efficiency, :secondary_fan_total_static_pressure, :secondary_air_source)
     end
 end

@@ -10,5 +10,10 @@
   <%= @schedule_day.type %>
 </p>
 
+<p>
+  <strong>Hour:</strong>
+  <%= @schedule_day.hour %>
+</p>
+
 <%= link_to 'Edit', edit_schedule_day_path(@schedule_day) %> |
 <%= link_to 'Back', schedule_days_path %>

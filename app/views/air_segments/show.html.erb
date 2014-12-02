@@ -5,5 +5,15 @@
   <%= @air_segment.name %>
 </p>
 
+<p>
+  <strong>Type:</strong>
+  <%= @air_segment.type %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @air_segment.path %>
+</p>
+
 <%= link_to 'Edit', edit_air_segment_path(@air_segment) %> |
 <%= link_to 'Back', air_segments_path %>

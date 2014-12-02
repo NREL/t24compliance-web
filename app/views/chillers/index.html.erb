@@ -4,7 +4,30 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
       <th>Type</th>
+      <th>Fuel source</th>
+      <th>Condenser type</th>
+      <th>Condenser fluid segment in reference</th>
+      <th>Condenser fluid segment out reference</th>
+      <th>Evaporator fluid segment in reference</th>
+      <th>Evaporator fluid segment out reference</th>
+      <th>Evaporator has bypass</th>
+      <th>Entering temperature design</th>
+      <th>Entering temperature rated</th>
+      <th>Leaving temperature design</th>
+      <th>Leaving temperature rated</th>
+      <th>Capacity rated</th>
+      <th>Condenser power rated</th>
+      <th>Kw per ton</th>
+      <th>Eer</th>
+      <th>Cop</th>
+      <th>Iplv kw per ton</th>
+      <th>Iplveer</th>
+      <th>Iplvcop</th>
+      <th>Unload ratio minimum</th>
+      <th>Part load ratio minimum</th>
+      <th>Water flow capacity</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,7 +36,30 @@
     <% @chillers.each do |chiller| %>
       <tr>
         <td><%= chiller.name %></td>
+        <td><%= chiller.status %></td>
         <td><%= chiller.type %></td>
+        <td><%= chiller.fuel_source %></td>
+        <td><%= chiller.condenser_type %></td>
+        <td><%= chiller.condenser_fluid_segment_in_reference %></td>
+        <td><%= chiller.condenser_fluid_segment_out_reference %></td>
+        <td><%= chiller.evaporator_fluid_segment_in_reference %></td>
+        <td><%= chiller.evaporator_fluid_segment_out_reference %></td>
+        <td><%= chiller.evaporator_has_bypass %></td>
+        <td><%= chiller.entering_temperature_design %></td>
+        <td><%= chiller.entering_temperature_rated %></td>
+        <td><%= chiller.leaving_temperature_design %></td>
+        <td><%= chiller.leaving_temperature_rated %></td>
+        <td><%= chiller.capacity_rated %></td>
+        <td><%= chiller.condenser_power_rated %></td>
+        <td><%= chiller.kw_per_ton %></td>
+        <td><%= chiller.eer %></td>
+        <td><%= chiller.cop %></td>
+        <td><%= chiller.iplv_kw_per_ton %></td>
+        <td><%= chiller.iplveer %></td>
+        <td><%= chiller.iplvcop %></td>
+        <td><%= chiller.unload_ratio_minimum %></td>
+        <td><%= chiller.part_load_ratio_minimum %></td>
+        <td><%= chiller.water_flow_capacity %></td>
         <td><%= link_to 'Show', chiller %></td>
         <td><%= link_to 'Edit', edit_chiller_path(chiller) %></td>
         <td><%= link_to 'Destroy', chiller, method: :delete, data: { confirm: 'Are you sure?' } %></td>

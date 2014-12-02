@@ -3,6 +3,9 @@ class ExternalShadingObject
 	include Mongoid::Timestamps
   field :name, type: String
   field :status, type: String
+  field :transmittance_schedule_reference, type: String
+  field :solar_reflectance, type: Float
+  field :visible_reflectance, type: Float
 
 	has_many :poly_loops
 	belongs_to :project
@@ -16,7 +19,10 @@ class ExternalShadingObject
 
 	def xml_fields
 		xml_fields = [
-			{"db_field_name"=>"status", "xml_field_name"=>"Status"}
+			{"db_field_name"=>"status", "xml_field_name"=>"Status"},
+			{"db_field_name"=>"transmittance_schedule_reference", "xml_field_name"=>"TransSchRef"},
+			{"db_field_name"=>"solar_reflectance", "xml_field_name"=>"SolRefl"},
+			{"db_field_name"=>"visible_reflectance", "xml_field_name"=>"VisRefl"}
 		]
 	end
 

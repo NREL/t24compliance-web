@@ -3,6 +3,9 @@ class Schedule
 	include Mongoid::Timestamps
   field :name, type: String
   field :type, type: String
+  field :end_month, type: Array
+  field :end_day, type: Array
+  field :schedule_week_reference, type: Array
 
 	belongs_to :project
 
@@ -15,7 +18,10 @@ class Schedule
 
 	def xml_fields
 		xml_fields = [
-			{"db_field_name"=>"type", "xml_field_name"=>"Type"}
+			{"db_field_name"=>"type", "xml_field_name"=>"Type"},
+			{"db_field_name"=>"end_month", "xml_field_name"=>"EndMonth"},
+			{"db_field_name"=>"end_day", "xml_field_name"=>"EndDay"},
+			{"db_field_name"=>"schedule_week_reference", "xml_field_name"=>"SchWeekRef"}
 		]
 	end
 

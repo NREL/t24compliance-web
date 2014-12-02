@@ -1,74 +1,47 @@
 class MaterialsController < ApplicationController
   before_action :set_material, only: [:show, :edit, :update, :destroy]
 
-  # GET /materials
-  # GET /materials.json
+  respond_to :html
+
   def index
     @materials = Material.all
+    respond_with(@materials)
   end
 
-  # GET /materials/1
-  # GET /materials/1.json
   def show
+    respond_with(@material)
   end
 
-  # GET /materials/new
   def new
     @material = Material.new
+    respond_with(@material)
   end
 
-  # GET /materials/1/edit
   def edit
   end
 
-  # POST /materials
-  # POST /materials.json
   def create
     @material = Material.new(material_params)
-
-    respond_to do |format|
-      if @material.save
-        format.html { redirect_to @material, notice: 'Material was successfully created.' }
-        format.json { render :show, status: :created, location: @material }
-      else
-        format.html { render :new }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
-      end
-    end
+    @material.save
+    respond_with(@material)
   end
 
-  # PATCH/PUT /materials/1
-  # PATCH/PUT /materials/1.json
   def update
-    respond_to do |format|
-      if @material.update(material_params)
-        format.html { redirect_to @material, notice: 'Material was successfully updated.' }
-        format.json { render :show, status: :ok, location: @material }
-      else
-        format.html { render :edit }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
-      end
-    end
+    @material.update(material_params)
+    respond_with(@material)
   end
 
-  # DELETE /materials/1
-  # DELETE /materials/1.json
   def destroy
     @material.destroy
-    respond_to do |format|
-      format.html { redirect_to materials_url, notice: 'Material was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@material)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_material
       @material = Material.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
-      params.require(:material).permit(:name, :code_category, :code_item, :framing_material, :framing_configuration, :framing_depth, :cavity_insulation, :header_insulation, :cmu_weight, :cmu_fill, :spandrel_panel_insulation, :insulation_outside_waterproof_membrane)
+      params.require(:material).permit(:name, :code_category, :code_item, :framing_material, :framing_configuration, :framing_depth, :cavity_insulation, :cavity_insulation_option, :composite_material_notes, :header_insulation, :cmu_weight, :cmu_fill, :spandrel_panel_insulation, :icces_report_number, :insulation_outside_waterproof_membrane)
     end
 end

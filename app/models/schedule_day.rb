@@ -3,6 +3,7 @@ class ScheduleDay
 	include Mongoid::Timestamps
   field :name, type: String
   field :type, type: String
+  field :hour, type: Array
 
 	belongs_to :project
 
@@ -15,7 +16,8 @@ class ScheduleDay
 
 	def xml_fields
 		xml_fields = [
-			{"db_field_name"=>"type", "xml_field_name"=>"Type"}
+			{"db_field_name"=>"type", "xml_field_name"=>"Type"},
+			{"db_field_name"=>"hour", "xml_field_name"=>"Hr"}
 		]
 	end
 

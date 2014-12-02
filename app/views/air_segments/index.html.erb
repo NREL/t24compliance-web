@@ -4,6 +4,8 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Type</th>
+      <th>Path</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +14,8 @@
     <% @air_segments.each do |air_segment| %>
       <tr>
         <td><%= air_segment.name %></td>
+        <td><%= air_segment.type %></td>
+        <td><%= air_segment.path %></td>
         <td><%= link_to 'Show', air_segment %></td>
         <td><%= link_to 'Edit', edit_air_segment_path(air_segment) %></td>
         <td><%= link_to 'Destroy', air_segment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

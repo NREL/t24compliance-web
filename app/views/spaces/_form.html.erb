@@ -20,12 +20,40 @@
     <%= f.text_field :status %>
   </div>
   <div class="field">
+    <%= f.label :conditioning_type %><br>
+    <%= f.text_field :conditioning_type %>
+  </div>
+  <div class="field">
+    <%= f.label :supply_plenum_space_reference %><br>
+    <%= f.text_field :supply_plenum_space_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :return_plenum_space_reference %><br>
+    <%= f.text_field :return_plenum_space_reference %>
+  </div>
+  <div class="field">
     <%= f.label :thermal_zone_reference %><br>
     <%= f.text_field :thermal_zone_reference %>
   </div>
   <div class="field">
     <%= f.label :area %><br>
     <%= f.text_field :area %>
+  </div>
+  <div class="field">
+    <%= f.label :floor_area %><br>
+    <%= f.text_field :floor_area %>
+  </div>
+  <div class="field">
+    <%= f.label :floor_z %><br>
+    <%= f.text_field :floor_z %>
+  </div>
+  <div class="field">
+    <%= f.label :floor_to_ceiling_height %><br>
+    <%= f.text_field :floor_to_ceiling_height %>
+  </div>
+  <div class="field">
+    <%= f.label :volume %><br>
+    <%= f.text_field :volume %>
   </div>
   <div class="field">
     <%= f.label :space_function_defaults_reference %><br>
@@ -36,8 +64,436 @@
     <%= f.text_field :space_function %>
   </div>
   <div class="field">
+    <%= f.label :function_schedule_group %><br>
+    <%= f.text_field :function_schedule_group %>
+  </div>
+  <div class="field">
+    <%= f.label :occupant_density %><br>
+    <%= f.text_field :occupant_density %>
+  </div>
+  <div class="field">
+    <%= f.label :occupant_sensible_heat_rate %><br>
+    <%= f.text_field :occupant_sensible_heat_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :occupant_latent_heat_rate %><br>
+    <%= f.text_field :occupant_latent_heat_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :occupant_schedule_reference %><br>
+    <%= f.text_field :occupant_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :infiltration_method %><br>
+    <%= f.text_field :infiltration_method %>
+  </div>
+  <div class="field">
+    <%= f.label :design_infiltration_rate %><br>
+    <%= f.text_field :design_infiltration_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :infiltration_schedule_reference %><br>
+    <%= f.text_field :infiltration_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :infiltration_model_coefficient_a %><br>
+    <%= f.text_field :infiltration_model_coefficient_a %>
+  </div>
+  <div class="field">
+    <%= f.label :infiltration_model_coefficient_b %><br>
+    <%= f.text_field :infiltration_model_coefficient_b %>
+  </div>
+  <div class="field">
+    <%= f.label :infiltration_model_coefficient_c %><br>
+    <%= f.text_field :infiltration_model_coefficient_c %>
+  </div>
+  <div class="field">
+    <%= f.label :infiltration_model_coefficient_d %><br>
+    <%= f.text_field :infiltration_model_coefficient_d %>
+  </div>
+  <div class="field">
+    <%= f.label :envelope_status %><br>
+    <%= f.text_field :envelope_status %>
+  </div>
+  <div class="field">
+    <%= f.label :lighting_status %><br>
+    <%= f.text_field :lighting_status %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_specification_method %><br>
+    <%= f.text_field :interior_lighting_specification_method %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_power_density_regulated %><br>
+    <%= f.text_field :interior_lighting_power_density_regulated %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_regulated_schedule_reference %><br>
+    <%= f.text_field :interior_lighting_regulated_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_regulated_heat_gain_space_fraction %><br>
+    <%= f.text_field :interior_lighting_regulated_heat_gain_space_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_regulated_heat_gain_radiant_fraction %><br>
+    <%= f.text_field :interior_lighting_regulated_heat_gain_radiant_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_power_density_non_regulated %><br>
+    <%= f.text_field :interior_lighting_power_density_non_regulated %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_non_regulated_schedule_reference %><br>
+    <%= f.text_field :interior_lighting_non_regulated_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_non_regulated_heat_gain_space_fraction %><br>
+    <%= f.text_field :interior_lighting_non_regulated_heat_gain_space_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_non_regulated_heat_gain_radiant_fraction %><br>
+    <%= f.text_field :interior_lighting_non_regulated_heat_gain_radiant_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :skylit_daylighting_installed_lighting_power %><br>
+    <%= f.text_field :skylit_daylighting_installed_lighting_power %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_side_daylighting_installed_lighting_power %><br>
+    <%= f.text_field :primary_side_daylighting_installed_lighting_power %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_side_daylighting_installed_lighting_power %><br>
+    <%= f.text_field :secondary_side_daylighting_installed_lighting_power %>
+  </div>
+  <div class="field">
+    <%= f.label :skylit100_percent_controlled %><br>
+    <%= f.text_field :skylit100_percent_controlled %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_sidelit100_percent_controlled %><br>
+    <%= f.text_field :primary_sidelit100_percent_controlled %>
+  </div>
+  <div class="field">
     <%= f.label :secondary_sidelit100_percent_controlled %><br>
-    <%= f.number_field :secondary_sidelit100_percent_controlled %>
+    <%= f.text_field :secondary_sidelit100_percent_controlled %>
+  </div>
+  <div class="field">
+    <%= f.label :skylit_daylighting_reference_point_coordinate %><br>
+    <%= f.text_field :skylit_daylighting_reference_point_coordinate %>
+  </div>
+  <div class="field">
+    <%= f.label :skylit_daylighting_controlled_lighting_power %><br>
+    <%= f.text_field :skylit_daylighting_controlled_lighting_power %>
+  </div>
+  <div class="field">
+    <%= f.label :skylit_daylighting_control_lighting_fraction %><br>
+    <%= f.text_field :skylit_daylighting_control_lighting_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :skylit_daylighting_illuminance_set_point %><br>
+    <%= f.text_field :skylit_daylighting_illuminance_set_point %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_side_daylighting_reference_point_coordinate %><br>
+    <%= f.text_field :primary_side_daylighting_reference_point_coordinate %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_side_daylighting_controlled_lighting_power %><br>
+    <%= f.text_field :primary_side_daylighting_controlled_lighting_power %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_side_daylighting_control_lighting_fraction %><br>
+    <%= f.text_field :primary_side_daylighting_control_lighting_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :primary_side_daylighting_illuminance_set_point %><br>
+    <%= f.text_field :primary_side_daylighting_illuminance_set_point %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_side_daylighting_reference_point_coordinate %><br>
+    <%= f.text_field :secondary_side_daylighting_reference_point_coordinate %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_side_daylighting_controlled_lighting_power %><br>
+    <%= f.text_field :secondary_side_daylighting_controlled_lighting_power %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_side_daylighting_control_lighting_fraction %><br>
+    <%= f.text_field :secondary_side_daylighting_control_lighting_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :secondary_side_daylighting_illuminance_set_point %><br>
+    <%= f.text_field :secondary_side_daylighting_illuminance_set_point %>
+  </div>
+  <div class="field">
+    <%= f.label :daylighting_control_type %><br>
+    <%= f.text_field :daylighting_control_type %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_dimming_light_fraction %><br>
+    <%= f.text_field :minimum_dimming_light_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_dimming_power_fraction %><br>
+    <%= f.text_field :minimum_dimming_power_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :number_of_control_steps %><br>
+    <%= f.text_field :number_of_control_steps %>
+  </div>
+  <div class="field">
+    <%= f.label :glare_azimuth %><br>
+    <%= f.text_field :glare_azimuth %>
+  </div>
+  <div class="field">
+    <%= f.label :maximum_glare_index %><br>
+    <%= f.text_field :maximum_glare_index %>
+  </div>
+  <div class="field">
+    <%= f.label :skylight_requirement_exception %><br>
+    <%= f.text_field :skylight_requirement_exception %>
+  </div>
+  <div class="field">
+    <%= f.label :skylight_requirement_exception_area %><br>
+    <%= f.text_field :skylight_requirement_exception_area %>
+  </div>
+  <div class="field">
+    <%= f.label :skylight_requirement_exception_fraction %><br>
+    <%= f.text_field :skylight_requirement_exception_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :receptacle_power_density %><br>
+    <%= f.text_field :receptacle_power_density %>
+  </div>
+  <div class="field">
+    <%= f.label :receptacle_schedule_reference %><br>
+    <%= f.text_field :receptacle_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :receptacle_radiation_fraction %><br>
+    <%= f.text_field :receptacle_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :receptacle_latent_fraction %><br>
+    <%= f.text_field :receptacle_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :receptacle_lost_fraction %><br>
+    <%= f.text_field :receptacle_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :gas_equipment_power_density %><br>
+    <%= f.text_field :gas_equipment_power_density %>
+  </div>
+  <div class="field">
+    <%= f.label :gas_equipment_schedule_reference %><br>
+    <%= f.text_field :gas_equipment_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :gas_equipment_radiation_fraction %><br>
+    <%= f.text_field :gas_equipment_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :gas_equipment_latent_fraction %><br>
+    <%= f.text_field :gas_equipment_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :gas_equipment_lost_fraction %><br>
+    <%= f.text_field :gas_equipment_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :process_electrical_power_density %><br>
+    <%= f.text_field :process_electrical_power_density %>
+  </div>
+  <div class="field">
+    <%= f.label :process_electrical_schedule_reference %><br>
+    <%= f.text_field :process_electrical_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :process_electrical_radiation_fraction %><br>
+    <%= f.text_field :process_electrical_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :process_electrical_latent_fraction %><br>
+    <%= f.text_field :process_electrical_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :process_electrical_lost_fraction %><br>
+    <%= f.text_field :process_electrical_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :process_gas_power_density %><br>
+    <%= f.text_field :process_gas_power_density %>
+  </div>
+  <div class="field">
+    <%= f.label :process_gas_schedule_reference %><br>
+    <%= f.text_field :process_gas_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :process_gas_radiation_fraction %><br>
+    <%= f.text_field :process_gas_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :process_gas_latent_fraction %><br>
+    <%= f.text_field :process_gas_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :process_gas_lost_fraction %><br>
+    <%= f.text_field :process_gas_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :commercial_refrigeration_epd %><br>
+    <%= f.text_field :commercial_refrigeration_epd %>
+  </div>
+  <div class="field">
+    <%= f.label :commercial_refrigeration_equipment_schedule_reference %><br>
+    <%= f.text_field :commercial_refrigeration_equipment_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :commercial_refrigeration_radiation_fraction %><br>
+    <%= f.text_field :commercial_refrigeration_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :commercial_refrigeration_latent_fraction %><br>
+    <%= f.text_field :commercial_refrigeration_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :commercial_refrigeration_lost_fraction %><br>
+    <%= f.text_field :commercial_refrigeration_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :elevator_count %><br>
+    <%= f.text_field :elevator_count %>
+  </div>
+  <div class="field">
+    <%= f.label :elevator_power %><br>
+    <%= f.text_field :elevator_power %>
+  </div>
+  <div class="field">
+    <%= f.label :elevator_schedule_reference %><br>
+    <%= f.text_field :elevator_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :elevator_radiation_fraction %><br>
+    <%= f.text_field :elevator_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :elevator_latent_fraction %><br>
+    <%= f.text_field :elevator_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :elevator_lost_fraction %><br>
+    <%= f.text_field :elevator_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :escalator_count %><br>
+    <%= f.text_field :escalator_count %>
+  </div>
+  <div class="field">
+    <%= f.label :escalator_power %><br>
+    <%= f.text_field :escalator_power %>
+  </div>
+  <div class="field">
+    <%= f.label :escalator_schedule_reference %><br>
+    <%= f.text_field :escalator_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :escalator_radiation_fraction %><br>
+    <%= f.text_field :escalator_radiation_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :escalator_latent_fraction %><br>
+    <%= f.text_field :escalator_latent_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :escalator_lost_fraction %><br>
+    <%= f.text_field :escalator_lost_fraction %>
+  </div>
+  <div class="field">
+    <%= f.label :shw_fluid_segment_reference %><br>
+    <%= f.text_field :shw_fluid_segment_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :recirculation_dhw_system_reference %><br>
+    <%= f.text_field :recirculation_dhw_system_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :hot_water_heating_rate %><br>
+    <%= f.text_field :hot_water_heating_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :recirculation_hot_water_heating_rate %><br>
+    <%= f.text_field :recirculation_hot_water_heating_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :hot_water_heating_schedule_reference %><br>
+    <%= f.text_field :hot_water_heating_schedule_reference %>
+  </div>
+  <div class="field">
+    <%= f.label :ventilation_per_person %><br>
+    <%= f.text_field :ventilation_per_person %>
+  </div>
+  <div class="field">
+    <%= f.label :ventilation_per_area %><br>
+    <%= f.text_field :ventilation_per_area %>
+  </div>
+  <div class="field">
+    <%= f.label :ventilation_air_changes_per_hour %><br>
+    <%= f.text_field :ventilation_air_changes_per_hour %>
+  </div>
+  <div class="field">
+    <%= f.label :ventilation_per_space %><br>
+    <%= f.text_field :ventilation_per_space %>
+  </div>
+  <div class="field">
+    <%= f.label :exhaust_per_area %><br>
+    <%= f.text_field :exhaust_per_area %>
+  </div>
+  <div class="field">
+    <%= f.label :exhaust_air_changes_per_hour %><br>
+    <%= f.text_field :exhaust_air_changes_per_hour %>
+  </div>
+  <div class="field">
+    <%= f.label :exhaust_per_space %><br>
+    <%= f.text_field :exhaust_per_space %>
+  </div>
+  <div class="field">
+    <%= f.label :kitchen_exhaust_hood_length %><br>
+    <%= f.text_field :kitchen_exhaust_hood_length %>
+  </div>
+  <div class="field">
+    <%= f.label :kitchen_exhaust_hood_style %><br>
+    <%= f.text_field :kitchen_exhaust_hood_style %>
+  </div>
+  <div class="field">
+    <%= f.label :kitchen_exhaust_hood_duty %><br>
+    <%= f.text_field :kitchen_exhaust_hood_duty %>
+  </div>
+  <div class="field">
+    <%= f.label :kitchen_exhaust_hood_flow %><br>
+    <%= f.text_field :kitchen_exhaust_hood_flow %>
+  </div>
+  <div class="field">
+    <%= f.label :lab_exhaust_rate_type %><br>
+    <%= f.text_field :lab_exhaust_rate_type %>
+  </div>
+  <div class="field">
+    <%= f.label :interior_lighting_power_density_prescriptive %><br>
+    <%= f.text_field :interior_lighting_power_density_prescriptive %>
+  </div>
+  <div class="field">
+    <%= f.label :is_plenum_return %><br>
+    <%= f.text_field :is_plenum_return %>
+  </div>
+  <div class="field">
+    <%= f.label :high_rise_residential_integer %><br>
+    <%= f.text_field :high_rise_residential_integer %>
+  </div>
+  <div class="field">
+    <%= f.label :high_rise_residential_conditioned_floor_area %><br>
+    <%= f.text_field :high_rise_residential_conditioned_floor_area %>
   </div>
   <div class="actions">
     <%= f.submit %>

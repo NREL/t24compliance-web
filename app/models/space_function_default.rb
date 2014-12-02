@@ -4,6 +4,71 @@ class SpaceFunctionDefault
   field :name, type: String
   field :space_function, type: String
   field :function_schedule_group, type: String
+  field :occupant_density, type: Float
+  field :occupant_sensible_heat_rate, type: Float
+  field :occupant_latent_heat_rate, type: Float
+  field :occupant_schedule_reference, type: String
+  field :ventilation_per_person, type: Float
+  field :ventilation_per_area, type: Float
+  field :ventilation_air_changes_per_hour, type: Float
+  field :exhaust_per_area, type: Float
+  field :exhaust_air_changes_per_hour, type: Float
+  field :interior_lighting_power_density_regulated, type: Float
+  field :interior_lighting_regulated_schedule_reference, type: String
+  field :interior_lighting_regulated_heat_gain_space_fraction, type: Float
+  field :interior_lighting_regulated_heat_gain_radiant_fraction, type: Float
+  field :interior_lighting_power_density_non_regulated, type: Float
+  field :interior_lighting_non_regulated_schedule_reference, type: String
+  field :interior_lighting_non_regulated_heat_gain_space_fraction, type: Float
+  field :interior_lighting_non_regulated_heat_gain_radiant_fraction, type: Float
+  field :receptacle_power_density, type: Float
+  field :receptacle_schedule_reference, type: String
+  field :receptacle_radiation_fraction, type: Float
+  field :receptacle_latent_fraction, type: Float
+  field :receptacle_lost_fraction, type: Float
+  field :gas_equipment_power_density, type: Float
+  field :gas_equipment_schedule_reference, type: String
+  field :gas_equipment_radiation_fraction, type: Float
+  field :gas_equipment_latent_fraction, type: Float
+  field :gas_equipment_lost_fraction, type: Float
+  field :process_electrical_power_density, type: Float
+  field :process_electrical_schedule_reference, type: String
+  field :process_electrical_radiation_fraction, type: Float
+  field :process_electrical_latent_fraction, type: Float
+  field :process_electrical_lost_fraction, type: Float
+  field :commercial_refrigeration_epd, type: Float
+  field :commercial_refrigeration_equipment_schedule_reference, type: String
+  field :commercial_refrigeration_radiation_fraction, type: Float
+  field :commercial_refrigeration_latent_fraction, type: Float
+  field :commercial_refrigeration_lost_fraction, type: Float
+  field :elevator_count, type: Integer
+  field :elevator_power, type: Float
+  field :elevator_schedule_reference, type: String
+  field :elevator_radiation_fraction, type: Float
+  field :elevator_latent_fraction, type: Float
+  field :elevator_lost_fraction, type: Float
+  field :escalator_count, type: Integer
+  field :escalator_power, type: Float
+  field :escalator_schedule_reference, type: String
+  field :escalator_radiation_fraction, type: Float
+  field :escalator_latent_fraction, type: Float
+  field :escalator_lost_fraction, type: Float
+  field :process_gas_power_density, type: Float
+  field :process_gas_schedule_reference, type: String
+  field :process_gas_radiation_fraction, type: Float
+  field :process_gas_latent_fraction, type: Float
+  field :process_gas_lost_fraction, type: Float
+  field :hot_water_heating_rate, type: Float
+  field :hot_water_heating_schedule_reference, type: String
+  field :shw_fluid_segment_reference, type: String
+  field :recirculation_dhw_system_reference, type: String
+  field :infiltration_method, type: Array
+  field :design_infiltration_rate, type: Array
+  field :infiltration_schedule_reference, type: Array
+  field :infiltration_model_coefficient_a, type: Array
+  field :infiltration_model_coefficient_b, type: Array
+  field :infiltration_model_coefficient_c, type: Array
+  field :infiltration_model_coefficient_d, type: Array
 
 	belongs_to :project
 
@@ -17,7 +82,72 @@ class SpaceFunctionDefault
 	def xml_fields
 		xml_fields = [
 			{"db_field_name"=>"space_function", "xml_field_name"=>"SpcFunc"},
-			{"db_field_name"=>"function_schedule_group", "xml_field_name"=>"FuncSchGrp"}
+			{"db_field_name"=>"function_schedule_group", "xml_field_name"=>"FuncSchGrp"},
+			{"db_field_name"=>"occupant_density", "xml_field_name"=>"OccDens"},
+			{"db_field_name"=>"occupant_sensible_heat_rate", "xml_field_name"=>"OccSensHtRt"},
+			{"db_field_name"=>"occupant_latent_heat_rate", "xml_field_name"=>"OccLatHtRt"},
+			{"db_field_name"=>"occupant_schedule_reference", "xml_field_name"=>"OccSchRef"},
+			{"db_field_name"=>"ventilation_per_person", "xml_field_name"=>"VentPerPerson"},
+			{"db_field_name"=>"ventilation_per_area", "xml_field_name"=>"VentPerArea"},
+			{"db_field_name"=>"ventilation_air_changes_per_hour", "xml_field_name"=>"VentACH"},
+			{"db_field_name"=>"exhaust_per_area", "xml_field_name"=>"ExhPerArea"},
+			{"db_field_name"=>"exhaust_air_changes_per_hour", "xml_field_name"=>"ExhACH"},
+			{"db_field_name"=>"interior_lighting_power_density_regulated", "xml_field_name"=>"IntLPDReg"},
+			{"db_field_name"=>"interior_lighting_regulated_schedule_reference", "xml_field_name"=>"IntLtgRegSchRef"},
+			{"db_field_name"=>"interior_lighting_regulated_heat_gain_space_fraction", "xml_field_name"=>"IntLtgRegHtGnSpcFrac"},
+			{"db_field_name"=>"interior_lighting_regulated_heat_gain_radiant_fraction", "xml_field_name"=>"IntLtgRegHtGnRadFrac"},
+			{"db_field_name"=>"interior_lighting_power_density_non_regulated", "xml_field_name"=>"IntLPDNonReg"},
+			{"db_field_name"=>"interior_lighting_non_regulated_schedule_reference", "xml_field_name"=>"IntLtgNonRegSchRef"},
+			{"db_field_name"=>"interior_lighting_non_regulated_heat_gain_space_fraction", "xml_field_name"=>"IntLtgNonRegHtGnSpcFrac"},
+			{"db_field_name"=>"interior_lighting_non_regulated_heat_gain_radiant_fraction", "xml_field_name"=>"IntLtgNonRegHtGnRadFrac"},
+			{"db_field_name"=>"receptacle_power_density", "xml_field_name"=>"RecptPwrDens"},
+			{"db_field_name"=>"receptacle_schedule_reference", "xml_field_name"=>"RecptSchRef"},
+			{"db_field_name"=>"receptacle_radiation_fraction", "xml_field_name"=>"RecptRadFrac"},
+			{"db_field_name"=>"receptacle_latent_fraction", "xml_field_name"=>"RecptLatFrac"},
+			{"db_field_name"=>"receptacle_lost_fraction", "xml_field_name"=>"RecptLostFrac"},
+			{"db_field_name"=>"gas_equipment_power_density", "xml_field_name"=>"GasEqpPwrDens"},
+			{"db_field_name"=>"gas_equipment_schedule_reference", "xml_field_name"=>"GasEqpSchRef"},
+			{"db_field_name"=>"gas_equipment_radiation_fraction", "xml_field_name"=>"GasEqpRadFrac"},
+			{"db_field_name"=>"gas_equipment_latent_fraction", "xml_field_name"=>"GasEqpLatFrac"},
+			{"db_field_name"=>"gas_equipment_lost_fraction", "xml_field_name"=>"GasEqpLostFrac"},
+			{"db_field_name"=>"process_electrical_power_density", "xml_field_name"=>"ProcElecPwrDens"},
+			{"db_field_name"=>"process_electrical_schedule_reference", "xml_field_name"=>"ProcElecSchRef"},
+			{"db_field_name"=>"process_electrical_radiation_fraction", "xml_field_name"=>"ProcElecRadFrac"},
+			{"db_field_name"=>"process_electrical_latent_fraction", "xml_field_name"=>"ProcElecLatFrac"},
+			{"db_field_name"=>"process_electrical_lost_fraction", "xml_field_name"=>"ProcElecLostFrac"},
+			{"db_field_name"=>"commercial_refrigeration_epd", "xml_field_name"=>"CommRfrgEPD"},
+			{"db_field_name"=>"commercial_refrigeration_equipment_schedule_reference", "xml_field_name"=>"CommRfrgEqpSchRef"},
+			{"db_field_name"=>"commercial_refrigeration_radiation_fraction", "xml_field_name"=>"CommRfrgRadFrac"},
+			{"db_field_name"=>"commercial_refrigeration_latent_fraction", "xml_field_name"=>"CommRfrgLatFrac"},
+			{"db_field_name"=>"commercial_refrigeration_lost_fraction", "xml_field_name"=>"CommRfrgLostFrac"},
+			{"db_field_name"=>"elevator_count", "xml_field_name"=>"ElevCnt"},
+			{"db_field_name"=>"elevator_power", "xml_field_name"=>"ElevPwr"},
+			{"db_field_name"=>"elevator_schedule_reference", "xml_field_name"=>"ElevSchRef"},
+			{"db_field_name"=>"elevator_radiation_fraction", "xml_field_name"=>"ElevRadFrac"},
+			{"db_field_name"=>"elevator_latent_fraction", "xml_field_name"=>"ElevLatFrac"},
+			{"db_field_name"=>"elevator_lost_fraction", "xml_field_name"=>"ElevLostFrac"},
+			{"db_field_name"=>"escalator_count", "xml_field_name"=>"EscalCnt"},
+			{"db_field_name"=>"escalator_power", "xml_field_name"=>"EscalPwr"},
+			{"db_field_name"=>"escalator_schedule_reference", "xml_field_name"=>"EscalSchRef"},
+			{"db_field_name"=>"escalator_radiation_fraction", "xml_field_name"=>"EscalRadFrac"},
+			{"db_field_name"=>"escalator_latent_fraction", "xml_field_name"=>"EscalLatFrac"},
+			{"db_field_name"=>"escalator_lost_fraction", "xml_field_name"=>"EscalLostFrac"},
+			{"db_field_name"=>"process_gas_power_density", "xml_field_name"=>"ProcGasPwrDens"},
+			{"db_field_name"=>"process_gas_schedule_reference", "xml_field_name"=>"ProcGasSchRef"},
+			{"db_field_name"=>"process_gas_radiation_fraction", "xml_field_name"=>"ProcGasRadFrac"},
+			{"db_field_name"=>"process_gas_latent_fraction", "xml_field_name"=>"ProcGasLatFrac"},
+			{"db_field_name"=>"process_gas_lost_fraction", "xml_field_name"=>"ProcGasLostFrac"},
+			{"db_field_name"=>"hot_water_heating_rate", "xml_field_name"=>"HotWtrHtgRt"},
+			{"db_field_name"=>"hot_water_heating_schedule_reference", "xml_field_name"=>"HotWtrHtgSchRef"},
+			{"db_field_name"=>"shw_fluid_segment_reference", "xml_field_name"=>"SHWFluidSegRef"},
+			{"db_field_name"=>"recirculation_dhw_system_reference", "xml_field_name"=>"RecircDHWSysRef"},
+			{"db_field_name"=>"infiltration_method", "xml_field_name"=>"InfMthd"},
+			{"db_field_name"=>"design_infiltration_rate", "xml_field_name"=>"DsgnInfRt"},
+			{"db_field_name"=>"infiltration_schedule_reference", "xml_field_name"=>"InfSchRef"},
+			{"db_field_name"=>"infiltration_model_coefficient_a", "xml_field_name"=>"InfModelCoefA"},
+			{"db_field_name"=>"infiltration_model_coefficient_b", "xml_field_name"=>"InfModelCoefB"},
+			{"db_field_name"=>"infiltration_model_coefficient_c", "xml_field_name"=>"InfModelCoefC"},
+			{"db_field_name"=>"infiltration_model_coefficient_d", "xml_field_name"=>"InfModelCoefD"}
 		]
 	end
 

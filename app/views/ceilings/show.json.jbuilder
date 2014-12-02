@@ -1,1 +1,1 @@
-json.extract! @ceiling, :id, :name, :area, :adjacent_space_reference, :construct_assembly_reference, :created_at, :updated_at
+json.extract! @ceiling, :id, :name, :area, :adjacent_space_reference, :construct_assembly_reference, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance, :created_at, :updated_at

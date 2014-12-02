@@ -3,6 +3,19 @@ class ScheduleWeek
 	include Mongoid::Timestamps
   field :name, type: String
   field :type, type: String
+  field :schedule_day_all_days_reference, type: String
+  field :schedule_day_weekdays_reference, type: String
+  field :schedule_day_weekends_reference, type: String
+  field :schedule_day_sunday_reference, type: String
+  field :schedule_day_monday_reference, type: String
+  field :schedule_day_tuesday_reference, type: String
+  field :schedule_day_wednesday_reference, type: String
+  field :schedule_day_thursday_reference, type: String
+  field :schedule_day_friday_reference, type: String
+  field :schedule_day_saturday_reference, type: String
+  field :schedule_day_holiday_reference, type: String
+  field :schedule_day_cooling_design_day_reference, type: String
+  field :schedule_day_heating_design_day_reference, type: String
 
 	belongs_to :project
 
@@ -15,7 +28,20 @@ class ScheduleWeek
 
 	def xml_fields
 		xml_fields = [
-			{"db_field_name"=>"type", "xml_field_name"=>"Type"}
+			{"db_field_name"=>"type", "xml_field_name"=>"Type"},
+			{"db_field_name"=>"schedule_day_all_days_reference", "xml_field_name"=>"SchDayAllRef"},
+			{"db_field_name"=>"schedule_day_weekdays_reference", "xml_field_name"=>"SchDayWDRef"},
+			{"db_field_name"=>"schedule_day_weekends_reference", "xml_field_name"=>"SchDayWERef"},
+			{"db_field_name"=>"schedule_day_sunday_reference", "xml_field_name"=>"SchDaySunRef"},
+			{"db_field_name"=>"schedule_day_monday_reference", "xml_field_name"=>"SchDayMonRef"},
+			{"db_field_name"=>"schedule_day_tuesday_reference", "xml_field_name"=>"SchDayTueRef"},
+			{"db_field_name"=>"schedule_day_wednesday_reference", "xml_field_name"=>"SchDayWedRef"},
+			{"db_field_name"=>"schedule_day_thursday_reference", "xml_field_name"=>"SchDayThuRef"},
+			{"db_field_name"=>"schedule_day_friday_reference", "xml_field_name"=>"SchDayFriRef"},
+			{"db_field_name"=>"schedule_day_saturday_reference", "xml_field_name"=>"SchDaySatRef"},
+			{"db_field_name"=>"schedule_day_holiday_reference", "xml_field_name"=>"SchDayHolRef"},
+			{"db_field_name"=>"schedule_day_cooling_design_day_reference", "xml_field_name"=>"SchDayClgDDRef"},
+			{"db_field_name"=>"schedule_day_heating_design_day_reference", "xml_field_name"=>"SchDayHtgDDRef"}
 		]
 	end
 

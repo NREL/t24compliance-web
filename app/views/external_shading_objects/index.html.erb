@@ -5,6 +5,9 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
+      <th>Transmittance schedule reference</th>
+      <th>Solar reflectance</th>
+      <th>Visible reflectance</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +17,9 @@
       <tr>
         <td><%= external_shading_object.name %></td>
         <td><%= external_shading_object.status %></td>
+        <td><%= external_shading_object.transmittance_schedule_reference %></td>
+        <td><%= external_shading_object.solar_reflectance %></td>
+        <td><%= external_shading_object.visible_reflectance %></td>
         <td><%= link_to 'Show', external_shading_object %></td>
         <td><%= link_to 'Edit', edit_external_shading_object_path(external_shading_object) %></td>
         <td><%= link_to 'Destroy', external_shading_object, method: :delete, data: { confirm: 'Are you sure?' } %></td>

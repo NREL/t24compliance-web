@@ -25,5 +25,35 @@
   <%= @interior_wall.area %>
 </p>
 
+<p>
+  <strong>Exterior solar absorptance:</strong>
+  <%= @interior_wall.exterior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Exterior thermal absorptance:</strong>
+  <%= @interior_wall.exterior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Exterior visible absorptance:</strong>
+  <%= @interior_wall.exterior_visible_absorptance %>
+</p>
+
+<p>
+  <strong>Interior solar absorptance:</strong>
+  <%= @interior_wall.interior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Interior thermal absorptance:</strong>
+  <%= @interior_wall.interior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Interior visible absorptance:</strong>
+  <%= @interior_wall.interior_visible_absorptance %>
+</p>
+
 <%= link_to 'Edit', edit_interior_wall_path(@interior_wall) %> |
 <%= link_to 'Back', interior_walls_path %>

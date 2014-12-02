@@ -7,6 +7,15 @@
       <th>Status</th>
       <th>Operation control</th>
       <th>Speed control</th>
+      <th>Modeling method</th>
+      <th>Count</th>
+      <th>Flow capacity</th>
+      <th>Total head</th>
+      <th>Flow minimum</th>
+      <th>Minimum speed ratio</th>
+      <th>Motor efficiency</th>
+      <th>Impeller efficiency</th>
+      <th>Motor hp</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +27,15 @@
         <td><%= pump.status %></td>
         <td><%= pump.operation_control %></td>
         <td><%= pump.speed_control %></td>
+        <td><%= pump.modeling_method %></td>
+        <td><%= pump.count %></td>
+        <td><%= pump.flow_capacity %></td>
+        <td><%= pump.total_head %></td>
+        <td><%= pump.flow_minimum %></td>
+        <td><%= pump.minimum_speed_ratio %></td>
+        <td><%= pump.motor_efficiency %></td>
+        <td><%= pump.impeller_efficiency %></td>
+        <td><%= pump.motor_hp %></td>
         <td><%= link_to 'Show', pump %></td>
         <td><%= link_to 'Edit', edit_pump_path(pump) %></td>
         <td><%= link_to 'Destroy', pump, method: :delete, data: { confirm: 'Are you sure?' } %></td>

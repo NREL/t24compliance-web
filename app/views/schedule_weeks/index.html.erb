@@ -5,6 +5,19 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
+      <th>Schedule day all days reference</th>
+      <th>Schedule day weekdays reference</th>
+      <th>Schedule day weekends reference</th>
+      <th>Schedule day sunday reference</th>
+      <th>Schedule day monday reference</th>
+      <th>Schedule day tuesday reference</th>
+      <th>Schedule day wednesday reference</th>
+      <th>Schedule day thursday reference</th>
+      <th>Schedule day friday reference</th>
+      <th>Schedule day saturday reference</th>
+      <th>Schedule day holiday reference</th>
+      <th>Schedule day cooling design day reference</th>
+      <th>Schedule day heating design day reference</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +27,19 @@
       <tr>
         <td><%= schedule_week.name %></td>
         <td><%= schedule_week.type %></td>
+        <td><%= schedule_week.schedule_day_all_days_reference %></td>
+        <td><%= schedule_week.schedule_day_weekdays_reference %></td>
+        <td><%= schedule_week.schedule_day_weekends_reference %></td>
+        <td><%= schedule_week.schedule_day_sunday_reference %></td>
+        <td><%= schedule_week.schedule_day_monday_reference %></td>
+        <td><%= schedule_week.schedule_day_tuesday_reference %></td>
+        <td><%= schedule_week.schedule_day_wednesday_reference %></td>
+        <td><%= schedule_week.schedule_day_thursday_reference %></td>
+        <td><%= schedule_week.schedule_day_friday_reference %></td>
+        <td><%= schedule_week.schedule_day_saturday_reference %></td>
+        <td><%= schedule_week.schedule_day_holiday_reference %></td>
+        <td><%= schedule_week.schedule_day_cooling_design_day_reference %></td>
+        <td><%= schedule_week.schedule_day_heating_design_day_reference %></td>
         <td><%= link_to 'Show', schedule_week %></td>
         <td><%= link_to 'Edit', edit_schedule_week_path(schedule_week) %></td>
         <td><%= link_to 'Destroy', schedule_week, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Coordinate</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +13,7 @@
     <% @cartesian_points.each do |cartesian_point| %>
       <tr>
         <td><%= cartesian_point.name %></td>
+        <td><%= cartesian_point.coordinate %></td>
         <td><%= link_to 'Show', cartesian_point %></td>
         <td><%= link_to 'Edit', edit_cartesian_point_path(cartesian_point) %></td>
         <td><%= link_to 'Destroy', cartesian_point, method: :delete, data: { confirm: 'Are you sure?' } %></td>

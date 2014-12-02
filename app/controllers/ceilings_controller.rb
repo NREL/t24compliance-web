@@ -1,74 +1,47 @@
 class CeilingsController < ApplicationController
   before_action :set_ceiling, only: [:show, :edit, :update, :destroy]
 
-  # GET /ceilings
-  # GET /ceilings.json
+  respond_to :html
+
   def index
     @ceilings = Ceiling.all
+    respond_with(@ceilings)
   end
 
-  # GET /ceilings/1
-  # GET /ceilings/1.json
   def show
+    respond_with(@ceiling)
   end
 
-  # GET /ceilings/new
   def new
     @ceiling = Ceiling.new
+    respond_with(@ceiling)
   end
 
-  # GET /ceilings/1/edit
   def edit
   end
 
-  # POST /ceilings
-  # POST /ceilings.json
   def create
     @ceiling = Ceiling.new(ceiling_params)
-
-    respond_to do |format|
-      if @ceiling.save
-        format.html { redirect_to @ceiling, notice: 'Ceiling was successfully created.' }
-        format.json { render :show, status: :created, location: @ceiling }
-      else
-        format.html { render :new }
-        format.json { render json: @ceiling.errors, status: :unprocessable_entity }
-      end
-    end
+    @ceiling.save
+    respond_with(@ceiling)
   end
 
-  # PATCH/PUT /ceilings/1
-  # PATCH/PUT /ceilings/1.json
   def update
-    respond_to do |format|
-      if @ceiling.update(ceiling_params)
-        format.html { redirect_to @ceiling, notice: 'Ceiling was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ceiling }
-      else
-        format.html { render :edit }
-        format.json { render json: @ceiling.errors, status: :unprocessable_entity }
-      end
-    end
+    @ceiling.update(ceiling_params)
+    respond_with(@ceiling)
   end
 
-  # DELETE /ceilings/1
-  # DELETE /ceilings/1.json
   def destroy
     @ceiling.destroy
-    respond_to do |format|
-      format.html { redirect_to ceilings_url, notice: 'Ceiling was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@ceiling)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_ceiling
       @ceiling = Ceiling.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def ceiling_params
-      params.require(:ceiling).permit(:name, :area, :adjacent_space_reference, :construct_assembly_reference)
+      params.require(:ceiling).permit(:name, :area, :adjacent_space_reference, :construct_assembly_reference, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
     end
 end

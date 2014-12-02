@@ -5,6 +5,15 @@ class Pump
   field :status, type: String
   field :operation_control, type: String
   field :speed_control, type: String
+  field :modeling_method, type: String
+  field :count, type: Integer
+  field :flow_capacity, type: Float
+  field :total_head, type: Float
+  field :flow_minimum, type: Float
+  field :minimum_speed_ratio, type: Float
+  field :motor_efficiency, type: Float
+  field :impeller_efficiency, type: Float
+  field :motor_hp, type: Float
 
 	belongs_to :fluid_segment
 	belongs_to :chiller
@@ -23,7 +32,16 @@ class Pump
 		xml_fields = [
 			{"db_field_name"=>"status", "xml_field_name"=>"Status"},
 			{"db_field_name"=>"operation_control", "xml_field_name"=>"OperCtrl"},
-			{"db_field_name"=>"speed_control", "xml_field_name"=>"SpdCtrl"}
+			{"db_field_name"=>"speed_control", "xml_field_name"=>"SpdCtrl"},
+			{"db_field_name"=>"modeling_method", "xml_field_name"=>"ModelingMthd"},
+			{"db_field_name"=>"count", "xml_field_name"=>"Cnt"},
+			{"db_field_name"=>"flow_capacity", "xml_field_name"=>"FlowCap"},
+			{"db_field_name"=>"total_head", "xml_field_name"=>"TotHd"},
+			{"db_field_name"=>"flow_minimum", "xml_field_name"=>"FlowMin"},
+			{"db_field_name"=>"minimum_speed_ratio", "xml_field_name"=>"MinSpdRat"},
+			{"db_field_name"=>"motor_efficiency", "xml_field_name"=>"MtrEff"},
+			{"db_field_name"=>"impeller_efficiency", "xml_field_name"=>"ImpellerEff"},
+			{"db_field_name"=>"motor_hp", "xml_field_name"=>"MtrHP"}
 		]
 	end
 
@@ -64,6 +82,13 @@ class Pump
 		[
 			'ConstantSpeed',
 			'VariableSpeed'
+		]
+	end
+
+	def modeling_method_enums
+		[
+			'Detailed',
+			'PowerPerUnitFlow'
 		]
 	end
 end

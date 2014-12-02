@@ -5,6 +5,13 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
+      <th>Effectiveness</th>
+      <th>Pump power</th>
+      <th>Indirect dew point effectiveness</th>
+      <th>Secondary fan flow capacity</th>
+      <th>Secondary fan total efficiency</th>
+      <th>Secondary fan total static pressure</th>
+      <th>Secondary air source</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +21,13 @@
       <tr>
         <td><%= evaporative_cooler.name %></td>
         <td><%= evaporative_cooler.type %></td>
+        <td><%= evaporative_cooler.effectiveness %></td>
+        <td><%= evaporative_cooler.pump_power %></td>
+        <td><%= evaporative_cooler.indirect_dew_point_effectiveness %></td>
+        <td><%= evaporative_cooler.secondary_fan_flow_capacity %></td>
+        <td><%= evaporative_cooler.secondary_fan_total_efficiency %></td>
+        <td><%= evaporative_cooler.secondary_fan_total_static_pressure %></td>
+        <td><%= evaporative_cooler.secondary_air_source %></td>
         <td><%= link_to 'Show', evaporative_cooler %></td>
         <td><%= link_to 'Edit', edit_evaporative_cooler_path(evaporative_cooler) %></td>
         <td><%= link_to 'Destroy', evaporative_cooler, method: :delete, data: { confirm: 'Are you sure?' } %></td>

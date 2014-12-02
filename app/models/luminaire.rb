@@ -4,6 +4,9 @@ class Luminaire
   field :name, type: String
   field :fixture_type, type: String
   field :lamp_type, type: String
+  field :power, type: Float
+  field :heat_gain_space_fraction, type: Float
+  field :heat_gain_radiant_fraction, type: Float
 
 	belongs_to :project
 
@@ -17,7 +20,10 @@ class Luminaire
 	def xml_fields
 		xml_fields = [
 			{"db_field_name"=>"fixture_type", "xml_field_name"=>"FxtrType"},
-			{"db_field_name"=>"lamp_type", "xml_field_name"=>"LampType"}
+			{"db_field_name"=>"lamp_type", "xml_field_name"=>"LampType"},
+			{"db_field_name"=>"power", "xml_field_name"=>"Pwr"},
+			{"db_field_name"=>"heat_gain_space_fraction", "xml_field_name"=>"HtGnSpcFrac"},
+			{"db_field_name"=>"heat_gain_radiant_fraction", "xml_field_name"=>"HtGnRadFrac"}
 		]
 	end
 

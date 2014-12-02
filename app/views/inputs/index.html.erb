@@ -44,7 +44,7 @@
 													<th>Validation</th>
 													<th>Enum Default ID</th>
 													<th>Enumerations</th>
-													<th>Expose to App </th>
+													<th>Remove from App </th>
 													<th>Set as Constant</th>
 													<th>Conditional Control Field</th>
 													<th>Comments</th>
@@ -85,7 +85,7 @@
 													  </div>
 														<% end %>
 													</td>
-													<td><span class="pad-left-sm"><%= df['exposed'] ? 'X' : nil %></span></td>
+													<td><span class="pad-left-sm"><%= df['remove'] ? 'X' : nil %></span></td>
 													<td><%= df['constant_value'] %></td>
 													<td><%= df['conditional_control_field'] %></td>
 													<td><%= df['comments'] %></td>

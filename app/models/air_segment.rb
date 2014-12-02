@@ -2,6 +2,8 @@ class AirSegment
   include Mongoid::Document
 	include Mongoid::Timestamps
   field :name, type: String
+  field :type, type: String
+  field :path, type: String
 
 	belongs_to :air_system
 	has_many :evaporative_coolers
@@ -21,7 +23,8 @@ class AirSegment
 
 	def xml_fields
 		xml_fields = [
-
+			{"db_field_name"=>"type", "xml_field_name"=>"Type"},
+			{"db_field_name"=>"path", "xml_field_name"=>"Path"}
 		]
 	end
 
@@ -41,5 +44,24 @@ class AirSegment
 				end
 			end
 		end
+	end
+
+	def type_enums
+		[
+			'- specify -',
+			'Supply',
+			'Return',
+			'Relief',
+			'Exhaust'
+		]
+	end
+
+	def path_enums
+		[
+			'NotApplicable',
+			'Direct',
+			'Ducted',
+			'PlenumZones'
+		]
 	end
 end

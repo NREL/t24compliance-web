@@ -8,6 +8,18 @@
       <th>Construct assembly reference</th>
       <th>Area</th>
       <th>Azimuth</th>
+      <th>Tilt</th>
+      <th>Interior solar absorptance</th>
+      <th>Interior thermal absorptance</th>
+      <th>Interior visible absorptance</th>
+      <th>Field applied coating</th>
+      <th>Crrc initial reflectance</th>
+      <th>Crrc aged reflectance</th>
+      <th>Crrc initial emittance</th>
+      <th>Crrc aged emittance</th>
+      <th>Crrc initial sri</th>
+      <th>Crrc aged sri</th>
+      <th>Crrc product</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +32,18 @@
         <td><%= roof.construct_assembly_reference %></td>
         <td><%= roof.area %></td>
         <td><%= roof.azimuth %></td>
+        <td><%= roof.tilt %></td>
+        <td><%= roof.interior_solar_absorptance %></td>
+        <td><%= roof.interior_thermal_absorptance %></td>
+        <td><%= roof.interior_visible_absorptance %></td>
+        <td><%= roof.field_applied_coating %></td>
+        <td><%= roof.crrc_initial_reflectance %></td>
+        <td><%= roof.crrc_aged_reflectance %></td>
+        <td><%= roof.crrc_initial_emittance %></td>
+        <td><%= roof.crrc_aged_emittance %></td>
+        <td><%= roof.crrc_initial_sri %></td>
+        <td><%= roof.crrc_aged_sri %></td>
+        <td><%= roof.crrc_product_id %></td>
         <td><%= link_to 'Show', roof %></td>
         <td><%= link_to 'Edit', edit_roof_path(roof) %></td>
         <td><%= link_to 'Destroy', roof, method: :delete, data: { confirm: 'Are you sure?' } %></td>

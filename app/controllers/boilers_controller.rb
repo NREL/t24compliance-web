@@ -1,74 +1,47 @@
 class BoilersController < ApplicationController
   before_action :set_boiler, only: [:show, :edit, :update, :destroy]
 
-  # GET /boilers
-  # GET /boilers.json
+  respond_to :html
+
   def index
     @boilers = Boiler.all
+    respond_with(@boilers)
   end
 
-  # GET /boilers/1
-  # GET /boilers/1.json
   def show
+    respond_with(@boiler)
   end
 
-  # GET /boilers/new
   def new
     @boiler = Boiler.new
+    respond_with(@boiler)
   end
 
-  # GET /boilers/1/edit
   def edit
   end
 
-  # POST /boilers
-  # POST /boilers.json
   def create
     @boiler = Boiler.new(boiler_params)
-
-    respond_to do |format|
-      if @boiler.save
-        format.html { redirect_to @boiler, notice: 'Boiler was successfully created.' }
-        format.json { render :show, status: :created, location: @boiler }
-      else
-        format.html { render :new }
-        format.json { render json: @boiler.errors, status: :unprocessable_entity }
-      end
-    end
+    @boiler.save
+    respond_with(@boiler)
   end
 
-  # PATCH/PUT /boilers/1
-  # PATCH/PUT /boilers/1.json
   def update
-    respond_to do |format|
-      if @boiler.update(boiler_params)
-        format.html { redirect_to @boiler, notice: 'Boiler was successfully updated.' }
-        format.json { render :show, status: :ok, location: @boiler }
-      else
-        format.html { render :edit }
-        format.json { render json: @boiler.errors, status: :unprocessable_entity }
-      end
-    end
+    @boiler.update(boiler_params)
+    respond_with(@boiler)
   end
 
-  # DELETE /boilers/1
-  # DELETE /boilers/1.json
   def destroy
     @boiler.destroy
-    respond_to do |format|
-      format.html { redirect_to boilers_url, notice: 'Boiler was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@boiler)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_boiler
       @boiler = Boiler.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def boiler_params
-      params.require(:boiler).permit(:name)
+      params.require(:boiler).permit(:name, :status, :type, :fuel_source, :draft_type, :fluid_segment_in_reference, :fluid_segment_out_reference, :has_bypass, :entering_temperature_design, :leaving_temperature_design, :capacity_rated, :afue, :combustion_efficiency, :thermal_efficiency, :hir_f_plr_curve_reference, :eir, :fuel_full_load, :heat_loss, :unload_ratio_minimum, :draft_fan_horse_power, :parasitic_load, :water_flow_capacity)
     end
 end

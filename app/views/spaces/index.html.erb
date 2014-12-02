@@ -5,11 +5,125 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
+      <th>Conditioning type</th>
+      <th>Supply plenum space reference</th>
+      <th>Return plenum space reference</th>
       <th>Thermal zone reference</th>
       <th>Area</th>
+      <th>Floor area</th>
+      <th>Floor z</th>
+      <th>Floor to ceiling height</th>
+      <th>Volume</th>
       <th>Space function defaults reference</th>
       <th>Space function</th>
+      <th>Function schedule group</th>
+      <th>Occupant density</th>
+      <th>Occupant sensible heat rate</th>
+      <th>Occupant latent heat rate</th>
+      <th>Occupant schedule reference</th>
+      <th>Infiltration method</th>
+      <th>Design infiltration rate</th>
+      <th>Infiltration schedule reference</th>
+      <th>Infiltration model coefficient a</th>
+      <th>Infiltration model coefficient b</th>
+      <th>Infiltration model coefficient c</th>
+      <th>Infiltration model coefficient d</th>
+      <th>Envelope status</th>
+      <th>Lighting status</th>
+      <th>Interior lighting specification method</th>
+      <th>Interior lighting power density regulated</th>
+      <th>Interior lighting regulated schedule reference</th>
+      <th>Interior lighting regulated heat gain space fraction</th>
+      <th>Interior lighting regulated heat gain radiant fraction</th>
+      <th>Interior lighting power density non regulated</th>
+      <th>Interior lighting non regulated schedule reference</th>
+      <th>Interior lighting non regulated heat gain space fraction</th>
+      <th>Interior lighting non regulated heat gain radiant fraction</th>
+      <th>Skylit daylighting installed lighting power</th>
+      <th>Primary side daylighting installed lighting power</th>
+      <th>Secondary side daylighting installed lighting power</th>
+      <th>Skylit100 percent controlled</th>
+      <th>Primary sidelit100 percent controlled</th>
       <th>Secondary sidelit100 percent controlled</th>
+      <th>Skylit daylighting reference point coordinate</th>
+      <th>Skylit daylighting controlled lighting power</th>
+      <th>Skylit daylighting control lighting fraction</th>
+      <th>Skylit daylighting illuminance set point</th>
+      <th>Primary side daylighting reference point coordinate</th>
+      <th>Primary side daylighting controlled lighting power</th>
+      <th>Primary side daylighting control lighting fraction</th>
+      <th>Primary side daylighting illuminance set point</th>
+      <th>Secondary side daylighting reference point coordinate</th>
+      <th>Secondary side daylighting controlled lighting power</th>
+      <th>Secondary side daylighting control lighting fraction</th>
+      <th>Secondary side daylighting illuminance set point</th>
+      <th>Daylighting control type</th>
+      <th>Minimum dimming light fraction</th>
+      <th>Minimum dimming power fraction</th>
+      <th>Number of control steps</th>
+      <th>Glare azimuth</th>
+      <th>Maximum glare index</th>
+      <th>Skylight requirement exception</th>
+      <th>Skylight requirement exception area</th>
+      <th>Skylight requirement exception fraction</th>
+      <th>Receptacle power density</th>
+      <th>Receptacle schedule reference</th>
+      <th>Receptacle radiation fraction</th>
+      <th>Receptacle latent fraction</th>
+      <th>Receptacle lost fraction</th>
+      <th>Gas equipment power density</th>
+      <th>Gas equipment schedule reference</th>
+      <th>Gas equipment radiation fraction</th>
+      <th>Gas equipment latent fraction</th>
+      <th>Gas equipment lost fraction</th>
+      <th>Process electrical power density</th>
+      <th>Process electrical schedule reference</th>
+      <th>Process electrical radiation fraction</th>
+      <th>Process electrical latent fraction</th>
+      <th>Process electrical lost fraction</th>
+      <th>Process gas power density</th>
+      <th>Process gas schedule reference</th>
+      <th>Process gas radiation fraction</th>
+      <th>Process gas latent fraction</th>
+      <th>Process gas lost fraction</th>
+      <th>Commercial refrigeration epd</th>
+      <th>Commercial refrigeration equipment schedule reference</th>
+      <th>Commercial refrigeration radiation fraction</th>
+      <th>Commercial refrigeration latent fraction</th>
+      <th>Commercial refrigeration lost fraction</th>
+      <th>Elevator count</th>
+      <th>Elevator power</th>
+      <th>Elevator schedule reference</th>
+      <th>Elevator radiation fraction</th>
+      <th>Elevator latent fraction</th>
+      <th>Elevator lost fraction</th>
+      <th>Escalator count</th>
+      <th>Escalator power</th>
+      <th>Escalator schedule reference</th>
+      <th>Escalator radiation fraction</th>
+      <th>Escalator latent fraction</th>
+      <th>Escalator lost fraction</th>
+      <th>Shw fluid segment reference</th>
+      <th>Recirculation dhw system reference</th>
+      <th>Hot water heating rate</th>
+      <th>Recirculation hot water heating rate</th>
+      <th>Hot water heating schedule reference</th>
+      <th>Ventilation per person</th>
+      <th>Ventilation per area</th>
+      <th>Ventilation air changes per hour</th>
+      <th>Ventilation per space</th>
+      <th>Exhaust per area</th>
+      <th>Exhaust air changes per hour</th>
+      <th>Exhaust per space</th>
+      <th>Kitchen exhaust hood length</th>
+      <th>Kitchen exhaust hood style</th>
+      <th>Kitchen exhaust hood duty</th>
+      <th>Kitchen exhaust hood flow</th>
+      <th>Lab exhaust rate type</th>
+      <th>Interior lighting power density prescriptive</th>
+      <th>Is plenum return</th>
+      <th>High rise residential integer</th>
+      <th>High rise residential conditioned floor area</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,11 +133,125 @@
       <tr>
         <td><%= space.name %></td>
         <td><%= space.status %></td>
+        <td><%= space.conditioning_type %></td>
+        <td><%= space.supply_plenum_space_reference %></td>
+        <td><%= space.return_plenum_space_reference %></td>
         <td><%= space.thermal_zone_reference %></td>
         <td><%= space.area %></td>
+        <td><%= space.floor_area %></td>
+        <td><%= space.floor_z %></td>
+        <td><%= space.floor_to_ceiling_height %></td>
+        <td><%= space.volume %></td>
         <td><%= space.space_function_defaults_reference %></td>
         <td><%= space.space_function %></td>
+        <td><%= space.function_schedule_group %></td>
+        <td><%= space.occupant_density %></td>
+        <td><%= space.occupant_sensible_heat_rate %></td>
+        <td><%= space.occupant_latent_heat_rate %></td>
+        <td><%= space.occupant_schedule_reference %></td>
+        <td><%= space.infiltration_method %></td>
+        <td><%= space.design_infiltration_rate %></td>
+        <td><%= space.infiltration_schedule_reference %></td>
+        <td><%= space.infiltration_model_coefficient_a %></td>
+        <td><%= space.infiltration_model_coefficient_b %></td>
+        <td><%= space.infiltration_model_coefficient_c %></td>
+        <td><%= space.infiltration_model_coefficient_d %></td>
+        <td><%= space.envelope_status %></td>
+        <td><%= space.lighting_status %></td>
+        <td><%= space.interior_lighting_specification_method %></td>
+        <td><%= space.interior_lighting_power_density_regulated %></td>
+        <td><%= space.interior_lighting_regulated_schedule_reference %></td>
+        <td><%= space.interior_lighting_regulated_heat_gain_space_fraction %></td>
+        <td><%= space.interior_lighting_regulated_heat_gain_radiant_fraction %></td>
+        <td><%= space.interior_lighting_power_density_non_regulated %></td>
+        <td><%= space.interior_lighting_non_regulated_schedule_reference %></td>
+        <td><%= space.interior_lighting_non_regulated_heat_gain_space_fraction %></td>
+        <td><%= space.interior_lighting_non_regulated_heat_gain_radiant_fraction %></td>
+        <td><%= space.skylit_daylighting_installed_lighting_power %></td>
+        <td><%= space.primary_side_daylighting_installed_lighting_power %></td>
+        <td><%= space.secondary_side_daylighting_installed_lighting_power %></td>
+        <td><%= space.skylit100_percent_controlled %></td>
+        <td><%= space.primary_sidelit100_percent_controlled %></td>
         <td><%= space.secondary_sidelit100_percent_controlled %></td>
+        <td><%= space.skylit_daylighting_reference_point_coordinate %></td>
+        <td><%= space.skylit_daylighting_controlled_lighting_power %></td>
+        <td><%= space.skylit_daylighting_control_lighting_fraction %></td>
+        <td><%= space.skylit_daylighting_illuminance_set_point %></td>
+        <td><%= space.primary_side_daylighting_reference_point_coordinate %></td>
+        <td><%= space.primary_side_daylighting_controlled_lighting_power %></td>
+        <td><%= space.primary_side_daylighting_control_lighting_fraction %></td>
+        <td><%= space.primary_side_daylighting_illuminance_set_point %></td>
+        <td><%= space.secondary_side_daylighting_reference_point_coordinate %></td>
+        <td><%= space.secondary_side_daylighting_controlled_lighting_power %></td>
+        <td><%= space.secondary_side_daylighting_control_lighting_fraction %></td>
+        <td><%= space.secondary_side_daylighting_illuminance_set_point %></td>
+        <td><%= space.daylighting_control_type %></td>
+        <td><%= space.minimum_dimming_light_fraction %></td>
+        <td><%= space.minimum_dimming_power_fraction %></td>
+        <td><%= space.number_of_control_steps %></td>
+        <td><%= space.glare_azimuth %></td>
+        <td><%= space.maximum_glare_index %></td>
+        <td><%= space.skylight_requirement_exception %></td>
+        <td><%= space.skylight_requirement_exception_area %></td>
+        <td><%= space.skylight_requirement_exception_fraction %></td>
+        <td><%= space.receptacle_power_density %></td>
+        <td><%= space.receptacle_schedule_reference %></td>
+        <td><%= space.receptacle_radiation_fraction %></td>
+        <td><%= space.receptacle_latent_fraction %></td>
+        <td><%= space.receptacle_lost_fraction %></td>
+        <td><%= space.gas_equipment_power_density %></td>
+        <td><%= space.gas_equipment_schedule_reference %></td>
+        <td><%= space.gas_equipment_radiation_fraction %></td>
+        <td><%= space.gas_equipment_latent_fraction %></td>
+        <td><%= space.gas_equipment_lost_fraction %></td>
+        <td><%= space.process_electrical_power_density %></td>
+        <td><%= space.process_electrical_schedule_reference %></td>
+        <td><%= space.process_electrical_radiation_fraction %></td>
+        <td><%= space.process_electrical_latent_fraction %></td>
+        <td><%= space.process_electrical_lost_fraction %></td>
+        <td><%= space.process_gas_power_density %></td>
+        <td><%= space.process_gas_schedule_reference %></td>
+        <td><%= space.process_gas_radiation_fraction %></td>
+        <td><%= space.process_gas_latent_fraction %></td>
+        <td><%= space.process_gas_lost_fraction %></td>
+        <td><%= space.commercial_refrigeration_epd %></td>
+        <td><%= space.commercial_refrigeration_equipment_schedule_reference %></td>
+        <td><%= space.commercial_refrigeration_radiation_fraction %></td>
+        <td><%= space.commercial_refrigeration_latent_fraction %></td>
+        <td><%= space.commercial_refrigeration_lost_fraction %></td>
+        <td><%= space.elevator_count %></td>
+        <td><%= space.elevator_power %></td>
+        <td><%= space.elevator_schedule_reference %></td>
+        <td><%= space.elevator_radiation_fraction %></td>
+        <td><%= space.elevator_latent_fraction %></td>
+        <td><%= space.elevator_lost_fraction %></td>
+        <td><%= space.escalator_count %></td>
+        <td><%= space.escalator_power %></td>
+        <td><%= space.escalator_schedule_reference %></td>
+        <td><%= space.escalator_radiation_fraction %></td>
+        <td><%= space.escalator_latent_fraction %></td>
+        <td><%= space.escalator_lost_fraction %></td>
+        <td><%= space.shw_fluid_segment_reference %></td>
+        <td><%= space.recirculation_dhw_system_reference %></td>
+        <td><%= space.hot_water_heating_rate %></td>
+        <td><%= space.recirculation_hot_water_heating_rate %></td>
+        <td><%= space.hot_water_heating_schedule_reference %></td>
+        <td><%= space.ventilation_per_person %></td>
+        <td><%= space.ventilation_per_area %></td>
+        <td><%= space.ventilation_air_changes_per_hour %></td>
+        <td><%= space.ventilation_per_space %></td>
+        <td><%= space.exhaust_per_area %></td>
+        <td><%= space.exhaust_air_changes_per_hour %></td>
+        <td><%= space.exhaust_per_space %></td>
+        <td><%= space.kitchen_exhaust_hood_length %></td>
+        <td><%= space.kitchen_exhaust_hood_style %></td>
+        <td><%= space.kitchen_exhaust_hood_duty %></td>
+        <td><%= space.kitchen_exhaust_hood_flow %></td>
+        <td><%= space.lab_exhaust_rate_type %></td>
+        <td><%= space.interior_lighting_power_density_prescriptive %></td>
+        <td><%= space.is_plenum_return %></td>
+        <td><%= space.high_rise_residential_integer %></td>
+        <td><%= space.high_rise_residential_conditioned_floor_area %></td>
         <td><%= link_to 'Show', space %></td>
         <td><%= link_to 'Edit', edit_space_path(space) %></td>
         <td><%= link_to 'Destroy', space, method: :delete, data: { confirm: 'Are you sure?' } %></td>

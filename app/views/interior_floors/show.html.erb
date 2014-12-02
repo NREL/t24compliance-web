@@ -20,5 +20,20 @@
   <%= @interior_floor.area %>
 </p>
 
+<p>
+  <strong>Interior solar absorptance:</strong>
+  <%= @interior_floor.interior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Interior thermal absorptance:</strong>
+  <%= @interior_floor.interior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Interior visible absorptance:</strong>
+  <%= @interior_floor.interior_visible_absorptance %>
+</p>
+
 <%= link_to 'Edit', edit_interior_floor_path(@interior_floor) %> |
 <%= link_to 'Back', interior_floors_path %>

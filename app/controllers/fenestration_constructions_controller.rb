@@ -1,74 +1,47 @@
 class FenestrationConstructionsController < ApplicationController
   before_action :set_fenestration_construction, only: [:show, :edit, :update, :destroy]
 
-  # GET /fenestration_constructions
-  # GET /fenestration_constructions.json
+  respond_to :html
+
   def index
     @fenestration_constructions = FenestrationConstruction.all
+    respond_with(@fenestration_constructions)
   end
 
-  # GET /fenestration_constructions/1
-  # GET /fenestration_constructions/1.json
   def show
+    respond_with(@fenestration_construction)
   end
 
-  # GET /fenestration_constructions/new
   def new
     @fenestration_construction = FenestrationConstruction.new
+    respond_with(@fenestration_construction)
   end
 
-  # GET /fenestration_constructions/1/edit
   def edit
   end
 
-  # POST /fenestration_constructions
-  # POST /fenestration_constructions.json
   def create
     @fenestration_construction = FenestrationConstruction.new(fenestration_construction_params)
-
-    respond_to do |format|
-      if @fenestration_construction.save
-        format.html { redirect_to @fenestration_construction, notice: 'Fenestration construction was successfully created.' }
-        format.json { render :show, status: :created, location: @fenestration_construction }
-      else
-        format.html { render :new }
-        format.json { render json: @fenestration_construction.errors, status: :unprocessable_entity }
-      end
-    end
+    @fenestration_construction.save
+    respond_with(@fenestration_construction)
   end
 
-  # PATCH/PUT /fenestration_constructions/1
-  # PATCH/PUT /fenestration_constructions/1.json
   def update
-    respond_to do |format|
-      if @fenestration_construction.update(fenestration_construction_params)
-        format.html { redirect_to @fenestration_construction, notice: 'Fenestration construction was successfully updated.' }
-        format.json { render :show, status: :ok, location: @fenestration_construction }
-      else
-        format.html { render :edit }
-        format.json { render json: @fenestration_construction.errors, status: :unprocessable_entity }
-      end
-    end
+    @fenestration_construction.update(fenestration_construction_params)
+    respond_with(@fenestration_construction)
   end
 
-  # DELETE /fenestration_constructions/1
-  # DELETE /fenestration_constructions/1.json
   def destroy
     @fenestration_construction.destroy
-    respond_to do |format|
-      format.html { redirect_to fenestration_constructions_url, notice: 'Fenestration construction was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@fenestration_construction)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_fenestration_construction
       @fenestration_construction = FenestrationConstruction.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def fenestration_construction_params
-      params.require(:fenestration_construction).permit(:name, :fenestration_type, :fenestration_product_type, :assembly_context, :certification_method, :shgc, :u_factor, :visible_transmittance)
+      params.require(:fenestration_construction).permit(:name, :fenestration_type, :fenestration_product_type, :assembly_context, :certification_method, :skylight_glazing, :skylight_curb, :operable_window_configuration, :greenhouse_garden_window, :fenestration_framing, :fenestration_panes, :glazing_tint, :window_divider, :diffusing, :shgc, :shgc_center_of_glass, :u_factor, :u_factor_center_of_glass, :visible_transmittance, :visible_transmittance_center_of_glass)
     end
 end

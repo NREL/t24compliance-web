@@ -1,1 +1,1 @@
-json.extract! @schedule_day, :id, :name, :type, :created_at, :updated_at
+json.extract! @schedule_day, :id, :name, :type, :hour, :created_at, :updated_at

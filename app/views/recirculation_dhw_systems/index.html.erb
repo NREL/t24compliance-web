@@ -6,6 +6,24 @@
       <th>Name</th>
       <th>Status</th>
       <th>Type</th>
+      <th>Multiplier</th>
+      <th>Central system</th>
+      <th>Distribution type</th>
+      <th>Pump power</th>
+      <th>Pump efficiency</th>
+      <th>System story count</th>
+      <th>Living unit count</th>
+      <th>Water heater count</th>
+      <th>Total input rating</th>
+      <th>Total tank volume</th>
+      <th>Baseline recirculation water heater reference</th>
+      <th>Use default loops</th>
+      <th>Pipe length</th>
+      <th>Pipe diameter</th>
+      <th>Pipe location</th>
+      <th>Loop count</th>
+      <th>Pipe extra insulation</th>
+      <th>Annual solar fraction</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +34,24 @@
         <td><%= recirculation_dhw_system.name %></td>
         <td><%= recirculation_dhw_system.status %></td>
         <td><%= recirculation_dhw_system.type %></td>
+        <td><%= recirculation_dhw_system.multiplier %></td>
+        <td><%= recirculation_dhw_system.central_system %></td>
+        <td><%= recirculation_dhw_system.distribution_type %></td>
+        <td><%= recirculation_dhw_system.pump_power %></td>
+        <td><%= recirculation_dhw_system.pump_efficiency %></td>
+        <td><%= recirculation_dhw_system.system_story_count %></td>
+        <td><%= recirculation_dhw_system.living_unit_count %></td>
+        <td><%= recirculation_dhw_system.water_heater_count %></td>
+        <td><%= recirculation_dhw_system.total_input_rating %></td>
+        <td><%= recirculation_dhw_system.total_tank_volume %></td>
+        <td><%= recirculation_dhw_system.baseline_recirculation_water_heater_reference %></td>
+        <td><%= recirculation_dhw_system.use_default_loops %></td>
+        <td><%= recirculation_dhw_system.pipe_length %></td>
+        <td><%= recirculation_dhw_system.pipe_diameter %></td>
+        <td><%= recirculation_dhw_system.pipe_location %></td>
+        <td><%= recirculation_dhw_system.loop_count %></td>
+        <td><%= recirculation_dhw_system.pipe_extra_insulation %></td>
+        <td><%= recirculation_dhw_system.annual_solar_fraction %></td>
         <td><%= link_to 'Show', recirculation_dhw_system %></td>
         <td><%= link_to 'Edit', edit_recirculation_dhw_system_path(recirculation_dhw_system) %></td>
         <td><%= link_to 'Destroy', recirculation_dhw_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>

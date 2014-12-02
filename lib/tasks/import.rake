@@ -128,7 +128,7 @@ namespace :import do
             if obj.data_fields
 	            obj.data_fields.each do |df|
 	            	if df['name'] == field['name']
-	            		field['exposed'] = df['exposed']
+	            		field['remove'] = df['remove']
 	            		field['set_as_constant'] = df['set_as_constant']
 	            		field['constant_value'] = df['constant_value']
 	            		field['comments'] = df['comments']

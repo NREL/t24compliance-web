@@ -2,7 +2,15 @@ class Project
   include Mongoid::Document
 	include Mongoid::Timestamps
   field :name, type: String
+  field :building_energy_model_version, type: Integer
   field :geometry_input_type, type: String
+  field :number_time_steps_per_hour, type: Integer
+  field :permit_scope, type: String
+  field :permit_month, type: Integer
+  field :permit_day, type: Integer
+  field :permit_year, type: Integer
+  field :climate_zone_county, type: String
+  field :climate_zone_number, type: Integer
   field :climate_zone, type: String
   field :latitude, type: Float
   field :longitude, type: Float
@@ -26,16 +34,52 @@ class Project
   field :hvac_engineer_organization, type: String
   field :hvac_engineer_email, type: String
   field :hvac_engineer_phone, type: String
+  field :lighting_designer_name, type: String
+  field :lighting_designer_title, type: String
+  field :lighting_designer_organization, type: String
+  field :lighting_designer_email, type: String
+  field :lighting_designer_phone, type: String
+  field :energy_modeler_name, type: String
+  field :energy_modeler_title, type: String
+  field :energy_modeler_organization, type: String
+  field :energy_modeler_email, type: String
+  field :energy_modeler_phone, type: String
+  field :weather_station_number, type: Integer
   field :weather_station, type: String
+  field :design_day_weather_file, type: String
+  field :annual_weather_file, type: String
+  field :weather_file_download_url, type: String
+  field :site_fuel_type, type: String
   field :hvac_auto_sizing, type: Integer
+  field :simulate_design_days, type: Integer
+  field :run_period_begin_month, type: Integer
+  field :run_period_begin_day, type: Integer
+  field :run_period_end_month, type: Integer
+  field :run_period_end_day, type: Integer
+  field :run_period_year, type: Integer
   field :exceptional_condition_complete_building, type: String
   field :exceptional_condition_exterior_lighting, type: String
   field :exceptional_condition_no_cooling_system, type: String
   field :exceptional_condition_rated_capacity, type: String
   field :exceptional_condition_water_heater, type: String
   field :exceptional_condition_narrative, type: String
+  field :disable_daylighting_controls, type: Integer
+  field :default_daylighting_controls, type: Integer
+  field :simulation_variables_site, type: Integer
+  field :simulation_variables_thermal_zone, type: Integer
+  field :simulation_variables_daylighting, type: Integer
+  field :simulation_variables_hvac_secondary, type: Integer
+  field :simulation_variables_hvac_primary, type: Integer
+  field :simulation_variables_hvac_zone, type: Integer
+  field :average_dry_bulb_temperature, type: Float
+  field :monthly_average_temperature_maximum_difference, type: Float
+  field :holiday_reference, type: Array
   field :run_title, type: String
+  field :analysis_type, type: String
   field :compliance_type, type: String
+  field :rule_report_type, type: String
+  field :rule_report_file_append, type: String
+  field :software_version, type: String
   field :compliance_report_pdf, type: Integer
   field :compliance_report_xml, type: Integer
 
@@ -78,7 +122,15 @@ class Project
 
 	def xml_fields
 		xml_fields = [
+			{"db_field_name"=>"building_energy_model_version", "xml_field_name"=>"BldgEngyModelVersion"},
 			{"db_field_name"=>"geometry_input_type", "xml_field_name"=>"GeometryInpType"},
+			{"db_field_name"=>"number_time_steps_per_hour", "xml_field_name"=>"NumTimeStepsPerHr"},
+			{"db_field_name"=>"permit_scope", "xml_field_name"=>"PermitScope"},
+			{"db_field_name"=>"permit_month", "xml_field_name"=>"PermitMonth"},
+			{"db_field_name"=>"permit_day", "xml_field_name"=>"PermitDay"},
+			{"db_field_name"=>"permit_year", "xml_field_name"=>"PermitYear"},
+			{"db_field_name"=>"climate_zone_county", "xml_field_name"=>"CliZnCounty"},
+			{"db_field_name"=>"climate_zone_number", "xml_field_name"=>"CliZnNum"},
 			{"db_field_name"=>"climate_zone", "xml_field_name"=>"CliZn"},
 			{"db_field_name"=>"latitude", "xml_field_name"=>"Lat"},
 			{"db_field_name"=>"longitude", "xml_field_name"=>"Long"},
@@ -102,16 +154,52 @@ class Project
 			{"db_field_name"=>"hvac_engineer_organization", "xml_field_name"=>"HVACEngrOrg"},
 			{"db_field_name"=>"hvac_engineer_email", "xml_field_name"=>"HVACEngrEmail"},
 			{"db_field_name"=>"hvac_engineer_phone", "xml_field_name"=>"HVACEngrPhone"},
+			{"db_field_name"=>"lighting_designer_name", "xml_field_name"=>"LtgDsgnrName"},
+			{"db_field_name"=>"lighting_designer_title", "xml_field_name"=>"LtgDsgnrTitle"},
+			{"db_field_name"=>"lighting_designer_organization", "xml_field_name"=>"LtgDsgnrOrg"},
+			{"db_field_name"=>"lighting_designer_email", "xml_field_name"=>"LtgDsgnrEmail"},
+			{"db_field_name"=>"lighting_designer_phone", "xml_field_name"=>"LtgDsgnrPhone"},
+			{"db_field_name"=>"energy_modeler_name", "xml_field_name"=>"EnergyMdlrName"},
+			{"db_field_name"=>"energy_modeler_title", "xml_field_name"=>"EnergyMdlrTitle"},
+			{"db_field_name"=>"energy_modeler_organization", "xml_field_name"=>"EnergyMdlrOrg"},
+			{"db_field_name"=>"energy_modeler_email", "xml_field_name"=>"EnergyMdlrEmail"},
+			{"db_field_name"=>"energy_modeler_phone", "xml_field_name"=>"EnergyMdlrPhone"},
+			{"db_field_name"=>"weather_station_number", "xml_field_name"=>"WeatherStationNum"},
 			{"db_field_name"=>"weather_station", "xml_field_name"=>"WeatherStation"},
+			{"db_field_name"=>"design_day_weather_file", "xml_field_name"=>"DDWeatherFile"},
+			{"db_field_name"=>"annual_weather_file", "xml_field_name"=>"AnnualWeatherFile"},
+			{"db_field_name"=>"weather_file_download_url", "xml_field_name"=>"WeatherFileDownloadURL"},
+			{"db_field_name"=>"site_fuel_type", "xml_field_name"=>"SiteFuelType"},
 			{"db_field_name"=>"hvac_auto_sizing", "xml_field_name"=>"HVACAutoSizing"},
+			{"db_field_name"=>"simulate_design_days", "xml_field_name"=>"SimDsgnDays"},
+			{"db_field_name"=>"run_period_begin_month", "xml_field_name"=>"RunPeriodBeginMonth"},
+			{"db_field_name"=>"run_period_begin_day", "xml_field_name"=>"RunPeriodBeginDay"},
+			{"db_field_name"=>"run_period_end_month", "xml_field_name"=>"RunPeriodEndMonth"},
+			{"db_field_name"=>"run_period_end_day", "xml_field_name"=>"RunPeriodEndDay"},
+			{"db_field_name"=>"run_period_year", "xml_field_name"=>"RunPeriodYear"},
 			{"db_field_name"=>"exceptional_condition_complete_building", "xml_field_name"=>"ExcptCondCompleteBldg"},
 			{"db_field_name"=>"exceptional_condition_exterior_lighting", "xml_field_name"=>"ExcptCondExtLtg"},
 			{"db_field_name"=>"exceptional_condition_no_cooling_system", "xml_field_name"=>"ExcptCondNoClgSys"},
 			{"db_field_name"=>"exceptional_condition_rated_capacity", "xml_field_name"=>"ExcptCondRtdCap"},
 			{"db_field_name"=>"exceptional_condition_water_heater", "xml_field_name"=>"ExcptCondWtrHtr"},
 			{"db_field_name"=>"exceptional_condition_narrative", "xml_field_name"=>"ExcptCondNarrative"},
+			{"db_field_name"=>"disable_daylighting_controls", "xml_field_name"=>"DisableDayltgCtrls"},
+			{"db_field_name"=>"default_daylighting_controls", "xml_field_name"=>"DefaultDayltgCtrls"},
+			{"db_field_name"=>"simulation_variables_site", "xml_field_name"=>"SimVarsSite"},
+			{"db_field_name"=>"simulation_variables_thermal_zone", "xml_field_name"=>"SimVarsThrmlZn"},
+			{"db_field_name"=>"simulation_variables_daylighting", "xml_field_name"=>"SimVarsDayltg"},
+			{"db_field_name"=>"simulation_variables_hvac_secondary", "xml_field_name"=>"SimVarsHVACSec"},
+			{"db_field_name"=>"simulation_variables_hvac_primary", "xml_field_name"=>"SimVarsHVACPri"},
+			{"db_field_name"=>"simulation_variables_hvac_zone", "xml_field_name"=>"SimVarsHVACZn"},
+			{"db_field_name"=>"average_dry_bulb_temperature", "xml_field_name"=>"AvgDBTemp"},
+			{"db_field_name"=>"monthly_average_temperature_maximum_difference", "xml_field_name"=>"MoAvgTempMaxDiff"},
+			{"db_field_name"=>"holiday_reference", "xml_field_name"=>"HolRef"},
 			{"db_field_name"=>"run_title", "xml_field_name"=>"RunTitle"},
+			{"db_field_name"=>"analysis_type", "xml_field_name"=>"AnalysisType"},
 			{"db_field_name"=>"compliance_type", "xml_field_name"=>"CompType"},
+			{"db_field_name"=>"rule_report_type", "xml_field_name"=>"RuleReportType"},
+			{"db_field_name"=>"rule_report_file_append", "xml_field_name"=>"RuleReportFileAppend"},
+			{"db_field_name"=>"software_version", "xml_field_name"=>"SoftwareVersion"},
 			{"db_field_name"=>"compliance_report_pdf", "xml_field_name"=>"CompReportPDF"},
 			{"db_field_name"=>"compliance_report_xml", "xml_field_name"=>"CompReportXML"}
 		]
@@ -148,6 +236,81 @@ class Project
 		File.open("#{Rails.root}/data/xmls/#{self.id}.xml", "w") do |f|
 			f << xml
 		end
+	end
+
+	def permit_scope_enums
+		[
+			'PermitNonresidentialAll',
+			'PermitNonresidentialEnvelope',
+			'PermitNonresidentialEnvelopeLighting',
+			'PermitNonresidentialEnvelopeMechanical',
+			'PermitNonresidentialLighting',
+			'PermitNonresidentialLightingMechanical',
+			'PermitNonresidentialMechanical'
+		]
+	end
+
+	def climate_zone_county_enums
+		[
+			'Alameda',
+			'Alpine',
+			'Amador',
+			'Butte',
+			'Calaveras',
+			'Colusa',
+			'Contra Costa',
+			'Del Norte',
+			'El Dorado',
+			'Fresno',
+			'Glenn',
+			'Humboldt',
+			'Imperial',
+			'Inyo',
+			'Kern',
+			'Kings',
+			'Lake',
+			'Lassen',
+			'Los Angeles',
+			'Madera',
+			'Marin',
+			'Mariposa',
+			'Mendocino',
+			'Merced',
+			'Modoc',
+			'Mono',
+			'Monterey',
+			'Napa',
+			'Nevada',
+			'Orange',
+			'Placer',
+			'Plumas',
+			'Riverside',
+			'Sacramento',
+			'San Benito',
+			'San Bernardino',
+			'San Diego',
+			'San Francisco',
+			'San Joaquin',
+			'San Luis Obispo',
+			'San Mateo',
+			'Santa Barbara',
+			'Santa Clara',
+			'Santa Cruz',
+			'Shasta',
+			'Sierra',
+			'Siskiyou',
+			'Solano',
+			'Sonoma',
+			'Stanislaus',
+			'Sutter',
+			'Tehama',
+			'Trinity',
+			'Tulare',
+			'Tuolumne',
+			'Ventura',
+			'Yolo',
+			'Yuba'
+		]
 	end
 
 	def climate_zone_enums
@@ -264,6 +427,15 @@ class Project
 		]
 	end
 
+	def site_fuel_type_enums
+		[
+			'- select -',
+			'Electricity',
+			'NaturalGas',
+			'Propane'
+		]
+	end
+
 	def exceptional_condition_complete_building_enums
 		[
 			'Yes',
@@ -306,6 +478,13 @@ class Project
 		]
 	end
 
+	def analysis_type_enums
+		[
+			'Title24Compliance',
+			'Title24ProposedOnly'
+		]
+	end
+
 	def compliance_type_enums
 		[
 			'NewComplete',
@@ -318,6 +497,28 @@ class Project
 			'ExistingAddition',
 			'ExistingAlteration',
 			'ExistingAdditionAndAlteration'
+		]
+	end
+
+	def rule_report_type_enums
+		[
+			'ModelRpt_Space_InteriorLoadsElec',
+			'ModelRpt_Space_InteriorLoadsFuel',
+			'ModelRpt_HVACPrimary',
+			'ModelRpt_Envelope',
+			'ModelRpt_HVACSecondary',
+			'ModelRpt_HVACSecondarySizing'
+		]
+	end
+
+	def rule_report_file_append_enums
+		[
+			'- SpcLoadsElec.csv',
+			'- SpcLoadsFuel.csv',
+			'- HVACPrimary.csv',
+			'- Envelope.csv',
+			'- HVACSecondary.csv',
+			'- HVACSecondarySizing.csv'
 		]
 	end
 end

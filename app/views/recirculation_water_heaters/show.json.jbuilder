@@ -1,1 +1,1 @@
-json.extract! @recirculation_water_heater, :id, :name, :status, :element_type, :tank_category, :created_at, :updated_at
+json.extract! @recirculation_water_heater, :id, :name, :status, :element_type, :tank_category, :tank_type, :input_rating, :energy_factor, :tank_volume, :tank_interior_insulation_r_value, :tank_exterior_insulation_r_value, :ambient_condition, :standby_loss_fraction, :thermal_efficiency, :created_at, :updated_at

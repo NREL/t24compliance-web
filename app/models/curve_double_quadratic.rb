@@ -2,6 +2,18 @@ class CurveDoubleQuadratic
   include Mongoid::Document
 	include Mongoid::Timestamps
   field :name, type: String
+  field :curve_coefficient1, type: Float
+  field :curve_coefficient2, type: Float
+  field :curve_coefficient3, type: Float
+  field :curve_coefficient4, type: Float
+  field :curve_coefficient5, type: Float
+  field :curve_coefficient6, type: Float
+  field :curve_maximum_out, type: Float
+  field :curve_maximum_var1, type: Float
+  field :curve_maximum_var2, type: Float
+  field :curve_minimum_out, type: Float
+  field :curve_minimum_var1, type: Float
+  field :curve_minimum_var2, type: Float
 
 	belongs_to :project
 
@@ -14,7 +26,18 @@ class CurveDoubleQuadratic
 
 	def xml_fields
 		xml_fields = [
-
+			{"db_field_name"=>"curve_coefficient1", "xml_field_name"=>"Coef1"},
+			{"db_field_name"=>"curve_coefficient2", "xml_field_name"=>"Coef2"},
+			{"db_field_name"=>"curve_coefficient3", "xml_field_name"=>"Coef3"},
+			{"db_field_name"=>"curve_coefficient4", "xml_field_name"=>"Coef4"},
+			{"db_field_name"=>"curve_coefficient5", "xml_field_name"=>"Coef5"},
+			{"db_field_name"=>"curve_coefficient6", "xml_field_name"=>"Coef6"},
+			{"db_field_name"=>"curve_maximum_out", "xml_field_name"=>"MaxOut"},
+			{"db_field_name"=>"curve_maximum_var1", "xml_field_name"=>"MaxVar1"},
+			{"db_field_name"=>"curve_maximum_var2", "xml_field_name"=>"MaxVar2"},
+			{"db_field_name"=>"curve_minimum_out", "xml_field_name"=>"MinOut"},
+			{"db_field_name"=>"curve_minimum_var1", "xml_field_name"=>"MinVar1"},
+			{"db_field_name"=>"curve_minimum_var2", "xml_field_name"=>"MinVar2"}
 		]
 	end
 

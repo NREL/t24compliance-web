@@ -1,6 +1,6 @@
 namespace :code_gen do
   desc "test code generation"
-  task :run => :environment do
+  task :test_run => :environment do
     `rails g scaffold ExampleModel --no-helper --no-assets --no-test-framework`
   end
 
@@ -22,9 +22,9 @@ namespace :code_gen do
   		# get fields (in a string name: type)
   		input.data_fields.each do |df|
 
-  			# only create fields marked as 'exposed' or 'set_as_constant'
+  			# only create fields not marked as 'remove'
   			
-  			if df['exposed'] or df['set_as_constant']
+  			unless df['remove']
   				num += 1
 	  			if df['data_type'].include? 'Array' 
 	  				data_type = 'array'
@@ -165,7 +165,7 @@ namespace :code_gen do
   	xml_fields = []
   	input.data_fields.each do |df|
   		f_hash = {}
-  		if df['exposed'] or df['set_as_constant']
+  		unless df['remove']
   			f_hash['db_field_name'] = df['db_field_name']
   			f_hash['xml_field_name'] = df['name'] 
   			xml_fields << f_hash
@@ -334,15 +334,15 @@ namespace :code_gen do
 
   def generate_enumerations(input)
 
-  	# get exposed inputs which are Enumerations and not set as constant
+  	# get non-removed inputs which are Enumerations and not set as constant
 		enums = []
 
 		# find enums
 		input.data_fields.each do |df|
 
 			# find enumerations
-				if df['data_type'] == 'Enumeration'
-				if df['exposed'] and !df['set_as_constant']
+			if df['data_type'] == 'Enumeration'
+				if !df['remove'] and !df['set_as_constant']
 					unless df['enumerations'].nil?
 						method_str = "\n\tdef #{df['db_field_name']}_enums\n\t\t[\n"
 

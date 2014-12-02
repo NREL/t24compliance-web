@@ -4,7 +4,15 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Building energy model version</th>
       <th>Geometry input type</th>
+      <th>Number time steps per hour</th>
+      <th>Permit scope</th>
+      <th>Permit month</th>
+      <th>Permit day</th>
+      <th>Permit year</th>
+      <th>Climate zone county</th>
+      <th>Climate zone number</th>
       <th>Climate zone</th>
       <th>Latitude</th>
       <th>Longitude</th>
@@ -28,16 +36,52 @@
       <th>Hvac engineer organization</th>
       <th>Hvac engineer email</th>
       <th>Hvac engineer phone</th>
+      <th>Lighting designer name</th>
+      <th>Lighting designer title</th>
+      <th>Lighting designer organization</th>
+      <th>Lighting designer email</th>
+      <th>Lighting designer phone</th>
+      <th>Energy modeler name</th>
+      <th>Energy modeler title</th>
+      <th>Energy modeler organization</th>
+      <th>Energy modeler email</th>
+      <th>Energy modeler phone</th>
+      <th>Weather station number</th>
       <th>Weather station</th>
+      <th>Design day weather file</th>
+      <th>Annual weather file</th>
+      <th>Weather file download url</th>
+      <th>Site fuel type</th>
       <th>Hvac auto sizing</th>
+      <th>Simulate design days</th>
+      <th>Run period begin month</th>
+      <th>Run period begin day</th>
+      <th>Run period end month</th>
+      <th>Run period end day</th>
+      <th>Run period year</th>
       <th>Exceptional condition complete building</th>
       <th>Exceptional condition exterior lighting</th>
       <th>Exceptional condition no cooling system</th>
       <th>Exceptional condition rated capacity</th>
       <th>Exceptional condition water heater</th>
       <th>Exceptional condition narrative</th>
+      <th>Disable daylighting controls</th>
+      <th>Default daylighting controls</th>
+      <th>Simulation variables site</th>
+      <th>Simulation variables thermal zone</th>
+      <th>Simulation variables daylighting</th>
+      <th>Simulation variables hvac secondary</th>
+      <th>Simulation variables hvac primary</th>
+      <th>Simulation variables hvac zone</th>
+      <th>Average dry bulb temperature</th>
+      <th>Monthly average temperature maximum difference</th>
+      <th>Holiday reference</th>
       <th>Run title</th>
+      <th>Analysis type</th>
       <th>Compliance type</th>
+      <th>Rule report type</th>
+      <th>Rule report file append</th>
+      <th>Software version</th>
       <th>Compliance report pdf</th>
       <th>Compliance report xml</th>
       <th colspan="3"></th>
@@ -48,7 +92,15 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.name %></td>
+        <td><%= project.building_energy_model_version %></td>
         <td><%= project.geometry_input_type %></td>
+        <td><%= project.number_time_steps_per_hour %></td>
+        <td><%= project.permit_scope %></td>
+        <td><%= project.permit_month %></td>
+        <td><%= project.permit_day %></td>
+        <td><%= project.permit_year %></td>
+        <td><%= project.climate_zone_county %></td>
+        <td><%= project.climate_zone_number %></td>
         <td><%= project.climate_zone %></td>
         <td><%= project.latitude %></td>
         <td><%= project.longitude %></td>
@@ -72,16 +124,52 @@
         <td><%= project.hvac_engineer_organization %></td>
         <td><%= project.hvac_engineer_email %></td>
         <td><%= project.hvac_engineer_phone %></td>
+        <td><%= project.lighting_designer_name %></td>
+        <td><%= project.lighting_designer_title %></td>
+        <td><%= project.lighting_designer_organization %></td>
+        <td><%= project.lighting_designer_email %></td>
+        <td><%= project.lighting_designer_phone %></td>
+        <td><%= project.energy_modeler_name %></td>
+        <td><%= project.energy_modeler_title %></td>
+        <td><%= project.energy_modeler_organization %></td>
+        <td><%= project.energy_modeler_email %></td>
+        <td><%= project.energy_modeler_phone %></td>
+        <td><%= project.weather_station_number %></td>
         <td><%= project.weather_station %></td>
+        <td><%= project.design_day_weather_file %></td>
+        <td><%= project.annual_weather_file %></td>
+        <td><%= project.weather_file_download_url %></td>
+        <td><%= project.site_fuel_type %></td>
         <td><%= project.hvac_auto_sizing %></td>
+        <td><%= project.simulate_design_days %></td>
+        <td><%= project.run_period_begin_month %></td>
+        <td><%= project.run_period_begin_day %></td>
+        <td><%= project.run_period_end_month %></td>
+        <td><%= project.run_period_end_day %></td>
+        <td><%= project.run_period_year %></td>
         <td><%= project.exceptional_condition_complete_building %></td>
         <td><%= project.exceptional_condition_exterior_lighting %></td>
         <td><%= project.exceptional_condition_no_cooling_system %></td>
         <td><%= project.exceptional_condition_rated_capacity %></td>
         <td><%= project.exceptional_condition_water_heater %></td>
         <td><%= project.exceptional_condition_narrative %></td>
+        <td><%= project.disable_daylighting_controls %></td>
+        <td><%= project.default_daylighting_controls %></td>
+        <td><%= project.simulation_variables_site %></td>
+        <td><%= project.simulation_variables_thermal_zone %></td>
+        <td><%= project.simulation_variables_daylighting %></td>
+        <td><%= project.simulation_variables_hvac_secondary %></td>
+        <td><%= project.simulation_variables_hvac_primary %></td>
+        <td><%= project.simulation_variables_hvac_zone %></td>
+        <td><%= project.average_dry_bulb_temperature %></td>
+        <td><%= project.monthly_average_temperature_maximum_difference %></td>
+        <td><%= project.holiday_reference %></td>
         <td><%= project.run_title %></td>
+        <td><%= project.analysis_type %></td>
         <td><%= project.compliance_type %></td>
+        <td><%= project.rule_report_type %></td>
+        <td><%= project.rule_report_file_append %></td>
+        <td><%= project.software_version %></td>
         <td><%= project.compliance_report_pdf %></td>
         <td><%= project.compliance_report_xml %></td>
         <td><%= link_to 'Show', project %></td>

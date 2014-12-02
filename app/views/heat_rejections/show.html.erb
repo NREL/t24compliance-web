@@ -15,5 +15,85 @@
   <%= @heat_rejection.type %>
 </p>
 
+<p>
+  <strong>Fan type:</strong>
+  <%= @heat_rejection.fan_type %>
+</p>
+
+<p>
+  <strong>Modulation control:</strong>
+  <%= @heat_rejection.modulation_control %>
+</p>
+
+<p>
+  <strong>Fluid segment in reference:</strong>
+  <%= @heat_rejection.fluid_segment_in_reference %>
+</p>
+
+<p>
+  <strong>Fluid segment out reference:</strong>
+  <%= @heat_rejection.fluid_segment_out_reference %>
+</p>
+
+<p>
+  <strong>Entering temperature design:</strong>
+  <%= @heat_rejection.entering_temperature_design %>
+</p>
+
+<p>
+  <strong>Design wb temperature:</strong>
+  <%= @heat_rejection.design_wb_temperature %>
+</p>
+
+<p>
+  <strong>Leaving temperature design:</strong>
+  <%= @heat_rejection.leaving_temperature_design %>
+</p>
+
+<p>
+  <strong>Cell count:</strong>
+  <%= @heat_rejection.cell_count %>
+</p>
+
+<p>
+  <strong>Capacity rated:</strong>
+  <%= @heat_rejection.capacity_rated %>
+</p>
+
+<p>
+  <strong>Total fan hp:</strong>
+  <%= @heat_rejection.total_fan_hp %>
+</p>
+
+<p>
+  <strong>Air flow capacity:</strong>
+  <%= @heat_rejection.air_flow_capacity %>
+</p>
+
+<p>
+  <strong>Water flow capacity:</strong>
+  <%= @heat_rejection.water_flow_capacity %>
+</p>
+
+<p>
+  <strong>Power f plr curve reference:</strong>
+  <%= @heat_rejection.power_f_plr_curve_reference %>
+</p>
+
+<p>
+  <strong>Low speed air flow ratio:</strong>
+  <%= @heat_rejection.low_speed_air_flow_ratio %>
+</p>
+
+<p>
+  <strong>Low speed power ratio:</strong>
+  <%= @heat_rejection.low_speed_power_ratio %>
+</p>
+
+<p>
+  <strong>Minimum speed ratio:</strong>
+  <%= @heat_rejection.minimum_speed_ratio %>
+</p>
+
 <%= link_to 'Edit', edit_heat_rejection_path(@heat_rejection) %> |
 <%= link_to 'Back', heat_rejections_path %>

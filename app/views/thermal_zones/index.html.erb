@@ -6,6 +6,31 @@
       <th>Name</th>
       <th>Type</th>
       <th>Multiplier</th>
+      <th>Description</th>
+      <th>Supply plenum zone reference</th>
+      <th>Return plenum zone reference</th>
+      <th>Hvac zone count</th>
+      <th>Primary air conditioning system reference</th>
+      <th>Ventilation system reference</th>
+      <th>Cooling design supply air temperature</th>
+      <th>Cooling design supply air temperature difference</th>
+      <th>Cooling design sizing factor</th>
+      <th>Heating design supply air temperature</th>
+      <th>Heating design supply air temperature difference</th>
+      <th>Heating design sizing factor</th>
+      <th>Heating design maximum flow fraction</th>
+      <th>Ventilation source</th>
+      <th>Ventilation control method</th>
+      <th>Ventilation specification method</th>
+      <th>Daylighting control lighting fraction1</th>
+      <th>Daylighting control lighting fraction2</th>
+      <th>Daylighting control type</th>
+      <th>Daylighting minimum dimming light fraction</th>
+      <th>Daylighting minimum dimming power fraction</th>
+      <th>Daylighting number of control steps</th>
+      <th>Exhaust system reference</th>
+      <th>Exhaust fan name</th>
+      <th>Exhaust flow simulated</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +41,31 @@
         <td><%= thermal_zone.name %></td>
         <td><%= thermal_zone.type %></td>
         <td><%= thermal_zone.multiplier %></td>
+        <td><%= thermal_zone.description %></td>
+        <td><%= thermal_zone.supply_plenum_zone_reference %></td>
+        <td><%= thermal_zone.return_plenum_zone_reference %></td>
+        <td><%= thermal_zone.hvac_zone_count %></td>
+        <td><%= thermal_zone.primary_air_conditioning_system_reference %></td>
+        <td><%= thermal_zone.ventilation_system_reference %></td>
+        <td><%= thermal_zone.cooling_design_supply_air_temperature %></td>
+        <td><%= thermal_zone.cooling_design_supply_air_temperature_difference %></td>
+        <td><%= thermal_zone.cooling_design_sizing_factor %></td>
+        <td><%= thermal_zone.heating_design_supply_air_temperature %></td>
+        <td><%= thermal_zone.heating_design_supply_air_temperature_difference %></td>
+        <td><%= thermal_zone.heating_design_sizing_factor %></td>
+        <td><%= thermal_zone.heating_design_maximum_flow_fraction %></td>
+        <td><%= thermal_zone.ventilation_source %></td>
+        <td><%= thermal_zone.ventilation_control_method %></td>
+        <td><%= thermal_zone.ventilation_specification_method %></td>
+        <td><%= thermal_zone.daylighting_control_lighting_fraction1 %></td>
+        <td><%= thermal_zone.daylighting_control_lighting_fraction2 %></td>
+        <td><%= thermal_zone.daylighting_control_type %></td>
+        <td><%= thermal_zone.daylighting_minimum_dimming_light_fraction %></td>
+        <td><%= thermal_zone.daylighting_minimum_dimming_power_fraction %></td>
+        <td><%= thermal_zone.daylighting_number_of_control_steps %></td>
+        <td><%= thermal_zone.exhaust_system_reference %></td>
+        <td><%= thermal_zone.exhaust_fan_name %></td>
+        <td><%= thermal_zone.exhaust_flow_simulated %></td>
         <td><%= link_to 'Show', thermal_zone %></td>
         <td><%= link_to 'Edit', edit_thermal_zone_path(thermal_zone) %></td>
         <td><%= link_to 'Destroy', thermal_zone, method: :delete, data: { confirm: 'Are you sure?' } %></td>

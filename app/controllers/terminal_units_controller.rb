@@ -1,74 +1,47 @@
 class TerminalUnitsController < ApplicationController
   before_action :set_terminal_unit, only: [:show, :edit, :update, :destroy]
 
-  # GET /terminal_units
-  # GET /terminal_units.json
+  respond_to :html
+
   def index
     @terminal_units = TerminalUnit.all
+    respond_with(@terminal_units)
   end
 
-  # GET /terminal_units/1
-  # GET /terminal_units/1.json
   def show
+    respond_with(@terminal_unit)
   end
 
-  # GET /terminal_units/new
   def new
     @terminal_unit = TerminalUnit.new
+    respond_with(@terminal_unit)
   end
 
-  # GET /terminal_units/1/edit
   def edit
   end
 
-  # POST /terminal_units
-  # POST /terminal_units.json
   def create
     @terminal_unit = TerminalUnit.new(terminal_unit_params)
-
-    respond_to do |format|
-      if @terminal_unit.save
-        format.html { redirect_to @terminal_unit, notice: 'Terminal unit was successfully created.' }
-        format.json { render :show, status: :created, location: @terminal_unit }
-      else
-        format.html { render :new }
-        format.json { render json: @terminal_unit.errors, status: :unprocessable_entity }
-      end
-    end
+    @terminal_unit.save
+    respond_with(@terminal_unit)
   end
 
-  # PATCH/PUT /terminal_units/1
-  # PATCH/PUT /terminal_units/1.json
   def update
-    respond_to do |format|
-      if @terminal_unit.update(terminal_unit_params)
-        format.html { redirect_to @terminal_unit, notice: 'Terminal unit was successfully updated.' }
-        format.json { render :show, status: :ok, location: @terminal_unit }
-      else
-        format.html { render :edit }
-        format.json { render json: @terminal_unit.errors, status: :unprocessable_entity }
-      end
-    end
+    @terminal_unit.update(terminal_unit_params)
+    respond_with(@terminal_unit)
   end
 
-  # DELETE /terminal_units/1
-  # DELETE /terminal_units/1.json
   def destroy
     @terminal_unit.destroy
-    respond_to do |format|
-      format.html { redirect_to terminal_units_url, notice: 'Terminal unit was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@terminal_unit)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_terminal_unit
       @terminal_unit = TerminalUnit.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def terminal_unit_params
-      params.require(:terminal_unit).permit(:name, :status, :type)
+      params.require(:terminal_unit).permit(:name, :status, :type, :zone_served_reference, :count, :minimum_air_fraction_schedule_reference, :primary_air_segment_reference, :primary_air_flow_maximum, :primary_air_flow_minimum, :heating_air_flow_maximum, :reheat_control_method, :induced_air_zone_reference, :induction_ratio, :fan_power_per_flow, :parallel_box_fan_flow_fraction)
     end
 end

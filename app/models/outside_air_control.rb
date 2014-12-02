@@ -4,6 +4,10 @@ class OutsideAirControl
   field :name, type: String
   field :economizer_control_method, type: String
   field :economizer_integration, type: String
+  field :economizer_high_temperature_lockout, type: Float
+  field :economizer_low_temperature_lockout, type: Float
+  field :air_segment_supply_reference, type: String
+  field :air_segment_return_reference, type: String
 
 	belongs_to :air_system
 
@@ -17,7 +21,11 @@ class OutsideAirControl
 	def xml_fields
 		xml_fields = [
 			{"db_field_name"=>"economizer_control_method", "xml_field_name"=>"EconoCtrlMthd"},
-			{"db_field_name"=>"economizer_integration", "xml_field_name"=>"EconoIntegration"}
+			{"db_field_name"=>"economizer_integration", "xml_field_name"=>"EconoIntegration"},
+			{"db_field_name"=>"economizer_high_temperature_lockout", "xml_field_name"=>"EconoHiTempLockout"},
+			{"db_field_name"=>"economizer_low_temperature_lockout", "xml_field_name"=>"EconoLowTempLockout"},
+			{"db_field_name"=>"air_segment_supply_reference", "xml_field_name"=>"AirSegSupRef"},
+			{"db_field_name"=>"air_segment_return_reference", "xml_field_name"=>"AirSegRetRef"}
 		]
 	end
 

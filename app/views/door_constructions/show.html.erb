@@ -10,5 +10,20 @@
   <%= @door_construction.type %>
 </p>
 
+<p>
+  <strong>Certification method:</strong>
+  <%= @door_construction.certification_method %>
+</p>
+
+<p>
+  <strong>U factor:</strong>
+  <%= @door_construction.u_factor %>
+</p>
+
+<p>
+  <strong>Open:</strong>
+  <%= @door_construction.open %>
+</p>
+
 <%= link_to 'Edit', edit_door_construction_path(@door_construction) %> |
 <%= link_to 'Back', door_constructions_path %>

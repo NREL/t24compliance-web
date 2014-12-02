@@ -10,5 +10,20 @@
   <%= @external_shading_object.status %>
 </p>
 
+<p>
+  <strong>Transmittance schedule reference:</strong>
+  <%= @external_shading_object.transmittance_schedule_reference %>
+</p>
+
+<p>
+  <strong>Solar reflectance:</strong>
+  <%= @external_shading_object.solar_reflectance %>
+</p>
+
+<p>
+  <strong>Visible reflectance:</strong>
+  <%= @external_shading_object.visible_reflectance %>
+</p>
+
 <%= link_to 'Edit', edit_external_shading_object_path(@external_shading_object) %> |
 <%= link_to 'Back', external_shading_objects_path %>

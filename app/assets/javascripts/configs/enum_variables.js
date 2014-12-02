@@ -150,7 +150,7 @@ var project_exceptional_condition_narrative_enums =
 	[
 		'Yes',
 		'No'
-	]''
+	];
 
 var project_compliance_type_enums =
 	[

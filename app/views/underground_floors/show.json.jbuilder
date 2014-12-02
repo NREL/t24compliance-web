@@ -1,1 +1,1 @@
-json.extract! @underground_floor, :id, :name, :status, :construct_assembly_reference, :area, :created_at, :updated_at
+json.extract! @underground_floor, :id, :name, :status, :construct_assembly_reference, :area, :perimeter_exposed, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance, :created_at, :updated_at

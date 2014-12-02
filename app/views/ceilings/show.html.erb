@@ -20,5 +20,35 @@
   <%= @ceiling.construct_assembly_reference %>
 </p>
 
+<p>
+  <strong>Exterior solar absorptance:</strong>
+  <%= @ceiling.exterior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Exterior thermal absorptance:</strong>
+  <%= @ceiling.exterior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Exterior visible absorptance:</strong>
+  <%= @ceiling.exterior_visible_absorptance %>
+</p>
+
+<p>
+  <strong>Interior solar absorptance:</strong>
+  <%= @ceiling.interior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Interior thermal absorptance:</strong>
+  <%= @ceiling.interior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Interior visible absorptance:</strong>
+  <%= @ceiling.interior_visible_absorptance %>
+</p>
+
 <%= link_to 'Edit', edit_ceiling_path(@ceiling) %> |
 <%= link_to 'Back', ceilings_path %>

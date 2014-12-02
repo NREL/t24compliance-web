@@ -35,10 +35,10 @@ class InputsController < ApplicationController
 
 			@input.data_fields.each do |df|
 				# save added fields
-				if params[:exposed_fields] and params[:exposed_fields].include? df['name']
-					df['exposed'] = true
+				if params[:remove_fields] and params[:remove_fields].include? df['name']
+					df['remove'] = true
 				else
-					df['exposed'] = false 
+					df['remove'] = false 
 				end
 
 				if params[:set_as_constant_fields] and params[:set_as_constant_fields].include? df['name']

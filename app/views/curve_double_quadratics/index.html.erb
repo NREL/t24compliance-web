@@ -4,6 +4,18 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Curve coefficient1</th>
+      <th>Curve coefficient2</th>
+      <th>Curve coefficient3</th>
+      <th>Curve coefficient4</th>
+      <th>Curve coefficient5</th>
+      <th>Curve coefficient6</th>
+      <th>Curve maximum out</th>
+      <th>Curve maximum var1</th>
+      <th>Curve maximum var2</th>
+      <th>Curve minimum out</th>
+      <th>Curve minimum var1</th>
+      <th>Curve minimum var2</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +24,18 @@
     <% @curve_double_quadratics.each do |curve_double_quadratic| %>
       <tr>
         <td><%= curve_double_quadratic.name %></td>
+        <td><%= curve_double_quadratic.curve_coefficient1 %></td>
+        <td><%= curve_double_quadratic.curve_coefficient2 %></td>
+        <td><%= curve_double_quadratic.curve_coefficient3 %></td>
+        <td><%= curve_double_quadratic.curve_coefficient4 %></td>
+        <td><%= curve_double_quadratic.curve_coefficient5 %></td>
+        <td><%= curve_double_quadratic.curve_coefficient6 %></td>
+        <td><%= curve_double_quadratic.curve_maximum_out %></td>
+        <td><%= curve_double_quadratic.curve_maximum_var1 %></td>
+        <td><%= curve_double_quadratic.curve_maximum_var2 %></td>
+        <td><%= curve_double_quadratic.curve_minimum_out %></td>
+        <td><%= curve_double_quadratic.curve_minimum_var1 %></td>
+        <td><%= curve_double_quadratic.curve_minimum_var2 %></td>
         <td><%= link_to 'Show', curve_double_quadratic %></td>
         <td><%= link_to 'Edit', edit_curve_double_quadratic_path(curve_double_quadratic) %></td>
         <td><%= link_to 'Destroy', curve_double_quadratic, method: :delete, data: { confirm: 'Are you sure?' } %></td>

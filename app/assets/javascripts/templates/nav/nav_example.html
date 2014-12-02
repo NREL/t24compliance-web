@@ -1,0 +1,9 @@
+<h3>Here is a partial template for navigation</h3>
+<div class="collapse navbar-collapse" ng-controller="NavCtrl">
+    <ul class="nav navbar-nav">
+        <li ng-class="{ active: isActive('/')}"><a href="/">Home</a></li>
+        <li ng-class="{ active: isActive('/tests')}"><a href="/tests">Tests</a></li>
+        <li ng-class="{ active: isActive('/inputs')}"><a href="/inputs">Inputs</a></li>
+    </ul>
+</div>
+

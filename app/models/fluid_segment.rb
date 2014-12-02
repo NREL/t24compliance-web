@@ -4,6 +4,7 @@ class FluidSegment
   field :name, type: String
   field :type, type: String
   field :source, type: String
+  field :primary_segment_reference, type: String
 
 	belongs_to :fluid_system
 	has_many :pumps
@@ -18,7 +19,8 @@ class FluidSegment
 	def xml_fields
 		xml_fields = [
 			{"db_field_name"=>"type", "xml_field_name"=>"Type"},
-			{"db_field_name"=>"source", "xml_field_name"=>"Src"}
+			{"db_field_name"=>"source", "xml_field_name"=>"Src"},
+			{"db_field_name"=>"primary_segment_reference", "xml_field_name"=>"PriSegRef"}
 		]
 	end
 

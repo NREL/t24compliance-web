@@ -4,6 +4,27 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th>Fuel source</th>
+      <th>Draft type</th>
+      <th>Fluid segment in reference</th>
+      <th>Fluid segment out reference</th>
+      <th>Has bypass</th>
+      <th>Entering temperature design</th>
+      <th>Leaving temperature design</th>
+      <th>Capacity rated</th>
+      <th>Afue</th>
+      <th>Combustion efficiency</th>
+      <th>Thermal efficiency</th>
+      <th>Hir f plr curve reference</th>
+      <th>Eir</th>
+      <th>Fuel full load</th>
+      <th>Heat loss</th>
+      <th>Unload ratio minimum</th>
+      <th>Draft fan horse power</th>
+      <th>Parasitic load</th>
+      <th>Water flow capacity</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +33,27 @@
     <% @boilers.each do |boiler| %>
       <tr>
         <td><%= boiler.name %></td>
+        <td><%= boiler.status %></td>
+        <td><%= boiler.type %></td>
+        <td><%= boiler.fuel_source %></td>
+        <td><%= boiler.draft_type %></td>
+        <td><%= boiler.fluid_segment_in_reference %></td>
+        <td><%= boiler.fluid_segment_out_reference %></td>
+        <td><%= boiler.has_bypass %></td>
+        <td><%= boiler.entering_temperature_design %></td>
+        <td><%= boiler.leaving_temperature_design %></td>
+        <td><%= boiler.capacity_rated %></td>
+        <td><%= boiler.afue %></td>
+        <td><%= boiler.combustion_efficiency %></td>
+        <td><%= boiler.thermal_efficiency %></td>
+        <td><%= boiler.hir_f_plr_curve_reference %></td>
+        <td><%= boiler.eir %></td>
+        <td><%= boiler.fuel_full_load %></td>
+        <td><%= boiler.heat_loss %></td>
+        <td><%= boiler.unload_ratio_minimum %></td>
+        <td><%= boiler.draft_fan_horse_power %></td>
+        <td><%= boiler.parasitic_load %></td>
+        <td><%= boiler.water_flow_capacity %></td>
         <td><%= link_to 'Show', boiler %></td>
         <td><%= link_to 'Edit', edit_boiler_path(boiler) %></td>
         <td><%= link_to 'Destroy', boiler, method: :delete, data: { confirm: 'Are you sure?' } %></td>

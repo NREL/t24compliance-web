@@ -4,6 +4,39 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Status</th>
+      <th>Type</th>
+      <th>Sub type</th>
+      <th>Description</th>
+      <th>Control system type</th>
+      <th>Control zone reference</th>
+      <th>Night cycle fan control</th>
+      <th>Reheat control method</th>
+      <th>Count</th>
+      <th>Fan position</th>
+      <th>Cooling design supply air temperature</th>
+      <th>Heating design supply air temperature</th>
+      <th>Design air flow minimum</th>
+      <th>Design preheat temperature</th>
+      <th>Design preheat humidity ratio</th>
+      <th>Design precool temperature</th>
+      <th>Design precool humidity ratio</th>
+      <th>Sizing option</th>
+      <th>Cooling all outside air</th>
+      <th>Heating all outside air</th>
+      <th>Cooling design humidity ratio</th>
+      <th>Heating design humidity ratio</th>
+      <th>Cooling control</th>
+      <th>Cooling fixed supply temperature</th>
+      <th>Cooling setpoint schedule reference</th>
+      <th>Cool reset supply high</th>
+      <th>Cool reset supply low</th>
+      <th>Cool reset outdoor low</th>
+      <th>Cool reset outdoor high</th>
+      <th>Exhaust system type</th>
+      <th>Exhaust operation mode</th>
+      <th>Exhaust control method</th>
+      <th>Air distribution type</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +45,39 @@
     <% @air_systems.each do |air_system| %>
       <tr>
         <td><%= air_system.name %></td>
+        <td><%= air_system.status %></td>
+        <td><%= air_system.type %></td>
+        <td><%= air_system.sub_type %></td>
+        <td><%= air_system.description %></td>
+        <td><%= air_system.control_system_type %></td>
+        <td><%= air_system.control_zone_reference %></td>
+        <td><%= air_system.night_cycle_fan_control %></td>
+        <td><%= air_system.reheat_control_method %></td>
+        <td><%= air_system.count %></td>
+        <td><%= air_system.fan_position %></td>
+        <td><%= air_system.cooling_design_supply_air_temperature %></td>
+        <td><%= air_system.heating_design_supply_air_temperature %></td>
+        <td><%= air_system.design_air_flow_minimum %></td>
+        <td><%= air_system.design_preheat_temperature %></td>
+        <td><%= air_system.design_preheat_humidity_ratio %></td>
+        <td><%= air_system.design_precool_temperature %></td>
+        <td><%= air_system.design_precool_humidity_ratio %></td>
+        <td><%= air_system.sizing_option %></td>
+        <td><%= air_system.cooling_all_outside_air %></td>
+        <td><%= air_system.heating_all_outside_air %></td>
+        <td><%= air_system.cooling_design_humidity_ratio %></td>
+        <td><%= air_system.heating_design_humidity_ratio %></td>
+        <td><%= air_system.cooling_control %></td>
+        <td><%= air_system.cooling_fixed_supply_temperature %></td>
+        <td><%= air_system.cooling_setpoint_schedule_reference %></td>
+        <td><%= air_system.cool_reset_supply_high %></td>
+        <td><%= air_system.cool_reset_supply_low %></td>
+        <td><%= air_system.cool_reset_outdoor_low %></td>
+        <td><%= air_system.cool_reset_outdoor_high %></td>
+        <td><%= air_system.exhaust_system_type %></td>
+        <td><%= air_system.exhaust_operation_mode %></td>
+        <td><%= air_system.exhaust_control_method %></td>
+        <td><%= air_system.air_distribution_type %></td>
         <td><%= link_to 'Show', air_system %></td>
         <td><%= link_to 'Edit', edit_air_system_path(air_system) %></td>
         <td><%= link_to 'Destroy', air_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>

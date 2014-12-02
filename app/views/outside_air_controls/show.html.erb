@@ -15,5 +15,25 @@
   <%= @outside_air_control.economizer_integration %>
 </p>
 
+<p>
+  <strong>Economizer high temperature lockout:</strong>
+  <%= @outside_air_control.economizer_high_temperature_lockout %>
+</p>
+
+<p>
+  <strong>Economizer low temperature lockout:</strong>
+  <%= @outside_air_control.economizer_low_temperature_lockout %>
+</p>
+
+<p>
+  <strong>Air segment supply reference:</strong>
+  <%= @outside_air_control.air_segment_supply_reference %>
+</p>
+
+<p>
+  <strong>Air segment return reference:</strong>
+  <%= @outside_air_control.air_segment_return_reference %>
+</p>
+
 <%= link_to 'Edit', edit_outside_air_control_path(@outside_air_control) %> |
 <%= link_to 'Back', outside_air_controls_path %>

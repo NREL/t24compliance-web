@@ -1,74 +1,47 @@
 class CoilHeatingsController < ApplicationController
   before_action :set_coil_heating, only: [:show, :edit, :update, :destroy]
 
-  # GET /coil_heatings
-  # GET /coil_heatings.json
+  respond_to :html
+
   def index
     @coil_heatings = CoilHeating.all
+    respond_with(@coil_heatings)
   end
 
-  # GET /coil_heatings/1
-  # GET /coil_heatings/1.json
   def show
+    respond_with(@coil_heating)
   end
 
-  # GET /coil_heatings/new
   def new
     @coil_heating = CoilHeating.new
+    respond_with(@coil_heating)
   end
 
-  # GET /coil_heatings/1/edit
   def edit
   end
 
-  # POST /coil_heatings
-  # POST /coil_heatings.json
   def create
     @coil_heating = CoilHeating.new(coil_heating_params)
-
-    respond_to do |format|
-      if @coil_heating.save
-        format.html { redirect_to @coil_heating, notice: 'Coil heating was successfully created.' }
-        format.json { render :show, status: :created, location: @coil_heating }
-      else
-        format.html { render :new }
-        format.json { render json: @coil_heating.errors, status: :unprocessable_entity }
-      end
-    end
+    @coil_heating.save
+    respond_with(@coil_heating)
   end
 
-  # PATCH/PUT /coil_heatings/1
-  # PATCH/PUT /coil_heatings/1.json
   def update
-    respond_to do |format|
-      if @coil_heating.update(coil_heating_params)
-        format.html { redirect_to @coil_heating, notice: 'Coil heating was successfully updated.' }
-        format.json { render :show, status: :ok, location: @coil_heating }
-      else
-        format.html { render :edit }
-        format.json { render json: @coil_heating.errors, status: :unprocessable_entity }
-      end
-    end
+    @coil_heating.update(coil_heating_params)
+    respond_with(@coil_heating)
   end
 
-  # DELETE /coil_heatings/1
-  # DELETE /coil_heatings/1.json
   def destroy
     @coil_heating.destroy
-    respond_to do |format|
-      format.html { redirect_to coil_heatings_url, notice: 'Coil heating was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@coil_heating)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_coil_heating
       @coil_heating = CoilHeating.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def coil_heating_params
-      params.require(:coil_heating).permit(:name, :type)
+      params.require(:coil_heating).permit(:name, :type, :fuel_source, :fluid_segment_in_reference, :fluid_segment_out_reference, :fluid_flow_rate_design, :capacity_total_gross_rated, :capacity_total_net_rated, :capacity_total_rated_stage_fraction, :furnace_afue, :furnace_thermal_efficiency, :furnace_ignition_type, :furnace_pilot_fuel_input, :condenser_type, :heat_pump_hspf, :heat_pump_cop, :heat_pump_supplemental_coil_heating_reference, :heat_pump_compressor_lockout_temperature, :heat_pump_supplemental_temperature, :heat_pump_crankcase_heat_capacity, :heat_pump_crankcase_control_temperature, :heat_pump_defrost_heat_source, :heat_pump_defrost_heat_capacity, :heat_pump_defrost_control, :auxilliary_power)
     end
 end

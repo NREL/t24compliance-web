@@ -1,74 +1,47 @@
 class ChillersController < ApplicationController
   before_action :set_chiller, only: [:show, :edit, :update, :destroy]
 
-  # GET /chillers
-  # GET /chillers.json
+  respond_to :html
+
   def index
     @chillers = Chiller.all
+    respond_with(@chillers)
   end
 
-  # GET /chillers/1
-  # GET /chillers/1.json
   def show
+    respond_with(@chiller)
   end
 
-  # GET /chillers/new
   def new
     @chiller = Chiller.new
+    respond_with(@chiller)
   end
 
-  # GET /chillers/1/edit
   def edit
   end
 
-  # POST /chillers
-  # POST /chillers.json
   def create
     @chiller = Chiller.new(chiller_params)
-
-    respond_to do |format|
-      if @chiller.save
-        format.html { redirect_to @chiller, notice: 'Chiller was successfully created.' }
-        format.json { render :show, status: :created, location: @chiller }
-      else
-        format.html { render :new }
-        format.json { render json: @chiller.errors, status: :unprocessable_entity }
-      end
-    end
+    @chiller.save
+    respond_with(@chiller)
   end
 
-  # PATCH/PUT /chillers/1
-  # PATCH/PUT /chillers/1.json
   def update
-    respond_to do |format|
-      if @chiller.update(chiller_params)
-        format.html { redirect_to @chiller, notice: 'Chiller was successfully updated.' }
-        format.json { render :show, status: :ok, location: @chiller }
-      else
-        format.html { render :edit }
-        format.json { render json: @chiller.errors, status: :unprocessable_entity }
-      end
-    end
+    @chiller.update(chiller_params)
+    respond_with(@chiller)
   end
 
-  # DELETE /chillers/1
-  # DELETE /chillers/1.json
   def destroy
     @chiller.destroy
-    respond_to do |format|
-      format.html { redirect_to chillers_url, notice: 'Chiller was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@chiller)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_chiller
       @chiller = Chiller.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def chiller_params
-      params.require(:chiller).permit(:name, :type)
+      params.require(:chiller).permit(:name, :status, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :evaporator_has_bypass, :entering_temperature_design, :entering_temperature_rated, :leaving_temperature_design, :leaving_temperature_rated, :capacity_rated, :condenser_power_rated, :kw_per_ton, :eer, :cop, :iplv_kw_per_ton, :iplveer, :iplvcop, :unload_ratio_minimum, :part_load_ratio_minimum, :water_flow_capacity)
     end
 end

@@ -6,6 +6,20 @@
       <th>Name</th>
       <th>Status</th>
       <th>Parent space function</th>
+      <th>Schedule reference</th>
+      <th>Power regulated</th>
+      <th>Non regulated exclusion</th>
+      <th>Luminaire reference</th>
+      <th>Luminaire count</th>
+      <th>Area category allowance type</th>
+      <th>Allowance length</th>
+      <th>Allowance area</th>
+      <th>Tailored method allowance type</th>
+      <th>Power adjustment factor credit type</th>
+      <th>Interior lighting specification method</th>
+      <th>Luminaire mounting height</th>
+      <th>Work plane height</th>
+      <th>Daylit area type</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +30,20 @@
         <td><%= interior_lighting_system.name %></td>
         <td><%= interior_lighting_system.status %></td>
         <td><%= interior_lighting_system.parent_space_function %></td>
+        <td><%= interior_lighting_system.schedule_reference %></td>
+        <td><%= interior_lighting_system.power_regulated %></td>
+        <td><%= interior_lighting_system.non_regulated_exclusion %></td>
+        <td><%= interior_lighting_system.luminaire_reference %></td>
+        <td><%= interior_lighting_system.luminaire_count %></td>
+        <td><%= interior_lighting_system.area_category_allowance_type %></td>
+        <td><%= interior_lighting_system.allowance_length %></td>
+        <td><%= interior_lighting_system.allowance_area %></td>
+        <td><%= interior_lighting_system.tailored_method_allowance_type %></td>
+        <td><%= interior_lighting_system.power_adjustment_factor_credit_type %></td>
+        <td><%= interior_lighting_system.interior_lighting_specification_method %></td>
+        <td><%= interior_lighting_system.luminaire_mounting_height %></td>
+        <td><%= interior_lighting_system.work_plane_height %></td>
+        <td><%= interior_lighting_system.daylit_area_type %></td>
         <td><%= link_to 'Show', interior_lighting_system %></td>
         <td><%= link_to 'Edit', edit_interior_lighting_system_path(interior_lighting_system) %></td>
         <td><%= link_to 'Destroy', interior_lighting_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>

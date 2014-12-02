@@ -6,6 +6,26 @@
       <th>Name</th>
       <th>Status</th>
       <th>Type</th>
+      <th>Description</th>
+      <th>Design supply water temperature</th>
+      <th>Heating design supply water temperature</th>
+      <th>Design supply water temperature delta t</th>
+      <th>Control type</th>
+      <th>Temperature control</th>
+      <th>Fixed supply temperature</th>
+      <th>Temperature setpoint schedule reference</th>
+      <th>Heating fixed supply temperature</th>
+      <th>Heating temperature setpoint schedule reference</th>
+      <th>Reset supply high</th>
+      <th>Reset supply low</th>
+      <th>Reset outdoor high</th>
+      <th>Reset outdoor low</th>
+      <th>Wet bulb approach</th>
+      <th>Cooling supply temperature</th>
+      <th>Heating supply temperature</th>
+      <th>Evaporator fluid segment in reference</th>
+      <th>Shw system count</th>
+      <th>Annual solar fraction</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +36,26 @@
         <td><%= fluid_system.name %></td>
         <td><%= fluid_system.status %></td>
         <td><%= fluid_system.type %></td>
+        <td><%= fluid_system.description %></td>
+        <td><%= fluid_system.design_supply_water_temperature %></td>
+        <td><%= fluid_system.heating_design_supply_water_temperature %></td>
+        <td><%= fluid_system.design_supply_water_temperature_delta_t %></td>
+        <td><%= fluid_system.control_type %></td>
+        <td><%= fluid_system.temperature_control %></td>
+        <td><%= fluid_system.fixed_supply_temperature %></td>
+        <td><%= fluid_system.temperature_setpoint_schedule_reference %></td>
+        <td><%= fluid_system.heating_fixed_supply_temperature %></td>
+        <td><%= fluid_system.heating_temperature_setpoint_schedule_reference %></td>
+        <td><%= fluid_system.reset_supply_high %></td>
+        <td><%= fluid_system.reset_supply_low %></td>
+        <td><%= fluid_system.reset_outdoor_high %></td>
+        <td><%= fluid_system.reset_outdoor_low %></td>
+        <td><%= fluid_system.wet_bulb_approach %></td>
+        <td><%= fluid_system.cooling_supply_temperature %></td>
+        <td><%= fluid_system.heating_supply_temperature %></td>
+        <td><%= fluid_system.evaporator_fluid_segment_in_reference %></td>
+        <td><%= fluid_system.shw_system_count %></td>
+        <td><%= fluid_system.annual_solar_fraction %></td>
         <td><%= link_to 'Show', fluid_system %></td>
         <td><%= link_to 'Edit', edit_fluid_system_path(fluid_system) %></td>
         <td><%= link_to 'Destroy', fluid_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>

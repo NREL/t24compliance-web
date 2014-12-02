@@ -4,6 +4,15 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Type</th>
+      <th>Design dry bulb</th>
+      <th>Design dry bulb range</th>
+      <th>Coincident wet bulb</th>
+      <th>Wind speed</th>
+      <th>Wind direction</th>
+      <th>Sky clearness</th>
+      <th>Month</th>
+      <th>Month day</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,6 +21,15 @@
     <% @design_days.each do |design_day| %>
       <tr>
         <td><%= design_day.name %></td>
+        <td><%= design_day.type %></td>
+        <td><%= design_day.design_dry_bulb %></td>
+        <td><%= design_day.design_dry_bulb_range %></td>
+        <td><%= design_day.coincident_wet_bulb %></td>
+        <td><%= design_day.wind_speed %></td>
+        <td><%= design_day.wind_direction %></td>
+        <td><%= design_day.sky_clearness %></td>
+        <td><%= design_day.month %></td>
+        <td><%= design_day.month_day %></td>
         <td><%= link_to 'Show', design_day %></td>
         <td><%= link_to 'Edit', edit_design_day_path(design_day) %></td>
         <td><%= link_to 'Destroy', design_day, method: :delete, data: { confirm: 'Are you sure?' } %></td>

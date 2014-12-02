@@ -1,1 +1,1 @@
-json.extract! @fluid_segment, :id, :name, :type, :source, :created_at, :updated_at
+json.extract! @fluid_segment, :id, :name, :type, :source, :primary_segment_reference, :created_at, :updated_at

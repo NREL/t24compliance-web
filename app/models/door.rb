@@ -2,6 +2,9 @@ class Door
   include Mongoid::Document
 	include Mongoid::Timestamps
   field :name, type: String
+  field :status, type: String
+  field :operation, type: String
+  field :door_construction_reference, type: String
   field :area, type: Float
 
 	belongs_to :exterior_wall
@@ -17,6 +20,9 @@ class Door
 
 	def xml_fields
 		xml_fields = [
+			{"db_field_name"=>"status", "xml_field_name"=>"Status"},
+			{"db_field_name"=>"operation", "xml_field_name"=>"Oper"},
+			{"db_field_name"=>"door_construction_reference", "xml_field_name"=>"DrConsRef"},
 			{"db_field_name"=>"area", "xml_field_name"=>"Area"}
 		]
 	end
@@ -37,5 +43,21 @@ class Door
 				end
 			end
 		end
+	end
+
+	def status_enums
+		[
+			'New',
+			'Existing',
+			'Altered'
+		]
+	end
+
+	def operation_enums
+		[
+			'- specify -',
+			'NonSwinging',
+			'Swinging'
+		]
 	end
 end

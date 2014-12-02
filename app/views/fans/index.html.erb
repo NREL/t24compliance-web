@@ -6,6 +6,18 @@
       <th>Name</th>
       <th>Control method</th>
       <th>Classification</th>
+      <th>Centrifugal type</th>
+      <th>Modeling method</th>
+      <th>Flow capacity</th>
+      <th>Flow minimum</th>
+      <th>Flow efficiency</th>
+      <th>Total static pressure</th>
+      <th>Motor bhp</th>
+      <th>Motor hp</th>
+      <th>Motor type</th>
+      <th>Motor pole count</th>
+      <th>Motor efficiency</th>
+      <th>Motor position</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +28,18 @@
         <td><%= fan.name %></td>
         <td><%= fan.control_method %></td>
         <td><%= fan.classification %></td>
+        <td><%= fan.centrifugal_type %></td>
+        <td><%= fan.modeling_method %></td>
+        <td><%= fan.flow_capacity %></td>
+        <td><%= fan.flow_minimum %></td>
+        <td><%= fan.flow_efficiency %></td>
+        <td><%= fan.total_static_pressure %></td>
+        <td><%= fan.motor_bhp %></td>
+        <td><%= fan.motor_hp %></td>
+        <td><%= fan.motor_type %></td>
+        <td><%= fan.motor_pole_count %></td>
+        <td><%= fan.motor_efficiency %></td>
+        <td><%= fan.motor_position %></td>
         <td><%= link_to 'Show', fan %></td>
         <td><%= link_to 'Edit', edit_fan_path(fan) %></td>
         <td><%= link_to 'Destroy', fan, method: :delete, data: { confirm: 'Are you sure?' } %></td>

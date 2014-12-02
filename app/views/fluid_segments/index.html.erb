@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Type</th>
       <th>Source</th>
+      <th>Primary segment reference</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td><%= fluid_segment.name %></td>
         <td><%= fluid_segment.type %></td>
         <td><%= fluid_segment.source %></td>
+        <td><%= fluid_segment.primary_segment_reference %></td>
         <td><%= link_to 'Show', fluid_segment %></td>
         <td><%= link_to 'Edit', edit_fluid_segment_path(fluid_segment) %></td>
         <td><%= link_to 'Destroy', fluid_segment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

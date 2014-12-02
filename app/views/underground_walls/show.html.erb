@@ -25,5 +25,20 @@
   <%= @underground_wall.height %>
 </p>
 
+<p>
+  <strong>Interior solar absorptance:</strong>
+  <%= @underground_wall.interior_solar_absorptance %>
+</p>
+
+<p>
+  <strong>Interior thermal absorptance:</strong>
+  <%= @underground_wall.interior_thermal_absorptance %>
+</p>
+
+<p>
+  <strong>Interior visible absorptance:</strong>
+  <%= @underground_wall.interior_visible_absorptance %>
+</p>
+
 <%= link_to 'Edit', edit_underground_wall_path(@underground_wall) %> |
 <%= link_to 'Back', underground_walls_path %>

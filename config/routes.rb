@@ -125,6 +125,7 @@ Rails.application.routes.draw do
   resources :buildings
 
   resources :projects
+  get 'wizard' => 'projects#wizard'
 
   resources :inputs, :only => [:index, :show] do
     get 'datafields'

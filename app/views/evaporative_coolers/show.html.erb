@@ -10,5 +10,40 @@
   <%= @evaporative_cooler.type %>
 </p>
 
+<p>
+  <strong>Effectiveness:</strong>
+  <%= @evaporative_cooler.effectiveness %>
+</p>
+
+<p>
+  <strong>Pump power:</strong>
+  <%= @evaporative_cooler.pump_power %>
+</p>
+
+<p>
+  <strong>Indirect dew point effectiveness:</strong>
+  <%= @evaporative_cooler.indirect_dew_point_effectiveness %>
+</p>
+
+<p>
+  <strong>Secondary fan flow capacity:</strong>
+  <%= @evaporative_cooler.secondary_fan_flow_capacity %>
+</p>
+
+<p>
+  <strong>Secondary fan total efficiency:</strong>
+  <%= @evaporative_cooler.secondary_fan_total_efficiency %>
+</p>
+
+<p>
+  <strong>Secondary fan total static pressure:</strong>
+  <%= @evaporative_cooler.secondary_fan_total_static_pressure %>
+</p>
+
+<p>
+  <strong>Secondary air source:</strong>
+  <%= @evaporative_cooler.secondary_air_source %>
+</p>
+
 <%= link_to 'Edit', edit_evaporative_cooler_path(@evaporative_cooler) %> |
 <%= link_to 'Back', evaporative_coolers_path %>

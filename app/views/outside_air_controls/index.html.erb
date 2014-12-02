@@ -6,6 +6,10 @@
       <th>Name</th>
       <th>Economizer control method</th>
       <th>Economizer integration</th>
+      <th>Economizer high temperature lockout</th>
+      <th>Economizer low temperature lockout</th>
+      <th>Air segment supply reference</th>
+      <th>Air segment return reference</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +20,10 @@
         <td><%= outside_air_control.name %></td>
         <td><%= outside_air_control.economizer_control_method %></td>
         <td><%= outside_air_control.economizer_integration %></td>
+        <td><%= outside_air_control.economizer_high_temperature_lockout %></td>
+        <td><%= outside_air_control.economizer_low_temperature_lockout %></td>
+        <td><%= outside_air_control.air_segment_supply_reference %></td>
+        <td><%= outside_air_control.air_segment_return_reference %></td>
         <td><%= link_to 'Show', outside_air_control %></td>
         <td><%= link_to 'Edit', edit_outside_air_control_path(outside_air_control) %></td>
         <td><%= link_to 'Destroy', outside_air_control, method: :delete, data: { confirm: 'Are you sure?' } %></td>

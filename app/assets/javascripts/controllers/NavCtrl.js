@@ -1,8 +1,8 @@
-var controllers;
+var ctrls;
 
-controllers = angular.module('controllers');
+ctrls = angular.module('controllers');
 
-controllers.controller("NavCtrl", [
+ctrls.controller("NavCtrl", [
   '$scope', '$location', function($scope, $location) {
     return $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();

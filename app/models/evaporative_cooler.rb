@@ -3,6 +3,13 @@ class EvaporativeCooler
 	include Mongoid::Timestamps
   field :name, type: String
   field :type, type: String
+  field :effectiveness, type: Float
+  field :pump_power, type: Float
+  field :indirect_dew_point_effectiveness, type: Float
+  field :secondary_fan_flow_capacity, type: Float
+  field :secondary_fan_total_efficiency, type: Float
+  field :secondary_fan_total_static_pressure, type: Float
+  field :secondary_air_source, type: String
 
 	belongs_to :air_segment
 
@@ -15,7 +22,14 @@ class EvaporativeCooler
 
 	def xml_fields
 		xml_fields = [
-			{"db_field_name"=>"type", "xml_field_name"=>"Type"}
+			{"db_field_name"=>"type", "xml_field_name"=>"Type"},
+			{"db_field_name"=>"effectiveness", "xml_field_name"=>"Eff"},
+			{"db_field_name"=>"pump_power", "xml_field_name"=>"PumpPwr"},
+			{"db_field_name"=>"indirect_dew_point_effectiveness", "xml_field_name"=>"IndirectDewPtEff"},
+			{"db_field_name"=>"secondary_fan_flow_capacity", "xml_field_name"=>"SecFanFlowCap"},
+			{"db_field_name"=>"secondary_fan_total_efficiency", "xml_field_name"=>"SecFanTotEff"},
+			{"db_field_name"=>"secondary_fan_total_static_pressure", "xml_field_name"=>"SecFanTotStaticPress"},
+			{"db_field_name"=>"secondary_air_source", "xml_field_name"=>"SecAirSrc"}
 		]
 	end
 
@@ -42,6 +56,13 @@ class EvaporativeCooler
 			'- specify -',
 			'Direct',
 			'Indirect'
+		]
+	end
+
+	def secondary_air_source_enums
+		[
+			'Return',
+			'Outdoor'
 		]
 	end
 end

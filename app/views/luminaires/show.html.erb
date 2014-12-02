@@ -15,5 +15,20 @@
   <%= @luminaire.lamp_type %>
 </p>
 
+<p>
+  <strong>Power:</strong>
+  <%= @luminaire.power %>
+</p>
+
+<p>
+  <strong>Heat gain space fraction:</strong>
+  <%= @luminaire.heat_gain_space_fraction %>
+</p>
+
+<p>
+  <strong>Heat gain radiant fraction:</strong>
+  <%= @luminaire.heat_gain_radiant_fraction %>
+</p>
+
 <%= link_to 'Edit', edit_luminaire_path(@luminaire) %> |
 <%= link_to 'Back', luminaires_path %>

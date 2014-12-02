@@ -6,6 +6,22 @@
       <th>Name</th>
       <th>Status</th>
       <th>Type</th>
+      <th>Fan type</th>
+      <th>Modulation control</th>
+      <th>Fluid segment in reference</th>
+      <th>Fluid segment out reference</th>
+      <th>Entering temperature design</th>
+      <th>Design wb temperature</th>
+      <th>Leaving temperature design</th>
+      <th>Cell count</th>
+      <th>Capacity rated</th>
+      <th>Total fan hp</th>
+      <th>Air flow capacity</th>
+      <th>Water flow capacity</th>
+      <th>Power f plr curve reference</th>
+      <th>Low speed air flow ratio</th>
+      <th>Low speed power ratio</th>
+      <th>Minimum speed ratio</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +32,22 @@
         <td><%= heat_rejection.name %></td>
         <td><%= heat_rejection.status %></td>
         <td><%= heat_rejection.type %></td>
+        <td><%= heat_rejection.fan_type %></td>
+        <td><%= heat_rejection.modulation_control %></td>
+        <td><%= heat_rejection.fluid_segment_in_reference %></td>
+        <td><%= heat_rejection.fluid_segment_out_reference %></td>
+        <td><%= heat_rejection.entering_temperature_design %></td>
+        <td><%= heat_rejection.design_wb_temperature %></td>
+        <td><%= heat_rejection.leaving_temperature_design %></td>
+        <td><%= heat_rejection.cell_count %></td>
+        <td><%= heat_rejection.capacity_rated %></td>
+        <td><%= heat_rejection.total_fan_hp %></td>
+        <td><%= heat_rejection.air_flow_capacity %></td>
+        <td><%= heat_rejection.water_flow_capacity %></td>
+        <td><%= heat_rejection.power_f_plr_curve_reference %></td>
+        <td><%= heat_rejection.low_speed_air_flow_ratio %></td>
+        <td><%= heat_rejection.low_speed_power_ratio %></td>
+        <td><%= heat_rejection.minimum_speed_ratio %></td>
         <td><%= link_to 'Show', heat_rejection %></td>
         <td><%= link_to 'Edit', edit_heat_rejection_path(heat_rejection) %></td>
         <td><%= link_to 'Destroy', heat_rejection, method: :delete, data: { confirm: 'Are you sure?' } %></td>

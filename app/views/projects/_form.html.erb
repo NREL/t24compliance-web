@@ -16,8 +16,40 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    <%= f.label :building_energy_model_version %><br>
+    <%= f.text_field :building_energy_model_version %>
+  </div>
+  <div class="field">
     <%= f.label :geometry_input_type %><br>
     <%= f.text_field :geometry_input_type %>
+  </div>
+  <div class="field">
+    <%= f.label :number_time_steps_per_hour %><br>
+    <%= f.text_field :number_time_steps_per_hour %>
+  </div>
+  <div class="field">
+    <%= f.label :permit_scope %><br>
+    <%= f.text_field :permit_scope %>
+  </div>
+  <div class="field">
+    <%= f.label :permit_month %><br>
+    <%= f.text_field :permit_month %>
+  </div>
+  <div class="field">
+    <%= f.label :permit_day %><br>
+    <%= f.text_field :permit_day %>
+  </div>
+  <div class="field">
+    <%= f.label :permit_year %><br>
+    <%= f.text_field :permit_year %>
+  </div>
+  <div class="field">
+    <%= f.label :climate_zone_county %><br>
+    <%= f.text_field :climate_zone_county %>
+  </div>
+  <div class="field">
+    <%= f.label :climate_zone_number %><br>
+    <%= f.text_field :climate_zone_number %>
   </div>
   <div class="field">
     <%= f.label :climate_zone %><br>
@@ -112,12 +144,96 @@
     <%= f.text_field :hvac_engineer_phone %>
   </div>
   <div class="field">
+    <%= f.label :lighting_designer_name %><br>
+    <%= f.text_field :lighting_designer_name %>
+  </div>
+  <div class="field">
+    <%= f.label :lighting_designer_title %><br>
+    <%= f.text_field :lighting_designer_title %>
+  </div>
+  <div class="field">
+    <%= f.label :lighting_designer_organization %><br>
+    <%= f.text_field :lighting_designer_organization %>
+  </div>
+  <div class="field">
+    <%= f.label :lighting_designer_email %><br>
+    <%= f.text_field :lighting_designer_email %>
+  </div>
+  <div class="field">
+    <%= f.label :lighting_designer_phone %><br>
+    <%= f.text_field :lighting_designer_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :energy_modeler_name %><br>
+    <%= f.text_field :energy_modeler_name %>
+  </div>
+  <div class="field">
+    <%= f.label :energy_modeler_title %><br>
+    <%= f.text_field :energy_modeler_title %>
+  </div>
+  <div class="field">
+    <%= f.label :energy_modeler_organization %><br>
+    <%= f.text_field :energy_modeler_organization %>
+  </div>
+  <div class="field">
+    <%= f.label :energy_modeler_email %><br>
+    <%= f.text_field :energy_modeler_email %>
+  </div>
+  <div class="field">
+    <%= f.label :energy_modeler_phone %><br>
+    <%= f.text_field :energy_modeler_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :weather_station_number %><br>
+    <%= f.text_field :weather_station_number %>
+  </div>
+  <div class="field">
     <%= f.label :weather_station %><br>
     <%= f.text_field :weather_station %>
   </div>
   <div class="field">
+    <%= f.label :design_day_weather_file %><br>
+    <%= f.text_field :design_day_weather_file %>
+  </div>
+  <div class="field">
+    <%= f.label :annual_weather_file %><br>
+    <%= f.text_field :annual_weather_file %>
+  </div>
+  <div class="field">
+    <%= f.label :weather_file_download_url %><br>
+    <%= f.text_field :weather_file_download_url %>
+  </div>
+  <div class="field">
+    <%= f.label :site_fuel_type %><br>
+    <%= f.text_field :site_fuel_type %>
+  </div>
+  <div class="field">
     <%= f.label :hvac_auto_sizing %><br>
     <%= f.text_field :hvac_auto_sizing %>
+  </div>
+  <div class="field">
+    <%= f.label :simulate_design_days %><br>
+    <%= f.text_field :simulate_design_days %>
+  </div>
+  <div class="field">
+    <%= f.label :run_period_begin_month %><br>
+    <%= f.text_field :run_period_begin_month %>
+  </div>
+  <div class="field">
+    <%= f.label :run_period_begin_day %><br>
+    <%= f.text_field :run_period_begin_day %>
+  </div>
+  <div class="field">
+    <%= f.label :run_period_end_month %><br>
+    <%= f.text_field :run_period_end_month %>
+  </div>
+  <div class="field">
+    <%= f.label :run_period_end_day %><br>
+    <%= f.text_field :run_period_end_day %>
+  </div>
+  <div class="field">
+    <%= f.label :run_period_year %><br>
+    <%= f.text_field :run_period_year %>
   </div>
   <div class="field">
     <%= f.label :exceptional_condition_complete_building %><br>
@@ -144,12 +260,72 @@
     <%= f.text_field :exceptional_condition_narrative %>
   </div>
   <div class="field">
+    <%= f.label :disable_daylighting_controls %><br>
+    <%= f.text_field :disable_daylighting_controls %>
+  </div>
+  <div class="field">
+    <%= f.label :default_daylighting_controls %><br>
+    <%= f.text_field :default_daylighting_controls %>
+  </div>
+  <div class="field">
+    <%= f.label :simulation_variables_site %><br>
+    <%= f.text_field :simulation_variables_site %>
+  </div>
+  <div class="field">
+    <%= f.label :simulation_variables_thermal_zone %><br>
+    <%= f.text_field :simulation_variables_thermal_zone %>
+  </div>
+  <div class="field">
+    <%= f.label :simulation_variables_daylighting %><br>
+    <%= f.text_field :simulation_variables_daylighting %>
+  </div>
+  <div class="field">
+    <%= f.label :simulation_variables_hvac_secondary %><br>
+    <%= f.text_field :simulation_variables_hvac_secondary %>
+  </div>
+  <div class="field">
+    <%= f.label :simulation_variables_hvac_primary %><br>
+    <%= f.text_field :simulation_variables_hvac_primary %>
+  </div>
+  <div class="field">
+    <%= f.label :simulation_variables_hvac_zone %><br>
+    <%= f.text_field :simulation_variables_hvac_zone %>
+  </div>
+  <div class="field">
+    <%= f.label :average_dry_bulb_temperature %><br>
+    <%= f.text_field :average_dry_bulb_temperature %>
+  </div>
+  <div class="field">
+    <%= f.label :monthly_average_temperature_maximum_difference %><br>
+    <%= f.text_field :monthly_average_temperature_maximum_difference %>
+  </div>
+  <div class="field">
+    <%= f.label :holiday_reference %><br>
+    <%= f.text_field :holiday_reference %>
+  </div>
+  <div class="field">
     <%= f.label :run_title %><br>
     <%= f.text_field :run_title %>
   </div>
   <div class="field">
+    <%= f.label :analysis_type %><br>
+    <%= f.text_field :analysis_type %>
+  </div>
+  <div class="field">
     <%= f.label :compliance_type %><br>
     <%= f.text_field :compliance_type %>
+  </div>
+  <div class="field">
+    <%= f.label :rule_report_type %><br>
+    <%= f.text_field :rule_report_type %>
+  </div>
+  <div class="field">
+    <%= f.label :rule_report_file_append %><br>
+    <%= f.text_field :rule_report_file_append %>
+  </div>
+  <div class="field">
+    <%= f.label :software_version %><br>
+    <%= f.text_field :software_version %>
   </div>
   <div class="field">
     <%= f.label :compliance_report_pdf %><br>

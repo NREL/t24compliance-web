@@ -1,1 +1,1 @@
-json.extract! @design_day, :id, :name, :created_at, :updated_at
+json.extract! @design_day, :id, :name, :type, :design_dry_bulb, :design_dry_bulb_range, :coincident_wet_bulb, :wind_speed, :wind_direction, :sky_clearness, :month, :month_day, :created_at, :updated_at

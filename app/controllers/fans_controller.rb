@@ -1,74 +1,47 @@
 class FansController < ApplicationController
   before_action :set_fan, only: [:show, :edit, :update, :destroy]
 
-  # GET /fans
-  # GET /fans.json
+  respond_to :html
+
   def index
     @fans = Fan.all
+    respond_with(@fans)
   end
 
-  # GET /fans/1
-  # GET /fans/1.json
   def show
+    respond_with(@fan)
   end
 
-  # GET /fans/new
   def new
     @fan = Fan.new
+    respond_with(@fan)
   end
 
-  # GET /fans/1/edit
   def edit
   end
 
-  # POST /fans
-  # POST /fans.json
   def create
     @fan = Fan.new(fan_params)
-
-    respond_to do |format|
-      if @fan.save
-        format.html { redirect_to @fan, notice: 'Fan was successfully created.' }
-        format.json { render :show, status: :created, location: @fan }
-      else
-        format.html { render :new }
-        format.json { render json: @fan.errors, status: :unprocessable_entity }
-      end
-    end
+    @fan.save
+    respond_with(@fan)
   end
 
-  # PATCH/PUT /fans/1
-  # PATCH/PUT /fans/1.json
   def update
-    respond_to do |format|
-      if @fan.update(fan_params)
-        format.html { redirect_to @fan, notice: 'Fan was successfully updated.' }
-        format.json { render :show, status: :ok, location: @fan }
-      else
-        format.html { render :edit }
-        format.json { render json: @fan.errors, status: :unprocessable_entity }
-      end
-    end
+    @fan.update(fan_params)
+    respond_with(@fan)
   end
 
-  # DELETE /fans/1
-  # DELETE /fans/1.json
   def destroy
     @fan.destroy
-    respond_to do |format|
-      format.html { redirect_to fans_url, notice: 'Fan was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_with(@fan)
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_fan
       @fan = Fan.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def fan_params
-      params.require(:fan).permit(:name, :control_method, :classification)
+      params.require(:fan).permit(:name, :control_method, :classification, :centrifugal_type, :modeling_method, :flow_capacity, :flow_minimum, :flow_efficiency, :total_static_pressure, :motor_bhp, :motor_hp, :motor_type, :motor_pole_count, :motor_efficiency, :motor_position)
     end
 end

@@ -6,8 +6,123 @@
 </p>
 
 <p>
+  <strong>Status:</strong>
+  <%= @chiller.status %>
+</p>
+
+<p>
   <strong>Type:</strong>
   <%= @chiller.type %>
+</p>
+
+<p>
+  <strong>Fuel source:</strong>
+  <%= @chiller.fuel_source %>
+</p>
+
+<p>
+  <strong>Condenser type:</strong>
+  <%= @chiller.condenser_type %>
+</p>
+
+<p>
+  <strong>Condenser fluid segment in reference:</strong>
+  <%= @chiller.condenser_fluid_segment_in_reference %>
+</p>
+
+<p>
+  <strong>Condenser fluid segment out reference:</strong>
+  <%= @chiller.condenser_fluid_segment_out_reference %>
+</p>
+
+<p>
+  <strong>Evaporator fluid segment in reference:</strong>
+  <%= @chiller.evaporator_fluid_segment_in_reference %>
+</p>
+
+<p>
+  <strong>Evaporator fluid segment out reference:</strong>
+  <%= @chiller.evaporator_fluid_segment_out_reference %>
+</p>
+
+<p>
+  <strong>Evaporator has bypass:</strong>
+  <%= @chiller.evaporator_has_bypass %>
+</p>
+
+<p>
+  <strong>Entering temperature design:</strong>
+  <%= @chiller.entering_temperature_design %>
+</p>
+
+<p>
+  <strong>Entering temperature rated:</strong>
+  <%= @chiller.entering_temperature_rated %>
+</p>
+
+<p>
+  <strong>Leaving temperature design:</strong>
+  <%= @chiller.leaving_temperature_design %>
+</p>
+
+<p>
+  <strong>Leaving temperature rated:</strong>
+  <%= @chiller.leaving_temperature_rated %>
+</p>
+
+<p>
+  <strong>Capacity rated:</strong>
+  <%= @chiller.capacity_rated %>
+</p>
+
+<p>
+  <strong>Condenser power rated:</strong>
+  <%= @chiller.condenser_power_rated %>
+</p>
+
+<p>
+  <strong>Kw per ton:</strong>
+  <%= @chiller.kw_per_ton %>
+</p>
+
+<p>
+  <strong>Eer:</strong>
+  <%= @chiller.eer %>
+</p>
+
+<p>
+  <strong>Cop:</strong>
+  <%= @chiller.cop %>
+</p>
+
+<p>
+  <strong>Iplv kw per ton:</strong>
+  <%= @chiller.iplv_kw_per_ton %>
+</p>
+
+<p>
+  <strong>Iplveer:</strong>
+  <%= @chiller.iplveer %>
+</p>
+
+<p>
+  <strong>Iplvcop:</strong>
+  <%= @chiller.iplvcop %>
+</p>
+
+<p>
+  <strong>Unload ratio minimum:</strong>
+  <%= @chiller.unload_ratio_minimum %>
+</p>
+
+<p>
+  <strong>Part load ratio minimum:</strong>
+  <%= @chiller.part_load_ratio_minimum %>
+</p>
+
+<p>
+  <strong>Water flow capacity:</strong>
+  <%= @chiller.water_flow_capacity %>
 </p>
 
 <%= link_to 'Edit', edit_chiller_path(@chiller) %> |

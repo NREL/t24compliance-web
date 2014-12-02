@@ -15,5 +15,60 @@
   <%= @zone_system.type %>
 </p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @zone_system.description %>
+</p>
+
+<p>
+  <strong>Hvac auto sizing:</strong>
+  <%= @zone_system.hvac_auto_sizing %>
+</p>
+
+<p>
+  <strong>Fan control:</strong>
+  <%= @zone_system.fan_control %>
+</p>
+
+<p>
+  <strong>Cooling control:</strong>
+  <%= @zone_system.cooling_control %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @zone_system.count %>
+</p>
+
+<p>
+  <strong>Cooling design supply air temperature:</strong>
+  <%= @zone_system.cooling_design_supply_air_temperature %>
+</p>
+
+<p>
+  <strong>Heating design supply air temperature:</strong>
+  <%= @zone_system.heating_design_supply_air_temperature %>
+</p>
+
+<p>
+  <strong>Exhaust system type:</strong>
+  <%= @zone_system.exhaust_system_type %>
+</p>
+
+<p>
+  <strong>Exhaust operation mode:</strong>
+  <%= @zone_system.exhaust_operation_mode %>
+</p>
+
+<p>
+  <strong>Exhaust control method:</strong>
+  <%= @zone_system.exhaust_control_method %>
+</p>
+
+<p>
+  <strong>Air distribution type:</strong>
+  <%= @zone_system.air_distribution_type %>
+</p>
+
 <%= link_to 'Edit', edit_zone_system_path(@zone_system) %> |
 <%= link_to 'Back', zone_systems_path %>

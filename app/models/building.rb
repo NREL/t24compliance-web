@@ -4,10 +4,20 @@ class Building
   field :name, type: String
   field :function_classification_method, type: String
   field :relocatable_public_school_building, type: Integer
+  field :whole_building_modeled, type: Integer
   field :building_azimuth, type: Float
   field :total_story_count, type: Integer
+  field :total_story_count_new, type: Integer
+  field :total_story_count_existing, type: Integer
+  field :total_story_count_altered, type: Integer
   field :above_grade_story_count, type: Integer
+  field :above_grade_story_count_new, type: Integer
+  field :above_grade_story_count_existing, type: Integer
+  field :above_grade_story_count_altered, type: Integer
   field :living_unit_count, type: Integer
+  field :living_unit_count_new, type: Integer
+  field :living_unit_count_existing, type: Integer
+  field :living_unit_count_altered, type: Integer
   field :total_floor_area, type: Float
   field :nonresidential_floor_area, type: Float
   field :residential_floor_area, type: Float
@@ -39,10 +49,20 @@ class Building
 		xml_fields = [
 			{"db_field_name"=>"function_classification_method", "xml_field_name"=>"FuncClassMthd"},
 			{"db_field_name"=>"relocatable_public_school_building", "xml_field_name"=>"RelocPubSchoolBldg"},
+			{"db_field_name"=>"whole_building_modeled", "xml_field_name"=>"WholeBldgModeled"},
 			{"db_field_name"=>"building_azimuth", "xml_field_name"=>"BldgAz"},
 			{"db_field_name"=>"total_story_count", "xml_field_name"=>"TotStoryCnt"},
+			{"db_field_name"=>"total_story_count_new", "xml_field_name"=>"TotStoryCntNew"},
+			{"db_field_name"=>"total_story_count_existing", "xml_field_name"=>"TotStoryCntExisting"},
+			{"db_field_name"=>"total_story_count_altered", "xml_field_name"=>"TotStoryCntAltered"},
 			{"db_field_name"=>"above_grade_story_count", "xml_field_name"=>"AboveGrdStoryCnt"},
+			{"db_field_name"=>"above_grade_story_count_new", "xml_field_name"=>"AboveGrdStoryCntNew"},
+			{"db_field_name"=>"above_grade_story_count_existing", "xml_field_name"=>"AboveGrdStoryCntExisting"},
+			{"db_field_name"=>"above_grade_story_count_altered", "xml_field_name"=>"AboveGrdStoryCntAltered"},
 			{"db_field_name"=>"living_unit_count", "xml_field_name"=>"LivingUnitCnt"},
+			{"db_field_name"=>"living_unit_count_new", "xml_field_name"=>"LivingUnitCntNew"},
+			{"db_field_name"=>"living_unit_count_existing", "xml_field_name"=>"LivingUnitCntExisting"},
+			{"db_field_name"=>"living_unit_count_altered", "xml_field_name"=>"LivingUnitCntAltered"},
 			{"db_field_name"=>"total_floor_area", "xml_field_name"=>"TotFlrArea"},
 			{"db_field_name"=>"nonresidential_floor_area", "xml_field_name"=>"NonResFlrArea"},
 			{"db_field_name"=>"residential_floor_area", "xml_field_name"=>"ResFlrArea"},

@@ -6,6 +6,18 @@
       <th>Name</th>
       <th>Status</th>
       <th>Type</th>
+      <th>Zone served reference</th>
+      <th>Count</th>
+      <th>Minimum air fraction schedule reference</th>
+      <th>Primary air segment reference</th>
+      <th>Primary air flow maximum</th>
+      <th>Primary air flow minimum</th>
+      <th>Heating air flow maximum</th>
+      <th>Reheat control method</th>
+      <th>Induced air zone reference</th>
+      <th>Induction ratio</th>
+      <th>Fan power per flow</th>
+      <th>Parallel box fan flow fraction</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +28,18 @@
         <td><%= terminal_unit.name %></td>
         <td><%= terminal_unit.status %></td>
         <td><%= terminal_unit.type %></td>
+        <td><%= terminal_unit.zone_served_reference %></td>
+        <td><%= terminal_unit.count %></td>
+        <td><%= terminal_unit.minimum_air_fraction_schedule_reference %></td>
+        <td><%= terminal_unit.primary_air_segment_reference %></td>
+        <td><%= terminal_unit.primary_air_flow_maximum %></td>
+        <td><%= terminal_unit.primary_air_flow_minimum %></td>
+        <td><%= terminal_unit.heating_air_flow_maximum %></td>
+        <td><%= terminal_unit.reheat_control_method %></td>
+        <td><%= terminal_unit.induced_air_zone_reference %></td>
+        <td><%= terminal_unit.induction_ratio %></td>
+        <td><%= terminal_unit.fan_power_per_flow %></td>
+        <td><%= terminal_unit.parallel_box_fan_flow_fraction %></td>
         <td><%= link_to 'Show', terminal_unit %></td>
         <td><%= link_to 'Edit', edit_terminal_unit_path(terminal_unit) %></td>
         <td><%= link_to 'Destroy', terminal_unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>

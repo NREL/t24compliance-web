@@ -20,5 +20,50 @@
   <%= @pump.speed_control %>
 </p>
 
+<p>
+  <strong>Modeling method:</strong>
+  <%= @pump.modeling_method %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @pump.count %>
+</p>
+
+<p>
+  <strong>Flow capacity:</strong>
+  <%= @pump.flow_capacity %>
+</p>
+
+<p>
+  <strong>Total head:</strong>
+  <%= @pump.total_head %>
+</p>
+
+<p>
+  <strong>Flow minimum:</strong>
+  <%= @pump.flow_minimum %>
+</p>
+
+<p>
+  <strong>Minimum speed ratio:</strong>
+  <%= @pump.minimum_speed_ratio %>
+</p>
+
+<p>
+  <strong>Motor efficiency:</strong>
+  <%= @pump.motor_efficiency %>
+</p>
+
+<p>
+  <strong>Impeller efficiency:</strong>
+  <%= @pump.impeller_efficiency %>
+</p>
+
+<p>
+  <strong>Motor hp:</strong>
+  <%= @pump.motor_hp %>
+</p>
+
 <%= link_to 'Edit', edit_pump_path(@pump) %> |
 <%= link_to 'Back', pumps_path %>
