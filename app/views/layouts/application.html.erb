@@ -13,15 +13,15 @@
 <body>
 
   <div class="fluid-container pad-all-sm">
-  <%= render 'layouts/nav' %>
+    <%= render 'layouts/nav' %>
 
 
-  <div class="row-fluid header-row">
-    <!-- notices -->
-    <%= render 'layouts/flash_messages' if !flash.empty? %>
-  </div>
+    <div class="row-fluid header-row">
+     <!-- notices -->
+      <%= render 'layouts/flash_messages' if !flash.empty? %>
+    </div>
 
-  <%= yield %>
+    <%= yield %>
 
   </div>
 
