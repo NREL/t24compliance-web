@@ -75,5 +75,7 @@ group :test, :development do
   gem 'selenium-webdriver'
   gem 'teaspoon'
   gem 'phantomjs'
+  gem 'rubocop', require: false
+  gem 'rubocop-checkstyle_formatter', require: false
 end
 
