@@ -29,7 +29,7 @@ class RunSimulation
 
     # What is the longest timeout?
     docker_container_timeout = 30 * 60 # 30 minutes
-    Excon.defaults[:write_timeout] =docker_container_timeout
+    Excon.defaults[:write_timeout] = docker_container_timeout
     Excon.defaults[:read_timeout] = docker_container_timeout
 
 
