@@ -193,7 +193,7 @@ namespace :code_gen do
   	xml_str = xml_str + "\t\txml_fields = [\n"
 
   	xml_fields = xml_fields(input)
-  	unless xml_fields.nil? or xml_fields.empty?
+  	unless xml_fields.nil? || xml_fields.empty?
 	  	xml_fields.each do |f|
 	  		xml_str = xml_str + "\t\t\t#{f},\n"
 	  	end
@@ -208,7 +208,7 @@ namespace :code_gen do
   	kids_str =  "\n\tdef children_models\n"
   	kids_str = kids_str + "\t\tchildren = [\n"
   	kids = children(input)
-  	unless kids.nil? or kids.empty?
+  	unless kids.nil? || kids.empty?
   		kids.each do |k|
   			kids_str = kids_str + "\t\t\t'" + k['model_name'] + "',\n"
   		end
@@ -228,7 +228,7 @@ namespace :code_gen do
 	  	sdd_str = sdd_str + "\t\t\t\t" + "end" + "\n"
 	  	sdd_str = sdd_str + "\t\t\t\t" + "# go through children if they have something to add, call their methods\n"
 	  	sdd_str = sdd_str + "\t\t\t\t" + "kids = self.children_models" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "unless kids.nil? or kids.empty?" + "\n"
+	  	sdd_str = sdd_str + "\t\t\t\t" + "unless kids.nil? || kids.empty?" + "\n"
 	  	sdd_str = sdd_str + "\t\t\t\t\t" + "kids.each do |k|" + "\n"
 	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "if k == 'building'\n"
 	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "unless self.building.nil?\n"
@@ -254,7 +254,7 @@ namespace :code_gen do
 	  	sdd_str = sdd_str + "\t\t\t" + "end" + "\n"
 	  	sdd_str = sdd_str + "\t\t\t" + "# go through children if they have something to add, call their methods\n"
 	  	sdd_str = sdd_str + "\t\t\t" + "kids = self.children_models" + "\n"
-	    sdd_str = sdd_str + "\t\t\t" + "unless kids.nil? or kids.empty?" + "\n"
+	    sdd_str = sdd_str + "\t\t\t" + "unless kids.nil? || kids.empty?" + "\n"
 	    sdd_str = sdd_str + "\t\t\t\t" + "kids.each do |k|" + "\n"
 	  	sdd_str = sdd_str + "\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
 	  	sdd_str = sdd_str + "\t\t\t\t\t" + "models.each do |m|\n"
