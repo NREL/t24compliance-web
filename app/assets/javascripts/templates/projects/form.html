@@ -25,7 +25,7 @@
 	      Compliance Type
 	    </label>
 	    <div class="col-md-5">
-	      <select class="form-control" ng-model="project.compliance_type" ngOptions="ct for ct in project_compliance_type_enums">
+	      <select class="form-control" ng-model="project.compliance_type" ng-options="ct as ct for ct in project_compliance_type_enums">
   			</select>
 
 	    </div>
@@ -89,5 +89,11 @@
 	  </div>
 
 	</div>
+	<div class="control-group">
+    <div class="controls">
+      <a class="btn" ng-click="cancel()">Cancel</a>
+      <button type="submit" class="btn btn-success">Save</button>
+    </div>
+  </div>
 </form>
 </div>
