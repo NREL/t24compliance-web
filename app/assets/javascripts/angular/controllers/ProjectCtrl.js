@@ -1,8 +1,4 @@
-var ctrls;
-
-ctrls = angular.module('controllers');
-
-ctrls.controller("ProjectCtrl", [
+cbecc.controller("ProjectCtrl", [
   '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', 'Project', function($scope, $window, $routeParams, $resource, $location, flash, Project) {
 
   	// pull in global enum definitions

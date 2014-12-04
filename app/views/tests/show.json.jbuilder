@@ -1,1 +1,0 @@
-json.partial! 'test', test: @test

@@ -1,4 +1,4 @@
-app.factory("Project", function($resource) {
+cbecc.factory("Project", function($resource) {
   return $resource("/projects/:id", { id: "@id" },
     {
       'create':  { method: 'POST' },

@@ -1,8 +1,8 @@
-var ctrls, app;
 
-app = angular.module('app', ['templates', 'ngRoute', 'ngResource', 'controllers', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'common.errorHandling']);
+var cbecc;
+cbecc = angular.module('cbecc', ['templates', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive']);
 
-app.config([
+cbecc.config([
   '$routeProvider', 'flashProvider', function($routeProvider, flashProvider) {
     flashProvider.errorClassnames.push("alert-danger");
     flashProvider.warnClassnames.push("alert-warning");
@@ -17,5 +17,5 @@ app.config([
   }
 ]);
 
-ctrls = angular.module('controllers', []);
+
 
