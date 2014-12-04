@@ -7,6 +7,10 @@
     "angular-mocks": "latest",
     "bootstrap-sass-official": "latest",
     "angular-flash": "latest",
-    "lodash": "latest"
+    "lodash": "latest",
+    "angular-ui-grid": "latest"
+  },
+  "resolutions": {
+
   }
 }
