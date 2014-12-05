@@ -1,4 +1,6 @@
 class CurveQuadraticsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :curve_quadratic_params
   before_action :set_curve_quadratic, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

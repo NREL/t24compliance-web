@@ -1,4 +1,6 @@
 class ExteriorFloorsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :exterior_floor_params
   before_action :set_exterior_floor, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

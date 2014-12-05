@@ -1,4 +1,6 @@
 class FluidSystemsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :fluid_system_params
   before_action :set_fluid_system, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

@@ -1,4 +1,6 @@
 class ExternalShadingObjectsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :external_shading_object_params
   before_action :set_external_shading_object, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

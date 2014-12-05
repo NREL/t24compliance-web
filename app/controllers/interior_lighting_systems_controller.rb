@@ -1,4 +1,6 @@
 class InteriorLightingSystemsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :interior_lighting_system_params
   before_action :set_interior_lighting_system, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

@@ -1,4 +1,6 @@
 class RecirculationWaterHeatersController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :recirculation_water_heater_params
   before_action :set_recirculation_water_heater, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

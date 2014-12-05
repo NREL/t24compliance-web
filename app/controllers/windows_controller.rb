@@ -1,4 +1,6 @@
 class WindowsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :window_params
   before_action :set_window, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

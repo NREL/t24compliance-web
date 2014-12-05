@@ -1,4 +1,6 @@
 class WaterHeatersController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :water_heater_params
   before_action :set_water_heater, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

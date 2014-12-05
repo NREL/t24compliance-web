@@ -1,4 +1,6 @@
 class RecirculationDhwSystemsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :recirculation_dhw_system_params
   before_action :set_recirculation_dhw_system, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

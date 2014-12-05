@@ -1,4 +1,6 @@
 class BoilersController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :boiler_params
   before_action :set_boiler, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

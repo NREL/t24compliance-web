@@ -1,4 +1,6 @@
 class EvaporativeCoolersController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :evaporative_cooler_params
   before_action :set_evaporative_cooler, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

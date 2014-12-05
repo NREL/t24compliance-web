@@ -1,4 +1,6 @@
 class UndergroundWallsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :underground_wall_params
   before_action :set_underground_wall, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

@@ -1,4 +1,6 @@
 class FenestrationConstructionsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :fenestration_construction_params
   before_action :set_fenestration_construction, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

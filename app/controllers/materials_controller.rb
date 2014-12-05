@@ -1,4 +1,6 @@
 class MaterialsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :material_params
   before_action :set_material, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
