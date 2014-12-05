@@ -1,3 +1,8 @@
 <h2>Dashboard</h2>
 
-<%= link_to 'View All Inputs', inputs_path %><br/>
+
+<%= link_to 'View All Inputs', inputs_path, class: 'btn btn-primary' %>
+
+<% if can? :create, Project %>
+ <%= link_to "New Project Wizard", wizard_path, class: 'btn btn-primary' %>
+<% end %>

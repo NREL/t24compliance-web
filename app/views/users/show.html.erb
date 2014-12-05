@@ -1,16 +1,26 @@
 <h2>User Account</h2>
-<h3 class="edit-name"><%= @user.email %> <% if current_user == @user %><%= link_to "[ edit ]", edit_user_registration_path(current_user), class: "edit-link" %><% else %><%= link_to "[ edit ]", edit_user_path(@user), class: "edit-link" %><% end %></h3>
-<table class="table table-striped">
-  <tr>
-    <th> Email</th>
-    <td><%= @user.email %></td>
-  </tr>
-  <tr>
-    <th>Roles</th>
-    <td>
-      <% @user.roles.each do |role| %>
-        <%= role %><br/>
-      <% end %>
-    </td>
-  </tr>
-</table>
+<h3 class="edit-name"><%= @user.email %> <% if @user.has_role? :admin %>(admin user)<% end %>
+<%= link_to "[ edit account ]", edit_user_registration_path(@user), class: "edit-link" %>
+<% if current_user.has_role? :admin %><%= link_to "[ edit roles ]", edit_user_path(@user), class: "edit-link" %><% end %></h3>
+
+<h2>Projects</h2>
+
+<%= link_to 'New Project Wizard', wizard_path, class: 'btn btn-primary' %>
+<div class="pad-tb-20">
+<% if @projects.nil? %>
+  <p>You do not have any projects.</p>
+<% else %>
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+    <% @projects.each do |p| %>
+      <tr>
+        <th> <%= p.name %></th>
+        <th> <a href="wizard#/project/<%= p.id %>">Open in Wizard</a></th>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+</div>

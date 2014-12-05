@@ -8,7 +8,7 @@ class Ability
 
     # Define abilities for the passed in user here.
     user ||= User.new # guest user (not logged in)
-                        # a signed-in user can do everything
+
     # admin
     if user.has_role? :admin
       # an admin can do everything
@@ -18,6 +18,7 @@ class Ability
     elsif user.encrypted_password
         can [:read, :dashboard], Input
         can [:read, :update], User, :id => user.id
+        can :create, Project
         can :manage, Project, :user_id => user.id
     # unauthenticated    
     else
