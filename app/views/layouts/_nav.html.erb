@@ -5,7 +5,6 @@
     <div class="collapse navbar-collapse" id="navbar">
       <%= link_to 'T24 Compliance', root_path, class:'navbar-brand sitename' %>
       <ul class="nav navbar-nav">
-        <li </li>
         <% if user_signed_in? and current_user.has_role? :admin %><li<%= active_nav('Admin')%>><%= link_to 'Admin', admin_path %></li><% end %>
       </ul>
 

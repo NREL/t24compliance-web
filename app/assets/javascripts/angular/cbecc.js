@@ -1,21 +1,37 @@
-
-var cbecc;
-cbecc = angular.module('cbecc', ['templates', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive']);
+var cbecc = angular.module('cbecc', ['templates', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive']);
 
 cbecc.config([
-  '$routeProvider', 'flashProvider', function($routeProvider, flashProvider) {
+  '$routeProvider', 'flashProvider', function ($routeProvider, flashProvider) {
     flashProvider.errorClassnames.push("alert-danger");
     flashProvider.warnClassnames.push("alert-warning");
     flashProvider.infoClassnames.push("alert-info");
     flashProvider.successClassnames.push("alert-success");
     return $routeProvider.when('/', {
-      templateUrl: "projects/intro.html",
+      templateUrl: 'introduction/introduction.html'
     }).when('/project', {
-      templateUrl: "projects/form.html",
+      templateUrl: 'project/project.html',
       controller: 'ProjectCtrl'
+    }).when('/building', {
+      templateUrl: 'building/building.html',
+      controller: 'BuildingCtrl'
+    }).when('/constructions', {
+      templateUrl: 'constructions/constructions.html',
+      controller: 'ConstructionsCtrl'
+    }).when('/spaces', {
+      templateUrl: 'spaces/spaces.html',
+      controller: 'SpacesCtrl'
+    }).when('/systems', {
+      templateUrl: 'systems/systems.html',
+      controller: 'SystemsCtrl'
+    }).when('/zones', {
+      templateUrl: 'zones/zones.html',
+      controller: 'ZonesCtrl'
+    }).when('/review', {
+      templateUrl: 'review/review.html',
+      controller: 'ReviewCtrl'
+    }).when('/compliance', {
+      templateUrl: 'compliance/compliance.html',
+      controller: 'ComplianceCtrl'
     });
   }
 ]);
-
-
-
