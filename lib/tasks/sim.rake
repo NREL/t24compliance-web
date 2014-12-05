@@ -29,7 +29,7 @@ namespace :sim do
     # Example file to run
     current_dir = Dir.pwd
     begin
-      sim_path = File.expand_path('test/integration/files/cbecc_com_files/0200016-OffSml-SG-BaseRun.xml')
+      sim_path = File.expand_path('spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml')
       fail "Simulation file does not exist: #{sim_path}" unless File.exist? sim_path
 
       Dir.chdir(File.dirname(sim_path))

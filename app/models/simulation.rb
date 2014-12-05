@@ -24,7 +24,7 @@ class Simulation
     Sidekiq::Queue.new.clear
     # For now just copy in the example model that we are running into the folder under the new filename
 
-    test_file = File.join(Rails.root, 'test/integration/files/cbecc_com_files/0200016-OffSml-SG-BaseRun.xml')
+    test_file = File.join(Rails.root, 'spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml')
     run_file = File.join(run_dir, File.basename(test_file))
     ## End Temp Code
 
