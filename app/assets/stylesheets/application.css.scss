@@ -8,6 +8,7 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "angular-motion/dist/angular-motion";
 
 $sansFontFamily: 'PT Sans', sans-serif;
 $baseFontSize: 15px;
