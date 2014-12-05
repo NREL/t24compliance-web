@@ -33,7 +33,7 @@
 									<div id="collapse<%= index %>df" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= index %>df">
 	      						<div class="panel-body">
 							
-											<div class="pad-all-sm"><%= link_to 'Edit Data Fields', input_datafields_path(i.id) %></div>
+											<% if can? :manage, Input %><div class="pad-all-sm"><%= link_to 'Edit Data Fields', input_datafields_path(i.id) %></div><% end %>
 											<table class="table table-striped">
 												<tr>
 													<th>Name</th>
