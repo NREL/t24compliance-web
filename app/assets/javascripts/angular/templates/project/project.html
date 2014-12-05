@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12 app-nav" ng-include="'nav/nav.html'"></div>
+</div>
+<div class="row">
+  <div class="col-md-12 pad-left-40">
+    <div class="inline-heading"><h2>Project |</h2> Project team contacts and overall settings</div>
+  </div>
+</div>
+<form class="form-horizontal" role="form" name="projectForm">
+  <div class="row">
+
+    <div class="col-md-6">
+
+      <div class="form-group" ng-class="errors.name ? 'error' : ''">
+        <label for="name" class="col-md-2 control-label col-md-offset-1">
+          Project Name
+        </label>
+
+        <div class="col-md-5">
+          <input type="text" name="name" class="form-control" ng-model="project.name">
+        </div>
+        <div field_error errors="errors" field="name"></div>
+      </div>
+      <div class="form-group" ng-class="errors.compliance_type ? 'error' : ''">
+        <label for="compliance_type" class="col-md-2 control-label col-md-offset-1">
+          Compliance Type
+        </label>
+
+        <div class="col-md-5">
+          <select class="form-control" ng-model="project.compliance_type" ng-options="ct as ct for ct in project_compliance_type_enums">
+          </select>
+
+        </div>
+        <div field_error errors="errors" field="compliance_type"></div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label col-md-offset-1">Simplified Geometry Only</label>
+
+        <div class="col-md-5">
+          <p>This tool offers simplified geometry and is not eligible for daylighting compliance.</p>
+        </div>
+      </div>
+      <div class="form-group" ng-class="errors.run_title ? 'error' : ''">
+        <label for="run_title" class="col-md-2 control-label col-md-offset-1">
+          Run Title
+        </label>
+
+        <div class="col-md-5">
+          <input type="text" name="run_title" class="form-control" ng-model="project.run_title">
+        </div>
+        <div field_error errors="errors" field="run_title"></div>
+      </div>
+
+
+    </div>
+    <div class="col-md-6">
+
+      <div class="form-group" ng-class="errors.address ? 'error' : ''">
+        <label for="address" class="col-md-2 control-label col-md-offset-1">
+          Address
+        </label>
+
+        <div class="col-md-5">
+          <input type="text" name="address" class="form-control" ng-model="project.address">
+        </div>
+        <div field_error errors="errors" field="address"></div>
+      </div>
+      <div class="form-group" ng-class="errors.address ? 'error' : ''">
+        <label for="city" class="col-md-2 control-label col-md-offset-1">
+          City
+        </label>
+
+        <div class="col-md-5">
+          <input type="text" name="city" class="form-control" ng-model="project.city">
+        </div>
+        <div field_error errors="errors" field="city"></div>
+      </div>
+      <div class="form-group" ng-class="errors.state ? 'error' : ''">
+        <label for="state" class="col-md-2 control-label col-md-offset-1">
+          State
+        </label>
+
+        <div class="col-md-5">
+          <input type="text" name="state" class="form-control" ng-model="project.state">
+        </div>
+        <div field_error errors="errors" field="state"></div>
+      </div>
+      <div class="form-group" ng-class="errors.zip_code ? 'error' : ''">
+        <label for="zip_code" class="col-md-2 control-label col-md-offset-1">
+          Zip Code
+        </label>
+
+        <div class="col-md-5">
+          <input type="text" name="zip_code" class="form-control" ng-model="project.zip_code">
+        </div>
+        <div field_error errors="errors" field="zip_code"></div>
+      </div>
+
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <a class="btn" ng-click="cancel()">Cancel</a>
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+    </div>
+</form>

@@ -1,46 +1,46 @@
-cbecc.controller("ProjectCtrl", [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', 'Project', function($scope, $window, $routeParams, $resource, $location, flash, Project) {
+cbecc.controller('ProjectCtrl', [
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', 'Project', function ($scope, $window, $routeParams, $resource, $location, flash, Project) {
 
-  	// pull in global enum definitions
-  	$scope.project_compliance_type_enums = $window.project_compliance_type_enums;
+    // pull in global enum definitions
+    $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
 
-		if ($routeParams.id) {
-		    $scope.project = Project.show({ id: $routeParams.id });
-		} 
-		else {
-		    $scope.project = new Project();
-		}
-	  
-	  $scope.submit = function() {
-	    console.log("submit")
+    if ($routeParams.id) {
+      $scope.project = Project.show({id: $routeParams.id});
+    }
+    else {
+      $scope.project = new Project();
+    }
 
-	    function success(response) {
-	      console.log("success", response)
-	      $location.path("/projects/"+$scope.project.id);
-	    }
+    $scope.submit = function () {
+      console.log("submit");
 
-	    function failure(response) {
-	      console.log("failure", response)
+      function success(response) {
+        console.log("success", response);
+        $location.path("/projects/" + $scope.project.id);
+      }
 
-	      _.each(response.data, function(errors, key) {
-	        _.each(errors, function(e) {
-	          $scope.form[key].$dirty = true;
-	          $scope.form[key].$setValidity(e, false);
-	        });
-	      });
-	    }
+      function failure(response) {
+        console.log("failure", response);
 
-	    if ($routeParams.id) {
-	      Project.update($scope.project, success, failure);
-	    } else {
-	      Project.create($scope.project, success, failure);
-	    }
+        _.each(response.data, function (errors, key) {
+          _.each(errors, function (e) {
+            $scope.form[key].$dirty = true;
+            $scope.form[key].$setValidity(e, false);
+          });
+        });
+      }
 
-	  };
+      if ($routeParams.id) {
+        Project.update($scope.project, success, failure);
+      } else {
+        Project.create($scope.project, success, failure);
+      }
 
-	  $scope.cancel = function() {
-    	$location.path("/projects/"+$scope.project.id);
-  	};
+    };
 
-	}
+    $scope.cancel = function () {
+      $location.path("/projects/" + $scope.project.id);
+    };
+
+  }
 ]);
