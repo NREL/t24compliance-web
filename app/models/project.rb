@@ -98,6 +98,8 @@ class Project
 	has_many :curve_double_quadratics
 	has_one :building
 	has_many :external_shading_objects
+	has_many :simulations
+	belongs_to :user
 
 
 	def children_models
