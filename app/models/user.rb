@@ -50,7 +50,6 @@ class User
 
   # Relations
   has_many :projects
-  has_many :simulations
 
 
   # ****NOTE:  this is a hack for devise + rails 4.1 to work together

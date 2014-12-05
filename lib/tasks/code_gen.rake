@@ -41,7 +41,10 @@ namespace :code_gen do
   		puts "Generating scaffold for #{controller_name} with #{num} fields"
   		
   		# call generate scaffold  (use -f to force/overwrite)
- 			output = `rails g scaffold #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
+ 			#output = `rails g scaffold #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
+
+			# only generate models now
+			output = `rails g model #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
 
  			puts "Output of generate command: #{output}"
  			puts '***************'

@@ -16,11 +16,13 @@ class Ability
     
     # authenticated user
     elsif user.encrypted_password
-        can :read, Input
+        can [:read, :dashboard], Input
         can [:read, :update], User, :id => user.id
+        can :manage, Project, :user_id => user.id
     # unauthenticated    
     else
       can :read, Input
+      can :dashboard, Input
     end
 
   end
