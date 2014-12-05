@@ -23,14 +23,13 @@ namespace :code_gen do
   		input.data_fields.each do |df|
 
   			# only create fields not marked as 'remove'
-  			
   			unless df['remove']
   				num += 1
-	  			if df['data_type'].include? 'Array' 
+	  			if df['data_type'].include? 'Array'
 	  				data_type = 'array'
 	  			elsif df['data_type'].include? 'Enumeration'
 	  				data_type = 'string'
-	  			else 
+	  			else
 	  				data_type = df['data_type'].downcase
 	  			end
 
@@ -39,12 +38,12 @@ namespace :code_gen do
   		end
 
   		puts "Generating scaffold for #{controller_name} with #{num} fields"
-  		
+
   		# call generate scaffold  (use -f to force/overwrite)
  			#output = `rails g scaffold #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
 
 			# only generate models now
-			output = `rails g model #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
+			output = `rails g model #{controller_name.singularize} #{fields_str} --force --no-helper --no-assets --no-test-framework`
 
  			puts "Output of generate command: #{output}"
  			puts '***************'
@@ -61,8 +60,15 @@ namespace :code_gen do
   		input = Input.find_by(name: s)
 
   		# rewrite model file
-  		File.open("#{Rails.root}/app/models/#{input.display_name.singularize.underscore}-tmp.rb", 'w') do |out| # 'w' for a new file, 'a' append to existing
-			  File.open("#{Rails.root}/app/models/#{input.display_name.singularize.underscore}.rb", 'r') do |f|
+      singularized_filename = input.display_name.singularize.underscore
+
+      # catch unique cases where it is okay
+      #unless input.display_name == 'space_function_defaults'
+      #  singularized_filename = singularized_filename.singularize.underscore
+      #end
+
+  		File.open("#{Rails.root}/app/models/#{singularized_filename}-tmp.rb", 'w') do |out| # 'w' for a new file, 'a' append to existing
+			  File.open("#{Rails.root}/app/models/#{singularized_filename}.rb", 'r') do |f|
 			    f.each_line do |line|
 				    unless line.strip == 'end'
 				    	# don't print the last comma
@@ -93,6 +99,9 @@ namespace :code_gen do
 			  # add xml_save on Project model only
 			  out.write(generate_xml_save(input))
 
+        # add in the from xml method
+        out.write(generate_from_sdd(input))
+
 			  # write enums
   			enums = generate_enumerations(input)
 			  enums.each do |e|
@@ -104,8 +113,8 @@ namespace :code_gen do
 			end
 
 			# replace files
-			`rm #{Rails.root}/app/models/#{input.display_name.singularize.underscore}.rb`
-			`mv #{Rails.root}/app/models/#{input.display_name.singularize.underscore}-tmp.rb #{Rails.root}/app/models/#{input.display_name.singularize.underscore}.rb`
+			`rm #{Rails.root}/app/models/#{singularized_filename}.rb`
+			`mv #{Rails.root}/app/models/#{singularized_filename}-tmp.rb #{Rails.root}/app/models/#{singularized_filename}.rb`
 
   	end
 
@@ -145,10 +154,10 @@ namespace :code_gen do
 
   def inputs_to_scaffold
 
-  	# ['Proj', 'Bldg']	
+  	# ['Proj', 'Bldg']
 
   	scaffolds = []
-  	inputs = Input.all 
+  	inputs = Input.all
   	inputs.each do |input|
   		scaffolds << input.name
   	end
@@ -158,19 +167,21 @@ namespace :code_gen do
 
   def mongoid_timestamps
 
-		"\tinclude Mongoid::Timestamps\n"
-  
+		"#{' '*2}include Mongoid::Timestamps\n"
+
   end
 
   # used by generate_xml_fields_list and generate_sdd_xml
   def xml_fields(input)
 
   	xml_fields = []
+    xml_fields << {'db_field_name' => 'name', 'xml_field_name' => 'Name'}
+
   	input.data_fields.each do |df|
   		f_hash = {}
   		unless df['remove']
   			f_hash['db_field_name'] = df['db_field_name']
-  			f_hash['xml_field_name'] = df['name'] 
+  			f_hash['xml_field_name'] = df['name']
   			xml_fields << f_hash
   		end
   	end
@@ -192,94 +203,94 @@ namespace :code_gen do
   end
 
   def generate_xml_fields_list(input)
-  	xml_str = "\n\tdef xml_fields\n"
-  	xml_str = xml_str + "\t\txml_fields = [\n"
+  	xml_str = "\n#{' '*2}def self.xml_fields\n"
+  	xml_str = xml_str + "#{' '*4}xml_fields = [\n"
 
   	xml_fields = xml_fields(input)
   	unless xml_fields.nil? || xml_fields.empty?
-	  	xml_fields.each do |f|
-	  		xml_str = xml_str + "\t\t\t#{f},\n"
-	  	end
-	  	# remove last comma
-	  	xml_str = xml_str.chop.chop
+      xml_str = xml_str + "#{' '*6}" + xml_fields.join(",\n#{' '*6}")
 	  end
-  	xml_str = xml_str + "\n\t\t]\n"
-  	xml_str = xml_str + "\tend\n\n"
+  	xml_str = xml_str + "\n#{' '*4}]\n"
+  	xml_str = xml_str + "#{' '*2}end\n\n"
   end
 
   def generate_children(input)
-  	kids_str =  "\n\tdef children_models\n"
-  	kids_str = kids_str + "\t\tchildren = [\n"
+  	kids_str =  "\n#{' '*2}def self.children_models\n"
+  	kids_str = kids_str + "#{' '*4}children = [\n"
   	kids = children(input)
   	unless kids.nil? || kids.empty?
   		kids.each do |k|
-  			kids_str = kids_str + "\t\t\t'" + k['model_name'] + "',\n"
+  			kids_str = kids_str + "#{' '*6}'" + k['model_name'] + "',\n"
   		end
   		kids_str = kids_str.chop.chop
   	end
-  	kids_str = kids_str + "\n\t\t]\n\tend\n"
+  	kids_str = kids_str + "\n#{' '*4}]\n#{' '*2}end\n"
   end
 
   def generate_sdd_xml(input)
-  	
   	if input.name == 'Proj'
-	  	sdd_str = "\tdef to_sdd_xml\n"
-	  	sdd_str = sdd_str + "\t\t" + "builder = Nokogiri::XML::Builder.new do |xml|\n"
-	  	sdd_str = sdd_str + "\t\t\t" + "xml.send(:""#{input.name}"") do" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" +  "xml_fields.each do |field|" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "end" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "# go through children if they have something to add, call their methods\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "kids = self.children_models" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "unless kids.nil? || kids.empty?" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t" + "kids.each do |k|" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "if k == 'building'\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "unless self.building.nil?\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "self.building.to_sdd_xml(xml)\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t"	+ "else\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "models.each do |m|\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t\t" + "m.to_sdd_xml(xml)\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t" + "builder.to_xml" + "\n"
-	  	sdd_str = sdd_str + "\tend\n"
+	  	sdd_str = "#{' '*2}def to_sdd_xml\n"
+	  	sdd_str = sdd_str + "#{' '*4}" + "builder = Nokogiri::XML::Builder.new do |xml|\n"
+	  	sdd_str = sdd_str + "#{' '*6}" + "xml.send(:""#{input.name}"") do" + "\n"
+	  	sdd_str = sdd_str + "#{' '*8}" +   "xml_fields.each do |field|" + "\n"
+	  	sdd_str = sdd_str + "#{' '*10}" +    "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
+	  	sdd_str = sdd_str + "#{' '*8}" +   "end" + "\n"
+	  	sdd_str = sdd_str + "#{' '*8}" +   "# go through children if they have something to add, call their methods\n"
+	  	sdd_str = sdd_str + "#{' '*8}" +   "kids = self.children_models" + "\n"
+	  	sdd_str = sdd_str + "#{' '*8}" +   "unless kids.nil? || kids.empty?" + "\n"
+	  	sdd_str = sdd_str + "#{' '*10}" +     "kids.each do |k|" + "\n"
+	  	sdd_str = sdd_str + "#{' '*12}" +       "if k == 'building'\n"
+	  	sdd_str = sdd_str + "#{' '*14}" +         "unless self.building.nil?\n"
+	  	sdd_str = sdd_str + "#{' '*16}" +           "self.building.to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "#{' '*14}" +         "end\n"
+	  	sdd_str = sdd_str + "#{' '*12}"	+       "else\n"
+	  	sdd_str = sdd_str + "#{' '*14}" +         "models = self.send(k.pluralize)" + "\n"
+	  	sdd_str = sdd_str + "#{' '*14}" +         "models.each do |m|\n"
+	  	sdd_str = sdd_str + "#{' '*16}" +           "m.to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "#{' '*14}" +         "end\n"
+	  	sdd_str = sdd_str + "#{' '*12}" +       "end\n"
+	  	sdd_str = sdd_str + "#{' '*10}" +      "end\n"
+	  	sdd_str = sdd_str + "#{' '*8}" +    "end\n"
+	  	sdd_str = sdd_str + "#{' '*6}" +  "end\n"
+	  	sdd_str = sdd_str + "#{' '*4}" +  "end\n"
+	  	sdd_str = sdd_str + "#{' '*4}" +  "builder.to_xml" + "\n"
+	  	sdd_str = sdd_str + "#{' '*2}end\n"
 	  else
-	  	sdd_str = "\tdef to_sdd_xml(xml)\n"
-	  	sdd_str = sdd_str + "\t\t" + "xml.send(:""#{input.name}"") do" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t" +  "xml_fields.each do |field|" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t" + "end" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t" + "# go through children if they have something to add, call their methods\n"
-	  	sdd_str = sdd_str + "\t\t\t" + "kids = self.children_models" + "\n"
-	    sdd_str = sdd_str + "\t\t\t" + "unless kids.nil? || kids.empty?" + "\n"
-	    sdd_str = sdd_str + "\t\t\t\t" + "kids.each do |k|" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t" + "models = self.send(k.pluralize)" + "\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t" + "models.each do |m|\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t\t" + "m.to_sdd_xml(xml)\n"
-	  	sdd_str = sdd_str + "\t\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\t\t" + "end\n"
-	  	sdd_str = sdd_str + "\tend\n"
+	  	sdd_str = "#{' '*2}def to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "#{' '*4}" + "xml.send(:""#{input.name}"") do" + "\n"
+	  	sdd_str = sdd_str + "#{' '*6}" +  "xml_fields.each do |field|" + "\n"
+	  	sdd_str = sdd_str + "#{' '*8}" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
+	  	sdd_str = sdd_str + "#{' '*6}" + "end" + "\n"
+	  	sdd_str = sdd_str + "#{' '*6}" + "# go through children if they have something to add, call their methods\n"
+	  	sdd_str = sdd_str + "#{' '*6}" + "kids = self.children_models" + "\n"
+	    sdd_str = sdd_str + "#{' '*6}" + "unless kids.nil? || kids.empty?" + "\n"
+	    sdd_str = sdd_str + "#{' '*8}" + "kids.each do |k|" + "\n"
+	  	sdd_str = sdd_str + "#{' '*10}" + "models = self.send(k.pluralize)" + "\n"
+	  	sdd_str = sdd_str + "#{' '*10}" + "models.each do |m|\n"
+	  	sdd_str = sdd_str + "#{' '*12}" + "m.to_sdd_xml(xml)\n"
+	  	sdd_str = sdd_str + "#{' '*10}" + "end\n"
+	  	sdd_str = sdd_str + "#{' '*8}" + "end\n"
+	  	sdd_str = sdd_str + "#{' '*6}" + "end\n"
+	  	sdd_str = sdd_str + "#{' '*4}" + "end\n"
+	  	sdd_str = sdd_str + "#{' '*2}end\n"
 	  end
   end
 
   def generate_xml_save(input)
   	if input.name == 'Proj'
   		# only need this method on the Project model
-  		str = "\tdef xml_save\n"
-  		str = str + "\t\txml = self.to_sdd_xml" + "\n"
-  		str = str + "\t\t" + 'File.open("#{Rails.root}/data/xmls/#{self.id}.xml", "w") do |f|' + "\n"
-  		str = str + "\t\t\tf << xml" + "\n"
-  		str = str + "\t\tend\n"
-  		str = str + "\tend\n"
+      str = "\n"
+  		str = str + "#{' '*2}def xml_save\n"
+  		str = str + "#{' '*4}xml = self.to_sdd_xml" + "\n"
+  		str = str + "#{' '*4}" + 'File.open("#{Rails.root}/data/xmls/#{self.id}.xml", "w") do |f|' + "\n"
+  		str = str + "#{' '*6}f << xml" + "\n"
+  		str = str + "#{' '*4}end\n"
+  		str = str + "#{' '*2}end\n"
   	end
+  end
+
+  def generate_from_sdd(input)
+    # TODO: fill this out
   end
 
   def generate_relationships(input)
@@ -288,25 +299,25 @@ namespace :code_gen do
   	unless input.parents.nil?
 	  	input.parents.each do |p|
 	  		model = Input.find_by(name: p)
-	  		relations_str = relations_str + "\tbelongs_to :#{model.display_name.singularize.underscore}\n"
+	  		relations_str = relations_str + "  belongs_to :#{model.display_name.singularize.underscore}\n"
 	  	end
 	  end
 	  unless input.children.nil?
 	  	input.children.each do |c|
 	  		model = Input.find_by(name: c)
 	  		if c == 'Bldg'
-	  			relations_str = relations_str + "\thas_one :" + model.display_name.singularize.underscore + "\n"
+	  			relations_str = relations_str + "  has_one :" + model.display_name.singularize.underscore + "\n"
 	  		else
-	  			relations_str = relations_str + "\thas_many :" + model.display_name.underscore.pluralize + "\n"
+	  			relations_str = relations_str + "  has_many :" + model.display_name.underscore.pluralize + "\n"
 	  		end
 	  	end
 	  end
-  	
+
 	  # check for missing relationships (some belongs_to are missing on the children models)
 	  relationships = add_missing_relationships
 	  relationships.each do |r|
 	  	if r['name'] == input.display_name.singularize.underscore
-	  		relations_str = relations_str + "\t" + r['relation'] + "\n"
+	  		relations_str = relations_str + "  " + r['relation'] + "\n"
 	  	end
 	  end
 
@@ -331,7 +342,8 @@ namespace :code_gen do
 			{'name' => 'curve_quadratic', 'relation' =>  "belongs_to :project"},
 			{'name' => 'curve_cubic', 'relation' =>  "belongs_to :project"},
 			{'name' => 'curve_double_quadratic','relation' =>  "belongs_to :project"},
-			{'name' => 'external_shading_object','relation' => "belongs_to :project"}
+			{'name' => 'external_shading_object','relation' => "belongs_to :project"},
+			{'name' => 'project','relation' => "belongs_to :user"}
   	]
   end
 
@@ -347,13 +359,13 @@ namespace :code_gen do
 			if df['data_type'] == 'Enumeration'
 				if !df['remove'] and !df['set_as_constant']
 					unless df['enumerations'].nil?
-						method_str = "\n\tdef #{df['db_field_name']}_enums\n\t\t[\n"
+						method_str = "\n#{' '*2}def #{df['db_field_name']}_enums\n#{' '*4}[\n"
 
 						df['enumerations'].each do |e|
-							method_str = method_str + "\t\t\t'#{e['name']}',\n"
+							method_str = method_str + "#{' '*6}'#{e['name']}',\n"
 						end
 						method_str = method_str.chop.chop
-						method_str = method_str + "\n\t\t]\n\tend\n"
+						method_str = method_str + "\n#{' '*4}]\n#{' '*2}end\n"
 						enums << method_str
 					end
 				end
