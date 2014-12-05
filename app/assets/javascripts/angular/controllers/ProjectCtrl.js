@@ -16,7 +16,7 @@ cbecc.controller('ProjectCtrl', [
 
       function success(response) {
         console.log("success", response);
-        $location.path("/projects/" + $scope.project.id);
+        $location.path("#/project/" + $scope.project.id);
       }
 
       function failure(response) {
@@ -39,7 +39,7 @@ cbecc.controller('ProjectCtrl', [
     };
 
     $scope.cancel = function () {
-      $location.path("/projects/" + $scope.project.id);
+      $location.path("#/project/" + $scope.project.id);
     };
 
   }
