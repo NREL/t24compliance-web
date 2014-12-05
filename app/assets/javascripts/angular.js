@@ -10,6 +10,8 @@
 //= require angular-strap/dist/angular-strap
 //= require angular-ui-grid/ui-grid
 //= require angular-ui-router/release/angular-ui-router
+//= require jquery
+//= require jquery_ujs
 //= require bootstrap-sprockets
 //= require lodash
 //= require angular/cbecc
