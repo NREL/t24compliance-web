@@ -22,12 +22,17 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 
 ## Updating Libraries
 
-CBECC-Com Web uses Bower to manage front end assets. To add a new dependency:
+CBECC-Com Web uses Bower to manage front end libraries. To add a new dependency:
 
 * Add the dependency to the Bowerfile
     * Restrict the version if needed
 * Run `rake bower:update`
-* Commit the updated vendor asset files
+* Commit the updated vendor/asset files
+
+To update the dependencies (based on version restrictions in the Bowerfile):
+
+* Run `rake bower:update`
+* Commit the updated vendor/asset files
 
 ## Running
 
