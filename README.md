@@ -20,6 +20,15 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 1. Install bundler for jruby `gem install bundler`
 1. bundle
 
+## Updating Libraries
+
+CBECC-Com Web uses Bower to manage front end assets. To add a new dependency:
+
+* Add the dependency to the Bowerfile
+    * Restrict the version if needed
+* Run `rake bower:update`
+* Commit the updated vendor asset files
+
 ## Running
 
 ### CBECC-Com Simulations
