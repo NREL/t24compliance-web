@@ -26,12 +26,16 @@ CBECC-Com Web uses Bower to manage front end libraries. To add a new dependency:
 
 * Add the dependency to the Bowerfile
     * Restrict the version if needed
-* Run `rake bower:update`
+* Run `rake bower:install`
+* Remove the bootstrap that is installed because it is a dependency of angular-strap
+    * `rm -rf vendor/assets/bower_components/bootstrap`
 * Commit the updated vendor/asset files
 
 To update the dependencies (based on version restrictions in the Bowerfile):
 
 * Run `rake bower:update`
+* Remove the bootstrap that is installed because it is a dependency of angular-strap
+    * `rm -rf vendor/assets/bower_components/bootstrap`
 * Commit the updated vendor/asset files
 
 ## Running
