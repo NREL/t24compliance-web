@@ -66,10 +66,12 @@ group :development do
   gem 'capistrano-file-permissions'
 end
 
+gem 'faker'
+
 group :test, :development do
   gem 'rspec', '~> 3.1.0'
   gem 'rspec-rails', '~> 3.1.0'
-  gem 'factory_girl_rails', '~> 4.5'
+  #gem 'factory_girl_rails', '~> 4.5'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'

@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 describe Building do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before :all do
+    #@building = create :building
+  end
+
+  it 'should save an xml' do
+    puts @building
+  end
 end
