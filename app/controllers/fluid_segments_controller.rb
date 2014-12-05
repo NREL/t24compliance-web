@@ -1,4 +1,6 @@
 class FluidSegmentsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :fluid_segment_params
   before_action :set_fluid_segment, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

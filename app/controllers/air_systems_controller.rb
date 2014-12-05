@@ -1,4 +1,6 @@
 class AirSystemsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :air_system_params
   before_action :set_air_system, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

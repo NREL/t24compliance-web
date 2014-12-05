@@ -11,6 +11,9 @@ cbecc.config([
     }).when('/project', {
       templateUrl: 'project/project.html',
       controller: 'ProjectCtrl'
+    }).when('/project/:id', {
+      templateUrl: 'project/project.html',
+      controller: 'ProjectCtrl'
     }).when('/building', {
       templateUrl: 'building/building.html',
       controller: 'BuildingCtrl'
@@ -32,6 +35,8 @@ cbecc.config([
     }).when('/compliance', {
       templateUrl: 'compliance/compliance.html',
       controller: 'ComplianceCtrl'
+    }).otherwise({
+      templateUrl: '404/404.html'
     });
   }
 ]);

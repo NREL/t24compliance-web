@@ -1,4 +1,6 @@
 class SimulationsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :simulation_params
   before_action :set_simulation, only: [:show, :edit, :update, :destroy, :run]
 
   # GET /simulations

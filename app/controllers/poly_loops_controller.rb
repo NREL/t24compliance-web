@@ -1,4 +1,6 @@
 class PolyLoopsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :poly_loop_params
   before_action :set_poly_loop, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

@@ -1,4 +1,6 @@
 class HeatRejectionsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :heat_rejection_params
   before_action :set_heat_rejection, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

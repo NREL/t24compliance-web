@@ -1,4 +1,6 @@
 class ConstructAssembliesController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :construct_assembly_params
   before_action :set_construct_assembly, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

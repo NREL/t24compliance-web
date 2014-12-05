@@ -1,4 +1,6 @@
 class CurveCubicsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :curve_cubic_params
   before_action :set_curve_cubic, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

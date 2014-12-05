@@ -1,4 +1,6 @@
 class CeilingsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :ceiling_params
   before_action :set_ceiling, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

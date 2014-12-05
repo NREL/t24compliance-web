@@ -1,4 +1,6 @@
 class CoilHeatingsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :coil_heating_params
   before_action :set_coil_heating, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

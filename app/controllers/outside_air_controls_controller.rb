@@ -1,4 +1,6 @@
 class OutsideAirControlsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :outside_air_control_params
   before_action :set_outside_air_control, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

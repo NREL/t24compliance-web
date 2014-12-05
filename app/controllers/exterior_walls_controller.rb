@@ -1,4 +1,6 @@
 class ExteriorWallsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :exterior_walls_params
   before_action :set_exterior_wall, only: [:show, :edit, :update, :destroy]
 
   respond_to :html

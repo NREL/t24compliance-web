@@ -1,4 +1,6 @@
 class SpaceFunctionDefaultsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :space_function_default_params
   before_action :set_space_function_default, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
