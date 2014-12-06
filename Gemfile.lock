@@ -48,11 +48,13 @@ GEM
       parser (>= 2.2.0.pre.3, < 3.0)
     autoprefixer-rails (4.0.1.1)
       execjs
+    bcrypt (3.1.9)
     bcrypt (3.1.9-java)
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
     bootstrap_form (2.2.0)
     bower-rails (0.9.2)
+    bson (2.3.0)
     bson (2.3.0-java)
     builder (3.2.2)
     cancancan (1.9.2)
@@ -115,8 +117,10 @@ GEM
     execjs (2.2.2)
     faker (1.4.3)
       i18n (~> 0.5)
+    ffi (1.9.6)
     ffi (1.9.6-java)
     hike (1.2.3)
+    hitimes (1.2.2)
     hitimes (1.2.2-java)
     i18n (0.6.11)
     jbuilder (2.2.5)
@@ -125,10 +129,12 @@ GEM
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    json (1.8.1)
     json (1.8.1-java)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     mime-types (2.4.3)
+    mini_portile (0.6.1)
     minitest (5.4.3)
     moped (2.0.2)
       bson (~> 2.2)
@@ -138,6 +144,8 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
     nokogiri (1.6.5-java)
     optionable (0.2.0)
     origin (2.1.1)
@@ -147,6 +155,8 @@ GEM
       slop (~> 3.4, >= 3.4.5)
     phantomjs (1.9.7.1)
     powerpack (0.0.9)
+    puma (2.10.2)
+      rack (>= 1.1, < 2.0)
     puma (2.10.2-java)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
@@ -247,6 +257,7 @@ GEM
       therubyrhino_jar (>= 1.7.3)
     therubyrhino_jar (1.7.4)
     thor (0.19.1)
+    thread_safe (0.3.4)
     thread_safe (0.3.4-java)
     tilt (1.4.1)
     timers (4.0.1)
@@ -264,6 +275,7 @@ GEM
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   angular-rails-templates
