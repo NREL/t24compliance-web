@@ -13,17 +13,18 @@ class Ability
     if user.has_role? :admin
       # an admin can do everything
       can :manage, :all
-    
+      Rails.logger.info("USER IS ADMIN: #{user.inspect}")
     # authenticated user
-    elsif user.encrypted_password
-        can [:read, :dashboard], Input
-        can [:read, :update], User, :id => user.id
-        can :create, Project
-        can :manage, Project, :user_id => user.id
-    # unauthenticated    
+    elsif !user.current_sign_in_at.nil?
+      can [:read, :dashboard], Input
+      can [:show, :update], User, :id => user.id
+      can :create, Project
+      can [:edit, :show, :delete, :update], Project, :user_id => user.id
+      Rails.logger.info("USER IS AUTHENTICATED: #{user.inspect}")
+    # unauthenticated
     else
-      can :read, Input
-      can :dashboard, Input
+      can [:read, :dashboard], Input
+      Rails.logger.info("USER IS NOT AUTH: #{user.inspect}")
     end
 
   end
