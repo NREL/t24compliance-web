@@ -6,5 +6,19 @@
     <div class="inline-heading">
       <h2>Building Spaces |</h2> Edit and add spaces, walls, floors, and roofs. Move through each tab below to complete.
     </div>
+    <div class="collapse navbar-collapse" ng-controller="NavCtrl">
+  <ul class="nav nav-pills">
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces')}"><a ui-sref="spaces.main">Spaces</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces/settings')}"><a ui-sref="spaces.settings">Space Type Settings</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces/surfaces')}"><a ui-sref="spaces.surfaces">Surfaces: Walls, Floors, Ceilings and Roofs</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces/subsurfaces')}">
+      <a ui-sref="spaces.subsurfaces">Sub-surfaces: Windows, Doors, and Skylights</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces/ventilation')}"><a ui-sref="spaces.ventilation">Ventilation &amp; Exhaust</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces/loads')}"><a ui-sref="spaces.loads">Loads</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces/lighting')}"><a ui-sref="spaces.lighting">Lighting</a></li>
+    </li>
+  </ul>
+</div>
+    <div ui-view></div>
   </div>
 </div>
