@@ -1,4 +1,3 @@
-
 var cbecc = angular.module('cbecc', ['templates', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.grid', 'ui.grid.selection', 'ui.router', 'ui.router.stateHelper', 'mgcrea.ngStrap', 'frapontillo.bootstrap-switch']);
 
 cbecc.config([
@@ -8,7 +7,7 @@ cbecc.config([
     flashProvider.infoClassnames.push("alert-info");
     flashProvider.successClassnames.push("alert-success");
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.when('', '/').otherwise('404');
 
     stateHelperProvider
       .state({
@@ -108,6 +107,11 @@ cbecc.config([
         url: '/compliance',
         controller: 'ComplianceCtrl',
         templateUrl: 'compliance/compliance.html'
+      })
+      .state({
+        name: '404',
+        url: '/404',
+        templateUrl: '404/404.html'
       });
   }
 ]);
