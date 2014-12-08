@@ -73,7 +73,7 @@ cbecc.controller('ConstructionsCtrl', [
             "title": "Slab-on-grade Construction"
         }
      ];
-     $scope.panels.activePanel = 0;
+
 
     $scope.gridOptions.onRegisterApi = function (gridApi) {
       $scope.gridApi = gridApi;
@@ -85,6 +85,12 @@ cbecc.controller('ConstructionsCtrl', [
         }
       });
     };
+
+    $scope.checkIfFirst = function(first) {
+      console.log(first)
+
+      }
+
 
   }
 ]);

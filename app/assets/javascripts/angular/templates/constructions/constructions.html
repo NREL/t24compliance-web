@@ -4,7 +4,8 @@
 <div class="row">
   <div class="col-md-12 pad-left-40">
     <div class="inline-heading">
-      <h2>Construction Defaults |</h2> You can refine these defaults down to the individual surface later. But this will take care of most of the surfaces in your building.
+      <h2>Construction Defaults |</h2> You can refine these defaults down to the individual surface later. But this will
+      take care of most of the surfaces in your building.
     </div>
   </div>
 </div>
@@ -15,19 +16,22 @@
 </div>
 
 <!-- ngModel is optional -->
-<div class="panel-group" ng-model="panels.activePanel" bs-collapse>
-    <div class="panel panel-default" ng-repeat="panel in panels">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a bs-collapse-toggle>
-                    {{ panel.title }}
-                </a>
-            </h4>
-        </div>
-        <div class="panel-collapse" bs-collapse-target>
-            <div class="panel-body">
-                {{ panel.body }}
-            </div>
-        </div>
+<div ng-repeat="panel in panels">
+  <div class="panel-group" ng-model="library.construction[field]" bs-collapse>
+    <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a bs-collapse-toggle class="chevron-toggleable">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          {{ panel.title }}
+        </a>
+      </h4>
     </div>
+    <div class="panel-collapse" bs-collapse-target ng-class="{katherine: $first}" >
+      <div class="panel-body">
+        {{ panel.body }}
+      </div>
+    </div>
+  </div>
+</div>
 </div>
