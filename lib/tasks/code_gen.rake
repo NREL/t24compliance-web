@@ -33,7 +33,7 @@ namespace :code_gen do
 	  				data_type = df['data_type'].downcase
 	  			end
 
-	  			fields_str = fields_str + ", #{df['db_field_name']}:#{data_type}"
+	  			fields_str = fields_str + ", #{df[:db_field_name]}:#{data_type}"
 	  		end
   		end
 
@@ -100,7 +100,10 @@ namespace :code_gen do
 			  out.write(generate_xml_save(input))
 
         # add in the from xml method
-        out.write(generate_from_sdd(input))
+        out.write(generate_from_sdd_xml(input))
+
+        # sdd json
+        out.write(generate_from_sdd_json(input))
 
 			  # write enums
   			enums = generate_enumerations(input)
@@ -150,11 +153,13 @@ namespace :code_gen do
 
 	end
 
+  desc "run scaffold and model extras"
+  task :generate => [:generate_scaffolds, :add_model_extras]
   # HELPER METHODS
 
   def inputs_to_scaffold
 
-  	# ['Proj', 'Bldg']
+  	#['Proj', 'Bldg', 'Story', 'Spc']
 
   	scaffolds = []
   	inputs = Input.all
@@ -175,13 +180,13 @@ namespace :code_gen do
   def xml_fields(input)
 
   	xml_fields = []
-    xml_fields << {'db_field_name' => 'name', 'xml_field_name' => 'Name'}
+    xml_fields << {db_field_name: 'name', xml_field_name: 'Name'}
 
   	input.data_fields.each do |df|
   		f_hash = {}
   		unless df['remove']
-  			f_hash['db_field_name'] = df['db_field_name']
-  			f_hash['xml_field_name'] = df['name']
+  			f_hash[:db_field_name] = df[:db_field_name]
+  			f_hash[:xml_field_name] = df[:name]
   			xml_fields << f_hash
   		end
   	end
@@ -220,7 +225,7 @@ namespace :code_gen do
   	kids = children(input)
   	unless kids.nil? || kids.empty?
   		kids.each do |k|
-  			kids_str = kids_str + "#{' '*6}'" + k['model_name'] + "',\n"
+  			kids_str = kids_str + "#{' '*6} { model_name: '#{k['model_name']}', xml_name: '#{k['xml_name']}' },\n"
   		end
   		kids_str = kids_str.chop.chop
   	end
@@ -233,18 +238,18 @@ namespace :code_gen do
 	  	sdd_str = sdd_str + "#{' '*4}" + "builder = Nokogiri::XML::Builder.new do |xml|\n"
 	  	sdd_str = sdd_str + "#{' '*6}" + "xml.send(:""#{input.name}"") do" + "\n"
 	  	sdd_str = sdd_str + "#{' '*8}" +   "xml_fields.each do |field|" + "\n"
-	  	sdd_str = sdd_str + "#{' '*10}" +    "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
+	  	sdd_str = sdd_str + "#{' '*10}" +    "xml.send(:" + '"#{field[:xml_field_name]}"' + ", self[field[:db_field_name]])" + "\n"
 	  	sdd_str = sdd_str + "#{' '*8}" +   "end" + "\n"
 	  	sdd_str = sdd_str + "#{' '*8}" +   "# go through children if they have something to add, call their methods\n"
 	  	sdd_str = sdd_str + "#{' '*8}" +   "kids = self.children_models" + "\n"
 	  	sdd_str = sdd_str + "#{' '*8}" +   "unless kids.nil? || kids.empty?" + "\n"
 	  	sdd_str = sdd_str + "#{' '*10}" +     "kids.each do |k|" + "\n"
-	  	sdd_str = sdd_str + "#{' '*12}" +       "if k == 'building'\n"
+	  	sdd_str = sdd_str + "#{' '*12}" +       "if k[:model_name] == 'building'\n"
 	  	sdd_str = sdd_str + "#{' '*14}" +         "unless self.building.nil?\n"
 	  	sdd_str = sdd_str + "#{' '*16}" +           "self.building.to_sdd_xml(xml)\n"
 	  	sdd_str = sdd_str + "#{' '*14}" +         "end\n"
 	  	sdd_str = sdd_str + "#{' '*12}"	+       "else\n"
-	  	sdd_str = sdd_str + "#{' '*14}" +         "models = self.send(k.pluralize)" + "\n"
+	  	sdd_str = sdd_str + "#{' '*14}" +         "models = self.send(k[:model_name].pluralize)" + "\n"
 	  	sdd_str = sdd_str + "#{' '*14}" +         "models.each do |m|\n"
 	  	sdd_str = sdd_str + "#{' '*16}" +           "m.to_sdd_xml(xml)\n"
 	  	sdd_str = sdd_str + "#{' '*14}" +         "end\n"
@@ -259,13 +264,13 @@ namespace :code_gen do
 	  	sdd_str = "#{' '*2}def to_sdd_xml(xml)\n"
 	  	sdd_str = sdd_str + "#{' '*4}" + "xml.send(:""#{input.name}"") do" + "\n"
 	  	sdd_str = sdd_str + "#{' '*6}" +  "xml_fields.each do |field|" + "\n"
-	  	sdd_str = sdd_str + "#{' '*8}" + "xml.send(:" + '"#{field[\'xml_field_name\']}"' + ", self[field['db_field_name']])" + "\n"
+	  	sdd_str = sdd_str + "#{' '*8}" + "xml.send(:" + '"#{field[:xml_field_name]}"' + ", self[field[:db_field_name]])" + "\n"
 	  	sdd_str = sdd_str + "#{' '*6}" + "end" + "\n"
 	  	sdd_str = sdd_str + "#{' '*6}" + "# go through children if they have something to add, call their methods\n"
 	  	sdd_str = sdd_str + "#{' '*6}" + "kids = self.children_models" + "\n"
 	    sdd_str = sdd_str + "#{' '*6}" + "unless kids.nil? || kids.empty?" + "\n"
 	    sdd_str = sdd_str + "#{' '*8}" + "kids.each do |k|" + "\n"
-	  	sdd_str = sdd_str + "#{' '*10}" + "models = self.send(k.pluralize)" + "\n"
+	  	sdd_str = sdd_str + "#{' '*10}" + "models = self.send(k[:model_name].pluralize)" + "\n"
 	  	sdd_str = sdd_str + "#{' '*10}" + "models.each do |m|\n"
 	  	sdd_str = sdd_str + "#{' '*12}" + "m.to_sdd_xml(xml)\n"
 	  	sdd_str = sdd_str + "#{' '*10}" + "end\n"
@@ -289,8 +294,163 @@ namespace :code_gen do
   	end
   end
 
-  def generate_from_sdd(input)
-    # TODO: fill this out
+  def generate_from_sdd_xml(input)
+    if input.name == 'Proj'
+      %{
+  # This method is autogenerated. Do not change directly.
+  def self.from_sdd_xml(filename)
+    p = nil
+    if File.exist? filename
+      file = File.read(filename)
+      h = Hash.from_xml(file)
+
+      p = Project.from_sdd_json(h)
+    else
+      fail "Could not find SDD XML file \#{filename}"
+    end
+
+    p
+  end
+}
+    end
+  end
+
+  def generate_from_sdd_json(input)
+    if input.name == 'Proj'
+      %{
+  # This method is autogenerated. Do not change directly.
+  # Top level method takes the XML as a Hash and parses it recursively
+  def self.from_sdd_json(h)
+    p = nil
+    if h
+      if h['SDDXML'] && h['SDDXML']['Proj']
+        new_h = {}
+
+        # Find fields as defined by the XML
+        Project.xml_fields.each do |field|
+          if h['SDDXML']['Proj'][field[:xml_field_name]]
+            new_h[field[:db_field_name]] = h['SDDXML']['Proj'][field[:xml_field_name]]
+          end
+        end
+
+        # create the project object
+        p = Project.new(new_h) unless new_h.empty?
+        if p
+          # Go through the children
+          kids = Project.children_models
+          unless kids.nil? || kids.empty?
+            kids.each do |k|
+              # check if the kids have a json object at this level
+              if h['SDDXML']['Proj'][k[:xml_name]]
+                logger.info "XML child is \#{k[:xml_name]}"
+                logger.info "Model name is \#{k[:model_name]}"
+                if h['SDDXML']['Proj'][k[:xml_name]].is_a? Array
+                  logger.info "\#{k[:xml_name]} is an array, will add all the objects"
+                  h['SDDXML']['Proj'][k[:xml_name]].each do |h_instance|
+                    klass = k[:model_name].camelcase(:upper).constantize
+                    if klass.respond_to? :from_sdd_json
+                      model = klass.from_sdd_json(k, h_instance)
+
+                      # Assign the foreign key on the object
+                      model.project_id = p.id
+                      model.save!
+                    else
+                      logger.warn "Class \#{klass} does not have instance method 'from_sdd_json'"
+                    end
+                  end
+                elsif h['SDDXML']['Proj'][k[:xml_name]].is_a? Hash
+                  logger.info "\#{k[:xml_name]} is a single object, will add only one"
+                  klass = k[:model_name].camelcase(:upper).constantize
+                  if klass.respond_to? :from_sdd_json
+                    model = klass.from_sdd_json(k, h['SDDXML']['Proj'][k[:xml_name]])
+
+                    # Assign the foreign key on the object
+                    model.project_id = p.id
+                    model.save!
+                  else
+                    logger.warn "Class \#{klass} does not have instance method 'from_sdd_json'"
+                  end
+                end
+              end
+            end
+          end
+          p.save!
+        else
+          fail 'failed to import the XML'
+        end
+      end
+    end
+
+    p
+  end
+}
+    else
+     %{
+  # This method is autogenerated. Do not change directly.
+  # Take the map of model name and xml name, and the hash (from the XML)
+  def self.from_sdd_json(map, h)
+    o = nil
+    if h
+      new_h = {}
+
+      # Find fields as defined by the XML
+      map[:model_name].camelcase(:upper).constantize.xml_fields.each do |field|
+        if h[field[:xml_field_name]]
+          new_h[field[:db_field_name]] = h[field[:xml_field_name]]
+        end
+      end
+
+      o = map[:model_name].camelcase(:upper).constantize.new(new_h) unless new_h.empty?
+
+      # find the children
+      if o
+        # Go through the children
+        kids = map[:model_name].camelcase(:upper).constantize.children_models
+        unless kids.nil? || kids.empty?
+          kids.each do |k|
+            # check if the kids have a json object at this level
+            if h[k[:xml_name]]
+              logger.info "XML child is \#{k[:xml_name]}"
+              logger.info "Model name is \#{k[:model_name]}"
+              if h[k[:xml_name]].is_a? Array
+                logger.info "\#{k[:xml_name]} is an array, will add all the objects"
+                h[k[:xml_name]].each do |h_instance|
+                  klass = k[:model_name].camelcase(:upper).constantize
+                  if klass.respond_to? :from_sdd_json
+                    model = klass.from_sdd_json(k, h_instance)
+
+                    # Assign the foreign key on the object
+                    model["\#{map[:model_name]}_id"] = o.id
+                    model.save!
+                  else
+                    logger.warn "Class \#{klass} does not have instance method 'from_sdd_json'"
+                  end
+                end
+              elsif h[k[:xml_name]].is_a? Hash
+                logger.info "\#{k[:xml_name]} is a single object, will add only one"
+                klass = k[:model_name].camelcase(:upper).constantize
+                if klass.respond_to? :from_sdd_json
+                  model = klass.from_sdd_json(k, h[k[:xml_name]])
+
+                  # Assign the foreign key on the object
+                  model["\#{map[:model_name]}_id"] = o.id
+                  model.save!
+                else
+                  logger.warn "Class \#{klass} does not have instance method 'from_sdd_json'"
+                end
+              end
+            end
+          end
+        end
+      end
+
+      o.save!
+    end
+
+    o
+  end
+}
+    end
   end
 
   def generate_relationships(input)
@@ -359,7 +519,7 @@ namespace :code_gen do
 			if df['data_type'] == 'Enumeration'
 				if !df['remove'] and !df['set_as_constant']
 					unless df['enumerations'].nil?
-						method_str = "\n#{' '*2}def #{df['db_field_name']}_enums\n#{' '*4}[\n"
+						method_str = "\n#{' '*2}def #{df[:db_field_name]}_enums\n#{' '*4}[\n"
 
 						df['enumerations'].each do |e|
 							method_str = method_str + "#{' '*6}'#{e['name']}',\n"
