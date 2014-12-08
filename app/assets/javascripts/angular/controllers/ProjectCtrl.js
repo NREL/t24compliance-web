@@ -42,7 +42,8 @@ cbecc.controller('ProjectCtrl', [
       $location.path("#/project/" + $scope.project.id);
     };
 
-
+    //FORM TODO:  when saving, check if exceptional_condition_modeling is true.  If so, save exceptional_condition_narrative.
+    // Exceptional_condition_modeling doesn't actually have a field
 
 
   }

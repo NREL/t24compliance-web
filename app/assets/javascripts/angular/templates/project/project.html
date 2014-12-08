@@ -101,7 +101,8 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a bs-collapse-toggle>
+          <a bs-collapse-toggle class="chevron-toggleable">
+            <span class="glyphicon glyphicon-chevron-down"></span>
             Project Team
           </a>
         </h4>
@@ -384,8 +385,8 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-          <a bs-collapse-toggle>
+          <a bs-collapse-toggle class="chevron-toggleable">
+            <span class="glyphicon glyphicon-chevron-down"></span>
             Exceptional Conditions
           </a>
         </h4>
@@ -457,6 +458,18 @@
                 If so, a separate narrative must be provided.</label>
             </div>
           </div>
+
+          <div class="form-group" ng-show="projectForm.exceptional_condition_modeling.$viewValue == true" ng-class="errors.exceptional_condition_narrative ? 'error' : ''">
+            <label for="exceptional_condition_narrative" class="col-md-2 control-label col-md-offset-1">
+              Please provide a narrative:
+            </label>
+            <div class="col-md-4">
+              <textarea rows="5" name="exceptional_condition_narrative" class="form-control"
+                     ng-model="project.exceptional_condition_narrative"></textarea>
+          </div>
+            <div field_error errors="errors" field="exceptional_condition_narrative"></div>
+          </div>
+
 
         </div>
       </div>
