@@ -12,8 +12,10 @@
 //= require angular-ui-router/release/angular-ui-router
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-switch/dist/js/bootstrap-switch
 //= require bootstrap-sprockets
 //= require lodash
+//= require angular-bootstrap-switch/dist/angular-bootstrap-switch
 //= require angular/cbecc
 //= require_tree  ./angular/templates
 //= require_tree ./angular

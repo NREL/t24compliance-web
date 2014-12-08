@@ -1,4 +1,4 @@
-var cbecc = angular.module('cbecc', ['templates', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.grid']);
+var cbecc = angular.module('cbecc', ['templates', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.grid', 'mgcrea.ngStrap', 'frapontillo.bootstrap-switch']);
 
 cbecc.config([
   '$routeProvider', 'flashProvider', function ($routeProvider, flashProvider) {

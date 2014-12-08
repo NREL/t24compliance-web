@@ -42,5 +42,8 @@ cbecc.controller('ProjectCtrl', [
       $location.path("#/project/" + $scope.project.id);
     };
 
+
+
+
   }
 ]);

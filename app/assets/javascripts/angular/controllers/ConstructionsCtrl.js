@@ -43,5 +43,31 @@ cbecc.controller('ConstructionsCtrl', [
       }
     ];
 
+    //collapsible panels
+    $scope.panels = [
+        {
+            "title": "Exterior Wall Construction"
+        },
+        {
+            "title": "Interior Wall Construction"
+        },
+        {
+            "title": "Roof Construction"
+        },
+        {
+            "title": "Window Construction"
+        },
+        {
+            "title": "Skylight Construction"
+        },
+        {
+            "title": "Raised Floor Construction"
+        },
+        {
+            "title": "Slab-on-grade Construction"
+        }
+     ];
+     $scope.panels.activePanel = 0;
+
   }
 ]);

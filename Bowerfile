@@ -8,5 +8,6 @@ asset 'angular-flash'
 asset 'angular-strap'
 asset 'bootstrap-sass-official'
 asset 'lodash'
+asset 'angular-bootstrap-switch'
 
 resolution "angular", '~> 1.3.5'
