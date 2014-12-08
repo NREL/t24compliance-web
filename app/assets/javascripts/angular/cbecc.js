@@ -1,96 +1,117 @@
-
 var cbecc = angular.module('cbecc', ['templates', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.grid', 'ui.grid.selection', 'ui.router', 'ui.router.stateHelper', 'mgcrea.ngStrap', 'frapontillo.bootstrap-switch']);
 
 cbecc.config([
-  '$stateProvider', '$urlRouterProvider', 'flashProvider', function ($stateProvider, $urlRouterProvider,  flashProvider) {
+  '$stateProvider', '$urlRouterProvider', 'flashProvider', 'stateHelperProvider', function ($stateProvider, $urlRouterProvider, flashProvider, stateHelperProvider) {
     flashProvider.errorClassnames.push("alert-danger");
     flashProvider.warnClassnames.push("alert-warning");
     flashProvider.infoClassnames.push("alert-info");
     flashProvider.successClassnames.push("alert-success");
 
-    $urlRouterProvider.otherwise('/404');
+    $urlRouterProvider.when('', '/').otherwise('404');
 
-    $stateProvider 
-      .state('introduction', {
+    stateHelperProvider
+      .state({
+        name: 'introduction',
         url: '/',
         templateUrl: 'introduction/introduction.html'
       })
-      .state('project', {
+      .state({
+        name: 'project',
         url: '/project',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html'
+        templateUrl: 'project/project.html',
+        children: [
+          {
+            name: 'show',
+            url: '/{id:[0-9]}',
+            controller: 'ProjectCtrl',
+            templateUrl: 'project/project.html' //use same template as project for now.
+          }
+        ]
       })
-      .state('project.show', {
-        url: '/{id:[0-9]}',
-        controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html' //use same template as project for now.
-      })
-      .state('building', {
+      .state({
+        name: 'building',
         url: '/building',
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html'
       })
-      .state('constructions', {
+      .state({
+        name: 'constructions',
         url: '/constructions',
         controller: 'ConstructionsCtrl',
         templateUrl: 'constructions/constructions.html'
       })
-      .state('spaces', {
+      .state({
+        name: 'spaces',
         url: '/spaces',
         controller: 'SpacesCtrl',
-        templateUrl: 'spaces/spaces.html'
+        templateUrl: 'spaces/spaces.html',
+        children: [
+          {
+            name: 'main',
+            url: '',
+            templateUrl: 'spaces/main.html'
+          },
+          {
+            name: 'settings',
+            url: '/settings',
+            templateUrl: 'spaces/settings.html'
+          },
+          {
+            name: 'surfaces',
+            url: '/surfaces',
+            templateUrl: 'spaces/surfaces.html'
+          },
+          {
+            name: 'subsurfaces',
+            url: '/subsurfaces',
+            templateUrl: 'spaces/subsurfaces.html'
+          },
+          {
+            name: 'ventilation',
+            url: '/ventilation',
+            templateUrl: 'spaces/ventilation.html'
+          },
+          {
+            name: 'loads',
+            url: '/loads',
+            templateUrl: 'spaces/loads.html'
+          },
+          {
+            name: 'lighting',
+            url: '/lighting',
+            templateUrl: 'spaces/lighting.html'
+          }
+        ]
       })
-      .state('spaces.main', {
-        url: '',
-        templateUrl: 'spaces/main.html'
-      })
-      .state('spaces.settings', {
-        url: '/settings',
-        templateUrl: 'spaces/settings.html'
-      })
-      .state('spaces.surfaces', {
-        url: '/surfaces',
-        templateUrl: 'spaces/surfaces.html'
-      })
-      .state('spaces.subsurfaces', {
-        url: '/subsurfaces',
-        templateUrl: 'spaces/subsurfaces.html'
-      })
-      .state('spaces.ventilation', {
-        url: '/ventilation',
-        templateUrl: 'spaces/ventilation.html'
-      })
-      .state('spaces.loads', {
-        url: '/loads',
-        templateUrl: 'spaces/loads.html'
-      })
-      .state('spaces.lighting', {
-        url: '/lighting',
-        templateUrl: 'spaces/lighting.html'
-      })
-      .state('systems', {
+      .state({
+        name: 'systems',
         url: '/systems',
         controller: 'SystemsCtrl',
         templateUrl: 'systems/systems.html'
       })
-      .state('zones', {
+      .state({
+        name: 'zones',
         url: '/zones',
         controller: 'ZonesCtrl',
         templateUrl: 'zones/zones.html'
       })
-      .state('review', {
+      .state({
+        name: 'review',
         url: '/review',
         controller: 'ReviewCtrl',
         templateUrl: 'review/review.html'
       })
-      .state('compliance', {
+      .state({
+        name: 'compliance',
         url: '/compliance',
         controller: 'ComplianceCtrl',
         templateUrl: 'compliance/compliance.html'
       })
-      .state('404', {
+      .state({
+        name: '404',
         url: '/404',
         templateUrl: '404/404.html'
-      })
+      });
   }
 ]);

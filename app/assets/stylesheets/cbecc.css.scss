@@ -40,6 +40,10 @@
   padding-top:10px;
 }
 
+.pad-top-5{
+  padding-top:5px;
+}
+
 .section-desc {
   font-size: 120%;
 }
@@ -48,4 +52,12 @@
   font-size: 120%;
   font-weight: bold;
   padding:10px 20px;
+}
+
+a.chevron-toggleable:hover {
+  text-decoration: none;
+}
+
+:first-child {
+
 }
