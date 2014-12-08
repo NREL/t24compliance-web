@@ -1,5 +1,11 @@
 cbecc.controller('ConstructionsCtrl', [
   '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $routeParams, $resource, $location, flash) {
+    $scope.gridOptions = {
+      data: 'data',
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      multiSelect: false
+    };
 
     $scope.data = [
       {
@@ -68,6 +74,17 @@ cbecc.controller('ConstructionsCtrl', [
         }
      ];
      $scope.panels.activePanel = 0;
+
+    $scope.gridOptions.onRegisterApi = function (gridApi) {
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+        if (row.isSelected) {
+          console.log(row.entity);
+        } else {
+          // No rows selected
+        }
+      });
+    };
 
   }
 ]);
