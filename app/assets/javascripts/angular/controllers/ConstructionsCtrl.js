@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', function ($scope, $window, $routeParams, $resource, $location, flash, $modal) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'Construction', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, Construction) {
     $scope.gridOptions = {
       data: 'data',
       enableRowHeaderSelection: true,
