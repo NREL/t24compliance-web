@@ -53,9 +53,3 @@ describe Project do
     expect(h['Proj']['Bldg']['Story'].first['Name']).to eq 'story1'
   end
 end
-
-
-# load the xml from the xml
-describe Project do
-
-end
