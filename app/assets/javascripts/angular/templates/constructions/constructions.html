@@ -15,14 +15,13 @@
   </div>
 </div>
 
-<accordion close-others="oneAtATime">
-  <accordion-group ng-repeat="panel in panels">
+<accordion close-others="false">
+  <accordion-group ng-repeat="panel in panels" is-open="panels[$index].open">
     <accordion-heading>
-      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panels[$index].open, 'glyphicon-chevron-right': !panels[$index].open}"></i>
       {{panel.title}}
-      </accordion-heading>
-      {{panel.title}}
+    </accordion-heading>
+    <button class="btn btn-default" ng-click="openLibraryModal($index)">Select a Construction</button>
+    <div ng-show="panels[$index].selected">Selection: {{panels[$index].selected}}</div>
   </accordion-group>
 </accordion>
-
-

@@ -97,388 +97,370 @@
     </div>
   </div>
 
-  <div class="panel-group" bs-collapse>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a bs-collapse-toggle class="chevron-toggleable">
-            <span class="glyphicon glyphicon-chevron-down"></span>
-            Project Team
-          </a>
-        </h4>
-      </div>
-      <div class="panel-collapse" bs-collapse-target>
-        <div class="panel-body">
-          <p class="section-desc">Add contact information for project</p>
-          <div class="row">
-             <div class="col-md-6">
+  <accordion>
+    <accordion-group is-open="status['project_team']">
+      <accordion-heading>
+        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': status['project_team'], 'glyphicon-chevron-right': !status['project_team']}"></i>
+        Project Team
+      </accordion-heading>
+      <p class="section-desc">Add contact information for project</p>
+      <div class="row">
+         <div class="col-md-6">
 
-              <div class="form-heading">Owner Information</div>
-              <div class="form-group" ng-class="errors.owner_organization ? 'error' : ''">
-                <label for="owner_organization" class="col-md-2 control-label col-md-offset-1">
-                  Organization
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="owner_organization" class="form-control"
-                         ng-model="project.owner_organization">
-                </div>
-                <div field_error errors="errors" field="owner_organization"></div>
-              </div>
-              <div class="form-group" ng-class="errors.owner_name ? 'error' : ''">
-                <label for="owner_name" class="col-md-2 control-label col-md-offset-1">
-                 Contact Name
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="owner_name" class="form-control"
-                         ng-model="project.owner_name">
-                </div>
-                <div field_error errors="errors" field="owner_name"></div>
-              </div>
-              <div class="form-group" ng-class="errors.owner_title ? 'error' : ''">
-                <label for="owner_title" class="col-md-2 control-label col-md-offset-1">
-                  Title
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="owner_title" class="form-control"
-                         ng-model="project.owner_title">
-                </div>
-                <div field_error errors="errors" field="owner_title"></div>
-              </div>
-              <div class="form-group" ng-class="errors.owner_email ? 'error' : ''">
-                <label for="owner_email" class="col-md-2 control-label col-md-offset-1">
-                  Email
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="owner_email" class="form-control"
-                         ng-model="project.owner_email">
-                </div>
-                <div field_error errors="errors" field="owner_email"></div>
-              </div>
-              <div class="form-group" ng-class="errors.owner_phone ? 'error' : ''">
-                <label for="owner_phone" class="col-md-2 control-label col-md-offset-1">
-                  Phone
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="owner_phone" class="form-control"
-                         ng-model="project.owner_phone">
-                </div>
-                <div field_error errors="errors" field="owner_phone"></div>
-              </div>
-
-              <div class="form-heading">HVAC Engineer</div>
-              <div class="form-group" ng-class="errors.hvac_engineer_organization ? 'error' : ''">
-                <label for="hvac_engineer_organization" class="col-md-2 control-label col-md-offset-1">
-                  Organization
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="hvac_engineer_organization" class="form-control"
-                         ng-model="project.hvac_engineer_organization">
-                </div>
-                <div field_error errors="errors" field="hvac_engineer_organization"></div>
-              </div>
-              <div class="form-group" ng-class="errors.hvac_engineer_name ? 'error' : ''">
-                <label for="hvac_engineer_name" class="col-md-2 control-label col-md-offset-1">
-                  Contact Name
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="hvac_engineer_name" class="form-control"
-                         ng-model="project.hvac_engineer_name">
-                </div>
-                <div field_error errors="errors" field="hvac_engineer_name"></div>
-              </div>
-              <div class="form-group" ng-class="errors.hvac_engineer_title ? 'error' : ''">
-                <label for="hvac_engineer_title" class="col-md-2 control-label col-md-offset-1">
-                  Title
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="hvac_engineer_title" class="form-control"
-                         ng-model="project.hvac_engineer_title">
-                </div>
-                <div field_error errors="errors" field="hvac_engineer_title"></div>
-              </div>
-              <div class="form-group" ng-class="errors.hvac_engineer_email ? 'error' : ''">
-                <label for="hvac_engineer_email" class="col-md-2 control-label col-md-offset-1">
-                  Email
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="hvac_engineer_email" class="form-control"
-                         ng-model="project.hvac_engineer_email">
-                </div>
-                <div field_error errors="errors" field="hvac_engineer_email"></div>
-              </div>
-              <div class="form-group" ng-class="errors.hvac_engineer_phone ? 'error' : ''">
-                <label for="hvac_engineer_phone" class="col-md-2 control-label col-md-offset-1">
-                  Phone
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="hvac_engineer_phone" class="form-control"
-                         ng-model="project.hvac_engineer_phone">
-                </div>
-                <div field_error errors="errors" field="hvac_engineer_phone"></div>
-              </div>
-
-              <div class="form-heading">Energy Modeler</div>
-              <div class="form-group" ng-class="errors.energy_modeler_organization ? 'error' : ''">
-                <label for="energy_modeler_organization" class="col-md-2 control-label col-md-offset-1">
-                  Organization
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="energy_modeler_organization" class="form-control"
-                         ng-model="project.energy_modeler_organization">
-                </div>
-                <div field_error errors="errors" field="energy_modeler_organization"></div>
-              </div>
-              <div class="form-group" ng-class="errors.energy_modeler_name ? 'error' : ''">
-                <label for="energy_modeler_name" class="col-md-2 control-label col-md-offset-1">
-                  Contact Name
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="energy_modeler_name" class="form-control"
-                         ng-model="project.energy_modeler_name">
-                </div>
-                <div field_error errors="errors" field="energy_modeler_name"></div>
-              </div>
-              <div class="form-group" ng-class="errors.energy_modeler_title ? 'error' : ''">
-                <label for="energy_modeler_title" class="col-md-2 control-label col-md-offset-1">
-                  Title
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="energy_modeler_title" class="form-control"
-                         ng-model="project.energy_modeler_title">
-                </div>
-                <div field_error errors="errors" field="energy_modeler_title"></div>
-              </div>
-              <div class="form-group" ng-class="errors.energy_modeler_email ? 'error' : ''">
-                <label for="energy_modeler_email" class="col-md-2 control-label col-md-offset-1">
-                  Email
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="energy_modeler_email" class="form-control"
-                         ng-model="project.energy_modeler_email">
-                </div>
-                <div field_error errors="errors" field="energy_modeler_email"></div>
-              </div>
-              <div class="form-group" ng-class="errors.energy_modeler_phone ? 'error' : ''">
-                <label for="energy_modeler_phone" class="col-md-2 control-label col-md-offset-1">
-                  Phone
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="energy_modeler_phone" class="form-control"
-                         ng-model="project.energy_modeler_phone">
-                </div>
-                <div field_error errors="errors" field="energy_modeler_phone"></div>
-              </div>
-
-            </div>
-            <div class="col-md-6">
-              <div class="form-heading">Architect</div>
-              <div class="form-group" ng-class="errors.architect_organization ? 'error' : ''">
-                <label for="architect_organization" class="col-md-2 control-label col-md-offset-1">
-                  Organization
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="architect_organization" class="form-control"
-                         ng-model="project.architect_organization">
-                </div>
-                <div field_error errors="errors" field="architect_organization"></div>
-              </div>
-              <div class="form-group" ng-class="errors.architect_name ? 'error' : ''">
-                <label for="architect_name" class="col-md-2 control-label col-md-offset-1">
-                  Contact Name
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="architect_name" class="form-control"
-                         ng-model="project.architect_name">
-                </div>
-                <div field_error errors="errors" field="architect_name"></div>
-              </div>
-              <div class="form-group" ng-class="errors.architect_title ? 'error' : ''">
-                <label for="architect_title" class="col-md-2 control-label col-md-offset-1">
-                  Title
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="architect_title" class="form-control"
-                         ng-model="project.architect_title">
-                </div>
-                <div field_error errors="errors" field="architect_title"></div>
-              </div>
-              <div class="form-group" ng-class="errors.architect_email ? 'error' : ''">
-                <label for="architect_email" class="col-md-2 control-label col-md-offset-1">
-                  Email
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="architect_email" class="form-control"
-                         ng-model="project.architect_email">
-                </div>
-                <div field_error errors="errors" field="architect_email"></div>
-              </div>
-              <div class="form-group" ng-class="errors.architect_phone ? 'error' : ''">
-                <label for="architect_phone" class="col-md-2 control-label col-md-offset-1">
-                  Phone
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="architect_phone" class="form-control"
-                         ng-model="project.architect_phone">
-                </div>
-                <div field_error errors="errors" field="architect_phone"></div>
-              </div>
-
-              <div class="form-heading">Lighting Designer</div>
-              <div class="form-group" ng-class="errors.lighting_designer_organization ? 'error' : ''">
-                <label for="lighting_designer_organization" class="col-md-2 control-label col-md-offset-1">
-                  Organization
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="lighting_designer_organization" class="form-control"
-                         ng-model="project.lighting_designer_organization">
-                </div>
-                <div field_error errors="errors" field="lighting_designer_organization"></div>
-              </div>
-              <div class="form-group" ng-class="errors.lighting_designer_name ? 'error' : ''">
-                <label for="lighting_designer_name" class="col-md-2 control-label col-md-offset-1">
-                  Contact Name
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="lighting_designer_name" class="form-control"
-                         ng-model="project.lighting_designer_name">
-                </div>
-                <div field_error errors="errors" field="lighting_designer_name"></div>
-              </div>
-              <div class="form-group" ng-class="errors.lighting_designer_title ? 'error' : ''">
-                <label for="lighting_designer_title" class="col-md-2 control-label col-md-offset-1">
-                  Title
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="lighting_designer_title" class="form-control"
-                         ng-model="project.lighting_designer_title">
-                </div>
-                <div field_error errors="errors" field="lighting_designer_title"></div>
-              </div>
-              <div class="form-group" ng-class="errors.lighting_designer_email ? 'error' : ''">
-                <label for="lighting_designer_email" class="col-md-2 control-label col-md-offset-1">
-                  Email
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="lighting_designer_email" class="form-control"
-                         ng-model="project.lighting_designer_email">
-                </div>
-                <div field_error errors="errors" field="lighting_designer_email"></div>
-              </div>
-              <div class="form-group" ng-class="errors.lighting_designer_phone ? 'error' : ''">
-                <label for="lighting_designer_phone" class="col-md-2 control-label col-md-offset-1">
-                  Phone
-                </label>
-                <div class="col-md-5">
-                  <input type="text" name="lighting_designer_phone" class="form-control"
-                         ng-model="project.lighting_designer_phone">
-                </div>
-                <div field_error errors="errors" field="lighting_designer_phone"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="panel-group" bs-collapse>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a bs-collapse-toggle class="chevron-toggleable">
-            <span class="glyphicon glyphicon-chevron-down"></span>
-            Exceptional Conditions
-          </a>
-        </h4>
-      </div>
-      <div class="panel-collapse" bs-collapse-target>
-        <div class="panel-body">
-          <div class="form-group" ng-class="errors.exceptional_condition_no_cooling_system ? 'error' : ''">
-            <div class="col-md-1">
-              <input
-                bs-switch
-                ng-model="project.exceptional_condition_no_cooling_system"
-                type="checkbox"
-                name="exceptional_condition_no_cooling_system"
-                switch-on-text="Yes"
-                switch-off-text="No"
-                ng-true-value="'Yes'"
-                ng-false-value="'No'">
-             </div>
-            <div class="col-md-11 pad-top-5">
-              <label for="exceptional_condition_no_cooling_system">Is any cooling equipment modeled which will not be installed in the actual building?</label>
-            </div>
-          </div>
-          <div class="form-group" ng-class="errors.exceptional_condition_rated_capacity ? 'error' : ''">
-            <div class="col-md-1">
-              <input
-                  bs-switch
-                  ng-model="project.exceptional_condition_rated_capacity"
-                  type="checkbox"
-                  name="exceptional_condition_rated_capacity"
-                  switch-on-text="Yes"
-                  switch-off-text="No"
-                  ng-true-value="'Yes'"
-                  ng-false-value="'No'">
-            </div>
-            <div class="col-md-11 pad-top-5">
-              <label for="exceptional_condition_rated_capacity">Does the rated capacity of any HVAC equipment installed for your project not match the value used in the compliance analysis?</label>
-            </div>
-          </div>
-          <div class="form-group" ng-class="errors.exceptional_condition_water_heater ? 'error' : ''">
-            <div class="col-md-1">
-              <input
-                  bs-switch
-                  ng-model="project.exceptional_condition_water_heater"
-                  type="checkbox"
-                  name="exceptional_condition_water_heater"
-                  switch-on-text="Yes"
-                  switch-off-text="No"
-                  ng-true-value="'Yes'"
-                  ng-false-value="'No'">
-            </div>
-            <div class="col-md-11 pad-top-5">
-              <label for="exceptional_condition_water_heater">Is service water heating excluded from the design of this building?</label>
-            </div>
-          </div>
-          <div class="form-group" ng-class="errors.exceptional_condition_modeling ? 'error' : ''">
-            <div class="col-md-1">
-              <input
-                  bs-switch
-                  ng-model="project.exceptional_condition_modeling"
-                  type="checkbox"
-                  name="exceptional_condition_modeling"
-                  switch-on-text="Yes"
-                  switch-off-text="No"
-                  ng-true-value="'Yes'"
-                  ng-false-value="'No'">
-            </div>
-            <div class="col-md-11 pad-top-5">
-              <label for="exceptional_condition_modeling">Are significant modeling approximations used in this proposed design model?
-                If so, a separate narrative must be provided.</label>
-            </div>
-          </div>
-
-          <div class="form-group" ng-show="projectForm.exceptional_condition_modeling.$viewValue == true" ng-class="errors.exceptional_condition_narrative ? 'error' : ''">
-            <label for="exceptional_condition_narrative" class="col-md-2 control-label col-md-offset-1">
-              Please provide a narrative:
+          <div class="form-heading">Owner Information</div>
+          <div class="form-group" ng-class="errors.owner_organization ? 'error' : ''">
+            <label for="owner_organization" class="col-md-2 control-label col-md-offset-1">
+              Organization
             </label>
-            <div class="col-md-4">
-              <textarea rows="5" name="exceptional_condition_narrative" class="form-control"
-                     ng-model="project.exceptional_condition_narrative"></textarea>
+            <div class="col-md-5">
+              <input type="text" name="owner_organization" class="form-control"
+                     ng-model="project.owner_organization">
+            </div>
+            <div field_error errors="errors" field="owner_organization"></div>
           </div>
-            <div field_error errors="errors" field="exceptional_condition_narrative"></div>
+          <div class="form-group" ng-class="errors.owner_name ? 'error' : ''">
+            <label for="owner_name" class="col-md-2 control-label col-md-offset-1">
+             Contact Name
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="owner_name" class="form-control"
+                     ng-model="project.owner_name">
+            </div>
+            <div field_error errors="errors" field="owner_name"></div>
+          </div>
+          <div class="form-group" ng-class="errors.owner_title ? 'error' : ''">
+            <label for="owner_title" class="col-md-2 control-label col-md-offset-1">
+              Title
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="owner_title" class="form-control"
+                     ng-model="project.owner_title">
+            </div>
+            <div field_error errors="errors" field="owner_title"></div>
+          </div>
+          <div class="form-group" ng-class="errors.owner_email ? 'error' : ''">
+            <label for="owner_email" class="col-md-2 control-label col-md-offset-1">
+              Email
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="owner_email" class="form-control"
+                     ng-model="project.owner_email">
+            </div>
+            <div field_error errors="errors" field="owner_email"></div>
+          </div>
+          <div class="form-group" ng-class="errors.owner_phone ? 'error' : ''">
+            <label for="owner_phone" class="col-md-2 control-label col-md-offset-1">
+              Phone
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="owner_phone" class="form-control"
+                     ng-model="project.owner_phone">
+            </div>
+            <div field_error errors="errors" field="owner_phone"></div>
           </div>
 
+          <div class="form-heading">HVAC Engineer</div>
+          <div class="form-group" ng-class="errors.hvac_engineer_organization ? 'error' : ''">
+            <label for="hvac_engineer_organization" class="col-md-2 control-label col-md-offset-1">
+              Organization
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="hvac_engineer_organization" class="form-control"
+                     ng-model="project.hvac_engineer_organization">
+            </div>
+            <div field_error errors="errors" field="hvac_engineer_organization"></div>
+          </div>
+          <div class="form-group" ng-class="errors.hvac_engineer_name ? 'error' : ''">
+            <label for="hvac_engineer_name" class="col-md-2 control-label col-md-offset-1">
+              Contact Name
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="hvac_engineer_name" class="form-control"
+                     ng-model="project.hvac_engineer_name">
+            </div>
+            <div field_error errors="errors" field="hvac_engineer_name"></div>
+          </div>
+          <div class="form-group" ng-class="errors.hvac_engineer_title ? 'error' : ''">
+            <label for="hvac_engineer_title" class="col-md-2 control-label col-md-offset-1">
+              Title
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="hvac_engineer_title" class="form-control"
+                     ng-model="project.hvac_engineer_title">
+            </div>
+            <div field_error errors="errors" field="hvac_engineer_title"></div>
+          </div>
+          <div class="form-group" ng-class="errors.hvac_engineer_email ? 'error' : ''">
+            <label for="hvac_engineer_email" class="col-md-2 control-label col-md-offset-1">
+              Email
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="hvac_engineer_email" class="form-control"
+                     ng-model="project.hvac_engineer_email">
+            </div>
+            <div field_error errors="errors" field="hvac_engineer_email"></div>
+          </div>
+          <div class="form-group" ng-class="errors.hvac_engineer_phone ? 'error' : ''">
+            <label for="hvac_engineer_phone" class="col-md-2 control-label col-md-offset-1">
+              Phone
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="hvac_engineer_phone" class="form-control"
+                     ng-model="project.hvac_engineer_phone">
+            </div>
+            <div field_error errors="errors" field="hvac_engineer_phone"></div>
+          </div>
 
+          <div class="form-heading">Energy Modeler</div>
+          <div class="form-group" ng-class="errors.energy_modeler_organization ? 'error' : ''">
+            <label for="energy_modeler_organization" class="col-md-2 control-label col-md-offset-1">
+              Organization
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="energy_modeler_organization" class="form-control"
+                     ng-model="project.energy_modeler_organization">
+            </div>
+            <div field_error errors="errors" field="energy_modeler_organization"></div>
+          </div>
+          <div class="form-group" ng-class="errors.energy_modeler_name ? 'error' : ''">
+            <label for="energy_modeler_name" class="col-md-2 control-label col-md-offset-1">
+              Contact Name
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="energy_modeler_name" class="form-control"
+                     ng-model="project.energy_modeler_name">
+            </div>
+            <div field_error errors="errors" field="energy_modeler_name"></div>
+          </div>
+          <div class="form-group" ng-class="errors.energy_modeler_title ? 'error' : ''">
+            <label for="energy_modeler_title" class="col-md-2 control-label col-md-offset-1">
+              Title
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="energy_modeler_title" class="form-control"
+                     ng-model="project.energy_modeler_title">
+            </div>
+            <div field_error errors="errors" field="energy_modeler_title"></div>
+          </div>
+          <div class="form-group" ng-class="errors.energy_modeler_email ? 'error' : ''">
+            <label for="energy_modeler_email" class="col-md-2 control-label col-md-offset-1">
+              Email
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="energy_modeler_email" class="form-control"
+                     ng-model="project.energy_modeler_email">
+            </div>
+            <div field_error errors="errors" field="energy_modeler_email"></div>
+          </div>
+          <div class="form-group" ng-class="errors.energy_modeler_phone ? 'error' : ''">
+            <label for="energy_modeler_phone" class="col-md-2 control-label col-md-offset-1">
+              Phone
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="energy_modeler_phone" class="form-control"
+                     ng-model="project.energy_modeler_phone">
+            </div>
+            <div field_error errors="errors" field="energy_modeler_phone"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-heading">Architect</div>
+          <div class="form-group" ng-class="errors.architect_organization ? 'error' : ''">
+            <label for="architect_organization" class="col-md-2 control-label col-md-offset-1">
+              Organization
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="architect_organization" class="form-control"
+                     ng-model="project.architect_organization">
+            </div>
+            <div field_error errors="errors" field="architect_organization"></div>
+          </div>
+          <div class="form-group" ng-class="errors.architect_name ? 'error' : ''">
+            <label for="architect_name" class="col-md-2 control-label col-md-offset-1">
+              Contact Name
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="architect_name" class="form-control"
+                     ng-model="project.architect_name">
+            </div>
+            <div field_error errors="errors" field="architect_name"></div>
+          </div>
+          <div class="form-group" ng-class="errors.architect_title ? 'error' : ''">
+            <label for="architect_title" class="col-md-2 control-label col-md-offset-1">
+              Title
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="architect_title" class="form-control"
+                     ng-model="project.architect_title">
+            </div>
+            <div field_error errors="errors" field="architect_title"></div>
+          </div>
+          <div class="form-group" ng-class="errors.architect_email ? 'error' : ''">
+            <label for="architect_email" class="col-md-2 control-label col-md-offset-1">
+              Email
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="architect_email" class="form-control"
+                     ng-model="project.architect_email">
+            </div>
+            <div field_error errors="errors" field="architect_email"></div>
+          </div>
+          <div class="form-group" ng-class="errors.architect_phone ? 'error' : ''">
+            <label for="architect_phone" class="col-md-2 control-label col-md-offset-1">
+              Phone
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="architect_phone" class="form-control"
+                     ng-model="project.architect_phone">
+            </div>
+            <div field_error errors="errors" field="architect_phone"></div>
+          </div>
+
+          <div class="form-heading">Lighting Designer</div>
+          <div class="form-group" ng-class="errors.lighting_designer_organization ? 'error' : ''">
+            <label for="lighting_designer_organization" class="col-md-2 control-label col-md-offset-1">
+              Organization
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="lighting_designer_organization" class="form-control"
+                     ng-model="project.lighting_designer_organization">
+            </div>
+            <div field_error errors="errors" field="lighting_designer_organization"></div>
+          </div>
+          <div class="form-group" ng-class="errors.lighting_designer_name ? 'error' : ''">
+            <label for="lighting_designer_name" class="col-md-2 control-label col-md-offset-1">
+              Contact Name
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="lighting_designer_name" class="form-control"
+                     ng-model="project.lighting_designer_name">
+            </div>
+            <div field_error errors="errors" field="lighting_designer_name"></div>
+          </div>
+          <div class="form-group" ng-class="errors.lighting_designer_title ? 'error' : ''">
+            <label for="lighting_designer_title" class="col-md-2 control-label col-md-offset-1">
+              Title
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="lighting_designer_title" class="form-control"
+                     ng-model="project.lighting_designer_title">
+            </div>
+            <div field_error errors="errors" field="lighting_designer_title"></div>
+          </div>
+          <div class="form-group" ng-class="errors.lighting_designer_email ? 'error' : ''">
+            <label for="lighting_designer_email" class="col-md-2 control-label col-md-offset-1">
+              Email
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="lighting_designer_email" class="form-control"
+                     ng-model="project.lighting_designer_email">
+            </div>
+            <div field_error errors="errors" field="lighting_designer_email"></div>
+          </div>
+          <div class="form-group" ng-class="errors.lighting_designer_phone ? 'error' : ''">
+            <label for="lighting_designer_phone" class="col-md-2 control-label col-md-offset-1">
+              Phone
+            </label>
+            <div class="col-md-5">
+              <input type="text" name="lighting_designer_phone" class="form-control"
+                     ng-model="project.lighting_designer_phone">
+            </div>
+            <div field_error errors="errors" field="lighting_designer_phone"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    </accordion-group>
+  </accordion>
+
+
+  <accordion>
+    <accordion-group is-open="status['exceptional_condition']">
+      <accordion-heading>
+        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': status['exceptional_condition'] , 'glyphicon-chevron-right': !status['exceptional_condition']}"></i>
+        Exceptional Conditions
+      </accordion-heading>
+      <div class="form-group" ng-class="errors.exceptional_condition_no_cooling_system ? 'error' : ''">
+        <div class="col-md-1">
+          <input
+            bs-switch
+            ng-model="project.exceptional_condition_no_cooling_system"
+            type="checkbox"
+            name="exceptional_condition_no_cooling_system"
+            switch-on-text="Yes"
+            switch-off-text="No"
+            ng-true-value="'Yes'"
+            ng-false-value="'No'">
+         </div>
+        <div class="col-md-11 pad-top-5">
+          <label for="exceptional_condition_no_cooling_system">Is any cooling equipment modeled which will not be installed in the actual building?</label>
+        </div>
+      </div>
+      <div class="form-group" ng-class="errors.exceptional_condition_rated_capacity ? 'error' : ''">
+        <div class="col-md-1">
+          <input
+              bs-switch
+              ng-model="project.exceptional_condition_rated_capacity"
+              type="checkbox"
+              name="exceptional_condition_rated_capacity"
+              switch-on-text="Yes"
+              switch-off-text="No"
+              ng-true-value="'Yes'"
+              ng-false-value="'No'">
+        </div>
+        <div class="col-md-11 pad-top-5">
+          <label for="exceptional_condition_rated_capacity">Does the rated capacity of any HVAC equipment installed for your project not match the value used in the compliance analysis?</label>
+        </div>
+      </div>
+      <div class="form-group" ng-class="errors.exceptional_condition_water_heater ? 'error' : ''">
+        <div class="col-md-1">
+          <input
+              bs-switch
+              ng-model="project.exceptional_condition_water_heater"
+              type="checkbox"
+              name="exceptional_condition_water_heater"
+              switch-on-text="Yes"
+              switch-off-text="No"
+              ng-true-value="'Yes'"
+              ng-false-value="'No'">
+        </div>
+        <div class="col-md-11 pad-top-5">
+          <label for="exceptional_condition_water_heater">Is service water heating excluded from the design of this building?</label>
+        </div>
+      </div>
+      <div class="form-group" ng-class="errors.exceptional_condition_modeling ? 'error' : ''">
+        <div class="col-md-1">
+          <input
+              bs-switch
+              ng-model="project.exceptional_condition_modeling"
+              type="checkbox"
+              name="exceptional_condition_modeling"
+              switch-on-text="Yes"
+              switch-off-text="No"
+              ng-true-value="'Yes'"
+              ng-false-value="'No'">
+        </div>
+        <div class="col-md-11 pad-top-5">
+          <label for="exceptional_condition_modeling">Are significant modeling approximations used in this proposed design model?
+            If so, a separate narrative must be provided.</label>
+        </div>
+      </div>
+      <div class="form-group" ng-show="projectForm.exceptional_condition_modeling.$viewValue == true" ng-class="errors.exceptional_condition_narrative ? 'error' : ''">
+        <label for="exceptional_condition_narrative" class="col-md-2 control-label col-md-offset-1">
+          Please provide a narrative:
+        </label>
+        <div class="col-md-4">
+          <textarea rows="5" name="exceptional_condition_narrative" class="form-control"
+                 ng-model="project.exceptional_condition_narrative"></textarea>
+        </div>
+        <div field_error errors="errors" field="exceptional_condition_narrative"></div>
+      </div>
+    </accordion-group>
+  </accordion>
+
+
   <div class="control-group">
     <div class="controls">
-      <a class="btn" ng-click="cancel()">Cancel</a>
-      <button type="submit" class="btn btn-success">Save</button>
+      <button type="submit" ng-click="submit()" class="btn btn-success">Save</button>
     </div>
   </div>
 

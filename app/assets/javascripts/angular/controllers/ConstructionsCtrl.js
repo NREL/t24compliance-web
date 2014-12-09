@@ -1,11 +1,14 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $routeParams, $resource, $location, flash) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'Construction', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, Construction) {
     $scope.gridOptions = {
       data: 'data',
       enableRowHeaderSelection: true,
       enableRowSelection: true,
       multiSelect: false
     };
+
+    //use Construction.index() to retrieve all constructions
+    //use Construction.show(id) to retrieve a construction by id
 
     $scope.data = [
       {
@@ -51,34 +54,29 @@ cbecc.controller('ConstructionsCtrl', [
 
     //collapsible panels
     $scope.panels = [
-        {
-            "title": "Exterior Wall Construction"
-        },
-        {
-            "title": "Interior Wall Construction"
-        },
-        {
-            "title": "Roof Construction"
-        },
-        {
-            "title": "Window Construction"
-        },
-        {
-            "title": "Skylight Construction"
-        },
-        {
-            "title": "Raised Floor Construction"
-        },
-        {
-            "title": "Slab-on-grade Construction"
-        }
-     ];
-
-    $scope.oneAtATime = false;
-    $scope.status = {
-      isFirstOpen: true,
-      isFirstDisabled: false
-    };
+      {
+        "title": "Exterior Wall Construction",
+        "open": true
+      },
+      {
+        "title": "Interior Wall Construction"
+      },
+      {
+        "title": "Roof Construction"
+      },
+      {
+        "title": "Window Construction"
+      },
+      {
+        "title": "Skylight Construction"
+      },
+      {
+        "title": "Raised Floor Construction"
+      },
+      {
+        "title": "Slab-on-grade Construction"
+      }
+    ];
 
     $scope.gridOptions.onRegisterApi = function (gridApi) {
       $scope.gridApi = gridApi;
@@ -91,11 +89,41 @@ cbecc.controller('ConstructionsCtrl', [
       });
     };
 
-    $scope.checkIfFirst = function(first) {
-      console.log(first)
+    // Modal Settings
+    $scope.items = ['item1', 'item2', 'item3'];
+    $scope.openLibraryModal = function (index) {
 
-      }
+      var modalInstance = $modal.open({
+        templateUrl: 'constructions/library.html',
+        controller: 'ModalConstructionsLibraryCtrl',
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
 
-
+      modalInstance.result.then(function (selectedItem) {
+        $scope.panels[index].selected = selectedItem;
+      }, function () {
+        console.log('Modal dismissed at: ' + new Date());
+      });
+    };
   }
 ]);
+
+cbecc.controller('ModalConstructionsLibraryCtrl', function ($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
