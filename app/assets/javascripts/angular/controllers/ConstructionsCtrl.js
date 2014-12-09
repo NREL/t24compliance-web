@@ -74,6 +74,11 @@ cbecc.controller('ConstructionsCtrl', [
         }
      ];
 
+    $scope.oneAtATime = false;
+    $scope.status = {
+      isFirstOpen: true,
+      isFirstDisabled: false
+    };
 
     $scope.gridOptions.onRegisterApi = function (gridApi) {
       $scope.gridApi = gridApi;

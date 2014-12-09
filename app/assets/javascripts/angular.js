@@ -5,6 +5,7 @@
 //= require angular/angular
 //= require angular/cbecc
 //= require angular-animate
+//= require angular-bootstrap
 //= require angular-bootstrap-switch
 //= require angular-flash
 //= require angular-mocks
