@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   root :to => "inputs#dashboard"
 
-  resources :tests, only: [:index, :show, :create, :update, :destroy]
-
   devise_for :users
   resources :users
   get '/admin' => 'users#admin'
@@ -15,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :projects
   get 'wizard' => 'projects#wizard'
+
+  resources :constructions, only: [:show, :index]
 
   resources :windows
 
