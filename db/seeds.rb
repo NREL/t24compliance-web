@@ -15,9 +15,6 @@ u.save!
 
 u.projects.destroy_all
 
-#User.project.delete_all
-
-
 # file = File.read(File.join(Rails.root,"lib/assets/construction_library.json"))
 # data = JSON.parse(file)
 #

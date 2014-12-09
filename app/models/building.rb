@@ -1,6 +1,7 @@
 class Building
   include Mongoid::Document
   include Mongoid::Timestamps
+
   field :name, type: String
   field :function_classification_method, type: String
   field :relocatable_public_school_building, type: Integer
@@ -27,72 +28,165 @@ class Building
   field :coil_cooling_capacity, type: Float
   field :coil_heating_capacity, type: Float
 
-  has_many :building_stories
-  has_many :external_shading_objects
-  has_many :thermal_zones
-  has_many :air_systems
-  has_many :zone_systems
+  has_many :building_stories, dependent: :destroy
+  has_many :external_shading_objects, dependent: :destroy
+  has_many :thermal_zones, dependent: :destroy
+  has_many :air_systems, dependent: :destroy
+  has_many :zone_systems, dependent: :destroy
   belongs_to :project
 
 
   def self.children_models
     children = [
-      'building_story',
-      'external_shading_object',
-      'thermal_zone',
-      'air_system',
-      'zone_system'
+       { model_name: 'building_story', xml_name: 'Story' },
+       { model_name: 'external_shading_object', xml_name: 'ExtShdgObj' },
+       { model_name: 'thermal_zone', xml_name: 'ThrmlZn' },
+       { model_name: 'air_system', xml_name: 'AirSys' },
+       { model_name: 'zone_system', xml_name: 'ZnSys' }
     ]
   end
 
   def self.xml_fields
     xml_fields = [
-      {"db_field_name"=>"name", "xml_field_name"=>"Name"},
-      {"db_field_name"=>"function_classification_method", "xml_field_name"=>"FuncClassMthd"},
-      {"db_field_name"=>"relocatable_public_school_building", "xml_field_name"=>"RelocPubSchoolBldg"},
-      {"db_field_name"=>"whole_building_modeled", "xml_field_name"=>"WholeBldgModeled"},
-      {"db_field_name"=>"building_azimuth", "xml_field_name"=>"BldgAz"},
-      {"db_field_name"=>"total_story_count", "xml_field_name"=>"TotStoryCnt"},
-      {"db_field_name"=>"total_story_count_new", "xml_field_name"=>"TotStoryCntNew"},
-      {"db_field_name"=>"total_story_count_existing", "xml_field_name"=>"TotStoryCntExisting"},
-      {"db_field_name"=>"total_story_count_altered", "xml_field_name"=>"TotStoryCntAltered"},
-      {"db_field_name"=>"above_grade_story_count", "xml_field_name"=>"AboveGrdStoryCnt"},
-      {"db_field_name"=>"above_grade_story_count_new", "xml_field_name"=>"AboveGrdStoryCntNew"},
-      {"db_field_name"=>"above_grade_story_count_existing", "xml_field_name"=>"AboveGrdStoryCntExisting"},
-      {"db_field_name"=>"above_grade_story_count_altered", "xml_field_name"=>"AboveGrdStoryCntAltered"},
-      {"db_field_name"=>"living_unit_count", "xml_field_name"=>"LivingUnitCnt"},
-      {"db_field_name"=>"living_unit_count_new", "xml_field_name"=>"LivingUnitCntNew"},
-      {"db_field_name"=>"living_unit_count_existing", "xml_field_name"=>"LivingUnitCntExisting"},
-      {"db_field_name"=>"living_unit_count_altered", "xml_field_name"=>"LivingUnitCntAltered"},
-      {"db_field_name"=>"total_floor_area", "xml_field_name"=>"TotFlrArea"},
-      {"db_field_name"=>"nonresidential_floor_area", "xml_field_name"=>"NonResFlrArea"},
-      {"db_field_name"=>"residential_floor_area", "xml_field_name"=>"ResFlrArea"},
-      {"db_field_name"=>"total_conditioned_volume", "xml_field_name"=>"TotCondVol"},
-      {"db_field_name"=>"plant_cooling_capacity", "xml_field_name"=>"PlantClgCap"},
-      {"db_field_name"=>"plant_heating_capacity", "xml_field_name"=>"PlantHtgCap"},
-      {"db_field_name"=>"coil_cooling_capacity", "xml_field_name"=>"CoilClgCap"},
-      {"db_field_name"=>"coil_heating_capacity", "xml_field_name"=>"CoilHtgCap"}
+      {:db_field_name=>"name", :xml_field_name=>"Name"},
+      {:db_field_name=>"function_classification_method", :xml_field_name=>"FuncClassMthd"},
+      {:db_field_name=>"relocatable_public_school_building", :xml_field_name=>"RelocPubSchoolBldg"},
+      {:db_field_name=>"whole_building_modeled", :xml_field_name=>"WholeBldgModeled"},
+      {:db_field_name=>"building_azimuth", :xml_field_name=>"BldgAz"},
+      {:db_field_name=>"total_story_count", :xml_field_name=>"TotStoryCnt"},
+      {:db_field_name=>"total_story_count_new", :xml_field_name=>"TotStoryCntNew"},
+      {:db_field_name=>"total_story_count_existing", :xml_field_name=>"TotStoryCntExisting"},
+      {:db_field_name=>"total_story_count_altered", :xml_field_name=>"TotStoryCntAltered"},
+      {:db_field_name=>"above_grade_story_count", :xml_field_name=>"AboveGrdStoryCnt"},
+      {:db_field_name=>"above_grade_story_count_new", :xml_field_name=>"AboveGrdStoryCntNew"},
+      {:db_field_name=>"above_grade_story_count_existing", :xml_field_name=>"AboveGrdStoryCntExisting"},
+      {:db_field_name=>"above_grade_story_count_altered", :xml_field_name=>"AboveGrdStoryCntAltered"},
+      {:db_field_name=>"living_unit_count", :xml_field_name=>"LivingUnitCnt"},
+      {:db_field_name=>"living_unit_count_new", :xml_field_name=>"LivingUnitCntNew"},
+      {:db_field_name=>"living_unit_count_existing", :xml_field_name=>"LivingUnitCntExisting"},
+      {:db_field_name=>"living_unit_count_altered", :xml_field_name=>"LivingUnitCntAltered"},
+      {:db_field_name=>"total_floor_area", :xml_field_name=>"TotFlrArea"},
+      {:db_field_name=>"nonresidential_floor_area", :xml_field_name=>"NonResFlrArea"},
+      {:db_field_name=>"residential_floor_area", :xml_field_name=>"ResFlrArea"},
+      {:db_field_name=>"total_conditioned_volume", :xml_field_name=>"TotCondVol"},
+      {:db_field_name=>"plant_cooling_capacity", :xml_field_name=>"PlantClgCap"},
+      {:db_field_name=>"plant_heating_capacity", :xml_field_name=>"PlantHtgCap"},
+      {:db_field_name=>"coil_cooling_capacity", :xml_field_name=>"CoilClgCap"},
+      {:db_field_name=>"coil_heating_capacity", :xml_field_name=>"CoilHtgCap"}
     ]
   end
 
-  def to_sdd_xml(xml)
-    xml.send(:Bldg) do
-      xml_fields.each do |field|
-        xml.send(:"#{field['xml_field_name']}", self[field['db_field_name']])
+
+  # This method is autogenerated. Do not change directly.
+  def to_sdd_xml(parent, xml)
+    xml.send(parent[:xml_name]) do
+      self.class.xml_fields.each do |field|
+        xml.send(:"#{field[:xml_field_name]}", self[field[:db_field_name]]) if self[field[:db_field_name]]
       end
       # go through children if they have something to add, call their methods
-      kids = self.children_models
+      kids = self.class.children_models
       unless kids.nil? || kids.empty?
         kids.each do |k|
-          models = self.send(k.pluralize)
+          models = self.send(k[:model_name].pluralize)
           models.each do |m|
-            m.to_sdd_xml(xml)
+            m.to_sdd_xml(k, xml)
+          end
+        end
+      end
+    end
+  end
+      
+  # This method is autogenerated. Do not change directly.
+  # Take the map of model name and xml name, and the hash (from the XML).
+  def self.from_sdd_json(parent, h)
+    o = nil
+    if parent && h
+      self_model = parent[:model_name].camelcase(:upper).constantize
+      o = self_model.create_from_sdd_json(parent, h)
+      if o
+        o.create_children_from_sdd_json(parent, h)
+        o.save!
+        o.reload # in case of relationships being updated
+      end
+    end
+
+    o
+  end
+  
+  # This method is autogenerated. Do not change directly.
+  def self.create_from_sdd_json(parent, h)
+    new_h = {}
+
+    # Find fields as defined by the XML
+    self_model = parent[:model_name].camelcase(:upper).constantize
+    self_model.xml_fields.each do |field|
+      if h[field[:xml_field_name]]
+        logger.debug "Field Data Type: #{self_model.fields[field[:db_field_name]].options[:type]}"
+        if self_model.fields[field[:db_field_name]].options[:type].to_s == 'Array'
+          logger.debug "Data model has an array as the field"
+          # check if the hash has an array, otherwise make it an array
+          if h[field[:xml_field_name]].is_a? Array
+            logger.debug "XML/JSON field is already an Array"
+            new_h[field[:db_field_name]] = h[field[:xml_field_name]]
+          else
+            new_h[field[:db_field_name]] = [h[field[:xml_field_name]]]
+          end
+        else
+          new_h[field[:db_field_name]] = h[field[:xml_field_name]]
+        end
+
+      end
+    end
+
+    o = self_model.new(new_h) unless new_h.empty?
+
+    o
+  end
+
+  # This method is autogenerated. Do not change directly.
+  def create_children_from_sdd_json(parent, h)
+    # Go through the children
+    self_model = parent[:model_name].camelcase(:upper).constantize
+    kids = self_model.children_models
+    unless kids.nil? || kids.empty?
+      kids.each do |k|
+        # check if the kids have a json object at this level
+        if h[k[:xml_name]]
+          logger.debug "XML child is #{k[:xml_name]}"
+          logger.debug "Model name is #{k[:model_name]}"
+          if h[k[:xml_name]].is_a? Array
+            logger.debug "#{k[:xml_name]} is an array, will add all the objects"
+            h[k[:xml_name]].each do |h_instance|
+              klass = k[:model_name].camelcase(:upper).constantize
+              if klass.respond_to? :from_sdd_json
+                model = klass.from_sdd_json(k, h_instance)
+
+                # Assign the foreign key on the object
+                model["#{parent[:model_name]}_id"] = self.id
+                model.save!
+              else
+                logger.warn "Class #{klass} does not have instance method 'from_sdd_json'"
+              end
+            end
+          elsif h[k[:xml_name]].is_a? Hash
+            logger.debug "#{k[:xml_name]} is a single object, will add only one"
+            klass = k[:model_name].camelcase(:upper).constantize
+            if klass.respond_to? :from_sdd_json
+              model = klass.from_sdd_json(k, h[k[:xml_name]])
+
+              # Assign the foreign key on the object
+              model["#{parent[:model_name]}_id"] = self.id
+              model.save!
+            else
+              logger.warn "Class #{klass} does not have instance method 'from_sdd_json'"
+            end
           end
         end
       end
     end
   end
 
+  
   def function_classification_method_enums
     [
       'AreaCategoryMethod'

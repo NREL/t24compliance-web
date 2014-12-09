@@ -1,6 +1,7 @@
 class FluidSystem
   include Mongoid::Document
   include Mongoid::Timestamps
+
   field :name, type: String
   field :status, type: String
   field :type, type: String
@@ -25,69 +26,162 @@ class FluidSystem
   field :shw_system_count, type: Integer
   field :annual_solar_fraction, type: Float
 
-  has_many :fluid_segments
-  has_many :chillers
-  has_many :boilers
-  has_many :heat_rejections
-  has_many :water_heaters
+  has_many :fluid_segments, dependent: :destroy
+  has_many :chillers, dependent: :destroy
+  has_many :boilers, dependent: :destroy
+  has_many :heat_rejections, dependent: :destroy
+  has_many :water_heaters, dependent: :destroy
 
 
   def self.children_models
     children = [
-      'fluid_segment',
-      'chiller',
-      'boiler',
-      'heat_rejection',
-      'water_heater'
+       { model_name: 'fluid_segment', xml_name: 'FluidSeg' },
+       { model_name: 'chiller', xml_name: 'Chlr' },
+       { model_name: 'boiler', xml_name: 'Blr' },
+       { model_name: 'heat_rejection', xml_name: 'HtRej' },
+       { model_name: 'water_heater', xml_name: 'WtrHtr' }
     ]
   end
 
   def self.xml_fields
     xml_fields = [
-      {"db_field_name"=>"name", "xml_field_name"=>"Name"},
-      {"db_field_name"=>"status", "xml_field_name"=>"Status"},
-      {"db_field_name"=>"type", "xml_field_name"=>"Type"},
-      {"db_field_name"=>"description", "xml_field_name"=>"Desc"},
-      {"db_field_name"=>"design_supply_water_temperature", "xml_field_name"=>"DsgnSupWtrTemp"},
-      {"db_field_name"=>"heating_design_supply_water_temperature", "xml_field_name"=>"HtgDsgnSupWtrTemp"},
-      {"db_field_name"=>"design_supply_water_temperature_delta_t", "xml_field_name"=>"DsgnSupWtrDelT"},
-      {"db_field_name"=>"control_type", "xml_field_name"=>"CtrlType"},
-      {"db_field_name"=>"temperature_control", "xml_field_name"=>"TempCtrl"},
-      {"db_field_name"=>"fixed_supply_temperature", "xml_field_name"=>"FixedSupTemp"},
-      {"db_field_name"=>"temperature_setpoint_schedule_reference", "xml_field_name"=>"TempSetptSchRef"},
-      {"db_field_name"=>"heating_fixed_supply_temperature", "xml_field_name"=>"HtgFixedSupTemp"},
-      {"db_field_name"=>"heating_temperature_setpoint_schedule_reference", "xml_field_name"=>"HtgTempSetptSchRef"},
-      {"db_field_name"=>"reset_supply_high", "xml_field_name"=>"RstSupHi"},
-      {"db_field_name"=>"reset_supply_low", "xml_field_name"=>"RstSupLow"},
-      {"db_field_name"=>"reset_outdoor_high", "xml_field_name"=>"RstOutdrHi"},
-      {"db_field_name"=>"reset_outdoor_low", "xml_field_name"=>"RstOutdrLow"},
-      {"db_field_name"=>"wet_bulb_approach", "xml_field_name"=>"WetBulbApproach"},
-      {"db_field_name"=>"cooling_supply_temperature", "xml_field_name"=>"ClgSupTemp"},
-      {"db_field_name"=>"heating_supply_temperature", "xml_field_name"=>"HtgSupTemp"},
-      {"db_field_name"=>"evaporator_fluid_segment_in_reference", "xml_field_name"=>"EvapFluidSegInRef"},
-      {"db_field_name"=>"shw_system_count", "xml_field_name"=>"SHWSysCnt"},
-      {"db_field_name"=>"annual_solar_fraction", "xml_field_name"=>"AnnualSolFrac"}
+      {:db_field_name=>"name", :xml_field_name=>"Name"},
+      {:db_field_name=>"status", :xml_field_name=>"Status"},
+      {:db_field_name=>"type", :xml_field_name=>"Type"},
+      {:db_field_name=>"description", :xml_field_name=>"Desc"},
+      {:db_field_name=>"design_supply_water_temperature", :xml_field_name=>"DsgnSupWtrTemp"},
+      {:db_field_name=>"heating_design_supply_water_temperature", :xml_field_name=>"HtgDsgnSupWtrTemp"},
+      {:db_field_name=>"design_supply_water_temperature_delta_t", :xml_field_name=>"DsgnSupWtrDelT"},
+      {:db_field_name=>"control_type", :xml_field_name=>"CtrlType"},
+      {:db_field_name=>"temperature_control", :xml_field_name=>"TempCtrl"},
+      {:db_field_name=>"fixed_supply_temperature", :xml_field_name=>"FixedSupTemp"},
+      {:db_field_name=>"temperature_setpoint_schedule_reference", :xml_field_name=>"TempSetptSchRef"},
+      {:db_field_name=>"heating_fixed_supply_temperature", :xml_field_name=>"HtgFixedSupTemp"},
+      {:db_field_name=>"heating_temperature_setpoint_schedule_reference", :xml_field_name=>"HtgTempSetptSchRef"},
+      {:db_field_name=>"reset_supply_high", :xml_field_name=>"RstSupHi"},
+      {:db_field_name=>"reset_supply_low", :xml_field_name=>"RstSupLow"},
+      {:db_field_name=>"reset_outdoor_high", :xml_field_name=>"RstOutdrHi"},
+      {:db_field_name=>"reset_outdoor_low", :xml_field_name=>"RstOutdrLow"},
+      {:db_field_name=>"wet_bulb_approach", :xml_field_name=>"WetBulbApproach"},
+      {:db_field_name=>"cooling_supply_temperature", :xml_field_name=>"ClgSupTemp"},
+      {:db_field_name=>"heating_supply_temperature", :xml_field_name=>"HtgSupTemp"},
+      {:db_field_name=>"evaporator_fluid_segment_in_reference", :xml_field_name=>"EvapFluidSegInRef"},
+      {:db_field_name=>"shw_system_count", :xml_field_name=>"SHWSysCnt"},
+      {:db_field_name=>"annual_solar_fraction", :xml_field_name=>"AnnualSolFrac"}
     ]
   end
 
-  def to_sdd_xml(xml)
-    xml.send(:FluidSys) do
-      xml_fields.each do |field|
-        xml.send(:"#{field['xml_field_name']}", self[field['db_field_name']])
+
+  # This method is autogenerated. Do not change directly.
+  def to_sdd_xml(parent, xml)
+    xml.send(parent[:xml_name]) do
+      self.class.xml_fields.each do |field|
+        xml.send(:"#{field[:xml_field_name]}", self[field[:db_field_name]]) if self[field[:db_field_name]]
       end
       # go through children if they have something to add, call their methods
-      kids = self.children_models
+      kids = self.class.children_models
       unless kids.nil? || kids.empty?
         kids.each do |k|
-          models = self.send(k.pluralize)
+          models = self.send(k[:model_name].pluralize)
           models.each do |m|
-            m.to_sdd_xml(xml)
+            m.to_sdd_xml(k, xml)
+          end
+        end
+      end
+    end
+  end
+      
+  # This method is autogenerated. Do not change directly.
+  # Take the map of model name and xml name, and the hash (from the XML).
+  def self.from_sdd_json(parent, h)
+    o = nil
+    if parent && h
+      self_model = parent[:model_name].camelcase(:upper).constantize
+      o = self_model.create_from_sdd_json(parent, h)
+      if o
+        o.create_children_from_sdd_json(parent, h)
+        o.save!
+        o.reload # in case of relationships being updated
+      end
+    end
+
+    o
+  end
+  
+  # This method is autogenerated. Do not change directly.
+  def self.create_from_sdd_json(parent, h)
+    new_h = {}
+
+    # Find fields as defined by the XML
+    self_model = parent[:model_name].camelcase(:upper).constantize
+    self_model.xml_fields.each do |field|
+      if h[field[:xml_field_name]]
+        logger.debug "Field Data Type: #{self_model.fields[field[:db_field_name]].options[:type]}"
+        if self_model.fields[field[:db_field_name]].options[:type].to_s == 'Array'
+          logger.debug "Data model has an array as the field"
+          # check if the hash has an array, otherwise make it an array
+          if h[field[:xml_field_name]].is_a? Array
+            logger.debug "XML/JSON field is already an Array"
+            new_h[field[:db_field_name]] = h[field[:xml_field_name]]
+          else
+            new_h[field[:db_field_name]] = [h[field[:xml_field_name]]]
+          end
+        else
+          new_h[field[:db_field_name]] = h[field[:xml_field_name]]
+        end
+
+      end
+    end
+
+    o = self_model.new(new_h) unless new_h.empty?
+
+    o
+  end
+
+  # This method is autogenerated. Do not change directly.
+  def create_children_from_sdd_json(parent, h)
+    # Go through the children
+    self_model = parent[:model_name].camelcase(:upper).constantize
+    kids = self_model.children_models
+    unless kids.nil? || kids.empty?
+      kids.each do |k|
+        # check if the kids have a json object at this level
+        if h[k[:xml_name]]
+          logger.debug "XML child is #{k[:xml_name]}"
+          logger.debug "Model name is #{k[:model_name]}"
+          if h[k[:xml_name]].is_a? Array
+            logger.debug "#{k[:xml_name]} is an array, will add all the objects"
+            h[k[:xml_name]].each do |h_instance|
+              klass = k[:model_name].camelcase(:upper).constantize
+              if klass.respond_to? :from_sdd_json
+                model = klass.from_sdd_json(k, h_instance)
+
+                # Assign the foreign key on the object
+                model["#{parent[:model_name]}_id"] = self.id
+                model.save!
+              else
+                logger.warn "Class #{klass} does not have instance method 'from_sdd_json'"
+              end
+            end
+          elsif h[k[:xml_name]].is_a? Hash
+            logger.debug "#{k[:xml_name]} is a single object, will add only one"
+            klass = k[:model_name].camelcase(:upper).constantize
+            if klass.respond_to? :from_sdd_json
+              model = klass.from_sdd_json(k, h[k[:xml_name]])
+
+              # Assign the foreign key on the object
+              model["#{parent[:model_name]}_id"] = self.id
+              model.save!
+            else
+              logger.warn "Class #{klass} does not have instance method 'from_sdd_json'"
+            end
           end
         end
       end
     end
   end
 
+  
   def status_enums
     [
       'New',
