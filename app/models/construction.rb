@@ -1,6 +1,7 @@
 class Construction
   include Mongoid::Document
 	include Mongoid::Timestamps
+
 	field :name, type: String
 	field :compatible_surface_type, type: String
 	field :type, type: String
@@ -11,5 +12,6 @@ class Construction
 	field :continuous_insulation_material_name, type: String
 	field :layers, type: Array
 
+	index :compatible_surface_type
 
 end
