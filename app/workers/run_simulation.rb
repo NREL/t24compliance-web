@@ -4,10 +4,9 @@ class RunSimulation
   include Sidekiq::Worker
   sidekiq_options :retry => false, :backtrace => true
 
-  def perform(simulation_id, run_file)
+  def perform(simulation_id, run_path)
     simulation = Simulation.find(simulation_id)
-    run_path = File.dirname(run_file)
-    run_filename = File.basename(run_file)
+    run_filename = 'in.xml'
 
     # This section needs to go into an initializer
     # If you are using boot2docker, then you have to deal with all these shananigans
@@ -28,14 +27,14 @@ class RunSimulation
     Docker.url = ENV['DOCKER_HOST']
 
     # What is the longest timeout?
-    docker_container_timeout = 30 * 60 # 30 minutes
+    docker_container_timeout = 60 * 60 # 60 minutes  # how to catch a timeout error?  test this?
     Excon.defaults[:write_timeout] = docker_container_timeout
     Excon.defaults[:read_timeout] = docker_container_timeout
 
 
     current_dir = Dir.pwd
     begin
-      fail "Simulation file does not exist: #{run_file}" unless File.exist? run_file
+      fail "Simulation file does not exist: #{File.join(run_path, run_filename)}" unless File.exist? File.join(run_path, run_filename)
 
       Dir.chdir(run_path)
       puts "Current working directory is: #{Dir.getwd}"

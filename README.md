@@ -42,12 +42,15 @@ To update the dependencies (based on version restrictions in the Bowerfile):
 
 ### CBECC-Com Simulations
 
-To run the web application only, then you can simply start mongo (`mongod`) and then rails (`rails s`). * Note that rails run in JRuby with Puma *
-The CBECC-Com simulations require the following
+To run the web application only, then start the following:
+* mongodb (`mongd`)
+* Run rails (`rails s`) * Note that rails run in JRuby with Puma *
 
-* [boot2docker](https://github.com/boot2docker/boot2docker)
-* redis (`brew install redis`)
-* sidekiq (`bundle exec sidekiq`)
+To run the CBECC-Com simulations, then start the following:
+
+* [boot2docker](https://github.com/boot2docker/boot2docker) then `boot2docker start`. Make sure to export the docker port.
+* redis (`brew install redis`) then `redis-server`
+* sidekiq (installed with bundler) then `bundle exec sidekiq -e development` or `bundle exec sidekiq -e test`
 
 ## System Configuration (Using Chef)
 

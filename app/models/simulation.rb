@@ -2,8 +2,7 @@ class Simulation
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :name, type: String
-  field :filename, type: String
+  field :filename, type: String # this should be used and not passing run_path to the RunSimulation Worker
   field :status, type: String
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
@@ -12,27 +11,42 @@ class Simulation
   field :compliance_report_pdf_path, type: String
 
   #embeds_many :simulation_results
+  belongs_to :project
+
+  before_destroy :remove_files
+
 
   # Run the data point
-  def run_docker
-    run_dir = File.join(Rails.root, 'data', 'simulations', self._id)
-    FileUtils.mkdir_p run_dir
+  def run
+    if Dir.exist? run_path
+      fail "Run for '#{self.project.name}' in directory '#{run_path}' already exists. Delete simulation first"
+    end
+
+    FileUtils.mkdir_p run_path
 
     ## Temp Code
     # clear out the queue until we have proper queue management
     require 'sidekiq/api'
     Sidekiq::Queue.new.clear
     # For now just copy in the example model that we are running into the folder under the new filename
-
-    test_file = File.join(Rails.root, 'spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml')
-    run_file = File.join(run_dir, File.basename(test_file))
     ## End Temp Code
 
-    if File.exists? run_file
-      fail "File #{run_file} already exists. Cannot run the analysis."
-    end
-    FileUtils.copy test_file, run_file
+    # save the xml instance
+    self.project.xml_save("#{run_path}/in.xml")
 
-    RunSimulation.perform_async(self.id, run_file)
+    RunSimulation.perform_async(self.id, run_path)
+  end
+
+  def remove_files
+    if Dir.exist? run_path
+      logger.info "Removing simulation run directory #{run_path}"
+      FileUtils.rm_rf run_path
+    end
+  end
+
+  protected
+
+  def run_path
+    File.join(Rails.root, 'data', 'simulations', Rails.env, self._id)
   end
 end
