@@ -6,7 +6,6 @@ namespace :code_gen do
 
   desc "generate scaffold from inputs"
   task :generate_scaffolds => :environment do
-
     scaffolds = inputs_to_scaffold
 
     # for each scaffold do:
@@ -52,11 +51,8 @@ namespace :code_gen do
 
   desc "add enums, timestamps, and relationships to model.rb"
   task :add_model_extras => :environment do
-
     scaffolds = inputs_to_scaffold
-
     scaffolds.each do |s|
-
       input = Input.find_by(name: s)
 
       # rewrite model file
@@ -120,32 +116,29 @@ namespace :code_gen do
       # replace files
       `rm #{Rails.root}/app/models/#{singularized_filename}.rb`
       `mv #{Rails.root}/app/models/#{singularized_filename}-tmp.rb #{Rails.root}/app/models/#{singularized_filename}.rb`
-
     end
-
   end
 
   desc "save a test project"
   task :test => :environment do
-    f = File.join(Rails.root,"spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
+    f = File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
     p = Project.from_sdd_xml(f)
     puts p.to_sdd_xml
   end
 
   desc "run scaffold and model extras"
   task :generate => [:generate_scaffolds, :add_model_extras]
+
   # HELPER METHODS
 
   # list of inputs to scaffold. Select one of the other.
   def inputs_to_scaffold
     # ['Proj', 'Bldg', 'Story', 'Spc']
-    Input.all.map{|i| i.name}
+    Input.all.map { |i| i.name }
   end
 
   def mongoid_timestamps
-
     "#{' '*2}include Mongoid::Timestamps\n\n"
-
   end
 
   # used by generate_xml_fields_list and generate_sdd_xml
@@ -442,9 +435,8 @@ namespace :code_gen do
   end
 
   def add_missing_relationships
-
     # model to apply to => relationship to add
-    relationships = [
+    [
         {'name' => 'building', 'relation' => "belongs_to :project"},
         {'name' => 'schedule_day', 'relation' => "belongs_to :project"},
         {'name' => 'schedule_week', 'relation' => "belongs_to :project"},
@@ -465,7 +457,6 @@ namespace :code_gen do
   end
 
   def generate_enumerations(input)
-
     # get non-removed inputs which are Enumerations and not set as constant
     enums = []
 
@@ -490,5 +481,4 @@ namespace :code_gen do
     end
     enums
   end
-
 end
