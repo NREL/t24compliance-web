@@ -7,6 +7,9 @@ cbecc.controller('ConstructionsCtrl', [
       multiSelect: false
     };
 
+    //use Construction.index() to retrieve all constructions
+    //use Construction.show(id) to retrieve a construction by id
+
     $scope.data = [
       {
         "Category": "Concrete",
