@@ -1,4 +1,5 @@
 asset 'angular', '~> 1.3.5'
+asset 'angular-bootstrap'
 asset 'angular-bootstrap-switch'
 asset 'angular-flash'
 asset 'angular-mocks', '~> 1.3.5'
@@ -10,6 +11,6 @@ asset 'angular-ui-router'
 asset 'angular-ui-router.stateHelper'
 asset 'bootstrap-sass-official'
 asset 'lodash'
-asset 'angular-bootstrap-switch'
+
 
 resolution 'angular', '~> 1.3.5'

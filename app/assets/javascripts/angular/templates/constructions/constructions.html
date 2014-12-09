@@ -15,23 +15,14 @@
   </div>
 </div>
 
-<!-- ngModel is optional -->
-<div ng-repeat="panel in panels">
-  <div class="panel-group" ng-model="library.construction[field]" bs-collapse>
-    <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a bs-collapse-toggle class="chevron-toggleable">
-          <span class="glyphicon glyphicon-chevron-right"></span>
-          {{ panel.title }}
-        </a>
-      </h4>
-    </div>
-    <div class="panel-collapse" bs-collapse-target ng-class="{katherine: $first}" >
-      <div class="panel-body">
-        {{ panel.body }}
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+<accordion close-others="oneAtATime">
+  <accordion-group ng-repeat="panel in panels">
+    <accordion-heading>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+      {{panel.title}}
+      </accordion-heading>
+      {{panel.title}}
+  </accordion-group>
+</accordion>
+
+
