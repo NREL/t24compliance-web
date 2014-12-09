@@ -4,6 +4,13 @@ cbecc.controller('ProjectCtrl', [
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
 
+    // project tabs
+    $scope.status =
+      {
+        project_team: true,
+        exceptional_condition: true
+      }
+
     if ($routeParams.id) {
       $scope.project = Project.show({id: $routeParams.id});
     }
