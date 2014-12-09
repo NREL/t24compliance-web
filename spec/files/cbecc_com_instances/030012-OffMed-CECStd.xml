@@ -1,0 +1,3324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SDDXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RulesetFilename file="CEC 2013 NonRes.bin"/>
+  <Proj>
+    <Name>030012-OffMed-CECStd</Name>
+    <BldgEngyModelVersion>7</BldgEngyModelVersion>
+    <CreateDate>1415032004</CreateDate>
+    <ModDate>1415032004</ModDate>
+    <RunDate>1414621335</RunDate>
+    <ZipCode>95814</ZipCode>
+    <DDWeatherFile>D:/AEC Ruleset/branches/CBECC-Com13-BZ/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.ddy</DDWeatherFile>
+    <AnnualWeatherFile>D:/AEC Ruleset/branches/CBECC-Com13-BZ/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.epw</AnnualWeatherFile>
+    <ExcptCondNoClgSys>No</ExcptCondNoClgSys>
+    <ExcptCondRtdCap>No</ExcptCondRtdCap>
+    <ExcptCondFanPress>No</ExcptCondFanPress>
+    <ExcptCondWCC>No</ExcptCondWCC>
+    <ExcptCondNarrative>No</ExcptCondNarrative>
+    <AutoHardSize>1</AutoHardSize>
+    <AutoEffInput>1</AutoEffInput>
+    <DefaultDayltgCtrls>1</DefaultDayltgCtrls>
+    <CompType>NewComplete</CompType>
+    <SoftwareVersion>CBECC-Com 2013-3 (653)</SoftwareVersion>
+    <ResultsCurrentMessage>(not current)</ResultsCurrentMessage>
+    <ConsAssm>
+      <Name>Base_CZ12-NonresMetalFrameWallU062</Name>
+      <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
+      <MatRef index="0">Stucco - 7/8 in.</MatRef>
+      <MatRef index="1">Compliance Insulation R13.99</MatRef>
+      <MatRef index="2">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
+      <MatRef index="3">Gypsum Board - 1/2 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Stucco - 7/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Stucco - 7/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Compliance Insulation R13.99</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R13.99</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Metal Wall Framing - 16 or 24 in. OC</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Metal Wall Framing - 16 or 24 in. OC</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Gypsum Board - 1/2 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Gypsum Board - 1/2 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Base_CZ12-SlabOnOrBelowGradeF073</Name>
+      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
+      <SlabType>UnheatedSlabOnGrade</SlabType>
+      <MatRef index="0">Concrete - 140 lb/ft3 - 6 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Concrete - 140 lb/ft3 - 6 in.</Name>
+      <CodeCat>Concrete</CodeCat>
+      <CodeItem>Concrete - 140 lb/ft3 - 6 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039</Name>
+      <CompatibleSurfType>Roof</CompatibleSurfType>
+      <CRRCInitialRefl>0.63</CRRCInitialRefl>
+      <CRRCAgedRefl>0.63</CRRCAgedRefl>
+      <CRRCInitialEmittance>0.85</CRRCInitialEmittance>
+      <CRRCAgedEmittance>0.85</CRRCAgedEmittance>
+      <CRRCProdID>XXXX-XXXX</CRRCProdID>
+      <MatRef index="0">Metal Standing Seam - 1/16 in.</MatRef>
+      <MatRef index="1">Compliance Insulation R24.86</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Metal Standing Seam - 1/16 in.</Name>
+      <CodeCat>Roofing</CodeCat>
+      <CodeItem>Metal Standing Seam - 1/16 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Compliance Insulation R24.86</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R24.86</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>NACM_Interior Wall</Name>
+      <CompatibleSurfType>InteriorWall</CompatibleSurfType>
+      <MatRef index="0">NACM_Gypsum Board 5/8in</MatRef>
+      <MatRef index="1">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
+      <MatRef index="2">NACM_Gypsum Board 5/8in</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>NACM_Gypsum Board 5/8in</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Gypsum Board - 5/8 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>NACM_Drop Ceiling</Name>
+      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
+      <MatRef index="0">NACM_Acoustic Tile 3/4in</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>NACM_Acoustic Tile 3/4in</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>NACM_Interior Floor</Name>
+      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Metal Deck - 1/16 in</MatRef>
+      <MatRef index="1">NACM_Concrete 4in_140lb/ft3</MatRef>
+      <MatRef index="2">NACM_Carpet 3/4in</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>NACM_Concrete 4in_140lb/ft3</Name>
+      <CodeCat>Concrete</CodeCat>
+      <CodeItem>Concrete - 140 lb/ft3 - 4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>NACM_Carpet 3/4in</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Carpet - 3/4 in.</CodeItem>
+    </Mat>
+    <FenCons>
+      <Name>Base_AllCZ_FixedWindowU36</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>FixedWindow</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>NFRCRated</CertificationMthd>
+      <SHGC>0.25</SHGC>
+      <UFactor>0.36</UFactor>
+      <VT>0.42</VT>
+    </FenCons>
+    <Sch>
+      <Name>Office Occupancy</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeOccupancyWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeOccupancyWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeOccupancySun</SchDaySunRef>
+      <SchDayMonRef>OfficeOccupancyWD</SchDayMonRef>
+      <SchDayTueRef>OfficeOccupancyWD</SchDayTueRef>
+      <SchDayWedRef>OfficeOccupancyWD</SchDayWedRef>
+      <SchDayThuRef>OfficeOccupancyWD</SchDayThuRef>
+      <SchDayFriRef>OfficeOccupancyWD</SchDayFriRef>
+      <SchDaySatRef>OfficeOccupancySat</SchDaySatRef>
+      <SchDayHolRef>OfficeOccupancySun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeOccupancySun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancyWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.2</Hr>
+      <Hr index="8">0.95</Hr>
+      <Hr index="9">0.95</Hr>
+      <Hr index="10">0.95</Hr>
+      <Hr index="11">0.95</Hr>
+      <Hr index="12">0.5</Hr>
+      <Hr index="13">0.95</Hr>
+      <Hr index="14">0.95</Hr>
+      <Hr index="15">0.95</Hr>
+      <Hr index="16">0.95</Hr>
+      <Hr index="17">0.3</Hr>
+      <Hr index="18">0.1</Hr>
+      <Hr index="19">0.1</Hr>
+      <Hr index="20">0.1</Hr>
+      <Hr index="21">0.1</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancySat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.1</Hr>
+      <Hr index="13">0.1</Hr>
+      <Hr index="14">0.1</Hr>
+      <Hr index="15">0.1</Hr>
+      <Hr index="16">0.1</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office Receptacle</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeReceptacleWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeReceptacleWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeReceptacleSun</SchDaySunRef>
+      <SchDayMonRef>OfficeReceptacleWD</SchDayMonRef>
+      <SchDayTueRef>OfficeReceptacleWD</SchDayTueRef>
+      <SchDayWedRef>OfficeReceptacleWD</SchDayWedRef>
+      <SchDayThuRef>OfficeReceptacleWD</SchDayThuRef>
+      <SchDayFriRef>OfficeReceptacleWD</SchDayFriRef>
+      <SchDaySatRef>OfficeReceptacleSat</SchDaySatRef>
+      <SchDayHolRef>OfficeReceptacleSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeReceptacleSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.1</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.9</Hr>
+      <Hr index="9">0.9</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.5</Hr>
+      <Hr index="18">0.3</Hr>
+      <Hr index="19">0.3</Hr>
+      <Hr index="20">0.2</Hr>
+      <Hr index="21">0.2</Hr>
+      <Hr index="22">0.1</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.15</Hr>
+      <Hr index="13">0.15</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.15</Hr>
+      <Hr index="16">0.15</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office ServiceHotWater</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeServiceHotWaterWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeServiceHotWaterWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeServiceHotWaterSun</SchDaySunRef>
+      <SchDayMonRef>OfficeServiceHotWaterWD</SchDayMonRef>
+      <SchDayTueRef>OfficeServiceHotWaterWD</SchDayTueRef>
+      <SchDayWedRef>OfficeServiceHotWaterWD</SchDayWedRef>
+      <SchDayThuRef>OfficeServiceHotWaterWD</SchDayThuRef>
+      <SchDayFriRef>OfficeServiceHotWaterWD</SchDayFriRef>
+      <SchDaySatRef>OfficeServiceHotWaterSat</SchDaySatRef>
+      <SchDayHolRef>OfficeServiceHotWaterSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeServiceHotWaterSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.04</Hr>
+      <Hr index="1">0.04</Hr>
+      <Hr index="2">0.04</Hr>
+      <Hr index="3">0.04</Hr>
+      <Hr index="4">0.04</Hr>
+      <Hr index="5">0.07</Hr>
+      <Hr index="6">0.04</Hr>
+      <Hr index="7">0.04</Hr>
+      <Hr index="8">0.04</Hr>
+      <Hr index="9">0.04</Hr>
+      <Hr index="10">0.04</Hr>
+      <Hr index="11">0.06</Hr>
+      <Hr index="12">0.06</Hr>
+      <Hr index="13">0.09</Hr>
+      <Hr index="14">0.06</Hr>
+      <Hr index="15">0.04</Hr>
+      <Hr index="16">0.04</Hr>
+      <Hr index="17">0.04</Hr>
+      <Hr index="18">0.04</Hr>
+      <Hr index="19">0.04</Hr>
+      <Hr index="20">0.04</Hr>
+      <Hr index="21">0.07</Hr>
+      <Hr index="22">0.04</Hr>
+      <Hr index="23">0.04</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.08</Hr>
+      <Hr index="6">0.07</Hr>
+      <Hr index="7">0.19</Hr>
+      <Hr index="8">0.35</Hr>
+      <Hr index="9">0.38</Hr>
+      <Hr index="10">0.39</Hr>
+      <Hr index="11">0.47</Hr>
+      <Hr index="12">0.57</Hr>
+      <Hr index="13">0.54</Hr>
+      <Hr index="14">0.34</Hr>
+      <Hr index="15">0.33</Hr>
+      <Hr index="16">0.44</Hr>
+      <Hr index="17">0.26</Hr>
+      <Hr index="18">0.21</Hr>
+      <Hr index="19">0.15</Hr>
+      <Hr index="20">0.17</Hr>
+      <Hr index="21">0.08</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.08</Hr>
+      <Hr index="6">0.07</Hr>
+      <Hr index="7">0.11</Hr>
+      <Hr index="8">0.15</Hr>
+      <Hr index="9">0.21</Hr>
+      <Hr index="10">0.19</Hr>
+      <Hr index="11">0.23</Hr>
+      <Hr index="12">0.2</Hr>
+      <Hr index="13">0.19</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.12</Hr>
+      <Hr index="16">0.14</Hr>
+      <Hr index="17">0.07</Hr>
+      <Hr index="18">0.07</Hr>
+      <Hr index="19">0.07</Hr>
+      <Hr index="20">0.07</Hr>
+      <Hr index="21">0.09</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office Elevator</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">OfficeElevatorWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeElevatorWk</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>OfficeElevatorWD</SchDayWDRef>
+      <SchDaySunRef>OfficeElevatorSun</SchDaySunRef>
+      <SchDaySatRef>OfficeElevatorSat</SchDaySatRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeElevatorWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.69</Hr>
+      <Hr index="9">0.43</Hr>
+      <Hr index="10">0.37</Hr>
+      <Hr index="11">0.43</Hr>
+      <Hr index="12">0.58</Hr>
+      <Hr index="13">0.48</Hr>
+      <Hr index="14">0.37</Hr>
+      <Hr index="15">0.37</Hr>
+      <Hr index="16">0.46</Hr>
+      <Hr index="17">0.62</Hr>
+      <Hr index="18">0.2</Hr>
+      <Hr index="19">0.12</Hr>
+      <Hr index="20">0.04</Hr>
+      <Hr index="21">0.04</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.16</Hr>
+      <Hr index="8">0.14</Hr>
+      <Hr index="9">0.21</Hr>
+      <Hr index="10">0.18</Hr>
+      <Hr index="11">0.25</Hr>
+      <Hr index="12">0.21</Hr>
+      <Hr index="13">0.13</Hr>
+      <Hr index="14">0.08</Hr>
+      <Hr index="15">0.04</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.06</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office Lights</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeLightsWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeLightsWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeLightsSun</SchDaySunRef>
+      <SchDayMonRef>OfficeLightsWD</SchDayMonRef>
+      <SchDayTueRef>OfficeLightsWD</SchDayTueRef>
+      <SchDayWedRef>OfficeLightsWD</SchDayWedRef>
+      <SchDayThuRef>OfficeLightsWD</SchDayThuRef>
+      <SchDayFriRef>OfficeLightsWD</SchDayFriRef>
+      <SchDaySatRef>OfficeLightsSat</SchDaySatRef>
+      <SchDayHolRef>OfficeLightsSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeLightsSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeLightsWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.1</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.65</Hr>
+      <Hr index="9">0.65</Hr>
+      <Hr index="10">0.65</Hr>
+      <Hr index="11">0.65</Hr>
+      <Hr index="12">0.65</Hr>
+      <Hr index="13">0.65</Hr>
+      <Hr index="14">0.65</Hr>
+      <Hr index="15">0.65</Hr>
+      <Hr index="16">0.65</Hr>
+      <Hr index="17">0.35</Hr>
+      <Hr index="18">0.3</Hr>
+      <Hr index="19">0.3</Hr>
+      <Hr index="20">0.2</Hr>
+      <Hr index="21">0.2</Hr>
+      <Hr index="22">0.1</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeLightsSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.15</Hr>
+      <Hr index="13">0.15</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.15</Hr>
+      <Hr index="16">0.15</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Assembly Lights</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">AssemblyLightsWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>AssemblyLightsWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>AssemblyLightsSun</SchDaySunRef>
+      <SchDayMonRef>AssemblyLightsWD</SchDayMonRef>
+      <SchDayTueRef>AssemblyLightsWD</SchDayTueRef>
+      <SchDayWedRef>AssemblyLightsWD</SchDayWedRef>
+      <SchDayThuRef>AssemblyLightsWD</SchDayThuRef>
+      <SchDayFriRef>AssemblyLightsWD</SchDayFriRef>
+      <SchDaySatRef>AssemblyLightsSat</SchDaySatRef>
+      <SchDayHolRef>AssemblyLightsSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OnDay</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OffDay</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLightsSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.55</Hr>
+      <Hr index="13">0.55</Hr>
+      <Hr index="14">0.55</Hr>
+      <Hr index="15">0.55</Hr>
+      <Hr index="16">0.55</Hr>
+      <Hr index="17">0.55</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.55</Hr>
+      <Hr index="20">0.55</Hr>
+      <Hr index="21">0.55</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLightsWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.35</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.35</Hr>
+      <Hr index="9">0.65</Hr>
+      <Hr index="10">0.65</Hr>
+      <Hr index="11">0.65</Hr>
+      <Hr index="12">0.65</Hr>
+      <Hr index="13">0.65</Hr>
+      <Hr index="14">0.65</Hr>
+      <Hr index="15">0.65</Hr>
+      <Hr index="16">0.65</Hr>
+      <Hr index="17">0.65</Hr>
+      <Hr index="18">0.65</Hr>
+      <Hr index="19">0.65</Hr>
+      <Hr index="20">0.65</Hr>
+      <Hr index="21">0.65</Hr>
+      <Hr index="22">0.25</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLightsSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.4</Hr>
+      <Hr index="10">0.4</Hr>
+      <Hr index="11">0.4</Hr>
+      <Hr index="12">0.4</Hr>
+      <Hr index="13">0.4</Hr>
+      <Hr index="14">0.4</Hr>
+      <Hr index="15">0.4</Hr>
+      <Hr index="16">0.4</Hr>
+      <Hr index="17">0.4</Hr>
+      <Hr index="18">0.4</Hr>
+      <Hr index="19">0.4</Hr>
+      <Hr index="20">0.4</Hr>
+      <Hr index="21">0.4</Hr>
+      <Hr index="22">0.4</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office ClgSetPt</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeClgSetPtWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeClgSetPtWk</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>OfficeClgSetPtSun</SchDaySunRef>
+      <SchDayMonRef>OfficeClgSetPtWD</SchDayMonRef>
+      <SchDayTueRef>OfficeClgSetPtWD</SchDayTueRef>
+      <SchDayWedRef>OfficeClgSetPtWD</SchDayWedRef>
+      <SchDayThuRef>OfficeClgSetPtWD</SchDayThuRef>
+      <SchDayFriRef>OfficeClgSetPtWD</SchDayFriRef>
+      <SchDaySatRef>OfficeClgSetPtSat</SchDaySatRef>
+      <SchDayHolRef>OfficeClgSetPtSun</SchDayHolRef>
+      <SchDayClgDDRef>OfficeClgSetPtWD</SchDayClgDDRef>
+      <SchDayHtgDDRef>OfficeClgSetPtWD</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeClgSetPtSun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">85</Hr>
+      <Hr index="1">85</Hr>
+      <Hr index="2">85</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">85</Hr>
+      <Hr index="6">85</Hr>
+      <Hr index="7">85</Hr>
+      <Hr index="8">85</Hr>
+      <Hr index="9">85</Hr>
+      <Hr index="10">85</Hr>
+      <Hr index="11">85</Hr>
+      <Hr index="12">85</Hr>
+      <Hr index="13">85</Hr>
+      <Hr index="14">85</Hr>
+      <Hr index="15">85</Hr>
+      <Hr index="16">85</Hr>
+      <Hr index="17">85</Hr>
+      <Hr index="18">85</Hr>
+      <Hr index="19">85</Hr>
+      <Hr index="20">85</Hr>
+      <Hr index="21">85</Hr>
+      <Hr index="22">85</Hr>
+      <Hr index="23">85</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeClgSetPtWD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">85</Hr>
+      <Hr index="1">85</Hr>
+      <Hr index="2">85</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">75</Hr>
+      <Hr index="6">75</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">75</Hr>
+      <Hr index="20">75</Hr>
+      <Hr index="21">75</Hr>
+      <Hr index="22">75</Hr>
+      <Hr index="23">75</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeClgSetPtSat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">85</Hr>
+      <Hr index="1">85</Hr>
+      <Hr index="2">85</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">75</Hr>
+      <Hr index="6">75</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">85</Hr>
+      <Hr index="20">85</Hr>
+      <Hr index="21">85</Hr>
+      <Hr index="22">85</Hr>
+      <Hr index="23">85</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office HtgSetPt</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeHtgSetPtWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeHtgSetPtWk</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>OfficeHtgSetPtSun</SchDaySunRef>
+      <SchDayMonRef>OfficeHtgSetPtWD</SchDayMonRef>
+      <SchDayTueRef>OfficeHtgSetPtWD</SchDayTueRef>
+      <SchDayWedRef>OfficeHtgSetPtWD</SchDayWedRef>
+      <SchDayThuRef>OfficeHtgSetPtWD</SchDayThuRef>
+      <SchDayFriRef>OfficeHtgSetPtWD</SchDayFriRef>
+      <SchDaySatRef>OfficeHtgSetPtSat</SchDaySatRef>
+      <SchDayHolRef>OfficeHtgSetPtSun</SchDayHolRef>
+      <SchDayClgDDRef>OfficeHtgSetPtWD</SchDayClgDDRef>
+      <SchDayHtgDDRef>OfficeHtgSetPtWD</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeHtgSetPtSun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">60</Hr>
+      <Hr index="1">60</Hr>
+      <Hr index="2">60</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">60</Hr>
+      <Hr index="6">60</Hr>
+      <Hr index="7">60</Hr>
+      <Hr index="8">60</Hr>
+      <Hr index="9">60</Hr>
+      <Hr index="10">60</Hr>
+      <Hr index="11">60</Hr>
+      <Hr index="12">60</Hr>
+      <Hr index="13">60</Hr>
+      <Hr index="14">60</Hr>
+      <Hr index="15">60</Hr>
+      <Hr index="16">60</Hr>
+      <Hr index="17">60</Hr>
+      <Hr index="18">60</Hr>
+      <Hr index="19">60</Hr>
+      <Hr index="20">60</Hr>
+      <Hr index="21">60</Hr>
+      <Hr index="22">60</Hr>
+      <Hr index="23">60</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeHtgSetPtWD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">60</Hr>
+      <Hr index="1">60</Hr>
+      <Hr index="2">60</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">70</Hr>
+      <Hr index="6">70</Hr>
+      <Hr index="7">70</Hr>
+      <Hr index="8">70</Hr>
+      <Hr index="9">70</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">70</Hr>
+      <Hr index="20">70</Hr>
+      <Hr index="21">70</Hr>
+      <Hr index="22">70</Hr>
+      <Hr index="23">70</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeHtgSetPtSat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">60</Hr>
+      <Hr index="1">60</Hr>
+      <Hr index="2">60</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">70</Hr>
+      <Hr index="6">70</Hr>
+      <Hr index="7">70</Hr>
+      <Hr index="8">70</Hr>
+      <Hr index="9">70</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">60</Hr>
+      <Hr index="20">60</Hr>
+      <Hr index="21">60</Hr>
+      <Hr index="22">60</Hr>
+      <Hr index="23">60</Hr>
+    </SchDay>
+    <Bldg>
+      <Name>OfficeMedium</Name>
+      <TotStoryCnt>3</TotStoryCnt>
+      <AboveGrdStoryCnt>3</AboveGrdStoryCnt>
+      <Story>
+        <Name>BottomFlr</Name>
+        <Spc>
+          <Name>Core_bottom</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Core_bottom Thermal Zone</ThrmlZnRef>
+          <Vol>95280.3</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <ElevCnt>1</ElevCnt>
+          <ElevLostFrac>1</ElevLostFrac>
+          <EscalCnt>1</EscalCnt>
+          <EscalLostFrac>1</EscalLostFrac>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Core_bot_ZN_5_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <IntWall>
+            <Name>Core_bot_ZN_5_Wall_East</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_bot_ZN_5_Wall_North</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_bot_ZN_5_Wall_South</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_bot_ZN_5_Wall_West</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_bot_ZN_1</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Perimeter_bot_ZN_1 Thermal Zone</ThrmlZnRef>
+          <Vol>20085.9</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Perimeter_bot_ZN_1_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <IntWall>
+            <Name>Perimeter_bot_ZN_1_Wall_East</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <ExtWall>
+            <Name>Perimeter_bot_ZN_1_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_bot_ZN_1_Wall_South_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>7.64206</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>0</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>0</Coord><Coord>7.64206</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_bot_ZN_4_Wall_South Reversed</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_bot_ZN_2</Name>
+          <ThrmlZnRef>Perimeter_bot_ZN_2 Thermal Zone</ThrmlZnRef>
+          <Vol>12716.1</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Perimeter_bot_ZN_2_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Perimeter_bot_ZN_2_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_bot_ZN_2_Wall_East_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>163.75</Coord><Coord>0.01</Coord><Coord>7.64206</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>0.01</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>109.156</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>109.156</Coord><Coord>7.64206</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_bot_ZN_2_Wall_North</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_bot_ZN_3</Name>
+          <ThrmlZnRef>Perimeter_bot_ZN_3 Thermal Zone</ThrmlZnRef>
+          <Vol>20085.9</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Perimeter_bot_ZN_3_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Perimeter_bot_ZN_3_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_bot_ZN_3_Wall_North_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>163.747</Coord><Coord>109.166</Coord><Coord>7.64206</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>109.166</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>7.64206</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_bot_ZN_3_Wall_West</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_bot_ZN_4</Name>
+          <ThrmlZnRef>Perimeter_bot_ZN_4 Thermal Zone</ThrmlZnRef>
+          <Vol>12715.2</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Perimeter_bot_ZN_4_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Perimeter_bot_ZN_4_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_bot_ZN_4_Wall_West_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>109.156</Coord><Coord>7.64206</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.156</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.01</Coord><Coord>3.35072</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.01</Coord><Coord>7.64206</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+        </Spc>
+        <Spc>
+          <Name>FirstFloor_Plenum</Name>
+          <CondgType>Plenum</CondgType>
+          <ThrmlZnRef>FirstFloor_Plenum Thermal Zone</ThrmlZnRef>
+          <Vol>71503.7</Vol>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Core_bot_ZN_5_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Core_bottom</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_bot_Plenum_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_bot_Plenum_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_bot_Plenum_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_bot_Plenum_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <IntFlr>
+            <Name>Perimeter_bot_ZN_1_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_bot_ZN_2_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_bot_ZN_3_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_bot_ZN_4_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_bot_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>9</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>9</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+        </Spc>
+      </Story>
+      <Story>
+        <Name>MidFlr</Name>
+        <Spc>
+          <Name>Core_mid</Name>
+          <ThrmlZnRef>Core_mid Thermal Zone</ThrmlZnRef>
+          <Vol>95280.3</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Core_mid_ZN_5_Floor</Name>
+            <AdjacentSpcRef>FirstFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntWall>
+            <Name>Core_mid_ZN_5_Wall_East</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_mid_ZN_5_Wall_North</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_mid_ZN_5_Wall_South</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_mid_ZN_5_Wall_West</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_mid_ZN_1</Name>
+          <ThrmlZnRef>Perimeter_mid_ZN_1 Thermal Zone</ThrmlZnRef>
+          <Vol>20085.9</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_1_Floor</Name>
+            <AdjacentSpcRef>FirstFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntWall>
+            <Name>Perimeter_mid_ZN_1_Wall_East</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <ExtWall>
+            <Name>Perimeter_mid_ZN_1_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_mid_ZN_1_Wall_South_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>20.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>0</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>0</Coord><Coord>20.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_mid_ZN_4_Wall_South Reversed</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_mid_ZN_2</Name>
+          <ThrmlZnRef>Perimeter_mid_ZN_2 Thermal Zone</ThrmlZnRef>
+          <Vol>12716.1</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_2_Floor</Name>
+            <AdjacentSpcRef>FirstFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_mid_ZN_2_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_mid_ZN_2_Wall_East_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>163.75</Coord><Coord>0.01</Coord><Coord>20.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>0.01</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>109.156</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>109.156</Coord><Coord>20.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_mid_ZN_2_Wall_North</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_mid_ZN_3</Name>
+          <ThrmlZnRef>Perimeter_mid_ZN_3 Thermal Zone</ThrmlZnRef>
+          <Vol>20085.9</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_3_Floor</Name>
+            <AdjacentSpcRef>FirstFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_mid_ZN_3_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_mid_ZN_3_Wall_North_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>163.747</Coord><Coord>109.166</Coord><Coord>20.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>109.166</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>20.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_mid_ZN_3_Wall_West</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_mid_ZN_4</Name>
+          <ThrmlZnRef>Perimeter_mid_ZN_4 Thermal Zone</ThrmlZnRef>
+          <Vol>12715.2</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_4_Floor</Name>
+            <AdjacentSpcRef>FirstFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_mid_ZN_4_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>13</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_mid_ZN_4_Wall_West_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>109.156</Coord><Coord>20.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.156</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.01</Coord><Coord>16.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.01</Coord><Coord>20.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+        </Spc>
+        <Spc>
+          <Name>MidFloor_Plenum</Name>
+          <CondgType>Plenum</CondgType>
+          <ThrmlZnRef>MidFloor_Plenum Thermal Zone</ThrmlZnRef>
+          <Vol>71503.7</Vol>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Core_mid_ZN_5_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Core_mid</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_mid_Plenum_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_mid_Plenum_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_mid_Plenum_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_mid_Plenum_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_1_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_2_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_3_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_mid_ZN_4_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_mid_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>22</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>22</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+        </Spc>
+      </Story>
+      <Story>
+        <Name>TopFloor</Name>
+        <Spc>
+          <Name>Core_top</Name>
+          <ThrmlZnRef>Core_top Thermal Zone</ThrmlZnRef>
+          <Vol>95280.3</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Core_top_ZN_5_Floor</Name>
+            <AdjacentSpcRef>MidFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntWall>
+            <Name>Core_top_ZN_5_Wall_East</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_top_ZN_5_Wall_North</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_top_ZN_5_Wall_South</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <IntWall>
+            <Name>Core_top_ZN_5_Wall_West</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_top_ZN_1</Name>
+          <ThrmlZnRef>Perimeter_top_ZN_1 Thermal Zone</ThrmlZnRef>
+          <Vol>20085.9</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_1_Floor</Name>
+            <AdjacentSpcRef>MidFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntWall>
+            <Name>Perimeter_top_ZN_1_Wall_East</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <ExtWall>
+            <Name>Perimeter_top_ZN_1_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_top_ZN_1_Wall_South_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>33.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>0</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>0</Coord><Coord>33.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_top_ZN_4_Wall_South Reversed</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_top_ZN_2</Name>
+          <ThrmlZnRef>Perimeter_top_ZN_2 Thermal Zone</ThrmlZnRef>
+          <Vol>12716.1</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_2_Floor</Name>
+            <AdjacentSpcRef>MidFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_top_ZN_2_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_top_ZN_2_Wall_East_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>163.75</Coord><Coord>0.01</Coord><Coord>33.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>0.01</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>109.156</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>163.75</Coord><Coord>109.156</Coord><Coord>33.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_top_ZN_2_Wall_North</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_top_ZN_3</Name>
+          <ThrmlZnRef>Perimeter_top_ZN_3 Thermal Zone</ThrmlZnRef>
+          <Vol>20085.9</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_3_Floor</Name>
+            <AdjacentSpcRef>MidFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_top_ZN_3_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_top_ZN_3_Wall_North_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>163.747</Coord><Coord>109.166</Coord><Coord>33.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>163.747</Coord><Coord>109.166</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>33.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_top_ZN_3_Wall_West</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_top_ZN_4</Name>
+          <ThrmlZnRef>Perimeter_top_ZN_4 Thermal Zone</ThrmlZnRef>
+          <Vol>12715.2</Vol>
+          <SpcFuncDefaultsRef>Office Mod Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSys1 Supply</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_4_Floor</Name>
+            <AdjacentSpcRef>MidFloor_Plenum</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Floor</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_top_ZN_4_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>26</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Perimeter_top_ZN_4_Wall_West_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>109.156</Coord><Coord>33.6421</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>109.156</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.01</Coord><Coord>29.3507</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.01</Coord><Coord>33.6421</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+        </Spc>
+        <Spc>
+          <Name>TopFloor_Plenum</Name>
+          <CondgType>Plenum</CondgType>
+          <ThrmlZnRef>TopFloor_Plenum Thermal Zone</ThrmlZnRef>
+          <Vol>71503.7</Vol>
+          <PolyLp>
+            <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+            <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+          </PolyLp>
+          <Roof>
+            <Name>Building_Roof</Name>
+            <ConsAssmRef>Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>39</Coord></CartesianPt>
+            </PolyLp>
+          </Roof>
+          <IntFlr>
+            <Name>Core_top_ZN_5_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Core_top</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <ExtWall>
+            <Name>Perimeter_top_Plenum_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>39</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_top_Plenum_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>39</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_top_Plenum_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>39</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Perimeter_top_Plenum_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>39</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>39</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_1_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_2_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>163.75</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_3_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>163.75</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>148.745</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>Perimeter_top_ZN_4_Ceiling Reversed</Name>
+            <AdjacentSpcRef>Perimeter_top_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>109.166</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>94.1621</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>15.0039</Coord><Coord>15.0039</Coord><Coord>35</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>35</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+        </Spc>
+      </Story>
+      <ThrmlZn>
+        <Name>Core_bottom Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>BottomVAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_bot_ZN_1 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>BottomVAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_bot_ZN_2 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>BottomVAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_bot_ZN_3 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>BottomVAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_bot_ZN_4 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>BottomVAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>FirstFloor_Plenum Thermal Zone</Name>
+        <Type>Plenum</Type>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Core_mid Thermal Zone</Name>
+        <PriAirCondgSysRef>Mid VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_mid_ZN_1 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Mid VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_mid_ZN_2 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Mid VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_mid_ZN_3 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Mid VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_mid_ZN_4 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Mid VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>MidFloor_Plenum Thermal Zone</Name>
+        <Type>Plenum</Type>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Core_top Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Top VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_top_ZN_1 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Top VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_top_ZN_2 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Top VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_top_ZN_3 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Top VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_top_ZN_4 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Top VAV</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>TopFloor_Plenum Thermal Zone</Name>
+        <Type>Plenum</Type>
+      </ThrmlZn>
+      <AirSys>
+        <Name>BottomVAV</Name>
+        <Type>PVAV</Type>
+        <CtrlSysType>DDCToZone</CtrlSysType>
+        <ReheatCtrlMthd>DualMaximum</ReheatCtrlMthd>
+        <ClgCtrl>WarmestResetFlowFirst</ClgCtrl>
+        <ClRstSupHi>60</ClRstSupHi>
+        <ClRstSupLow>55</ClRstSupLow>
+        <AirSeg>
+          <Name>Bottom VAV AirSegment Supply</Name>
+          <Type>Supply</Type>
+          <CoilHtg>
+            <Name>Bottom VAV CoilHeating</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+          <CoilClg>
+            <Name>Bottom VAV CoilCooling</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <NumClgStages>2</NumClgStages>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <Fan>
+            <Name>BottomVAV SupplyFan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Bottom VAV ReturnAirSegment</Name>
+          <Type>Relief</Type>
+          <Fan>
+            <Name>Bottom VAV Relief Fan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>CoreBottomZn TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Core_bottom Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Bottom VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>CoreBottomReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterBottomZn1 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_bot_ZN_1 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Bottom VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterBottom1ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterBottomZn2 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_bot_ZN_2 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Bottom VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterBottom2ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterBottomZn3 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_bot_ZN_3 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Bottom VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterBottom3ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterBottomZn4 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_bot_ZN_4 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Bottom VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterBottom4ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>BottomVAV Economizer</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+          <AirSegSupRef>Bottom VAV AirSegment Supply</AirSegSupRef>
+          <AirSegRetRef>Bottom VAV ReturnAirSegment</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Mid VAV</Name>
+        <Type>PVAV</Type>
+        <CtrlSysType>DDCToZone</CtrlSysType>
+        <ReheatCtrlMthd>DualMaximum</ReheatCtrlMthd>
+        <ClgCtrl>WarmestResetFlowFirst</ClgCtrl>
+        <ClRstSupHi>60</ClRstSupHi>
+        <ClRstSupLow>55</ClRstSupLow>
+        <AirSeg>
+          <Name>Mid VAV AirSegment Supply</Name>
+          <Type>Supply</Type>
+          <CoilHtg>
+            <Name>Mid VAV CoilHeating</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+          <CoilClg>
+            <Name>Mid VAV CoilCooling</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <NumClgStages>2</NumClgStages>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <Fan>
+            <Name>MidVAV SupplyFan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>MidVAV RetAirSeg</Name>
+          <Type>Relief</Type>
+          <Fan>
+            <Name>Mid VAV Relief Fan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>CoreMidZn TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Core_mid Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Mid VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>CoreMidReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterMidZn1 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_mid_ZN_1 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Mid VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterMid1ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterMidZn2 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_mid_ZN_2 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Mid VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterMid2ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterMidZn3 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_mid_ZN_3 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Mid VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterMid3ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterMidZn4 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_mid_ZN_4 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Mid VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterMid4ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>MidVAV OACtrl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+          <AirSegSupRef>Mid VAV AirSegment Supply</AirSegSupRef>
+          <AirSegRetRef>MidVAV RetAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Top VAV</Name>
+        <Type>PVAV</Type>
+        <CtrlSysType>DDCToZone</CtrlSysType>
+        <ReheatCtrlMthd>DualMaximum</ReheatCtrlMthd>
+        <ClgCtrl>WarmestResetFlowFirst</ClgCtrl>
+        <ClRstSupHi>60</ClRstSupHi>
+        <ClRstSupLow>55</ClRstSupLow>
+        <AirSeg>
+          <Name>Top VAV AirSegment Supply</Name>
+          <Type>Supply</Type>
+          <CoilHtg>
+            <Name>Top VAV CoilHeating</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+          <CoilClg>
+            <Name>Top VAV CoilCooling</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <NumClgStages>2</NumClgStages>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <Fan>
+            <Name>TopVAV SupplyFan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>TopVAV RetAirSeg</Name>
+          <Type>Relief</Type>
+          <Fan>
+            <Name>Top VAV Relief Fan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Core Top Zn TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Core_top Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Top VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>CoreTopReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterTopZn1 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_top_ZN_1 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Top VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterTop1ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterTopZn2 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_top_ZN_2 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Top VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterTop2ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterTopZn3 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_top_ZN_3 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Top VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterTop3ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <TrmlUnit>
+          <Name>PerimeterTopZn4 TU</Name>
+          <Type>VAVReheatBox</Type>
+          <ZnServedRef>Perimeter_top_ZN_4 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Top VAV AirSegment Supply</PriAirSegRef>
+          <CoilHtg>
+            <Name>PerimeterTop4ReheatCoil</Name>
+            <Type>HotWater</Type>
+            <FluidSegInRef>HW Primary Supply</FluidSegInRef>
+            <FluidSegOutRef>HW Primary Return</FluidSegOutRef>
+          </CoilHtg>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>Top VAV OACtrl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+          <AirSegSupRef>Top VAV AirSegment Supply</AirSegSupRef>
+          <AirSegRetRef>TopVAV RetAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+    </Bldg>
+    <FluidSys>
+      <Name>HotWater Loop</Name>
+      <Type>HotWater</Type>
+      <RstSupHi>180</RstSupHi>
+      <RstSupLow>130</RstSupLow>
+      <RstOutdrHi>20</RstOutdrHi>
+      <RstOutdrLow>50</RstOutdrLow>
+      <Blr>
+        <Name>Boiler 1</Name>
+        <Type>HotWater</Type>
+        <FuelSrc>Gas</FuelSrc>
+        <DraftType>MechanicalNoncondensing</DraftType>
+        <FluidSegInRef>HW Primary Return</FluidSegInRef>
+        <FluidSegOutRef>HW Primary Supply</FluidSegOutRef>
+        <CapRtd>390994</CapRtd>
+        <ThrmlEff>0.8</ThrmlEff>
+        <Pump>
+          <Name>Boiler 1 Pump</Name>
+        </Pump>
+      </Blr>
+      <FluidSeg>
+        <Name>HW Primary Supply</Name>
+        <Type>PrimarySupply</Type>
+      </FluidSeg>
+      <FluidSeg>
+        <Name>HW Primary Return</Name>
+        <Type>PrimaryReturn</Type>
+      </FluidSeg>
+      <Blr>
+        <Name>Boiler 2</Name>
+        <Type>HotWater</Type>
+        <FuelSrc>Gas</FuelSrc>
+        <DraftType>MechanicalNoncondensing</DraftType>
+        <FluidSegInRef>HW Primary Return</FluidSegInRef>
+        <FluidSegOutRef>HW Primary Supply</FluidSegOutRef>
+        <CapRtd>390994</CapRtd>
+        <ThrmlEff>0.8</ThrmlEff>
+        <Pump>
+          <Name>Boiler 2 Pump</Name>
+        </Pump>
+      </Blr>
+    </FluidSys>
+    <FluidSys>
+      <Name>SHWSys1</Name>
+      <Type>ServiceHotWater</Type>
+      <FluidSeg>
+        <Name>SHWSys1 MuniInlet</Name>
+        <Type>MakeupFluid</Type>
+        <Src>MunicipalWater</Src>
+      </FluidSeg>
+      <FluidSeg>
+        <Name>SHWSys1 Supply</Name>
+        <Type>PrimarySupply</Type>
+      </FluidSeg>
+      <WtrHtr>
+        <Name>WaterHeater 1</Name>
+        <FluidSegOutRef>SHWSys1 Supply</FluidSegOutRef>
+        <FluidSegMakeupRef>SHWSys1 MuniInlet</FluidSegMakeupRef>
+      </WtrHtr>
+    </FluidSys>
+    <SpcFuncDefaults>
+      <Name>Office Mod Defaults</Name>
+      <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+      <OccSchRef>Office Occupancy</OccSchRef>
+      <IntLtgRegSchRef>Office Lights</IntLtgRegSchRef>
+      <RecptSchRef>Office Receptacle</RecptSchRef>
+      <ProcElecSchRef>Office Receptacle</ProcElecSchRef>
+      <CommRfrgEqpSchRef>Office Receptacle</CommRfrgEqpSchRef>
+      <ElevSchRef>Office Elevator</ElevSchRef>
+      <ProcGasSchRef>Office Receptacle</ProcGasSchRef>
+      <HotWtrHtgSchRef>Office ServiceHotWater</HotWtrHtgSchRef>
+    </SpcFuncDefaults>
+    <SchDay>
+      <Name>School HVAC WD</Name>
+      <Type>OnOff</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>School HVAC Sun</Name>
+      <Type>OnOff</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>School HVAC Sat</Name>
+      <Type>OnOff</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>School HVAC Week</Name>
+      <Type>OnOff</Type>
+      <SchDayWDRef>School HVAC WD</SchDayWDRef>
+      <SchDaySunRef>School HVAC Sun</SchDaySunRef>
+      <SchDaySatRef>School HVAC Sat</SchDaySatRef>
+    </SchWeek>
+    <Sch>
+      <Name>School HVAC Sch</Name>
+      <Type>OnOff</Type>
+      <SchWeekRef index="0">School HVAC Week</SchWeekRef>
+    </Sch>
+    <SchDay>
+      <Name>Cooling Tstat WD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">80</Hr>
+      <Hr index="1">80</Hr>
+      <Hr index="2">80</Hr>
+      <Hr index="3">80</Hr>
+      <Hr index="4">80</Hr>
+      <Hr index="5">80</Hr>
+      <Hr index="6">75</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">75</Hr>
+      <Hr index="20">75</Hr>
+      <Hr index="21">75</Hr>
+      <Hr index="22">80</Hr>
+      <Hr index="23">80</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Cooling Tstat Sun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">80</Hr>
+      <Hr index="1">80</Hr>
+      <Hr index="2">80</Hr>
+      <Hr index="3">80</Hr>
+      <Hr index="4">80</Hr>
+      <Hr index="5">80</Hr>
+      <Hr index="6">80</Hr>
+      <Hr index="7">80</Hr>
+      <Hr index="8">80</Hr>
+      <Hr index="9">80</Hr>
+      <Hr index="10">80</Hr>
+      <Hr index="11">80</Hr>
+      <Hr index="12">80</Hr>
+      <Hr index="13">80</Hr>
+      <Hr index="14">80</Hr>
+      <Hr index="15">80</Hr>
+      <Hr index="16">80</Hr>
+      <Hr index="17">80</Hr>
+      <Hr index="18">80</Hr>
+      <Hr index="19">80</Hr>
+      <Hr index="20">80</Hr>
+      <Hr index="21">80</Hr>
+      <Hr index="22">80</Hr>
+      <Hr index="23">80</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Cooling Tstat Sat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">80</Hr>
+      <Hr index="1">80</Hr>
+      <Hr index="2">80</Hr>
+      <Hr index="3">80</Hr>
+      <Hr index="4">80</Hr>
+      <Hr index="5">80</Hr>
+      <Hr index="6">75</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">80</Hr>
+      <Hr index="20">80</Hr>
+      <Hr index="21">80</Hr>
+      <Hr index="22">80</Hr>
+      <Hr index="23">80</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>Cooling Tstat Week</Name>
+      <Type>Temperature</Type>
+      <SchDayWDRef>Cooling Tstat WD</SchDayWDRef>
+      <SchDaySunRef>Cooling Tstat Sun</SchDaySunRef>
+      <SchDaySatRef>Cooling Tstat Sat</SchDaySatRef>
+    </SchWeek>
+    <Sch>
+      <Name>Cooling Tstat Sch</Name>
+      <Type>Temperature</Type>
+      <SchWeekRef index="0">Cooling Tstat Week</SchWeekRef>
+    </Sch>
+    <SchDay>
+      <Name>Heating Tstat WD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">65</Hr>
+      <Hr index="1">65</Hr>
+      <Hr index="2">65</Hr>
+      <Hr index="3">65</Hr>
+      <Hr index="4">65</Hr>
+      <Hr index="5">65</Hr>
+      <Hr index="6">72</Hr>
+      <Hr index="7">72</Hr>
+      <Hr index="8">72</Hr>
+      <Hr index="9">72</Hr>
+      <Hr index="10">72</Hr>
+      <Hr index="11">72</Hr>
+      <Hr index="12">72</Hr>
+      <Hr index="13">72</Hr>
+      <Hr index="14">72</Hr>
+      <Hr index="15">72</Hr>
+      <Hr index="16">72</Hr>
+      <Hr index="17">72</Hr>
+      <Hr index="18">72</Hr>
+      <Hr index="19">72</Hr>
+      <Hr index="20">72</Hr>
+      <Hr index="21">72</Hr>
+      <Hr index="22">65</Hr>
+      <Hr index="23">65</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Heating Tstat Sun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">65</Hr>
+      <Hr index="1">65</Hr>
+      <Hr index="2">65</Hr>
+      <Hr index="3">65</Hr>
+      <Hr index="4">65</Hr>
+      <Hr index="5">65</Hr>
+      <Hr index="6">65</Hr>
+      <Hr index="7">65</Hr>
+      <Hr index="8">65</Hr>
+      <Hr index="9">65</Hr>
+      <Hr index="10">65</Hr>
+      <Hr index="11">65</Hr>
+      <Hr index="12">65</Hr>
+      <Hr index="13">65</Hr>
+      <Hr index="14">65</Hr>
+      <Hr index="15">65</Hr>
+      <Hr index="16">65</Hr>
+      <Hr index="17">65</Hr>
+      <Hr index="18">65</Hr>
+      <Hr index="19">65</Hr>
+      <Hr index="20">65</Hr>
+      <Hr index="21">65</Hr>
+      <Hr index="22">65</Hr>
+      <Hr index="23">65</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Heating Tstat Sat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">65</Hr>
+      <Hr index="1">65</Hr>
+      <Hr index="2">65</Hr>
+      <Hr index="3">65</Hr>
+      <Hr index="4">65</Hr>
+      <Hr index="5">65</Hr>
+      <Hr index="6">72</Hr>
+      <Hr index="7">72</Hr>
+      <Hr index="8">72</Hr>
+      <Hr index="9">72</Hr>
+      <Hr index="10">72</Hr>
+      <Hr index="11">72</Hr>
+      <Hr index="12">72</Hr>
+      <Hr index="13">72</Hr>
+      <Hr index="14">72</Hr>
+      <Hr index="15">72</Hr>
+      <Hr index="16">72</Hr>
+      <Hr index="17">72</Hr>
+      <Hr index="18">72</Hr>
+      <Hr index="19">65</Hr>
+      <Hr index="20">65</Hr>
+      <Hr index="21">65</Hr>
+      <Hr index="22">65</Hr>
+      <Hr index="23">65</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>Heating Tstat Week</Name>
+      <Type>Temperature</Type>
+      <SchDayWDRef>Heating Tstat WD</SchDayWDRef>
+      <SchDaySunRef>Heating Tstat Sun</SchDaySunRef>
+      <SchDaySatRef>Heating Tstat Sat</SchDaySatRef>
+    </SchWeek>
+    <Sch>
+      <Name>Heating Tstat Sch</Name>
+      <Type>Temperature</Type>
+      <SchWeekRef index="0">Heating Tstat Week</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>OfficeElevator</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeElevatorWk-2</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeElevatorWk-2</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeElevatorSun</SchDaySunRef>
+      <SchDayMonRef>OfficeElevatorWD</SchDayMonRef>
+      <SchDayTueRef>OfficeElevatorWD</SchDayTueRef>
+      <SchDayWedRef>OfficeElevatorWD</SchDayWedRef>
+      <SchDayThuRef>OfficeElevatorWD</SchDayThuRef>
+      <SchDayFriRef>OfficeElevatorWD</SchDayFriRef>
+      <SchDaySatRef>OfficeElevatorSat</SchDaySatRef>
+      <SchDayHolRef>OfficeElevatorSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <Sch>
+      <Name>OfficeEscalator</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeEscalatorWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeEscalatorWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeEscalatorSun</SchDaySunRef>
+      <SchDayMonRef>OfficeEscalatorWD</SchDayMonRef>
+      <SchDayTueRef>OfficeEscalatorWD</SchDayTueRef>
+      <SchDayWedRef>OfficeEscalatorWD</SchDayWedRef>
+      <SchDayThuRef>OfficeEscalatorWD</SchDayThuRef>
+      <SchDayFriRef>OfficeEscalatorWD</SchDayFriRef>
+      <SchDaySatRef>OfficeEscalatorSat</SchDaySatRef>
+      <SchDayHolRef>OfficeEscalatorSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeEscalatorSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeEscalatorWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeEscalatorSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Mat>
+      <Name>Metal Deck - 1/16 in</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Metal Deck - 1/16 in.</CodeItem>
+    </Mat>
+    <EUseSummary>
+      <Name>EUseSummary</Name>
+      <Title1 index="1">Proposed</Title1>
+      <Title1 index="2">Proposed</Title1>
+      <Title1 index="3">Proposed</Title1>
+      <Title1 index="4">Standard</Title1>
+      <Title1 index="5">Standard</Title1>
+      <Title1 index="6">Standard</Title1>
+      <Title1 index="7">Compliance</Title1>
+      <Title2 index="1">Design</Title2>
+      <Title2 index="2">Design</Title2>
+      <Title2 index="3">Design</Title2>
+      <Title2 index="4">Design</Title2>
+      <Title2 index="5">Design</Title2>
+      <Title2 index="6">Design</Title2>
+      <Title2 index="7">Margin</Title2>
+      <Title3 index="0">End Use</Title3>
+      <Title3 index="1">Site (MWh)</Title3>
+      <Title3 index="2">Site (therms)</Title3>
+      <Title3 index="3">(kTDV/ft²-yr)</Title3>
+      <Title3 index="4">Site (MWh)</Title3>
+      <Title3 index="5">Site (therms)</Title3>
+      <Title3 index="6">(kTDV/ft²-yr)</Title3>
+      <Title3 index="7">(kTDV/ft²-yr)</Title3>
+      <Enduse1 index="0">Space Heating</Enduse1>
+      <Enduse1 index="1">0.0</Enduse1>
+      <Enduse1 index="2">3,433</Enduse1>
+      <Enduse1 index="3">11.7</Enduse1>
+      <Enduse1 index="4">0.0</Enduse1>
+      <Enduse1 index="5">3,435</Enduse1>
+      <Enduse1 index="6">11.7</Enduse1>
+      <Enduse1 index="7">--</Enduse1>
+      <Enduse2 index="0">Space Cooling</Enduse2>
+      <Enduse2 index="1">87.6</Enduse2>
+      <Enduse2 index="2">--</Enduse2>
+      <Enduse2 index="3">64.1</Enduse2>
+      <Enduse2 index="4">87.7</Enduse2>
+      <Enduse2 index="5">--</Enduse2>
+      <Enduse2 index="6">64.1</Enduse2>
+      <Enduse2 index="7">--</Enduse2>
+      <Enduse3 index="0">Indoor Fans</Enduse3>
+      <Enduse3 index="1">31.1</Enduse3>
+      <Enduse3 index="2">--</Enduse3>
+      <Enduse3 index="3">15.8</Enduse3>
+      <Enduse3 index="4">31.1</Enduse3>
+      <Enduse3 index="5">--</Enduse3>
+      <Enduse3 index="6">15.8</Enduse3>
+      <Enduse3 index="7">--</Enduse3>
+      <Enduse4 index="0">Heat Rejection</Enduse4>
+      <Enduse4 index="1">--</Enduse4>
+      <Enduse4 index="2">--</Enduse4>
+      <Enduse4 index="3">--</Enduse4>
+      <Enduse4 index="4">--</Enduse4>
+      <Enduse4 index="5">--</Enduse4>
+      <Enduse4 index="6">--</Enduse4>
+      <Enduse4 index="7">--</Enduse4>
+      <Enduse5 index="0">Pumps &amp; Misc.</Enduse5>
+      <Enduse5 index="1">1.9</Enduse5>
+      <Enduse5 index="2">--</Enduse5>
+      <Enduse5 index="3">0.6</Enduse5>
+      <Enduse5 index="4">1.9</Enduse5>
+      <Enduse5 index="5">--</Enduse5>
+      <Enduse5 index="6">0.6</Enduse5>
+      <Enduse5 index="7">--</Enduse5>
+      <Enduse6 index="0">Domestic HW</Enduse6>
+      <Enduse6 index="1">--</Enduse6>
+      <Enduse6 index="2">1,087</Enduse6>
+      <Enduse6 index="3">3.3</Enduse6>
+      <Enduse6 index="4">--</Enduse6>
+      <Enduse6 index="5">1,087</Enduse6>
+      <Enduse6 index="6">3.3</Enduse6>
+      <Enduse6 index="7">--</Enduse6>
+      <Enduse7 index="0">Lighting</Enduse7>
+      <Enduse7 index="1">73.3</Enduse7>
+      <Enduse7 index="2">--</Enduse7>
+      <Enduse7 index="3">33.9</Enduse7>
+      <Enduse7 index="4">73.3</Enduse7>
+      <Enduse7 index="5">--</Enduse7>
+      <Enduse7 index="6">33.9</Enduse7>
+      <Enduse7 index="7">--</Enduse7>
+      <Enduse8 index="0">Compliance Total</Enduse8>
+      <Enduse8 index="1">193.9</Enduse8>
+      <Enduse8 index="2">4,520</Enduse8>
+      <Enduse8 index="3">129.4</Enduse8>
+      <Enduse8 index="4">194.0</Enduse8>
+      <Enduse8 index="5">4,522</Enduse8>
+      <Enduse8 index="6">129.4</Enduse8>
+      <Enduse8 index="7">--</Enduse8>
+      <Enduse9 index="0">Receptacle</Enduse9>
+      <Enduse9 index="1">229.7</Enduse9>
+      <Enduse9 index="2">--</Enduse9>
+      <Enduse9 index="3">109.8</Enduse9>
+      <Enduse9 index="4">229.7</Enduse9>
+      <Enduse9 index="5">--</Enduse9>
+      <Enduse9 index="6">109.8</Enduse9>
+      <Enduse10 index="0">Process</Enduse10>
+      <Enduse10 index="1">39.5</Enduse10>
+      <Enduse10 index="2">--</Enduse10>
+      <Enduse10 index="3">17.8</Enduse10>
+      <Enduse10 index="4">39.5</Enduse10>
+      <Enduse10 index="5">--</Enduse10>
+      <Enduse10 index="6">17.8</Enduse10>
+      <Enduse11 index="0">Process Ltg</Enduse11>
+      <Enduse11 index="1">--</Enduse11>
+      <Enduse11 index="2">--</Enduse11>
+      <Enduse11 index="3">--</Enduse11>
+      <Enduse11 index="4">--</Enduse11>
+      <Enduse11 index="5">--</Enduse11>
+      <Enduse11 index="6">--</Enduse11>
+      <Enduse12 index="0">TOTAL</Enduse12>
+      <Enduse12 index="1">463.1</Enduse12>
+      <Enduse12 index="2">4,520</Enduse12>
+      <Enduse12 index="3">257.0</Enduse12>
+      <Enduse12 index="4">463.2</Enduse12>
+      <Enduse12 index="5">4,522</Enduse12>
+      <Enduse12 index="6">257.0</Enduse12>
+      <ZoneUMLHsLoaded index="0">1</ZoneUMLHsLoaded>
+      <ZoneUMLHsLoaded index="1">1</ZoneUMLHsLoaded>
+      <ZoneUMLHs index="0">clg: 0  htg: 5  'Core_bottom Thermal Zone'
+clg: 0  htg: 6  'Perimeter_bot_ZN_1 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_bot_ZN_2 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_bot_ZN_3 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_bot_ZN_4 Thermal Zone'
+clg: 0  htg: 0  'FirstFloor_Plenum Thermal Zone'
+clg: 0  htg: 5  'Core_mid Thermal Zone'
+clg: 0  htg: 6  'Perimeter_mid_ZN_1 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_mid_ZN_2 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_mid_ZN_3 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_mid_ZN_4 Thermal Zone'
+clg: 0  htg: 0  'MidFloor_Plenum Thermal Zone'
+clg: 0  htg: 6  'Core_top Thermal Zone'
+clg: 0  htg: 6  'Perimeter_top_ZN_1 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_top_ZN_2 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_top_ZN_3 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_top_ZN_4 Thermal Zone'
+clg: 0  htg: 0  'TopFloor_Plenum Thermal Zone'</ZoneUMLHs>
+      <ZoneUMLHs index="1">clg: 0  htg: 7  'Core_bottom Thermal Zone'
+clg: 0  htg: 7  'Perimeter_bot_ZN_1 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_bot_ZN_2 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_bot_ZN_3 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_bot_ZN_4 Thermal Zone'
+clg: 0  htg: 0  'FirstFloor_Plenum Thermal Zone'
+clg: 0  htg: 6  'Core_mid Thermal Zone'
+clg: 0  htg: 6  'Perimeter_mid_ZN_1 Thermal Zone'
+clg: 0  htg: 6  'Perimeter_mid_ZN_2 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_mid_ZN_3 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_mid_ZN_4 Thermal Zone'
+clg: 0  htg: 0  'MidFloor_Plenum Thermal Zone'
+clg: 0  htg: 7  'Core_top Thermal Zone'
+clg: 0  htg: 8  'Perimeter_top_ZN_1 Thermal Zone'
+clg: 0  htg: 7  'Perimeter_top_ZN_2 Thermal Zone'
+clg: 0  htg: 8  'Perimeter_top_ZN_3 Thermal Zone'
+clg: 0  htg: 8  'Perimeter_top_ZN_4 Thermal Zone'
+clg: 0  htg: 0  'TopFloor_Plenum Thermal Zone'</ZoneUMLHs>
+      <SimSummary index="0">Successful (96 warnings)</SimSummary>
+      <SimSummary index="2">Successful (96 warnings)</SimSummary>
+      <PassFail>PASS</PassFail>
+    </EUseSummary>
+  </Proj>
+</SDDXML>

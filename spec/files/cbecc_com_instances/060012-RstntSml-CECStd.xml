@@ -1,0 +1,2762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SDDXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RulesetFilename file="CEC 2013 NonRes.bin"/>
+  <Proj>
+    <Name>060012-RstntSml-CECStd</Name>
+    <BldgEngyModelVersion>7</BldgEngyModelVersion>
+    <CreateDate>1415032343</CreateDate>
+    <ModDate>1415032343</ModDate>
+    <RunDate>1414691068</RunDate>
+    <ZipCode>95814</ZipCode>
+    <DDWeatherFile>F:/360Local/AEC/CBECCn/CBECC Source Files/CBECC-Com13/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.ddy</DDWeatherFile>
+    <AnnualWeatherFile>F:/360Local/AEC/CBECCn/CBECC Source Files/CBECC-Com13/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.epw</AnnualWeatherFile>
+    <ExcptCondNoClgSys>No</ExcptCondNoClgSys>
+    <ExcptCondRtdCap>No</ExcptCondRtdCap>
+    <ExcptCondFanPress>No</ExcptCondFanPress>
+    <ExcptCondWCC>No</ExcptCondWCC>
+    <ExcptCondNarrative>No</ExcptCondNarrative>
+    <AutoHardSize>1</AutoHardSize>
+    <AutoEffInput>1</AutoEffInput>
+    <DefaultDayltgCtrls>1</DefaultDayltgCtrls>
+    <SimVarsThrmlZn>1</SimVarsThrmlZn>
+    <SimVarsHVACSec>1</SimVarsHVACSec>
+    <SimVarsHVACZn>1</SimVarsHVACZn>
+    <CompType>NewComplete</CompType>
+    <SoftwareVersion>CBECC-Com 2013-3 (653)</SoftwareVersion>
+    <ResultsCurrentMessage>(not current)</ResultsCurrentMessage>
+    <ConsAssm>
+      <Name>Base_CZ12-NonresMetalFrameWallU062</Name>
+      <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
+      <MatRef index="0">Stucco - 7/8 in.</MatRef>
+      <MatRef index="1">Compliance Insulation R13.99</MatRef>
+      <MatRef index="2">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
+      <MatRef index="3">Gypsum Board - 1/2 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Stucco - 7/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Stucco - 7/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Compliance Insulation R13.99</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R13.99</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Metal Wall Framing - 16 or 24 in. OC</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Metal Wall Framing - 16 or 24 in. OC</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Gypsum Board - 1/2 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Gypsum Board - 1/2 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Base_CZ12-SlabOnOrBelowGradeF073</Name>
+      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
+      <SlabType>UnheatedSlabOnGrade</SlabType>
+      <MatRef index="0">Concrete - 140 lb/ft3 - 6 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Concrete - 140 lb/ft3 - 6 in.</Name>
+      <CodeCat>Concrete</CodeCat>
+      <CodeItem>Concrete - 140 lb/ft3 - 6 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039</Name>
+      <CompatibleSurfType>Roof</CompatibleSurfType>
+      <CRRCInitialRefl>0.2</CRRCInitialRefl>
+      <CRRCAgedRefl>0.2</CRRCAgedRefl>
+      <CRRCInitialEmittance>0.85</CRRCInitialEmittance>
+      <CRRCAgedEmittance>0.85</CRRCAgedEmittance>
+      <CRRCProdID>XXXX-XXXX</CRRCProdID>
+      <MatRef index="0">Metal Standing Seam - 1/16 in.</MatRef>
+      <MatRef index="1">Compliance Insulation R24.86</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Metal Standing Seam - 1/16 in.</Name>
+      <CodeCat>Roofing</CodeCat>
+      <CodeItem>Metal Standing Seam - 1/16 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Compliance Insulation R24.86</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R24.86</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Base_CZ12-NonresOtherFloorU071</Name>
+      <CompatibleSurfType>ExteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Compliance Insulation R9.83</MatRef>
+      <MatRef index="1">Plywood - 5/8 in.</MatRef>
+      <MatRef index="2">Carpet - 3/4 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Compliance Insulation R9.83</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R9.83</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Plywood - 5/8 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Plywood - 5/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Carpet - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Carpet - 3/4 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>NACM_Interior Wall</Name>
+      <CompatibleSurfType>InteriorWall</CompatibleSurfType>
+      <MatRef index="0">NACM_Gypsum Board 5/8in</MatRef>
+      <MatRef index="1">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
+      <MatRef index="2">NACM_Gypsum Board 5/8in</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>NACM_Gypsum Board 5/8in</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Gypsum Board - 5/8 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>NACM_Drop Ceiling</Name>
+      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
+      <MatRef index="0">NACM_Acoustic Tile 3/4in</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>NACM_Acoustic Tile 3/4in</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
+    </Mat>
+    <FenCons>
+      <Name>Base_AllCZ_FixedWindowU36</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>FixedWindow</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>NFRCRated</CertificationMthd>
+      <SHGC>0.25</SHGC>
+      <UFactor>0.36</UFactor>
+      <VT>0.42</VT>
+    </FenCons>
+    <Bldg>
+      <Name>QS Restaurant</Name>
+      <TotStoryCnt>1</TotStoryCnt>
+      <AboveGrdStoryCnt>1</AboveGrdStoryCnt>
+      <Story>
+        <Name>QS Restaurant 1</Name>
+        <Spc>
+          <Name>Attic Space</Name>
+          <CondgType>IndirectlyConditioned</CondgType>
+          <ThrmlZnRef>Attic Zn</ThrmlZnRef>
+          <Vol>8933.61</Vol>
+          <SpcFunc>Unoccupied-Exclude from Gross Floor Area</SpcFunc>
+          <PolyLp>
+            <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+            <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+          </PolyLp>
+          <IntFlr>
+            <Name>attic-floor-dinning</Name>
+            <AdjacentSpcRef>Dining</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <IntFlr>
+            <Name>attic-floor-kitchen</Name>
+            <AdjacentSpcRef>Kitchen</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Drop Ceiling</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </IntFlr>
+          <Roof>
+            <Name>east-roof</Name>
+            <ConsAssmRef>Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>41.6742</Coord><Coord>25.0046</Coord><Coord>18.3376</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </Roof>
+          <Roof>
+            <Name>north-roof</Name>
+            <ConsAssmRef>Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>41.6742</Coord><Coord>25.0046</Coord><Coord>18.3376</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>8.33497</Coord><Coord>25.0046</Coord><Coord>18.3376</Coord></CartesianPt>
+            </PolyLp>
+          </Roof>
+          <Roof>
+            <Name>south-roof</Name>
+            <ConsAssmRef>Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>8.33497</Coord><Coord>25.0046</Coord><Coord>18.3376</Coord></CartesianPt>
+              <CartesianPt><Coord>1.93046e-033</Coord><Coord>-2.76065e-016</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>-2.41094e-016</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>41.6742</Coord><Coord>25.0046</Coord><Coord>18.3376</Coord></CartesianPt>
+            </PolyLp>
+          </Roof>
+          <Roof>
+            <Name>west-roof</Name>
+            <ConsAssmRef>Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>8.33497</Coord><Coord>25.0046</Coord><Coord>18.3376</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </Roof>
+        </Spc>
+        <Spc>
+          <Name>Dining</Name>
+          <ThrmlZnRef>Dining Thermal Zone</ThrmlZnRef>
+          <Vol>12507.9</Vol>
+          <SpcFuncDefaultsRef>Dining Area Defaults</SpcFuncDefaultsRef>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <PolyLp>
+            <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Dining_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Dining_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Dining_Wall_East_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>50.0092</Coord><Coord>0.833333</Coord><Coord>6.50164</Coord></CartesianPt>
+                <CartesianPt><Coord>50.0092</Coord><Coord>0.833333</Coord><Coord>3.50098</Coord></CartesianPt>
+                <CartesianPt><Coord>50.0092</Coord><Coord>24.1709</Coord><Coord>3.50098</Coord></CartesianPt>
+                <CartesianPt><Coord>50.0092</Coord><Coord>24.1709</Coord><Coord>6.50164</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Dining_Wall_North</Name>
+            <AdjacentSpcRef>Kitchen</AdjacentSpcRef>
+            <ConsAssmRef>NACM_Interior Wall</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </IntWall>
+          <ExtWall>
+            <Name>Dining_Wall_South</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Dining_Wall_South_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>1.66667</Coord><Coord>0</Coord><Coord>6.50164</Coord></CartesianPt>
+                <CartesianPt><Coord>1.66667</Coord><Coord>0</Coord><Coord>3.50098</Coord></CartesianPt>
+                <CartesianPt><Coord>48.3432</Coord><Coord>0</Coord><Coord>3.50098</Coord></CartesianPt>
+                <CartesianPt><Coord>48.3432</Coord><Coord>0</Coord><Coord>6.50164</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+          <ExtWall>
+            <Name>Dining_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>0</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+            <Win>
+              <Name>Dining_Wall_West_Window</Name>
+              <FenConsRef>Base_AllCZ_FixedWindowU36</FenConsRef>
+              <PolyLp>
+                <CartesianPt><Coord>0</Coord><Coord>24.1709</Coord><Coord>6.50164</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>24.1709</Coord><Coord>3.50098</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.833333</Coord><Coord>3.50098</Coord></CartesianPt>
+                <CartesianPt><Coord>0</Coord><Coord>0.833333</Coord><Coord>6.50164</Coord></CartesianPt>
+              </PolyLp>
+            </Win>
+          </ExtWall>
+        </Spc>
+        <Spc>
+          <Name>Kitchen</Name>
+          <ThrmlZnRef>Kitchen Thermal Zone</ThrmlZnRef>
+          <Vol>12507.9</Vol>
+          <SpcFuncDefaultsRef>Kitchen Food Preperation Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Kitchen, Commercial Food Preparation</SpcFunc>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <VentPerSpc>500</VentPerSpc>
+          <KitExhHoodLen>10</KitExhHoodLen>
+          <KitExhHoodDuty>Light</KitExhHoodDuty>
+          <KitExhHoodFlow>1000</KitExhHoodFlow>
+          <PolyLp>
+            <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+            <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+          </PolyLp>
+          <UndgrFlr>
+            <Name>Kitchen_Floor</Name>
+            <ConsAssmRef>Base_CZ12-SlabOnOrBelowGradeF073</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+            </PolyLp>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Kitchen_Wall_East</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Kitchen_Wall_North</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>50.0092</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+          <ExtWall>
+            <Name>Kitchen_Wall_West</Name>
+            <ConsAssmRef>Base_CZ12-NonresMetalFrameWallU062</ConsAssmRef>
+            <PolyLp>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>10.0026</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>50.0092</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>0</Coord></CartesianPt>
+              <CartesianPt><Coord>0</Coord><Coord>25.0046</Coord><Coord>10.0026</Coord></CartesianPt>
+            </PolyLp>
+          </ExtWall>
+        </Spc>
+      </Story>
+      <ThrmlZn>
+        <Name>Attic Zn</Name>
+        <Type>Unconditioned</Type>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Dining Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>DiningPSZ</PriAirCondgSysRef>
+        <ClgTstatSchRef>RestaurantClgSetPt Sch</ClgTstatSchRef>
+        <HtgTstatSchRef>RestaurantHtgSetPt Sch</HtgTstatSchRef>
+        <VentCtrlMthd>CO2Sensors</VentCtrlMthd>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Kitchen Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>KitchenMUA</PriAirCondgSysRef>
+        <ClgTstatSchRef>RestaurantClgSetPt Sch</ClgTstatSchRef>
+        <HtgTstatSchRef>RestaurantHtgSetPt Sch</HtgTstatSchRef>
+        <ExhSysRef>KitchenExhaust</ExhSysRef>
+      </ThrmlZn>
+      <AirSys>
+        <Name>DiningPSZ</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Dining Thermal Zone</CtrlZnRef>
+        <AvailSchRef>RestaurantHVACAvail Sch</AvailSchRef>
+        <AirSeg>
+          <Name>Dining SupAirSeg</Name>
+          <Type>Supply</Type>
+          <CoilClg>
+            <Name>Dining CoilClg</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+          </CoilClg>
+          <CoilHtg>
+            <Name>DiningCoilHtg</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+          </CoilHtg>
+          <Fan>
+            <Name>Dining Fan</Name>
+          </Fan>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Dining TerminalUnit</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Dining Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Dining SupAirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <AirSeg>
+          <Name>Dining ReliefAirSeg</Name>
+          <Type>Relief</Type>
+          <Path>Ducted</Path>
+          <Fan>
+            <Name>Dining ReliefFan</Name>
+            <CtrlMthd>VariableSpeedDrive</CtrlMthd>
+          </Fan>
+        </AirSeg>
+        <OACtrl>
+          <Name>DiningOAControl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+          <AirSegSupRef>Dining SupAirSeg</AirSegSupRef>
+          <AirSegRetRef>Dining ReliefAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>KitchenMUA</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Kitchen Thermal Zone</CtrlZnRef>
+        <AvailSchRef>RestaurantHVACAvail Sch</AvailSchRef>
+        <ClgDsgnSupAirTemp>60</ClgDsgnSupAirTemp>
+        <AirSeg>
+          <Name>Kitchen SupAirSeg</Name>
+          <Type>Supply</Type>
+          <CoilClg>
+            <Name>Kitchen CoilClg</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+          </CoilClg>
+          <CoilHtg>
+            <Name>KitchenCoilHtg</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+          </CoilHtg>
+          <Fan>
+            <Name>Kitchen Fan</Name>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Kitchen ReturnAirSeg</Name>
+          <Type>Return</Type>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Kitchen TerminalUnit</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Kitchen Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Kitchen SupAirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>Kitchen OAControl</Name>
+          <AirSegSupRef>Dining SupAirSeg</AirSegSupRef>
+          <AirSegRetRef>Dining ReliefAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <ZnSys>
+        <Name>KitchenExhaust</Name>
+        <Type>Exhaust</Type>
+        <AvailSchRef>RestaurantHVACAvail Sch</AvailSchRef>
+        <ExhSysType>CommercialKitchen</ExhSysType>
+        <ExhOperMode>CoupledToSystem</ExhOperMode>
+        <Fan>
+          <Name>KitchExh Fan</Name>
+          <TotStaticPress>2.5</TotStaticPress>
+        </Fan>
+      </ZnSys>
+    </Bldg>
+    <SpcFuncDefaults>
+      <Name>Dining Area Defaults</Name>
+      <SpcFunc>Dining Area</SpcFunc>
+      <OccSchRef>Restaurant Occup Sch</OccSchRef>
+      <IntLtgRegSchRef>Restaurant Lighting Sch</IntLtgRegSchRef>
+      <RecptSchRef>Restaurant Plugs Sch</RecptSchRef>
+      <GasEqpSchRef>RestaurantGasEquip Sch</GasEqpSchRef>
+      <ElevSchRef>Restaurant Elevator Sch</ElevSchRef>
+      <HotWtrHtgSchRef>Restaurant HotWtr Sch</HotWtrHtgSchRef>
+    </SpcFuncDefaults>
+    <SpcFuncDefaults>
+      <Name>Kitchen Food Preperation Defaults</Name>
+      <SpcFunc>Kitchen, Commercial Food Preparation</SpcFunc>
+      <OccSchRef>Restaurant Occup Sch</OccSchRef>
+      <IntLtgRegSchRef>Restaurant Lighting Sch</IntLtgRegSchRef>
+      <RecptSchRef>Restaurant Plugs Sch</RecptSchRef>
+      <GasEqpSchRef>RestaurantGasEquip Sch</GasEqpSchRef>
+      <ProcElecSchRef>Restaurant Plugs Sch</ProcElecSchRef>
+      <CommRfrgEqpSchRef>RestaurantRefrigeration Sch</CommRfrgEqpSchRef>
+      <ElevSchRef>Restaurant Elevator Sch</ElevSchRef>
+      <HotWtrHtgSchRef>Restaurant HotWtr Sch</HotWtrHtgSchRef>
+    </SpcFuncDefaults>
+    <Sch>
+      <Name>Restaurant Occup Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">Restaurant Occup Week</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Restaurant Lighting Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">Restaurant Lighting Week</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Restaurant Plugs Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">Restaurant Plugs Week</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Restaurant HotWtr Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">Restaurant HotWtr Week</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Restaurant Elevator Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">Restaurant Elevator Week</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>RestaurantHVACAvail Sch</Name>
+      <Type>OnOff</Type>
+      <SchWeekRef index="0">RestaurantHVACAvailWeek</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>RestaurantInfiltration Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">RestaurantInfiltrationWeek</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>RestaurantClgSetPt Sch</Name>
+      <Type>Temperature</Type>
+      <SchWeekRef index="0">RestaurantClgSetPtWeek</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>RestaurantHtgSetPt Sch</Name>
+      <Type>Temperature</Type>
+      <SchWeekRef index="0">RestaurantHtgSetPtWeek</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>RestaurantRefrigeration Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">RestaurantRefrigerationWeek</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>RestaurantGasEquip Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">RestaurantGasEquipWeek</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>AlwaysOn</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">AlwaysOn HVAC Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>Restaurant Occup Week</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>Restaurant Occup WD</SchDayWDRef>
+      <SchDaySunRef>Restaurant Occup Sun</SchDaySunRef>
+      <SchDaySatRef>Restaurant Occup Sat</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>Restaurant Lighting Week</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>Restaurant Lighting WD</SchDayWDRef>
+      <SchDaySunRef>Restaurant Lighting Sun</SchDaySunRef>
+      <SchDaySatRef>Restaurant Lighting Sat</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>Restaurant Plugs Week</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>Restaurant Plugs WD</SchDayWDRef>
+      <SchDaySunRef>Restaurant Plugs Sun</SchDaySunRef>
+      <SchDaySatRef>Restaurant Plugs Sat</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>Restaurant HotWtr Week</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>Restaurant HotWtr WD</SchDayWDRef>
+      <SchDaySunRef>Restaurant HotWtr Sun</SchDaySunRef>
+      <SchDaySatRef>Restaurant HotWtr Sat</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>Restaurant Elevator Week</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>Restaurant Elevator WD</SchDayWDRef>
+      <SchDaySunRef>Restaurant Elevator Sun</SchDaySunRef>
+      <SchDaySatRef>Restaurant Elevator Sat</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>RestaurantHVACAvailWeek</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>RestaurantHVACAvail WD</SchDayWDRef>
+      <SchDaySunRef>RestaurantHVACAvail Sat</SchDaySunRef>
+      <SchDaySatRef>RestaurantHVACAvail Sun</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>RestaurantInfiltrationWeek</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>RestaurantInfiltration WD</SchDayWDRef>
+      <SchDaySunRef>RestaurantInfiltration Sat</SchDaySunRef>
+      <SchDaySatRef>RestaurantInfiltration Sun</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>RestaurantClgSetPtWeek</Name>
+      <Type>Temperature</Type>
+      <SchDayWDRef>RestaurantClgSetPt WD</SchDayWDRef>
+      <SchDaySunRef>RestaurantClgSetPt Sat</SchDaySunRef>
+      <SchDaySatRef>RestaurantClgSetPt Sun</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>RestaurantHtgSetPtWeek</Name>
+      <Type>Temperature</Type>
+      <SchDayWDRef>RestaurantHtgSetPt WD</SchDayWDRef>
+      <SchDaySunRef>RestaurantHtgSetPt Sat</SchDaySunRef>
+      <SchDaySatRef>RestaurantHtgSetPt Sun</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>RestaurantRefrigerationWeek</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>RestaurantRefrigeration WD</SchDayWDRef>
+      <SchDaySunRef>RestaurantRefrigeration Sat</SchDaySunRef>
+      <SchDaySatRef>RestaurantRefrigeration Sun</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>RestaurantGasEquipWeek</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>RestaurantGasEquip WD</SchDayWDRef>
+      <SchDaySunRef>RestaurantGasEquip Sat</SchDaySunRef>
+      <SchDaySatRef>RestaurantGasEquip Sun</SchDaySatRef>
+    </SchWeek>
+    <SchWeek>
+      <Name>AlwaysOn HVAC Week</Name>
+      <Type>OnOff</Type>
+      <SchDayWDRef>AlwaysOn HVAC WD</SchDayWDRef>
+      <SchDaySunRef>AlwaysOn HVAC Sun</SchDaySunRef>
+      <SchDaySatRef>AlwaysOn HVAC Sat</SchDaySatRef>
+    </SchWeek>
+    <SchDay>
+      <Name>Restaurant Occup WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.15</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.2</Hr>
+      <Hr index="11">0.5</Hr>
+      <Hr index="12">0.8</Hr>
+      <Hr index="13">0.7</Hr>
+      <Hr index="14">0.4</Hr>
+      <Hr index="15">0.2</Hr>
+      <Hr index="16">0.25</Hr>
+      <Hr index="17">0.5</Hr>
+      <Hr index="18">0.8</Hr>
+      <Hr index="19">0.8</Hr>
+      <Hr index="20">0.8</Hr>
+      <Hr index="21">0.5</Hr>
+      <Hr index="22">0.35</Hr>
+      <Hr index="23">0.2</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Occup Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.3</Hr>
+      <Hr index="1">0.25</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.2</Hr>
+      <Hr index="11">0.45</Hr>
+      <Hr index="12">0.5</Hr>
+      <Hr index="13">0.5</Hr>
+      <Hr index="14">0.35</Hr>
+      <Hr index="15">0.3</Hr>
+      <Hr index="16">0.3</Hr>
+      <Hr index="17">0.3</Hr>
+      <Hr index="18">0.7</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.7</Hr>
+      <Hr index="21">0.65</Hr>
+      <Hr index="22">0.55</Hr>
+      <Hr index="23">0.35</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Occup Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.2</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0.1</Hr>
+      <Hr index="11">0.2</Hr>
+      <Hr index="12">0.25</Hr>
+      <Hr index="13">0.25</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.2</Hr>
+      <Hr index="16">0.25</Hr>
+      <Hr index="17">0.35</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.65</Hr>
+      <Hr index="20">0.7</Hr>
+      <Hr index="21">0.35</Hr>
+      <Hr index="22">0.2</Hr>
+      <Hr index="23">0.2</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Lighting WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.15</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0.15</Hr>
+      <Hr index="4">0.15</Hr>
+      <Hr index="5">0.2</Hr>
+      <Hr index="6">0.35</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.55</Hr>
+      <Hr index="9">0.55</Hr>
+      <Hr index="10">0.85</Hr>
+      <Hr index="11">0.85</Hr>
+      <Hr index="12">0.85</Hr>
+      <Hr index="13">0.85</Hr>
+      <Hr index="14">0.85</Hr>
+      <Hr index="15">0.85</Hr>
+      <Hr index="16">0.85</Hr>
+      <Hr index="17">0.85</Hr>
+      <Hr index="18">0.85</Hr>
+      <Hr index="19">0.85</Hr>
+      <Hr index="20">0.85</Hr>
+      <Hr index="21">0.85</Hr>
+      <Hr index="22">0.45</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Lighting Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0.15</Hr>
+      <Hr index="4">0.15</Hr>
+      <Hr index="5">0.15</Hr>
+      <Hr index="6">0.3</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.55</Hr>
+      <Hr index="9">0.55</Hr>
+      <Hr index="10">0.75</Hr>
+      <Hr index="11">0.75</Hr>
+      <Hr index="12">0.75</Hr>
+      <Hr index="13">0.75</Hr>
+      <Hr index="14">0.75</Hr>
+      <Hr index="15">0.75</Hr>
+      <Hr index="16">0.75</Hr>
+      <Hr index="17">0.85</Hr>
+      <Hr index="18">0.85</Hr>
+      <Hr index="19">0.85</Hr>
+      <Hr index="20">0.85</Hr>
+      <Hr index="21">0.85</Hr>
+      <Hr index="22">0.45</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Lighting Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0.15</Hr>
+      <Hr index="4">0.15</Hr>
+      <Hr index="5">0.15</Hr>
+      <Hr index="6">0.3</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.45</Hr>
+      <Hr index="9">0.45</Hr>
+      <Hr index="10">0.65</Hr>
+      <Hr index="11">0.65</Hr>
+      <Hr index="12">0.65</Hr>
+      <Hr index="13">0.65</Hr>
+      <Hr index="14">0.65</Hr>
+      <Hr index="15">0.65</Hr>
+      <Hr index="16">0.55</Hr>
+      <Hr index="17">0.55</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.55</Hr>
+      <Hr index="20">0.55</Hr>
+      <Hr index="21">0.55</Hr>
+      <Hr index="22">0.45</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Plugs WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.15</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0.15</Hr>
+      <Hr index="4">0.15</Hr>
+      <Hr index="5">0.2</Hr>
+      <Hr index="6">0.4</Hr>
+      <Hr index="7">0.4</Hr>
+      <Hr index="8">0.6</Hr>
+      <Hr index="9">0.6</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.9</Hr>
+      <Hr index="22">0.5</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Plugs Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0.15</Hr>
+      <Hr index="4">0.15</Hr>
+      <Hr index="5">0.15</Hr>
+      <Hr index="6">0.3</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.6</Hr>
+      <Hr index="9">0.6</Hr>
+      <Hr index="10">0.8</Hr>
+      <Hr index="11">0.8</Hr>
+      <Hr index="12">0.8</Hr>
+      <Hr index="13">0.8</Hr>
+      <Hr index="14">0.8</Hr>
+      <Hr index="15">0.8</Hr>
+      <Hr index="16">0.8</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.9</Hr>
+      <Hr index="22">0.5</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Plugs Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0.15</Hr>
+      <Hr index="4">0.15</Hr>
+      <Hr index="5">0.15</Hr>
+      <Hr index="6">0.3</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.5</Hr>
+      <Hr index="9">0.5</Hr>
+      <Hr index="10">0.7</Hr>
+      <Hr index="11">0.7</Hr>
+      <Hr index="12">0.7</Hr>
+      <Hr index="13">0.7</Hr>
+      <Hr index="14">0.7</Hr>
+      <Hr index="15">0.7</Hr>
+      <Hr index="16">0.6</Hr>
+      <Hr index="17">0.6</Hr>
+      <Hr index="18">0.6</Hr>
+      <Hr index="19">0.6</Hr>
+      <Hr index="20">0.6</Hr>
+      <Hr index="21">0.6</Hr>
+      <Hr index="22">0.5</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantHVACAvail WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantHVACAvail Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantHVACAvail Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant HotWtr WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.6</Hr>
+      <Hr index="8">0.55</Hr>
+      <Hr index="9">0.45</Hr>
+      <Hr index="10">0.4</Hr>
+      <Hr index="11">0.45</Hr>
+      <Hr index="12">0.4</Hr>
+      <Hr index="13">0.35</Hr>
+      <Hr index="14">0.3</Hr>
+      <Hr index="15">0.3</Hr>
+      <Hr index="16">0.3</Hr>
+      <Hr index="17">0.4</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.6</Hr>
+      <Hr index="20">0.5</Hr>
+      <Hr index="21">0.55</Hr>
+      <Hr index="22">0.45</Hr>
+      <Hr index="23">0.25</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant HotWtr Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.2</Hr>
+      <Hr index="1">0.15</Hr>
+      <Hr index="2">0.15</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0.5</Hr>
+      <Hr index="10">0.45</Hr>
+      <Hr index="11">0.5</Hr>
+      <Hr index="12">0.5</Hr>
+      <Hr index="13">0.45</Hr>
+      <Hr index="14">0.4</Hr>
+      <Hr index="15">0.4</Hr>
+      <Hr index="16">0.35</Hr>
+      <Hr index="17">0.4</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.55</Hr>
+      <Hr index="20">0.5</Hr>
+      <Hr index="21">0.55</Hr>
+      <Hr index="22">0.4</Hr>
+      <Hr index="23">0.3</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant HotWtr Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.25</Hr>
+      <Hr index="1">0.2</Hr>
+      <Hr index="2">0.2</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0.5</Hr>
+      <Hr index="11">0.5</Hr>
+      <Hr index="12">0.4</Hr>
+      <Hr index="13">0.4</Hr>
+      <Hr index="14">0.3</Hr>
+      <Hr index="15">0.3</Hr>
+      <Hr index="16">0.3</Hr>
+      <Hr index="17">0.4</Hr>
+      <Hr index="18">0.5</Hr>
+      <Hr index="19">0.5</Hr>
+      <Hr index="20">0.4</Hr>
+      <Hr index="21">0.5</Hr>
+      <Hr index="22">0.4</Hr>
+      <Hr index="23">0.2</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Elevator WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Elevator Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>Restaurant Elevator Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantRefrigeration WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.9</Hr>
+      <Hr index="1">0.9</Hr>
+      <Hr index="2">0.9</Hr>
+      <Hr index="3">0.9</Hr>
+      <Hr index="4">0.9</Hr>
+      <Hr index="5">0.9</Hr>
+      <Hr index="6">0.9</Hr>
+      <Hr index="7">0.9</Hr>
+      <Hr index="8">0.9</Hr>
+      <Hr index="9">0.9</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.9</Hr>
+      <Hr index="22">0.9</Hr>
+      <Hr index="23">0.9</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantRefrigeration Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.9</Hr>
+      <Hr index="1">0.9</Hr>
+      <Hr index="2">0.9</Hr>
+      <Hr index="3">0.9</Hr>
+      <Hr index="4">0.9</Hr>
+      <Hr index="5">0.9</Hr>
+      <Hr index="6">0.9</Hr>
+      <Hr index="7">0.9</Hr>
+      <Hr index="8">0.9</Hr>
+      <Hr index="9">0.9</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.9</Hr>
+      <Hr index="22">0.9</Hr>
+      <Hr index="23">0.9</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantRefrigeration Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.9</Hr>
+      <Hr index="1">0.9</Hr>
+      <Hr index="2">0.9</Hr>
+      <Hr index="3">0.9</Hr>
+      <Hr index="4">0.9</Hr>
+      <Hr index="5">0.9</Hr>
+      <Hr index="6">0.9</Hr>
+      <Hr index="7">0.9</Hr>
+      <Hr index="8">0.9</Hr>
+      <Hr index="9">0.9</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.9</Hr>
+      <Hr index="22">0.9</Hr>
+      <Hr index="23">0.9</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantHtgSetPt WD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">70</Hr>
+      <Hr index="1">70</Hr>
+      <Hr index="2">70</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">60</Hr>
+      <Hr index="6">60</Hr>
+      <Hr index="7">70</Hr>
+      <Hr index="8">70</Hr>
+      <Hr index="9">70</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">70</Hr>
+      <Hr index="20">70</Hr>
+      <Hr index="21">70</Hr>
+      <Hr index="22">70</Hr>
+      <Hr index="23">70</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantHtgSetPt Sat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">70</Hr>
+      <Hr index="1">70</Hr>
+      <Hr index="2">70</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">60</Hr>
+      <Hr index="6">60</Hr>
+      <Hr index="7">60</Hr>
+      <Hr index="8">60</Hr>
+      <Hr index="9">70</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">70</Hr>
+      <Hr index="20">70</Hr>
+      <Hr index="21">70</Hr>
+      <Hr index="22">70</Hr>
+      <Hr index="23">70</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantHtgSetPt Sun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">70</Hr>
+      <Hr index="1">70</Hr>
+      <Hr index="2">70</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">60</Hr>
+      <Hr index="6">60</Hr>
+      <Hr index="7">60</Hr>
+      <Hr index="8">60</Hr>
+      <Hr index="9">60</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">70</Hr>
+      <Hr index="20">70</Hr>
+      <Hr index="21">70</Hr>
+      <Hr index="22">70</Hr>
+      <Hr index="23">70</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantClgSetPt WD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">75</Hr>
+      <Hr index="1">75</Hr>
+      <Hr index="2">75</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">85</Hr>
+      <Hr index="6">85</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">75</Hr>
+      <Hr index="20">75</Hr>
+      <Hr index="21">75</Hr>
+      <Hr index="22">75</Hr>
+      <Hr index="23">75</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantClgSetPt Sat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">75</Hr>
+      <Hr index="1">75</Hr>
+      <Hr index="2">75</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">85</Hr>
+      <Hr index="6">85</Hr>
+      <Hr index="7">85</Hr>
+      <Hr index="8">85</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">75</Hr>
+      <Hr index="20">75</Hr>
+      <Hr index="21">75</Hr>
+      <Hr index="22">75</Hr>
+      <Hr index="23">75</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantClgSetPt Sun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">75</Hr>
+      <Hr index="1">75</Hr>
+      <Hr index="2">75</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">85</Hr>
+      <Hr index="6">85</Hr>
+      <Hr index="7">85</Hr>
+      <Hr index="8">85</Hr>
+      <Hr index="9">85</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">75</Hr>
+      <Hr index="20">75</Hr>
+      <Hr index="21">75</Hr>
+      <Hr index="22">75</Hr>
+      <Hr index="23">75</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantInfiltration WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.25</Hr>
+      <Hr index="1">0.25</Hr>
+      <Hr index="2">0.25</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">0.25</Hr>
+      <Hr index="8">0.25</Hr>
+      <Hr index="9">0.25</Hr>
+      <Hr index="10">0.25</Hr>
+      <Hr index="11">0.25</Hr>
+      <Hr index="12">0.25</Hr>
+      <Hr index="13">0.25</Hr>
+      <Hr index="14">0.25</Hr>
+      <Hr index="15">0.25</Hr>
+      <Hr index="16">0.25</Hr>
+      <Hr index="17">0.25</Hr>
+      <Hr index="18">0.25</Hr>
+      <Hr index="19">0.25</Hr>
+      <Hr index="20">0.25</Hr>
+      <Hr index="21">0.25</Hr>
+      <Hr index="22">0.25</Hr>
+      <Hr index="23">0.25</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantInfiltration Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.25</Hr>
+      <Hr index="1">0.25</Hr>
+      <Hr index="2">0.25</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">0.25</Hr>
+      <Hr index="10">0.25</Hr>
+      <Hr index="11">0.25</Hr>
+      <Hr index="12">0.25</Hr>
+      <Hr index="13">0.25</Hr>
+      <Hr index="14">0.25</Hr>
+      <Hr index="15">0.25</Hr>
+      <Hr index="16">0.25</Hr>
+      <Hr index="17">0.25</Hr>
+      <Hr index="18">0.25</Hr>
+      <Hr index="19">0.25</Hr>
+      <Hr index="20">0.25</Hr>
+      <Hr index="21">0.25</Hr>
+      <Hr index="22">0.25</Hr>
+      <Hr index="23">0.25</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantInfiltration Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.25</Hr>
+      <Hr index="1">0.25</Hr>
+      <Hr index="2">0.25</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">0.25</Hr>
+      <Hr index="11">0.25</Hr>
+      <Hr index="12">0.25</Hr>
+      <Hr index="13">0.25</Hr>
+      <Hr index="14">0.25</Hr>
+      <Hr index="15">0.25</Hr>
+      <Hr index="16">0.25</Hr>
+      <Hr index="17">0.25</Hr>
+      <Hr index="18">0.25</Hr>
+      <Hr index="19">0.25</Hr>
+      <Hr index="20">0.25</Hr>
+      <Hr index="21">0.25</Hr>
+      <Hr index="22">0.25</Hr>
+      <Hr index="23">0.25</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantGasEquip WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.5</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.5</Hr>
+      <Hr index="8">0.5</Hr>
+      <Hr index="9">0.5</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.75</Hr>
+      <Hr index="15">0.75</Hr>
+      <Hr index="16">0.75</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.75</Hr>
+      <Hr index="22">0.5</Hr>
+      <Hr index="23">0.5</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantGasEquip Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.5</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0.5</Hr>
+      <Hr index="9">0.5</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.75</Hr>
+      <Hr index="15">0.75</Hr>
+      <Hr index="16">0.75</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.75</Hr>
+      <Hr index="22">0.75</Hr>
+      <Hr index="23">0.5</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantGasEquip Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.5</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0.5</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.75</Hr>
+      <Hr index="15">0.75</Hr>
+      <Hr index="16">0.75</Hr>
+      <Hr index="17">0.9</Hr>
+      <Hr index="18">0.9</Hr>
+      <Hr index="19">0.9</Hr>
+      <Hr index="20">0.9</Hr>
+      <Hr index="21">0.75</Hr>
+      <Hr index="22">0.5</Hr>
+      <Hr index="23">0.5</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AlwaysOn HVAC WD</Name>
+      <Type>OnOff</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AlwaysOn HVAC Sat</Name>
+      <Type>OnOff</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AlwaysOn HVAC Sun</Name>
+      <Type>OnOff</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <Sch>
+      <Name>AssemblyLights</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">AssemblyLights Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>AssemblyLights Week</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>AssemblyLights Sun</SchDaySunRef>
+      <SchDayMonRef>AssemblyLights WD</SchDayMonRef>
+      <SchDayTueRef>AssemblyLights WD</SchDayTueRef>
+      <SchDayWedRef>AssemblyLights WD</SchDayWedRef>
+      <SchDayThuRef>AssemblyLights WD</SchDayThuRef>
+      <SchDayFriRef>AssemblyLights WD</SchDayFriRef>
+      <SchDaySatRef>AssemblyLights Sat</SchDaySatRef>
+      <SchDayHolRef>AssemblyLights Sun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>AssemblyLights Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.55</Hr>
+      <Hr index="13">0.55</Hr>
+      <Hr index="14">0.55</Hr>
+      <Hr index="15">0.55</Hr>
+      <Hr index="16">0.55</Hr>
+      <Hr index="17">0.55</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.55</Hr>
+      <Hr index="20">0.55</Hr>
+      <Hr index="21">0.55</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLights WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.35</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.35</Hr>
+      <Hr index="9">0.65</Hr>
+      <Hr index="10">0.65</Hr>
+      <Hr index="11">0.65</Hr>
+      <Hr index="12">0.65</Hr>
+      <Hr index="13">0.65</Hr>
+      <Hr index="14">0.65</Hr>
+      <Hr index="15">0.65</Hr>
+      <Hr index="16">0.65</Hr>
+      <Hr index="17">0.65</Hr>
+      <Hr index="18">0.65</Hr>
+      <Hr index="19">0.65</Hr>
+      <Hr index="20">0.65</Hr>
+      <Hr index="21">0.65</Hr>
+      <Hr index="22">0.25</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLights Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.4</Hr>
+      <Hr index="10">0.4</Hr>
+      <Hr index="11">0.4</Hr>
+      <Hr index="12">0.4</Hr>
+      <Hr index="13">0.4</Hr>
+      <Hr index="14">0.4</Hr>
+      <Hr index="15">0.4</Hr>
+      <Hr index="16">0.4</Hr>
+      <Hr index="17">0.4</Hr>
+      <Hr index="18">0.4</Hr>
+      <Hr index="19">0.4</Hr>
+      <Hr index="20">0.4</Hr>
+      <Hr index="21">0.4</Hr>
+      <Hr index="22">0.4</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OnDay</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OffDay</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Sch>
+      <Name>On</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">On Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>On Week</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OnDay</SchDaySunRef>
+      <SchDayMonRef>OnDay</SchDayMonRef>
+      <SchDayTueRef>OnDay</SchDayTueRef>
+      <SchDayWedRef>OnDay</SchDayWedRef>
+      <SchDayThuRef>OnDay</SchDayThuRef>
+      <SchDayFriRef>OnDay</SchDayFriRef>
+      <SchDaySatRef>OnDay</SchDaySatRef>
+      <SchDayHolRef>OnDay</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OnDay</SchDayHtgDDRef>
+    </SchWeek>
+    <Mat>
+      <Name>NACM_Wall Insulation EPS</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Expanded Polystyrene - EPS - 1 1/2 in.</CodeItem>
+    </Mat>
+    <FluidSys>
+      <Name>SHWFluidSys1</Name>
+      <Type>ServiceHotWater</Type>
+      <FluidSeg>
+        <Name>SHWSupply1</Name>
+        <Type>PrimarySupply</Type>
+      </FluidSeg>
+      <FluidSeg>
+        <Name>SHWMakeup1</Name>
+        <Type>MakeupFluid</Type>
+        <Src>MunicipalWater</Src>
+      </FluidSeg>
+      <WtrHtr>
+        <Name>WaterHeater1</Name>
+        <FluidSegOutRef>SHWSupply1</FluidSegOutRef>
+        <FluidSegMakeupRef>SHWMakeup1</FluidSegMakeupRef>
+      </WtrHtr>
+    </FluidSys>
+    <Sch>
+      <Name>WaterMainCZ01</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">1</EndMonth>
+      <EndMonth index="1">2</EndMonth>
+      <EndMonth index="2">3</EndMonth>
+      <EndMonth index="3">4</EndMonth>
+      <EndMonth index="4">5</EndMonth>
+      <EndMonth index="5">6</EndMonth>
+      <EndMonth index="6">7</EndMonth>
+      <EndMonth index="7">8</EndMonth>
+      <EndMonth index="8">9</EndMonth>
+      <EndMonth index="9">10</EndMonth>
+      <EndMonth index="10">11</EndMonth>
+      <EndMonth index="11">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <EndDay index="1">28</EndDay>
+      <EndDay index="2">31</EndDay>
+      <EndDay index="3">30</EndDay>
+      <EndDay index="4">31</EndDay>
+      <EndDay index="5">30</EndDay>
+      <EndDay index="6">31</EndDay>
+      <EndDay index="7">31</EndDay>
+      <EndDay index="8">30</EndDay>
+      <EndDay index="9">31</EndDay>
+      <EndDay index="10">30</EndDay>
+      <EndDay index="11">31</EndDay>
+      <SchWeekRef index="0">WaterMainCZ01Jan Week</SchWeekRef>
+      <SchWeekRef index="1">WaterMainCZ01Feb Week</SchWeekRef>
+      <SchWeekRef index="2">WaterMainCZ01Mar Week</SchWeekRef>
+      <SchWeekRef index="3">WaterMainCZ01Apr Week</SchWeekRef>
+      <SchWeekRef index="4">WaterMainCZ01May Week</SchWeekRef>
+      <SchWeekRef index="5">WaterMainCZ01Jun Week</SchWeekRef>
+      <SchWeekRef index="6">WaterMainCZ01Jul Week</SchWeekRef>
+      <SchWeekRef index="7">WaterMainCZ01Aug Week</SchWeekRef>
+      <SchWeekRef index="8">WaterMainCZ01Sep Week</SchWeekRef>
+      <SchWeekRef index="9">WaterMainCZ01Oct Week</SchWeekRef>
+      <SchWeekRef index="10">WaterMainCZ01Nov Week</SchWeekRef>
+      <SchWeekRef index="11">WaterMainCZ01Dec Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>WaterMainCZ01Jan Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Jan</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Jan</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Jan</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Jan</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Jan</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Jan</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Jan</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Jan</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Jan</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Jan</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Jan</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">48.2</Hr>
+      <Hr index="1">48.2</Hr>
+      <Hr index="2">48.2</Hr>
+      <Hr index="3">48.2</Hr>
+      <Hr index="4">48.2</Hr>
+      <Hr index="5">48.2</Hr>
+      <Hr index="6">48.2</Hr>
+      <Hr index="7">48.2</Hr>
+      <Hr index="8">48.2</Hr>
+      <Hr index="9">48.2</Hr>
+      <Hr index="10">48.2</Hr>
+      <Hr index="11">48.2</Hr>
+      <Hr index="12">48.2</Hr>
+      <Hr index="13">48.2</Hr>
+      <Hr index="14">48.2</Hr>
+      <Hr index="15">48.2</Hr>
+      <Hr index="16">48.2</Hr>
+      <Hr index="17">48.2</Hr>
+      <Hr index="18">48.2</Hr>
+      <Hr index="19">48.2</Hr>
+      <Hr index="20">48.2</Hr>
+      <Hr index="21">48.2</Hr>
+      <Hr index="22">48.2</Hr>
+      <Hr index="23">48.2</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Feb Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Feb</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Feb</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Feb</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Feb</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Feb</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Feb</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Feb</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Feb</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Feb</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Feb</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Feb</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">48.7</Hr>
+      <Hr index="1">48.7</Hr>
+      <Hr index="2">48.7</Hr>
+      <Hr index="3">48.7</Hr>
+      <Hr index="4">48.7</Hr>
+      <Hr index="5">48.7</Hr>
+      <Hr index="6">48.7</Hr>
+      <Hr index="7">48.7</Hr>
+      <Hr index="8">48.7</Hr>
+      <Hr index="9">48.7</Hr>
+      <Hr index="10">48.7</Hr>
+      <Hr index="11">48.7</Hr>
+      <Hr index="12">48.7</Hr>
+      <Hr index="13">48.7</Hr>
+      <Hr index="14">48.7</Hr>
+      <Hr index="15">48.7</Hr>
+      <Hr index="16">48.7</Hr>
+      <Hr index="17">48.7</Hr>
+      <Hr index="18">48.7</Hr>
+      <Hr index="19">48.7</Hr>
+      <Hr index="20">48.7</Hr>
+      <Hr index="21">48.7</Hr>
+      <Hr index="22">48.7</Hr>
+      <Hr index="23">48.7</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Mar Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Mar</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Mar</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Mar</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Mar</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Mar</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Mar</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Mar</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Mar</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Mar</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Mar</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Mar</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">47.9</Hr>
+      <Hr index="1">47.9</Hr>
+      <Hr index="2">47.9</Hr>
+      <Hr index="3">47.9</Hr>
+      <Hr index="4">47.9</Hr>
+      <Hr index="5">47.9</Hr>
+      <Hr index="6">47.9</Hr>
+      <Hr index="7">47.9</Hr>
+      <Hr index="8">47.9</Hr>
+      <Hr index="9">47.9</Hr>
+      <Hr index="10">47.9</Hr>
+      <Hr index="11">47.9</Hr>
+      <Hr index="12">47.9</Hr>
+      <Hr index="13">47.9</Hr>
+      <Hr index="14">47.9</Hr>
+      <Hr index="15">47.9</Hr>
+      <Hr index="16">47.9</Hr>
+      <Hr index="17">47.9</Hr>
+      <Hr index="18">47.9</Hr>
+      <Hr index="19">47.9</Hr>
+      <Hr index="20">47.9</Hr>
+      <Hr index="21">47.9</Hr>
+      <Hr index="22">47.9</Hr>
+      <Hr index="23">47.9</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Apr Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Apr</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Apr</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Apr</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Apr</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Apr</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Apr</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Apr</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Apr</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Apr</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Apr</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Apr</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">48.6</Hr>
+      <Hr index="1">48.6</Hr>
+      <Hr index="2">48.6</Hr>
+      <Hr index="3">48.6</Hr>
+      <Hr index="4">48.6</Hr>
+      <Hr index="5">48.6</Hr>
+      <Hr index="6">48.6</Hr>
+      <Hr index="7">48.6</Hr>
+      <Hr index="8">48.6</Hr>
+      <Hr index="9">48.6</Hr>
+      <Hr index="10">48.6</Hr>
+      <Hr index="11">48.6</Hr>
+      <Hr index="12">48.6</Hr>
+      <Hr index="13">48.6</Hr>
+      <Hr index="14">48.6</Hr>
+      <Hr index="15">48.6</Hr>
+      <Hr index="16">48.6</Hr>
+      <Hr index="17">48.6</Hr>
+      <Hr index="18">48.6</Hr>
+      <Hr index="19">48.6</Hr>
+      <Hr index="20">48.6</Hr>
+      <Hr index="21">48.6</Hr>
+      <Hr index="22">48.6</Hr>
+      <Hr index="23">48.6</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01May Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01May</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01May</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01May</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01May</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01May</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01May</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01May</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01May</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01May</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01May</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01May</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">48.1</Hr>
+      <Hr index="1">48.1</Hr>
+      <Hr index="2">48.1</Hr>
+      <Hr index="3">48.1</Hr>
+      <Hr index="4">48.1</Hr>
+      <Hr index="5">48.1</Hr>
+      <Hr index="6">48.1</Hr>
+      <Hr index="7">48.1</Hr>
+      <Hr index="8">48.1</Hr>
+      <Hr index="9">48.1</Hr>
+      <Hr index="10">48.1</Hr>
+      <Hr index="11">48.1</Hr>
+      <Hr index="12">48.1</Hr>
+      <Hr index="13">48.1</Hr>
+      <Hr index="14">48.1</Hr>
+      <Hr index="15">48.1</Hr>
+      <Hr index="16">48.1</Hr>
+      <Hr index="17">48.1</Hr>
+      <Hr index="18">48.1</Hr>
+      <Hr index="19">48.1</Hr>
+      <Hr index="20">48.1</Hr>
+      <Hr index="21">48.1</Hr>
+      <Hr index="22">48.1</Hr>
+      <Hr index="23">48.1</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Jun Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Jun</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Jun</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Jun</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Jun</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Jun</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Jun</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Jun</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Jun</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Jun</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Jun</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Jun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">49.9</Hr>
+      <Hr index="1">49.9</Hr>
+      <Hr index="2">49.9</Hr>
+      <Hr index="3">49.9</Hr>
+      <Hr index="4">49.9</Hr>
+      <Hr index="5">49.9</Hr>
+      <Hr index="6">49.9</Hr>
+      <Hr index="7">49.9</Hr>
+      <Hr index="8">49.9</Hr>
+      <Hr index="9">49.9</Hr>
+      <Hr index="10">49.9</Hr>
+      <Hr index="11">49.9</Hr>
+      <Hr index="12">49.9</Hr>
+      <Hr index="13">49.9</Hr>
+      <Hr index="14">49.9</Hr>
+      <Hr index="15">49.9</Hr>
+      <Hr index="16">49.9</Hr>
+      <Hr index="17">49.9</Hr>
+      <Hr index="18">49.9</Hr>
+      <Hr index="19">49.9</Hr>
+      <Hr index="20">49.9</Hr>
+      <Hr index="21">49.9</Hr>
+      <Hr index="22">49.9</Hr>
+      <Hr index="23">49.9</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Jul Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Jul</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Jul</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Jul</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Jul</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Jul</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Jul</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Jul</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Jul</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Jul</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Jul</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Jul</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">50.7</Hr>
+      <Hr index="1">50.7</Hr>
+      <Hr index="2">50.7</Hr>
+      <Hr index="3">50.7</Hr>
+      <Hr index="4">50.7</Hr>
+      <Hr index="5">50.7</Hr>
+      <Hr index="6">50.7</Hr>
+      <Hr index="7">50.7</Hr>
+      <Hr index="8">50.7</Hr>
+      <Hr index="9">50.7</Hr>
+      <Hr index="10">50.7</Hr>
+      <Hr index="11">50.7</Hr>
+      <Hr index="12">50.7</Hr>
+      <Hr index="13">50.7</Hr>
+      <Hr index="14">50.7</Hr>
+      <Hr index="15">50.7</Hr>
+      <Hr index="16">50.7</Hr>
+      <Hr index="17">50.7</Hr>
+      <Hr index="18">50.7</Hr>
+      <Hr index="19">50.7</Hr>
+      <Hr index="20">50.7</Hr>
+      <Hr index="21">50.7</Hr>
+      <Hr index="22">50.7</Hr>
+      <Hr index="23">50.7</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Aug Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Aug</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Aug</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Aug</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Aug</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Aug</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Aug</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Aug</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Aug</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Aug</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Aug</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Aug</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">51.4</Hr>
+      <Hr index="1">51.4</Hr>
+      <Hr index="2">51.4</Hr>
+      <Hr index="3">51.4</Hr>
+      <Hr index="4">51.4</Hr>
+      <Hr index="5">51.4</Hr>
+      <Hr index="6">51.4</Hr>
+      <Hr index="7">51.4</Hr>
+      <Hr index="8">51.4</Hr>
+      <Hr index="9">51.4</Hr>
+      <Hr index="10">51.4</Hr>
+      <Hr index="11">51.4</Hr>
+      <Hr index="12">51.4</Hr>
+      <Hr index="13">51.4</Hr>
+      <Hr index="14">51.4</Hr>
+      <Hr index="15">51.4</Hr>
+      <Hr index="16">51.4</Hr>
+      <Hr index="17">51.4</Hr>
+      <Hr index="18">51.4</Hr>
+      <Hr index="19">51.4</Hr>
+      <Hr index="20">51.4</Hr>
+      <Hr index="21">51.4</Hr>
+      <Hr index="22">51.4</Hr>
+      <Hr index="23">51.4</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Sep Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Sep</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Sep</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Sep</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Sep</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Sep</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Sep</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Sep</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Sep</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Sep</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Sep</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Sep</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">51.5</Hr>
+      <Hr index="1">51.5</Hr>
+      <Hr index="2">51.5</Hr>
+      <Hr index="3">51.5</Hr>
+      <Hr index="4">51.5</Hr>
+      <Hr index="5">51.5</Hr>
+      <Hr index="6">51.5</Hr>
+      <Hr index="7">51.5</Hr>
+      <Hr index="8">51.5</Hr>
+      <Hr index="9">51.5</Hr>
+      <Hr index="10">51.5</Hr>
+      <Hr index="11">51.5</Hr>
+      <Hr index="12">51.5</Hr>
+      <Hr index="13">51.5</Hr>
+      <Hr index="14">51.5</Hr>
+      <Hr index="15">51.5</Hr>
+      <Hr index="16">51.5</Hr>
+      <Hr index="17">51.5</Hr>
+      <Hr index="18">51.5</Hr>
+      <Hr index="19">51.5</Hr>
+      <Hr index="20">51.5</Hr>
+      <Hr index="21">51.5</Hr>
+      <Hr index="22">51.5</Hr>
+      <Hr index="23">51.5</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Oct Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Oct</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Oct</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Oct</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Oct</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Oct</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Oct</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Oct</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Oct</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Oct</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Oct</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Oct</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">50.7</Hr>
+      <Hr index="1">50.7</Hr>
+      <Hr index="2">50.7</Hr>
+      <Hr index="3">50.7</Hr>
+      <Hr index="4">50.7</Hr>
+      <Hr index="5">50.7</Hr>
+      <Hr index="6">50.7</Hr>
+      <Hr index="7">50.7</Hr>
+      <Hr index="8">50.7</Hr>
+      <Hr index="9">50.7</Hr>
+      <Hr index="10">50.7</Hr>
+      <Hr index="11">50.7</Hr>
+      <Hr index="12">50.7</Hr>
+      <Hr index="13">50.7</Hr>
+      <Hr index="14">50.7</Hr>
+      <Hr index="15">50.7</Hr>
+      <Hr index="16">50.7</Hr>
+      <Hr index="17">50.7</Hr>
+      <Hr index="18">50.7</Hr>
+      <Hr index="19">50.7</Hr>
+      <Hr index="20">50.7</Hr>
+      <Hr index="21">50.7</Hr>
+      <Hr index="22">50.7</Hr>
+      <Hr index="23">50.7</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Nov Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Nov</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Nov</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Nov</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Nov</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Nov</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Nov</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Nov</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Nov</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Nov</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Nov</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Nov</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">49.9</Hr>
+      <Hr index="1">49.9</Hr>
+      <Hr index="2">49.9</Hr>
+      <Hr index="3">49.9</Hr>
+      <Hr index="4">49.9</Hr>
+      <Hr index="5">49.9</Hr>
+      <Hr index="6">49.9</Hr>
+      <Hr index="7">49.9</Hr>
+      <Hr index="8">49.9</Hr>
+      <Hr index="9">49.9</Hr>
+      <Hr index="10">49.9</Hr>
+      <Hr index="11">49.9</Hr>
+      <Hr index="12">49.9</Hr>
+      <Hr index="13">49.9</Hr>
+      <Hr index="14">49.9</Hr>
+      <Hr index="15">49.9</Hr>
+      <Hr index="16">49.9</Hr>
+      <Hr index="17">49.9</Hr>
+      <Hr index="18">49.9</Hr>
+      <Hr index="19">49.9</Hr>
+      <Hr index="20">49.9</Hr>
+      <Hr index="21">49.9</Hr>
+      <Hr index="22">49.9</Hr>
+      <Hr index="23">49.9</Hr>
+    </SchDay>
+    <SchWeek>
+      <Name>WaterMainCZ01Dec Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>WaterMainCZ01Dec</SchDaySunRef>
+      <SchDayMonRef>WaterMainCZ01Dec</SchDayMonRef>
+      <SchDayTueRef>WaterMainCZ01Dec</SchDayTueRef>
+      <SchDayWedRef>WaterMainCZ01Dec</SchDayWedRef>
+      <SchDayThuRef>WaterMainCZ01Dec</SchDayThuRef>
+      <SchDayFriRef>WaterMainCZ01Dec</SchDayFriRef>
+      <SchDaySatRef>WaterMainCZ01Dec</SchDaySatRef>
+      <SchDayHolRef>WaterMainCZ01Dec</SchDayHolRef>
+      <SchDayClgDDRef>WaterMainCZ01Dec</SchDayClgDDRef>
+      <SchDayHtgDDRef>WaterMainCZ01Dec</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>WaterMainCZ01Dec</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">48.5</Hr>
+      <Hr index="1">48.5</Hr>
+      <Hr index="2">48.5</Hr>
+      <Hr index="3">48.5</Hr>
+      <Hr index="4">48.5</Hr>
+      <Hr index="5">48.5</Hr>
+      <Hr index="6">48.5</Hr>
+      <Hr index="7">48.5</Hr>
+      <Hr index="8">48.5</Hr>
+      <Hr index="9">48.5</Hr>
+      <Hr index="10">48.5</Hr>
+      <Hr index="11">48.5</Hr>
+      <Hr index="12">48.5</Hr>
+      <Hr index="13">48.5</Hr>
+      <Hr index="14">48.5</Hr>
+      <Hr index="15">48.5</Hr>
+      <Hr index="16">48.5</Hr>
+      <Hr index="17">48.5</Hr>
+      <Hr index="18">48.5</Hr>
+      <Hr index="19">48.5</Hr>
+      <Hr index="20">48.5</Hr>
+      <Hr index="21">48.5</Hr>
+      <Hr index="22">48.5</Hr>
+      <Hr index="23">48.5</Hr>
+    </SchDay>
+    <Sch>
+      <Name>OfficeWtrHtrSetPt</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeWtrHtrSetPt Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeWtrHtrSetPt Week</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>OfficeWtrHtrSetPt Sun</SchDaySunRef>
+      <SchDayMonRef>OfficeWtrHtrSetPt WD</SchDayMonRef>
+      <SchDayTueRef>OfficeWtrHtrSetPt WD</SchDayTueRef>
+      <SchDayWedRef>OfficeWtrHtrSetPt WD</SchDayWedRef>
+      <SchDayThuRef>OfficeWtrHtrSetPt WD</SchDayThuRef>
+      <SchDayFriRef>OfficeWtrHtrSetPt WD</SchDayFriRef>
+      <SchDaySatRef>OfficeWtrHtrSetPt Sat</SchDaySatRef>
+      <SchDayHolRef>OfficeWtrHtrSetPt Sun</SchDayHolRef>
+      <SchDayClgDDRef>OfficeWtrHtrSetPt WD</SchDayClgDDRef>
+      <SchDayHtgDDRef>OfficeWtrHtrSetPt WD</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeWtrHtrSetPt Sun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">135</Hr>
+      <Hr index="1">135</Hr>
+      <Hr index="2">135</Hr>
+      <Hr index="3">135</Hr>
+      <Hr index="4">135</Hr>
+      <Hr index="5">135</Hr>
+      <Hr index="6">135</Hr>
+      <Hr index="7">135</Hr>
+      <Hr index="8">135</Hr>
+      <Hr index="9">135</Hr>
+      <Hr index="10">135</Hr>
+      <Hr index="11">135</Hr>
+      <Hr index="12">135</Hr>
+      <Hr index="13">135</Hr>
+      <Hr index="14">135</Hr>
+      <Hr index="15">135</Hr>
+      <Hr index="16">135</Hr>
+      <Hr index="17">135</Hr>
+      <Hr index="18">135</Hr>
+      <Hr index="19">135</Hr>
+      <Hr index="20">135</Hr>
+      <Hr index="21">135</Hr>
+      <Hr index="22">135</Hr>
+      <Hr index="23">135</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeWtrHtrSetPt WD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">135</Hr>
+      <Hr index="1">135</Hr>
+      <Hr index="2">135</Hr>
+      <Hr index="3">135</Hr>
+      <Hr index="4">135</Hr>
+      <Hr index="5">135</Hr>
+      <Hr index="6">135</Hr>
+      <Hr index="7">135</Hr>
+      <Hr index="8">135</Hr>
+      <Hr index="9">135</Hr>
+      <Hr index="10">135</Hr>
+      <Hr index="11">135</Hr>
+      <Hr index="12">135</Hr>
+      <Hr index="13">135</Hr>
+      <Hr index="14">135</Hr>
+      <Hr index="15">135</Hr>
+      <Hr index="16">135</Hr>
+      <Hr index="17">135</Hr>
+      <Hr index="18">135</Hr>
+      <Hr index="19">135</Hr>
+      <Hr index="20">135</Hr>
+      <Hr index="21">135</Hr>
+      <Hr index="22">135</Hr>
+      <Hr index="23">135</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeWtrHtrSetPt Sat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">135</Hr>
+      <Hr index="1">135</Hr>
+      <Hr index="2">135</Hr>
+      <Hr index="3">135</Hr>
+      <Hr index="4">135</Hr>
+      <Hr index="5">135</Hr>
+      <Hr index="6">135</Hr>
+      <Hr index="7">135</Hr>
+      <Hr index="8">135</Hr>
+      <Hr index="9">135</Hr>
+      <Hr index="10">135</Hr>
+      <Hr index="11">135</Hr>
+      <Hr index="12">135</Hr>
+      <Hr index="13">135</Hr>
+      <Hr index="14">135</Hr>
+      <Hr index="15">135</Hr>
+      <Hr index="16">135</Hr>
+      <Hr index="17">135</Hr>
+      <Hr index="18">135</Hr>
+      <Hr index="19">135</Hr>
+      <Hr index="20">135</Hr>
+      <Hr index="21">135</Hr>
+      <Hr index="22">135</Hr>
+      <Hr index="23">135</Hr>
+    </SchDay>
+    <CrvQuad>
+      <Name>WtHtrStorFIRRatio_fQRatio</Name>
+      <Coef1>0.021826</Coef1>
+      <Coef2>0.97763</Coef2>
+      <Coef3>0.000543</Coef3>
+      <MaxOut>1</MaxOut>
+      <MaxVar1>1</MaxVar1>
+      <MinOut>0.1</MinOut>
+      <MinVar1>0.1</MinVar1>
+    </CrvQuad>
+    <Sch>
+      <Name>RestaurantExhaust Sch</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">RestaurantExhaustHoodEqualOrLessThan5000cfm Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>RestaurantExhaustHoodEqualOrLessThan5000cfm Week</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>RestaurantExhaustHoodEqualOrLessThan5000cfm Sun</SchDaySunRef>
+      <SchDayMonRef>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</SchDayMonRef>
+      <SchDayTueRef>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</SchDayTueRef>
+      <SchDayWedRef>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</SchDayWedRef>
+      <SchDayThuRef>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</SchDayThuRef>
+      <SchDayFriRef>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</SchDayFriRef>
+      <SchDaySatRef>RestaurantExhaustHoodEqualOrLessThan5000cfm Sat</SchDaySatRef>
+      <SchDayHolRef>RestaurantExhaustHoodEqualOrLessThan5000cfm Sun</SchDayHolRef>
+      <SchDayClgDDRef>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</SchDayClgDDRef>
+      <SchDayHtgDDRef>RestaurantExhaustHoodEqualOrLessThan5000cfm Sun</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>RestaurantExhaustHoodEqualOrLessThan5000cfm Sun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantExhaustHoodEqualOrLessThan5000cfm WD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>RestaurantExhaustHoodEqualOrLessThan5000cfm Sat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <EUseSummary>
+      <Name>EUseSummary</Name>
+      <Title1 index="1">Proposed</Title1>
+      <Title1 index="2">Proposed</Title1>
+      <Title1 index="3">Proposed</Title1>
+      <Title1 index="4">Standard</Title1>
+      <Title1 index="5">Standard</Title1>
+      <Title1 index="6">Standard</Title1>
+      <Title1 index="7">Compliance</Title1>
+      <Title2 index="1">Design</Title2>
+      <Title2 index="2">Design</Title2>
+      <Title2 index="3">Design</Title2>
+      <Title2 index="4">Design</Title2>
+      <Title2 index="5">Design</Title2>
+      <Title2 index="6">Design</Title2>
+      <Title2 index="7">Margin</Title2>
+      <Title3 index="0">End Use</Title3>
+      <Title3 index="1">Site (MWh)</Title3>
+      <Title3 index="2">Site (therms)</Title3>
+      <Title3 index="3">(kTDV/ft²-yr)</Title3>
+      <Title3 index="4">Site (MWh)</Title3>
+      <Title3 index="5">Site (therms)</Title3>
+      <Title3 index="6">(kTDV/ft²-yr)</Title3>
+      <Title3 index="7">(kTDV/ft²-yr)</Title3>
+      <Enduse1 index="0">Space Heating</Enduse1>
+      <Enduse1 index="1">--</Enduse1>
+      <Enduse1 index="2">439</Enduse1>
+      <Enduse1 index="3">32.3</Enduse1>
+      <Enduse1 index="4">--</Enduse1>
+      <Enduse1 index="5">440</Enduse1>
+      <Enduse1 index="6">32.4</Enduse1>
+      <Enduse1 index="7">0.1</Enduse1>
+      <Enduse2 index="0">Space Cooling</Enduse2>
+      <Enduse2 index="1">10.7</Enduse2>
+      <Enduse2 index="2">--</Enduse2>
+      <Enduse2 index="3">163.1</Enduse2>
+      <Enduse2 index="4">10.7</Enduse2>
+      <Enduse2 index="5">--</Enduse2>
+      <Enduse2 index="6">163.2</Enduse2>
+      <Enduse2 index="7">0.1</Enduse2>
+      <Enduse3 index="0">Indoor Fans</Enduse3>
+      <Enduse3 index="1">21.7</Enduse3>
+      <Enduse3 index="2">--</Enduse3>
+      <Enduse3 index="3">193.4</Enduse3>
+      <Enduse3 index="4">21.7</Enduse3>
+      <Enduse3 index="5">--</Enduse3>
+      <Enduse3 index="6">193.4</Enduse3>
+      <Enduse3 index="7">--</Enduse3>
+      <Enduse4 index="0">Heat Rejection</Enduse4>
+      <Enduse4 index="1">--</Enduse4>
+      <Enduse4 index="2">--</Enduse4>
+      <Enduse4 index="3">--</Enduse4>
+      <Enduse4 index="4">--</Enduse4>
+      <Enduse4 index="5">--</Enduse4>
+      <Enduse4 index="6">--</Enduse4>
+      <Enduse4 index="7">--</Enduse4>
+      <Enduse5 index="0">Pumps &amp; Misc.</Enduse5>
+      <Enduse5 index="1">--</Enduse5>
+      <Enduse5 index="2">--</Enduse5>
+      <Enduse5 index="3">--</Enduse5>
+      <Enduse5 index="4">--</Enduse5>
+      <Enduse5 index="5">--</Enduse5>
+      <Enduse5 index="6">--</Enduse5>
+      <Enduse5 index="7">--</Enduse5>
+      <Enduse6 index="0">Domestic HW</Enduse6>
+      <Enduse6 index="1">--</Enduse6>
+      <Enduse6 index="2">1,049</Enduse6>
+      <Enduse6 index="3">68.9</Enduse6>
+      <Enduse6 index="4">--</Enduse6>
+      <Enduse6 index="5">1,049</Enduse6>
+      <Enduse6 index="6">68.9</Enduse6>
+      <Enduse6 index="7">--</Enduse6>
+      <Enduse7 index="0">Lighting</Enduse7>
+      <Enduse7 index="1">13.7</Enduse7>
+      <Enduse7 index="2">--</Enduse7>
+      <Enduse7 index="3">126.4</Enduse7>
+      <Enduse7 index="4">13.7</Enduse7>
+      <Enduse7 index="5">--</Enduse7>
+      <Enduse7 index="6">126.4</Enduse7>
+      <Enduse7 index="7">--</Enduse7>
+      <Enduse8 index="0">Compliance Total</Enduse8>
+      <Enduse8 index="1">46.1</Enduse8>
+      <Enduse8 index="2">1,488</Enduse8>
+      <Enduse8 index="3">584.1</Enduse8>
+      <Enduse8 index="4">46.1</Enduse8>
+      <Enduse8 index="5">1,489</Enduse8>
+      <Enduse8 index="6">584.3</Enduse8>
+      <Enduse8 index="7">0.2</Enduse8>
+      <Enduse9 index="0">Receptacle</Enduse9>
+      <Enduse9 index="1">12.6</Enduse9>
+      <Enduse9 index="2">1,040</Enduse9>
+      <Enduse9 index="3">186.2</Enduse9>
+      <Enduse9 index="4">12.6</Enduse9>
+      <Enduse9 index="5">1,040</Enduse9>
+      <Enduse9 index="6">186.2</Enduse9>
+      <Enduse10 index="0">Process</Enduse10>
+      <Enduse10 index="1">11.0</Enduse10>
+      <Enduse10 index="2">--</Enduse10>
+      <Enduse10 index="3">92.1</Enduse10>
+      <Enduse10 index="4">11.0</Enduse10>
+      <Enduse10 index="5">--</Enduse10>
+      <Enduse10 index="6">92.1</Enduse10>
+      <Enduse11 index="0">Process Ltg</Enduse11>
+      <Enduse11 index="1">--</Enduse11>
+      <Enduse11 index="2">--</Enduse11>
+      <Enduse11 index="3">--</Enduse11>
+      <Enduse11 index="4">--</Enduse11>
+      <Enduse11 index="5">--</Enduse11>
+      <Enduse11 index="6">--</Enduse11>
+      <Enduse12 index="0">TOTAL</Enduse12>
+      <Enduse12 index="1">69.7</Enduse12>
+      <Enduse12 index="2">2,528</Enduse12>
+      <Enduse12 index="3">862.4</Enduse12>
+      <Enduse12 index="4">69.7</Enduse12>
+      <Enduse12 index="5">2,529</Enduse12>
+      <Enduse12 index="6">862.6</Enduse12>
+      <ZoneUMLHsLoaded index="0">1</ZoneUMLHsLoaded>
+      <ZoneUMLHsLoaded index="1">1</ZoneUMLHsLoaded>
+      <ZoneUMLHs index="0">clg: 0  htg: 0  'Attic Zn'
+clg: 0  htg: 0  'Dining Thermal Zone'
+clg: 4  htg: 49  'Kitchen Thermal Zone'</ZoneUMLHs>
+      <ZoneUMLHs index="1">clg: 0  htg: 0  'Attic Zn'
+clg: 0  htg: 0  'Dining Thermal Zone'
+clg: 4  htg: 54  'Kitchen Thermal Zone'</ZoneUMLHs>
+      <SimSummary index="0">Successful (1 severe error, 87 warnings)</SimSummary>
+      <SimSummary index="2">Successful (1 severe error, 89 warnings)</SimSummary>
+      <PassFail>PASS</PassFail>
+    </EUseSummary>
+  </Proj>
+</SDDXML>

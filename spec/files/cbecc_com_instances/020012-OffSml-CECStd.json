@@ -1,0 +1,3746 @@
+{
+  "SDDXML": {
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "RulesetFilename": {
+      "file": "CEC 2013 NonRes.bin"
+    },
+    "Proj": {
+      "Name": "020012-OffSml-CECStd",
+      "BldgEngyModelVersion": "7",
+      "CreateDate": "1415031770",
+      "ModDate": "1415031770",
+      "RunDate": "1414951359",
+      "ZipCode": "95814",
+      "DDWeatherFile": "D:/AEC Ruleset/branches/CBECC-Com13-BZ/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.ddy",
+      "AnnualWeatherFile": "D:/AEC Ruleset/branches/CBECC-Com13-BZ/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.epw",
+      "ExcptCondNoClgSys": "No",
+      "ExcptCondRtdCap": "No",
+      "ExcptCondFanPress": "No",
+      "ExcptCondWCC": "No",
+      "ExcptCondNarrative": "No",
+      "AutoHardSize": "0",
+      "AutoEffInput": "0",
+      "CompType": "NewComplete",
+      "SoftwareVersion": "CBECC-Com 2013-3 (653)",
+      "CompReportPDF": "1",
+      "CompReportXML": "1",
+      "ConsAssm": [
+        {
+          "Name": "Base_CZ12-NonresMetalFrameWallU062",
+          "CompatibleSurfType": "ExteriorWall",
+          "MatRef": [
+            "Stucco - 7/8 in.",
+            "Compliance Insulation R13.99",
+            "Air - Metal Wall Framing - 16 or 24 in. OC",
+            "Gypsum Board - 1/2 in."
+          ]
+        },
+        {
+          "Name": "Base_CZ12-SlabOnOrBelowGradeF073",
+          "CompatibleSurfType": "UndergroundFloor",
+          "SlabType": "UnheatedSlabOnGrade",
+          "MatRef": "Concrete - 140 lb/ft3 - 6 in."
+        },
+        {
+          "Name": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+          "CompatibleSurfType": "Roof",
+          "CRRCInitialRefl": "0.2",
+          "CRRCAgedRefl": "0.2",
+          "CRRCInitialEmittance": "0.85",
+          "CRRCAgedEmittance": "0.85",
+          "CRRCProdID": "XXXX-XXXX",
+          "MatRef": [
+            "Metal Standing Seam - 1/16 in.",
+            "Compliance Insulation R24.86"
+          ]
+        },
+        {
+          "Name": "Base_CZ12-NonresOtherFloorU071",
+          "CompatibleSurfType": "ExteriorFloor",
+          "MatRef": [
+            "Compliance Insulation R9.83",
+            "Plywood - 5/8 in.",
+            "Carpet - 3/4 in."
+          ]
+        },
+        {
+          "Name": "NACM_Interior Wall",
+          "CompatibleSurfType": "InteriorWall",
+          "MatRef": [
+            "NACM_Gypsum Board 5/8in",
+            "Air - Metal Wall Framing - 16 or 24 in. OC",
+            "NACM_Gypsum Board 5/8in"
+          ]
+        },
+        {
+          "Name": "NACM_Drop Ceiling",
+          "CompatibleSurfType": "InteriorFloor",
+          "MatRef": "NACM_Acoustic Tile 3/4in"
+        }
+      ],
+      "Mat": [
+        {
+          "Name": "Stucco - 7/8 in.",
+          "CodeCat": "Plastering Materials",
+          "CodeItem": "Stucco - 7/8 in."
+        },
+        {
+          "Name": "Compliance Insulation R13.99",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R13.99"
+        },
+        {
+          "Name": "Air - Metal Wall Framing - 16 or 24 in. OC",
+          "CodeCat": "Air",
+          "CodeItem": "Air - Metal Wall Framing - 16 or 24 in. OC"
+        },
+        {
+          "Name": "Gypsum Board - 1/2 in.",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Gypsum Board - 1/2 in."
+        },
+        {
+          "Name": "Concrete - 140 lb/ft3 - 6 in.",
+          "CodeCat": "Concrete",
+          "CodeItem": "Concrete - 140 lb/ft3 - 6 in."
+        },
+        {
+          "Name": "Metal Standing Seam - 1/16 in.",
+          "CodeCat": "Roofing",
+          "CodeItem": "Metal Standing Seam - 1/16 in."
+        },
+        {
+          "Name": "Compliance Insulation R24.86",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R24.86"
+        },
+        {
+          "Name": "Compliance Insulation R9.83",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R9.83"
+        },
+        {
+          "Name": "Plywood - 5/8 in.",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Plywood - 5/8 in."
+        },
+        {
+          "Name": "Carpet - 3/4 in.",
+          "CodeCat": "Finish Materials",
+          "CodeItem": "Carpet - 3/4 in."
+        },
+        {
+          "Name": "NACM_Gypsum Board 5/8in",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Gypsum Board - 5/8 in."
+        },
+        {
+          "Name": "NACM_Acoustic Tile 3/4in",
+          "CodeCat": "Finish Materials",
+          "CodeItem": "Acoustic Tile - 3/4 in."
+        }
+      ],
+      "FenCons": {
+        "Name": "Base_AllCZ_FixedWindowU36",
+        "FenType": "VerticalFenestration",
+        "FenProdType": "FixedWindow",
+        "AssmContext": "Manufactured",
+        "CertificationMthd": "NFRCRated",
+        "SHGC": "0.25",
+        "UFactor": "0.36",
+        "VT": "0.42"
+      },
+      "Sch": [
+        {
+          "Name": "Office Occupancy",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeOccupancyWk"
+        },
+        {
+          "Name": "Office Receptacle",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeReceptacleWk"
+        },
+        {
+          "Name": "Office ServiceHotWater",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeServiceHotWaterWk"
+        },
+        {
+          "Name": "Office Elevator",
+          "Type": "Fraction",
+          "SchWeekRef": "OfficeElevatorWk"
+        },
+        {
+          "Name": "Office Lights",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeLightsWk"
+        },
+        {
+          "Name": "Office ClgSetPt",
+          "Type": "Temperature",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeClgSetPtWk"
+        },
+        {
+          "Name": "Office HtgSetPt",
+          "Type": "Temperature",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeHtgSetPtWk"
+        },
+        {
+          "Name": "Office WtrHtrSetPt",
+          "Type": "Temperature",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeWtrHtrSetPtWk"
+        }
+      ],
+      "SchWeek": [
+        {
+          "Name": "OfficeOccupancyWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "OfficeOccupancySun",
+          "SchDayMonRef": "OfficeOccupancyWD",
+          "SchDayTueRef": "OfficeOccupancyWD",
+          "SchDayWedRef": "OfficeOccupancyWD",
+          "SchDayThuRef": "OfficeOccupancyWD",
+          "SchDayFriRef": "OfficeOccupancyWD",
+          "SchDaySatRef": "OfficeOccupancySat",
+          "SchDayHolRef": "OfficeOccupancySun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "OfficeReceptacleWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "OfficeReceptacleSun",
+          "SchDayMonRef": "OfficeReceptacleWD",
+          "SchDayTueRef": "OfficeReceptacleWD",
+          "SchDayWedRef": "OfficeReceptacleWD",
+          "SchDayThuRef": "OfficeReceptacleWD",
+          "SchDayFriRef": "OfficeReceptacleWD",
+          "SchDaySatRef": "OfficeReceptacleSat",
+          "SchDayHolRef": "OfficeReceptacleSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "OfficeServiceHotWaterWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "OfficeServiceHotWaterSun",
+          "SchDayMonRef": "OfficeServiceHotWaterWD",
+          "SchDayTueRef": "OfficeServiceHotWaterWD",
+          "SchDayWedRef": "OfficeServiceHotWaterWD",
+          "SchDayThuRef": "OfficeServiceHotWaterWD",
+          "SchDayFriRef": "OfficeServiceHotWaterWD",
+          "SchDaySatRef": "OfficeServiceHotWaterSat",
+          "SchDayHolRef": "OfficeServiceHotWaterSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "OfficeElevatorWk",
+          "Type": "Fraction",
+          "SchDayWDRef": "OfficeElevatorWD",
+          "SchDaySunRef": "OfficeElevatorSun",
+          "SchDaySatRef": "OfficeElevatorSat"
+        },
+        {
+          "Name": "OfficeLightsWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "OfficeLightsSun",
+          "SchDayMonRef": "OfficeLightsWD",
+          "SchDayTueRef": "OfficeLightsWD",
+          "SchDayWedRef": "OfficeLightsWD",
+          "SchDayThuRef": "OfficeLightsWD",
+          "SchDayFriRef": "OfficeLightsWD",
+          "SchDaySatRef": "OfficeLightsSat",
+          "SchDayHolRef": "OfficeLightsSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "OfficeClgSetPtWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "OfficeClgSetPtSun",
+          "SchDayMonRef": "OfficeClgSetPtWD",
+          "SchDayTueRef": "OfficeClgSetPtWD",
+          "SchDayWedRef": "OfficeClgSetPtWD",
+          "SchDayThuRef": "OfficeClgSetPtWD",
+          "SchDayFriRef": "OfficeClgSetPtWD",
+          "SchDaySatRef": "OfficeClgSetPtSat",
+          "SchDayHolRef": "OfficeClgSetPtSun",
+          "SchDayClgDDRef": "OfficeClgSetPtWD",
+          "SchDayHtgDDRef": "OfficeClgSetPtWD"
+        },
+        {
+          "Name": "OfficeHtgSetPtWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "OfficeHtgSetPtSun",
+          "SchDayMonRef": "OfficeHtgSetPtWD",
+          "SchDayTueRef": "OfficeHtgSetPtWD",
+          "SchDayWedRef": "OfficeHtgSetPtWD",
+          "SchDayThuRef": "OfficeHtgSetPtWD",
+          "SchDayFriRef": "OfficeHtgSetPtWD",
+          "SchDaySatRef": "OfficeHtgSetPtSat",
+          "SchDayHolRef": "OfficeHtgSetPtSun",
+          "SchDayClgDDRef": "OfficeHtgSetPtWD",
+          "SchDayHtgDDRef": "OfficeHtgSetPtWD"
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "OfficeWtrHtrSetPtSun",
+          "SchDayMonRef": "OfficeWtrHtrSetPtWD",
+          "SchDayTueRef": "OfficeWtrHtrSetPtWD",
+          "SchDayWedRef": "OfficeWtrHtrSetPtWD",
+          "SchDayThuRef": "OfficeWtrHtrSetPtWD",
+          "SchDayFriRef": "OfficeWtrHtrSetPtWD",
+          "SchDaySatRef": "OfficeWtrHtrSetPtSat",
+          "SchDayHolRef": "OfficeWtrHtrSetPtSun",
+          "SchDayClgDDRef": "OfficeWtrHtrSetPtWD",
+          "SchDayHtgDDRef": "OfficeWtrHtrSetPtWD"
+        }
+      ],
+      "SchDay": [
+        {
+          "Name": "OfficeOccupancySun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeOccupancyWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.2",
+            "0.95",
+            "0.95",
+            "0.95",
+            "0.95",
+            "0.5",
+            "0.95",
+            "0.95",
+            "0.95",
+            "0.95",
+            "0.3",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeOccupancySat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.1",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.05",
+            "0.05",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeReceptacleSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeReceptacleWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.1",
+            "0.3",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.5",
+            "0.3",
+            "0.3",
+            "0.2",
+            "0.2",
+            "0.1",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeReceptacleSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.1",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeServiceHotWaterSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.07",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.06",
+            "0.06",
+            "0.09",
+            "0.06",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.07",
+            "0.04",
+            "0.04"
+          ]
+        },
+        {
+          "Name": "OfficeServiceHotWaterWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.08",
+            "0.07",
+            "0.19",
+            "0.35",
+            "0.38",
+            "0.39",
+            "0.47",
+            "0.57",
+            "0.54",
+            "0.34",
+            "0.33",
+            "0.44",
+            "0.26",
+            "0.21",
+            "0.15",
+            "0.17",
+            "0.08",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeServiceHotWaterSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.08",
+            "0.07",
+            "0.11",
+            "0.15",
+            "0.21",
+            "0.19",
+            "0.23",
+            "0.2",
+            "0.19",
+            "0.15",
+            "0.12",
+            "0.14",
+            "0.07",
+            "0.07",
+            "0.07",
+            "0.07",
+            "0.09",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeElevatorWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.35",
+            "0.69",
+            "0.43",
+            "0.37",
+            "0.43",
+            "0.58",
+            "0.48",
+            "0.37",
+            "0.37",
+            "0.46",
+            "0.62",
+            "0.2",
+            "0.12",
+            "0.04",
+            "0.04",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeElevatorSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.16",
+            "0.14",
+            "0.21",
+            "0.18",
+            "0.25",
+            "0.21",
+            "0.13",
+            "0.08",
+            "0.04",
+            "0.05",
+            "0.06",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeElevatorSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeLightsSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeLightsWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.1",
+            "0.3",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.35",
+            "0.3",
+            "0.3",
+            "0.2",
+            "0.2",
+            "0.1",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OfficeLightsSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.1",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OnDay",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "OffDay",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeClgSetPtSun",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85"
+          ]
+        },
+        {
+          "Name": "OfficeClgSetPtWD",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75"
+          ]
+        },
+        {
+          "Name": "OfficeClgSetPtSat",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85"
+          ]
+        },
+        {
+          "Name": "OfficeHtgSetPtSun",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60"
+          ]
+        },
+        {
+          "Name": "OfficeHtgSetPtWD",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70"
+          ]
+        },
+        {
+          "Name": "OfficeHtgSetPtSat",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtSun",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtWD",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtSat",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        }
+      ],
+      "Bldg": {
+        "Name": "Small Office",
+        "FuncClassMthd": "AreaCategoryMethod",
+        "TotStoryCnt": "1",
+        "AboveGrdStoryCnt": "1",
+        "Story": {
+          "Name": "Building Story 1",
+          "Spc": [
+            {
+              "Name": "Perimeter_ZN_1",
+              "ThrmlZnRef": "Perimeter_ZN_1 Thermal Zone",
+              "Vol": "12219.7",
+              "SpcFuncDefaultsRef": "Office Defaults",
+              "SpcFunc": "Office (Greater than 250 square feet in floor area)",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "74.4423",
+                      "16.4042",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "90.8465",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "16.4042",
+                      "16.4042",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "IntWall": [
+                {
+                  "Name": "Perimeter_ZN_1_wall_east",
+                  "AdjacentSpcRef": "Perimeter_ZN_2",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "6.69906e-015",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "6.69906e-015",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Perimeter_ZN_1_wall_north",
+                  "AdjacentSpcRef": "Core_ZN",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "UndgrFlr": {
+                "Name": "Perimeter_ZN_1_floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "16.4042",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "16.4042",
+                        "16.4042",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": {
+                "Name": "Perimeter_ZN_1_wall_south",
+                "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "10.0066"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "0",
+                        "10.0066"
+                      ]
+                    }
+                  ]
+                },
+                "Win": [
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_Window_1",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "4.56037",
+                            "0",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "4.56037",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "10.5643",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "10.5643",
+                            "0",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_door",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "42.4213",
+                            "0",
+                            "7.00131"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "42.4213",
+                            "0",
+                            "0"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "48.4252",
+                            "0",
+                            "0"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "48.4252",
+                            "0",
+                            "7.00131"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_Window_5",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "65.1247",
+                            "0",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "65.1247",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "71.1286",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "71.1286",
+                            "0",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_Window_4",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "50",
+                            "0",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "50",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "56.0039",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "56.0039",
+                            "0",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_Window_6",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "80.2822",
+                            "0",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "80.2822",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "86.2861",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "86.2861",
+                            "0",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_Window_2",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "19.7178",
+                            "0",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "19.7178",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "25.7218",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "25.7218",
+                            "0",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_1_wall_south_Window_3",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "34.8425",
+                            "0",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "34.8425",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "40.8465",
+                            "0",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "40.8465",
+                            "0",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "Name": "Perimeter_ZN_2",
+              "ThrmlZnRef": "Perimeter_ZN_2 Thermal Zone",
+              "Vol": "7248.87",
+              "SpcFuncDefaultsRef": "Office Defaults",
+              "SpcFunc": "Office (Greater than 250 square feet in floor area)",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "90.8465",
+                      "60.5643",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "90.8465",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "74.4423",
+                      "16.4042",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "74.4423",
+                      "44.1601",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "ExtWall": {
+                "Name": "Perimeter_ZN_2_wall_east",
+                "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "6.69906e-015",
+                        "10.0066"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "60.5643",
+                        "10.0066"
+                      ]
+                    }
+                  ]
+                },
+                "Win": [
+                  {
+                    "Name": "Perimeter_ZN_2_wall_east_Window_3",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "34.8425",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "34.8425",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "40.8465",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "40.8465",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_2_wall_east_Window_4",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "50",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "50",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "56.0039",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "56.0039",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_2_wall_east_Window_2",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "19.7178",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "19.7178",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "25.7218",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "25.7218",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_2_wall_east_Window_1",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "4.56037",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "4.56037",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "10.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "90.8465",
+                            "10.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Perimeter_ZN_2_floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "16.4042",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "44.1601",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Perimeter_ZN_3",
+              "ThrmlZnRef": "Perimeter_ZN_3 Thermal Zone",
+              "Vol": "12219.7",
+              "SpcFuncDefaultsRef": "Office Defaults",
+              "SpcFunc": "Office (Greater than 250 square feet in floor area)",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "90.8465",
+                      "60.5643",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "74.4423",
+                      "44.1601",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "16.4042",
+                      "44.1601",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "60.5643",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Perimeter_ZN_3_floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "44.1601",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "16.4042",
+                        "44.1601",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "60.5643",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": {
+                "Name": "Perimeter_ZN_3_wall_north",
+                "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "60.5643",
+                        "10.0066"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "90.8465",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "60.5643",
+                        "10.0066"
+                      ]
+                    }
+                  ]
+                },
+                "Win": [
+                  {
+                    "Name": "Perimeter_ZN_3_wall_north_Window_5",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "25.7218",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "25.7218",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "19.7178",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "19.7178",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_3_wall_north_Window_2",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "71.1286",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "71.1286",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "65.1247",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "65.1247",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_3_wall_north_Window_1",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "86.2861",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "86.2861",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "80.2822",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "80.2822",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_3_wall_north_Window_6",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "10.5643",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "10.5643",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "4.56037",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "4.56037",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_3_wall_north_Window_3",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "56.0039",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "56.0039",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "50",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "50",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_3_wall_north_Window_4",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "40.8465",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "40.8465",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "34.8425",
+                            "60.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "34.8425",
+                            "60.5643",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "IntWall": [
+                {
+                  "Name": "Perimeter_ZN_3_wall_east",
+                  "AdjacentSpcRef": "Perimeter_ZN_2",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "60.5643",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Perimeter_ZN_3_wall_south",
+                  "AdjacentSpcRef": "Core_ZN",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Perimeter_ZN_4",
+              "ThrmlZnRef": "Perimeter_ZN_4 Thermal Zone",
+              "Vol": "7248.87",
+              "SpcFuncDefaultsRef": "Office Defaults",
+              "SpcFunc": "Office (Greater than 250 square feet in floor area)",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "0",
+                      "60.5643",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "16.4042",
+                      "44.1601",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "16.4042",
+                      "16.4042",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "0",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "IntWall": [
+                {
+                  "Name": "Perimeter_ZN_4_wall_south",
+                  "AdjacentSpcRef": "Perimeter_ZN_1",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Perimeter_ZN_4_wall_east",
+                  "AdjacentSpcRef": "Core_ZN",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Perimeter_ZN_4_wall_north",
+                  "AdjacentSpcRef": "Perimeter_ZN_3",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "60.5643",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "ExtWall": {
+                "Name": "Perimeter_ZN_4_wall_west",
+                "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "0",
+                        "60.5643",
+                        "10.0066"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "10.0066"
+                      ]
+                    }
+                  ]
+                },
+                "Win": [
+                  {
+                    "Name": "Perimeter_ZN_4_wall_west_Window_1",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "0",
+                            "56.0039",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "56.0039",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "50",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "50",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_4_wall_west_Window_2",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "0",
+                            "40.8465",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "40.8465",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "34.8425",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "34.8425",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_4_wall_west_Window_4",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "0",
+                            "10.5643",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "10.5643",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "4.56037",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "4.56037",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Perimeter_ZN_4_wall_west_Window_3",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "0",
+                            "25.7218",
+                            "7.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "25.7218",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "19.7178",
+                            "2.95276"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "19.7178",
+                            "7.95276"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Perimeter_ZN_4_floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "0",
+                        "60.5643",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "16.4042",
+                        "44.1601",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "16.4042",
+                        "16.4042",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Core_ZN",
+              "ThrmlZnRef": "Core_ZN Thermal Zone",
+              "Vol": "16119.6",
+              "SpcFuncDefaultsRef": "Office Defaults",
+              "SpcFunc": "Office (Greater than 250 square feet in floor area)",
+              "CommRfrgEPD": "0",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "74.4423",
+                      "44.1601",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "74.4423",
+                      "16.4042",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "16.4042",
+                      "16.4042",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "16.4042",
+                      "44.1601",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Core_ZN_floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "44.1601",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "16.4042",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "16.4042",
+                        "16.4042",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "16.4042",
+                        "44.1601",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "IntWall": {
+                "Name": "Core_ZN_wall_east",
+                "AdjacentSpcRef": "Perimeter_ZN_2",
+                "ConsAssmRef": "NACM_Interior Wall",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "16.4042",
+                        "10.0066"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "16.4042",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "44.1601",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "74.4423",
+                        "44.1601",
+                        "10.0066"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Attic",
+              "CondgType": "IndirectlyConditioned",
+              "ThrmlZnRef": "Attic Thermal Zone",
+              "Vol": "28195.7",
+              "SpcFunc": "Unoccupied-Exclude from Gross Floor Area",
+              "SecSide100PctControlled": "0",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "92.815",
+                      "62.5328",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "92.815",
+                      "-1.9685",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "-1.9685",
+                      "-1.9685",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "-1.9685",
+                      "-1.9685",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "-1.9685",
+                      "62.5328",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "60.5643",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "0",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "90.8465",
+                      "0",
+                      "10.0066"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "90.8465",
+                      "60.5643",
+                      "10.0066"
+                    ]
+                  }
+                ]
+              },
+              "Roof": [
+                {
+                  "Name": "Attic_roof_north",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "60.5643",
+                          "30.2822",
+                          "20.7677"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "92.815",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "30.2822",
+                          "30.2822",
+                          "20.7677"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_roof_west",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "30.2822",
+                          "30.2822",
+                          "20.7677"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_roof_east",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "60.5643",
+                          "30.2822",
+                          "20.7677"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "92.815",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "92.815",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_roof_south",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "30.2822",
+                          "30.2822",
+                          "20.7677"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "92.815",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "60.5643",
+                          "30.2822",
+                          "20.7677"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "IntFlr": [
+                {
+                  "Name": "Attic_floor_core",
+                  "AdjacentSpcRef": "Core_ZN",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_floor_perimeter_east",
+                  "AdjacentSpcRef": "Perimeter_ZN_2",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_floor_perimeter_west",
+                  "AdjacentSpcRef": "Perimeter_ZN_4",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_floor_perimeter_south",
+                  "AdjacentSpcRef": "Perimeter_ZN_1",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "16.4042",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_floor_perimeter_north",
+                  "AdjacentSpcRef": "Perimeter_ZN_3",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "74.4423",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "16.4042",
+                          "44.1601",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "ExtFlr": [
+                {
+                  "Name": "Attic_soffit_north",
+                  "ConsAssmRef": "Base_CZ12-NonresOtherFloorU071",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "92.815",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_soffit_east",
+                  "ConsAssmRef": "Base_CZ12-NonresOtherFloorU071",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "92.815",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "92.815",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_soffit_west",
+                  "ConsAssmRef": "Base_CZ12-NonresOtherFloorU071",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "62.5328",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "60.5643",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Attic_soffit_south",
+                  "ConsAssmRef": "Base_CZ12-NonresOtherFloorU071",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "90.8465",
+                          "0",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "92.815",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "-1.9685",
+                          "-1.9685",
+                          "10.0066"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0066"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "ThrmlZn": [
+          {
+            "Name": "Attic Thermal Zone",
+            "Type": "Unconditioned"
+          },
+          {
+            "Name": "Core_ZN Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "CoreZnPSZ AirSys",
+            "ClgTstatSchRef": "Office ClgSetPt",
+            "HtgTstatSchRef": "Office HtgSetPt"
+          },
+          {
+            "Name": "Perimeter_ZN_1 Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "Perim1ZnPSZ AirSys",
+            "ClgTstatSchRef": "Office ClgSetPt",
+            "HtgTstatSchRef": "Office HtgSetPt"
+          },
+          {
+            "Name": "Perimeter_ZN_2 Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "Perim2ZnPSZ AirSys",
+            "ClgTstatSchRef": "Office ClgSetPt",
+            "HtgTstatSchRef": "Office HtgSetPt"
+          },
+          {
+            "Name": "Perimeter_ZN_3 Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "Perim3ZnPSZ AirSys",
+            "ClgTstatSchRef": "Office ClgSetPt",
+            "HtgTstatSchRef": "Office HtgSetPt"
+          },
+          {
+            "Name": "Perimeter_ZN_4 Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "Perim4ZnPSZ AirSys",
+            "ClgTstatSchRef": "Office ClgSetPt",
+            "HtgTstatSchRef": "Office HtgSetPt"
+          }
+        ],
+        "AirSys": [
+          {
+            "Name": "CoreZnPSZ AirSys",
+            "Type": "SZAC",
+            "CtrlZnRef": "Core_ZN Thermal Zone",
+            "ClgDsgnSupAirTemp": "60",
+            "AirSeg": [
+              {
+                "Name": "CoreZnSysSupply AirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "CoreZnCoolingCoil",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric",
+                  "CapTotNetRtd": "41464",
+                  "DXSEER": "13",
+                  "CndsrType": "Air"
+                },
+                "CoilHtg": {
+                  "Name": "CoreZnHeatingCoil",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas",
+                  "CapTotGrossRtd": "57468",
+                  "FurnAFUE": "0.78"
+                },
+                "Fan": {
+                  "Name": "CoreZnSupplyFan",
+                  "CtrlMthd": "ConstantVolume",
+                  "ModelingMthd": "BrakeHorsePower",
+                  "FlowCap": "1493",
+                  "MtrBHP": "1.17635",
+                  "MtrHP": "1.5",
+                  "MtrEff": "0.865"
+                }
+              },
+              {
+                "Name": "CoreZnSysReturnAirSeg",
+                "Type": "Return"
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "CoreZn TU",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Core_ZN Thermal Zone",
+              "PriAirSegRef": "CoreZnSysSupply AirSeg",
+              "PriAirFlowMax": "1493"
+            },
+            "OACtrl": {
+              "Name": "CoreZnOAControl",
+              "AirSegSupRef": "CoreZnSysSupply AirSeg",
+              "AirSegRetRef": "CoreZnSysReturnAirSeg"
+            }
+          },
+          {
+            "Name": "Perim1ZnPSZ AirSys",
+            "Type": "SZAC",
+            "CtrlZnRef": "Perimeter_ZN_1 Thermal Zone",
+            "AirSeg": [
+              {
+                "Name": "Perim1ZnSysSupply AirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "Perim1ZnCoolingCoil",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric",
+                  "CapTotNetRtd": "33475",
+                  "DXSEER": "13",
+                  "CndsrType": "Air"
+                },
+                "CoilHtg": {
+                  "Name": "Perim1ZnHeatingCoil",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas",
+                  "CapTotGrossRtd": "46076",
+                  "FurnAFUE": "0.78"
+                },
+                "Fan": {
+                  "Name": "Perim1ZnSupplyFan",
+                  "CtrlMthd": "ConstantVolume",
+                  "ModelingMthd": "BrakeHorsePower",
+                  "FlowCap": "1204",
+                  "MtrBHP": "0.948817",
+                  "MtrHP": "1",
+                  "MtrEff": "0.855"
+                }
+              },
+              {
+                "Name": "Perim1ZnSysReturn AirSeg",
+                "Type": "Return"
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "Perim1 TU",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Perimeter_ZN_1 Thermal Zone",
+              "PriAirSegRef": "Perim1ZnSysSupply AirSeg",
+              "PriAirFlowMax": "1204"
+            },
+            "OACtrl": {
+              "Name": "Perime1OAControl",
+              "AirSegSupRef": "Perim1ZnSysSupply AirSeg",
+              "AirSegRetRef": "Perim1ZnSysReturn AirSeg"
+            }
+          },
+          {
+            "Name": "Perim2ZnPSZ AirSys",
+            "Type": "SZAC",
+            "CtrlZnRef": "Perimeter_ZN_2 Thermal Zone",
+            "AirSeg": [
+              {
+                "Name": "Perim2ZnSysSupply AirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "Perim2ZnCoolingCoil",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric",
+                  "CapTotNetRtd": "20439",
+                  "DXSEER": "13",
+                  "CndsrType": "Air"
+                },
+                "CoilHtg": {
+                  "Name": "Perim2ZnHeatingCoil",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas",
+                  "CapTotGrossRtd": "27119",
+                  "FurnAFUE": "0.78"
+                },
+                "Fan": {
+                  "Name": "Perim2ZnSupplyFan",
+                  "CtrlMthd": "ConstantVolume",
+                  "ModelingMthd": "BrakeHorsePower",
+                  "FlowCap": "707",
+                  "MtrBHP": "0.557311",
+                  "MtrHP": "0.75",
+                  "MtrEff": "0.855"
+                }
+              },
+              {
+                "Name": "Perim2ZnSysReturnAirSeg",
+                "Type": "Return"
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "Perim2 TU",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Perimeter_ZN_2 Thermal Zone",
+              "PriAirSegRef": "Perim2ZnSysSupply AirSeg",
+              "PriAirFlowMax": "707"
+            },
+            "OACtrl": {
+              "Name": "Perim2OAControl",
+              "AirSegSupRef": "Perim2ZnSysSupply AirSeg",
+              "AirSegRetRef": "Perim2ZnSysReturnAirSeg"
+            }
+          },
+          {
+            "Name": "Perim3ZnPSZ AirSys",
+            "Type": "SZAC",
+            "CtrlZnRef": "Perimeter_ZN_3 Thermal Zone",
+            "AirSeg": [
+              {
+                "Name": "Perim3ZnSysSupply AirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "Perim3ZnCoolingCoil",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric",
+                  "CapTotNetRtd": "35309",
+                  "DXSEER": "13",
+                  "CndsrType": "Air"
+                },
+                "CoilHtg": {
+                  "Name": "Perim3ZnHeatingCoil",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas",
+                  "CapTotGrossRtd": "40884",
+                  "FurnAFUE": "0.78"
+                },
+                "Fan": {
+                  "Name": "Perim3ZnSupplyFan",
+                  "CtrlMthd": "ConstantVolume",
+                  "ModelingMthd": "BrakeHorsePower",
+                  "FlowCap": "1035",
+                  "MtrBHP": "0.815201",
+                  "MtrHP": "1",
+                  "MtrEff": "0.855"
+                }
+              },
+              {
+                "Name": "Perim3ZnSysReturn AirSeg",
+                "Type": "Return"
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "Perim3 TU",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Perimeter_ZN_3 Thermal Zone",
+              "PriAirSegRef": "Perim3ZnSysSupply AirSeg",
+              "PriAirFlowMax": "1035"
+            },
+            "OACtrl": {
+              "Name": "Perim3 OAControl",
+              "AirSegSupRef": "Perim3ZnSysSupply AirSeg",
+              "AirSegRetRef": "Perim3ZnSysReturn AirSeg"
+            }
+          },
+          {
+            "Name": "Perim4ZnPSZ AirSys",
+            "Type": "SZAC",
+            "CtrlZnRef": "Perimeter_ZN_4 Thermal Zone",
+            "AirSeg": [
+              {
+                "Name": "Perim4ZnSysSupplyAirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "Perim4ZnCoolingCoil",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric",
+                  "CapTotNetRtd": "24732",
+                  "DXSEER": "13",
+                  "CndsrType": "Air"
+                },
+                "CoilHtg": {
+                  "Name": "Perim4ZnHeatingCoil",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas",
+                  "CapTotGrossRtd": "29849",
+                  "FurnAFUE": "0.78"
+                },
+                "Fan": {
+                  "Name": "Perim4ZnSupplyFan",
+                  "CtrlMthd": "ConstantVolume",
+                  "ModelingMthd": "BrakeHorsePower",
+                  "FlowCap": "797",
+                  "MtrBHP": "0.627649",
+                  "MtrHP": "0.75",
+                  "MtrEff": "0.855"
+                }
+              },
+              {
+                "Name": "Perim4ZnSysReturnAirSeg",
+                "Type": "Return"
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "Perim4 TU",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Perimeter_ZN_4 Thermal Zone",
+              "PriAirSegRef": "Perim4ZnSysSupplyAirSeg",
+              "PriAirFlowMax": "797"
+            },
+            "OACtrl": {
+              "Name": "Perim4 OAControl",
+              "AirSegSupRef": "Perim4ZnSysSupplyAirSeg",
+              "AirSegRetRef": "Perim4ZnSysReturnAirSeg"
+            }
+          }
+        ]
+      },
+      "FluidSys": {
+        "Name": "SHWFluidSys1",
+        "Type": "ServiceHotWater",
+        "FluidSeg": [
+          {
+            "Name": "SHWSupply1",
+            "Type": "PrimarySupply"
+          },
+          {
+            "Name": "SHWMakeup1",
+            "Type": "MakeupFluid",
+            "Src": "MunicipalWater"
+          }
+        ],
+        "WtrHtr": {
+          "Name": "WaterHeater1",
+          "FluidSegOutRef": "SHWSupply1",
+          "FluidSegMakeupRef": "SHWMakeup1",
+          "StorCap": "12",
+          "EF": "0.647",
+          "TankOffCycleLossCoef": "10",
+          "CapRtd": "6655"
+        }
+      },
+      "SpcFuncDefaults": {
+        "Name": "Office Defaults",
+        "SpcFunc": "Office (Greater than 250 square feet in floor area)",
+        "OccSchRef": "Office Occupancy",
+        "IntLtgRegSchRef": "Office Lights",
+        "RecptSchRef": "Office Receptacle",
+        "ProcElecSchRef": "Office Receptacle",
+        "CommRfrgEqpSchRef": "Office Receptacle",
+        "ElevSchRef": "Office Elevator",
+        "ProcGasSchRef": "Office Receptacle",
+        "HotWtrHtgSchRef": "Office ServiceHotWater"
+      },
+      "EUseSummary": {
+        "Name": "EUseSummary",
+        "Title1": [
+          "Proposed",
+          "Proposed",
+          "Proposed",
+          "Standard",
+          "Standard",
+          "Standard",
+          "Compliance"
+        ],
+        "Title2": [
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Margin"
+        ],
+        "Title3": [
+          "End Use",
+          "Site (MWh)",
+          "Site (therms)",
+          "(kTDV/ft²-yr)",
+          "Site (MWh)",
+          "Site (therms)",
+          "(kTDV/ft²-yr)",
+          "(kTDV/ft²-yr)"
+        ],
+        "Enduse1": [
+          "Space Heating",
+          "--",
+          "243",
+          "8.3",
+          "--",
+          "243",
+          "8.3",
+          "--"
+        ],
+        "Enduse2": [
+          "Space Cooling",
+          "10.1",
+          "--",
+          "73.0",
+          "10.1",
+          "--",
+          "73.0",
+          "--"
+        ],
+        "Enduse3": [
+          "Indoor Fans",
+          "22.7",
+          "--",
+          "93.8",
+          "22.7",
+          "--",
+          "93.8",
+          "--"
+        ],
+        "Enduse4": [
+          "Heat Rejection",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse5": [
+          "Pumps & Misc.",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse6": [
+          "Domestic HW",
+          "--",
+          "165",
+          "4.9",
+          "--",
+          "171",
+          "5.1",
+          "0.2"
+        ],
+        "Enduse7": [
+          "Lighting",
+          "7.9",
+          "--",
+          "35.7",
+          "7.9",
+          "--",
+          "35.7",
+          "--"
+        ],
+        "Enduse8": [
+          "Compliance Total",
+          "40.7",
+          "408",
+          "215.7",
+          "40.7",
+          "414",
+          "215.9",
+          "0.2"
+        ],
+        "Enduse9": [
+          "Receptacle",
+          "23.6",
+          "--",
+          "109.8",
+          "23.6",
+          "--",
+          "109.8"
+        ],
+        "Enduse10": [
+          "Process",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse11": [
+          "Process Ltg",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse12": [
+          "TOTAL",
+          "64.3",
+          "408",
+          "325.5",
+          "64.3",
+          "414",
+          "325.7"
+        ],
+        "ZoneUMLHsLoaded": [
+          "1",
+          "1"
+        ],
+        "ZoneUMLHs": [
+          "clg: 0  htg: 0  'Attic Thermal Zone'\nclg: 0  htg: 0  'Core_ZN Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_1 Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_2 Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_3 Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_4 Thermal Zone'",
+          "clg: 0  htg: 0  'Attic Thermal Zone'\nclg: 0  htg: 0  'Core_ZN Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_1 Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_2 Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_3 Thermal Zone'\nclg: 0  htg: 0  'Perimeter_ZN_4 Thermal Zone'"
+        ],
+        "SimSummary": [
+          "Successful (111 warnings)",
+          "Successful (111 warnings)"
+        ],
+        "PassFail": "PASS"
+      }
+    }
+  }
+}

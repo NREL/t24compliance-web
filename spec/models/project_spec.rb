@@ -8,6 +8,18 @@ describe Project do
     p = Project.from_sdd_xml(f)
   end
 
+  it 'should load all test instances' do
+    d = File.join(Rails.root,"spec/files/cbecc_com_instances")
+    Dir["#{d}/*.xml"].each do |f|
+      puts f
+      h = Hash.from_xml(File.read(f))
+      File.open("#{d}/#{File.basename(f,".*")}.json",'w') { |f| f << JSON.pretty_generate(h)}
+
+      p = Project.from_sdd_xml(f)
+      expect(p).to_not be nil
+    end
+  end
+
   it 'should have loaded the xml' do
     p = Project.where(name: '0200016-OffSml-SG-BaseRun').first
     expect(p).not_to be nil

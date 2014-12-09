@@ -1,0 +1,5509 @@
+{
+  "SDDXML": {
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "RulesetFilename": {
+      "file": "CEC 2013 NonRes.bin"
+    },
+    "Proj": {
+      "Name": "050012-RetlMed-CECStd",
+      "BldgEngyModelVersion": "7",
+      "CreateDate": "1415032284",
+      "ModDate": "1415032284",
+      "RunDate": "1414952025",
+      "ZipCode": "95814",
+      "DDWeatherFile": "F:/360Local/AEC/CBECCn/CBECC Source Files/CBECC-Com13/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.ddy",
+      "AnnualWeatherFile": "F:/360Local/AEC/CBECCn/CBECC Source Files/CBECC-Com13/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.epw",
+      "ExcptCondNoClgSys": "No",
+      "ExcptCondRtdCap": "No",
+      "ExcptCondFanPress": "No",
+      "ExcptCondWCC": "No",
+      "ExcptCondNarrative": "No",
+      "AutoHardSize": "1",
+      "AutoEffInput": "1",
+      "CompType": "NewComplete",
+      "SoftwareVersion": "CBECC-Com 2013-3 (653)",
+      "CompReportPDF": "1",
+      "CompReportXML": "1",
+      "ConsAssm": [
+        {
+          "Name": "Base_CZ12-NonresMetalFrameWallU062",
+          "CompatibleSurfType": "ExteriorWall",
+          "MatRef": [
+            "Stucco - 7/8 in.",
+            "Compliance Insulation R13.99",
+            "Air - Metal Wall Framing - 16 or 24 in. OC",
+            "Gypsum Board - 1/2 in."
+          ]
+        },
+        {
+          "Name": "Base_CZ12-SlabOnOrBelowGradeF073",
+          "CompatibleSurfType": "UndergroundFloor",
+          "SlabType": "UnheatedSlabOnGrade",
+          "MatRef": "Concrete - 140 lb/ft3 - 6 in."
+        },
+        {
+          "Name": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039",
+          "CompatibleSurfType": "Roof",
+          "CRRCInitialRefl": "0.63",
+          "CRRCAgedRefl": "0.63",
+          "CRRCInitialEmittance": "0.85",
+          "CRRCAgedEmittance": "0.85",
+          "CRRCProdID": "XXXX-XXXX",
+          "MatRef": [
+            "Metal Standing Seam - 1/16 in.",
+            "Compliance Insulation R24.86"
+          ]
+        },
+        {
+          "Name": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofUnconditioned",
+          "CompatibleSurfType": "Roof",
+          "CRRCInitialRefl": "0.63",
+          "CRRCAgedRefl": "0.63",
+          "CRRCInitialEmittance": "0.85",
+          "CRRCAgedEmittance": "0.85",
+          "CRRCProdID": "XXXX-XXXX",
+          "MatRef": "Metal Standing Seam - 1/16 in."
+        },
+        {
+          "Name": "NACM_Interior Wall",
+          "CompatibleSurfType": "InteriorWall",
+          "MatRef": [
+            "NACM_Gypsum Board 5/8in",
+            "Air - Metal Wall Framing - 16 or 24 in. OC",
+            "NACM_Gypsum Board 5/8in"
+          ]
+        },
+        {
+          "Name": "Base_CZ12-MetalFrameWallUnconditioned",
+          "CompatibleSurfType": "ExteriorWall",
+          "MatRef": "Stucco - 7/8 in."
+        }
+      ],
+      "Mat": [
+        {
+          "Name": "Stucco - 7/8 in.",
+          "CodeCat": "Plastering Materials",
+          "CodeItem": "Stucco - 7/8 in."
+        },
+        {
+          "Name": "Compliance Insulation R13.99",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R13.99"
+        },
+        {
+          "Name": "Air - Metal Wall Framing - 16 or 24 in. OC",
+          "CodeCat": "Air",
+          "CodeItem": "Air - Metal Wall Framing - 16 or 24 in. OC"
+        },
+        {
+          "Name": "Gypsum Board - 1/2 in.",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Gypsum Board - 1/2 in."
+        },
+        {
+          "Name": "Concrete - 140 lb/ft3 - 6 in.",
+          "CodeCat": "Concrete",
+          "CodeItem": "Concrete - 140 lb/ft3 - 6 in."
+        },
+        {
+          "Name": "Metal Standing Seam - 1/16 in.",
+          "CodeCat": "Roofing",
+          "CodeItem": "Metal Standing Seam - 1/16 in."
+        },
+        {
+          "Name": "Compliance Insulation R24.86",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R24.86"
+        },
+        {
+          "Name": "NACM_Gypsum Board 5/8in",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Gypsum Board - 5/8 in."
+        }
+      ],
+      "FenCons": [
+        {
+          "Name": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+          "FenType": "Skylight",
+          "AssmContext": "Manufactured",
+          "CertificationMthd": "NFRCRated",
+          "SkyltGlz": "Glass",
+          "SkyltCurb": "CurbMounted",
+          "SHGC": "0.25",
+          "UFactor": "0.58",
+          "VT": "0.49"
+        },
+        {
+          "Name": "Base_AllCZ_FixedWindowU36",
+          "FenType": "VerticalFenestration",
+          "FenProdType": "FixedWindow",
+          "AssmContext": "Manufactured",
+          "CertificationMthd": "NFRCRated",
+          "GlzTint": "TintedGlazing",
+          "SHGC": "0.25",
+          "UFactor": "0.36",
+          "VT": "0.42"
+        }
+      ],
+      "Sch": [
+        {
+          "Name": "HVACAlwaysOn",
+          "Type": "OnOff",
+          "SchWeekRef": "HVACOnWk"
+        },
+        {
+          "Name": "On",
+          "Type": "Fraction",
+          "SchWeekRef": "OnWk"
+        },
+        {
+          "Name": "Off",
+          "Type": "Fraction",
+          "SchWeekRef": "OffWk"
+        },
+        {
+          "Name": "RetailOccupancy",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailOccupancyWk"
+        },
+        {
+          "Name": "RetailLights",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailLightsWk"
+        },
+        {
+          "Name": "RetailReceptacle",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailReceptacleWk"
+        },
+        {
+          "Name": "RetailHVAC",
+          "Type": "OnOff",
+          "SchWeekRef": "RetailHVACWk"
+        },
+        {
+          "Name": "RetailInfiltration",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailInfiltrationWk"
+        },
+        {
+          "Name": "RetailHotWater",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailHotWaterWk"
+        },
+        {
+          "Name": "HotWater_Setpoint_Temp",
+          "Type": "Temperature",
+          "SchWeekRef": "HotWater_Setpoint_TempWk"
+        },
+        {
+          "Name": "RetailElevator",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailElevatorWk"
+        },
+        {
+          "Name": "RetailRefrigeration",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailRefrigerationWk"
+        },
+        {
+          "Name": "RetailGasEquipment",
+          "Type": "Fraction",
+          "SchWeekRef": "RetailGasEquipmentWk"
+        },
+        {
+          "Name": "RetailHeating",
+          "Type": "Temperature",
+          "SchWeekRef": "RetailHeatingWk"
+        },
+        {
+          "Name": "RetailCooling",
+          "Type": "Temperature",
+          "SchWeekRef": "RetailCoolingWk"
+        },
+        {
+          "Name": "AssemblyOccupancy",
+          "Type": "Fraction",
+          "SchWeekRef": "AssemblyOccupancyWk"
+        },
+        {
+          "Name": "AssemblyLights",
+          "Type": "Fraction",
+          "SchWeekRef": "AssemblyLightsWk"
+        },
+        {
+          "Name": "AssemblyReceptacle",
+          "Type": "Fraction",
+          "SchWeekRef": "AssemblyReceptacleWk"
+        },
+        {
+          "Name": "AssemblyInfiltration",
+          "Type": "Fraction",
+          "SchWeekRef": "AssemblyInfiltrationWk"
+        },
+        {
+          "Name": "AssemblyHeating",
+          "Type": "Temperature",
+          "SchWeekRef": "AssemblyHeatingWk"
+        },
+        {
+          "Name": "AssemblyCooling",
+          "Type": "Temperature",
+          "SchWeekRef": "AssemblyCoolingWk"
+        },
+        {
+          "Name": "AssemblyHVAC",
+          "Type": "OnOff",
+          "SchWeekRef": "AssemblyHVACWk"
+        },
+        {
+          "Name": "OfficeWtrHtrSetPt",
+          "Type": "Temperature",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeWtrHtrSetPtWk"
+        }
+      ],
+      "SchWeek": [
+        {
+          "Name": "HVACOnWk",
+          "SchDaySunRef": "HVACOnDay",
+          "SchDayMonRef": "HVACOnDay",
+          "SchDayTueRef": "HVACOnDay",
+          "SchDayWedRef": "HVACOnDay",
+          "SchDayThuRef": "HVACOnDay",
+          "SchDayFriRef": "HVACOnDay",
+          "SchDaySatRef": "HVACOnDay",
+          "SchDayHolRef": "HVACOnDay",
+          "SchDayClgDDRef": "HVACOnDay",
+          "SchDayHtgDDRef": "HVACOnDay"
+        },
+        {
+          "Name": "OnWk",
+          "SchDaySunRef": "OnDay",
+          "SchDayMonRef": "OnDay",
+          "SchDayTueRef": "OnDay",
+          "SchDayWedRef": "OnDay",
+          "SchDayThuRef": "OnDay",
+          "SchDayFriRef": "OnDay",
+          "SchDaySatRef": "OnDay",
+          "SchDayHolRef": "OnDay",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OnDay"
+        },
+        {
+          "Name": "OffWk",
+          "SchDaySunRef": "OffDay",
+          "SchDayMonRef": "OffDay",
+          "SchDayTueRef": "OffDay",
+          "SchDayWedRef": "OffDay",
+          "SchDayThuRef": "OffDay",
+          "SchDayFriRef": "OffDay",
+          "SchDaySatRef": "OffDay",
+          "SchDayHolRef": "OffDay",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OnDay"
+        },
+        {
+          "Name": "RetailOccupancyWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailOccupancySun",
+          "SchDayMonRef": "RetailOccupancyWD",
+          "SchDayTueRef": "RetailOccupancyWD",
+          "SchDayWedRef": "RetailOccupancyWD",
+          "SchDayThuRef": "RetailOccupancyWD",
+          "SchDayFriRef": "RetailOccupancyWD",
+          "SchDaySatRef": "RetailOccupancySat",
+          "SchDayHolRef": "RetailOccupancySun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "RetailLightsWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailLightsSun",
+          "SchDayMonRef": "RetailLightsWD",
+          "SchDayTueRef": "RetailLightsWD",
+          "SchDayWedRef": "RetailLightsWD",
+          "SchDayThuRef": "RetailLightsWD",
+          "SchDayFriRef": "RetailLightsWD",
+          "SchDaySatRef": "RetailLightsSat",
+          "SchDayHolRef": "RetailLightsSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "RetailReceptacleWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailReceptacleSun",
+          "SchDayMonRef": "RetailReceptacleWD",
+          "SchDayTueRef": "RetailReceptacleWD",
+          "SchDayWedRef": "RetailReceptacleWD",
+          "SchDayThuRef": "RetailReceptacleWD",
+          "SchDayFriRef": "RetailReceptacleWD",
+          "SchDaySatRef": "RetailReceptacleSat",
+          "SchDayHolRef": "RetailReceptacleSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "RetailHVACWk",
+          "Type": "OnOff",
+          "SchDaySunRef": "RetailHVACSun",
+          "SchDayMonRef": "- none -",
+          "SchDayTueRef": "RetailHVACWD",
+          "SchDayWedRef": "RetailHVACWD",
+          "SchDayThuRef": "RetailHVACWD",
+          "SchDayFriRef": "RetailHVACWD",
+          "SchDaySatRef": "RetailHVACSat",
+          "SchDayHolRef": "RetailHVACSun",
+          "SchDayClgDDRef": "RetailHVACWD",
+          "SchDayHtgDDRef": "RetailHVACSat"
+        },
+        {
+          "Name": "RetailInfiltrationWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailInfiltrationSun",
+          "SchDayMonRef": "RetailInfiltrationWD",
+          "SchDayTueRef": "RetailInfiltrationWD",
+          "SchDayWedRef": "RetailInfiltrationWD",
+          "SchDayThuRef": "RetailInfiltrationWD",
+          "SchDayFriRef": "RetailInfiltrationWD",
+          "SchDaySatRef": "RetailInfiltrationSat",
+          "SchDayHolRef": "RetailInfiltrationSun",
+          "SchDayClgDDRef": "RetailInfiltrationWD",
+          "SchDayHtgDDRef": "RetailInfiltrationSat"
+        },
+        {
+          "Name": "RetailHotWaterWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailHotWaterSun",
+          "SchDayMonRef": "RetailHotWaterWD",
+          "SchDayTueRef": "RetailHotWaterWD",
+          "SchDayWedRef": "RetailHotWaterWD",
+          "SchDayThuRef": "RetailHotWaterWD",
+          "SchDayFriRef": "RetailHotWaterWD",
+          "SchDaySatRef": "RetailHotWaterSat",
+          "SchDayHolRef": "RetailHotWaterSun",
+          "SchDayClgDDRef": "RetailHotWaterWD",
+          "SchDayHtgDDRef": "RetailHotWaterSat"
+        },
+        {
+          "Name": "HotWater_Setpoint_TempWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "HotWater_Setpoint_TempAll",
+          "SchDayMonRef": "HotWater_Setpoint_TempAll",
+          "SchDayTueRef": "HotWater_Setpoint_TempAll",
+          "SchDayWedRef": "HotWater_Setpoint_TempAll",
+          "SchDayThuRef": "HotWater_Setpoint_TempAll",
+          "SchDayFriRef": "HotWater_Setpoint_TempAll",
+          "SchDaySatRef": "HotWater_Setpoint_TempAll",
+          "SchDayHolRef": "HotWater_Setpoint_TempAll",
+          "SchDayClgDDRef": "HotWater_Setpoint_TempAll",
+          "SchDayHtgDDRef": "HotWater_Setpoint_TempAll"
+        },
+        {
+          "Name": "RetailElevatorWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailElevatorSun",
+          "SchDayMonRef": "RetailElevatorWD",
+          "SchDayTueRef": "RetailElevatorWD",
+          "SchDayWedRef": "RetailElevatorWD",
+          "SchDayThuRef": "RetailElevatorWD",
+          "SchDayFriRef": "RetailElevatorWD",
+          "SchDaySatRef": "RetailElevatorSat",
+          "SchDayHolRef": "RetailElevatorSun",
+          "SchDayClgDDRef": "RetailElevatorWD",
+          "SchDayHtgDDRef": "RetailElevatorSat"
+        },
+        {
+          "Name": "RetailRefrigerationWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailRefrigerationSun",
+          "SchDayMonRef": "RetailRefrigerationWD",
+          "SchDayTueRef": "RetailRefrigerationWD",
+          "SchDayWedRef": "RetailRefrigerationWD",
+          "SchDayThuRef": "RetailRefrigerationWD",
+          "SchDayFriRef": "RetailRefrigerationWD",
+          "SchDaySatRef": "RetailRefrigerationSat",
+          "SchDayHolRef": "RetailRefrigerationSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "RetailGasEquipmentWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "RetailGasEquipmentSun",
+          "SchDayMonRef": "RetailGasEquipmentWD",
+          "SchDayTueRef": "RetailGasEquipmentWD",
+          "SchDayWedRef": "RetailGasEquipmentWD",
+          "SchDayThuRef": "RetailGasEquipmentWD",
+          "SchDayFriRef": "RetailGasEquipmentWD",
+          "SchDaySatRef": "RetailGasEquipmentSat",
+          "SchDayHolRef": "RetailGasEquipmentSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "RetailHeatingWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "RetailHeatingSun",
+          "SchDayMonRef": "RetailHeatingWD",
+          "SchDayTueRef": "RetailHeatingWD",
+          "SchDayWedRef": "RetailHeatingWD",
+          "SchDayThuRef": "RetailHeatingWD",
+          "SchDayFriRef": "RetailHeatingWD",
+          "SchDaySatRef": "RetailHeatingSat",
+          "SchDayHolRef": "RetailHeatingSun",
+          "SchDayClgDDRef": "RetailHeatingSummDD",
+          "SchDayHtgDDRef": "RetailHeatingWD"
+        },
+        {
+          "Name": "RetailCoolingWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "RetailCoolingSun",
+          "SchDayMonRef": "RetailCoolingWD",
+          "SchDayTueRef": "RetailCoolingWD",
+          "SchDayWedRef": "RetailCoolingWD",
+          "SchDayThuRef": "RetailCoolingWD",
+          "SchDayFriRef": "RetailCoolingWD",
+          "SchDaySatRef": "RetailCoolingSat",
+          "SchDayHolRef": "RetailCoolingSun",
+          "SchDayClgDDRef": "RetailCoolingWD",
+          "SchDayHtgDDRef": "RetailCoolingWinDD"
+        },
+        {
+          "Name": "AssemblyOccupancyWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "AssemblyOccupancySun",
+          "SchDayMonRef": "AssemblyOccupancyWD",
+          "SchDayTueRef": "AssemblyOccupancyWD",
+          "SchDayWedRef": "AssemblyOccupancyWD",
+          "SchDayThuRef": "AssemblyOccupancyWD",
+          "SchDayFriRef": "AssemblyOccupancyWD",
+          "SchDaySatRef": "AssemblyOccupancySat",
+          "SchDayHolRef": "AssemblyOccupancySun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "AssemblyLightsWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "AssemblyLightsSun",
+          "SchDayMonRef": "AssemblyLightsWD",
+          "SchDayTueRef": "AssemblyLightsWD",
+          "SchDayWedRef": "AssemblyLightsWD",
+          "SchDayThuRef": "AssemblyLightsWD",
+          "SchDayFriRef": "AssemblyLightsWD",
+          "SchDaySatRef": "AssemblyLightsSat",
+          "SchDayHolRef": "AssemblyLightsSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "AssemblyReceptacleWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "AssemblyReceptacleSun",
+          "SchDayMonRef": "AssemblyReceptacleWD",
+          "SchDayTueRef": "AssemblyReceptacleWD",
+          "SchDayWedRef": "AssemblyReceptacleWD",
+          "SchDayThuRef": "AssemblyReceptacleWD",
+          "SchDayFriRef": "AssemblyReceptacleWD",
+          "SchDaySatRef": "AssemblyReceptacleSat",
+          "SchDayHolRef": "AssemblyReceptacleSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "AssemblyInfiltrationWk",
+          "Type": "Fraction",
+          "SchDaySunRef": "AssemblyInfiltrationSun",
+          "SchDayMonRef": "AssemblyInfiltrationWD",
+          "SchDayTueRef": "AssemblyInfiltrationWD",
+          "SchDayWedRef": "AssemblyInfiltrationWD",
+          "SchDayThuRef": "AssemblyInfiltrationWD",
+          "SchDayFriRef": "AssemblyInfiltrationWD",
+          "SchDaySatRef": "AssemblyInfiltrationSat",
+          "SchDayHolRef": "AssemblyInfiltrationSun",
+          "SchDayClgDDRef": "AssemblyInfiltrationWD",
+          "SchDayHtgDDRef": "AssemblyInfiltrationWD"
+        },
+        {
+          "Name": "AssemblyHeatingWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "AssemblyHeatingSun",
+          "SchDayMonRef": "AssemblyHeatingWD",
+          "SchDayTueRef": "AssemblyHeatingWD",
+          "SchDayWedRef": "AssemblyHeatingWD",
+          "SchDayThuRef": "AssemblyHeatingWD",
+          "SchDayFriRef": "AssemblyHeatingWD",
+          "SchDaySatRef": "AssemblyHeatingSat",
+          "SchDayHolRef": "AssemblyHeatingSun",
+          "SchDayClgDDRef": "AssemblyHeatingWD",
+          "SchDayHtgDDRef": "AssemblyHeatingWD"
+        },
+        {
+          "Name": "AssemblyCoolingWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "AssemblyCoolingSun",
+          "SchDayMonRef": "AssemblyCoolingWD",
+          "SchDayTueRef": "AssemblyCoolingWD",
+          "SchDayWedRef": "AssemblyCoolingWD",
+          "SchDayThuRef": "AssemblyCoolingWD",
+          "SchDayFriRef": "AssemblyCoolingWD",
+          "SchDaySatRef": "AssemblyCoolingSat",
+          "SchDayHolRef": "AssemblyCoolingSun",
+          "SchDayClgDDRef": "AssemblyCoolingWD",
+          "SchDayHtgDDRef": "AssemblyCoolingWD"
+        },
+        {
+          "Name": "AssemblyHVACWk",
+          "Type": "OnOff",
+          "SchDaySunRef": "AssemblyHVACSun",
+          "SchDayMonRef": "AssemblyHVACWD",
+          "SchDayTueRef": "AssemblyHVACWD",
+          "SchDayWedRef": "AssemblyHVACWD",
+          "SchDayThuRef": "AssemblyHVACWD",
+          "SchDayFriRef": "AssemblyHVACWD",
+          "SchDaySatRef": "AssemblyHVACSat",
+          "SchDayHolRef": "AssemblyHVACSun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OnDay"
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtWk",
+          "Type": "Temperature",
+          "SchDaySunRef": "OfficeWtrHtrSetPtSun",
+          "SchDayMonRef": "OfficeWtrHtrSetPtWD",
+          "SchDayTueRef": "OfficeWtrHtrSetPtWD",
+          "SchDayWedRef": "OfficeWtrHtrSetPtWD",
+          "SchDayThuRef": "OfficeWtrHtrSetPtWD",
+          "SchDayFriRef": "OfficeWtrHtrSetPtWD",
+          "SchDaySatRef": "OfficeWtrHtrSetPtSat",
+          "SchDayHolRef": "OfficeWtrHtrSetPtSun",
+          "SchDayClgDDRef": "OfficeWtrHtrSetPtWD",
+          "SchDayHtgDDRef": "OfficeWtrHtrSetPtWD"
+        }
+      ],
+      "SchDay": [
+        {
+          "Name": "HVACOnDay",
+          "Type": "OnOff",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "OnDay",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "OffDay",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailOccupancyWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.2",
+            "0.5",
+            "0.5",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.8",
+            "0.7",
+            "0.5",
+            "0.5",
+            "0.3",
+            "0.3",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailOccupancySat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.2",
+            "0.5",
+            "0.6",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.6",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailOccupancySun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.2",
+            "0.2",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.2",
+            "0.1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailLightsWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.2",
+            "0.5",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.55",
+            "0.55",
+            "0.5",
+            "0.2",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "RetailLightsSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.3",
+            "0.55",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.5",
+            "0.3",
+            "0.3",
+            "0.1",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "RetailLightsSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.1",
+            "0.4",
+            "0.4",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.4",
+            "0.2",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "RetailReceptacleWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.2",
+            "0.5",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.6",
+            "0.6",
+            "0.5",
+            "0.2",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "RetailReceptacleSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.3",
+            "0.6",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.5",
+            "0.3",
+            "0.3",
+            "0.1",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "RetailReceptacleSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.1",
+            "0.1",
+            "0.4",
+            "0.4",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.4",
+            "0.2",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "RetailHVACWD",
+          "Type": "OnOff",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailHVACSat",
+          "Type": "OnOff",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailHVACSun",
+          "Type": "OnOff",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailInfiltrationWD",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "RetailInfiltrationSat",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "RetailInfiltrationSun",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "RetailHotWaterWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.04",
+            "0.05",
+            "0.05",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.04",
+            "0.15",
+            "0.23",
+            "0.32",
+            "0.41",
+            "0.57",
+            "0.62",
+            "0.61",
+            "0.5",
+            "0.45",
+            "0.46",
+            "0.47",
+            "0.42",
+            "0.34",
+            "0.33",
+            "0.23",
+            "0.13",
+            "0.08"
+          ]
+        },
+        {
+          "Name": "RetailHotWaterSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.11",
+            "0.1",
+            "0.08",
+            "0.06",
+            "0.06",
+            "0.06",
+            "0.07",
+            "0.2",
+            "0.24",
+            "0.27",
+            "0.42",
+            "0.54",
+            "0.59",
+            "0.6",
+            "0.49",
+            "0.48",
+            "0.47",
+            "0.46",
+            "0.44",
+            "0.36",
+            "0.29",
+            "0.22",
+            "0.16",
+            "0.13"
+          ]
+        },
+        {
+          "Name": "RetailHotWaterSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.07",
+            "0.07",
+            "0.07",
+            "0.06",
+            "0.06",
+            "0.06",
+            "0.07",
+            "0.1",
+            "0.12",
+            "0.14",
+            "0.29",
+            "0.31",
+            "0.36",
+            "0.36",
+            "0.34",
+            "0.35",
+            "0.37",
+            "0.34",
+            "0.25",
+            "0.27",
+            "0.21",
+            "0.16",
+            "0.1",
+            "0.06"
+          ]
+        },
+        {
+          "Name": "HotWater_Setpoint_TempAll",
+          "Type": "Temperature",
+          "Hr": [
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.22",
+            "57.222",
+            "57.222",
+            "57.222"
+          ]
+        },
+        {
+          "Name": "RetailElevatorWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.12",
+            "0.22",
+            "0.64",
+            "0.74",
+            "0.68",
+            "0.68",
+            "0.71",
+            "0.72",
+            "0.72",
+            "0.73",
+            "0.68",
+            "0.68",
+            "0.58",
+            "0.54",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailElevatorSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.09",
+            "0.21",
+            "0.56",
+            "0.66",
+            "0.68",
+            "0.68",
+            "0.69",
+            "0.7",
+            "0.69",
+            "0.66",
+            "0.58",
+            "0.47",
+            "0.43",
+            "0.43",
+            "0.08",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailElevatorSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.11",
+            "0.13",
+            "0.35",
+            "0.37",
+            "0.37",
+            "0.39",
+            "0.41",
+            "0.38",
+            "0.34",
+            "0.03",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailRefrigerationWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9"
+          ]
+        },
+        {
+          "Name": "RetailRefrigerationSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9"
+          ]
+        },
+        {
+          "Name": "RetailRefrigerationSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9"
+          ]
+        },
+        {
+          "Name": "RetailGasEquipmentWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.5",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.5",
+            "0.5",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailGasEquipmentSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.5",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.5",
+            "0.5",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailGasEquipmentSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.5",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.5",
+            "0.5",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RetailHeatingWD",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60",
+            "60",
+            "60"
+          ]
+        },
+        {
+          "Name": "RetailHeatingSat",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60",
+            "60"
+          ]
+        },
+        {
+          "Name": "RetailHeatingSun",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60"
+          ]
+        },
+        {
+          "Name": "RetailHeatingSummDD",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60"
+          ]
+        },
+        {
+          "Name": "RetailCoolingWD",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85",
+            "85",
+            "85"
+          ]
+        },
+        {
+          "Name": "RetailCoolingSat",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85",
+            "85"
+          ]
+        },
+        {
+          "Name": "RetailCoolingSun",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85"
+          ]
+        },
+        {
+          "Name": "RetailCoolingWinDD",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85"
+          ]
+        },
+        {
+          "Name": "AssemblyOccupancyWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.1",
+            "0"
+          ]
+        },
+        {
+          "Name": "AssemblyOccupancySat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.2",
+            "0.2",
+            "0.2",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.8",
+            "0.1",
+            "0"
+          ]
+        },
+        {
+          "Name": "AssemblyOccupancySun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.1",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.2",
+            "0"
+          ]
+        },
+        {
+          "Name": "AssemblyLightsWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.35",
+            "0.35",
+            "0.35",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.25",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyLightsSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.3",
+            "0.3",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyLightsSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyReceptacleWD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.25",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyReceptacleSat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.3",
+            "0.3",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyReceptacleSun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyInfiltrationWD",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "1"
+          ]
+        },
+        {
+          "Name": "AssemblyInfiltrationSat",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "1"
+          ]
+        },
+        {
+          "Name": "AssemblyInfiltrationSun",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "1"
+          ]
+        },
+        {
+          "Name": "AssemblyHeatingWD",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60"
+          ]
+        },
+        {
+          "Name": "AssemblyHeatingSat",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60"
+          ]
+        },
+        {
+          "Name": "AssemblyHeatingSun",
+          "Type": "Temperature",
+          "Hr": [
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "60"
+          ]
+        },
+        {
+          "Name": "AssemblyCoolingWD",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85"
+          ]
+        },
+        {
+          "Name": "AssemblyCoolingSat",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85"
+          ]
+        },
+        {
+          "Name": "AssemblyCoolingSun",
+          "Type": "Temperature",
+          "Hr": [
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "85"
+          ]
+        },
+        {
+          "Name": "AssemblyHVACWD",
+          "Type": "OnOff",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "Name": "AssemblyHVACSat",
+          "Type": "OnOff",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "Name": "AssemblyHVACSun",
+          "Type": "OnOff",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtSun",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtWD",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPtSat",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        }
+      ],
+      "Bldg": {
+        "Name": "Retail Standalone",
+        "TotStoryCnt": "1",
+        "AboveGrdStoryCnt": "1",
+        "Story": {
+          "Name": "Building Story 1",
+          "Spc": [
+            {
+              "Name": "Back_Space",
+              "ThrmlZnRef": "Back_Space Thermal Zone",
+              "Vol": "81782",
+              "SpcFuncDefaultsRef": "Retail Back_Space",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "178.051",
+                      "138.681",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "178.051",
+                      "115.715",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "115.715",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "138.681",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Back_Space_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "178.051",
+                        "138.681",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "115.715",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "115.715",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "138.681",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "Roof": {
+                "Name": "Back_Space_Roof",
+                "ConsAssmRef": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "178.051",
+                        "115.715",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "138.681",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "138.681",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "115.715",
+                        "20"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": [
+                {
+                  "Name": "Back_Space_Wall_East",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "178.051",
+                          "115.715",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "115.715",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "138.681",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "138.681",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Back_Space_Wall_North",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "178.051",
+                          "138.681",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "138.681",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "138.681",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "138.681",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Back_Space_Wall_West",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "138.681",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "138.681",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "115.715",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "115.715",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "IntWall": {
+                "Name": "Back_Space_Wall_South",
+                "AdjacentSpcRef": "Core_Retail",
+                "ConsAssmRef": "NACM_Interior Wall",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "0",
+                        "115.715",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "115.715",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "115.715",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "115.715",
+                        "20"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Core_Retail",
+              "ThrmlZnRef": "Core_Retail Thermal Zone",
+              "Vol": "344549",
+              "SpcFuncDefaultsRef": "Retail Sales",
+              "Skylit100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "178.051",
+                      "115.715",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "178.051",
+                      "19.685",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "95.5873",
+                      "19.685",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "95.5873",
+                      "9.84252",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "82.4639",
+                      "9.84252",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "82.4639",
+                      "19.685",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "19.685",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "115.715",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Core_Retail_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "178.051",
+                        "115.715",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "19.685",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "19.685",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "9.84252",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "9.84252",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "19.685",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "19.685",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "115.715",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "Roof": {
+                "Name": "Core_Retail_Roof",
+                "ConsAssmRef": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "9.84252",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "115.715",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "115.715",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "9.84252",
+                        "20"
+                      ]
+                    }
+                  ]
+                },
+                "Skylt": [
+                  {
+                    "Name": "Skylights_r1c1",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "15",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "15",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r1c2",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "36",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "36",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r1c3",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "57",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "57",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r1c4",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r1c5",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r2c1",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "15",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "15",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r2c2",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "36",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "36",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r2c3",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "57",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "57",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r2c4",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r2c5",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r3c1",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "15",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "15",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r3c2",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "36",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "36",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r3c3",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "57",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "57",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r3c4",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r3c5",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r4c1",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "15",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "15",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "11",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r4c2",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "36",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "36",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "32",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r4c3",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "57",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "57",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "53",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r4c4",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "78.0256",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "74.0256",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Skylights_r4c5",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "96.9256",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "92.9256",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 1",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "117.926",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "117.926",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 10",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "159.926",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "159.926",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 1111",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "159.926",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "159.926",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 1112",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "159.926",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "159.926",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 2",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "117.926",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "117.926",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 3",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "117.926",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "117.926",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 4",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "117.926",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "117.926",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "113.926",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 5",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "138.926",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "138.926",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 6",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "138.926",
+                            "100.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "138.926",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "104.715",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "100.715",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 7",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "138.926",
+                            "54.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "138.926",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "58.0184",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "54.0184",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 8",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "138.926",
+                            "30.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "138.926",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "34.685",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "134.926",
+                            "30.685",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "Name": "Sub Surface 9",
+                    "FenConsRef": "Base_AllCZ_Skylt-Gl-CurbMntU58",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "159.926",
+                            "77.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "159.926",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "81.3517",
+                            "20"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "155.926",
+                            "77.3517",
+                            "20"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "IntWall": [
+                {
+                  "Name": "Core_Retail_Wall_East_1",
+                  "AdjacentSpcRef": "Front_Retail",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "9.84252",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "9.84252",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "19.685",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Core_Retail_Wall_South_1",
+                  "AdjacentSpcRef": "Point_Of_Sale",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "19.685",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "19.685",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Core_Retail_Wall_South_2",
+                  "AdjacentSpcRef": "Front_Entry",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "9.84252",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "9.84252",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "9.84252",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "9.84252",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Core_Retail_Wall_South_3",
+                  "AdjacentSpcRef": "Front_Retail",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "19.685",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "19.685",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Core_Retail_Wall_West_1",
+                  "AdjacentSpcRef": "Point_Of_Sale",
+                  "ConsAssmRef": "NACM_Interior Wall",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "19.685",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "9.84252",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "9.84252",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "ExtWall": [
+                {
+                  "Name": "Core_Retail_Wall_East_2",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "178.051",
+                          "19.685",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "115.715",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "115.715",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Core_Retail_Wall_West_2",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "115.715",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "115.715",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "19.685",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Front_Entry",
+              "CondgType": "Unconditioned",
+              "ThrmlZnRef": "Front_Entry Thermal Zone",
+              "Vol": "2583.34",
+              "SpcFuncDefaultsRef": "Retail Main Entry",
+              "Skylit100PctControlled": "0",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "0",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "95.5873",
+                      "9.84252",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "95.5873",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "82.4639",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "82.4639",
+                      "9.84252",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Front_Entry_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "9.84252",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "9.84252",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "Roof": {
+                "Name": "Front_Entry_Roof",
+                "ConsAssmRef": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofUnconditioned",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "0",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "9.84252",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "9.84252",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "0",
+                        "20"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "IntWall": [
+                {
+                  "Name": "Front_Entry_Wall_East",
+                  "AdjacentSpcRef": "Front_Retail",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "0",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "9.84252",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "9.84252",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Front_Entry_Wall_West",
+                  "AdjacentSpcRef": "Point_Of_Sale",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "9.84252",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "9.84252",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "0",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "ExtWall": {
+                "Name": "Front_Entry_Wall_South",
+                "ConsAssmRef": "Base_CZ12-MetalFrameWallUnconditioned",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "0",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "0",
+                        "20"
+                      ]
+                    }
+                  ]
+                },
+                "Win": {
+                  "Name": "Front_Entry_Wall_South_Glazing",
+                  "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "84.1043",
+                          "0",
+                          "8.72703"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "84.1043",
+                          "0",
+                          "0.164043"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "93.9469",
+                          "0",
+                          "0.164043"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "93.9469",
+                          "0",
+                          "8.72703"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "Name": "Front_Retail",
+              "ThrmlZnRef": "Front_Retail Thermal Zone",
+              "Vol": "32466.1",
+              "SpcFuncDefaultsRef": "Retail Sales",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "178.051",
+                      "19.685",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "178.051",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "95.5873",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "95.5873",
+                      "19.685",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Front_Retail_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "178.051",
+                        "19.685",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "19.685",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "Roof": {
+                "Name": "Front_Retail_Roof",
+                "ConsAssmRef": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "178.051",
+                        "0",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "178.051",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "95.5873",
+                        "0",
+                        "20"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": [
+                {
+                  "Name": "Front_Retail_Walll_East",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "178.051",
+                          "0",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "19.685",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Front_Retail_Wall_South",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "0",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "95.5873",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "178.051",
+                          "0",
+                          "20"
+                        ]
+                      }
+                    ]
+                  },
+                  "Win": {
+                    "Name": "Front_Retail_Wall_South_Glazing",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "95.7513",
+                            "0",
+                            "8.72703"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "95.7513",
+                            "0",
+                            "3.74016"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "177.887",
+                            "0",
+                            "3.74016"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "177.887",
+                            "0",
+                            "8.72703"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Point_Of_Sale",
+              "ThrmlZnRef": "Point_Of_Sale Thermal Zone",
+              "Vol": "32466.1",
+              "SpcFuncDefaultsRef": "Retail Sales",
+              "PriSide100PctControlled": "1",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "82.4639",
+                      "19.685",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "82.4639",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "19.685",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Point_Of_Sale_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "19.685",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "19.685",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "Roof": {
+                "Name": "Point_Of_Sale_Roof",
+                "ConsAssmRef": "Base_CZ12-FlatNonresWoodFramingAndOtherRoofU039",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "0",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "82.4639",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "19.685",
+                        "20"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "20"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": [
+                {
+                  "Name": "Point_Of_Sale_Wall_South",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "82.4639",
+                          "0",
+                          "20"
+                        ]
+                      }
+                    ]
+                  },
+                  "Win": {
+                    "Name": "Point_Of_Sale_Wall_South_Glazing",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "0.164042",
+                            "0",
+                            "8.72703"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0.164042",
+                            "0",
+                            "3.74016"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "82.2999",
+                            "0",
+                            "3.74016"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "82.2999",
+                            "0",
+                            "8.72703"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Point_Of_Sale_Wall_West",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "19.685",
+                          "20"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "19.685",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "20"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "ThrmlZn": [
+          {
+            "Name": "Back_Space Thermal Zone",
+            "PriAirCondgSysRef": "BaseAirSys5",
+            "ClgTstatSchRef": "AssemblyCooling",
+            "HtgTstatSchRef": "AssemblyHeating"
+          },
+          {
+            "Name": "Core_Retail Thermal Zone",
+            "PriAirCondgSysRef": "BaseAirSys5",
+            "ClgTstatSchRef": "RetailHeating",
+            "HtgTstatSchRef": "RetailHeating",
+            "VentCtrlMthd": "CO2Sensors"
+          },
+          {
+            "Name": "Front_Entry Thermal Zone",
+            "Type": "Unconditioned"
+          },
+          {
+            "Name": "Front_Retail Thermal Zone",
+            "PriAirCondgSysRef": "BaseAirSys5",
+            "ClgTstatSchRef": "RetailCooling",
+            "HtgTstatSchRef": "RetailHeating",
+            "VentCtrlMthd": "CO2Sensors"
+          },
+          {
+            "Name": "Point_Of_Sale Thermal Zone",
+            "PriAirCondgSysRef": "BaseAirSys5",
+            "ClgTstatSchRef": "RetailCooling",
+            "HtgTstatSchRef": "RetailHeating",
+            "VentCtrlMthd": "CO2Sensors"
+          }
+        ],
+        "AirSys": {
+          "Name": "BaseAirSys5",
+          "Type": "PVAV",
+          "CtrlSysType": "DDCToZone",
+          "ReheatCtrlMthd": "DualMaximum",
+          "ClgCtrl": "WarmestResetFlowFirst",
+          "ClRstSupHi": "60",
+          "ClRstSupLow": "55",
+          "AirSeg": [
+            {
+              "Name": "BaseSys5 SupAirSeg",
+              "Type": "Supply",
+              "CoilClg": {
+                "Name": "BaseSys5 CoilClg",
+                "Type": "DirectExpansion",
+                "FuelSrc": "Electric",
+                "NumClgStages": "2",
+                "CapTotNetRtd": "1.08222e+006",
+                "DXEER": "9.5",
+                "CndsrType": "Air"
+              },
+              "CoilHtg": {
+                "Name": "BaseSys5 CoilHtg",
+                "Type": "HotWater",
+                "FluidSegInRef": "BaseHWPrimSupSeg",
+                "FluidSegOutRef": "BaseHWPrimRetSeg",
+                "CapTotGrossRtd": "303407"
+              },
+              "Fan": {
+                "Name": "BaseSys5 Fan",
+                "CtrlMthd": "VariableSpeedDrive",
+                "ModelingMthd": "BrakeHorsePower",
+                "FlowCap": "38024",
+                "FlowMin": "10945",
+                "MtrBHP": "38.659",
+                "MtrHP": "40",
+                "MtrEff": "0.941"
+              }
+            },
+            {
+              "Name": "BaseSys5 RetAirSeg",
+              "Type": "Relief",
+              "Fan": {
+                "Name": "BaseSys5 ReliefFan",
+                "CtrlMthd": "VariableSpeedDrive",
+                "ModelingMthd": "BrakeHorsePower",
+                "FlowCap": "36796",
+                "MtrBHP": "11.5972",
+                "MtrHP": "15",
+                "MtrEff": "0.924"
+              }
+            }
+          ],
+          "TrmlUnit": [
+            {
+              "Name": "BaseVAVTrmlUnit",
+              "Type": "VAVReheatBox",
+              "ZnServedRef": "Back_Space Thermal Zone",
+              "PriAirSegRef": "BaseSys5 SupAirSeg",
+              "PriAirFlowMax": "4045",
+              "PriAirFlowMin": "809",
+              "HtgAirFlowMax": "2023",
+              "CoilHtg": {
+                "Name": "BaseVAVReheatCoil",
+                "Type": "HotWater",
+                "FluidSegInRef": "BaseHWPrimSupSeg",
+                "FluidSegOutRef": "BaseHWPrimRetSeg",
+                "CapTotGrossRtd": "123832"
+              }
+            },
+            {
+              "Name": "BaseVAVTrmlUnit-2",
+              "Type": "VAVReheatBox",
+              "ZnServedRef": "Core_Retail Thermal Zone",
+              "PriAirSegRef": "BaseSys5 SupAirSeg",
+              "PriAirFlowMax": "28654",
+              "PriAirFlowMin": "8528",
+              "HtgAirFlowMax": "14327",
+              "CoilHtg": {
+                "Name": "BaseVAVReheatCoil-2",
+                "Type": "HotWater",
+                "FluidSegInRef": "BaseHWPrimSupSeg",
+                "FluidSegOutRef": "BaseHWPrimRetSeg",
+                "CapTotGrossRtd": "498176"
+              }
+            },
+            {
+              "Name": "BaseVAVTrmlUnit-3",
+              "Type": "VAVReheatBox",
+              "ZnServedRef": "Front_Retail Thermal Zone",
+              "PriAirSegRef": "BaseSys5 SupAirSeg",
+              "PriAirFlowMax": "2668",
+              "PriAirFlowMin": "804",
+              "HtgAirFlowMax": "1334",
+              "CoilHtg": {
+                "Name": "BaseVAVReheatCoil-3",
+                "Type": "HotWater",
+                "FluidSegInRef": "BaseHWPrimSupSeg",
+                "FluidSegOutRef": "BaseHWPrimRetSeg",
+                "CapTotGrossRtd": "60229.8"
+              }
+            },
+            {
+              "Name": "BaseVAVTrmlUnit-4",
+              "Type": "VAVReheatBox",
+              "ZnServedRef": "Point_Of_Sale Thermal Zone",
+              "PriAirSegRef": "BaseSys5 SupAirSeg",
+              "PriAirFlowMax": "2657",
+              "PriAirFlowMin": "804",
+              "HtgAirFlowMax": "1329",
+              "CoilHtg": {
+                "Name": "BaseVAVReheatCoil-4",
+                "Type": "HotWater",
+                "FluidSegInRef": "BaseHWPrimSupSeg",
+                "FluidSegOutRef": "BaseHWPrimRetSeg",
+                "CapTotGrossRtd": "60218.3"
+              }
+            }
+          ],
+          "OACtrl": {
+            "Name": "BaseSys5 OACtrl",
+            "EconoCtrlMthd": "DifferentialDryBulb",
+            "EconoIntegration": "Integrated",
+            "AirSegSupRef": "BaseSys5 SupAirSeg",
+            "AirSegRetRef": "BaseSys5 RetAirSeg"
+          }
+        }
+      },
+      "FluidSys": [
+        {
+          "Name": "BaseHWSystem",
+          "Type": "HotWater",
+          "FluidSeg": [
+            {
+              "Name": "BaseHWPrimSupSeg",
+              "Type": "PrimarySupply"
+            },
+            {
+              "Name": "BaseHWPrimRetSeg",
+              "Type": "PrimaryReturn"
+            }
+          ],
+          "Blr": [
+            {
+              "Name": "Base Blr",
+              "Type": "HotWater",
+              "FuelSrc": "Gas",
+              "DraftType": "MechanicalNoncondensing",
+              "FluidSegInRef": "BaseHWPrimRetSeg",
+              "FluidSegOutRef": "BaseHWPrimSupSeg",
+              "CapRtd": "437294",
+              "ThrmlEff": "0.8",
+              "Pump": {
+                "Name": "Base HW Pump",
+                "OperCtrl": "OnDemand",
+                "SpdCtrl": "ConstantSpeed",
+                "FlowCap": "21.9",
+                "TotHd": "60.4",
+                "MtrEff": "0.855",
+                "ImpellerEff": "0.7",
+                "MtrHP": "0.5"
+              }
+            },
+            {
+              "Name": "Base Blr-2",
+              "Type": "HotWater",
+              "FuelSrc": "Gas",
+              "DraftType": "MechanicalNoncondensing",
+              "FluidSegInRef": "BaseHWPrimRetSeg",
+              "FluidSegOutRef": "BaseHWPrimSupSeg",
+              "CapRtd": "437294",
+              "ThrmlEff": "0.8",
+              "Pump": {
+                "Name": "Base HW Pump-2",
+                "OperCtrl": "OnDemand",
+                "SpdCtrl": "ConstantSpeed",
+                "FlowCap": "21.9",
+                "TotHd": "60.4",
+                "MtrEff": "0.855",
+                "ImpellerEff": "0.7",
+                "MtrHP": "0.5"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "SHWFluidSys1",
+          "Type": "ServiceHotWater",
+          "FluidSeg": [
+            {
+              "Name": "SHWSupply1",
+              "Type": "PrimarySupply"
+            },
+            {
+              "Name": "SHWMakeup1",
+              "Type": "MakeupFluid",
+              "Src": "MunicipalWater"
+            }
+          ],
+          "WtrHtr": {
+            "Name": "WaterHeater1",
+            "FluidSegOutRef": "SHWSupply1",
+            "FluidSegMakeupRef": "SHWMakeup1",
+            "StorCap": "161",
+            "ThrmlEff": "0.78",
+            "TankOffCycleLossCoef": "10",
+            "CapRtd": "83287"
+          }
+        }
+      ],
+      "SpcFuncDefaults": [
+        {
+          "Name": "Retail Sales",
+          "SpcFunc": "Retail Merchandise Sales, Wholesale Showroom",
+          "OccSchRef": "RetailOccupancy",
+          "IntLtgRegSchRef": "RetailLights",
+          "RecptSchRef": "RetailReceptacle",
+          "CommRfrgEqpSchRef": "RetailRefrigeration",
+          "ProcGasSchRef": "RetailGasEquipment",
+          "HotWtrHtgSchRef": "RetailHotWater",
+          "InfSchRef": "RetailInfiltration"
+        },
+        {
+          "Name": "Retail Back_Space",
+          "SpcFunc": "Commercial and Industrial Storage Areas (conditioned or unconditioned)",
+          "OccSchRef": "AssemblyOccupancy",
+          "IntLtgRegSchRef": "AssemblyLights",
+          "RecptSchRef": "AssemblyReceptacle",
+          "CommRfrgEqpSchRef": "AssemblyReceptacle",
+          "ProcGasSchRef": "RetailGasEquipment",
+          "HotWtrHtgSchRef": "RetailHotWater",
+          "InfSchRef": "AssemblyInfiltration"
+        },
+        {
+          "Name": "Retail Main Entry",
+          "SpcFunc": "Lobby, Main Entry",
+          "OccSchRef": "AssemblyOccupancy",
+          "IntLtgRegSchRef": "AssemblyLights",
+          "RecptPwrDens": "0",
+          "RecptSchRef": "AssemblyReceptacle",
+          "CommRfrgEqpSchRef": "RetailRefrigeration",
+          "ProcGasSchRef": "RetailGasEquipment",
+          "HotWtrHtgSchRef": "RetailHotWater",
+          "InfSchRef": "AssemblyInfiltration"
+        }
+      ],
+      "EUseSummary": {
+        "Name": "EUseSummary",
+        "Title1": [
+          "Proposed",
+          "Proposed",
+          "Proposed",
+          "Standard",
+          "Standard",
+          "Standard",
+          "Compliance"
+        ],
+        "Title2": [
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Margin"
+        ],
+        "Title3": [
+          "End Use",
+          "Site (MWh)",
+          "Site (therms)",
+          "(kTDV/ft²-yr)",
+          "Site (MWh)",
+          "Site (therms)",
+          "(kTDV/ft²-yr)",
+          "(kTDV/ft²-yr)"
+        ],
+        "Enduse1": [
+          "Space Heating",
+          "0.0",
+          "1,882",
+          "14.2",
+          "0.0",
+          "1,886",
+          "14.2",
+          "--"
+        ],
+        "Enduse2": [
+          "Space Cooling",
+          "61.6",
+          "--",
+          "98.1",
+          "61.6",
+          "--",
+          "98.1",
+          "--"
+        ],
+        "Enduse3": [
+          "Indoor Fans",
+          "16.9",
+          "--",
+          "17.5",
+          "16.9",
+          "--",
+          "17.5",
+          "--"
+        ],
+        "Enduse4": [
+          "Heat Rejection",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse5": [
+          "Pumps & Misc.",
+          "2.1",
+          "--",
+          "1.6",
+          "2.0",
+          "--",
+          "1.6",
+          "--"
+        ],
+        "Enduse6": [
+          "Domestic HW",
+          "--",
+          "2,019",
+          "13.5",
+          "--",
+          "2,019",
+          "13.5",
+          "--"
+        ],
+        "Enduse7": [
+          "Lighting",
+          "56.2",
+          "--",
+          "55.8",
+          "56.2",
+          "--",
+          "55.8",
+          "--"
+        ],
+        "Enduse8": [
+          "Compliance Total",
+          "136.8",
+          "3,901",
+          "200.7",
+          "136.7",
+          "3,905",
+          "200.7",
+          "--"
+        ],
+        "Enduse9": [
+          "Receptacle",
+          "77.7",
+          "--",
+          "79.4",
+          "77.7",
+          "--",
+          "79.4"
+        ],
+        "Enduse10": [
+          "Process",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse11": [
+          "Process Ltg",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse12": [
+          "TOTAL",
+          "214.5",
+          "3,901",
+          "280.1",
+          "214.4",
+          "3,905",
+          "280.1"
+        ],
+        "ZoneUMLHsLoaded": [
+          "1",
+          "1"
+        ],
+        "ZoneUMLHs": [
+          "clg: 0  htg: 0  'Back_Space Thermal Zone'\nclg: 0  htg: 0  'Core_Retail Thermal Zone'\nclg: 0  htg: 0  'Front_Entry Thermal Zone'\nclg: 0  htg: 0  'Front_Retail Thermal Zone'\nclg: 0  htg: 0  'Point_Of_Sale Thermal Zone'",
+          "clg: 0  htg: 0  'Back_Space Thermal Zone'\nclg: 0  htg: 0  'Core_Retail Thermal Zone'\nclg: 0  htg: 0  'Front_Entry Thermal Zone'\nclg: 0  htg: 0  'Front_Retail Thermal Zone'\nclg: 0  htg: 0  'Point_Of_Sale Thermal Zone'"
+        ],
+        "SimSummary": [
+          "Successful (70 warnings)",
+          "Successful (70 warnings)"
+        ],
+        "PassFail": "PASS"
+      }
+    }
+  }
+}

@@ -1,0 +1,3497 @@
+{
+  "SDDXML": {
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema",
+    "RulesetFilename": {
+      "file": "CEC 2013 NonRes.bin"
+    },
+    "Proj": {
+      "Name": "060012-RstntSml-CECStd",
+      "BldgEngyModelVersion": "7",
+      "CreateDate": "1415032343",
+      "ModDate": "1415032343",
+      "RunDate": "1414691068",
+      "ZipCode": "95814",
+      "DDWeatherFile": "F:/360Local/AEC/CBECCn/CBECC Source Files/CBECC-Com13/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.ddy",
+      "AnnualWeatherFile": "F:/360Local/AEC/CBECCn/CBECC Source Files/CBECC-Com13/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.epw",
+      "ExcptCondNoClgSys": "No",
+      "ExcptCondRtdCap": "No",
+      "ExcptCondFanPress": "No",
+      "ExcptCondWCC": "No",
+      "ExcptCondNarrative": "No",
+      "AutoHardSize": "1",
+      "AutoEffInput": "1",
+      "DefaultDayltgCtrls": "1",
+      "SimVarsThrmlZn": "1",
+      "SimVarsHVACSec": "1",
+      "SimVarsHVACZn": "1",
+      "CompType": "NewComplete",
+      "SoftwareVersion": "CBECC-Com 2013-3 (653)",
+      "ResultsCurrentMessage": "(not current)",
+      "ConsAssm": [
+        {
+          "Name": "Base_CZ12-NonresMetalFrameWallU062",
+          "CompatibleSurfType": "ExteriorWall",
+          "MatRef": [
+            "Stucco - 7/8 in.",
+            "Compliance Insulation R13.99",
+            "Air - Metal Wall Framing - 16 or 24 in. OC",
+            "Gypsum Board - 1/2 in."
+          ]
+        },
+        {
+          "Name": "Base_CZ12-SlabOnOrBelowGradeF073",
+          "CompatibleSurfType": "UndergroundFloor",
+          "SlabType": "UnheatedSlabOnGrade",
+          "MatRef": "Concrete - 140 lb/ft3 - 6 in."
+        },
+        {
+          "Name": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+          "CompatibleSurfType": "Roof",
+          "CRRCInitialRefl": "0.2",
+          "CRRCAgedRefl": "0.2",
+          "CRRCInitialEmittance": "0.85",
+          "CRRCAgedEmittance": "0.85",
+          "CRRCProdID": "XXXX-XXXX",
+          "MatRef": [
+            "Metal Standing Seam - 1/16 in.",
+            "Compliance Insulation R24.86"
+          ]
+        },
+        {
+          "Name": "Base_CZ12-NonresOtherFloorU071",
+          "CompatibleSurfType": "ExteriorFloor",
+          "MatRef": [
+            "Compliance Insulation R9.83",
+            "Plywood - 5/8 in.",
+            "Carpet - 3/4 in."
+          ]
+        },
+        {
+          "Name": "NACM_Interior Wall",
+          "CompatibleSurfType": "InteriorWall",
+          "MatRef": [
+            "NACM_Gypsum Board 5/8in",
+            "Air - Metal Wall Framing - 16 or 24 in. OC",
+            "NACM_Gypsum Board 5/8in"
+          ]
+        },
+        {
+          "Name": "NACM_Drop Ceiling",
+          "CompatibleSurfType": "InteriorFloor",
+          "MatRef": "NACM_Acoustic Tile 3/4in"
+        }
+      ],
+      "Mat": [
+        {
+          "Name": "Stucco - 7/8 in.",
+          "CodeCat": "Plastering Materials",
+          "CodeItem": "Stucco - 7/8 in."
+        },
+        {
+          "Name": "Compliance Insulation R13.99",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R13.99"
+        },
+        {
+          "Name": "Air - Metal Wall Framing - 16 or 24 in. OC",
+          "CodeCat": "Air",
+          "CodeItem": "Air - Metal Wall Framing - 16 or 24 in. OC"
+        },
+        {
+          "Name": "Gypsum Board - 1/2 in.",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Gypsum Board - 1/2 in."
+        },
+        {
+          "Name": "Concrete - 140 lb/ft3 - 6 in.",
+          "CodeCat": "Concrete",
+          "CodeItem": "Concrete - 140 lb/ft3 - 6 in."
+        },
+        {
+          "Name": "Metal Standing Seam - 1/16 in.",
+          "CodeCat": "Roofing",
+          "CodeItem": "Metal Standing Seam - 1/16 in."
+        },
+        {
+          "Name": "Compliance Insulation R24.86",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R24.86"
+        },
+        {
+          "Name": "Compliance Insulation R9.83",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Compliance Insulation R9.83"
+        },
+        {
+          "Name": "Plywood - 5/8 in.",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Plywood - 5/8 in."
+        },
+        {
+          "Name": "Carpet - 3/4 in.",
+          "CodeCat": "Finish Materials",
+          "CodeItem": "Carpet - 3/4 in."
+        },
+        {
+          "Name": "NACM_Gypsum Board 5/8in",
+          "CodeCat": "Bldg Board and Siding",
+          "CodeItem": "Gypsum Board - 5/8 in."
+        },
+        {
+          "Name": "NACM_Acoustic Tile 3/4in",
+          "CodeCat": "Finish Materials",
+          "CodeItem": "Acoustic Tile - 3/4 in."
+        },
+        {
+          "Name": "NACM_Wall Insulation EPS",
+          "CodeCat": "Insulation Board",
+          "CodeItem": "Expanded Polystyrene - EPS - 1 1/2 in."
+        }
+      ],
+      "FenCons": {
+        "Name": "Base_AllCZ_FixedWindowU36",
+        "FenType": "VerticalFenestration",
+        "FenProdType": "FixedWindow",
+        "AssmContext": "Manufactured",
+        "CertificationMthd": "NFRCRated",
+        "SHGC": "0.25",
+        "UFactor": "0.36",
+        "VT": "0.42"
+      },
+      "Bldg": {
+        "Name": "QS Restaurant",
+        "TotStoryCnt": "1",
+        "AboveGrdStoryCnt": "1",
+        "Story": {
+          "Name": "QS Restaurant 1",
+          "Spc": [
+            {
+              "Name": "Attic Space",
+              "CondgType": "IndirectlyConditioned",
+              "ThrmlZnRef": "Attic Zn",
+              "Vol": "8933.61",
+              "SpcFunc": "Unoccupied-Exclude from Gross Floor Area",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "50.0092",
+                      "50.0092",
+                      "10.0026"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "50.0092",
+                      "0",
+                      "10.0026"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "0",
+                      "10.0026"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "50.0092",
+                      "10.0026"
+                    ]
+                  }
+                ]
+              },
+              "IntFlr": [
+                {
+                  "Name": "attic-floor-dinning",
+                  "AdjacentSpcRef": "Dining",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "0",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "attic-floor-kitchen",
+                  "AdjacentSpcRef": "Kitchen",
+                  "ConsAssmRef": "NACM_Drop Ceiling",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Roof": [
+                {
+                  "Name": "east-roof",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "41.6742",
+                          "25.0046",
+                          "18.3376"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "0",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "north-roof",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "41.6742",
+                          "25.0046",
+                          "18.3376"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "8.33497",
+                          "25.0046",
+                          "18.3376"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "south-roof",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "8.33497",
+                          "25.0046",
+                          "18.3376"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "1.93046e-033",
+                          "-2.76065e-016",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "-2.41094e-016",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "41.6742",
+                          "25.0046",
+                          "18.3376"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "west-roof",
+                  "ConsAssmRef": "Base_CZ12-SteepNonresWoodFramingAndOtherRoofU039",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "8.33497",
+                          "25.0046",
+                          "18.3376"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "Name": "Dining",
+              "ThrmlZnRef": "Dining Thermal Zone",
+              "Vol": "12507.9",
+              "SpcFuncDefaultsRef": "Dining Area Defaults",
+              "SecSide100PctControlled": "1",
+              "SHWFluidSegRef": "SHWSupply1",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "50.0092",
+                      "25.0046",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "50.0092",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "0",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "25.0046",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Dining_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "50.0092",
+                        "25.0046",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "50.0092",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "0",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "25.0046",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": [
+                {
+                  "Name": "Dining_Wall_East",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "0",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "25.0046",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  },
+                  "Win": {
+                    "Name": "Dining_Wall_East_Window",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "50.0092",
+                            "0.833333",
+                            "6.50164"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "50.0092",
+                            "0.833333",
+                            "3.50098"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "50.0092",
+                            "24.1709",
+                            "3.50098"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "50.0092",
+                            "24.1709",
+                            "6.50164"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Dining_Wall_South",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "0",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  },
+                  "Win": {
+                    "Name": "Dining_Wall_South_Window",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "1.66667",
+                            "0",
+                            "6.50164"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "1.66667",
+                            "0",
+                            "3.50098"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "48.3432",
+                            "0",
+                            "3.50098"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "48.3432",
+                            "0",
+                            "6.50164"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "Name": "Dining_Wall_West",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "25.0046",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "0",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  },
+                  "Win": {
+                    "Name": "Dining_Wall_West_Window",
+                    "FenConsRef": "Base_AllCZ_FixedWindowU36",
+                    "PolyLp": {
+                      "CartesianPt": [
+                        {
+                          "Coord": [
+                            "0",
+                            "24.1709",
+                            "6.50164"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "24.1709",
+                            "3.50098"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "0.833333",
+                            "3.50098"
+                          ]
+                        },
+                        {
+                          "Coord": [
+                            "0",
+                            "0.833333",
+                            "6.50164"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "IntWall": {
+                "Name": "Dining_Wall_North",
+                "AdjacentSpcRef": "Kitchen",
+                "ConsAssmRef": "NACM_Interior Wall",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "50.0092",
+                        "25.0046",
+                        "10.0026"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "50.0092",
+                        "25.0046",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "25.0046",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "25.0046",
+                        "10.0026"
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "Name": "Kitchen",
+              "ThrmlZnRef": "Kitchen Thermal Zone",
+              "Vol": "12507.9",
+              "SpcFuncDefaultsRef": "Kitchen Food Preperation Defaults",
+              "SpcFunc": "Kitchen, Commercial Food Preparation",
+              "SHWFluidSegRef": "SHWSupply1",
+              "VentPerSpc": "500",
+              "KitExhHoodLen": "10",
+              "KitExhHoodDuty": "Light",
+              "KitExhHoodFlow": "1000",
+              "PolyLp": {
+                "CartesianPt": [
+                  {
+                    "Coord": [
+                      "50.0092",
+                      "50.0092",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "50.0092",
+                      "25.0046",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "25.0046",
+                      "0"
+                    ]
+                  },
+                  {
+                    "Coord": [
+                      "0",
+                      "50.0092",
+                      "0"
+                    ]
+                  }
+                ]
+              },
+              "UndgrFlr": {
+                "Name": "Kitchen_Floor",
+                "ConsAssmRef": "Base_CZ12-SlabOnOrBelowGradeF073",
+                "PolyLp": {
+                  "CartesianPt": [
+                    {
+                      "Coord": [
+                        "50.0092",
+                        "50.0092",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "50.0092",
+                        "25.0046",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "25.0046",
+                        "0"
+                      ]
+                    },
+                    {
+                      "Coord": [
+                        "0",
+                        "50.0092",
+                        "0"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "ExtWall": [
+                {
+                  "Name": "Kitchen_Wall_East",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "25.0046",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Kitchen_Wall_North",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "50.0092",
+                          "50.0092",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Name": "Kitchen_Wall_West",
+                  "ConsAssmRef": "Base_CZ12-NonresMetalFrameWallU062",
+                  "PolyLp": {
+                    "CartesianPt": [
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "10.0026"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "50.0092",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "25.0046",
+                          "0"
+                        ]
+                      },
+                      {
+                        "Coord": [
+                          "0",
+                          "25.0046",
+                          "10.0026"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "ThrmlZn": [
+          {
+            "Name": "Attic Zn",
+            "Type": "Unconditioned"
+          },
+          {
+            "Name": "Dining Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "DiningPSZ",
+            "ClgTstatSchRef": "RestaurantClgSetPt Sch",
+            "HtgTstatSchRef": "RestaurantHtgSetPt Sch",
+            "VentCtrlMthd": "CO2Sensors"
+          },
+          {
+            "Name": "Kitchen Thermal Zone",
+            "Type": "Conditioned",
+            "PriAirCondgSysRef": "KitchenMUA",
+            "ClgTstatSchRef": "RestaurantClgSetPt Sch",
+            "HtgTstatSchRef": "RestaurantHtgSetPt Sch",
+            "ExhSysRef": "KitchenExhaust"
+          }
+        ],
+        "AirSys": [
+          {
+            "Name": "DiningPSZ",
+            "Type": "SZAC",
+            "CtrlZnRef": "Dining Thermal Zone",
+            "AvailSchRef": "RestaurantHVACAvail Sch",
+            "AirSeg": [
+              {
+                "Name": "Dining SupAirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "Dining CoilClg",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric"
+                },
+                "CoilHtg": {
+                  "Name": "DiningCoilHtg",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas"
+                },
+                "Fan": {
+                  "Name": "Dining Fan"
+                }
+              },
+              {
+                "Name": "Dining ReliefAirSeg",
+                "Type": "Relief",
+                "Path": "Ducted",
+                "Fan": {
+                  "Name": "Dining ReliefFan",
+                  "CtrlMthd": "VariableSpeedDrive"
+                }
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "Dining TerminalUnit",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Dining Thermal Zone",
+              "PriAirSegRef": "Dining SupAirSeg"
+            },
+            "OACtrl": {
+              "Name": "DiningOAControl",
+              "EconoCtrlMthd": "DifferentialDryBulb",
+              "EconoIntegration": "Integrated",
+              "AirSegSupRef": "Dining SupAirSeg",
+              "AirSegRetRef": "Dining ReliefAirSeg"
+            }
+          },
+          {
+            "Name": "KitchenMUA",
+            "Type": "SZAC",
+            "CtrlZnRef": "Kitchen Thermal Zone",
+            "AvailSchRef": "RestaurantHVACAvail Sch",
+            "ClgDsgnSupAirTemp": "60",
+            "AirSeg": [
+              {
+                "Name": "Kitchen SupAirSeg",
+                "Type": "Supply",
+                "CoilClg": {
+                  "Name": "Kitchen CoilClg",
+                  "Type": "DirectExpansion",
+                  "FuelSrc": "Electric"
+                },
+                "CoilHtg": {
+                  "Name": "KitchenCoilHtg",
+                  "Type": "Furnace",
+                  "FuelSrc": "NaturalGas"
+                },
+                "Fan": {
+                  "Name": "Kitchen Fan"
+                }
+              },
+              {
+                "Name": "Kitchen ReturnAirSeg",
+                "Type": "Return"
+              }
+            ],
+            "TrmlUnit": {
+              "Name": "Kitchen TerminalUnit",
+              "Type": "Uncontrolled",
+              "ZnServedRef": "Kitchen Thermal Zone",
+              "PriAirSegRef": "Kitchen SupAirSeg"
+            },
+            "OACtrl": {
+              "Name": "Kitchen OAControl",
+              "AirSegSupRef": "Dining SupAirSeg",
+              "AirSegRetRef": "Dining ReliefAirSeg"
+            }
+          }
+        ],
+        "ZnSys": {
+          "Name": "KitchenExhaust",
+          "Type": "Exhaust",
+          "AvailSchRef": "RestaurantHVACAvail Sch",
+          "ExhSysType": "CommercialKitchen",
+          "ExhOperMode": "CoupledToSystem",
+          "Fan": {
+            "Name": "KitchExh Fan",
+            "TotStaticPress": "2.5"
+          }
+        }
+      },
+      "SpcFuncDefaults": [
+        {
+          "Name": "Dining Area Defaults",
+          "SpcFunc": "Dining Area",
+          "OccSchRef": "Restaurant Occup Sch",
+          "IntLtgRegSchRef": "Restaurant Lighting Sch",
+          "RecptSchRef": "Restaurant Plugs Sch",
+          "GasEqpSchRef": "RestaurantGasEquip Sch",
+          "ElevSchRef": "Restaurant Elevator Sch",
+          "HotWtrHtgSchRef": "Restaurant HotWtr Sch"
+        },
+        {
+          "Name": "Kitchen Food Preperation Defaults",
+          "SpcFunc": "Kitchen, Commercial Food Preparation",
+          "OccSchRef": "Restaurant Occup Sch",
+          "IntLtgRegSchRef": "Restaurant Lighting Sch",
+          "RecptSchRef": "Restaurant Plugs Sch",
+          "GasEqpSchRef": "RestaurantGasEquip Sch",
+          "ProcElecSchRef": "Restaurant Plugs Sch",
+          "CommRfrgEqpSchRef": "RestaurantRefrigeration Sch",
+          "ElevSchRef": "Restaurant Elevator Sch",
+          "HotWtrHtgSchRef": "Restaurant HotWtr Sch"
+        }
+      ],
+      "Sch": [
+        {
+          "Name": "Restaurant Occup Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "Restaurant Occup Week"
+        },
+        {
+          "Name": "Restaurant Lighting Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "Restaurant Lighting Week"
+        },
+        {
+          "Name": "Restaurant Plugs Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "Restaurant Plugs Week"
+        },
+        {
+          "Name": "Restaurant HotWtr Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "Restaurant HotWtr Week"
+        },
+        {
+          "Name": "Restaurant Elevator Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "Restaurant Elevator Week"
+        },
+        {
+          "Name": "RestaurantHVACAvail Sch",
+          "Type": "OnOff",
+          "SchWeekRef": "RestaurantHVACAvailWeek"
+        },
+        {
+          "Name": "RestaurantInfiltration Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "RestaurantInfiltrationWeek"
+        },
+        {
+          "Name": "RestaurantClgSetPt Sch",
+          "Type": "Temperature",
+          "SchWeekRef": "RestaurantClgSetPtWeek"
+        },
+        {
+          "Name": "RestaurantHtgSetPt Sch",
+          "Type": "Temperature",
+          "SchWeekRef": "RestaurantHtgSetPtWeek"
+        },
+        {
+          "Name": "RestaurantRefrigeration Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "RestaurantRefrigerationWeek"
+        },
+        {
+          "Name": "RestaurantGasEquip Sch",
+          "Type": "Fraction",
+          "SchWeekRef": "RestaurantGasEquipWeek"
+        },
+        {
+          "Name": "AlwaysOn",
+          "Type": "Fraction",
+          "SchWeekRef": "AlwaysOn HVAC Week"
+        },
+        {
+          "Name": "AssemblyLights",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "AssemblyLights Week"
+        },
+        {
+          "Name": "On",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "On Week"
+        },
+        {
+          "Name": "WaterMainCZ01",
+          "Type": "Temperature",
+          "EndMonth": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+          ],
+          "EndDay": [
+            "31",
+            "28",
+            "31",
+            "30",
+            "31",
+            "30",
+            "31",
+            "31",
+            "30",
+            "31",
+            "30",
+            "31"
+          ],
+          "SchWeekRef": [
+            "WaterMainCZ01Jan Week",
+            "WaterMainCZ01Feb Week",
+            "WaterMainCZ01Mar Week",
+            "WaterMainCZ01Apr Week",
+            "WaterMainCZ01May Week",
+            "WaterMainCZ01Jun Week",
+            "WaterMainCZ01Jul Week",
+            "WaterMainCZ01Aug Week",
+            "WaterMainCZ01Sep Week",
+            "WaterMainCZ01Oct Week",
+            "WaterMainCZ01Nov Week",
+            "WaterMainCZ01Dec Week"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPt",
+          "Type": "Temperature",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "OfficeWtrHtrSetPt Week"
+        },
+        {
+          "Name": "RestaurantExhaust Sch",
+          "Type": "Fraction",
+          "EndMonth": "12",
+          "EndDay": "31",
+          "SchWeekRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm Week"
+        }
+      ],
+      "SchWeek": [
+        {
+          "Name": "Restaurant Occup Week",
+          "Type": "Fraction",
+          "SchDayWDRef": "Restaurant Occup WD",
+          "SchDaySunRef": "Restaurant Occup Sun",
+          "SchDaySatRef": "Restaurant Occup Sat"
+        },
+        {
+          "Name": "Restaurant Lighting Week",
+          "Type": "Fraction",
+          "SchDayWDRef": "Restaurant Lighting WD",
+          "SchDaySunRef": "Restaurant Lighting Sun",
+          "SchDaySatRef": "Restaurant Lighting Sat"
+        },
+        {
+          "Name": "Restaurant Plugs Week",
+          "Type": "Fraction",
+          "SchDayWDRef": "Restaurant Plugs WD",
+          "SchDaySunRef": "Restaurant Plugs Sun",
+          "SchDaySatRef": "Restaurant Plugs Sat"
+        },
+        {
+          "Name": "Restaurant HotWtr Week",
+          "Type": "Fraction",
+          "SchDayWDRef": "Restaurant HotWtr WD",
+          "SchDaySunRef": "Restaurant HotWtr Sun",
+          "SchDaySatRef": "Restaurant HotWtr Sat"
+        },
+        {
+          "Name": "Restaurant Elevator Week",
+          "Type": "Fraction",
+          "SchDayWDRef": "Restaurant Elevator WD",
+          "SchDaySunRef": "Restaurant Elevator Sun",
+          "SchDaySatRef": "Restaurant Elevator Sat"
+        },
+        {
+          "Name": "RestaurantHVACAvailWeek",
+          "Type": "Fraction",
+          "SchDayWDRef": "RestaurantHVACAvail WD",
+          "SchDaySunRef": "RestaurantHVACAvail Sat",
+          "SchDaySatRef": "RestaurantHVACAvail Sun"
+        },
+        {
+          "Name": "RestaurantInfiltrationWeek",
+          "Type": "Fraction",
+          "SchDayWDRef": "RestaurantInfiltration WD",
+          "SchDaySunRef": "RestaurantInfiltration Sat",
+          "SchDaySatRef": "RestaurantInfiltration Sun"
+        },
+        {
+          "Name": "RestaurantClgSetPtWeek",
+          "Type": "Temperature",
+          "SchDayWDRef": "RestaurantClgSetPt WD",
+          "SchDaySunRef": "RestaurantClgSetPt Sat",
+          "SchDaySatRef": "RestaurantClgSetPt Sun"
+        },
+        {
+          "Name": "RestaurantHtgSetPtWeek",
+          "Type": "Temperature",
+          "SchDayWDRef": "RestaurantHtgSetPt WD",
+          "SchDaySunRef": "RestaurantHtgSetPt Sat",
+          "SchDaySatRef": "RestaurantHtgSetPt Sun"
+        },
+        {
+          "Name": "RestaurantRefrigerationWeek",
+          "Type": "Fraction",
+          "SchDayWDRef": "RestaurantRefrigeration WD",
+          "SchDaySunRef": "RestaurantRefrigeration Sat",
+          "SchDaySatRef": "RestaurantRefrigeration Sun"
+        },
+        {
+          "Name": "RestaurantGasEquipWeek",
+          "Type": "Fraction",
+          "SchDayWDRef": "RestaurantGasEquip WD",
+          "SchDaySunRef": "RestaurantGasEquip Sat",
+          "SchDaySatRef": "RestaurantGasEquip Sun"
+        },
+        {
+          "Name": "AlwaysOn HVAC Week",
+          "Type": "OnOff",
+          "SchDayWDRef": "AlwaysOn HVAC WD",
+          "SchDaySunRef": "AlwaysOn HVAC Sun",
+          "SchDaySatRef": "AlwaysOn HVAC Sat"
+        },
+        {
+          "Name": "AssemblyLights Week",
+          "Type": "Fraction",
+          "SchDaySunRef": "AssemblyLights Sun",
+          "SchDayMonRef": "AssemblyLights WD",
+          "SchDayTueRef": "AssemblyLights WD",
+          "SchDayWedRef": "AssemblyLights WD",
+          "SchDayThuRef": "AssemblyLights WD",
+          "SchDayFriRef": "AssemblyLights WD",
+          "SchDaySatRef": "AssemblyLights Sat",
+          "SchDayHolRef": "AssemblyLights Sun",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OffDay"
+        },
+        {
+          "Name": "On Week",
+          "Type": "Fraction",
+          "SchDaySunRef": "OnDay",
+          "SchDayMonRef": "OnDay",
+          "SchDayTueRef": "OnDay",
+          "SchDayWedRef": "OnDay",
+          "SchDayThuRef": "OnDay",
+          "SchDayFriRef": "OnDay",
+          "SchDaySatRef": "OnDay",
+          "SchDayHolRef": "OnDay",
+          "SchDayClgDDRef": "OnDay",
+          "SchDayHtgDDRef": "OnDay"
+        },
+        {
+          "Name": "WaterMainCZ01Jan Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Jan",
+          "SchDayMonRef": "WaterMainCZ01Jan",
+          "SchDayTueRef": "WaterMainCZ01Jan",
+          "SchDayWedRef": "WaterMainCZ01Jan",
+          "SchDayThuRef": "WaterMainCZ01Jan",
+          "SchDayFriRef": "WaterMainCZ01Jan",
+          "SchDaySatRef": "WaterMainCZ01Jan",
+          "SchDayHolRef": "WaterMainCZ01Jan",
+          "SchDayClgDDRef": "WaterMainCZ01Jan",
+          "SchDayHtgDDRef": "WaterMainCZ01Jan"
+        },
+        {
+          "Name": "WaterMainCZ01Feb Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Feb",
+          "SchDayMonRef": "WaterMainCZ01Feb",
+          "SchDayTueRef": "WaterMainCZ01Feb",
+          "SchDayWedRef": "WaterMainCZ01Feb",
+          "SchDayThuRef": "WaterMainCZ01Feb",
+          "SchDayFriRef": "WaterMainCZ01Feb",
+          "SchDaySatRef": "WaterMainCZ01Feb",
+          "SchDayHolRef": "WaterMainCZ01Feb",
+          "SchDayClgDDRef": "WaterMainCZ01Feb",
+          "SchDayHtgDDRef": "WaterMainCZ01Feb"
+        },
+        {
+          "Name": "WaterMainCZ01Mar Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Mar",
+          "SchDayMonRef": "WaterMainCZ01Mar",
+          "SchDayTueRef": "WaterMainCZ01Mar",
+          "SchDayWedRef": "WaterMainCZ01Mar",
+          "SchDayThuRef": "WaterMainCZ01Mar",
+          "SchDayFriRef": "WaterMainCZ01Mar",
+          "SchDaySatRef": "WaterMainCZ01Mar",
+          "SchDayHolRef": "WaterMainCZ01Mar",
+          "SchDayClgDDRef": "WaterMainCZ01Mar",
+          "SchDayHtgDDRef": "WaterMainCZ01Mar"
+        },
+        {
+          "Name": "WaterMainCZ01Apr Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Apr",
+          "SchDayMonRef": "WaterMainCZ01Apr",
+          "SchDayTueRef": "WaterMainCZ01Apr",
+          "SchDayWedRef": "WaterMainCZ01Apr",
+          "SchDayThuRef": "WaterMainCZ01Apr",
+          "SchDayFriRef": "WaterMainCZ01Apr",
+          "SchDaySatRef": "WaterMainCZ01Apr",
+          "SchDayHolRef": "WaterMainCZ01Apr",
+          "SchDayClgDDRef": "WaterMainCZ01Apr",
+          "SchDayHtgDDRef": "WaterMainCZ01Apr"
+        },
+        {
+          "Name": "WaterMainCZ01May Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01May",
+          "SchDayMonRef": "WaterMainCZ01May",
+          "SchDayTueRef": "WaterMainCZ01May",
+          "SchDayWedRef": "WaterMainCZ01May",
+          "SchDayThuRef": "WaterMainCZ01May",
+          "SchDayFriRef": "WaterMainCZ01May",
+          "SchDaySatRef": "WaterMainCZ01May",
+          "SchDayHolRef": "WaterMainCZ01May",
+          "SchDayClgDDRef": "WaterMainCZ01May",
+          "SchDayHtgDDRef": "WaterMainCZ01May"
+        },
+        {
+          "Name": "WaterMainCZ01Jun Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Jun",
+          "SchDayMonRef": "WaterMainCZ01Jun",
+          "SchDayTueRef": "WaterMainCZ01Jun",
+          "SchDayWedRef": "WaterMainCZ01Jun",
+          "SchDayThuRef": "WaterMainCZ01Jun",
+          "SchDayFriRef": "WaterMainCZ01Jun",
+          "SchDaySatRef": "WaterMainCZ01Jun",
+          "SchDayHolRef": "WaterMainCZ01Jun",
+          "SchDayClgDDRef": "WaterMainCZ01Jun",
+          "SchDayHtgDDRef": "WaterMainCZ01Jun"
+        },
+        {
+          "Name": "WaterMainCZ01Jul Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Jul",
+          "SchDayMonRef": "WaterMainCZ01Jul",
+          "SchDayTueRef": "WaterMainCZ01Jul",
+          "SchDayWedRef": "WaterMainCZ01Jul",
+          "SchDayThuRef": "WaterMainCZ01Jul",
+          "SchDayFriRef": "WaterMainCZ01Jul",
+          "SchDaySatRef": "WaterMainCZ01Jul",
+          "SchDayHolRef": "WaterMainCZ01Jul",
+          "SchDayClgDDRef": "WaterMainCZ01Jul",
+          "SchDayHtgDDRef": "WaterMainCZ01Jul"
+        },
+        {
+          "Name": "WaterMainCZ01Aug Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Aug",
+          "SchDayMonRef": "WaterMainCZ01Aug",
+          "SchDayTueRef": "WaterMainCZ01Aug",
+          "SchDayWedRef": "WaterMainCZ01Aug",
+          "SchDayThuRef": "WaterMainCZ01Aug",
+          "SchDayFriRef": "WaterMainCZ01Aug",
+          "SchDaySatRef": "WaterMainCZ01Aug",
+          "SchDayHolRef": "WaterMainCZ01Aug",
+          "SchDayClgDDRef": "WaterMainCZ01Aug",
+          "SchDayHtgDDRef": "WaterMainCZ01Aug"
+        },
+        {
+          "Name": "WaterMainCZ01Sep Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Sep",
+          "SchDayMonRef": "WaterMainCZ01Sep",
+          "SchDayTueRef": "WaterMainCZ01Sep",
+          "SchDayWedRef": "WaterMainCZ01Sep",
+          "SchDayThuRef": "WaterMainCZ01Sep",
+          "SchDayFriRef": "WaterMainCZ01Sep",
+          "SchDaySatRef": "WaterMainCZ01Sep",
+          "SchDayHolRef": "WaterMainCZ01Sep",
+          "SchDayClgDDRef": "WaterMainCZ01Sep",
+          "SchDayHtgDDRef": "WaterMainCZ01Sep"
+        },
+        {
+          "Name": "WaterMainCZ01Oct Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Oct",
+          "SchDayMonRef": "WaterMainCZ01Oct",
+          "SchDayTueRef": "WaterMainCZ01Oct",
+          "SchDayWedRef": "WaterMainCZ01Oct",
+          "SchDayThuRef": "WaterMainCZ01Oct",
+          "SchDayFriRef": "WaterMainCZ01Oct",
+          "SchDaySatRef": "WaterMainCZ01Oct",
+          "SchDayHolRef": "WaterMainCZ01Oct",
+          "SchDayClgDDRef": "WaterMainCZ01Oct",
+          "SchDayHtgDDRef": "WaterMainCZ01Oct"
+        },
+        {
+          "Name": "WaterMainCZ01Nov Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Nov",
+          "SchDayMonRef": "WaterMainCZ01Nov",
+          "SchDayTueRef": "WaterMainCZ01Nov",
+          "SchDayWedRef": "WaterMainCZ01Nov",
+          "SchDayThuRef": "WaterMainCZ01Nov",
+          "SchDayFriRef": "WaterMainCZ01Nov",
+          "SchDaySatRef": "WaterMainCZ01Nov",
+          "SchDayHolRef": "WaterMainCZ01Nov",
+          "SchDayClgDDRef": "WaterMainCZ01Nov",
+          "SchDayHtgDDRef": "WaterMainCZ01Nov"
+        },
+        {
+          "Name": "WaterMainCZ01Dec Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "WaterMainCZ01Dec",
+          "SchDayMonRef": "WaterMainCZ01Dec",
+          "SchDayTueRef": "WaterMainCZ01Dec",
+          "SchDayWedRef": "WaterMainCZ01Dec",
+          "SchDayThuRef": "WaterMainCZ01Dec",
+          "SchDayFriRef": "WaterMainCZ01Dec",
+          "SchDaySatRef": "WaterMainCZ01Dec",
+          "SchDayHolRef": "WaterMainCZ01Dec",
+          "SchDayClgDDRef": "WaterMainCZ01Dec",
+          "SchDayHtgDDRef": "WaterMainCZ01Dec"
+        },
+        {
+          "Name": "OfficeWtrHtrSetPt Week",
+          "Type": "Temperature",
+          "SchDaySunRef": "OfficeWtrHtrSetPt Sun",
+          "SchDayMonRef": "OfficeWtrHtrSetPt WD",
+          "SchDayTueRef": "OfficeWtrHtrSetPt WD",
+          "SchDayWedRef": "OfficeWtrHtrSetPt WD",
+          "SchDayThuRef": "OfficeWtrHtrSetPt WD",
+          "SchDayFriRef": "OfficeWtrHtrSetPt WD",
+          "SchDaySatRef": "OfficeWtrHtrSetPt Sat",
+          "SchDayHolRef": "OfficeWtrHtrSetPt Sun",
+          "SchDayClgDDRef": "OfficeWtrHtrSetPt WD",
+          "SchDayHtgDDRef": "OfficeWtrHtrSetPt WD"
+        },
+        {
+          "Name": "RestaurantExhaustHoodEqualOrLessThan5000cfm Week",
+          "Type": "Fraction",
+          "SchDaySunRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm Sun",
+          "SchDayMonRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "SchDayTueRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "SchDayWedRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "SchDayThuRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "SchDayFriRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "SchDaySatRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm Sat",
+          "SchDayHolRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm Sun",
+          "SchDayClgDDRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "SchDayHtgDDRef": "RestaurantExhaustHoodEqualOrLessThan5000cfm Sun"
+        }
+      ],
+      "SchDay": [
+        {
+          "Name": "Restaurant Occup WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.15",
+            "0.15",
+            "0.05",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.2",
+            "0.5",
+            "0.8",
+            "0.7",
+            "0.4",
+            "0.2",
+            "0.25",
+            "0.5",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.5",
+            "0.35",
+            "0.2"
+          ]
+        },
+        {
+          "Name": "Restaurant Occup Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.3",
+            "0.25",
+            "0.05",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.05",
+            "0.2",
+            "0.45",
+            "0.5",
+            "0.5",
+            "0.35",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.7",
+            "0.9",
+            "0.7",
+            "0.65",
+            "0.55",
+            "0.35"
+          ]
+        },
+        {
+          "Name": "Restaurant Occup Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.2",
+            "0.05",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.1",
+            "0.2",
+            "0.25",
+            "0.25",
+            "0.15",
+            "0.2",
+            "0.25",
+            "0.35",
+            "0.55",
+            "0.65",
+            "0.7",
+            "0.35",
+            "0.2",
+            "0.2"
+          ]
+        },
+        {
+          "Name": "Restaurant Lighting WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.2",
+            "0.35",
+            "0.35",
+            "0.55",
+            "0.55",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.45",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "Restaurant Lighting Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.3",
+            "0.3",
+            "0.55",
+            "0.55",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.85",
+            "0.45",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "Restaurant Lighting Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.3",
+            "0.3",
+            "0.45",
+            "0.45",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.45",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "Restaurant Plugs WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.2",
+            "0.4",
+            "0.4",
+            "0.6",
+            "0.6",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.5",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "Restaurant Plugs Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.3",
+            "0.3",
+            "0.6",
+            "0.6",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.8",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.5",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "Restaurant Plugs Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.15",
+            "0.3",
+            "0.3",
+            "0.5",
+            "0.5",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.7",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.6",
+            "0.5",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "RestaurantHVACAvail WD",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "RestaurantHVACAvail Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "RestaurantHVACAvail Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "Restaurant HotWtr WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.15",
+            "0.15",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.6",
+            "0.55",
+            "0.45",
+            "0.4",
+            "0.45",
+            "0.4",
+            "0.35",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.4",
+            "0.55",
+            "0.6",
+            "0.5",
+            "0.55",
+            "0.45",
+            "0.25"
+          ]
+        },
+        {
+          "Name": "Restaurant HotWtr Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.2",
+            "0.15",
+            "0.15",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.45",
+            "0.5",
+            "0.5",
+            "0.45",
+            "0.4",
+            "0.4",
+            "0.35",
+            "0.4",
+            "0.55",
+            "0.55",
+            "0.5",
+            "0.55",
+            "0.4",
+            "0.3"
+          ]
+        },
+        {
+          "Name": "Restaurant HotWtr Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.25",
+            "0.2",
+            "0.2",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.5",
+            "0.4",
+            "0.4",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.4",
+            "0.5",
+            "0.5",
+            "0.4",
+            "0.5",
+            "0.4",
+            "0.2"
+          ]
+        },
+        {
+          "Name": "Restaurant Elevator WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "Restaurant Elevator Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "Restaurant Elevator Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RestaurantRefrigeration WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9"
+          ]
+        },
+        {
+          "Name": "RestaurantRefrigeration Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9"
+          ]
+        },
+        {
+          "Name": "RestaurantRefrigeration Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9"
+          ]
+        },
+        {
+          "Name": "RestaurantHtgSetPt WD",
+          "Type": "Temperature",
+          "Hr": [
+            "70",
+            "70",
+            "70",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70"
+          ]
+        },
+        {
+          "Name": "RestaurantHtgSetPt Sat",
+          "Type": "Temperature",
+          "Hr": [
+            "70",
+            "70",
+            "70",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70"
+          ]
+        },
+        {
+          "Name": "RestaurantHtgSetPt Sun",
+          "Type": "Temperature",
+          "Hr": [
+            "70",
+            "70",
+            "70",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "60",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70",
+            "70"
+          ]
+        },
+        {
+          "Name": "RestaurantClgSetPt WD",
+          "Type": "Temperature",
+          "Hr": [
+            "75",
+            "75",
+            "75",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75"
+          ]
+        },
+        {
+          "Name": "RestaurantClgSetPt Sat",
+          "Type": "Temperature",
+          "Hr": [
+            "75",
+            "75",
+            "75",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75"
+          ]
+        },
+        {
+          "Name": "RestaurantClgSetPt Sun",
+          "Type": "Temperature",
+          "Hr": [
+            "75",
+            "75",
+            "75",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "85",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75",
+            "75"
+          ]
+        },
+        {
+          "Name": "RestaurantInfiltration WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.25",
+            "0.25",
+            "0.25",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25"
+          ]
+        },
+        {
+          "Name": "RestaurantInfiltration Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.25",
+            "0.25",
+            "0.25",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25"
+          ]
+        },
+        {
+          "Name": "RestaurantInfiltration Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.25",
+            "0.25",
+            "0.25",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25",
+            "0.25"
+          ]
+        },
+        {
+          "Name": "RestaurantGasEquip WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.5",
+            "0.5",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.5",
+            "0.5"
+          ]
+        },
+        {
+          "Name": "RestaurantGasEquip Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.5",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.5"
+          ]
+        },
+        {
+          "Name": "RestaurantGasEquip Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0.5",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.75",
+            "0.75",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.9",
+            "0.75",
+            "0.5",
+            "0.5"
+          ]
+        },
+        {
+          "Name": "AlwaysOn HVAC WD",
+          "Type": "OnOff",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "AlwaysOn HVAC Sat",
+          "Type": "OnOff",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "AlwaysOn HVAC Sun",
+          "Type": "OnOff",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "AssemblyLights Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.3",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.55",
+            "0.05",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyLights WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.35",
+            "0.35",
+            "0.35",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.65",
+            "0.25",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "AssemblyLights Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.05",
+            "0.3",
+            "0.3",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.4",
+            "0.05"
+          ]
+        },
+        {
+          "Name": "OnDay",
+          "Type": "Fraction",
+          "Hr": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ]
+        },
+        {
+          "Name": "OffDay",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Jan",
+          "Type": "Temperature",
+          "Hr": [
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2",
+            "48.2"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Feb",
+          "Type": "Temperature",
+          "Hr": [
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7",
+            "48.7"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Mar",
+          "Type": "Temperature",
+          "Hr": [
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9",
+            "47.9"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Apr",
+          "Type": "Temperature",
+          "Hr": [
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6",
+            "48.6"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01May",
+          "Type": "Temperature",
+          "Hr": [
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1",
+            "48.1"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Jun",
+          "Type": "Temperature",
+          "Hr": [
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Jul",
+          "Type": "Temperature",
+          "Hr": [
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Aug",
+          "Type": "Temperature",
+          "Hr": [
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4",
+            "51.4"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Sep",
+          "Type": "Temperature",
+          "Hr": [
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5",
+            "51.5"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Oct",
+          "Type": "Temperature",
+          "Hr": [
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7",
+            "50.7"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Nov",
+          "Type": "Temperature",
+          "Hr": [
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9",
+            "49.9"
+          ]
+        },
+        {
+          "Name": "WaterMainCZ01Dec",
+          "Type": "Temperature",
+          "Hr": [
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5",
+            "48.5"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPt Sun",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPt WD",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "OfficeWtrHtrSetPt Sat",
+          "Type": "Temperature",
+          "Hr": [
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135",
+            "135"
+          ]
+        },
+        {
+          "Name": "RestaurantExhaustHoodEqualOrLessThan5000cfm Sun",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RestaurantExhaustHoodEqualOrLessThan5000cfm WD",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "Name": "RestaurantExhaustHoodEqualOrLessThan5000cfm Sat",
+          "Type": "Fraction",
+          "Hr": [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "1",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        }
+      ],
+      "FluidSys": {
+        "Name": "SHWFluidSys1",
+        "Type": "ServiceHotWater",
+        "FluidSeg": [
+          {
+            "Name": "SHWSupply1",
+            "Type": "PrimarySupply"
+          },
+          {
+            "Name": "SHWMakeup1",
+            "Type": "MakeupFluid",
+            "Src": "MunicipalWater"
+          }
+        ],
+        "WtrHtr": {
+          "Name": "WaterHeater1",
+          "FluidSegOutRef": "SHWSupply1",
+          "FluidSegMakeupRef": "SHWMakeup1"
+        }
+      },
+      "CrvQuad": {
+        "Name": "WtHtrStorFIRRatio_fQRatio",
+        "Coef1": "0.021826",
+        "Coef2": "0.97763",
+        "Coef3": "0.000543",
+        "MaxOut": "1",
+        "MaxVar1": "1",
+        "MinOut": "0.1",
+        "MinVar1": "0.1"
+      },
+      "EUseSummary": {
+        "Name": "EUseSummary",
+        "Title1": [
+          "Proposed",
+          "Proposed",
+          "Proposed",
+          "Standard",
+          "Standard",
+          "Standard",
+          "Compliance"
+        ],
+        "Title2": [
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Design",
+          "Margin"
+        ],
+        "Title3": [
+          "End Use",
+          "Site (MWh)",
+          "Site (therms)",
+          "(kTDV/ft²-yr)",
+          "Site (MWh)",
+          "Site (therms)",
+          "(kTDV/ft²-yr)",
+          "(kTDV/ft²-yr)"
+        ],
+        "Enduse1": [
+          "Space Heating",
+          "--",
+          "439",
+          "32.3",
+          "--",
+          "440",
+          "32.4",
+          "0.1"
+        ],
+        "Enduse2": [
+          "Space Cooling",
+          "10.7",
+          "--",
+          "163.1",
+          "10.7",
+          "--",
+          "163.2",
+          "0.1"
+        ],
+        "Enduse3": [
+          "Indoor Fans",
+          "21.7",
+          "--",
+          "193.4",
+          "21.7",
+          "--",
+          "193.4",
+          "--"
+        ],
+        "Enduse4": [
+          "Heat Rejection",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse5": [
+          "Pumps & Misc.",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse6": [
+          "Domestic HW",
+          "--",
+          "1,049",
+          "68.9",
+          "--",
+          "1,049",
+          "68.9",
+          "--"
+        ],
+        "Enduse7": [
+          "Lighting",
+          "13.7",
+          "--",
+          "126.4",
+          "13.7",
+          "--",
+          "126.4",
+          "--"
+        ],
+        "Enduse8": [
+          "Compliance Total",
+          "46.1",
+          "1,488",
+          "584.1",
+          "46.1",
+          "1,489",
+          "584.3",
+          "0.2"
+        ],
+        "Enduse9": [
+          "Receptacle",
+          "12.6",
+          "1,040",
+          "186.2",
+          "12.6",
+          "1,040",
+          "186.2"
+        ],
+        "Enduse10": [
+          "Process",
+          "11.0",
+          "--",
+          "92.1",
+          "11.0",
+          "--",
+          "92.1"
+        ],
+        "Enduse11": [
+          "Process Ltg",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--",
+          "--"
+        ],
+        "Enduse12": [
+          "TOTAL",
+          "69.7",
+          "2,528",
+          "862.4",
+          "69.7",
+          "2,529",
+          "862.6"
+        ],
+        "ZoneUMLHsLoaded": [
+          "1",
+          "1"
+        ],
+        "ZoneUMLHs": [
+          "clg: 0  htg: 0  'Attic Zn'\nclg: 0  htg: 0  'Dining Thermal Zone'\nclg: 4  htg: 49  'Kitchen Thermal Zone'",
+          "clg: 0  htg: 0  'Attic Zn'\nclg: 0  htg: 0  'Dining Thermal Zone'\nclg: 4  htg: 54  'Kitchen Thermal Zone'"
+        ],
+        "SimSummary": [
+          "Successful (1 severe error, 87 warnings)",
+          "Successful (1 severe error, 89 warnings)"
+        ],
+        "PassFail": "PASS"
+      }
+    }
+  }
+}
