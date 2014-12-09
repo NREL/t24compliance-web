@@ -21,6 +21,7 @@
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panels[$index].open, 'glyphicon-chevron-right': !panels[$index].open}"></i>
       {{panel.title}}
     </accordion-heading>
-    {{panel.title}}
+    <button class="btn btn-default" ng-click="openLibraryModal()">Launch Library Modal</button>
+    <div ng-show="selected">Selection: {{selected}}</div>
   </accordion-group>
 </accordion>
