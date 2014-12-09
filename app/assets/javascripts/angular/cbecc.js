@@ -22,15 +22,14 @@ cbecc.config([
         name: 'project',
         url: '/project',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html',
-        children: [
-          {
-            name: 'show',
-            url: '/{id:[0-9a-f]{24}}',
-            controller: 'ProjectCtrl',
-            templateUrl: 'project/project.html' //use same template as project for now.
-          }
-        ]
+        templateUrl: 'project/project.html'
+      })
+      .state({
+        name: 'project_show',
+        url: '/project/{id:[0-9a-f]{24}}',
+        controller: 'ProjectCtrl',
+        templateUrl: 'project/project.html' //use same template as project for now.
+
       })
       .state({
         name: 'building',

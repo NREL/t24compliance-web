@@ -1,5 +1,5 @@
 cbecc.controller('ProjectCtrl', [
-  '$scope', '$window', '$routeParams', '$stateParams', '$resource', '$location', 'flash', 'Project', function ($scope, $window, $routeParams, $stateParams, $resource, $location, flash, Project) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Project', function ($scope, $window, $stateParams, $resource, $location, flash, Project) {
 
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
@@ -12,10 +12,9 @@ cbecc.controller('ProjectCtrl', [
       };
 
     // new vs edit
-    console.log($routeParams);
     console.log($stateParams);
-    if ($routeParams.id) {
-      $scope.project = Project.show({ id: $routeParams.id });
+    if ($stateParams.id) {
+      $scope.project = Project.show({ id: $stateParams.id });
       console.log('existing project');
     } else {
       $scope.project = new Project();
@@ -29,9 +28,11 @@ cbecc.controller('ProjectCtrl', [
       function success(response) {
         console.log("success", response);
         console.log($scope.project);
-        console.log(response['_id']);
+        console.log("_id is: ", response['_id'], "or id is: ", response['id']);
+        the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
+
         // go back to form with id of what was just saved
-        $location.path("/project/" + response['_id']);
+        $location.path("/project/" + the_id);
 
       }
 
@@ -46,7 +47,7 @@ cbecc.controller('ProjectCtrl', [
         });
       }
 
-      if ($routeParams.id) {
+      if ($stateParams.id) {
         Project.update($scope.project, success, failure);
       } else {
         Project.create($scope.project, success, failure);
