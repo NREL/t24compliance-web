@@ -6,7 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
 
@@ -14,7 +13,10 @@ u.roles = [:admin]
 u.password = 'password'
 u.save!
 
+u.projects.destroy_all
+
 #User.project.delete_all
+
 
 # file = File.read(File.join(Rails.root,"lib/assets/construction_library.json"))
 # data = JSON.parse(file)
@@ -36,7 +38,8 @@ u.save!
 # import some cbecc com models
 f = File.join(Rails.root,"spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
 p = Project.from_sdd_xml(f)
-
+p.user_id = u.id
+p.save!
 puts p
 
 #h = Hash.from_xml(file)

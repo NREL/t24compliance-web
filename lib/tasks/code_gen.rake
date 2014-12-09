@@ -144,7 +144,7 @@ namespace :code_gen do
 
   def mongoid_timestamps
 
-    "#{' '*2}include Mongoid::Timestamps\n"
+    "#{' '*2}include Mongoid::Timestamps\n\n"
 
   end
 
@@ -423,9 +423,9 @@ namespace :code_gen do
       input.children.each do |c|
         model = Input.find_by(name: c)
         if c == 'Bldg'
-          relations_str = relations_str + "  has_one :" + model.display_name.singularize.underscore + "\n"
+          relations_str = "#{relations_str}  has_one :#{model.display_name.singularize.underscore}, dependent: :destroy\n"
         else
-          relations_str = relations_str + "  has_many :" + model.display_name.underscore.pluralize + "\n"
+          relations_str = "#{relations_str}  has_many :#{model.display_name.underscore.pluralize}, dependent: :destroy\n"
         end
       end
     end
