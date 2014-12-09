@@ -12,12 +12,11 @@
 //= require angular-rails-templates
 //= require angular-resource
 //= require angular-route
-//= require angular-strap
 //= require angular-ui-grid
 //= require angular-ui-router
 //= require angular-ui-router.stateHelper
-//= require bootstrap-switch/dist/js/bootstrap-switch
 //= require bootstrap-sprockets
+//= require bootstrap-switch
 //= require lodash
 //= require_tree ./angular/templates
 //= require_tree ./angular

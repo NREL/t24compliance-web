@@ -1,9 +1,9 @@
 .app-nav {
-  padding: 20px 0px;
+  padding: 20px 0;
 }
 
 .app-nav-item {
-  background-color: #dddddd;
+  background-color: #ddd;
   margin-right: 10px;
   font-size: 110%;
 }
@@ -24,7 +24,6 @@
 }
 
 .pad-left-40 {
-
   padding-left: 40px;
 }
 
@@ -33,15 +32,15 @@
 }
 
 .pad-tb-20 {
-  padding: 20px 0px;
+  padding: 20px 0;
 }
 
 .pad-top-10 {
-  padding-top:10px;
+  padding-top: 10px;
 }
 
-.pad-top-5{
-  padding-top:5px;
+.pad-top-5 {
+  padding-top: 5px;
 }
 
 .section-desc {
@@ -55,11 +54,7 @@
 .form-heading {
   font-size: 120%;
   font-weight: bold;
-  padding:10px 20px;
-}
-
-a.chevron-toggleable:hover {
-  text-decoration: none;
+  padding: 10px 20px;
 }
 
 .modal-backdrop.am-fade {
@@ -79,4 +74,15 @@ a.chevron-toggleable:hover {
   }
 }
 
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+.panel-title a, .panel-title a:hover {
+  text-decoration: none;
+}
+
+// Fix for UI grid shifting in Chrome on Windows
+.ui-grid-render-container-body {
+  float: none;
+}

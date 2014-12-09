@@ -51,34 +51,29 @@ cbecc.controller('ConstructionsCtrl', [
 
     //collapsible panels
     $scope.panels = [
-        {
-            "title": "Exterior Wall Construction"
-        },
-        {
-            "title": "Interior Wall Construction"
-        },
-        {
-            "title": "Roof Construction"
-        },
-        {
-            "title": "Window Construction"
-        },
-        {
-            "title": "Skylight Construction"
-        },
-        {
-            "title": "Raised Floor Construction"
-        },
-        {
-            "title": "Slab-on-grade Construction"
-        }
-     ];
-
-    $scope.oneAtATime = false;
-    $scope.status = {
-      isFirstOpen: true,
-      isFirstDisabled: false
-    };
+      {
+        "title": "Exterior Wall Construction",
+        "open": true
+      },
+      {
+        "title": "Interior Wall Construction"
+      },
+      {
+        "title": "Roof Construction"
+      },
+      {
+        "title": "Window Construction"
+      },
+      {
+        "title": "Skylight Construction"
+      },
+      {
+        "title": "Raised Floor Construction"
+      },
+      {
+        "title": "Slab-on-grade Construction"
+      }
+    ];
 
     $scope.gridOptions.onRegisterApi = function (gridApi) {
       $scope.gridApi = gridApi;
@@ -90,12 +85,5 @@ cbecc.controller('ConstructionsCtrl', [
         }
       });
     };
-
-    $scope.checkIfFirst = function(first) {
-      console.log(first)
-
-      }
-
-
   }
 ]);
