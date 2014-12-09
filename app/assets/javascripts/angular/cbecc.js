@@ -7,7 +7,7 @@ cbecc.config([
     flashProvider.infoClassnames.push("alert-info");
     flashProvider.successClassnames.push("alert-success");
 
-    $urlRouterProvider.when('', '/').otherwise('404');
+    //$urlRouterProvider.when('', '/').otherwise('404');
 
     authToken = $("meta[name=\"csrf-token\"]").attr("content")
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
@@ -26,7 +26,7 @@ cbecc.config([
         children: [
           {
             name: 'show',
-            url: '/{id:[0-9]}',
+            url: '/{id:[0-9a-f]{24}}',
             controller: 'ProjectCtrl',
             templateUrl: 'project/project.html' //use same template as project for now.
           }

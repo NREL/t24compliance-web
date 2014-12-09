@@ -1,5 +1,5 @@
 cbecc.controller('ProjectCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', 'Project', function ($scope, $window, $routeParams, $resource, $location, flash, Project) {
+  '$scope', '$window', '$routeParams', '$stateParams', '$resource', '$location', 'flash', 'Project', function ($scope, $window, $routeParams, $stateParams, $resource, $location, flash, Project) {
 
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
@@ -12,10 +12,14 @@ cbecc.controller('ProjectCtrl', [
       };
 
     // new vs edit
+    console.log($routeParams);
+    console.log($stateParams);
     if ($routeParams.id) {
       $scope.project = Project.show({ id: $routeParams.id });
+      console.log('existing project');
     } else {
       $scope.project = new Project();
+      console.log('new project');
     }
 
     // save
@@ -25,7 +29,9 @@ cbecc.controller('ProjectCtrl', [
       function success(response) {
         console.log("success", response);
         console.log($scope.project);
-        $location.path("/project/");
+        console.log(response['_id']);
+        // go back to form with id of what was just saved
+        $location.path("/project/" + response['_id']);
 
       }
 
