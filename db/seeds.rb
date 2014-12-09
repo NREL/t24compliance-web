@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 u = User.find_or_create_by(email: 'test@nrel.gov')
-u.roles = [:admin]
+u.roles = []
 
 # Remove this if we share the code. This is very dangerous giving the admin a simple password for testing sake!
 u.password = 'password'

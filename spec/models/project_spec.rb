@@ -29,6 +29,15 @@ describe Project do
     expect(p.building.building_stories.first.name).to eq "Building Story 1"
   end
 
+  it 'should queue the model to run' do
+    p = Project.where(name: '0200016-OffSml-SG-BaseRun').first
+    expect(p).not_to be nil
+    expect(p.simulation).not_to be nil
+    p.save!
+    
+    p.simulation.run
+  end
+
   it 'should create a project programmatically and save it to xml' do
     p = Project.new
     p.zip_code = 80305
