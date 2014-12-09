@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $routeParams, $resource, $location, flash) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', function ($scope, $window, $routeParams, $resource, $location, flash, $modal) {
     $scope.gridOptions = {
       data: 'data',
       enableRowHeaderSelection: true,
@@ -85,5 +85,42 @@ cbecc.controller('ConstructionsCtrl', [
         }
       });
     };
+
+    // Modal Settings
+    $scope.items = ['item1', 'item2', 'item3'];
+    $scope.openLibraryModal = function (index) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'constructions/library.html',
+        controller: 'ModalConstructionsLibraryCtrl',
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.panels[index].selected = selectedItem;
+      }, function () {
+        console.log('Modal dismissed at: ' + new Date());
+      });
+    };
   }
 ]);
+
+cbecc.controller('ModalConstructionsLibraryCtrl', function ($scope, $modalInstance, items) {
+
+  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };
+
+  $scope.ok = function () {
+    $modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+});
