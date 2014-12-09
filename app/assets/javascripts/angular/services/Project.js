@@ -1,5 +1,5 @@
 cbecc.factory('Project', function($resource) {
-  return $resource('#/project/:id', { id: '@id' },
+  return $resource('/projects/:id.json', { id: '@id' },
     {
       'create':  { method: 'POST' },
       'index':   { method: 'GET', isArray: true },

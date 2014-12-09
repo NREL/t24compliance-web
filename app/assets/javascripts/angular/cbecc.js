@@ -1,13 +1,16 @@
 var cbecc = angular.module('cbecc', ['templates', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.grid', 'ui.grid.selection', 'ui.router', 'ui.router.stateHelper', 'ui.bootstrap', 'frapontillo.bootstrap-switch']);
 
 cbecc.config([
-  '$stateProvider', '$urlRouterProvider', 'flashProvider', 'stateHelperProvider', '$modalProvider', function ($stateProvider, $urlRouterProvider, flashProvider, stateHelperProvider, $modalProvider) {
+  '$stateProvider', '$urlRouterProvider', 'flashProvider', 'stateHelperProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, flashProvider, stateHelperProvider, $httpProvider) {
     flashProvider.errorClassnames.push("alert-danger");
     flashProvider.warnClassnames.push("alert-warning");
     flashProvider.infoClassnames.push("alert-info");
     flashProvider.successClassnames.push("alert-success");
 
     $urlRouterProvider.when('', '/').otherwise('404');
+
+    authToken = $("meta[name=\"csrf-token\"]").attr("content")
+    $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
     stateHelperProvider
       .state({

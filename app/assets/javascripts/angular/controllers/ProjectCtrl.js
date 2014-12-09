@@ -9,28 +9,31 @@ cbecc.controller('ProjectCtrl', [
       {
         project_team: true,
         exceptional_condition: true
-      }
+      };
 
+    // new vs edit
     if ($routeParams.id) {
-      $scope.project = Project.show({id: $routeParams.id});
-    }
-    else {
+      $scope.project = Project.show({ id: $routeParams.id });
+    } else {
       $scope.project = new Project();
     }
 
+    // save
     $scope.submit = function () {
       console.log("submit");
 
       function success(response) {
         console.log("success", response);
-        $location.path("#/project/" + $scope.project.id);
+        console.log($scope.project);
+        $location.path("/project/");
+
       }
 
       function failure(response) {
         console.log("failure", response);
 
-        _.each(response.data, function (errors, key) {
-          _.each(errors, function (e) {
+        _.each(response.data, function(errors, key) {
+          _.each(errors, function(e) {
             $scope.form[key].$dirty = true;
             $scope.form[key].$setValidity(e, false);
           });
@@ -45,9 +48,6 @@ cbecc.controller('ProjectCtrl', [
 
     };
 
-    $scope.cancel = function () {
-      $location.path("#/project/" + $scope.project.id);
-    };
 
     //FORM TODO:  when saving, check if exceptional_condition_modeling is true.  If so, save exceptional_condition_narrative.
     // Exceptional_condition_modeling doesn't actually have a field

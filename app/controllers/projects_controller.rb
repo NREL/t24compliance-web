@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :json, :html
 
   def index
     @projects = Project.all
