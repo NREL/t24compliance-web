@@ -88,7 +88,7 @@ cbecc.controller('ConstructionsCtrl', [
 
     // Modal Settings
     $scope.items = ['item1', 'item2', 'item3'];
-    $scope.openLibraryModal = function () {
+    $scope.openLibraryModal = function (index) {
 
       var modalInstance = $modal.open({
         templateUrl: 'constructions/library.html',
@@ -101,7 +101,7 @@ cbecc.controller('ConstructionsCtrl', [
       });
 
       modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
+        $scope.panels[index].selected = selectedItem;
       }, function () {
         console.log('Modal dismissed at: ' + new Date());
       });
