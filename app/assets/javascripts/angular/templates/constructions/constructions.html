@@ -9,12 +9,6 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-12">
-    <div ui-grid="gridOptions" ui-grid-selection class="grid"></div>
-  </div>
-</div>
-
 <accordion close-others="false">
   <accordion-group ng-repeat="panel in panels" is-open="panels[$index].open">
     <accordion-heading>
@@ -22,6 +16,8 @@
       {{panel.title}}
     </accordion-heading>
     <button class="btn btn-default" ng-click="openLibraryModal($index)">Select a Construction</button>
-    <div ng-show="panels[$index].selected">Selection: {{panels[$index].selected}}</div>
+    <div ng-show="panels[$index].selected" class="pad-top-20">
+      <div ui-grid="panels[$index].gridOptions" class="layersGrid" ui-grid-resize-columns></div>
+    </div>
   </accordion-group>
 </accordion>

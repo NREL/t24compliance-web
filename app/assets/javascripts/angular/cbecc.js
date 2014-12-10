@@ -1,4 +1,11 @@
-var cbecc = angular.module('cbecc', ['templates', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-flash.service', 'angular-flash.flash-alert-directive', 'ui.grid', 'ui.grid.selection', 'ui.router', 'ui.router.stateHelper', 'ui.bootstrap', 'frapontillo.bootstrap-switch']);
+var cbecc = angular.module('cbecc', [
+  'templates',
+  'ngAnimate', 'ngResource', 'ngRoute',
+  'angular-flash.service', 'angular-flash.flash-alert-directive',
+  'ui.grid', 'ui.grid.autoResize', 'ui.grid.resizeColumns', 'ui.grid.selection',
+  'ui.router', 'ui.router.stateHelper',
+  'ui.bootstrap',
+  'frapontillo.bootstrap-switch']);
 
 cbecc.config([
   '$stateProvider', '$urlRouterProvider', 'flashProvider', 'stateHelperProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, flashProvider, stateHelperProvider, $httpProvider) {
@@ -7,10 +14,9 @@ cbecc.config([
     flashProvider.infoClassnames.push("alert-info");
     flashProvider.successClassnames.push("alert-success");
 
-    //$urlRouterProvider.when('', '/').otherwise('404');
+    $urlRouterProvider.when('', '/').otherwise('404');
 
-    authToken = $("meta[name=\"csrf-token\"]").attr("content")
-    $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+    $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
     stateHelperProvider
       .state({
@@ -25,11 +31,10 @@ cbecc.config([
         templateUrl: 'project/project.html'
       })
       .state({
-        name: 'project_show',
+        name: 'projectDetails',
         url: '/project/{id:[0-9a-f]{24}}',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html' //use same template as project for now.
-
+        templateUrl: 'project/project.html'
       })
       .state({
         name: 'building',

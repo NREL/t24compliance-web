@@ -35,6 +35,10 @@
   padding: 20px 0;
 }
 
+.pad-top-20 {
+  padding-top: 20px;
+}
+
 .pad-top-10 {
   padding-top: 10px;
 }
@@ -74,4 +78,17 @@
 // Fix for UI grid shifting in Chrome on Windows
 .ui-grid-render-container-body {
   float: none;
+  overflow: hidden;
+}
+
+// Increase modal size
+.wide-modal .modal-dialog {
+  min-width: 700px;
+  width: 90%;
+}
+
+// Grid Styling
+.layersGrid {
+  width: 668px;
+  height: 220px;
 }

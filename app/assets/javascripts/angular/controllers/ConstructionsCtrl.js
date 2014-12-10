@@ -1,129 +1,167 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'Construction', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, Construction) {
-    $scope.gridOptions = {
-      data: 'data',
-      enableRowHeaderSelection: true,
-      enableRowSelection: true,
-      multiSelect: false
-    };
-
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'Construction', 'uiGridConstants', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, Construction, uiGridConstants) {
     //use Construction.index() to retrieve all constructions
     //use Construction.show(id) to retrieve a construction by id
-
-    $scope.data = [
-      {
-        "Category": "Concrete",
-        "Standard Material Selection": "Concrete - 140 lb/ft3 -4 in",
-        "R-Value": 0.3,
-        "Thickness": 4.0,
-        "Specific Heat": 0.22,
-        "Density": 139.78,
-        "Thermal Conductivity": 1.128,
-        "Cavity Insulation R-Value": null,
-        "Framing": "",
-        "Configuration": "",
-        "Depth": null
-      },
-      {
-        "Category": "Composite",
-        "Standard Material Selection": "",
-        "R-Value": 10.0,
-        "Thickness": 4.0,
-        "Specific Heat": 0.22,
-        "Density": 139.78,
-        "Thermal Conductivity": null,
-        "Cavity Insulation R-Value": 0.5,
-        "Framing": "Wood",
-        "Configuration": "Wall 24 inch OC",
-        "Depth": 2
-      },
-      {
-        "Category": "Wood",
-        "Standard Material Selection": "Hardwood 1/2 inch",
-        "R-Value": 0.43,
-        "Thickness": 0.5,
-        "Specific Heat": 0.39,
-        "Density": 42.43,
-        "Thermal Conductivity": .097,
-        "Cavity Insulation R-Value": null,
-        "Framing": "",
-        "Configuration": "",
-        "Depth": null
-      }
-    ];
+    $scope.data = Construction.index();
 
     //collapsible panels
-    $scope.panels = [
-      {
-        "title": "Exterior Wall Construction",
-        "open": true
-      },
-      {
-        "title": "Interior Wall Construction"
-      },
-      {
-        "title": "Roof Construction"
-      },
-      {
-        "title": "Window Construction"
-      },
-      {
-        "title": "Skylight Construction"
-      },
-      {
-        "title": "Raised Floor Construction"
-      },
-      {
-        "title": "Slab-on-grade Construction"
-      }
-    ];
-
-    $scope.gridOptions.onRegisterApi = function (gridApi) {
-      $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          console.log(row.entity);
-        } else {
-          // No rows selected
-        }
-      });
-    };
+    $scope.panels = [{
+      title: "Exterior Wall Construction",
+      open: true
+    }, {
+      title: "Interior Wall Construction"
+    }, {
+      title: "Roof Construction"
+    }, {
+      title: "Window Construction"
+    }, {
+      title: "Skylight Construction"
+    }, {
+      title: "Raised Floor Construction"
+    }, {
+      title: "Slab-on-grade Construction"
+    }];
+    $scope.panels.forEach(function (panel) {
+      panel.gridOptions = {
+        columnDefs: [{name: 'name'}, {name: 'code_category'}],
+        enableColumnMenus: false,
+        enableColumnResizing: true,
+        enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
+        enableSorting: false,
+        enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED
+      };
+    });
 
     // Modal Settings
-    $scope.items = ['item1', 'item2', 'item3'];
     $scope.openLibraryModal = function (index) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'constructions/library.html',
+        backdrop: 'static',
         controller: 'ModalConstructionsLibraryCtrl',
+        templateUrl: 'constructions/library.html',
+        windowClass: 'wide-modal',
         resolve: {
-          items: function () {
-            return $scope.items;
+          params: function () {
+            return {
+              data: $scope.data,
+              title: $scope.panels[index].title
+            };
           }
         }
       });
 
-      modalInstance.result.then(function (selectedItem) {
-        $scope.panels[index].selected = selectedItem;
+      modalInstance.result.then(function (selectedConstruction) {
+        $scope.panels[index].selected = selectedConstruction.id;
+        $scope.panels[index].gridOptions.data = selectedConstruction.layers;
       }, function () {
-        console.log('Modal dismissed at: ' + new Date());
+        // Modal canceled
       });
     };
   }
 ]);
 
-cbecc.controller('ModalConstructionsLibraryCtrl', function ($scope, $modalInstance, items) {
+cbecc.controller('ModalConstructionsLibraryCtrl', [
+  '$scope', '$modalInstance', 'Construction', 'uiGridConstants', 'params', function ($scope, $modalInstance, Construction, uiGridConstants, params) {
+    $scope.data = params.data;
+    $scope.title = params.title;
+    $scope.layerData = [];
+    $scope.selected = null;
+    $scope.constructionsGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        minWidth: 400
+      }, {
+        name: 'type',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        }
+      }, {
+        name: 'framing_configuration',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        maxWidth: 218
+      }, {
+        name: 'framing_size',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        maxWidth: 159
+      }, {
+        name: 'cavity_insulation_r_value',
+        enableHiding: false,
+        filters: [{
+          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+          placeholder: 'At least'
+        }, {
+          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+          placeholder: 'No more than'
+        }]
+      }, {
+        name: 'continuous_insulation_r_value',
+        enableHiding: false,
+        filters: [{
+          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+          placeholder: 'At least'
+        }, {
+          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+          placeholder: 'No more than'
+        }]
+      }, {
+        name: 'continuous_insulation_material_name',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        minWidth: 300
+      }],
+      data: 'data',
+      enableColumnResizing: true,
+      enableFiltering: true,
+      enableRowHeaderSelection: false,
+      enableRowSelection: true,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selected = row.entity;
+            $scope.layerData = row.entity.layers;
+          } else {
+            // No rows selected
+            $scope.selected = null;
+            $scope.layerData = [];
+          }
+        });
+      }
+    };
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+    $scope.layersGridOptions = {
+      columnDefs: [{name: 'name'}, {name: 'code_category'}],
+      data: 'layerData',
+      enableColumnMenus: false,
+      enableColumnResizing: true,
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
+      enableSorting: false,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED
+    };
 
-  $scope.ok = function () {
-    $modalInstance.close($scope.selected.item);
-  };
+    $scope.ok = function () {
+      $modalInstance.close({
+        id: $scope.selected.id,
+        layers: $scope.selected.layers
+      });
+    };
 
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-});
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  }
+]);

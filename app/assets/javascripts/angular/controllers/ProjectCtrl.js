@@ -5,20 +5,16 @@ cbecc.controller('ProjectCtrl', [
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
 
     // project tabs
-    $scope.status =
-      {
-        project_team: true,
-        exceptional_condition: true
-      };
+    $scope.status = {
+      project_team: true,
+      exceptional_condition: true
+    };
 
     // new vs edit
-    console.log($stateParams);
     if ($stateParams.id) {
-      $scope.project = Project.show({ id: $stateParams.id });
-      console.log('existing project');
+      $scope.project = Project.show({id: $stateParams.id});
     } else {
       $scope.project = new Project();
-      console.log('new project');
     }
 
     // save
@@ -39,8 +35,8 @@ cbecc.controller('ProjectCtrl', [
       function failure(response) {
         console.log("failure", response);
 
-        _.each(response.data, function(errors, key) {
-          _.each(errors, function(e) {
+        _.each(response.data, function (errors, key) {
+          _.each(errors, function (e) {
             $scope.form[key].$dirty = true;
             $scope.form[key].$setValidity(e, false);
           });
