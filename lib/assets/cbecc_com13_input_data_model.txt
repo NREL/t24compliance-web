@@ -1,7 +1,7 @@
-2014-Sep-22 13:17:55
+2014-Dec-05 11:06:34
 
 --------------------
-Proj              Project                           #Props: 82/178  MaxDefinable:    1
+Proj              Project                           #Props: 85/210  MaxDefinable:    1
                                Children:  SchDay  /  SchWeek  /  Sch  /  ConsAssm  /  Mat  /  FenCons  /  DrCons  /  SpcFuncDefaults  /  Lum  /  CrvLin  /  CrvQuad  /  CrvCubic  /  CrvDblQuad  /  Bldg  /  ExtShdgObj
 
       BldgEngyModelVersion      BuildingEnergyModelVersion                                    Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -458,7 +458,6 @@ Proj              Project                           #Props: 82/178  MaxDefinable
                                            49:  "YUBA-CO_724838"
       DDWeatherFile             DesignDayWeatherFile                                          String        -  -  -    -  -  -  -  -  -  -  -   Required input     
       AnnualWeatherFile         AnnualWeatherFile                                             String        -  -  -    -  -  -  -  -  -  -  -   Required input     
-      WeatherFileDownloadURL    WeatherFileDownloadURL                                        String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
       SiteFuelType              SiteFuelType                                                  Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
                                       default:  0
                                             0:  "- select -"
@@ -472,6 +471,10 @@ Proj              Project                           #Props: 82/178  MaxDefinable
       RunPeriodEndMonth         RunPeriodEndMonth                                             Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 12
       RunPeriodEndDay           RunPeriodEndDay                                               Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 31
       RunPeriodYear             RunPeriodYear                                                 Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 2100
+      QuickAnalysis             QuickAnalysis                                                 Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      NumOfQuickAnalysisPeriods  NumberOfQuickAnalysisPeriods                                  Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  2 <= Value <= 12
+      NumOfDaysPerQuickAnalysisPeriod  NumberOfDaysPerQuickAnalysisPeriod                            Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  5 <= Value <= 35
+      QuickAnalysisWeekNumbers  QuickAnalysisWeekNumbers                                      Integer      #Vals: 12   -  -  -  -  -  -  -  -   Optional input     Error if not:  1 <= Value <= 52
       ExcptCondCompleteBldg     ExceptionalConditionCompleteBuilding                          Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
                                       default:  0
                                             1:  "Yes"
@@ -504,8 +507,8 @@ Proj              Project                           #Props: 82/178  MaxDefinable
       SimVarsHVACSec            SimulationVariablesHVACSecondary                              Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       SimVarsHVACPri            SimulationVariablesHVACPrimary                                Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       SimVarsHVACZn             SimulationVariablesHVACZone                                   Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
-      AvgDBTemp                 AverageDryBulbTemperature                                     Float         -  -  -   Units: °F                 Optional input     
-      MoAvgTempMaxDiff          MonthlyAverageTemperatureMaximumDifference                    Float         -  -  -   Units: °F                 Optional input     
+      AvgDBTemp                 AverageDryBulbTemperature                                     Float         -  -  -   Units: âˆžF                 Optional input     
+      MoAvgTempMaxDiff          MonthlyAverageTemperatureMaximumDifference                    Float         -  -  -   Units: âˆžF                 Optional input     
       HolRef                    HolidayReference                                              ObjectRef    #Vals: 15   -  -  -  -  -  -  -  -   Optional input     
                                Hol
       RunTitle                  RunTitle                                                      String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -604,7 +607,7 @@ Sch               Schedule                          #Props:  4/  7  MaxDefinable
                                SchWeek  (SchWeek:Type = Sch:Type)
 
 --------------------
-ConsAssm          ConstructAssembly                 #Props: 19/ 40  MaxDefinable:    0
+ConsAssm          ConstructAssembly                 #Props: 17/ 44  MaxDefinable:    0
 
       CompatibleSurfType        CompatibleSurfaceType                                         Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
                                When:  ConsAssm:AssignedSurfType = 1
@@ -641,12 +644,6 @@ ConsAssm          ConstructAssembly                 #Props: 19/ 40  MaxDefinable
                                             6:  "InteriorWall"
                                             7:  "Ceiling"
                                             8:  "InteriorFloor"
-      ExtSolAbs                 ExteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      ExtThrmlAbs               ExteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      ExtVisAbs                 ExteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntSolAbs                 InteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntThrmlAbs               InteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
       SlabType                  SlabType                                                      Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  0
                                             0:  "- specify -"
@@ -761,6 +758,10 @@ ConsAssm          ConstructAssembly                 #Props: 19/ 40  MaxDefinable
       CRRCInitialSRI            CRRCInitialSRI                                                Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       CRRCAgedSRI               CRRCAgedSRI                                                   Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       CRRCProdID                CRRCProductID                                                 String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      SolReflASTMCertification  SolarReflectanceASTMCertification                             Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      ThrmlEmittanceASTMCertification  ThermalEmittanceASTMCertification                             Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      RoofAgedSolRefl           RoofAgedSolarReflectance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      RoofAgedThrmlEmittance    RoofAgedThermalEmittance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       MatRef                    MaterialReference                                             ObjectRef    #Vals: 10   -  -  -  -  -  -  -  -   Optional input     
                                Mat
 
@@ -1539,8 +1540,8 @@ Mat               Material                          #Props: 14/ 34  MaxDefinable
                                            13:  "7_25In"
                                            14:  "9_25In"
                                            15:  "11_25In"
-      CavityIns                 CavityInsulation                                              Float         -  -  -   Units: °F-ft2-h/Btu       Optional input     
-      CavityInsOpt              CavityInsulationOption                                        Enumeration   -  -  -   Units: °F-ft2-h/Btu       Optional input     
+      CavityIns                 CavityInsulation                                              Float         -  -  -   Units: âˆžF-ft2-h/Btu       Optional input     
+      CavityInsOpt              CavityInsulationOption                                        Enumeration   -  -  -   Units: âˆžF-ft2-h/Btu       Optional input     
                                When:  Mat:FrmMat = "Metal"
                                 and:  Mat:FrmConfig = "Wall16inOC"
                                 and:  Mat:FrmDepth = "3_5In"
@@ -1749,7 +1750,7 @@ Mat               Material                          #Props: 14/ 34  MaxDefinable
                                       default:  -1
                                            -1:  "- specify -"
       CompositeMatNotes         CompositeMaterialNotes                                        String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
-      HeaderIns                 HeaderInsulation                                              Float         -  -  -   Units: °F-ft2-h/Btu       Optional input     
+      HeaderIns                 HeaderInsulation                                              Float         -  -  -   Units: âˆžF-ft2-h/Btu       Optional input     
       CMUWt                     CMUWeight                                                     Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  0
                                             0:  "- specify -"
@@ -1763,12 +1764,12 @@ Mat               Material                          #Props: 14/ 34  MaxDefinable
                                             1:  "Solid"
                                             2:  "Empty"
                                             3:  "Insulated"
-      SpandrelPanelIns          SpandrelPanelInsulation                                       Float         -  -  -   Units: °F-ft2-h/Btu       Optional input     
+      SpandrelPanelIns          SpandrelPanelInsulation                                       Float         -  -  -   Units: âˆžF-ft2-h/Btu       Optional input     
       ICCESRptNum               ICCESReportNumber                                             String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
       InsOutsdWtrprfMemb        InsulationOutsideWaterproofMembrane                           Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
-FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable:    0
+FenCons           FenestrationConstruction          #Props: 19/ 54  MaxDefinable:    0
 
       FenType                   FenestrationType                                              Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
                                       default:  -1
@@ -1784,7 +1785,7 @@ FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable
                                             4:  "GlazedDoor"
                                When:  FenCons:FenType = "Skylight"
                                       default:  0
-                                           99:  "- n/a -"
+                                            0:  "- specify -"
       AssmContext               AssemblyContext                                               Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
                                       default:  -1
                                             1:  "Manufactured"
@@ -1798,21 +1799,21 @@ FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable
                                       default:  1
                                             0:  "- specify -"
                                             1:  "NFRCRated"
-                                            2:  "CECDefaultPerformance"
+                                            2:  "DefaultPerformance"
                                When:  FenCons:AssmContext = "FieldFabricated"
                                       default:  1
                                             0:  "- specify -"
-                                            2:  "CECDefaultPerformance"
+                                            2:  "DefaultPerformance"
                                When:  FenCons:AssmContext = "SiteBuilt"
                                       default:  1
                                             0:  "- specify -"
                                             1:  "NFRCRated"
-                                            2:  "CECDefaultPerformance"
-                                            3:  "NA6Equations"
+                                            2:  "DefaultPerformance"
+                                            3:  "COGEquations"
       SkyltGlz                  SkylightGlazing                                               Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                When:  FenCons:FenType = "VerticalFenestration"
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
                                When:  FenCons:FenType = "Skylight"
                                       default:  0
                                             0:  "- specify -"
@@ -1820,8 +1821,8 @@ FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable
                                             2:  "Plastic"
       SkyltCurb                 SkylightCurb                                                  Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                When:  FenCons:FenType = "VerticalFenestration"
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
                                When:  FenCons:FenType = "Skylight"
                                       default:  0
                                             0:  "- specify -"
@@ -1832,15 +1833,14 @@ FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable
                                             0:  "- specify -"
                                             1:  "CasementAwning"
                                             2:  "Sliding"
-                                           99:  "- n/a -"
       GreenhouseGardenWin       GreenhouseGardenWindow                                        Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       FenFrm                    FenestrationFraming                                           Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                When:  FenCons:CertificationMthd = 0
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
                                When:  FenCons:CertificationMthd = 1
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
                                When:  FenCons:CertificationMthd = 2
                                       default:  0
                                             0:  "- specify -"
@@ -1855,11 +1855,11 @@ FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable
                                             3:  "NonMetalFraming"
       FenPanes                  FenestrationPanes                                             Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                When:  FenCons:CertificationMthd = 0
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
                                When:  FenCons:CertificationMthd = 1
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
                                When:  FenCons:CertificationMthd = 2
                                       default:  0
                                             0:  "- specify -"
@@ -1867,30 +1867,28 @@ FenCons           FenestrationConstruction          #Props: 19/ 53  MaxDefinable
                                             2:  "DoublePane"
                                             3:  "GlassBlock"
                                When:  FenCons:CertificationMthd = 3
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
       GlzTint                   GlazingTint                                                   Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                When:  FenCons:FenType = "VerticalFenestration"
-                                      default:  99
+                                      default:  0
                                             0:  "- specify -"
                                             1:  "ClearGlazing"
                                             2:  "TintedGlazing"
-                                           99:  "- n/a -"
                                When:  FenCons:FenType = "Skylight"
-                                      default:  99
-                                           99:  "- n/a -"
+                                      default:  0
+                                            0:  "- specify -"
       WinDivider                WindowDivider                                                 Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  0
                                             0:  "- specify -"
                                             1:  "TrueDividedLite"
                                             2:  "DividerBtwnPanesLessThan7_16in"
                                             3:  "DividerBtwnPanesGreaterThanOrEqualTo7_16in"
-                                           99:  "- n/a -"
       Diffusing                 Diffusing                                                     Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       SHGC                      SHGC                                                          Float         -  -  -   Units: frac.              Optional input     
       SHGCCOG                   SHGCCenterOfGlass                                             Float         -  -  -   Units: frac.              Optional input     
-      UFactor                   UFactor                                                       Float         -  -  -   Units: Btu/h-°F-ft2       Optional input     Error if not:  Value >= 0,  Warning if not:  Value <= 1
-      UFactorCOG                UFactorCenterOfGlass                                          Float         -  -  -   Units: Btu/h-°F-ft2       Optional input     
+      UFactor                   UFactor                                                       Float         -  -  -   Units: Btu/h-âˆžF-ft2       Optional input     Error if not:  Value >= 0,  Warning if not:  Value <= 1
+      UFactorCOG                UFactorCenterOfGlass                                          Float         -  -  -   Units: Btu/h-âˆžF-ft2       Optional input     
       VT                        VisibleTransmittance                                          Float         -  -  -   Units: frac.              Optional input     
       VTCOG                     VisibleTransmittanceCenterOfGlass                             Float         -  -  -   Units: frac.              Optional input     
 
@@ -1912,7 +1910,7 @@ DrCons            DoorConstruction                  #Props:  4/  7  MaxDefinable
                                             0:  "- specify -"
                                             1:  "NFRCRated"
                                             2:  "CECDefaultPerformance"
-      UFactor                   UFactor                                                       Float         -  -  -   Units: Btu/h-°F-ft2       Optional input     
+      UFactor                   UFactor                                                       Float         -  -  -   Units: Btu/h-âˆžF-ft2       Optional input     
       Open                      Open                                                          Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  0
                                             0:  "- specify -"
@@ -2077,7 +2075,7 @@ SpcFuncDefaults   SpaceFunctionDefaults             #Props: 67/ 68  MaxDefinable
       InfSchRef                 InfiltrationScheduleReference                                 ObjectRef    #Vals:  4   -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Fraction")
       InfModelCoefA             InfiltrationModelCoefficientA                                 Float        #Vals:  4   -  -  -  -  -  -  -  -   Optional input     
-      InfModelCoefB             InfiltrationModelCoefficientB                                 Float        #Vals:  4  Units: 1/°F               Optional input     
+      InfModelCoefB             InfiltrationModelCoefficientB                                 Float        #Vals:  4  Units: 1/âˆžF               Optional input     
       InfModelCoefC             InfiltrationModelCoefficientC                                 Float        #Vals:  4  Units: hr/mile            Optional input     
       InfModelCoefD             InfiltrationModelCoefficientD                                 Float        #Vals:  4  Units: hr2/mile2          Optional input     
 
@@ -2152,7 +2150,7 @@ CrvDblQuad        CurveDoubleQuadratic              #Props: 12/ 12  MaxDefinable
       MinVar2                   CurveMinimumVar2                                              Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
-Bldg              Building                          #Props: 24/165  MaxDefinable:    1
+Bldg              Building                          #Props: 28/175  MaxDefinable:    1
                                Children:  Story  /  ExtShdgObj  /  ThrmlZn  /  AirSys  /  ZnSys
 
       FuncClassMthd             FunctionClassificationMethod                                  Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -2181,13 +2179,17 @@ Bldg              Building                          #Props: 24/165  MaxDefinable
       PlantHtgCap               PlantHeatingCapacity                                          Float         -  -  -   Units: Btu/h              Defaulted input    Error if not:  Value >= 0
       CoilClgCap                CoilCoolingCapacity                                           Float         -  -  -   Units: Btu/h              Defaulted input    Error if not:  Value >= 0
       CoilHtgCap                CoilHeatingCapacity                                           Float         -  -  -   Units: Btu/h              Defaulted input    Error if not:  Value >= 0
+      NonResStoryCntFossilHt    NonresidentialStoryCountFossilHeat                            Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      NonResStoryCntElecHt      ResidentialStoryCountFossilHeat                               Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      ResStoryCntFossilHt       NonresidentialStoryCountElectricHeat                          Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      ResStoryCntElecHt         ResidentialStoryCountElectricHeat                             Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
-Story             BuildingStory                     #Props:  4/ 80  MaxDefinable:  100
+Story             BuildingStory                     #Props:  4/ 89  MaxDefinable:  100
                                Parent(s):  Bldg
                                Children:  Spc
 
-      Mult                      Multiplier                                                    Integer       -  -  -    -  -  -  -  -  -  -  -   Defaulted input    Error if not:  Value >= 0
+      Mult                      Multiplier                                                    Integer       -  -  -    -  -  -  -  -  -  -  -   Defaulted input    Error if not:  Value >= 1
       Z                         Z                                                             Float         -  -  -   Units: ft                 (see next line)    
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
       FlrToFlrHgt               FloorToFloorHeight                                            Float         -  -  -   Units: ft                 (see next line)    
@@ -2196,7 +2198,7 @@ Story             BuildingStory                     #Props:  4/ 80  MaxDefinable
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
 
 --------------------
-Spc               Space                             #Props:120/429  MaxDefinable: 1000
+Spc               Space                             #Props:129/453  MaxDefinable: 1000
                                Parent(s):  Story
                                Children:  IntLtgSys  /  Ceiling  /  ExtFlr  /  ExtWall  /  IntFlr  /  IntWall  /  Roof  /  UndgrFlr  /  UndgrWall  /  ExtShdgObj  /  PolyLp
 
@@ -2318,7 +2320,7 @@ Spc               Space                             #Props:120/429  MaxDefinable
       InfSchRef                 InfiltrationScheduleReference                                 ObjectRef    #Vals:  4   -  -  -  -  -  -  -  -   Defaulted input    
                                Sch  (Sch:Type = "Fraction")
       InfModelCoefA             InfiltrationModelCoefficientA                                 Float        #Vals:  4   -  -  -  -  -  -  -  -   Required input     Error if not:  Value >= 0,  Warning if not:  Value <= 1
-      InfModelCoefB             InfiltrationModelCoefficientB                                 Float        #Vals:  4  Units: 1/°F               Required input     Error if not:  Value >= 0,  Warning if not:  Value <= 0.1
+      InfModelCoefB             InfiltrationModelCoefficientB                                 Float        #Vals:  4  Units: 1/âˆžF               Required input     Error if not:  Value >= 0,  Warning if not:  Value <= 0.1
       InfModelCoefC             InfiltrationModelCoefficientC                                 Float        #Vals:  4  Units: hr/mile            Required input     Error if not:  Value >= 0,  Warning if not:  Value <= 1
       InfModelCoefD             InfiltrationModelCoefficientD                                 Float        #Vals:  4  Units: hr2/mile2          Required input     Error if not:  Value >= 0,  Warning if not:  Value <= 0.5
       EnvStatus                 EnvelopeStatus                                                Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -2393,17 +2395,25 @@ Spc               Space                             #Props:120/429  MaxDefinable
       SkyltReqExcptArea         SkylightRequirementExceptionArea                              Float         -  -  -   Units: ft2                Optional input     Error if not:  0 <= Value <= 1e+006
       SkyltReqExcptFrac         SkylightRequirementExceptionFraction                          Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 100
       RecptPwrDens              ReceptaclePowerDensity                                        Float         -  -  -   Units: W/ft2              Defaulted input    Error if not:  0 <= Value <= 500,  Warning if not:  0.2 <= Value <= 40
+      BaseRecptPwrDens          BaselineReceptaclePowerDensity                                Float         -  -  -   Units: W/ft2              Optional input     
       RecptSchRef               ReceptacleScheduleReference                                   ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
+                               Sch  (Sch:Type = "Fraction")
+      BaseRecptSchRef           BaselineReceptacleScheduleReference                           ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Fraction")
       RecptRadFrac              ReceptacleRadiationFraction                                   Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
       RecptLatFrac              ReceptacleLatentFraction                                      Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
       RecptLostFrac             ReceptacleLostFraction                                        Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
+      RecptPwrExcptCond         ReceptaclePowerExceptionalCondition                           Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       GasEqpPwrDens             GasEquipmentPowerDensity                                      Float         -  -  -   Units: Btu/h-ft2          Defaulted input    Error if not:  0 <= Value <= 100,  Warning if not:  0.2 <= Value <= 20
+      BaseGasEqpPwrDens         BaselineGasEquipmentPowerDensity                              Float         -  -  -   Units: Btu/h-ft2          Optional input     
       GasEqpSchRef              GasEquipmentScheduleReference                                 ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
+                               Sch  (Sch:Type = "Fraction")
+      BaseGasEqpSchRef          BaselineGasEquipmentScheduleReference                         ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Fraction")
       GasEqpRadFrac             GasEquipmentRadiationFraction                                 Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
       GasEqpLatFrac             GasEquipmentLatentFraction                                    Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
       GasEqpLostFrac            GasEquipmentLostFraction                                      Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
+      GasEqpPwrDensExcptCond    GasEquipmentPowerDensityExceptionalCondition                  Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       ProcElecPwrDens           ProcessElectricalPowerDensity                                 Float         -  -  -   Units: W/ft2              Optional input     Error if not:  0 <= Value <= 100,  Warning if not:  0.2 <= Value <= 10
       ProcElecSchRef            ProcessElectricalScheduleReference                            ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Fraction")
@@ -2417,11 +2427,15 @@ Spc               Space                             #Props:120/429  MaxDefinable
       ProcGasLatFrac            ProcessGasLatentFraction                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       ProcGasLostFrac           ProcessGasLostFraction                                        Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       CommRfrgEPD               CommercialRefrigerationEPD                                    Float         -  -  -   Units: W/ft2              Defaulted input    Error if not:  0 <= Value <= 20,  Warning if not:  0 <= Value <= 5
+      BaseCommRfrgEPD           BaselineCommercialRefrigerationEPD                            Float         -  -  -   Units: W/ft2              Optional input     
       CommRfrgEqpSchRef         CommercialRefrigerationEquipmentScheduleReference             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
+                               Sch  (Sch:Type = "Fraction")
+      BaseCommRfrgEqpSchRef     BaselineCommercialRefrigerationEquipmentScheduleReference     ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Fraction")
       CommRfrgRadFrac           CommercialRefrigerationRadiationFraction                      Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    Error if not:  0 <= Value <= 1
       CommRfrgLatFrac           CommercialRefrigerationLatentFraction                         Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    Error if not:  0 <= Value <= 1
       CommRfrgLostFrac          CommercialRefrigerationLostFraction                           Float         -  -  -    -  -  -  -  -  -  -  -   Defaulted input    Error if not:  0 <= Value <= 1
+      CommRfrgEPDExcptCond      CommercialRefrigerationEPDExceptionalCondition                Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       ElevCnt                   ElevatorCount                                                 Integer       -  -  -   Units: ElevMech/Space     Optional input     Error if not:  0 <= Value <= 50,  Warning if not:  0 <= Value <= 10
       ElevPwr                   ElevatorPower                                                 Float         -  -  -   Units: W/Elev             Optional input     Error if not:  0 <= Value <= 50000,  Warning if not:  0 <= Value <= 10000
       ElevSchRef                ElevatorScheduleReference                                     ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
@@ -2490,7 +2504,7 @@ Spc               Space                             #Props:120/429  MaxDefinable
       HighRiseResCondFlrArea    HighRiseResidentialConditionedFloorArea                       Float         -  -  -   Units: ft2                Optional input     Error if not:  Value >= 0
 
 --------------------
-IntLtgSys         InteriorLightingSystem            #Props: 16/104  MaxDefinable: 1000
+IntLtgSys         InteriorLightingSystem            #Props: 14/104  MaxDefinable: 1000
                                Parent(s):  Spc
 
       Status                    Status                                                        Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
@@ -2552,12 +2566,9 @@ IntLtgSys         InteriorLightingSystem            #Props: 16/104  MaxDefinable
                                           152:  "Transportation Function"
                                           153:  "Videoconferencing Studio"
                                           154:  "Waiting Area"
-      SchRef                    ScheduleReference                                             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
-                               Sch  (Sch:Type = "Fraction")
       PwrReg                    PowerRegulated                                                Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     
-      NonRegExclusion           NonRegulatedExclusion                                         Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
-                                      default:  0
-                                            0:  "- specify -"
+      NonRegExclusion           NonRegulatedExclusion                                         Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  Value >= 0
+                                      default:  1
                                             1:  "ThemeParksThemeAndSpecialEffects"
                                             2:  "FilmOrPhotoStudioLightingSeparatelySwitched"
                                             3:  "DanceFloorOrTheatrical"
@@ -2840,24 +2851,16 @@ IntLtgSys         InteriorLightingSystem            #Props: 16/104  MaxDefinable
                                       default:  0
                                             0:  "- none specified -"
       PAFCredType               PowerAdjustmentFactorCreditType                               Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
-                                      default:  -1
-                                            1:  "- none specified -"
-                                            2:  "PartialOnOccupantSensingControl"
-                                            3:  "OccupantSensingControls-1to125SF"
-                                            4:  "OccupantSensingControls-126to250SF"
-                                            5:  "OccupantSensingControls-251to500SF"
-                                            6:  "ManualDimming"
-                                            7:  "MultisceneProgrammableControls"
-                                            8:  "DemandResponsiveControl"
-                                            9:  "CombinedManualDimmingPlusPartialOnOccupantSensingControl"
-      IntLtgSpecMthd            InteriorLightingSpecificationMethod                           Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
-                               When:  Proj:GeometryInpType = "Detailed"
-                                      default:  1
-                                            1:  "AreaCategoryMethod"
-                                            2:  "TailoredMethod"
-                               When:  Proj:GeometryInpType = "Simplified"
-                                      default:  1
-                                            1:  "AreaCategoryMethod"
+                                      default:  0
+                                            0:  "- none specified -"
+                                            1:  "PartialOnOccupantSensingControl"
+                                            2:  "OccupantSensingControls-1to125SF"
+                                            3:  "OccupantSensingControls-126to250SF"
+                                            4:  "OccupantSensingControls-251to500SF"
+                                            5:  "ManualDimming"
+                                            6:  "MultisceneProgrammableControls"
+                                            7:  "DemandResponsiveControl"
+                                            8:  "CombinedManualDimmingPlusPartialOnOccupantSensingControl"
       LumMntgHgt                LuminaireMountingHeight                                       Float         -  -  -   Units: ft                 Optional input     Error if not:  0 <= Value <= 100
       WorkPlaneHgt              WorkPlaneHeight                                               Float         -  -  -   Units: ft                 Optional input     Error if not:  0 <= Value <= 10
       DaylitAreaType            DaylitAreaType                                                Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
@@ -2886,7 +2889,7 @@ Ceiling           Ceiling                           #Props:  9/ 33  MaxDefinable
       IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
-ExtFlr            ExteriorFloor                     #Props:  9/ 28  MaxDefinable: 1000
+ExtFlr            ExteriorFloor                     #Props:  3/ 28  MaxDefinable: 1000
                                Parent(s):  Spc
                                Children:  PolyLp
 
@@ -2899,15 +2902,9 @@ ExtFlr            ExteriorFloor                     #Props:  9/ 28  MaxDefinable
                                ConsAssm  (ConsAssm:CompatibleSurfType = "ExteriorFloor")
       Area                      Area                                                          Float         -  -  -   Units: ft2                (see next line)    Error if not:  Value >= 0.01
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
-      ExtSolAbs                 ExteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      ExtThrmlAbs               ExteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      ExtVisAbs                 ExteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      IntSolAbs                 InteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntThrmlAbs               InteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
 
 --------------------
-ExtWall           ExteriorWall                      #Props: 11/ 43  MaxDefinable:10000
+ExtWall           ExteriorWall                      #Props:  5/ 43  MaxDefinable:10000
                                Parent(s):  Spc
                                Children:  Win  /  Dr  /  PolyLp
 
@@ -2923,12 +2920,6 @@ ExtWall           ExteriorWall                      #Props: 11/ 43  MaxDefinable
       DisplayPerim              DisplayPerimeter                                              Float         -  -  -   Units: ft                 Optional input     
       Az                        Azimuth                                                       Float         -  -  -   Units: deg - relative to bldg. azimuth  (see next line)    Error if not:  0 <= Value <= 360
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
-      ExtSolAbs                 ExteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      ExtThrmlAbs               ExteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      ExtVisAbs                 ExteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      IntSolAbs                 InteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntThrmlAbs               InteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
 
 --------------------
 IntFlr            InteriorFloor                     #Props:  6/ 30  MaxDefinable:10000
@@ -2946,7 +2937,7 @@ IntFlr            InteriorFloor                     #Props:  6/ 30  MaxDefinable
       IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
-IntWall           InteriorWall                      #Props: 10/ 35  MaxDefinable:10000
+IntWall           InteriorWall                      #Props:  4/ 35  MaxDefinable:10000
                                Parent(s):  Spc
                                Children:  Dr  /  PolyLp
 
@@ -2961,15 +2952,9 @@ IntWall           InteriorWall                      #Props: 10/ 35  MaxDefinable
                                ConsAssm  (ConsAssm:CompatibleSurfType = "InteriorWall")
       Area                      Area                                                          Float         -  -  -   Units: ft2                (see next line)    Error if not:  Value >= 0.01
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
-      ExtSolAbs                 ExteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      ExtThrmlAbs               ExteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      ExtVisAbs                 ExteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  0 <= Value <= 1
-      IntSolAbs                 InteriorSolarAbsorptance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntThrmlAbs               InteriorThermalAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
-      IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1
 
 --------------------
-Roof              Roof                              #Props: 16/ 41  MaxDefinable: 1000
+Roof              Roof                              #Props: 18/ 43  MaxDefinable: 1000
                                Parent(s):  Spc
                                Children:  Skylt  /  PolyLp
 
@@ -2997,6 +2982,8 @@ Roof              Roof                              #Props: 16/ 41  MaxDefinable
       CRRCInitialSRI            CRRCInitialSRI                                                Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 100
       CRRCAgedSRI               CRRCAgedSRI                                                   Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 100
       CRRCProdID                CRRCProductID                                                 String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      RoofAgedSolRefl           RoofAgedSolarReflectance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      RoofAgedThrmlEmittance    RoofAgedThermalEmittance                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
 UndgrFlr          UndergroundFloor                  #Props:  7/ 25  MaxDefinable: 1000
@@ -3037,7 +3024,7 @@ UndgrWall         UndergroundWall                   #Props:  7/ 15  MaxDefinable
       IntVisAbs                 InteriorVisibleAbsorptance                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
 
 --------------------
-Win               Window                            #Props:  3/ 17  MaxDefinable:50000
+Win               Window                            #Props:  3/ 18  MaxDefinable:50000
                                Parent(s):  ExtWall
                                Children:  PolyLp
 
@@ -3046,13 +3033,13 @@ Win               Window                            #Props:  3/ 17  MaxDefinable
                                             1:  "New"
                                             2:  "Altered"
                                             3:  "Existing"
-      FenConsRef                FenestrationConstructionReference                             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      FenConsRef                FenestrationConstructionReference                             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Compulsory input   
                                FenCons  (FenCons:FenType = "VerticalFenestration")
       Area                      Area                                                          Float         -  -  -   Units: ft2                (see next line)    Error if not:  Value >= 0.01
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
 
 --------------------
-Skylt             Skylight                          #Props:  3/ 16  MaxDefinable: 5000
+Skylt             Skylight                          #Props:  3/ 17  MaxDefinable: 5000
                                Parent(s):  Roof
                                Children:  PolyLp
 
@@ -3060,7 +3047,7 @@ Skylt             Skylight                          #Props:  3/ 16  MaxDefinable
                                       default:  -1
                                             1:  "New"
                                             2:  "Existing"
-      FenConsRef                FenestrationConstructionReference                             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
+      FenConsRef                FenestrationConstructionReference                             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Compulsory input   
                                FenCons  (FenCons:FenType = "Skylight")
       Area                      Area                                                          Float         -  -  -   Units: ft2                (see next line)    Error if not:  Value >= 0.01
                                                                                                                                                 Required when Proj:GeometryInpType = 'Simplified', else NotInput
@@ -3111,7 +3098,7 @@ CartesianPt       CartesianPoint                    #Props:  1/  1  MaxDefinable
       Coord                     Coordinate                                                    Float        #Vals:  3  Units: ft                 Required input     ,  Warning if not:  -100000 <= Value <= 100000
 
 --------------------
-ThrmlZn           ThermalZone                       #Props: 27/183  MaxDefinable: 1000
+ThrmlZn           ThermalZone                       #Props: 26/188  MaxDefinable: 1000
                                Parent(s):  Bldg
 
       Type                      Type                                                          Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
@@ -3119,7 +3106,6 @@ ThrmlZn           ThermalZone                       #Props: 27/183  MaxDefinable
                                             1:  "Conditioned"
                                             2:  "Plenum"
                                             3:  "Unconditioned"
-      Mult                      Multiplier                                                    Integer       -  -  -    -  -  -  -  -  -  -  -   Defaulted input    
       Desc                      Description                                                   String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
       SupPlenumZnRef            SupplyPlenumZoneReference                                     ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                ThrmlZn  (ThrmlZn:Type = "Plenum")
@@ -3132,15 +3118,15 @@ ThrmlZn           ThermalZone                       #Props: 27/183  MaxDefinable
       VentSysRef                VentilationSystemReference                                    ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                ZnSys  (ZnSys:SysRefStatus = "HVAC")
                                AirSys  (AirSys:SysRefStatus = "HVAC")
-      ClgDsgnSupAirTemp         CoolingDesignSupplyAirTemperature                             Float         -  -  -   Units: °F                 Optional input     Error if not:  50 <= Value <= 75,  Warning if not:  54 <= Value <= 66
-      ClgDsgnSupAirTempDiff     CoolingDesignSupplyAirTemperatureDifference                   Float         -  -  -   Units: °F                 Optional input     Error if not:  3 <= Value <= 40,  Warning if not:  Value <= 21
+      ClgDsgnSupAirTemp         CoolingDesignSupplyAirTemperature                             Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  50 <= Value <= 75,  Warning if not:  54 <= Value <= 66
+      ClgDsgnSupAirTempDiff     CoolingDesignSupplyAirTemperatureDifference                   Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  3 <= Value <= 40,  Warning if not:  Value <= 21
       ClgDsgnSizingFac          CoolingDesignSizingFactor                                     Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  1 <= Value <= 2,  Warning if not:  Value <= 1.5
-      HtgDsgnSupAirTemp         HeatingDesignSupplyAirTemperature                             Float         -  -  -   Units: °F                 Optional input     Error if not:  60 <= Value <= 120,  Warning if not:  74 <= Value <= 106
-      HtgDsgnSupAirTempDiff     HeatingDesignSupplyAirTemperatureDifference                   Float         -  -  -   Units: °F                 Optional input     
+      HtgDsgnSupAirTemp         HeatingDesignSupplyAirTemperature                             Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  60 <= Value <= 120,  Warning if not:  74 <= Value <= 106
+      HtgDsgnSupAirTempDiff     HeatingDesignSupplyAirTemperatureDifference                   Float         -  -  -   Units: âˆžF                 Optional input     
       HtgDsgnSizingFac          HeatingDesignSizingFactor                                     Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  1 <= Value <= 2,  Warning if not:  Value <= 1.5
       HtgDsgnMaxFlowFrac        HeatingDesignMaximumFlowFraction                              Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1,  Warning if not:  0.15 <= Value <= 0.51
       VentSrc                   VentilationSource                                             Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
-                                      default:  -1
+                                      default:  0
                                             1:  "None"
                                             2:  "Forced"
       VentCtrlMthd              VentilationControlMethod                                      Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -3174,7 +3160,7 @@ ThrmlZn           ThermalZone                       #Props: 27/183  MaxDefinable
       ExhFlowSim                ExhaustFlowSimulated                                          Float         -  -  -   Units: cfm                Optional input     
 
 --------------------
-AirSys            AirSystem                         #Props: 33/119  MaxDefinable: 1000
+AirSys            AirSystem                         #Props: 33/129  MaxDefinable: 1000
                                Parent(s):  Bldg
                                Children:  AirSeg  /  TrmlUnit  /  OACtrl
 
@@ -3253,17 +3239,17 @@ AirSys            AirSystem                         #Props: 33/119  MaxDefinable
                                       default:  -1
                                             1:  "SingleMaximum"
                                             2:  "DualMaximum"
-      Cnt                       Count                                                         Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  1 <= Value <= 10
+      Cnt                       Count                                                         Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  Value >= 1,  Warning if not:  Value <= 10
       FanPos                    FanPosition                                                   Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
                                       default:  -1
                                             1:  "DrawThrough"
                                             2:  "BlowThrough"
-      ClgDsgnSupAirTemp         CoolingDesignSupplyAirTemperature                             Float         -  -  -   Units: °F                 Optional input     Error if not:  40 <= Value <= 85,  Warning if not:  55 <= Value <= 70
-      HtgDsgnSupAirTemp         HeatingDesignSupplyAirTemperature                             Float         -  -  -   Units: °F                 Optional input     Error if not:  60 <= Value <= 120,  Warning if not:  70 <= Value <= 110
+      ClgDsgnSupAirTemp         CoolingDesignSupplyAirTemperature                             Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  40 <= Value <= 85,  Warning if not:  55 <= Value <= 70
+      HtgDsgnSupAirTemp         HeatingDesignSupplyAirTemperature                             Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  60 <= Value <= 120,  Warning if not:  70 <= Value <= 110
       DsgnAirFlowMin            DesignAirFlowMinimum                                          Float         -  -  -   Units: cfm                Optional input     
-      DsgnPrehtTemp             DesignPreheatTemperature                                      Float         -  -  -   Units: °F                 Optional input     
+      DsgnPrehtTemp             DesignPreheatTemperature                                      Float         -  -  -   Units: âˆžF                 Optional input     
       DsgnPrehtHumidityRat      DesignPreheatHumidityRatio                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
-      DsgnPreclTemp             DesignPrecoolTemperature                                      Float         -  -  -   Units: °F                 Optional input     
+      DsgnPreclTemp             DesignPrecoolTemperature                                      Float         -  -  -   Units: âˆžF                 Optional input     
       DsgnPreclHumidityRat      DesignPrecoolHumidityRatio                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       SizingOption              SizingOption                                                  Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  -1
@@ -3281,61 +3267,67 @@ AirSys            AirSystem                         #Props: 33/119  MaxDefinable
       HtgDsgnHumidityRat        HeatingDesignHumidityRatio                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       ClgCtrl                   CoolingControl                                                Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                When:  AirSys:Type = "PVAV"
-                                      default:  2
-                                            1:  "Fixed"
-                                            2:  "WarmestResetFlowFirst"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
+                                      default:  5
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
+                                            5:  "WarmestResetFlowFirst"
+                                            6:  "WarmestResetTemperatureFirst"
+                                            7:  "WarmestReset"
                                When:  AirSys:Type = "VAV"
-                                      default:  1
-                                            1:  "Fixed"
-                                            2:  "WarmestResetFlowFirst"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
+                                      default:  5
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
+                                            5:  "WarmestResetFlowFirst"
+                                            6:  "WarmestResetTemperatureFirst"
+                                            7:  "WarmestReset"
                                When:  AirSys:Type = "SZAC"
-                                      default:  5
-                                            1:  "Fixed"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
-                                            5:  "NoSATControl"
+                                      default:  1
+                                            1:  "NoSATControl"
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
                                When:  AirSys:Type = "SZHP"
-                                      default:  5
-                                            1:  "Fixed"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
-                                            5:  "NoSATControl"
+                                      default:  1
+                                            1:  "NoSATControl"
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
                                When:  AirSys:Type = "SZVAVAC"
-                                      default:  5
-                                            1:  "Fixed"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
-                                            5:  "NoSATControl"
+                                      default:  1
+                                            1:  "NoSATControl"
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
                                When:  AirSys:Type = "SZVAVHP"
-                                      default:  5
-                                            1:  "Fixed"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
-                                            5:  "NoSATControl"
+                                      default:  1
+                                            1:  "NoSATControl"
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
                                When:  AirSys:Type = "HV"
-                                      default:  5
-                                            1:  "Fixed"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
-                                            5:  "NoSATControl"
+                                      default:  1
+                                            1:  "NoSATControl"
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
                                else:
-                                      default:  5
-                                            1:  "Fixed"
-                                            2:  "WarmestResetFlowFirst"
-                                            3:  "OutsideAirReset"
-                                            4:  "Scheduled"
-                                            5:  "NoSATControl"
-      ClgFixedSupTemp           CoolingFixedSupplyTemperature                                 Float         -  -  -   Units: °F                 Optional input     
+                                      default:  1
+                                            1:  "NoSATControl"
+                                            2:  "Fixed"
+                                            3:  "Scheduled"
+                                            4:  "OutsideAirReset"
+                                            5:  "WarmestResetFlowFirst"
+                                            6:  "WarmestResetTemperatureFirst"
+                                            7:  "WarmestReset"
+      ClgFixedSupTemp           CoolingFixedSupplyTemperature                                 Float         -  -  -   Units: âˆžF                 Optional input     
       ClgSetptSchRef            CoolingSetpointScheduleReference                              ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Temperature")
-      ClRstSupHi                CoolResetSupplyHigh                                           Float         -  -  -   Units: °F                 Optional input     Error if not:  50 <= Value <= 80,  Warning if not:  55 <= Value <= 65
-      ClRstSupLow               CoolResetSupplyLow                                            Float         -  -  -   Units: °F                 Optional input     Error if not:  45 <= Value <= 75,  Warning if not:  50 <= Value <= 60
-      ClRstOutdrLow             CoolResetOutdoorLow                                           Float         -  -  -   Units: °F                 Optional input     
-      ClRstOutdrHi              CoolResetOutdoorHigh                                          Float         -  -  -   Units: °F                 Optional input     
+      ClRstSupHi                CoolResetSupplyHigh                                           Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  50 <= Value <= 80,  Warning if not:  55 <= Value <= 65
+      ClRstSupLow               CoolResetSupplyLow                                            Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  45 <= Value <= 75,  Warning if not:  50 <= Value <= 60
+      ClRstOutdrLow             CoolResetOutdoorLow                                           Float         -  -  -   Units: âˆžF                 Optional input     
+      ClRstOutdrHi              CoolResetOutdoorHigh                                          Float         -  -  -   Units: âˆžF                 Optional input     
       ExhSysType                ExhaustSystemType                                             Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  -1
                                             1:  "General"
@@ -3381,7 +3373,7 @@ AirSys            AirSystem                         #Props: 33/119  MaxDefinable
                                             4:  "None"
 
 --------------------
-ZnSys             ZoneSystem                        #Props: 13/ 76  MaxDefinable: 1000
+ZnSys             ZoneSystem                        #Props: 13/ 82  MaxDefinable: 1000
                                Parent(s):  Bldg
                                Children:  CoilClg  /  CoilHtg  /  Fan
 
@@ -3406,11 +3398,11 @@ ZnSys             ZoneSystem                        #Props: 13/ 76  MaxDefinable
                                             1:  "Continuous"
                                             2:  "Cycling"
       ClgCtrl                   CoolingControl                                                Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
-                                      default:  5
+                                      default:  1
                                             1:  "NoSATControl"
-      Cnt                       Count                                                         Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  1 <= Value <= 30
-      ClgDsgnSupAirTemp         CoolingDesignSupplyAirTemperature                             Float         -  -  -   Units: °F                 Optional input     
-      HtgDsgnSupAirTemp         HeatingDesignSupplyAirTemperature                             Float         -  -  -   Units: °F                 Optional input     
+      Cnt                       Count                                                         Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  Value >= 1,  Warning if not:  Value <= 10
+      ClgDsgnSupAirTemp         CoolingDesignSupplyAirTemperature                             Float         -  -  -   Units: âˆžF                 Optional input     
+      HtgDsgnSupAirTemp         HeatingDesignSupplyAirTemperature                             Float         -  -  -   Units: âˆžF                 Optional input     
       ExhSysType                ExhaustSystemType                                             Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  -1
                                             1:  "General"
@@ -3454,7 +3446,7 @@ ZnSys             ZoneSystem                        #Props: 13/ 76  MaxDefinable
                                             2:  "None"
 
 --------------------
-AirSeg            AirSegment                        #Props:  2/ 17  MaxDefinable:10000
+AirSeg            AirSegment                        #Props:  2/ 22  MaxDefinable:10000
                                Parent(s):  AirSys
                                Children:  EvapClr  /  CoilClg  /  CoilHtg  /  Fan
 
@@ -3473,7 +3465,7 @@ AirSeg            AirSegment                        #Props:  2/ 17  MaxDefinable
                                             4:  "PlenumZones"
 
 --------------------
-EvapClr           EvaporativeCooler                 #Props:  8/ 12  MaxDefinable: 1000
+EvapClr           EvaporativeCooler                 #Props:  8/ 13  MaxDefinable: 1000
                                Parent(s):  AirSeg
 
       Type                      Type                                                          Enumeration   -  -  -    -  -  -  -  -  -  -  -   Compulsory input   
@@ -3493,7 +3485,7 @@ EvapClr           EvaporativeCooler                 #Props:  8/ 12  MaxDefinable
                                             2:  "Outdoor"
 
 --------------------
-TrmlUnit          TerminalUnit                      #Props: 14/ 47  MaxDefinable:10000
+TrmlUnit          TerminalUnit                      #Props: 14/ 48  MaxDefinable:10000
                                Parent(s):  AirSys
                                Children:  CoilHtg  /  Fan
 
@@ -3531,7 +3523,7 @@ TrmlUnit          TerminalUnit                      #Props: 14/ 47  MaxDefinable
       ParallelBoxFanFlowFrac    ParallelBoxFanFlowFraction                                    Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     ,  Warning if not:  0.2 <= Value <= 0.5
 
 --------------------
-CoilClg           CoilCooling                       #Props: 15/ 58  MaxDefinable:10000
+CoilClg           CoilCooling                       #Props: 15/ 59  MaxDefinable:10000
                                Parent(s):  AirSeg  /  ZnSys
 
       Type                      Type                                                          Enumeration   -  -  -    -  -  -  -  -  -  -  -   Compulsory input   
@@ -3547,12 +3539,12 @@ CoilClg           CoilCooling                       #Props: 15/ 58  MaxDefinable
                                FluidSeg  (FluidSeg:Type = "SecondaryReturn")
       FluidFlowRtDsgn           FluidFlowRateDesign                                           Float         -  -  -   Units: gpm                Optional input     
       NumClgStages              NumberCoolingStages                                           Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  1 <= Value <= 2
-      CapTotGrossRtd            CapacityTotalGrossRated                                       Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 0,  Warning if not:  300 <= Value <= 1.2e+006
-      CapTotNetRtd              CapacityTotalNetRated                                         Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 0,  Warning if not:  300 <= Value <= 1.2e+006
+      CapTotGrossRtd            CapacityTotalGrossRated                                       Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 1,  Warning if not:  300 <= Value <= 1.2e+006
+      CapTotNetRtd              CapacityTotalNetRated                                         Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 1,  Warning if not:  300 <= Value <= 1.2e+006
       CapTotRtdStageFrac        CapacityTotalRatedStageFraction                               Float        #Vals:  2  Units: frac               Optional input     Error if not:  0 <= Value <= 1,  Warning if not:  Value >= 0.2
       DXSEER                    DXSEER                                                        Float         -  -  -   Units: Btu/h-W            Optional input     ,  Warning if not:  7 <= Value <= 20
       DXEER                     DXEER                                                         Float         -  -  -   Units: Btu/h-W            Optional input     ,  Warning if not:  7 <= Value <= 18
-      DXCrankcaseCtrlTemp       DXCrankcaseControlTemperature                                 Float         -  -  -   Units: °F                 Optional input     
+      DXCrankcaseCtrlTemp       DXCrankcaseControlTemperature                                 Float         -  -  -   Units: âˆžF                 Optional input     
       DXCrankcaseHtrCap         DXCrankcaseHeatCapacity                                       Float         -  -  -   Units: Btu/h              Optional input     
       MinHotGasRat              MinimumHotGasRatio                                            Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       CndsrType                 CondenserType                                                 Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -3562,7 +3554,7 @@ CoilClg           CoilCooling                       #Props: 15/ 58  MaxDefinable
       AuxPwr                    AuxilliaryPower                                               Float         -  -  -   Units: W                  Optional input     
 
 --------------------
-CoilHtg           CoilHeating                       #Props: 24/ 63  MaxDefinable:10000
+CoilHtg           CoilHeating                       #Props: 23/ 65  MaxDefinable:10000
                                Parent(s):  AirSeg  /  ZnSys  /  TrmlUnit
 
       Type                      Type                                                          Enumeration   -  -  -    -  -  -  -  -  -  -  -   Compulsory input   
@@ -3599,9 +3591,8 @@ CoilHtg           CoilHeating                       #Props: 24/ 63  MaxDefinable
                                FluidSeg  (FluidSeg:Type = "PrimaryReturn")
                                FluidSeg  (FluidSeg:Type = "SecondaryReturn")
       FluidFlowRtDsgn           FluidFlowRateDesign                                           Float         -  -  -   Units: gpm                Optional input     
-      CapTotGrossRtd            CapacityTotalGrossRated                                       Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 0,  Warning if not:  300 <= Value <= 1.2e+006
-      CapTotNetRtd              CapacityTotalNetRated                                         Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 0,  Warning if not:  300 <= Value <= 1.2e+006
-      CapTotRtdStageFrac        CapacityTotalRatedStageFraction                               Float        #Vals:  2  Units: frac               Optional input     Error if not:  0 <= Value <= 1,  Warning if not:  Value >= 0.2
+      CapTotGrossRtd            CapacityTotalGrossRated                                       Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 1,  Warning if not:  300 <= Value <= 1.2e+006
+      CapTotNetRtd              CapacityTotalNetRated                                         Float         -  -  -   Units: Btu/h              Optional input     Error if not:  Value >= 1,  Warning if not:  300 <= Value <= 1.2e+006
       FurnAFUE                  FurnaceAFUE                                                   Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  Value <= 1,  Warning if not:  0.7 <= Value <= 0.98
       FurnThrmlEff              FurnaceThermalEfficiency                                      Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  Value <= 1,  Warning if not:  0.7 <= Value <= 0.98
       FurnIgnType               FurnaceIgnitionType                                           Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
@@ -3617,10 +3608,10 @@ CoilHtg           CoilHeating                       #Props: 24/ 63  MaxDefinable
       HtPumpCOP                 HeatPumpCOP                                                   Float         -  -  -   Units: W/W                Optional input     Error if not:  Value <= 6,  Warning if not:  2 <= Value <= 4
       HtPumpSuppCoilHtgRef      HeatPumpSupplementalCoilHeatingReference                      ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                CoilHtg
-      HtPumpCprsrLockoutTemp    HeatPumpCompressorLockoutTemperature                          Float         -  -  -   Units: °F                 Optional input     Error if not:  Value <= 40,  Warning if not:  17 <= Value <= 32
-      HtPumpSuppTemp            HeatPumpSupplementalTemperature                               Float         -  -  -   Units: °F                 Optional input     Error if not:  Value <= 40,  Warning if not:  Value >= 32
+      HtPumpCprsrLockoutTemp    HeatPumpCompressorLockoutTemperature                          Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  Value <= 40,  Warning if not:  10 <= Value <= 35
+      HtPumpSuppTemp            HeatPumpSupplementalTemperature                               Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  Value <= 40,  Warning if not:  Value >= 32
       HtPumpCrankcaseHtrCap     HeatPumpCrankcaseHeatCapacity                                 Float         -  -  -   Units: Btu/h              Optional input     
-      HtPumpCrankcaseCtrlTemp   HeatPumpCrankcaseControlTemperature                           Float         -  -  -   Units: °F                 Optional input     ,  Warning if not:  32 <= Value <= 50
+      HtPumpCrankcaseCtrlTemp   HeatPumpCrankcaseControlTemperature                           Float         -  -  -   Units: âˆžF                 Optional input     ,  Warning if not:  32 <= Value <= 50
       HtPumpDefHtSrc            HeatPumpDefrostHeatSource                                     Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  -1
                                             1:  "Electric"
@@ -3675,8 +3666,8 @@ Fan               Fan                               #Props: 14/ 42  MaxDefinable
       FlowMin                   FlowMinimum                                                   Float         -  -  -   Units: cfm                Defaulted input    
       FlowEff                   FlowEfficiency                                                Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0.35 <= Value <= 1,  Warning if not:  0.4 <= Value <= 0.7
       TotStaticPress            TotalStaticPressure                                           Float         -  -  -   Units: inches H2O         Optional input     Error if not:  Value >= 1e-005,  Warning if not:  0.1 <= Value <= 6
-      MtrBHP                    MotorBHP                                                      Float         -  -  -   Units: hp                 Optional input     Error if not:  Value >= 0,  Warning if not:  0.08333 <= Value <= 200
-      MtrHP                     MotorHP                                                       Float         -  -  -   Units: hp                 Required input     Error if not:  Value >= 0,  Warning if not:  0.083 <= Value <= 200
+      MtrBHP                    MotorBHP                                                      Float         -  -  -   Units: hp                 Optional input     Error if not:  Value >= 0,  Warning if not:  0.05 <= Value <= 200
+      MtrHP                     MotorHP                                                       Float         -  -  -   Units: hp                 Required input     Error if not:  Value >= 0,  Warning if not:  0.08333 <= Value <= 200
       MtrType                   MotorType                                                     Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  -1
                                             1:  "Open"
@@ -3689,7 +3680,7 @@ Fan               Fan                               #Props: 14/ 42  MaxDefinable
                                             2:  "NotInAirStream"
 
 --------------------
-OACtrl            OutsideAirControl                 #Props:  6/ 24  MaxDefinable:10000
+OACtrl            OutsideAirControl                 #Props:  6/ 25  MaxDefinable:10000
                                Parent(s):  AirSys
 
       EconoCtrlMthd             EconomizerControlMethod                                       Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
@@ -3703,8 +3694,8 @@ OACtrl            OutsideAirControl                 #Props:  6/ 24  MaxDefinable
                                       default:  -1
                                             1:  "NonIntegrated"
                                             2:  "Integrated"
-      EconoHiTempLockout        EconomizerHighTemperatureLockout                              Float         -  -  -   Units: °F                 Optional input     ,  Warning if not:  55 <= Value <= 85
-      EconoLowTempLockout       EconomizerLowTemperatureLockout                               Float         -  -  -   Units: °F                 Optional input     
+      EconoHiTempLockout        EconomizerHighTemperatureLockout                              Float         -  -  -   Units: âˆžF                 Optional input     ,  Warning if not:  55 <= Value <= 85
+      EconoLowTempLockout       EconomizerLowTemperatureLockout                               Float         -  -  -   Units: âˆžF                 Optional input     
       AirSegSupRef              AirSegmentSupplyReference                                     ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Required input     
                                AirSeg  (AirSeg:Type = "Supply")
       AirSegRetRef              AirSegmentReturnReference                                     ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Required input     
@@ -3712,7 +3703,7 @@ OACtrl            OutsideAirControl                 #Props:  6/ 24  MaxDefinable
                                AirSeg  (AirSeg:Type = "Relief")
 
 --------------------
-FluidSys          FluidSystem                       #Props: 22/ 71  MaxDefinable: 1000
+FluidSys          FluidSystem                       #Props: 22/ 72  MaxDefinable: 1000
                                Children:  FluidSeg  /  Chlr  /  Blr  /  HtRej  /  WtrHtr
 
       Status                    Status                                                        Enumeration   -  -  -    -  -  -  -  -  -  -  -   Required input     
@@ -3728,9 +3719,9 @@ FluidSys          FluidSystem                       #Props: 22/ 71  MaxDefinable
                                             3:  "HotWater"
                                             4:  "ServiceHotWater"
       Desc                      Description                                                   String        -  -  -    -  -  -  -  -  -  -  -   Optional input     
-      DsgnSupWtrTemp            DesignSupplyWaterTemperature                                  Float         -  -  -   Units: °F                 Optional input     Error if not:  35 <= Value <= 250
-      HtgDsgnSupWtrTemp         HeatingDesignSupplyWaterTemperature                           Float         -  -  -   Units: °F                 Optional input     Error if not:  35 <= Value <= 250
-      DsgnSupWtrDelT            DesignSupplyWaterTemperatureDeltaT                            Float         -  -  -   Units: °F                 Optional input     Error if not:  Value >= 1,  Warning if not:  5 <= Value <= 90
+      DsgnSupWtrTemp            DesignSupplyWaterTemperature                                  Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  35 <= Value <= 250
+      HtgDsgnSupWtrTemp         HeatingDesignSupplyWaterTemperature                           Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  35 <= Value <= 250
+      DsgnSupWtrDelT            DesignSupplyWaterTemperatureDeltaT                            Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  Value >= 1,  Warning if not:  5 <= Value <= 90
       CtrlType                  ControlType                                                   Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  -1
                                             1:  "DDC"
@@ -3743,19 +3734,19 @@ FluidSys          FluidSystem                       #Props: 22/ 71  MaxDefinable
                                             4:  "WetBulbReset"
                                             5:  "FixedDualSetpoint"
                                             6:  "ScheduledDualSetpoint"
-      FixedSupTemp              FixedSupplyTemperature                                        Float         -  -  -   Units: °F                 Optional input     
+      FixedSupTemp              FixedSupplyTemperature                                        Float         -  -  -   Units: âˆžF                 Optional input     
       TempSetptSchRef           TemperatureSetpointScheduleReference                          ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Temperature")
-      HtgFixedSupTemp           HeatingFixedSupplyTemperature                                 Float         -  -  -   Units: °F                 Optional input     
+      HtgFixedSupTemp           HeatingFixedSupplyTemperature                                 Float         -  -  -   Units: âˆžF                 Optional input     
       HtgTempSetptSchRef        HeatingTemperatureSetpointScheduleReference                   ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                Sch  (Sch:Type = "Temperature")
-      RstSupHi                  ResetSupplyHigh                                               Float         -  -  -   Units: °F                 Optional input     Error if not:  35 <= Value <= 250
-      RstSupLow                 ResetSupplyLow                                                Float         -  -  -   Units: °F                 Optional input     Error if not:  35 <= Value <= 250
-      RstOutdrHi                ResetOutdoorHigh                                              Float         -  -  -   Units: °F                 Optional input     Error if not:  0 <= Value <= 120,  Warning if not:  Value <= 70
-      RstOutdrLow               ResetOutdoorLow                                               Float         -  -  -   Units: °F                 Optional input     Error if not:  0 <= Value <= 120,  Warning if not:  Value >= 70
-      WetBulbApproach           WetBulbApproach                                               Float         -  -  -   Units: °F                 Optional input     Error if not:  0 <= Value <= 20,  Warning if not:  Value >= 5
-      ClgSupTemp                CoolingSupplyTemperature                                      Float         -  -  -   Units: °F                 Optional input     
-      HtgSupTemp                HeatingSupplyTemperature                                      Float         -  -  -   Units: °F                 Optional input     
+      RstSupHi                  ResetSupplyHigh                                               Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  35 <= Value <= 250
+      RstSupLow                 ResetSupplyLow                                                Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  35 <= Value <= 250
+      RstOutdrHi                ResetOutdoorHigh                                              Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  0 <= Value <= 120,  Warning if not:  Value <= 70
+      RstOutdrLow               ResetOutdoorLow                                               Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  0 <= Value <= 120,  Warning if not:  Value >= 70
+      WetBulbApproach           WetBulbApproach                                               Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  0 <= Value <= 20,  Warning if not:  Value >= 5
+      ClgSupTemp                CoolingSupplyTemperature                                      Float         -  -  -   Units: âˆžF                 Optional input     
+      HtgSupTemp                HeatingSupplyTemperature                                      Float         -  -  -   Units: âˆžF                 Optional input     
       EvapFluidSegInRef         EvaporatorFluidSegmentInReference                             ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                FluidSeg  (FluidSeg:Type = "PrimaryReturn")
                                FluidSeg  (FluidSeg:Type = 6)
@@ -3763,7 +3754,7 @@ FluidSys          FluidSystem                       #Props: 22/ 71  MaxDefinable
       AnnualSolFrac             AnnualSolarFraction                                           Float         -  -  -   Units: frac               Optional input     Error if not:  0 <= Value <= 1
 
 --------------------
-FluidSeg          FluidSegment                      #Props:  3/ 24  MaxDefinable:10000
+FluidSeg          FluidSegment                      #Props:  3/ 25  MaxDefinable:10000
                                Parent(s):  FluidSys
                                Children:  Pump
 
@@ -3783,7 +3774,7 @@ FluidSeg          FluidSegment                      #Props:  3/ 24  MaxDefinable
                                FluidSeg
 
 --------------------
-Chlr              Chiller                           #Props: 24/ 42  MaxDefinable:  100
+Chlr              Chiller                           #Props: 24/ 43  MaxDefinable:  100
                                Parent(s):  FluidSys
                                Children:  Pump
 
@@ -3817,10 +3808,10 @@ Chlr              Chiller                           #Props: 24/ 42  MaxDefinable
                                FluidSeg  (FluidSeg:Type = "PrimarySupply")
                                FluidSeg  (FluidSeg:Type = 6)
       EvapHasBypass             EvaporatorHasBypass                                           Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
-      EntTempDsgn               EnteringTemperatureDesign                                     Float         -  -  -   Units: °F                 Optional input     Error if not:  35 <= Value <= 85,  Warning if not:  45 <= Value <= 70
-      EntTempRtd                EnteringTemperatureRated                                      Float         -  -  -   Units: °F                 Optional input     
-      LvgTempDsgn               LeavingTemperatureDesign                                      Float         -  -  -   Units: °F                 Optional input     Error if not:  35 <= Value <= 70,  Warning if not:  42 <= Value <= 50
-      LvgTempRtd                LeavingTemperatureRated                                       Float         -  -  -   Units: °F                 Optional input     
+      EntTempDsgn               EnteringTemperatureDesign                                     Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  35 <= Value <= 85,  Warning if not:  45 <= Value <= 70
+      EntTempRtd                EnteringTemperatureRated                                      Float         -  -  -   Units: âˆžF                 Optional input     
+      LvgTempDsgn               LeavingTemperatureDesign                                      Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  35 <= Value <= 70,  Warning if not:  42 <= Value <= 50
+      LvgTempRtd                LeavingTemperatureRated                                       Float         -  -  -   Units: âˆžF                 Optional input     
       CapRtd                    CapacityRated                                                 Float         -  -  -   Units: Btu/h              Required input     Error if not:  Value >= 0,  Warning if not:  Value >= 60000
       CndsrPwrRtd               CondenserPowerRated                                           Float         -  -  -   Units: kW                 Optional input     
       KwPerTon                  KwPerTon                                                      Float         -  -  -   Units: kW/ton             Optional input     Error if not:  0 <= Value <= 2,  Warning if not:  0.35 <= Value <= 0.8
@@ -3834,7 +3825,7 @@ Chlr              Chiller                           #Props: 24/ 42  MaxDefinable
       WtrFlowCap                WaterFlowCapacity                                             Float         -  -  -   Units: gpm                Optional input     Error if not:  Value >= 0
 
 --------------------
-Blr               Boiler                            #Props: 21/ 29  MaxDefinable:  100
+Blr               Boiler                            #Props: 21/ 30  MaxDefinable:  100
                                Parent(s):  FluidSys
                                Children:  Pump
 
@@ -3863,8 +3854,8 @@ Blr               Boiler                            #Props: 21/ 29  MaxDefinable
                                FluidSeg  (FluidSeg:Type = "PrimarySupply")
                                FluidSeg  (FluidSeg:Type = 6)
       HasBypass                 HasBypass                                                     Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
-      EntTempDsgn               EnteringTemperatureDesign                                     Float         -  -  -   Units: °F                 Defaulted input    Error if not:  32 <= Value <= 210,  Warning if not:  75 <= Value <= 150
-      LvgTempDsgn               LeavingTemperatureDesign                                      Float         -  -  -   Units: °F                 Defaulted input    Error if not:  50 <= Value <= 400,  Warning if not:  90 <= Value <= 300
+      EntTempDsgn               EnteringTemperatureDesign                                     Float         -  -  -   Units: âˆžF                 Defaulted input    Error if not:  32 <= Value <= 210,  Warning if not:  75 <= Value <= 150
+      LvgTempDsgn               LeavingTemperatureDesign                                      Float         -  -  -   Units: âˆžF                 Defaulted input    Error if not:  50 <= Value <= 400,  Warning if not:  90 <= Value <= 300
       CapRtd                    CapacityRated                                                 Float         -  -  -   Units: Btu/h              Required input     Error if not:  Value >= 0,  Warning if not:  Value >= 10000
       AFUE                      AFUE                                                          Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1,  Warning if not:  0.6 <= Value <= 0.98
       CombEff                   CombustionEfficiency                                          Float         -  -  -   Units: frac               Optional input     Error if not:  0 <= Value <= 1,  Warning if not:  0.6 <= Value <= 0.98
@@ -3881,7 +3872,7 @@ Blr               Boiler                            #Props: 21/ 29  MaxDefinable
       WtrFlowCap                WaterFlowCapacity                                             Float         -  -  -   Units: gpm                Optional input     Error if not:  Value >= 0
 
 --------------------
-HtRej             HeatRejection                     #Props: 18/ 29  MaxDefinable:  100
+HtRej             HeatRejection                     #Props: 18/ 30  MaxDefinable:  100
                                Parent(s):  FluidSys
                                Children:  Pump
 
@@ -3912,9 +3903,9 @@ HtRej             HeatRejection                     #Props: 18/ 29  MaxDefinable
       FluidSegOutRef            FluidSegmentOutReference                                      ObjectRef     -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                FluidSeg  (FluidSeg:Type = "PrimarySupply")
                                FluidSeg  (FluidSeg:Type = 6)
-      EntTempDsgn               EnteringTemperatureDesign                                     Float         -  -  -   Units: °F                 Optional input     Error if not:  32 <= Value <= 212,  Warning if not:  60 <= Value <= 100
-      DsgnWBTemp                DesignWBTemperature                                           Float         -  -  -   Units: °F                 Optional input     
-      LvgTempDsgn               LeavingTemperatureDesign                                      Float         -  -  -   Units: °F                 Optional input     Error if not:  32 <= Value <= 212,  Warning if not:  60 <= Value <= 100
+      EntTempDsgn               EnteringTemperatureDesign                                     Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  32 <= Value <= 212,  Warning if not:  60 <= Value <= 100
+      DsgnWBTemp                DesignWBTemperature                                           Float         -  -  -   Units: âˆžF                 Optional input     
+      LvgTempDsgn               LeavingTemperatureDesign                                      Float         -  -  -   Units: âˆžF                 Optional input     Error if not:  32 <= Value <= 212,  Warning if not:  60 <= Value <= 100
       CellCnt                   CellCount                                                     Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  Value >= 1,  Warning if not:  1 <= Value <= 6
       CapRtd                    CapacityRated                                                 Float         -  -  -   Units: Btu/h              Required input     Error if not:  Value >= 0,  Warning if not:  Value >= 60000
       TotFanHP                  TotalFanHP                                                    Float         -  -  -   Units: hp                 Required input     
@@ -4004,12 +3995,12 @@ Pump              Pump                              #Props: 12/ 27  MaxDefinable
                                             2:  "PowerPerUnitFlow"
       Cnt                       Count                                                         Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       FlowCap                   FlowCapacity                                                  Float         -  -  -   Units: gpm                Required input     
-      TotHd                     TotalHead                                                     Float         -  -  -   Units: ft H20             Required input     Error if not:  Value >= 0
+      TotHd                     TotalHead                                                     Float         -  -  -   Units: ft H20             Required input     Error if not:  Value >= 0,  Warning if not:  10 <= Value <= 150
       FlowMin                   FlowMinimum                                                   Float         -  -  -   Units: gpm                Optional input     
       MinSpdRat                 MinimumSpeedRatio                                             Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     
       MtrEff                    MotorEfficiency                                               Float         -  -  -    -  -  -  -  -  -  -  -   Required input     Error if not:  Value >= 0.4,  Warning if not:  0.6 <= Value <= 0.98
       ImpellerEff               ImpellerEfficiency                                            Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 1,  Warning if not:  0.2 <= Value <= 0.9
-      MtrHP                     MotorHP                                                       Float         -  -  -   Units: hp                 Required input     Error if not:  Value >= 0,  Warning if not:  0.083 <= Value <= 200
+      MtrHP                     MotorHP                                                       Float         -  -  -   Units: hp                 Required input     Error if not:  Value >= 0,  Warning if not:  0.08333 <= Value <= 200
 
 --------------------
 RecircDHWSys      RecirculationDHWSystem            #Props: 20/ 26  MaxDefinable:10000
@@ -4099,10 +4090,10 @@ RecircWtrHtr      RecirculationWaterHeater          #Props: 12/ 23  MaxDefinable
                                             6:  "Small Storage"
                                             5:  "Small Tankless"
       InpRating                 InputRating                                                   Integer       -  -  -   Units: Btu/hr             Optional input     
-      EngyFac                   EnergyFactor                                                  Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 0.99,  Warning if not:  0.25 <= Value <= 0.98
+      EngyFac                   EnergyFactor                                                  Float         -  -  -    -  -  -  -  -  -  -  -   Optional input     Error if not:  0 <= Value <= 3
       TankVol                   TankVolume                                                    Float         -  -  -   Units: gal                Optional input     
-      TankIntInsR               TankInteriorInsulationRValue                                  Float         -  -  -   Units: °F-ft2-h/Btu       Optional input     
-      TankExtInsR               TankExteriorInsulationRValue                                  Float         -  -  -   Units: °F-ft2-h/Btu       Optional input     
+      TankIntInsR               TankInteriorInsulationRValue                                  Float         -  -  -   Units: âˆžF-ft2-h/Btu       Optional input     
+      TankExtInsR               TankExteriorInsulationRValue                                  Float         -  -  -   Units: âˆžF-ft2-h/Btu       Optional input     
       AmbCond                   AmbientCondition                                              Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     
                                       default:  1
                                             1:  "Unconditioned"
@@ -4117,11 +4108,11 @@ DesignDay         DesignDay                         #Props:  9/  9  MaxDefinable
                                       default:  1
                                             1:  "Cooling"
                                             2:  "Heating"
-      DsgnDB                    DesignDryBulb                                                 Float         -  -  -   Units: °F                 Required input     
-      DsgnDBRng                 DesignDryBulbRange                                            Float         -  -  -   Units: °F                 Required input     
-      CoinWB                    CoincidentWetBulb                                             Float         -  -  -   Units: °F                 Required input     
+      DsgnDB                    DesignDryBulb                                                 Float         -  -  -   Units: âˆžF                 Required input     
+      DsgnDBRng                 DesignDryBulbRange                                            Float         -  -  -   Units: âˆžF                 Required input     
+      CoinWB                    CoincidentWetBulb                                             Float         -  -  -   Units: âˆžF                 Required input     
       WindSpd                   WindSpeed                                                     Float         -  -  -   Units: mph                Required input     
-      WindDirection             WindDirection                                                 Float         -  -  -   Units: °F                 Required input     
+      WindDirection             WindDirection                                                 Float         -  -  -   Units: âˆžF                 Required input     
       SkyClear                  SkyClearness                                                  Float         -  -  -    -  -  -  -  -  -  -  -   Required input     
       Month                     Month                                                         Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     
       Day                       MonthDay                                                      Integer       -  -  -    -  -  -  -  -  -  -  -   Required input     
