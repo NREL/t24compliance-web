@@ -97,7 +97,6 @@ class Schedule
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -149,7 +148,6 @@ class Schedule
       end
     end
   end
-
   
   def type_enums
     [

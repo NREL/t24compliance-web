@@ -146,7 +146,6 @@ class Building
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -198,7 +197,6 @@ class Building
       end
     end
   end
-
   
   def function_classification_method_enums
     [

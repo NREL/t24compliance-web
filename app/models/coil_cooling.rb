@@ -120,7 +120,6 @@ class CoilCooling
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -172,7 +171,6 @@ class CoilCooling
       end
     end
   end
-
   
   def type_enums
     [

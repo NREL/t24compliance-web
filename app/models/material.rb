@@ -117,7 +117,6 @@ class Material
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -169,7 +168,6 @@ class Material
       end
     end
   end
-
   
   def code_category_enums
     [

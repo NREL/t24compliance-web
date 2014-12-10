@@ -112,7 +112,6 @@ class InteriorWall
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -164,7 +163,6 @@ class InteriorWall
       end
     end
   end
-
   
   def status_enums
     [

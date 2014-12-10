@@ -124,7 +124,6 @@ class Roof
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -176,7 +175,6 @@ class Roof
       end
     end
   end
-
   
   def status_enums
     [

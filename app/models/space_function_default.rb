@@ -223,7 +223,6 @@ class SpaceFunctionDefault
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -275,7 +274,6 @@ class SpaceFunctionDefault
       end
     end
   end
-
   
   def space_function_enums
     [

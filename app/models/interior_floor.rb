@@ -102,7 +102,6 @@ class InteriorFloor
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -154,5 +153,4 @@ class InteriorFloor
       end
     end
   end
-
   end

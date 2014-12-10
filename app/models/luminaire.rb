@@ -99,7 +99,6 @@ class Luminaire
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -151,7 +150,6 @@ class Luminaire
       end
     end
   end
-
   
   def fixture_type_enums
     [

@@ -1,5 +1,7 @@
 # this is the workhorse to run the docker container.
-# This method is run in the background as a delayed job task
+# This method is run in the background as a delayed job task. If you change this file, then you will need to
+# restart SideKiq
+
 class RunSimulation
   include Sidekiq::Worker
   sidekiq_options :retry => false, :backtrace => true
@@ -70,9 +72,9 @@ class RunSimulation
       elsif f =~ /CbeccComWrapper.json/
         # Save the state based on the CbeccComWrapper.json file that is persisted
         j = MultiJson.load(File.read(f), symbolize_keys: true) if File.exist?(f)
-        logger.info j
+        logger.info "pyCBECC responded with: #{j}"
 
-        simulation.cbecc_code = j.keys.first
+        simulation.cbecc_code = j.keys.first.to_s.to_i
         simulation.cbecc_code_description = j.values.first
       elsif f =~ /.*\s-\sab.*/
         logger.info "AB results"

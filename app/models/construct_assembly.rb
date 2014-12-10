@@ -127,7 +127,6 @@ class ConstructAssembly
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -179,7 +178,6 @@ class ConstructAssembly
       end
     end
   end
-
   
   def compatible_surface_type_enums
     [

@@ -119,7 +119,6 @@ class Fan
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -171,7 +170,6 @@ class Fan
       end
     end
   end
-
   
   def control_method_enums
     [

@@ -12,6 +12,6 @@ class Construction
 	field :continuous_insulation_material_name, type: String
 	field :layers, type: Array
 
-	index :compatible_surface_type
+  index({compatible_surface_type: 1})
 
 end

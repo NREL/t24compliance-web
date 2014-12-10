@@ -105,7 +105,6 @@ class EvaporativeCooler
         else
           new_h[field[:db_field_name]] = h[field[:xml_field_name]]
         end
-
       end
     end
 
@@ -157,7 +156,6 @@ class EvaporativeCooler
       end
     end
   end
-
   
   def type_enums
     [
