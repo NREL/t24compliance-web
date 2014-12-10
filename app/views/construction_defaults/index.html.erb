@@ -1,0 +1,23 @@
+<h1>Listing construction_defaults</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @construction_defaults.each do |construction_default| %>
+      <tr>
+        <td><%= link_to 'Show', construction_default %></td>
+        <td><%= link_to 'Edit', edit_construction_default_path(construction_default) %></td>
+        <td><%= link_to 'Destroy', construction_default, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Construction default', new_construction_default_path %>

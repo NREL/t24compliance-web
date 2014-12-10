@@ -1,0 +1,17 @@
+<%= form_for(@construction_default) do |f| %>
+  <% if @construction_default.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@construction_default.errors.count, "error") %> prohibited this construction_default from being saved:</h2>
+
+      <ul>
+      <% @construction_default.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

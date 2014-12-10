@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :construction_defaults
+
   root :to => "inputs#dashboard"
 
   devise_for :users
