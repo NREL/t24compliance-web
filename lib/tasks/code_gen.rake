@@ -420,7 +420,6 @@ namespace :code_gen do
       end
     end
   end
-
   }
   end
 
@@ -437,7 +436,6 @@ namespace :code_gen do
 
     true
   end
-
       }
     end
   end

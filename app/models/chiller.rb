@@ -73,8 +73,18 @@ class Chiller
   def to_sdd_xml(meta, xml)
     xml.send(meta[:xml_name]) do
       self.class.xml_fields.each do |field|
-        xml.send(:"#{field[:xml_field_name]}", self[field[:db_field_name]]) if self[field[:db_field_name]]
+        if self[field[:db_field_name]]
+          if self[field[:db_field_name]].is_a? Array
+            logger.debug "Translating to XML and the object is an Array"
+            self[field[:db_field_name]].each_with_index do |instance, index|
+              xml.send(:"#{field[:xml_field_name]}", instance, "index" => index)
+            end
+          else
+            xml.send(:"#{field[:xml_field_name]}", self[field[:db_field_name]])
+          end
+        end
       end
+
       # go through children if they have something to add, call their methods
       kids = self.class.children_models
       unless kids.nil? || kids.empty?
