@@ -12,11 +12,15 @@
   padding-bottom: 50px;
   font-color: #000;
   font-size: 130%;
-  h2 {
+  h2, h3 {
     color: #000;
     display: inline;
     font-weight: bold;
   }
+}
+
+.gray-backgnd {
+  background-color: #ccc;
 }
 
 .bold-text {
