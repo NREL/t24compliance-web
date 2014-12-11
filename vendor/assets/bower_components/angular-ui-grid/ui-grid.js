@@ -7739,8 +7739,6 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
       }
     }
     else if (filter.condition === uiGridConstants.filter.GREATER_THAN_OR_EQUAL) {
-      console.log(filter);
-      console.log({Term: term, Value: value});
       if (value < term) {
         return false;
       }

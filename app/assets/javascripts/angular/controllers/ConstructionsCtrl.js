@@ -23,7 +23,7 @@ cbecc.controller('ConstructionsCtrl', [
     }];
     $scope.panels.forEach(function (panel) {
       panel.gridOptions = {
-        columnDefs: [{name: 'name'}, {name: 'code_category'}],
+        columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
         enableColumnMenus: false,
         enableColumnResizing: true,
         enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
@@ -33,8 +33,7 @@ cbecc.controller('ConstructionsCtrl', [
     });
 
     // Modal Settings
-    $scope.openLibraryModal = function (index) {
-
+    $scope.openLibraryModal = function (index, rowEntity) {
       var modalInstance = $modal.open({
         backdrop: 'static',
         controller: 'ModalConstructionsLibraryCtrl',
@@ -44,6 +43,7 @@ cbecc.controller('ConstructionsCtrl', [
           params: function () {
             return {
               data: $scope.data,
+              rowEntity: rowEntity,
               title: $scope.panels[index].title
             };
           }
@@ -51,21 +51,28 @@ cbecc.controller('ConstructionsCtrl', [
       });
 
       modalInstance.result.then(function (selectedConstruction) {
-        $scope.panels[index].selected = selectedConstruction.id;
+        $scope.panels[index].selected = selectedConstruction;
         $scope.panels[index].gridOptions.data = selectedConstruction.layers;
       }, function () {
         // Modal canceled
       });
     };
+
+    // Remove Button
+    $scope.removeConstruction = function (index) {
+      $scope.panels[index].selected = null;
+      $scope.panels[index].gridOptions.data = [];
+    };
   }
 ]);
 
 cbecc.controller('ModalConstructionsLibraryCtrl', [
-  '$scope', '$modalInstance', 'Construction', 'uiGridConstants', 'params', function ($scope, $modalInstance, Construction, uiGridConstants, params) {
+  '$scope', '$modalInstance', '$interval', 'Construction', 'uiGridConstants', 'params', function ($scope, $modalInstance, $interval, Construction, uiGridConstants, params) {
     $scope.data = params.data;
     $scope.title = params.title;
     $scope.layerData = [];
     $scope.selected = null;
+
     $scope.constructionsGridOptions = {
       columnDefs: [{
         name: 'name',
@@ -140,11 +147,16 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
             $scope.layerData = [];
           }
         });
+        if (typeof(params.rowEntity) !== 'undefined' && params.rowEntity) {
+          $interval(function () {
+            $scope.gridApi.selection.selectRow(params.rowEntity);
+          }, 0, 1);
+        }
       }
     };
 
     $scope.layersGridOptions = {
-      columnDefs: [{name: 'name'}, {name: 'code_category'}],
+      columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
       data: 'layerData',
       enableColumnMenus: false,
       enableColumnResizing: true,
@@ -154,10 +166,7 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     };
 
     $scope.ok = function () {
-      $modalInstance.close({
-        id: $scope.selected.id,
-        layers: $scope.selected.layers
-      });
+      $modalInstance.close($scope.selected);
     };
 
     $scope.cancel = function () {
