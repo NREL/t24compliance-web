@@ -31,6 +31,7 @@ class FluidSystem
   has_many :boilers, dependent: :destroy
   has_many :heat_rejections, dependent: :destroy
   has_many :water_heaters, dependent: :destroy
+  belongs_to :project
 
 
   def self.children_models

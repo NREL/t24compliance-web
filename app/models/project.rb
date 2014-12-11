@@ -51,7 +51,6 @@ class Project
   field :weather_station, type: String
   field :design_day_weather_file, type: String
   field :annual_weather_file, type: String
-  field :weather_file_download_url, type: String
   field :site_fuel_type, type: String
   field :hvac_auto_sizing, type: Integer
   field :simulate_design_days, type: Integer
@@ -60,6 +59,10 @@ class Project
   field :run_period_end_month, type: Integer
   field :run_period_end_day, type: Integer
   field :run_period_year, type: Integer
+  field :quick_analysis, type: Integer
+  field :number_of_quick_analysis_periods, type: Integer
+  field :number_of_days_per_quick_analysis_period, type: Integer
+  field :quick_analysis_week_numbers, type: Array
   field :exceptional_condition_complete_building, type: String
   field :exceptional_condition_exterior_lighting, type: String
   field :exceptional_condition_no_cooling_system, type: String
@@ -101,6 +104,7 @@ class Project
   has_many :curve_double_quadratics, dependent: :destroy
   has_one :building, dependent: :destroy
   has_many :external_shading_objects, dependent: :destroy
+  has_many :fluid_systems, dependent: :destroy
   has_one :simulation, dependent: :destroy
   belongs_to :user
 
@@ -124,7 +128,8 @@ class Project
        { model_name: 'curve_cubic', xml_name: 'CrvCubic' },
        { model_name: 'curve_double_quadratic', xml_name: 'CrvDblQuad' },
        { model_name: 'building', xml_name: 'Bldg' },
-       { model_name: 'external_shading_object', xml_name: 'ExtShdgObj' }
+       { model_name: 'external_shading_object', xml_name: 'ExtShdgObj' },
+       { model_name: 'fluid_system', xml_name: 'FluidSys' }
     ]
   end
 
@@ -179,7 +184,6 @@ class Project
       {:db_field_name=>"weather_station", :xml_field_name=>"WeatherStation"},
       {:db_field_name=>"design_day_weather_file", :xml_field_name=>"DDWeatherFile"},
       {:db_field_name=>"annual_weather_file", :xml_field_name=>"AnnualWeatherFile"},
-      {:db_field_name=>"weather_file_download_url", :xml_field_name=>"WeatherFileDownloadURL"},
       {:db_field_name=>"site_fuel_type", :xml_field_name=>"SiteFuelType"},
       {:db_field_name=>"hvac_auto_sizing", :xml_field_name=>"HVACAutoSizing"},
       {:db_field_name=>"simulate_design_days", :xml_field_name=>"SimDsgnDays"},
@@ -188,6 +192,10 @@ class Project
       {:db_field_name=>"run_period_end_month", :xml_field_name=>"RunPeriodEndMonth"},
       {:db_field_name=>"run_period_end_day", :xml_field_name=>"RunPeriodEndDay"},
       {:db_field_name=>"run_period_year", :xml_field_name=>"RunPeriodYear"},
+      {:db_field_name=>"quick_analysis", :xml_field_name=>"QuickAnalysis"},
+      {:db_field_name=>"number_of_quick_analysis_periods", :xml_field_name=>"NumOfQuickAnalysisPeriods"},
+      {:db_field_name=>"number_of_days_per_quick_analysis_period", :xml_field_name=>"NumOfDaysPerQuickAnalysisPeriod"},
+      {:db_field_name=>"quick_analysis_week_numbers", :xml_field_name=>"QuickAnalysisWeekNumbers"},
       {:db_field_name=>"exceptional_condition_complete_building", :xml_field_name=>"ExcptCondCompleteBldg"},
       {:db_field_name=>"exceptional_condition_exterior_lighting", :xml_field_name=>"ExcptCondExtLtg"},
       {:db_field_name=>"exceptional_condition_no_cooling_system", :xml_field_name=>"ExcptCondNoClgSys"},
@@ -225,6 +233,14 @@ class Project
           self.class.xml_fields.each do |field|
             xml.send(:"#{field[:xml_field_name]}", self[field[:db_field_name]]) if self[field[:db_field_name]]
           end
+
+          # set some hard coded values which are not fields
+          xml.send(:CreateDate, self.created_at.to_i)
+          xml.send(:ExcptCondFanPress, 'No')
+          xml.send(:ExcptCondWCC, 'No')
+          xml.send(:AutoHardSize, 1)
+          xml.send(:AutoEffInput, 1)
+
           # go through children if they have something to add, call their methods
           kids = self.class.children_models
           unless kids.nil? || kids.empty?

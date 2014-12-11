@@ -198,8 +198,7 @@ class FenestrationConstruction
     [
       '- specify -',
       'CasementAwning',
-      'Sliding',
-      '- n/a -'
+      'Sliding'
     ]
   end
 
@@ -208,8 +207,7 @@ class FenestrationConstruction
       '- specify -',
       'TrueDividedLite',
       'DividerBtwnPanesLessThan7_16in',
-      'DividerBtwnPanesGreaterThanOrEqualTo7_16in',
-      '- n/a -'
+      'DividerBtwnPanesGreaterThanOrEqualTo7_16in'
     ]
   end
 end

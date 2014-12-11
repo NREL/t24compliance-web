@@ -32,6 +32,7 @@ namespace :import do
 			# puts index
 
 			if index > 2
+        next if line[0] == "#"
 				
 				#if index == 2186
 				# puts "space at beginning: #{line[/\A */].size}"

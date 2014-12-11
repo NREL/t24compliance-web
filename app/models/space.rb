@@ -66,15 +66,21 @@ class Space
   field :skylight_requirement_exception_area, type: Float
   field :skylight_requirement_exception_fraction, type: Float
   field :receptacle_power_density, type: Float
+  field :baseline_receptacle_power_density, type: Float
   field :receptacle_schedule_reference, type: String
+  field :baseline_receptacle_schedule_reference, type: String
   field :receptacle_radiation_fraction, type: Float
   field :receptacle_latent_fraction, type: Float
   field :receptacle_lost_fraction, type: Float
+  field :receptacle_power_exceptional_condition, type: Integer
   field :gas_equipment_power_density, type: Float
+  field :baseline_gas_equipment_power_density, type: Float
   field :gas_equipment_schedule_reference, type: String
+  field :baseline_gas_equipment_schedule_reference, type: String
   field :gas_equipment_radiation_fraction, type: Float
   field :gas_equipment_latent_fraction, type: Float
   field :gas_equipment_lost_fraction, type: Float
+  field :gas_equipment_power_density_exceptional_condition, type: Integer
   field :process_electrical_power_density, type: Float
   field :process_electrical_schedule_reference, type: String
   field :process_electrical_radiation_fraction, type: Float
@@ -86,10 +92,13 @@ class Space
   field :process_gas_latent_fraction, type: Float
   field :process_gas_lost_fraction, type: Float
   field :commercial_refrigeration_epd, type: Float
+  field :baseline_commercial_refrigeration_epd, type: Float
   field :commercial_refrigeration_equipment_schedule_reference, type: String
+  field :baseline_commercial_refrigeration_equipment_schedule_reference, type: String
   field :commercial_refrigeration_radiation_fraction, type: Float
   field :commercial_refrigeration_latent_fraction, type: Float
   field :commercial_refrigeration_lost_fraction, type: Float
+  field :commercial_refrigeration_epd_exceptional_condition, type: Integer
   field :elevator_count, type: Integer
   field :elevator_power, type: Float
   field :elevator_schedule_reference, type: String
@@ -220,15 +229,21 @@ class Space
       {:db_field_name=>"skylight_requirement_exception_area", :xml_field_name=>"SkyltReqExcptArea"},
       {:db_field_name=>"skylight_requirement_exception_fraction", :xml_field_name=>"SkyltReqExcptFrac"},
       {:db_field_name=>"receptacle_power_density", :xml_field_name=>"RecptPwrDens"},
+      {:db_field_name=>"baseline_receptacle_power_density", :xml_field_name=>"BaseRecptPwrDens"},
       {:db_field_name=>"receptacle_schedule_reference", :xml_field_name=>"RecptSchRef"},
+      {:db_field_name=>"baseline_receptacle_schedule_reference", :xml_field_name=>"BaseRecptSchRef"},
       {:db_field_name=>"receptacle_radiation_fraction", :xml_field_name=>"RecptRadFrac"},
       {:db_field_name=>"receptacle_latent_fraction", :xml_field_name=>"RecptLatFrac"},
       {:db_field_name=>"receptacle_lost_fraction", :xml_field_name=>"RecptLostFrac"},
+      {:db_field_name=>"receptacle_power_exceptional_condition", :xml_field_name=>"RecptPwrExcptCond"},
       {:db_field_name=>"gas_equipment_power_density", :xml_field_name=>"GasEqpPwrDens"},
+      {:db_field_name=>"baseline_gas_equipment_power_density", :xml_field_name=>"BaseGasEqpPwrDens"},
       {:db_field_name=>"gas_equipment_schedule_reference", :xml_field_name=>"GasEqpSchRef"},
+      {:db_field_name=>"baseline_gas_equipment_schedule_reference", :xml_field_name=>"BaseGasEqpSchRef"},
       {:db_field_name=>"gas_equipment_radiation_fraction", :xml_field_name=>"GasEqpRadFrac"},
       {:db_field_name=>"gas_equipment_latent_fraction", :xml_field_name=>"GasEqpLatFrac"},
       {:db_field_name=>"gas_equipment_lost_fraction", :xml_field_name=>"GasEqpLostFrac"},
+      {:db_field_name=>"gas_equipment_power_density_exceptional_condition", :xml_field_name=>"GasEqpPwrDensExcptCond"},
       {:db_field_name=>"process_electrical_power_density", :xml_field_name=>"ProcElecPwrDens"},
       {:db_field_name=>"process_electrical_schedule_reference", :xml_field_name=>"ProcElecSchRef"},
       {:db_field_name=>"process_electrical_radiation_fraction", :xml_field_name=>"ProcElecRadFrac"},
@@ -240,10 +255,13 @@ class Space
       {:db_field_name=>"process_gas_latent_fraction", :xml_field_name=>"ProcGasLatFrac"},
       {:db_field_name=>"process_gas_lost_fraction", :xml_field_name=>"ProcGasLostFrac"},
       {:db_field_name=>"commercial_refrigeration_epd", :xml_field_name=>"CommRfrgEPD"},
+      {:db_field_name=>"baseline_commercial_refrigeration_epd", :xml_field_name=>"BaseCommRfrgEPD"},
       {:db_field_name=>"commercial_refrigeration_equipment_schedule_reference", :xml_field_name=>"CommRfrgEqpSchRef"},
+      {:db_field_name=>"baseline_commercial_refrigeration_equipment_schedule_reference", :xml_field_name=>"BaseCommRfrgEqpSchRef"},
       {:db_field_name=>"commercial_refrigeration_radiation_fraction", :xml_field_name=>"CommRfrgRadFrac"},
       {:db_field_name=>"commercial_refrigeration_latent_fraction", :xml_field_name=>"CommRfrgLatFrac"},
       {:db_field_name=>"commercial_refrigeration_lost_fraction", :xml_field_name=>"CommRfrgLostFrac"},
+      {:db_field_name=>"commercial_refrigeration_epd_exceptional_condition", :xml_field_name=>"CommRfrgEPDExcptCond"},
       {:db_field_name=>"elevator_count", :xml_field_name=>"ElevCnt"},
       {:db_field_name=>"elevator_power", :xml_field_name=>"ElevPwr"},
       {:db_field_name=>"elevator_schedule_reference", :xml_field_name=>"ElevSchRef"},

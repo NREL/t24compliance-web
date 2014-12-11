@@ -296,11 +296,13 @@ class AirSystem
 
   def cooling_control_enums
     [
+      'NoSATControl',
       'Fixed',
-      'WarmestResetFlowFirst',
-      'OutsideAirReset',
       'Scheduled',
-      'NoSATControl'
+      'OutsideAirReset',
+      'WarmestResetFlowFirst',
+      'WarmestResetTemperatureFirst',
+      'WarmestReset'
     ]
   end
 

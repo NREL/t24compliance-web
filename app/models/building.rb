@@ -27,6 +27,10 @@ class Building
   field :plant_heating_capacity, type: Float
   field :coil_cooling_capacity, type: Float
   field :coil_heating_capacity, type: Float
+  field :nonresidential_story_count_fossil_heat, type: Integer
+  field :residential_story_count_fossil_heat, type: Integer
+  field :nonresidential_story_count_electric_heat, type: Integer
+  field :residential_story_count_electric_heat, type: Integer
 
   has_many :building_stories, dependent: :destroy
   has_many :external_shading_objects, dependent: :destroy
@@ -72,7 +76,11 @@ class Building
       {:db_field_name=>"plant_cooling_capacity", :xml_field_name=>"PlantClgCap"},
       {:db_field_name=>"plant_heating_capacity", :xml_field_name=>"PlantHtgCap"},
       {:db_field_name=>"coil_cooling_capacity", :xml_field_name=>"CoilClgCap"},
-      {:db_field_name=>"coil_heating_capacity", :xml_field_name=>"CoilHtgCap"}
+      {:db_field_name=>"coil_heating_capacity", :xml_field_name=>"CoilHtgCap"},
+      {:db_field_name=>"nonresidential_story_count_fossil_heat", :xml_field_name=>"NonResStoryCntFossilHt"},
+      {:db_field_name=>"residential_story_count_fossil_heat", :xml_field_name=>"NonResStoryCntElecHt"},
+      {:db_field_name=>"nonresidential_story_count_electric_heat", :xml_field_name=>"ResStoryCntFossilHt"},
+      {:db_field_name=>"residential_story_count_electric_heat", :xml_field_name=>"ResStoryCntElecHt"}
     ]
   end
 

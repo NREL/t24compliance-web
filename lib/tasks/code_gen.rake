@@ -42,7 +42,9 @@ namespace :code_gen do
       #output = `rails g scaffold #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
 
       # only generate models now
-      output = `rails g model #{controller_name.singularize} #{fields_str} --force --no-helper --no-assets --no-test-framework`
+      method = "rails g model #{controller_name.singularize} #{fields_str} --force --no-helper --no-assets --no-test-framework"
+      puts "Calling: #{method}"
+      output = `#{method}`
 
       puts "Output of generate command: #{output}"
       puts '***************'
@@ -142,7 +144,7 @@ namespace :code_gen do
 
   # list of inputs to scaffold. Select one of the other.
   def inputs_to_scaffold
-    # ['Proj', 'Bldg', 'Story', 'Spc']
+    #['Proj', 'FluidSys', 'Story', 'Spc']
     Input.all.map { |i| i.name }
   end
 
@@ -175,6 +177,14 @@ namespace :code_gen do
         k_hash['xml_name'] = model.name
         k_hash['model_name'] = model.display_name.singularize.underscore
         kids << k_hash
+      end
+
+      # add in some unlinked children as well for specific inputs
+      if input.name == 'Proj'
+        # k_hash = {}
+        # k_hash['xml_name'] = 'FluidSys'
+        # k_hash['model_name'] = 'fluid_system'
+        # kids << k_hash
       end
     end
     kids
@@ -216,6 +226,14 @@ namespace :code_gen do
           self.class.xml_fields.each do |field|
             xml.send(:"#{field[:xml_field_name]}", self[field[:db_field_name]]) if self[field[:db_field_name]]
           end
+
+          # set some hard coded values which are not fields
+          xml.send(:CreateDate, self.created_at.to_i)
+          xml.send(:ExcptCondFanPress, 'No')
+          xml.send(:ExcptCondWCC, 'No')
+          xml.send(:AutoHardSize, 1)
+          xml.send(:AutoEffInput, 1)
+
           # go through children if they have something to add, call their methods
           kids = self.class.children_models
           unless kids.nil? || kids.empty?
@@ -515,8 +533,10 @@ namespace :code_gen do
         {'name' => 'curve_cubic', 'relation' => "belongs_to :project"},
         {'name' => 'curve_double_quadratic', 'relation' => "belongs_to :project"},
         {'name' => 'external_shading_object', 'relation' => "belongs_to :project"},
+        {'name' => 'fluid_system', 'relation' => "belongs_to :project"},
         {'name' => 'project', 'relation' => "has_one :simulation, dependent: :destroy"},
         {'name' => 'project', 'relation' => "belongs_to :user"}
+
     ]
   end
 

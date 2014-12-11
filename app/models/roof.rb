@@ -19,6 +19,8 @@ class Roof
   field :crrc_initial_sri, type: Integer
   field :crrc_aged_sri, type: Integer
   field :crrc_product_id, type: String
+  field :roof_aged_solar_reflectance, type: Float
+  field :roof_aged_thermal_emittance, type: Float
 
   belongs_to :space
   has_many :skylights, dependent: :destroy
@@ -50,7 +52,9 @@ class Roof
       {:db_field_name=>"crrc_aged_emittance", :xml_field_name=>"CRRCAgedEmittance"},
       {:db_field_name=>"crrc_initial_sri", :xml_field_name=>"CRRCInitialSRI"},
       {:db_field_name=>"crrc_aged_sri", :xml_field_name=>"CRRCAgedSRI"},
-      {:db_field_name=>"crrc_product_id", :xml_field_name=>"CRRCProdID"}
+      {:db_field_name=>"crrc_product_id", :xml_field_name=>"CRRCProdID"},
+      {:db_field_name=>"roof_aged_solar_reflectance", :xml_field_name=>"RoofAgedSolRefl"},
+      {:db_field_name=>"roof_aged_thermal_emittance", :xml_field_name=>"RoofAgedThrmlEmittance"}
     ]
   end
 

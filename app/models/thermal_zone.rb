@@ -4,7 +4,6 @@ class ThermalZone
 
   field :name, type: String
   field :type, type: String
-  field :multiplier, type: Integer
   field :description, type: String
   field :supply_plenum_zone_reference, type: String
   field :return_plenum_zone_reference, type: String
@@ -44,7 +43,6 @@ class ThermalZone
     xml_fields = [
       {:db_field_name=>"name", :xml_field_name=>"Name"},
       {:db_field_name=>"type", :xml_field_name=>"Type"},
-      {:db_field_name=>"multiplier", :xml_field_name=>"Mult"},
       {:db_field_name=>"description", :xml_field_name=>"Desc"},
       {:db_field_name=>"supply_plenum_zone_reference", :xml_field_name=>"SupPlenumZnRef"},
       {:db_field_name=>"return_plenum_zone_reference", :xml_field_name=>"RetPlenumZnRef"},

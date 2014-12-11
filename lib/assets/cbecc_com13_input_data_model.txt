@@ -1,8 +1,10 @@
-2014-Dec-05 11:06:34
-
---------------------
+# 2014-Dec-05 11:06:34
+#
+# 2014/12/10 NL: Updated to most recent version from https://code.google.com/p/cbecc/source/browse/trunk/CBECC-Com13/Data/Rulesets/CEC%202013%20NonRes%20-%20Input%20Data%20Model.txt
+# 2014/12/10 NL: Added missing fields Proj -> FluidSys
+# --------------------
 Proj              Project                           #Props: 85/210  MaxDefinable:    1
-                               Children:  SchDay  /  SchWeek  /  Sch  /  ConsAssm  /  Mat  /  FenCons  /  DrCons  /  SpcFuncDefaults  /  Lum  /  CrvLin  /  CrvQuad  /  CrvCubic  /  CrvDblQuad  /  Bldg  /  ExtShdgObj
+                               Children:  SchDay  /  SchWeek  /  Sch  /  ConsAssm  /  Mat  /  FenCons  /  DrCons  /  SpcFuncDefaults  /  Lum  /  CrvLin  /  CrvQuad  /  CrvCubic  /  CrvDblQuad  /  Bldg  /  ExtShdgObj / FluidSys
 
       BldgEngyModelVersion      BuildingEnergyModelVersion                                    Integer       -  -  -    -  -  -  -  -  -  -  -   Optional input     
       GeometryInpType           GeometryInputType                                             Enumeration   -  -  -    -  -  -  -  -  -  -  -   Optional input     

@@ -10,7 +10,6 @@ class CoilHeating
   field :fluid_flow_rate_design, type: Float
   field :capacity_total_gross_rated, type: Float
   field :capacity_total_net_rated, type: Float
-  field :capacity_total_rated_stage_fraction, type: Array
   field :furnace_afue, type: Float
   field :furnace_thermal_efficiency, type: Float
   field :furnace_ignition_type, type: String
@@ -49,7 +48,6 @@ class CoilHeating
       {:db_field_name=>"fluid_flow_rate_design", :xml_field_name=>"FluidFlowRtDsgn"},
       {:db_field_name=>"capacity_total_gross_rated", :xml_field_name=>"CapTotGrossRtd"},
       {:db_field_name=>"capacity_total_net_rated", :xml_field_name=>"CapTotNetRtd"},
-      {:db_field_name=>"capacity_total_rated_stage_fraction", :xml_field_name=>"CapTotRtdStageFrac"},
       {:db_field_name=>"furnace_afue", :xml_field_name=>"FurnAFUE"},
       {:db_field_name=>"furnace_thermal_efficiency", :xml_field_name=>"FurnThrmlEff"},
       {:db_field_name=>"furnace_ignition_type", :xml_field_name=>"FurnIgnType"},

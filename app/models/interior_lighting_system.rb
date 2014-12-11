@@ -5,7 +5,6 @@ class InteriorLightingSystem
   field :name, type: String
   field :status, type: String
   field :parent_space_function, type: String
-  field :schedule_reference, type: String
   field :power_regulated, type: Integer
   field :non_regulated_exclusion, type: String
   field :luminaire_reference, type: Array
@@ -15,7 +14,6 @@ class InteriorLightingSystem
   field :allowance_area, type: Float
   field :tailored_method_allowance_type, type: String
   field :power_adjustment_factor_credit_type, type: String
-  field :interior_lighting_specification_method, type: String
   field :luminaire_mounting_height, type: Float
   field :work_plane_height, type: Float
   field :daylit_area_type, type: String
@@ -34,7 +32,6 @@ class InteriorLightingSystem
       {:db_field_name=>"name", :xml_field_name=>"Name"},
       {:db_field_name=>"status", :xml_field_name=>"Status"},
       {:db_field_name=>"parent_space_function", :xml_field_name=>"ParentSpcFunc"},
-      {:db_field_name=>"schedule_reference", :xml_field_name=>"SchRef"},
       {:db_field_name=>"power_regulated", :xml_field_name=>"PwrReg"},
       {:db_field_name=>"non_regulated_exclusion", :xml_field_name=>"NonRegExclusion"},
       {:db_field_name=>"luminaire_reference", :xml_field_name=>"LumRef"},
@@ -44,7 +41,6 @@ class InteriorLightingSystem
       {:db_field_name=>"allowance_area", :xml_field_name=>"AllowArea"},
       {:db_field_name=>"tailored_method_allowance_type", :xml_field_name=>"TailoredMthdAllowType"},
       {:db_field_name=>"power_adjustment_factor_credit_type", :xml_field_name=>"PAFCredType"},
-      {:db_field_name=>"interior_lighting_specification_method", :xml_field_name=>"IntLtgSpecMthd"},
       {:db_field_name=>"luminaire_mounting_height", :xml_field_name=>"LumMntgHgt"},
       {:db_field_name=>"work_plane_height", :xml_field_name=>"WorkPlaneHgt"},
       {:db_field_name=>"daylit_area_type", :xml_field_name=>"DaylitAreaType"}
@@ -240,7 +236,6 @@ class InteriorLightingSystem
 
   def non_regulated_exclusion_enums
     [
-      '- specify -',
       'ThemeParksThemeAndSpecialEffects',
       'FilmOrPhotoStudioLightingSeparatelySwitched',
       'DanceFloorOrTheatrical',
