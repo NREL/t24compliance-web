@@ -18,7 +18,7 @@
     <% @projects.each do |p| %>
       <tr>
         <th> <%= p.name %></th>
-        <th> <a href="wizard#/project/<%= p.id %>">Open in Wizard</a></th>
+        <th> <%= link_to 'Open in Wizard', wizard_path(project_id: p.id) %></th>
       </tr>
     <% end %>
   </table>

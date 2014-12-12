@@ -7,7 +7,8 @@ class BuildingsController < ApplicationController
   respond_to :json, :html
 
   def index
-    @buildings = @project.building
+    @buildings = []
+    @buildings << @project.building
     respond_with(@buildings)
   end
 
@@ -24,9 +25,9 @@ class BuildingsController < ApplicationController
   end
 
   def create
-    @building = Building.new(building_params)
-    @building.save
-    respond_with(@building)
+    @project.building = Building.new(building_params)
+    @project.building.save
+    respond_with(@project.building)
   end
 
   def update

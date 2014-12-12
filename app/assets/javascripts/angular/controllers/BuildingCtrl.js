@@ -9,7 +9,6 @@ cbecc.controller('BuildingCtrl', [
     console.log("Current ProjectID: ", Shared.getProjectId());
     $scope.projectId = Shared.getProjectId();
 
-
     // new vs edit (check if bld already saved and load that one)
     if ($stateParams.id) {
       Shared.setBuildingId($stateParams.id);
@@ -22,14 +21,20 @@ cbecc.controller('BuildingCtrl', [
     }
     else {
       buildings = Building.index({project_id: $scope.projectId});
-      console.log('buildings: ', buildings);
-      if (buildings.length > 0) {
-        $scope.building = buildings[0];
-        console.log('building retrieved by project id (bld exists): ', $scope.building.id);
-      }
-      else {
-        $scope.building = new Building();
-      }
+      // I don't know why, but this syntax on the index action is important
+      buildings.$promise.then(function(data) {
+        console.log('buildings: ', data);
+        if (data.length > 0) {
+          $scope.building = data[0];
+          Shared.setBuildingId($scope.building.id);
+          console.log('building retrieved by project id (bld exists): ', $scope.building.id);
+        }
+        else {
+          $scope.building = new Building();
+          console.log('no buildings associated wiht this project, creating new one');
+        }
+      });
+
     }
 
     // save
@@ -56,9 +61,18 @@ cbecc.controller('BuildingCtrl', [
       }
 
       // set project ID
-      $scope.building.project_id = $scope.projectId;
+      $scope.building.project_id = Shared.getProjectId();
+      console.log('checkbox: ', $scope.building.relocatable_public_school_building);
+      if ($scope.building.relocatable_public_school_building == true)
+      {
+        $scope.building.relocatable_public_school_building = 1;
+      }
+      else {
+        $scope.building.relocatable_public_school_building = 0;
+      }
 
-      if ($stateParams.id) {
+      // create vs update
+      if (Shared.getBuildingId() != null) {
         Building.update({project_id: $scope.projectId}, $scope.building, success, failure);
       } else {
         Building.create({project_id: $scope.projectId}, $scope.building, success, failure);
