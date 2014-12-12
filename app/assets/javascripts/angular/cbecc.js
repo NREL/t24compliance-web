@@ -43,6 +43,12 @@ cbecc.config([
         templateUrl: 'building/building.html'
       })
       .state({
+        name: 'buildingDetails',
+        url: '/building/{id:[0-9a-f]{24}}',
+        controller: 'BuildingCtrl',
+        templateUrl: 'building/building.html'
+      })
+      .state({
         name: 'constructions',
         url: '/constructions',
         controller: 'ConstructionsCtrl',

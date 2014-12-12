@@ -1,5 +1,5 @@
 cbecc.controller('ProjectCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Project', function ($scope, $window, $stateParams, $resource, $location, flash, Project) {
+  '$scope', '$rootScope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Project', 'Shared', function ($scope, $rootScope, $window, $stateParams, $resource, $location, flash, Project, Shared) {
 
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
@@ -12,8 +12,16 @@ cbecc.controller('ProjectCtrl', [
 
     // new vs edit
     if ($stateParams.id) {
+      Shared.setProjectId($stateParams.id);
+      console.log('Current ProjectID: ', Shared.getProjectId());
       $scope.project = Project.show({id: $stateParams.id});
-    } else {
+    }
+    else if (Shared.getProjectId() != null) {
+      $scope.project = Project.show({id: Shared.getProjectId()});
+      console.log('Current ProjectID already set: ', Shared.getProjectId());
+    }
+    else {
+
       $scope.project = new Project();
     }
 
@@ -23,8 +31,8 @@ cbecc.controller('ProjectCtrl', [
 
       function success(response) {
         console.log("success", response);
-        console.log($scope.project);
-        console.log("_id is: ", response['_id'], "or id is: ", response['id']);
+        //console.log($scope.project);
+        //console.log("_id is: ", response['_id'], "or id is: ", response['id']);
         the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
 
         // go back to form with id of what was just saved

@@ -13,8 +13,21 @@ Rails.application.routes.draw do
     get '/logout' => 'devise/sessions#destroy'
   end
 
-  resources :projects
   get 'wizard' => 'projects#wizard'
+  resources :projects,:defaults => {format: :json} do
+    resources :buildings, :defaults => {format: :json}
+    resources :materials
+    resources :construct_assemblies
+    resources :simulations do
+      member do
+        post :run
+        get :run
+      end
+    end
+  end
+
+  #also add these non-nested urls
+  resources :buildings, only: [:show, :edit, :update]
 
   resources :constructions, only: [:show, :index]
 
@@ -106,10 +119,6 @@ Rails.application.routes.draw do
 
   resources :fenestration_constructions
 
-  resources :materials
-
-  resources :construct_assemblies
-
   resources :schedule_weeks
 
   resources :schedule_days
@@ -120,14 +129,9 @@ Rails.application.routes.draw do
 
   resources :poly_loops
 
-  resources :simulations do
-    member do
-      post :run
-      get :run
-    end
-  end
 
-  resources :buildings
+
+
 
 
 

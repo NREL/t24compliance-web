@@ -1,11 +1,35 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $routeParams, $resource, $location, flash) {
+  '$scope', '$rootScope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Building', 'Shared', function ($scope, $rootScope, $window, $stateParams, $resource, $location, flash, Building, Shared) {
 
-    // new vs edit
+     // check on project, if undefined, redirect
+    if (Shared.getProjectId() == null)
+    {
+        $location.path("/project");
+    }
+    console.log("Current ProjectID: ", Shared.getProjectId());
+    $scope.projectId = Shared.getProjectId();
+
+
+    // new vs edit (check if bld already saved and load that one)
     if ($stateParams.id) {
-      $scope.building = Building.show({id: $stateParams.id});
-    } else {
-      $scope.building = new Building();
+      Shared.setBuildingId($stateParams.id);
+      $scope.building = Building.show({project_id: $scope.projectId, id: $stateParams.id});
+      console.log('building retrieved by stateParams: ', $stateParams.id);
+    }
+    else if (Shared.getBuildingId() != null) {
+      $scope.building = Building.show({project_id: $scope.projectId, id: Shared.getBuildingId()});
+      console.log('building retrieved by getBuildingId:', Shared.getBuildingId());
+    }
+    else {
+      buildings = Building.index({project_id: $scope.projectId});
+      console.log('buildings: ', buildings);
+      if (buildings.length > 0) {
+        $scope.building = buildings[0];
+        console.log('building retrieved by project id (bld exists): ', $scope.building.id);
+      }
+      else {
+        $scope.building = new Building();
+      }
     }
 
     // save
@@ -31,10 +55,13 @@ cbecc.controller('BuildingCtrl', [
         });
       }
 
+      // set project ID
+      $scope.building.project_id = $scope.projectId;
+
       if ($stateParams.id) {
-        Building.update($scope.building, success, failure);
+        Building.update({project_id: $scope.projectId}, $scope.building, success, failure);
       } else {
-        Building.create($scope.building, success, failure);
+        Building.create({project_id: $scope.projectId}, $scope.building, success, failure);
       }
 
     };
