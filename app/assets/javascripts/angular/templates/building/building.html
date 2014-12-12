@@ -38,16 +38,17 @@
 
     <div class="col-md-5">
       <div class="form-group" ng-class="errors.relocatable_public_school_building ? 'error' : ''">
-        <label for="relocatable_public_school_building" class="col-md-2 control-label col-md-offset-1">
-          Relocatable Public School Building
-        </label>
-        <div class="col-md-5">
-          <input type="text" name="relocatable_public_school_building" class="form-control" ng-model="building.relocatable_public_school_building" size="50">
-        </div>
+          <div class="checkbox">
+            <label for="relocatable_public_school_building" class="col-md-5 control-label col-md-offset-1">
+              <input type="checkbox" name="relocatable_public_school_building" ng-model="building.relocatable_public_school_building">
+              Relocatable Public School Building
+            </label>
+          </div>
         <div field_error errors="errors" field="relocatable_public_school_building"></div>
       </div>
     </div>
   </div>
+
   <div class="row pad-bot-20">
 
     <div class="col-md-5">
@@ -74,14 +75,15 @@
 
     </div>
   </div>
-
-  <div class="control-group">
-    <div class="controls">
-      <button type="submit" ng-click="submit()" class="btn btn-success">Save</button>
+  <div class="row pad-bot-20">
+    <div class="control-group">
+      <div class="controls">
+        <button type="submit" ng-click="submit()" class="btn btn-success">Save</button>
+      </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row pad-bot-20">
     <div class="col-md-12 pad-left-40">
       <div class="inline-heading">
         <h3>Stories |</h3> Define stories in building
