@@ -53,7 +53,6 @@ cbecc.controller('BuildingCtrl', [
         name: 'above_or_below'
       }],
       enableCellEditOnFocus: true,
-      enableColumnResizing: true,
       enableColumnMenus: false,
       enableRowHeaderSelection: true,
       enableRowSelection: true,

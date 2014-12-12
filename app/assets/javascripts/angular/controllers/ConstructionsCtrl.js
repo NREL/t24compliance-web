@@ -25,7 +25,6 @@ cbecc.controller('ConstructionsCtrl', [
       panel.gridOptions = {
         columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
         enableColumnMenus: false,
-        enableColumnResizing: true,
         enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
         enableSorting: false,
         enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED
@@ -130,7 +129,6 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
         minWidth: 300
       }],
       data: 'data',
-      enableColumnResizing: true,
       enableFiltering: true,
       enableRowHeaderSelection: false,
       enableRowSelection: true,
@@ -159,7 +157,6 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
       columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
       data: 'layerData',
       enableColumnMenus: false,
-      enableColumnResizing: true,
       enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
       enableSorting: false,
       enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED
