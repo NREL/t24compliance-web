@@ -10,8 +10,5 @@ cbecc.controller("NavCtrl", [
       }
       return false;
     };
-    $scope.isActiveSub = function (viewLocation) {
-      return viewLocation === $location.path();
-    };
   }
 ]);

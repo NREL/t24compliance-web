@@ -16,6 +16,7 @@
         <label for="name" class="col-md-2 control-label col-md-offset-1">
           Building Name
         </label>
+
         <div class="col-md-6">
           <input type="text" name="name" class="form-control" ng-model="building.name" size="50">
         </div>
@@ -27,8 +28,9 @@
         <label for="azimuth" class="col-md-2 control-label col-md-offset-1">
           Azimuth
         </label>
+
         <div class="col-md-1">
-          <input type="text" name="azimuth" class="form-control" ng-model="building.azimuth" >
+          <input type="text" name="azimuth" class="form-control" ng-model="building.azimuth">
         </div>
         <div field_error errors="errors" field="azimuth"></div>
       </div>
@@ -56,6 +58,7 @@
         <label for="total_floor_area" class="col-md-2 control-label col-md-offset-1">
           Floor Area
         </label>
+
         <div class="col-md-2">
           <input type="text" name="total_floor_area" class="form-control" ng-model="building.total_floor_area" size="50">
         </div>
@@ -67,8 +70,9 @@
         <label for="azimuth" class="col-md-2 control-label col-md-offset-1">
           Conditioned Space Living Units
         </label>
+
         <div class="col-md-2">
-          <input type="text" name="living_unit_count" class="form-control" ng-model="building.living_unit_count" >
+          <input type="text" name="living_unit_count" class="form-control" ng-model="building.living_unit_count">
         </div>
         <div field_error errors="errors" field="living_unit_count"></div>
       </div>
@@ -90,4 +94,16 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-1 col-md-offset-1">Total Stories: {{storiesGridOptions.data.length}}</div>
+    <!--<div class="col-md-1">Stories Below: {{storiesBelow}}</div>-->
+  </div>
+  <div class="row pad-bot-20">
+    <button type="button" ng-click="addStory()" class="btn btn-success col-md-1 col-md-offset-1">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Story
+    </button>
+    <button type="button" ng-click="duplicateStory()" class="btn btn-info col-md-1 col-md-offset-7" ng-disabled="!selected">Duplicate</button>
+    <button type="button" ng-click="deleteStory()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
+  </div>
+  <div ui-grid="storiesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
 </form>

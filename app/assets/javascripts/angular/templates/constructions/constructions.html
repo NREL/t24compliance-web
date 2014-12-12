@@ -13,11 +13,16 @@
   <accordion-group ng-repeat="panel in panels" is-open="panels[$index].open">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panels[$index].open, 'glyphicon-chevron-right': !panels[$index].open}"></i>
-      {{panel.title}}
+      {{panel.title}}<span ng-show="panels[$index].selected"> &mdash; <strong>{{panels[$index].selected.name}}</strong></span>
     </accordion-heading>
-    <button class="btn btn-default" ng-click="openLibraryModal($index)">Select a Construction</button>
-    <div ng-show="panels[$index].selected" class="pad-top-20">
+    <div ng-hide="panels[$index].selected">
+      <button class="btn btn-info" ng-click="openLibraryModal($index)">Select a Construction</button>
+    </div>
+    <div ng-show="panels[$index].selected">
       <div ui-grid="panels[$index].gridOptions" class="layersGrid" ui-grid-resize-columns></div>
+      <br>
+      <button class="btn btn-info" ng-click="openLibraryModal($index, panels[$index].selected)">Change Construction</button>
+      <button class="btn btn-danger" ng-show="panels[$index].selected" ng-click="removeConstruction($index)">Remove Construction</button>
     </div>
   </accordion-group>
 </accordion>

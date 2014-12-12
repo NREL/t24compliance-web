@@ -2,7 +2,7 @@ var cbecc = angular.module('cbecc', [
   'templates',
   'ngAnimate', 'ngResource', 'ngRoute',
   'angular-flash.service', 'angular-flash.flash-alert-directive',
-  'ui.grid', 'ui.grid.autoResize', 'ui.grid.resizeColumns', 'ui.grid.selection',
+  'ui.grid', 'ui.grid.autoResize', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.selection',
   'ui.router', 'ui.router.stateHelper',
   'ui.bootstrap',
   'frapontillo.bootstrap-switch']);

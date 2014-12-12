@@ -13,9 +13,7 @@ u.roles = [:admin]
 u.password = 'password'
 u.save!
 
-exit
 u.projects.destroy_all
-
 file = File.read(File.join(Rails.root,"lib/assets/construction_library.json"))
 data = JSON.parse(file)
 
