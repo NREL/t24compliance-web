@@ -85,7 +85,7 @@ cbecc.controller('BuildingCtrl', [
       columnDefs: [{
         name: 'story_name'
       }, {
-        name: 'altitude'
+        name: 'elevation'
       }, {
         name: 'floor_area_to_floor_height'
       }, {
@@ -116,7 +116,7 @@ cbecc.controller('BuildingCtrl', [
     $scope.addStory = function () {
       $scope.storiesGridOptions.data.push({
         story_name: "Story " + ($scope.storiesGridOptions.data.length + 1),
-        altitude: 6000,
+        elevation: 0,
         floor_area_to_floor_height: 14,
         floor_area_to_floor_ceiling: 14,
         above_or_below: 'Above'
@@ -125,7 +125,7 @@ cbecc.controller('BuildingCtrl', [
     $scope.duplicateStory = function () {
       $scope.storiesGridOptions.data.push({
         story_name: "Story " + ($scope.storiesGridOptions.data.length + 1),
-        altitude: $scope.selected.altitude,
+        elevation: $scope.selected.elevation,
         floor_area_to_floor_height: $scope.selected.floor_area_to_floor_height,
         floor_area_to_floor_ceiling: $scope.selected.floor_area_to_floor_ceiling,
         above_or_below: $scope.selected.above_or_below
@@ -134,7 +134,11 @@ cbecc.controller('BuildingCtrl', [
     $scope.deleteStory = function () {
       var index = $scope.storiesGridOptions.data.indexOf($scope.selected);
       $scope.storiesGridOptions.data.splice(index, 1);
-      $scope.selected = null;
+      if (index > 0) {
+        $scope.gridApi.selection.toggleRowSelection($scope.storiesGridOptions.data[index - 1]);
+      } else {
+        $scope.selected = null;
+      }
     };
 
     $scope.storiesBelow = function () {
