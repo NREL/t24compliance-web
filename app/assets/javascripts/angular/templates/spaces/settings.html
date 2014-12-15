@@ -1,1 +1,7 @@
-settings
+<div ng-controller="SubtabSettingsCtrl">
+  <div class="row pad-top-20 pad-bot-20">
+    <button type="button" ng-click="duplicateSpace()" class="btn btn-info col-md-1 col-md-offset-10" ng-disabled="!selected">Duplicate</button>
+    <button type="button" ng-click="deleteSpace()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
+  </div>
+  <div ui-grid="settingsGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+</div>

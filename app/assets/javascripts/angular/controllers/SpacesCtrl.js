@@ -1,59 +1,83 @@
 cbecc.controller('SpacesCtrl', [
   '$scope', '$window', '$location', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $location, $routeParams, $resource, $location, flash) {
 
-    // Reset tabs if the main Spaces nav button is clicked
-    $scope.$on('$locationChangeSuccess', function () {
-      if ($location.path() === '/spaces') $scope.tabs[0].active = true;
-    });
-
     $scope.tabs = [{
       heading: 'Spaces',
+      path: '/spaces',
       route: 'spaces.main'
     }, {
       heading: 'Space Type Settings',
+      path: '/spaces/settings',
       route: 'spaces.settings'
     }, {
       heading: 'Surfaces: Walls, Floors, Ceilings, and Roofs',
+      path: '/spaces/surfaces',
       route: 'spaces.surfaces'
     }, {
       heading: 'Sub-surfaces: Windows, Doors, and Skylights',
+      path: '/spaces/subsurfaces',
       route: 'spaces.subsurfaces'
     }, {
       heading: 'Ventilation & Exhaust',
+      path: '/spaces/ventilation',
       route: 'spaces.ventilation'
     }, {
       heading: 'Loads',
+      path: '/spaces/loads',
       route: 'spaces.loads'
     }, {
       heading: 'Lighting',
+      path: '/spaces/lighting',
       route: 'spaces.lighting'
     }];
+
+    function updateActiveTab() {
+      // Reset tabs if the main Spaces nav button is clicked
+      $scope.tabs.filter(function (element) {
+        if ($location.path() === element.path) element.active = true;
+      });
+    }
+
+    updateActiveTab();
+    $scope.$on('$locationChangeSuccess', function () {
+      updateActiveTab();
+    });
   }
 ]);
 
-cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', function ($scope, $modal) {
+cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
   // Spaces UI Grid
   $scope.spacesGridOptions = {
     columnDefs: [{
-      name: 'space_name'
+      name: 'name',
+      displayName: 'Space Name',
+      enableHiding: false,
+      filter: {
+        condition: uiGridConstants.filter.CONTAINS
+      }
     }, {
-      name: 'floor_to_ceiling_height'
+      name: 'floor_to_ceiling_height',
+      enableHiding: false
     }, {
-      name: 'story'
+      name: 'story',
+      enableHiding: false
     }, {
-      name: 'area'
+      name: 'area',
+      enableHiding: false
     }, {
-      name: 'conditioning_type'
+      name: 'conditioning_type',
+      enableHiding: false
     }, {
-      name: 'envelope_status'
+      name: 'envelope_status',
+      enableHiding: false
     }, {
-      name: 'lighting_status'
+      name: 'lighting_status',
+      enableHiding: false
     }],
     enableCellEditOnFocus: true,
-    enableColumnMenus: false,
+    enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
-    enableSorting: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
@@ -130,6 +154,79 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', function ($scope, $mod
   };
 }]);
 
+cbecc.controller('SubtabSettingsCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
+  // Settings UI Grid
+  $scope.settingsGridOptions = {
+    columnDefs: [{
+      name: 'space_name',
+      enableHiding: false,
+      filter: {
+        condition: uiGridConstants.filter.CONTAINS
+      }
+    }, {
+      name: 'space_function',
+      enableHiding: false
+    }, {
+      name: 'occupancy',
+      enableHiding: false
+    }, {
+      name: 'hot_water_use',
+      enableHiding: false
+    }, {
+      name: 'sensible',
+      enableHiding: false
+    }, {
+      name: 'latent',
+      enableHiding: false
+    }, {
+      name: 'schedule_group',
+      enableHiding: false
+    }, {
+      name: 'plug_loads',
+      enableHiding: false
+    }],
+    enableCellEditOnFocus: true,
+    enableFiltering: true,
+    enableRowHeaderSelection: true,
+    enableRowSelection: true,
+    multiSelect: false,
+    onRegisterApi: function (gridApi) {
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+        if (row.isSelected) {
+          $scope.selected = row.entity;
+        } else {
+          // No rows selected
+          $scope.selected = null;
+        }
+      });
+    }
+  };
+
+  // Buttons
+  $scope.duplicateSpace = function () {
+    $scope.spacesGridOptions.data.push({
+      space_name: "Space " + ($scope.spacesGridOptions.data.length + 1),
+      floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
+      story: $scope.selected.story,
+      area: $scope.selected.area,
+      conditioning_type: $scope.selected.conditioning_type,
+      envelope_status: $scope.selected.envelope_status,
+      lighting_status: $scope.selected.lighting_status
+    });
+  };
+  $scope.deleteSpace = function () {
+    var index = $scope.spacesGridOptions.data.indexOf($scope.selected);
+    $scope.spacesGridOptions.data.splice(index, 1);
+    if (index > 0) {
+      $scope.gridApi.selection.toggleRowSelection($scope.spacesGridOptions.data[index - 1]);
+    } else {
+      $scope.selected = null;
+    }
+  };
+
+}]);
+
 cbecc.controller('ModalSpaceCreatorCtrl', [
   '$scope', '$modalInstance', 'uiGridConstants', function ($scope, $modalInstance, uiGridConstants) {
     $scope.selected = null;
@@ -179,6 +276,28 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
           enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
           enableSorting: false,
           enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+        },
+        wallGridOptions: {
+          columnDefs: [{
+            name: 'external_walls',
+            displayName: '# of External Walls'
+          }, {
+            name: 'windows',
+            displayName: '# of Windows on External Walls'
+          }, {
+            name: 'internal_walls',
+            displayName: '# of Internal Walls'
+          }],
+          data: [{
+            external_walls: 1,
+            windows: 1,
+            internal_walls: 3
+          }],
+          enableCellEditOnFocus: true,
+          enableColumnMenus: false,
+          enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+          enableSorting: false,
+          enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
         }
       });
     };
@@ -193,6 +312,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       var data = [];
       for (var i = 0; i < $scope.spaceGroups.length; ++i) {
         data.push($scope.spaceGroups[i].gridOptions.data[0]);
+        data.push($scope.spaceGroups[i].wallGridOptions.data[0]);
       }
       $modalInstance.close(data);
     };

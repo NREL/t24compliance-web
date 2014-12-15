@@ -106,3 +106,7 @@
 .spaceCreatorGrid {
   height: 61px;
 }
+// Hide selected cell
+.ui-grid-cell-focus {
+  background-color: inherit;
+}
