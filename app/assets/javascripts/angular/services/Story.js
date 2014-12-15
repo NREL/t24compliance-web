@@ -1,4 +1,4 @@
-cbecc.factory('BuildingStory', function($resource) {
+cbecc.factory('Story', function($resource) {
   return $resource('/building_stories/:id.json', { id: '@id' },
     {
       'create':  { method: 'POST' },

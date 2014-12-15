@@ -2,11 +2,11 @@ class BuildingStoriesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource param_method: :building_story_params
   before_action :set_building_story, only: [:show, :edit, :update, :destroy]
-
-  respond_to :html
+  before_action :get_building
+  respond_to :json, :html
 
   def index
-    @building_stories = BuildingStory.all
+    @building_stories = @building.stories
     respond_with(@building_stories)
   end
 
@@ -23,9 +23,9 @@ class BuildingStoriesController < ApplicationController
   end
 
   def create
-    @building_story = BuildingStory.new(building_story_params)
-    @building_story.save
-    respond_with(@building_story)
+    @building.building_story = BuildingStory.new(building_story_params)
+    @building.building_story.save
+    respond_with(@building.building_story)
   end
 
   def update
@@ -43,7 +43,11 @@ class BuildingStoriesController < ApplicationController
       @building_story = BuildingStory.find(params[:id])
     end
 
+    def get_building
+      @building = Building.find(params[:building_id])
+    end
+
     def building_story_params
-      params.require(:building_story).permit(:name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height)
+      params.require(:building_story).permit(:name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, building_attributes: [:id])
     end
 end

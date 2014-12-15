@@ -19,6 +19,13 @@
   }
 }
 
+.inline-heading-modal {
+  h2, h3 {
+    display: inline;
+    font-weight: bold;
+  }
+}
+
 .gray-backgnd {
   background-color: #ccc;
 }
@@ -95,4 +102,7 @@
 .layersGrid {
   width: 668px;
   height: 220px;
+}
+.spaceCreatorGrid {
+  height: 61px;
 }

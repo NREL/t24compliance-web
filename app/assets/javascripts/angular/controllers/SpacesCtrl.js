@@ -49,7 +49,6 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', function ($scope, $mod
     }, {
       name: 'lighting_status'
     }],
-    data: [],
     enableCellEditOnFocus: true,
     enableColumnMenus: false,
     enableRowHeaderSelection: true,
@@ -92,13 +91,14 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', function ($scope, $mod
       lighting_status: $scope.selected.lighting_status
     });
   };
-  $scope.applySettings = function () {
-    // TODO
-  };
   $scope.deleteSpace = function () {
     var index = $scope.spacesGridOptions.data.indexOf($scope.selected);
     $scope.spacesGridOptions.data.splice(index, 1);
-    $scope.selected = null;
+    if (index > 0) {
+      $scope.gridApi.selection.toggleRowSelection($scope.spacesGridOptions.data[index - 1]);
+    } else {
+      $scope.selected = null;
+    }
   };
 
   // Modal Settings
@@ -110,9 +110,20 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', function ($scope, $mod
       windowClass: 'wide-modal'
     });
 
-    modalInstance.result.then(function (selectedConstruction) {
-      $scope.panels[index].selected = selectedConstruction;
-      $scope.panels[index].gridOptions.data = selectedConstruction.layers;
+    modalInstance.result.then(function (spaceGroups) {
+      _.each(spaceGroups, function (spaceGroup) {
+        for (var i = 0; i < spaceGroup.quantity; ++i) {
+          $scope.spacesGridOptions.data.push({
+            space_name: spaceGroup.name + ' ' + (i + 1),
+            floor_to_ceiling_height: spaceGroup.floor_to_ceiling_height,
+            story: spaceGroup.story,
+            area: spaceGroup.area,
+            conditioning_type: spaceGroup.conditioning_type,
+            envelope_status: spaceGroup.envelope_status,
+            lighting_status: spaceGroup.lighting_status
+          });
+        }
+      });
     }, function () {
       // Modal canceled
     });
@@ -120,11 +131,70 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', function ($scope, $mod
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
-  '$scope', '$modalInstance', function ($scope, $modalInstance) {
+  '$scope', '$modalInstance', 'uiGridConstants', function ($scope, $modalInstance, uiGridConstants) {
     $scope.selected = null;
 
+    $scope.spaceGroups = [];
+
+    $scope.addSpaceGroup = function () {
+      $scope.spaceGroups.push({
+        gridOptions: {
+          columnDefs: [{
+            name: 'quantity',
+            displayName: '# of Spaces of This Type'
+          }, {
+            name: 'name',
+            displayName: 'Name + 1,2,3...'
+          }, {
+            name: 'space_type_or_function'
+          }, {
+            name: 'floor_to_ceiling_height'
+          }, {
+            name: 'story',
+            width: 71
+          }, {
+            name: 'area',
+            displayName: 'Area (ft2)',
+            width: 98
+          }, {
+            name: 'conditioning_type'
+          }, {
+            name: 'envelope_status'
+          }, {
+            name: 'lighting_status'
+          }],
+          data: [{
+            quantity: 20,
+            name: 'Small Office',
+            space_type_or_function: 'Large Office ≥ 250ft',
+            floor_to_ceiling_height: 10,
+            area: 250,
+            story: 1,
+            conditioning_type: 'Directly Conditioned',
+            envelope_status: 'New',
+            lighting_status: 'New'
+          }],
+          enableCellEditOnFocus: true,
+          enableColumnMenus: false,
+          enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+          enableSorting: false,
+          enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+        }
+      });
+    };
+
+    $scope.addSpaceGroup();
+
+    $scope.removeSpaceGroup = function (index) {
+      $scope.spaceGroups.splice(index, 1);
+    };
+
     $scope.ok = function () {
-      $modalInstance.close($scope.selected);
+      var data = [];
+      for (var i = 0; i < $scope.spaceGroups.length; ++i) {
+        data.push($scope.spaceGroups[i].gridOptions.data[0]);
+      }
+      $modalInstance.close(data);
     };
 
     $scope.cancel = function () {

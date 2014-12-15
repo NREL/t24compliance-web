@@ -159,7 +159,7 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
       enableColumnMenus: false,
       enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
       enableSorting: false,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED
+      enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS
     };
 
     $scope.ok = function () {

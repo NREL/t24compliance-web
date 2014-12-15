@@ -36,7 +36,11 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    respond_with(@project)
+    respond_to do |format|
+      format.html {redirect_to user_url(current_user), notice: 'Project has been deleted.' }
+      format.json {head :no_content}
+    end
+
   end
 
   def wizard

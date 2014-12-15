@@ -13,9 +13,14 @@ Rails.application.routes.draw do
     get '/logout' => 'devise/sessions#destroy'
   end
 
+  resources :inputs, :only => [:index, :show] do
+    get 'datafields'
+    match 'datafields' => 'inputs#datafields', :via => [:get, :post]
+  end
+
   get 'wizard' => 'projects#wizard'
-  resources :projects,:defaults => {format: :json} do
-    resources :buildings, :defaults => {format: :json}
+  resources :projects do
+    resources :buildings
     resources :materials
     resources :construct_assemblies
     resources :simulations do
@@ -28,6 +33,13 @@ Rails.application.routes.draw do
 
   #also add these non-nested urls
   resources :buildings, only: [:show, :edit, :update]
+
+  resources :building_stories
+
+
+
+
+  # non-revised below
 
   resources :constructions, only: [:show, :index]
 
@@ -56,8 +68,6 @@ Rails.application.routes.draw do
   resources :roofs
 
   resources :ceilings
-
-  resources :building_stories
 
   resources :recirculation_dhw_systems
 
@@ -135,10 +145,6 @@ Rails.application.routes.draw do
 
 
 
-  resources :inputs, :only => [:index, :show] do
-    get 'datafields'
-    match 'datafields' => 'inputs#datafields', :via => [:get, :post]
-  end
 
 
 end

@@ -1,13 +1,20 @@
-<div class="modal-header">
-  <h3 class="modal-title">Speedy Space Creator</h3>
+<div class="modal-header inline-heading-modal">
+  <h3 class="modal-title">Speedy Space Creator |</h3> You can add to, edit, and delete these later in a table view. This is to help you quickly create a table with your basic spaces and surfaces to refine. Add walls, floors, ceilings, and roofs and set the details later in the view.
 </div>
 <div class="modal-body">
-  <h4>Body</h4>
-  <!--<div ui-grid="constructionsGridOptions" ui-grid-auto-resize ui-grid-resize-columns ui-grid-selection></div>
-  <h4>Layers:</h4>
-  <div ui-grid="layersGridOptions" class="layersGrid" ui-grid-auto-resize ui-grid-resize-columns></div>-->
+  <button class="btn btn-success" ng-click="addSpaceGroup()">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Space Types and the Number of Each Space Type
+  </button>
+  <hr>
+  <div ng-repeat="spaceGroup in spaceGroups">
+    <div class="clearfix">
+      <button class="btn btn-danger pull-right" ng-click="removeSpaceGroup($index)">Remove</button>
+    </div>
+    <div ui-grid="spaceGroups[$index].gridOptions" class="spaceCreatorGrid" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns></div>
+    <hr>
+  </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()" ng-disabled="!selected">OK</button>
+  <button class="btn btn-primary" ng-click="ok()" ng-disabled="!spaceGroups.length">OK</button>
   <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

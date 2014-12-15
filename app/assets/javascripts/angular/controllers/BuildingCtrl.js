@@ -1,5 +1,5 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Building', 'Shared', function ($scope, $window, $stateParams, $resource, $location, flash, Building, Shared) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Building', 'Story', 'Shared', function ($scope, $window, $stateParams, $resource, $location, flash, Building, Story, Shared) {
 
      // check on project, if undefined, redirect
     if (Shared.getProjectId() == null)
@@ -42,7 +42,14 @@ cbecc.controller('BuildingCtrl', [
       console.log("submit");
 
       function success(response) {
-        the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
+        var the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
+
+        // create / update / delete stories
+        //create all for now
+        $scope.stories.forEach( function (story) {
+          story.building_id = the_id;
+          Story.create(story);
+        });
 
         // go back to form with id of what was just saved
         $location.path("/building/" + the_id);
@@ -62,6 +69,7 @@ cbecc.controller('BuildingCtrl', [
 
       // set project ID
       $scope.building.project_id = Shared.getProjectId();
+      // TODO: this checkbox stuff needs a second look
       console.log('checkbox: ', $scope.building.relocatable_public_school_building);
       if ($scope.building.relocatable_public_school_building == true)
       {
@@ -70,6 +78,24 @@ cbecc.controller('BuildingCtrl', [
       else {
         $scope.building.relocatable_public_school_building = 0;
       }
+
+      // STORIES
+      $scope.building.total_story_count = $scope.storiesGridOptions.data.length;
+      console.log('total stories:', $scope.building.total_story_count);
+      var above_cnt = 0;
+      console.log('STORIES: ', $scope.storiesGridOptions);
+      $scope.stories = [];
+      $scope.storiesGridOptions.data.forEach( function (row)
+        {
+          if (row.above_or_below == 'Above')
+          {
+            above_cnt += 1;
+            // save story to scope
+            delete row.$$hashKey;
+            $scope.stories.push(row);
+          }
+        });
+      $scope.building.above_grade_story_count = above_cnt;
 
       // create vs update
       if (Shared.getBuildingId() != null) {
@@ -83,13 +109,15 @@ cbecc.controller('BuildingCtrl', [
     // Stories UI Grid
     $scope.storiesGridOptions = {
       columnDefs: [{
-        name: 'story_name'
+        name: 'name',
+        displayName: 'Story Name'
       }, {
-        name: 'altitude'
+        name: 'z',
+        displayName: 'Elevation'
       }, {
-        name: 'floor_area_to_floor_height'
+        name: 'floor_to_floor_height'
       }, {
-        name: 'floor_area_to_floor_ceiling'
+        name: 'floor_to_ceiling_height'
       }, {
         name: 'above_or_below'
       }],
@@ -115,26 +143,30 @@ cbecc.controller('BuildingCtrl', [
     // Buttons
     $scope.addStory = function () {
       $scope.storiesGridOptions.data.push({
-        story_name: "Story " + ($scope.storiesGridOptions.data.length + 1),
-        altitude: 6000,
-        floor_area_to_floor_height: 14,
-        floor_area_to_floor_ceiling: 14,
+        name: "Story " + ($scope.storiesGridOptions.data.length + 1),
+        z: 0,
+        floor_to_floor_height: 14,
+        floor_to_ceiling_height: 10,
         above_or_below: 'Above'
       });
     };
     $scope.duplicateStory = function () {
       $scope.storiesGridOptions.data.push({
-        story_name: "Story " + ($scope.storiesGridOptions.data.length + 1),
-        altitude: $scope.selected.altitude,
-        floor_area_to_floor_height: $scope.selected.floor_area_to_floor_height,
-        floor_area_to_floor_ceiling: $scope.selected.floor_area_to_floor_ceiling,
+        name: "Story " + ($scope.storiesGridOptions.data.length + 1),
+        z: $scope.selected.z,
+        floor_to_floor_height: $scope.selected.floor_to_floor_height,
+        floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
         above_or_below: $scope.selected.above_or_below
       });
     };
     $scope.deleteStory = function () {
       var index = $scope.storiesGridOptions.data.indexOf($scope.selected);
       $scope.storiesGridOptions.data.splice(index, 1);
-      $scope.selected = null;
+      if (index > 0) {
+        $scope.gridApi.selection.toggleRowSelection($scope.storiesGridOptions.data[index - 1]);
+      } else {
+        $scope.selected = null;
+      }
     };
 
     $scope.storiesBelow = function () {
