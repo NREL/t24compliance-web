@@ -8,100 +8,100 @@
     </div>
   </div>
 </div>
+<div class="row pad-bot-20">
+  <form class="form-horizontal" role="form" name="buildingForm">
+    <div class="row pad-bot-20">
+      <div class="col-md-5">
+        <div class="form-group" ng-class="errors.name ? 'error' : ''">
+          <label for="name" class="col-md-2 control-label col-md-offset-1">
+            Building Name
+          </label>
 
-<form class="form-horizontal" role="form" name="buildingForm">
-  <div class="row pad-bot-20">
-    <div class="col-md-5">
-      <div class="form-group" ng-class="errors.name ? 'error' : ''">
-        <label for="name" class="col-md-2 control-label col-md-offset-1">
-          Building Name
-        </label>
-
-        <div class="col-md-6">
-          <input type="text" name="name" class="form-control" ng-model="building.name" size="50">
-        </div>
-        <div field_error errors="errors" field="name"></div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group" ng-class="errors.azimuth ? 'error' : ''">
-        <label for="azimuth" class="col-md-2 control-label col-md-offset-1">
-          Azimuth
-        </label>
-
-        <div class="col-md-1">
-          <input type="text" name="azimuth" class="form-control" ng-model="building.azimuth">
-        </div>
-        <div field_error errors="errors" field="azimuth"></div>
-      </div>
-    </div>
-  </div>
-  <div class="row pad-bot-20">
-
-    <div class="col-md-5">
-      <div class="form-group" ng-class="errors.relocatable_public_school_building ? 'error' : ''">
-          <div class="checkbox">
-            <label class="col-md-5 control-label col-md-offset-3">
-              <input type="checkbox" name="relocatable_public_school_building" ng-model="building.relocatable_public_school_building" ngTrueValue="1" ngFalseValue="0" ng-checked="building.relocatable_public_school_building == 1">
-              Relocatable Public School Building
-            </label>
+          <div class="col-md-6">
+            <input type="text" name="name" class="form-control" ng-model="building.name" size="50">
           </div>
-        <div field_error errors="errors" field="relocatable_public_school_building"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row pad-bot-20">
-
-    <div class="col-md-5">
-      <div class="form-group" ng-class="errors.total_floor_area ? 'error' : ''">
-        <label for="total_floor_area" class="col-md-2 control-label col-md-offset-1">
-          Floor Area
-        </label>
-
-        <div class="col-md-2">
-          <input type="text" name="total_floor_area" class="form-control" ng-model="building.total_floor_area" size="50">
+          <div field_error errors="errors" field="name"></div>
         </div>
-        <div field_error errors="errors" field="total_floor_area"></div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group" ng-class="errors.living_unit_count ? 'error' : ''">
-        <label for="azimuth" class="col-md-2 control-label col-md-offset-1">
-          Conditioned Space Living Units
-        </label>
+      <div class="col-md-6">
+        <div class="form-group" ng-class="errors.azimuth ? 'error' : ''">
+          <label for="azimuth" class="col-md-2 control-label col-md-offset-1">
+            Azimuth
+          </label>
 
-        <div class="col-md-2">
-          <input type="text" name="living_unit_count" class="form-control" ng-model="building.living_unit_count">
+          <div class="col-md-1">
+            <input type="text" name="azimuth" class="form-control" ng-model="building.azimuth">
+          </div>
+          <div field_error errors="errors" field="azimuth"></div>
         </div>
-        <div field_error errors="errors" field="living_unit_count"></div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="row pad-bot-20">
-    <div class="col-md-12 pad-left-40">
-      <div class="inline-heading">
-        <h3>Stories |</h3> Define stories in building
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-1 col-md-offset-1">Total Stories: {{storiesGridOptions.data.length}}</div>
-    <!--<div class="col-md-1">Stories Below: {{storiesBelow}}</div>-->
-  </div>
-  <div class="row pad-bot-20">
-    <button type="button" ng-click="addStory()" class="btn btn-success col-md-1 col-md-offset-1">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Story
-    </button>
-    <button type="button" ng-click="duplicateStory()" class="btn btn-info col-md-1 col-md-offset-7" ng-disabled="!selected">Duplicate</button>
-    <button type="button" ng-click="deleteStory()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
-  </div>
-  <div ui-grid="storiesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-</form>
+    <div class="row pad-bot-20">
 
+      <div class="col-md-5">
+        <div class="form-group" ng-class="errors.relocatable_public_school_building ? 'error' : ''">
+            <div class="checkbox">
+              <label class="col-md-5 control-label col-md-offset-3">
+                <input type="checkbox" name="relocatable_public_school_building" ng-model="building.relocatable_public_school_building" ng-true-value="1" ng-false-value="0">
+                Relocatable Public School Building
+              </label>
+            </div>
+          <div field_error errors="errors" field="relocatable_public_school_building"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row pad-bot-20">
+
+      <div class="col-md-5">
+        <div class="form-group" ng-class="errors.total_floor_area ? 'error' : ''">
+          <label for="total_floor_area" class="col-md-2 control-label col-md-offset-1">
+            Floor Area
+          </label>
+
+          <div class="col-md-2">
+            <input type="text" name="total_floor_area" class="form-control" ng-model="building.total_floor_area" size="50">
+          </div>
+          <div field_error errors="errors" field="total_floor_area"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group" ng-class="errors.living_unit_count ? 'error' : ''">
+          <label for="azimuth" class="col-md-2 control-label col-md-offset-1">
+            Conditioned Space Living Units
+          </label>
+
+          <div class="col-md-2">
+            <input type="text" name="living_unit_count" class="form-control" ng-model="building.living_unit_count">
+          </div>
+          <div field_error errors="errors" field="living_unit_count"></div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row pad-bot-20">
+      <div class="col-md-12 pad-left-40">
+        <div class="inline-heading">
+          <h3>Stories |</h3> Define stories in building
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1 col-md-offset-1">Total Stories: {{storiesGridOptions.data.length}}</div>
+      <!--<div class="col-md-1">Stories Below: {{storiesBelow}}</div>-->
+    </div>
+    <div class="row pad-bot-20">
+      <button type="button" ng-click="addStory()" class="btn btn-success col-md-1 col-md-offset-1">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Story
+      </button>
+      <button type="button" ng-click="duplicateStory()" class="btn btn-info col-md-1 col-md-offset-7" ng-disabled="!selected">Duplicate</button>
+      <button type="button" ng-click="deleteStory()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
+    </div>
+    <div ui-grid="storiesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+  </form>
+</div>
 <div class="row pad-bot-20">
   <div class="control-group">
     <div class="controls">

@@ -6,7 +6,7 @@ class BuildingStoriesController < ApplicationController
   respond_to :json, :html
 
   def index
-    @building_stories = @building.stories
+    @building_stories = @building.building_stories
     respond_with(@building_stories)
   end
 
@@ -23,9 +23,8 @@ class BuildingStoriesController < ApplicationController
   end
 
   def create
-    @building.building_story = BuildingStory.new(building_story_params)
-    @building.building_story.save
-    respond_with(@building.building_story)
+    @building.building_stories.create(building_story_params)
+    respond_with(@building.building_stories.where(name: building_story_params[:name]).first)
   end
 
   def update
