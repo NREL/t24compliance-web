@@ -15,6 +15,7 @@
 //= require angular-ui-grid
 //= require angular-ui-router
 //= require angular-ui-router.stateHelper
+//= require angularjs-toaster
 //= require bootstrap-sprockets
 //= require bootstrap-switch
 //= require lodash
