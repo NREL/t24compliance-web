@@ -52,6 +52,9 @@ gem 'sidekiq'
 # use puma to run the web app in jruby
 gem 'puma'
 
+# for windows
+gem 'tzinfo-data'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

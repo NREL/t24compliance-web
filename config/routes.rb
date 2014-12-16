@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :construction_defaults
-
   root :to => "inputs#dashboard"
 
   devise_for :users
@@ -31,10 +29,15 @@ Rails.application.routes.draw do
     end
   end
 
-  #also add these non-nested urls
+  # depend on project
+  # also add these non-nested urls
   resources :buildings, only: [:show, :edit, :update]
+  resources :construction_defaults
 
+
+  # depend on building
   resources :building_stories
+
 
 
 

@@ -24,7 +24,7 @@ development:
     default:
       database: cbecc_com_web_dev
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
 test:
   sessions:

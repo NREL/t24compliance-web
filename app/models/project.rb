@@ -105,7 +105,9 @@ class Project
   has_one :building, dependent: :destroy
   has_many :external_shading_objects, dependent: :destroy
   has_many :fluid_systems, dependent: :destroy
+
   has_one :simulation, dependent: :destroy
+  has_one :construction_default
   belongs_to :user
 
 

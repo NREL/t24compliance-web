@@ -9,18 +9,61 @@ cbecc.controller('BuildingCtrl', [
     console.log("Current ProjectID: ", Shared.getProjectId());
     $scope.projectId = Shared.getProjectId();
 
+    // Stories UI Grid
+    $scope.storiesGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        displayName: 'Story Name'
+      }, {
+        name: 'z',
+        displayName: 'Elevation'
+      }, {
+        name: 'floor_to_floor_height'
+      }, {
+        name: 'floor_to_ceiling_height'
+      }, {
+        name: 'above_or_below'
+      }],
+      enableCellEditOnFocus: true,
+      enableColumnMenus: false,
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      enableSorting: false,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selected = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected = null;
+          }
+        });
+      }
+    };
+    console.log("SAVED STORIES ", $scope.stories);
+
+    $scope.stories = [];
     $scope.saved_stories = [];
     // new vs edit (check if bld already saved and load that one)
     if ($stateParams.id) {
       Shared.setBuildingId($stateParams.id);
       $scope.building = Building.show({project_id: $scope.projectId, id: $stateParams.id});
       console.log('building retrieved by stateParams: ', $stateParams.id);
-      $scope.saved_stories = Story.index({building_id: Shared.getBuildingId()});
+      Story.index({building_id: Shared.getBuildingId()}).$promise.then(function(storyData) {
+        $scope.stories = storyData;
+        $scope.saved_stories = storyData;
+        $scope.storiesGridOptions.data = storyData;
+      });
     }
     else if (Shared.getBuildingId() !== null) {
       $scope.building = Building.show({project_id: $scope.projectId, id: Shared.getBuildingId()});
       console.log('building retrieved by getBuildingId:', Shared.getBuildingId());
-      $scope.saved_stories = Story.index({building_id: Shared.getBuildingId()});
+      Story.index({building_id: Shared.getBuildingId()}).$promise.then(function(storyData) {
+        $scope.stories = storyData;
+        $scope.storiesGridOptions.data = storyData;
+      });
     }
     else {
       Building.index({project_id: $scope.projectId}).$promise.then(function(data) {
@@ -29,12 +72,18 @@ cbecc.controller('BuildingCtrl', [
           Shared.setBuildingId($scope.building.id);
           console.log('building retrieved by project id (bld exists): ', $scope.building.id);
           Story.index({building_id: $scope.building.id}).$promise.then(function(storyData) {
+            $scope.stories = storyData;
             $scope.saved_stories = storyData;
+            console.log("HEY!");
+            console.log($scope.saved_stories);
+            $scope.storiesGridOptions.data = storyData;
+
           });
         }
         else {
           $scope.building = new Building();
           console.log('no buildings associated with this project, creating new one');
+          $scope.storiesGridOptions.data = [];
         }
       });
     }
@@ -80,22 +129,8 @@ cbecc.controller('BuildingCtrl', [
       }
 
       // STORIES
-      $scope.building.total_story_count = $scope.storiesGridOptions.data.length;
+      $scope.building.total_story_count = $scope.stories.length;
       console.log('total stories:', $scope.building.total_story_count);
-      var above_cnt = 0;
-      console.log('STORIES: ', $scope.storiesGridOptions);
-      $scope.stories = [];
-      $scope.storiesGridOptions.data.forEach( function (row)
-        {
-          if (row.above_or_below == 'Above')
-          {
-            above_cnt += 1;
-            // save story to scope
-            delete row.$$hashKey;
-            $scope.stories.push(row);
-          }
-        });
-      $scope.building.above_grade_story_count = above_cnt;
 
       // create vs update
       if (Shared.getBuildingId() != null) {
@@ -106,46 +141,10 @@ cbecc.controller('BuildingCtrl', [
 
     };
 
-    // Stories UI Grid
-    $scope.storiesGridOptions = {
-      columnDefs: [{
-        name: 'name',
-        displayName: 'Story Name'
-      }, {
-        name: 'z',
-        displayName: 'Elevation'
-      }, {
-        name: 'floor_to_floor_height'
-      }, {
-        name: 'floor_to_ceiling_height'
-      }, {
-        name: 'above_or_below'
-      }],
-      enableCellEditOnFocus: true,
-      enableColumnMenus: false,
-      enableRowHeaderSelection: true,
-      enableRowSelection: true,
-      enableSorting: false,
-      multiSelect: false,
-      onRegisterApi: function (gridApi) {
-        $scope.gridApi = gridApi;
-        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-          if (row.isSelected) {
-            $scope.selected = row.entity;
-          } else {
-            // No rows selected
-            $scope.selected = null;
-          }
-        });
-      },
-      data: $scope.saved_stories
-    };
-    console.log("SAVED STORIES ", $scope.saved_stories);
-
     // Buttons
     $scope.addStory = function () {
-      $scope.saved_stories.push({
-        name: "Story " + ($scope.saved_stories.length + 1),
+      $scope.stories.push({
+        name: "Story " + ($scope.stories.length + 1),
         z: 0,
         floor_to_floor_height: 14,
         floor_to_ceiling_height: 10,
@@ -153,8 +152,8 @@ cbecc.controller('BuildingCtrl', [
       });
     };
     $scope.duplicateStory = function () {
-      $scope.saved_stories.push({
-        name: "Story " + ($scope.saved_stories.length + 1),
+      $scope.stories.push({
+        name: "Story " + ($scope.stories.length + 1),
         z: $scope.selected.z,
         floor_to_floor_height: $scope.selected.floor_to_floor_height,
         floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
@@ -162,10 +161,10 @@ cbecc.controller('BuildingCtrl', [
       });
     };
     $scope.deleteStory = function () {
-      var index = $scope.saved_stories.indexOf($scope.selected);
-      $scope.saved_stories.splice(index, 1);
+      var index = $scope.stories.indexOf($scope.selected);
+      $scope.stories.splice(index, 1);
       if (index > 0) {
-        $scope.gridApi.selection.toggleRowSelection($scope.saved_stories[index - 1]);
+        $scope.gridApi.selection.toggleRowSelection($scope.stories[index - 1]);
       } else {
         $scope.selected = null;
       }

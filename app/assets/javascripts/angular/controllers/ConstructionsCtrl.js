@@ -1,25 +1,35 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'Construction', 'uiGridConstants', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, Construction, uiGridConstants) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'uiGridConstants', 'Construction', 'ConstructionDefaults', 'Shared', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, uiGridConstants, Construction, ConstructionDefaults, Shared) {
     //use Construction.index() to retrieve all constructions
     //use Construction.show(id) to retrieve a construction by id
     $scope.data = Construction.index();
 
+    //retrieve saved defaults (if any)
+    $scope.defaults = ConstructionDefaults.index({project_id: Shared.getProjectId()});
+
     //collapsible panels
     $scope.panels = [{
       title: "Exterior Wall Construction",
+      name: 'external_wall',
       open: true
     }, {
-      title: "Interior Wall Construction"
+      title: "Interior Wall Construction",
+      name: 'internal_wall'
     }, {
-      title: "Roof Construction"
+      title: "Roof Construction",
+      name: 'roof'
     }, {
-      title: "Window Construction"
+      title: "Window Construction",
+      name: 'window'
     }, {
-      title: "Skylight Construction"
+      title: "Skylight Construction",
+      name: 'skylight'
     }, {
-      title: "Raised Floor Construction"
+      title: "Raised Floor Construction",
+      name: 'raised_floor'
     }, {
-      title: "Slab-on-grade Construction"
+      title: "Slab-on-grade Construction",
+      name: 'slab_on_grade'
     }];
     $scope.panels.forEach(function (panel) {
       panel.gridOptions = {
@@ -55,6 +65,18 @@ cbecc.controller('ConstructionsCtrl', [
       }, function () {
         // Modal canceled
       });
+    };
+
+    // save
+    $scope.submit = function () {
+      console.log("submit");
+
+      $scope.panels.forEach(function (panel) {
+
+
+
+      });
+
     };
 
     // Remove Button
