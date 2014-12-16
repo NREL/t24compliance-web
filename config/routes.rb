@@ -142,8 +142,6 @@ Rails.application.routes.draw do
 
   resources :poly_loops
 
-
-
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
