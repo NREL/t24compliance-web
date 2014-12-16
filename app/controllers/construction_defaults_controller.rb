@@ -5,13 +5,8 @@ class ConstructionDefaultsController < ApplicationController
   respond_to :json, :html
 
   def index
-    if @project
-      @construction_defaults = []
-      @construction_defaults << @project.construction_default
-    else
-      @construction_defaults = ConstructionDefault.all
-    end
-    respond_with(@construction_defaults)
+    @project.construction_default
+    respond_with(@project.construction_default)
   end
 
   def show

@@ -16,8 +16,14 @@ cbecc.controller('ConstructionsCtrl', [
       title: "Interior Wall Construction",
       name: 'internal_wall'
     }, {
+      title: "Underground Wall Construction",
+      name: 'underground_wall'
+    }, {
       title: "Roof Construction",
       name: 'roof'
+    }, {
+      title: "Door Construction",
+      name: 'door'
     }, {
       title: "Window Construction",
       name: 'window'
@@ -25,11 +31,14 @@ cbecc.controller('ConstructionsCtrl', [
       title: "Skylight Construction",
       name: 'skylight'
     }, {
-      title: "Raised Floor Construction",
-      name: 'raised_floor'
+      title: "Interior Floor Construction",
+      name: 'interior_floor'
     }, {
-      title: "Slab-on-grade Construction",
-      name: 'slab_on_grade'
+      title: "Exterior Floor Construction",
+      name: 'exterior_floor'
+    }, {
+      title: "Underground Floor Construction",
+      name: 'underground_floor'
     }];
     $scope.panels.forEach(function (panel) {
       panel.gridOptions = {

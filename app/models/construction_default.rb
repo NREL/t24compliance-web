@@ -4,11 +4,13 @@ class ConstructionDefault
 
   field :external_wall, type: String
   field :internal_wall, type: String
+  field :underground_wall, type: String
   field :roof, type: String
   field :window, type: String
   field :skylight, type: String
-  field :raised_floor, type: String
-  field :slab_on_grade, type: String
+  field :interior_floor, type: String
+  field :exterior_floor, type: String
+  field :underground_floor, type: String
 
   belongs_to :project
 
@@ -16,11 +18,13 @@ class ConstructionDefault
     construction_default_names = [
         {db_field_name: 'external_wall', display_name: 'External Wall Construction'},
         {db_field_name: 'internal_wall', display_name: 'Internal Wall Construction'},
+        {db_field_name: 'underground_wall', display_name: 'Underground Wall Construction'},
         {db_field_name: 'roof', display_name: 'Roof Construction'},
         {db_field_name: 'window', display_name: 'Window Construction'},
         {db_field_name: 'skylight', display_name: 'Skylight Construction'},
-        {db_field_name: 'raised_floor', display_name: 'Raised Floor Construction'},
-        {db_field_name: 'slab_on_grade', display_name: 'Slab-on-grade Construction'}
+        {db_field_name: 'interior_floor', display_name: 'Interior Floor Construction'},
+        {db_field_name: 'exterior_floor', display_name: 'Exterior Floor Construction'},
+        {db_field_name: 'underground_floor', display_name: 'Underground Construction'}
     ]
   end
 
