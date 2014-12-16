@@ -15,15 +15,8 @@ class Simulation
 
   before_destroy :remove_files
 
-
   # Run the data point
   def run
-    if Dir.exist? run_path
-      fail "Run for '#{self.project.name}' in directory '#{run_path}' already exists. Delete simulation first"
-    end
-
-    FileUtils.mkdir_p run_path
-
     ## Temp Code
     # clear out the queue until we have proper queue management
     require 'sidekiq/api'
@@ -31,20 +24,16 @@ class Simulation
     # For now just copy in the example model that we are running into the folder under the new filename
     ## End Temp Code
 
-    # save the xml instance
-    self.project.xml_save("#{run_path}/in.xml")
-
-    RunSimulation.perform_async(self.id, run_path)
+    RunSimulation.perform_async(self.id)
   end
 
+  # This only runs on the server, so if we federate the systems, then this will not always work.
   def remove_files
     if Dir.exist? run_path
       logger.info "Removing simulation run directory #{run_path}"
       FileUtils.rm_rf run_path
     end
   end
-
-  protected
 
   def run_path
     File.join(Rails.root, 'data', 'simulations', Rails.env, self._id)
