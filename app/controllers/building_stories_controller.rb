@@ -34,35 +34,33 @@ class BuildingStoriesController < ApplicationController
     clean_params = building_stories_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
 
-    # original set
-    # stories = @building.building_stories.only(:id)
-    # logger.info("stored stories ids: #{stories}")
-
-    # new set
-    # new_stories = clean_params.collect{ |s| s[:id] }
-    # logger.info("new stories ids: #{new_stories}")
+    @building = Building.find(params[:building_id])
 
     # add / update
-    clean_params[:_json].each do |rec|
-      logger.info("REC: #{rec.inspect}")
-      if rec.has_key?('id') and !rec['id'].nil?
+    stories = []
+    if clean_params.has_key?('_json')
+      clean_params[:_json].each do |rec|
+        logger.info("REC: #{rec.inspect}")
+        if rec.has_key?('id') and !rec['id'].nil?
 
-        @story = BuildingStory.find(rec['id'])
-        @building = @story.building
-        @story.update(rec)
-      else
-        @story = BuildingStory.new(rec)
-        @story.save
+          @story = BuildingStory.find(rec['id'])
+          @story.update(rec)
+          stories << @story
+        else
+          @story = BuildingStory.new(rec)
+          @story.save
+          stories << @story
+        end
       end
     end
 
-     @building_stories = @building.building_stories
-
-    # delete
+    # delete ?
+    @building.building_stories = stories
+    @building.save
 
     # TODO: add error handling?
     # TODO: couldn't get this to respond with index action...
-    respond_with(@story)
+    respond_with(@building.building_stories.first)
 
   end
 
@@ -86,6 +84,6 @@ class BuildingStoriesController < ApplicationController
 
     #for update_all
     def building_stories_params
-      params.permit(_json: [:id, :name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id])
+      params.permit(:building_id, _json: [:id, :name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id])
     end
 end

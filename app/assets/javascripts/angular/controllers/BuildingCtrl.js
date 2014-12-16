@@ -92,15 +92,12 @@ cbecc.controller('BuildingCtrl', [
         console.log($scope.stories);
         $scope.stories.forEach( function(s) {
           // ensure each story has a building_id defined
-          console.log("S!");
-          console.log(s);
           if (s.building_id != the_id ) {
             s.building_id = the_id;
-            console.log(s);
           }
         });
 
-        Story.createUpdate($scope.stories);
+        Story.createUpdate({building_id: Shared.getBuildingId()},$scope.stories);
 
         // go back to form with id of what was just saved
         $location.path("/building/" + the_id);
