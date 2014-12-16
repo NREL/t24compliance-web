@@ -31,9 +31,8 @@ Rails.application.routes.draw do
 
   # depend on project
   # also add these non-nested urls
-  resources :buildings, only: [:show, :edit, :update]
+  #resources :buildings
   resources :construction_defaults
-
 
   # depend on building
   resources :building_stories

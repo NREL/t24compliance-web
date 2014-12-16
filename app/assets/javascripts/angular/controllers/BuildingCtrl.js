@@ -45,7 +45,6 @@ cbecc.controller('BuildingCtrl', [
     console.log("SAVED STORIES ", $scope.stories);
 
     $scope.stories = [];
-    $scope.saved_stories = [];
     // new vs edit (check if bld already saved and load that one)
     if ($stateParams.id) {
       Shared.setBuildingId($stateParams.id);
@@ -53,7 +52,6 @@ cbecc.controller('BuildingCtrl', [
       console.log('building retrieved by stateParams: ', $stateParams.id);
       Story.index({building_id: Shared.getBuildingId()}).$promise.then(function(storyData) {
         $scope.stories = storyData;
-        $scope.saved_stories = storyData;
         $scope.storiesGridOptions.data = storyData;
       });
     }
@@ -67,15 +65,12 @@ cbecc.controller('BuildingCtrl', [
     }
     else {
       Building.index({project_id: $scope.projectId}).$promise.then(function(data) {
-        if (data.length) {
-          $scope.building = data[0];
+        if (data) {
+          $scope.building = data;
           Shared.setBuildingId($scope.building.id);
           console.log('building retrieved by project id (bld exists): ', $scope.building.id);
           Story.index({building_id: $scope.building.id}).$promise.then(function(storyData) {
             $scope.stories = storyData;
-            $scope.saved_stories = storyData;
-            console.log("HEY!");
-            console.log($scope.saved_stories);
             $scope.storiesGridOptions.data = storyData;
 
           });
@@ -94,13 +89,20 @@ cbecc.controller('BuildingCtrl', [
 
       function success(response) {
         var the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
-
-        // create / update / delete stories
-        //create all for now
-        $scope.stories.forEach( function (story) {
-          story.building_id = the_id;
-          Story.create(story);
+        console.log("BLDG ID: ", the_id);
+        // UPDATE STORIES
+        console.log($scope.stories);
+        $scope.stories.forEach( function(s) {
+          // ensure each story has a building_id defined
+          console.log("S!");
+          console.log(s);
+          if (s.building_id != the_id ) {
+            s.building_id = the_id;
+            console.log(s);
+          }
         });
+
+        Story.createUpdate($scope.stories);
 
         // go back to form with id of what was just saved
         $location.path("/building/" + the_id);
@@ -120,7 +122,6 @@ cbecc.controller('BuildingCtrl', [
 
       // set project ID
       $scope.building.project_id = Shared.getProjectId();
-      // TODO: this checkbox stuff needs a second look
       console.log('checkbox: ', $scope.building.relocatable_public_school_building);
       if ($scope.building.relocatable_public_school_building) {
         $scope.building.relocatable_public_school_building = 1;
@@ -134,8 +135,10 @@ cbecc.controller('BuildingCtrl', [
 
       // create vs update
       if (Shared.getBuildingId() != null) {
+        console.log('Update Bldg');
         Building.update({project_id: $scope.projectId}, $scope.building, success, failure);
       } else {
+        console.log('Create Bldg');
         Building.create({project_id: $scope.projectId}, $scope.building, success, failure);
       }
 
