@@ -3,6 +3,8 @@ class SimulationsController < ApplicationController
   load_and_authorize_resource param_method: :simulation_params
   before_action :set_simulation, only: [:show, :edit, :update, :destroy, :run]
 
+  respond_to :json, :html
+
   # GET /simulations
   # GET /simulations.json
   def index
@@ -66,9 +68,9 @@ class SimulationsController < ApplicationController
   end
 
   def run
-    @simulation.run_docker
+    @simulation.run
 
-    redirect_to simulation_path(@simulation)
+    respond_with(@simulation)
   end
 
   private
