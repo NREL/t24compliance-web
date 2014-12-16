@@ -89,6 +89,19 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-md-6">
+        <div class="form-group" ng-class="errors.above_grade_story_count ? 'error' : ''">
+          <label for="above_grade_story_count" class="col-md-4 control-label col-md-offset-1">
+            Number of Above Grade Stories
+          </label>
+          <div class="col-md-2">
+            <input type="text" name="total_floor_area" class="form-control" ng-model="building.above_grade_story_count">
+          </div>
+          <div field_error errors="errors" field="above_grade_story_count"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-1 col-md-offset-1">Total Stories: {{storiesGridOptions.data.length}}</div>
       <!--<div class="col-md-1">Stories Below: {{storiesBelow}}</div>-->
     </div>

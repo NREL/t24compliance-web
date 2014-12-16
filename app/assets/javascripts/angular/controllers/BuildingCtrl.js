@@ -21,8 +21,6 @@ cbecc.controller('BuildingCtrl', [
         name: 'floor_to_floor_height'
       }, {
         name: 'floor_to_ceiling_height'
-      }, {
-        name: 'above_or_below'
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,
@@ -150,8 +148,7 @@ cbecc.controller('BuildingCtrl', [
         name: "Story " + ($scope.stories.length + 1),
         z: 0,
         floor_to_floor_height: 14,
-        floor_to_ceiling_height: 10,
-        above_or_below: 'Above'
+        floor_to_ceiling_height: 10
       });
     };
     $scope.duplicateStory = function () {
@@ -159,8 +156,7 @@ cbecc.controller('BuildingCtrl', [
         name: "Story " + ($scope.stories.length + 1),
         z: $scope.selected.z,
         floor_to_floor_height: $scope.selected.floor_to_floor_height,
-        floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
-        above_or_below: $scope.selected.above_or_below
+        floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height
       });
     };
     $scope.deleteStory = function () {

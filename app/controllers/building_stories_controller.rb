@@ -60,7 +60,9 @@ class BuildingStoriesController < ApplicationController
 
     # delete
 
-    respond_with(@building_stories)
+    # TODO: add error handling?
+    # TODO: couldn't get this to respond with index action...
+    respond_with(@story)
 
   end
 
