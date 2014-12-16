@@ -45,6 +45,7 @@ gem 'angular-rails-templates'
 # For simulation of CBECC-Com Files
 gem 'docker-api', require: 'docker'
 gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -54,6 +55,7 @@ gem 'puma'
 
 # for windows
 gem 'tzinfo-data'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
