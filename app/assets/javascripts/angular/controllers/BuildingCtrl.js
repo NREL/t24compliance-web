@@ -92,7 +92,7 @@ cbecc.controller('BuildingCtrl', [
       console.log('total stories:', $scope.building.total_story_count);
 
       // create vs update
-      if (Shared.getBuildingId() != null) {
+      if (Shared.getBuildingId() !== null) {
         console.log('Update Bldg');
         Building.update({project_id: $scope.projectId}, $scope.building, success, failure);
       } else {
