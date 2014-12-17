@@ -1,6 +1,6 @@
 cbecc.controller('ReviewCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', function ($scope, $window, $routeParams, $resource, $location) {
-
+  '$scope', '$window', '$routeParams', '$resource', '$location', 'Shared', function ($scope, $window, $routeParams, $resource, $location, Shared) {
+    Shared.stopSpinner();
 
 
   }

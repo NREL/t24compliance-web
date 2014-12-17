@@ -5,10 +5,21 @@ var cbecc = angular.module('cbecc', [
   'ui.grid', 'ui.grid.autoResize', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.selection',
   'ui.router', 'ui.router.stateHelper',
   'ui.bootstrap',
-  'frapontillo.bootstrap-switch']);
+  'frapontillo.bootstrap-switch',
+  'angularSpinner']);
 
 cbecc.config([
-  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider) {
+  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider) {
+
+    usSpinnerConfigProvider.setDefaults({
+      lines: 13,
+      length: 0,
+      width: 22,
+      radius: 60,
+      speed: 2.2,
+      trail: 60,
+      shadow: false
+    });
 
     var getBuilding = function ($q, Shared, Building) {
       if (Shared.getProjectId() === null) {
@@ -26,17 +37,23 @@ cbecc.config([
       });
     };
 
-    var getStoriesForBuildingTab = function ($q, Story, Shared, Building) {
+    var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
+      Shared.startSpinner();
       if (Shared.getBuildingId() === null) {
-        return getBuilding($q, Shared, Building).then(function () {
-          return Story.index({
-            building_id: Shared.getBuildingId()
-          }).$promise;
-        }, function (error) {
-          if (error == 'No project ID') return $q.reject(error);
-          // Ignore lack of buildingId on the building tab with a projectId
-          return $q.when([]);
-        });
+        if ($stateParams.hasOwnProperty('id')) {
+          // buildingId, but no projectId
+          Shared.setBuildingId($stateParams.id);
+        } else {
+          return getBuilding($q, Shared, Building).then(function () {
+            return Story.index({
+              building_id: Shared.getBuildingId()
+            }).$promise;
+          }, function (error) {
+            if (error == 'No project ID') return $q.reject(error);
+            // Ignore lack of buildingId on the building tab with a projectId
+            return $q.when([]);
+          });
+        }
       }
       return Story.index({
         building_id: Shared.getBuildingId()
@@ -44,6 +61,7 @@ cbecc.config([
     };
 
     var getStories = function ($q, Story, Shared, Building) {
+      Shared.startSpinner();
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
           console.log('getBuilding returned success');
@@ -58,6 +76,7 @@ cbecc.config([
     };
 
     var getConstructions = function ($q, Construction, Shared, Building) {
+      Shared.startSpinner();
       // Construction data have no dependencies, but just to reduce latency:
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
@@ -68,6 +87,7 @@ cbecc.config([
     };
 
     var getConstructionDefaults = function ($q, ConstructionDefaults, Shared, Building) {
+      Shared.startSpinner();
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
           return ConstructionDefaults.index({
@@ -209,8 +229,9 @@ cbecc.config([
   }
 ]);
 
-cbecc.run(['$rootScope', '$state', 'toaster', function ($rootScope, $state, toaster) {
+cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $state, toaster, Shared) {
   $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+    Shared.stopSpinner();
     if (error == 'No project ID') {
       toaster.pop('error', error, "Please create or open a project.");
       $state.go('project');

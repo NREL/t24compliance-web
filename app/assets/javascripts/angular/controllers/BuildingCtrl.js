@@ -1,5 +1,6 @@
 cbecc.controller('BuildingCtrl', [
   '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Building', 'Story', 'Shared', 'data', function ($scope, $window, $stateParams, $resource, $location, toaster, Building, Story, Shared, data) {
+    Shared.stopSpinner();
 
     // Stories UI Grid
     $scope.storiesGridOptions = {

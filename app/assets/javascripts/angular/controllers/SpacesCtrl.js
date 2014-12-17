@@ -1,5 +1,6 @@
 cbecc.controller('SpacesCtrl', [
   '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'Story', 'storyData', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, Story, storyData) {
+    Shared.stopSpinner();
 
     // Global space data
     $scope.spaces = [];

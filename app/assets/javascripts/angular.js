@@ -11,6 +11,7 @@
 //= require angular-rails-templates
 //= require angular-resource
 //= require angular-route
+//= require angular-spinner
 //= require angular-ui-grid
 //= require angular-ui-router
 //= require angular-ui-router.stateHelper
@@ -18,5 +19,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-switch
 //= require lodash
+//= require spin.js/spin
 //= require_tree ./angular/templates
 //= require_tree ./angular

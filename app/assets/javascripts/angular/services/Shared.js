@@ -1,4 +1,4 @@
-cbecc.factory('Shared', function () {
+cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -19,5 +19,13 @@ cbecc.factory('Shared', function () {
     return buildingId;
   };
 
+  service.startSpinner = function () {
+    usSpinnerService.spin('spinner');
+  };
+
+  service.stopSpinner = function () {
+    usSpinnerService.stop('spinner');
+  };
+
   return service;
-});
+}]);

@@ -1,5 +1,7 @@
 cbecc.controller('ProjectCtrl', [
   '$scope', '$rootScope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Project', 'Shared', function ($scope, $rootScope, $window, $stateParams, $resource, $location, toaster, Project, Shared) {
+    Shared.stopSpinner();
+
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
 
