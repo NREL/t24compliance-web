@@ -63,6 +63,8 @@ group :doc do
 end
 
 group :development do
+  gem 'better_errors', '~> 1.1.0'
+
   # Use Capistrano for deployment
   gem 'capistrano-rbenv'
   gem 'capistrano-rails'

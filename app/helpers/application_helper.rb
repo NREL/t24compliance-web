@@ -1,5 +1,5 @@
 module ApplicationHelper
-	def active_nav(page)
+  def active_nav(page)
     path = request.path
     active = ' class="active"'.html_safe
     active2 = 'active'.html_safe
