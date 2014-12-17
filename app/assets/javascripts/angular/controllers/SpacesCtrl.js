@@ -1,5 +1,9 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$window', '$location', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $location, $routeParams, $resource, $location, flash) {
+  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'Story', 'storyData', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, Story, storyData) {
+
+    // Global space data
+    $scope.spaces = [];
+    $scope.stories = storyData;
 
     $scope.tabs = [{
       heading: 'Spaces',
@@ -42,8 +46,7 @@ cbecc.controller('SpacesCtrl', [
     $scope.$on('$locationChangeSuccess', function () {
       updateActiveTab();
     });
-  }
-]);
+  }]);
 
 cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
   // Spaces UI Grid
@@ -95,7 +98,7 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
   // Buttons
   $scope.addSpace = function () {
     $scope.spacesGridOptions.data.push({
-      space_name: "Space " + ($scope.spacesGridOptions.data.length + 1),
+      name: "Space " + ($scope.spacesGridOptions.data.length + 1),
       floor_to_ceiling_height: 14,
       story: 1,
       area: 400,
@@ -106,7 +109,7 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
   };
   $scope.duplicateSpace = function () {
     $scope.spacesGridOptions.data.push({
-      space_name: "Space " + ($scope.spacesGridOptions.data.length + 1),
+      name: "Space " + ($scope.spacesGridOptions.data.length + 1),
       floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
       story: $scope.selected.story,
       area: $scope.selected.area,
@@ -138,7 +141,7 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
       _.each(spaceGroups, function (spaceGroup) {
         for (var i = 0; i < spaceGroup.quantity; ++i) {
           $scope.spacesGridOptions.data.push({
-            space_name: spaceGroup.name + ' ' + (i + 1),
+            name: spaceGroup.name + ' ' + (i + 1),
             floor_to_ceiling_height: spaceGroup.floor_to_ceiling_height,
             story: spaceGroup.story,
             area: spaceGroup.area,
@@ -321,4 +324,3 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       $modalInstance.dismiss('cancel');
     };
   }]);
-

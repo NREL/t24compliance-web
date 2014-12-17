@@ -1,5 +1,5 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', function ($scope, $window, $routeParams, $resource, $location, flash) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', function ($scope, $window, $routeParams, $resource, $location) {
 
 
 

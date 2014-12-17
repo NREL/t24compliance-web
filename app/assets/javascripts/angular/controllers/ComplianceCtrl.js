@@ -1,5 +1,5 @@
 cbecc.controller('ComplianceCtrl', [
-    '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', 'Shared', 'Compliance', 'ComplianceRun', function ($scope, $window, $routeParams, $resource, $location, flash, Shared, Compliance, ComplianceRun) {
+    '$scope', '$window', '$routeParams', '$resource', '$location', 'Shared', 'Compliance', 'ComplianceRun', function ($scope, $window, $routeParams, $resource, $location, Shared, Compliance, ComplianceRun) {
 
         $scope.runSimulation = function () {
             console.log("submitting simulation to run queue");

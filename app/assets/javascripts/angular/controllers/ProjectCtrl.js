@@ -1,6 +1,5 @@
 cbecc.controller('ProjectCtrl', [
-  '$scope', '$rootScope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Project', 'Shared', function ($scope, $rootScope, $window, $stateParams, $resource, $location, flash, Project, Shared) {
-
+  '$scope', '$rootScope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Project', 'Shared', function ($scope, $rootScope, $window, $stateParams, $resource, $location, toaster, Project, Shared) {
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
 
@@ -31,6 +30,7 @@ cbecc.controller('ProjectCtrl', [
 
       function success(response) {
         console.log("success", response);
+        toaster.pop('success', 'Project successfully saved');
         //console.log($scope.project);
         //console.log("_id is: ", response['_id'], "or id is: ", response['id']);
         the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
@@ -42,6 +42,7 @@ cbecc.controller('ProjectCtrl', [
 
       function failure(response) {
         console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving', response.statusText);
 
         _.each(response.data, function (errors, key) {
           _.each(errors, function (e) {

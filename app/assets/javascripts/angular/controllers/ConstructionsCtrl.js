@@ -1,11 +1,9 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'flash', '$modal', 'uiGridConstants', 'Construction', 'ConstructionDefaults', 'Shared', function ($scope, $window, $routeParams, $resource, $location, flash, $modal, uiGridConstants, Construction, ConstructionDefaults, Shared) {
-    //use Construction.index() to retrieve all constructions
-    //use Construction.show(id) to retrieve a construction by id
-    $scope.data = Construction.index();
+  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'Construction', 'ConstructionDefaults', 'Shared', 'data', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, Construction, ConstructionDefaults, Shared, data, defaults) {
+    $scope.data = data;
 
     //retrieve saved defaults (if any)
-    $scope.defaults = ConstructionDefaults.index({project_id: Shared.getProjectId()});
+    $scope.defaults = defaults;
 
     //collapsible panels
     $scope.panels = [{
@@ -44,9 +42,9 @@ cbecc.controller('ConstructionsCtrl', [
       panel.gridOptions = {
         columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
         enableColumnMenus: false,
-        enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
+        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
         enableSorting: false,
-        enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED
+        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
       };
     });
 
@@ -81,7 +79,6 @@ cbecc.controller('ConstructionsCtrl', [
       console.log("submit");
 
       $scope.panels.forEach(function (panel) {
-
 
 
       });
@@ -188,9 +185,9 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
       columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
       data: 'layerData',
       enableColumnMenus: false,
-      enableHorizontalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableSorting: false,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.ALWAYS
+      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
     };
 
     $scope.ok = function () {

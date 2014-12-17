@@ -7,7 +7,6 @@
 //= require angular-animate
 //= require angular-bootstrap
 //= require angular-bootstrap-switch
-//= require angular-flash
 //= require angular-mocks
 //= require angular-rails-templates
 //= require angular-resource

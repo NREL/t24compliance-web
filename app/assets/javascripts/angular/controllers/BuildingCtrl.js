@@ -1,13 +1,5 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', 'flash', 'Building', 'Story', 'Shared', function ($scope, $window, $stateParams, $resource, $location, flash, Building, Story, Shared) {
-
-     // check on project, if undefined, redirect
-    if (Shared.getProjectId() === null)
-    {
-        $location.path("/project");
-    }
-    console.log("Current ProjectID: ", Shared.getProjectId());
-    $scope.projectId = Shared.getProjectId();
+  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Building', 'Story', 'Shared', 'data', function ($scope, $window, $stateParams, $resource, $location, toaster, Building, Story, Shared, data) {
 
     // Stories UI Grid
     $scope.storiesGridOptions = {
@@ -40,45 +32,13 @@ cbecc.controller('BuildingCtrl', [
         });
       }
     };
-    console.log("SAVED STORIES ", $scope.stories);
 
-    $scope.stories = [];
-    // new vs edit (check if bld already saved and load that one)
-    if ($stateParams.id) {
-      Shared.setBuildingId($stateParams.id);
-      $scope.building = Building.show({project_id: $scope.projectId, id: $stateParams.id});
-      console.log('building retrieved by stateParams: ', $stateParams.id);
-      Story.index({building_id: Shared.getBuildingId()}).$promise.then(function(storyData) {
-        $scope.stories = storyData;
-        $scope.storiesGridOptions.data = storyData;
-      });
-    }
-    else if (Shared.getBuildingId() !== null) {
-      $scope.building = Building.show({project_id: $scope.projectId, id: Shared.getBuildingId()});
-      console.log('building retrieved by getBuildingId:', Shared.getBuildingId());
-      Story.index({building_id: Shared.getBuildingId()}).$promise.then(function(storyData) {
-        $scope.stories = storyData;
-        $scope.storiesGridOptions.data = storyData;
-      });
-    }
-    else {
-      Building.index({project_id: $scope.projectId}).$promise.then(function(data) {
-        if (data) {
-          $scope.building = data;
-          Shared.setBuildingId($scope.building.id);
-          console.log('building retrieved by project id (bld exists): ', $scope.building.id);
-          Story.index({building_id: $scope.building.id}).$promise.then(function(storyData) {
-            $scope.stories = storyData;
-            $scope.storiesGridOptions.data = storyData;
-
-          });
-        }
-        else {
-          $scope.building = new Building();
-          console.log('no buildings associated with this project, creating new one');
-          $scope.storiesGridOptions.data = [];
-        }
-      });
+    $scope.stories = data;
+    $scope.storiesGridOptions.data = $scope.stories;
+    if (Shared.getBuildingId() === null) {
+      $scope.building = new Building();
+    } else {
+      $scope.building = Building.show({project_id: Shared.getProjectId(), id: Shared.getBuildingId()});
     }
 
     // save
@@ -86,18 +46,20 @@ cbecc.controller('BuildingCtrl', [
       console.log("submit");
 
       function success(response) {
+        toaster.pop('success', 'Building successfully saved');
         var the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
+        Shared.setBuildingId(the_id);
         console.log("BLDG ID: ", the_id);
         // UPDATE STORIES
         console.log($scope.stories);
-        $scope.stories.forEach( function(s) {
+        $scope.stories.forEach(function (s) {
           // ensure each story has a building_id defined
-          if (s.building_id != the_id ) {
+          if (s.building_id != the_id) {
             s.building_id = the_id;
           }
         });
 
-        Story.createUpdate({building_id: Shared.getBuildingId()},$scope.stories);
+        Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
 
         // go back to form with id of what was just saved
         $location.path("/building/" + the_id);
@@ -106,6 +68,7 @@ cbecc.controller('BuildingCtrl', [
 
       function failure(response) {
         console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving', response.statusText);
 
         _.each(response.data, function (errors, key) {
           _.each(errors, function (e) {
