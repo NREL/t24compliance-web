@@ -1,7 +1,5 @@
 cbecc.controller('ProjectCtrl', [
   '$scope', '$rootScope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Project', 'Shared', function ($scope, $rootScope, $window, $stateParams, $resource, $location, toaster, Project, Shared) {
-    Shared.stopSpinner();
-
     // pull in global enum definitions
     $scope.project_compliance_type_enums = $window.project_compliance_type_enums;
 
@@ -15,11 +13,12 @@ cbecc.controller('ProjectCtrl', [
     // new vs edit
     var proj_id = Shared.getProjectId();
     if (proj_id) {
-      Shared.setProjectId(proj_id);
-      console.log('Current ProjectID: ', proj_id);
-      $scope.project = Project.show({id: proj_id});
-    }
-    else {
+      Project.show({id: proj_id}).$promise.then(function (response) {
+        $scope.project = response;
+      }, function () {
+        toaster.pop('error', 'Unable to retrieve project', 'Invalid projectId');
+      });
+    } else {
       $scope.project = new Project();
     }
 

@@ -22,12 +22,10 @@ cbecc.config([
     });
 
     var getBuilding = function ($q, Shared, Building) {
-      if (Shared.getProjectId() === null) {
+      if (!Shared.getProjectId()) {
         return $q.reject('No project ID');
       }
-      if (Shared.getBuildingId() === null) {
-        // try to look up building id if not passed with url.  do we really want to do this?
-        // 
+      if (!Shared.getBuildingId()) {
         return Building.index({project_id: Shared.getProjectId()}).$promise.then(function (response) {
           if (response.hasOwnProperty('id')) {
             // TODO add to url?
@@ -43,65 +41,75 @@ cbecc.config([
     };
 
     var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
+      var mainPromise = function () {
+        return Story.index({
+          building_id: Shared.getBuildingId()
+        }).$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
-          return Story.index({
-            building_id: Shared.getBuildingId()
-          }).$promise;
+          return mainPromise();
         }, function (error) {
           if (error == 'No project ID') return $q.reject(error);
           // Ignore lack of buildingId on the building tab with a projectId
           return $q.when([]);
         });
       }
-      return Story.index({
-        building_id: Shared.getBuildingId()
-      }).$promise;
+      return mainPromise();
     };
 
     var getStories = function ($q, $stateParams, Story, Shared, Building) {
+      var mainPromise = function () {
+        return Story.index({
+          building_id: Shared.getBuildingId()
+        }).$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
           console.log('getBuilding returned success');
-          return Story.index({
-            building_id: Shared.getBuildingId()
-          }).$promise;
+          return mainPromise();
         });
       }
-      return Story.index({
-        building_id: Shared.getBuildingId()
-      }).$promise;
+      return mainPromise();
     };
 
     var getConstructions = function ($q, $stateParams, Construction, Shared, Building) {
+      var mainPromise = function () {
+        return Construction.index().$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
       // Construction data have no dependencies, but just to reduce latency:
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
-          return Construction.index().$promise;
+          return mainPromise();
         });
       }
-      return Construction.index().$promise;
+      return mainPromise();
     };
 
     var getConstructionDefaults = function ($q, $stateParams, ConstructionDefaults, Shared, Building) {
+      var mainPromise = function () {
+        return ConstructionDefaults.index({
+          project_id: Shared.getProjectId()
+        }).$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
-          return ConstructionDefaults.index({
-            project_id: Shared.getProjectId()
-          }).$promise;
+          return mainPromise();
         });
       }
-      return ConstructionDefaults.index({
-        project_id: Shared.getProjectId()
-      }).$promise;
+      return mainPromise();
     };
 
 
@@ -165,8 +173,18 @@ cbecc.config([
         }
       })
       .state({
+        name: 'constructions_placeholder',
+        url: '/constructions',
+        controller: 'ConstructionsCtrl',
+        templateUrl: 'constructions/constructions.html',
+        resolve: {
+          data: getConstructions,
+          defaults: getConstructionDefaults //this will redirect if project or building not set
+        }
+      })
+      .state({
         name: 'spaces',
-        url: '/spaces',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/spaces',
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
@@ -211,6 +229,15 @@ cbecc.config([
         ]
       })
       .state({
+        name: 'spaces_placeholder',
+        url: '/spaces',
+        controller: 'SpacesCtrl',
+        templateUrl: 'spaces/spaces.html',
+        resolve: {
+          storyData: getStories
+        }
+      })
+      .state({
         name: 'systems',
         url: '/systems',
         controller: 'SystemsCtrl',
@@ -243,6 +270,9 @@ cbecc.config([
 ]);
 
 cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $state, toaster, Shared) {
+  $rootScope.$on("$stateChangeSuccess", function () {
+    Shared.stopSpinner();
+  });
   $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
     Shared.stopSpinner();
     if (error == 'No project ID') {
@@ -250,7 +280,7 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $s
       $state.go('project');
     } else if (error == 'No building ID') {
       toaster.pop('error', error, "Please create a building.");
-      $state.go('building');
+      $state.go('building', {project_id: Shared.getProjectId()});
     } else {
       console.error('$stateChangeError - Unrecognized error message:', error);
     }

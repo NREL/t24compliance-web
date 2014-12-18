@@ -57,7 +57,7 @@ class BuildingStoriesController < ApplicationController
     # TODO: add error handling?
     # TODO: couldn't get this to respond with index action...
     respond_with stories.first || BuildingStory.new
- 
+
   end
 
   def destroy
