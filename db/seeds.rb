@@ -14,6 +14,8 @@ u.password = 'password'
 u.save!
 
 u.projects.destroy_all
+
+# CONSTRUCTION LIBRARIES
 file = File.read(File.join(Rails.root,"lib/assets/construction_library.json"))
 data = JSON.parse(file)
 
@@ -28,7 +30,22 @@ data['constructions'].each_with_index do |c, index|
     cons.update(c)
     cons.save!
   end
-  # break if index == 10
+end
+
+file = File.read(File.join(Rails.root,"lib/assets/fenestration_library.json"))
+data = JSON.parse(file)
+
+data['constructions'].each_with_index do |c, index|
+  fens = Fenestration.find_or_create_by(name: c['name'])
+  if fens
+    puts "Adding/Updating Fenestration: #{fens.name}"
+
+    # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+    # need to be removed
+    c = fens.as_json.merge(c)
+    fens.update(c)
+    fens.save!
+  end
 end
 
 # import some cbecc com models

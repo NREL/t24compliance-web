@@ -1,4 +1,5 @@
 class Construction
+  # CONSTRUCTION LIBRARY
   include Mongoid::Document
   include Mongoid::Timestamps
 
