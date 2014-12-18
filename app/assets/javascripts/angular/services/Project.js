@@ -8,8 +8,5 @@ cbecc.factory('Project', ['$resource','Shared',function($resource,Shared) {
       'destroy': { method: 'DELETE' }
     }
   );
-  service.projectPath = function(){
-    Shared.projectPath();
-  };
   return service;
 }]);
