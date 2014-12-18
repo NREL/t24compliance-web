@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'Construction', 'ConstructionDefaults', 'Shared', 'data', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, Construction, ConstructionDefaults, Shared, data, defaults) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'Construction', 'ConstructionDefaults', 'Shared', 'data', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, Construction, ConstructionDefaults, Shared, data, defaults) {
     Shared.stopSpinner();
 
     // construction data
@@ -98,6 +98,7 @@ cbecc.controller('ConstructionsCtrl', [
 
       function success(response) {
         toaster.pop('success', 'Construction defaults successfully saved');
+
         $location.path(Shared.constructionsPath());
 
       }
@@ -114,7 +115,7 @@ cbecc.controller('ConstructionsCtrl', [
       console.log("CONSTRUCTION DEFAULTS:");
       console.log(construction_defaults);
 
-      ConstructionDefaults.createUpdate({project_id: Shared.getProjectId()}, construction_defaults);
+      ConstructionDefaults.createUpdate({project_id: Shared.getProjectId()}, construction_defaults, success, failure);
 
 
     };
