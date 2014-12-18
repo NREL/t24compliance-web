@@ -41,65 +41,75 @@ cbecc.config([
     };
 
     var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
+      var mainPromise = function () {
+        return Story.index({
+          building_id: Shared.getBuildingId()
+        }).$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
       if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
-          return Story.index({
-            building_id: Shared.getBuildingId()
-          }).$promise;
+          return mainPromise();
         }, function (error) {
           if (error == 'No project ID') return $q.reject(error);
           // Ignore lack of buildingId on the building tab with a projectId
           return $q.when([]);
         });
       }
-      return Story.index({
-        building_id: Shared.getBuildingId()
-      }).$promise;
+      return mainPromise();
     };
 
     var getStories = function ($q, $stateParams, Story, Shared, Building) {
+      var mainPromise = function () {
+        return Story.index({
+          building_id: Shared.getBuildingId()
+        }).$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
           console.log('getBuilding returned success');
-          return Story.index({
-            building_id: Shared.getBuildingId()
-          }).$promise;
+          return mainPromise();
         });
       }
-      return Story.index({
-        building_id: Shared.getBuildingId()
-      }).$promise;
+      return mainPromise();
     };
 
     var getConstructions = function ($q, $stateParams, Construction, Shared, Building) {
+      var mainPromise = function () {
+        return Construction.index().$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
       // Construction data have no dependencies, but just to reduce latency:
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
-          return Construction.index().$promise;
+          return mainPromise();
         });
       }
-      return Construction.index().$promise;
+      return mainPromise();
     };
 
     var getConstructionDefaults = function ($q, $stateParams, ConstructionDefaults, Shared, Building) {
+      var mainPromise = function () {
+        return ConstructionDefaults.index({
+          project_id: Shared.getProjectId()
+        }).$promise;
+      };
+
       Shared.startSpinner();
       Shared.setIds($stateParams);
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
-          return ConstructionDefaults.index({
-            project_id: Shared.getProjectId()
-          }).$promise;
+          return mainPromise();
         });
       }
-      return ConstructionDefaults.index({
-        project_id: Shared.getProjectId()
-      }).$promise;
+      return mainPromise();
     };
 
 
