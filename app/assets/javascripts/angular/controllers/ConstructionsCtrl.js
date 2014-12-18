@@ -64,8 +64,7 @@ cbecc.controller('ConstructionsCtrl', [
 
     $scope.fenPanels = [{
       title: "Window Construction",
-      name: 'window',
-      open: true
+      name: 'window'
     }, {
       title: "Skylight Construction",
       name: 'skylight'
@@ -206,60 +205,47 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     $scope.layerData = [];
     $scope.selected = null;
 
+    var textFilter = {condition: uiGridConstants.filter.CONTAINS};
+    var numberFilter = [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
+
     $scope.constructionsGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        filter: textFilter
       }, {
         name: 'framing_configuration',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         maxWidth: 218
       }, {
         name: 'framing_size',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         maxWidth: 159
       }, {
         name: 'cavity_insulation_r_value',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter
       }, {
         name: 'continuous_insulation_r_value',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter
       }, {
         name: 'continuous_insulation_material_name',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         minWidth: 300
       }],
       data: 'data',
@@ -312,100 +298,68 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
     $scope.title = params.title;
     $scope.selected = null;
 
+    var textFilter = {condition: uiGridConstants.filter.CONTAINS};
+    var numberFilter = [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
+
     $scope.fenestrationGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        filter: textFilter
       }, {
         name: 'certification_method',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         maxWidth: 218
       }, {
         name: 'u_factor',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter
       }, {
         name: 'solar_heat_gain_coefficient',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter
       }, {
         name: 'visible_transmittance',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter
       }, {
         name: 'number_of_panes',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter
       }, {
         name: 'frame_type',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         minWidth: 300
       }, {
         name: 'divider_type',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter,
         minWidth: 300
       }, {
         name: 'tint',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        filter: textFilter
       }, {
         name: 'gas_fill',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        filter: textFilter
       }, {
         name: 'low_emissivity_coating',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-
+        filter: textFilter
       }],
       data: 'data',
       enableFiltering: true,
