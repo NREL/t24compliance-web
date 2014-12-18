@@ -1,4 +1,4 @@
-cbecc.factory('ConstructionDefaults', function($resource) {
+cbecc.factory('ConstructionDefaults', ['$resource',function($resource) {
   return $resource('construction_defaults/:id.json', { project_id: '@projectId', id: '@id' },
     {
       'create':  { method: 'POST' },
@@ -8,4 +8,4 @@ cbecc.factory('ConstructionDefaults', function($resource) {
       'destroy': { method: 'DELETE' }
     }
   );
-});
+}]);

@@ -1,9 +1,9 @@
 <div class="collapse navbar-collapse" ng-controller="NavCtrl">
   <ul class="nav nav-pills">
     <li class="app-nav-item" ng-class="{ active: isActive('/')}"><a href="#/">Introduction</a></li>
-    <li class="app-nav-item" ng-class="{ active: isActive('/project')}"><a href="{{currentProjPath()}}">Project</a></li>
-    <li class="app-nav-item" ng-class="{ active: isActive('/building')}"><a href="#/building">Building</a></li>
-    <li class="app-nav-item" ng-class="{ active: isActive('/constructions')}"><a href="#/constructions">Constructions</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/project')}"><a href="#{{projectPath()}}">Project</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/building')}"><a href="#{{buildingPath()}}">Building</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/constructions')}"><a href="#{{constructionsPath()}}">Constructions</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/spaces')}"><a href="#/spaces">Spaces</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/systems')}"><a href="#/systems">Systems</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/zones')}"><a href="#/zones">Thermal Zones</a></li>

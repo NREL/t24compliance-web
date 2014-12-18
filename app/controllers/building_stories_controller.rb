@@ -6,7 +6,7 @@ class BuildingStoriesController < ApplicationController
   respond_to :json, :html
 
   def index
-    @building_stories = @building.building_stories
+    @building_stories = (@building.present?) ? @building.building_stories : []
     respond_with(@building_stories)
   end
 
@@ -75,7 +75,7 @@ class BuildingStoriesController < ApplicationController
     end
 
     def get_building
-      @building = Building.find(params[:building_id])
+      @building = Building.where(:id => params[:building_id]).first
     end
 
     # def building_story_params

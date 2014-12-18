@@ -1,4 +1,4 @@
-cbecc.factory('Building', function($resource) {
+cbecc.factory('Building', ['$resource',function($resource) {
   return $resource('projects/:project_id/buildings/:id.json', { project_id: '@projectId', id: '@id' },
     {
       'create':  { method: 'POST' },
@@ -8,4 +8,4 @@ cbecc.factory('Building', function($resource) {
       'destroy': { method: 'DELETE' }
     }
   );
-});
+}]);

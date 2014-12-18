@@ -1,5 +1,5 @@
-cbecc.factory('Project', function($resource) {
-  return $resource('/projects/:id.json', { id: '@id' },
+cbecc.factory('Project', ['$resource','Shared',function($resource,Shared) {
+  var service = $resource('/projects/:id.json', { id: '@id' },
     {
       'create':  { method: 'POST' },
       'index':   { method: 'GET', isArray: true },
@@ -8,4 +8,8 @@ cbecc.factory('Project', function($resource) {
       'destroy': { method: 'DELETE' }
     }
   );
-});
+  service.projectPath = function(){
+    Shared.projectPath();
+  };
+  return service;
+}]);

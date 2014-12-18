@@ -2,6 +2,8 @@ cbecc.controller('BuildingCtrl', [
   '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Building', 'Story', 'Shared', 'data', function ($scope, $window, $stateParams, $resource, $location, toaster, Building, Story, Shared, data) {
     Shared.stopSpinner();
 
+
+    Shared.setIds($stateParams);
     // Stories UI Grid
     $scope.storiesGridOptions = {
       columnDefs: [{
@@ -37,8 +39,10 @@ cbecc.controller('BuildingCtrl', [
     $scope.stories = data;
     $scope.storiesGridOptions.data = $scope.stories;
     if (Shared.getBuildingId() === null) {
+      console.log("new building");
       $scope.building = new Building();
     } else {
+      console.log("existing building: id "+Shared.getBuildingId());
       $scope.building = Building.show({project_id: Shared.getProjectId(), id: Shared.getBuildingId()});
     }
 
@@ -62,8 +66,9 @@ cbecc.controller('BuildingCtrl', [
 
         Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
 
-        // go back to form with id of what was just saved
-        $location.path("/building/" + the_id);
+        Shared.setBuildingId(the_id);
+        console.log("redirecting to "+Shared.buildingPath());
+        $location.path(Shared.buildingPath());
 
       }
 

@@ -11,18 +11,15 @@ cbecc.controller('ProjectCtrl', [
       exceptional_condition: true
     };
 
+    Shared.setIds($stateParams);
     // new vs edit
-    if ($stateParams.id) {
-      Shared.setProjectId($stateParams.id);
-      console.log('Current ProjectID: ', Shared.getProjectId());
-      $scope.project = Project.show({id: $stateParams.id});
-    }
-    else if (Shared.getProjectId() != null) {
-      $scope.project = Project.show({id: Shared.getProjectId()});
-      console.log('Current ProjectID already set: ', Shared.getProjectId());
+    var proj_id = Shared.getProjectId();
+    if (proj_id) {
+      Shared.setProjectId(proj_id);
+      console.log('Current ProjectID: ', proj_id);
+      $scope.project = Project.show({id: proj_id});
     }
     else {
-
       $scope.project = new Project();
     }
 
@@ -31,14 +28,13 @@ cbecc.controller('ProjectCtrl', [
       console.log("submit");
 
       function success(response) {
-        console.log("success", response);
         toaster.pop('success', 'Project successfully saved');
-        //console.log($scope.project);
-        //console.log("_id is: ", response['_id'], "or id is: ", response['id']);
         the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
 
         // go back to form with id of what was just saved
-        $location.path("/project/" + the_id);
+        Shared.setProjectId(the_id);
+        console.log("redirecting to "+Shared.projectPath());
+        $location.path(Shared.projectPath());
 
       }
 
@@ -54,7 +50,7 @@ cbecc.controller('ProjectCtrl', [
         });
       }
 
-      if ($stateParams.id) {
+      if (Shared.getProjectId()) {
         Project.update($scope.project, success, failure);
       } else {
         Project.create($scope.project, success, failure);

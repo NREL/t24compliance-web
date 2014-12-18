@@ -1,4 +1,4 @@
-cbecc.factory('Compliance', function($resource) {
+cbecc.factory('Compliance', ['$resource',function($resource) {
     return $resource('/projects/:project_id/simulations/:id', { project_id: '@projectId', id: '@id' },
         {
             'create':  { method: 'POST' },
@@ -8,4 +8,4 @@ cbecc.factory('Compliance', function($resource) {
             'destroy': { method: 'DELETE' }
         }
     );
-});
+}]);

@@ -113,19 +113,28 @@ cbecc.config([
       })
       .state({
         name: 'project',
-        url: '/project',
+        url: '/projects',
         controller: 'ProjectCtrl',
         templateUrl: 'project/project.html'
       })
       .state({
         name: 'projectDetails',
-        url: '/project/{id:[0-9a-f]{24}}',
+        url: '/projects/{project_id:[0-9a-f]{24}}',
         controller: 'ProjectCtrl',
         templateUrl: 'project/project.html'
       })
       .state({
         name: 'building',
-        url: '/building',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings',
+        controller: 'BuildingCtrl',
+        templateUrl: 'building/building.html',
+        resolve: {
+          data: getStoriesForBuildingTab
+        }
+      })
+      .state({ //shouldn't be clickable without projectid
+        name: 'buildingPlaceholder',
+        url: '/buildings',
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
@@ -134,7 +143,7 @@ cbecc.config([
       })
       .state({
         name: 'buildingDetails',
-        url: '/building/{id:[0-9a-f]{24}}',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}',
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
@@ -242,5 +251,4 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $s
       console.error('$stateChangeError - Unrecognized error message:', error);
     }
   });
-
 }]);
