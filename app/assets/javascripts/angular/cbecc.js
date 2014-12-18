@@ -25,43 +25,45 @@ cbecc.config([
       if (Shared.getProjectId() === null) {
         return $q.reject('No project ID');
       }
-      return Building.index({project_id: Shared.getProjectId()}).$promise.then(function (response) {
-        if (response.hasOwnProperty('id')) {
-          Shared.setBuildingId(response.id);
-        } else {
-          // Project with no building
+      if (Shared.getBuildingId() === null) {
+        // try to look up building id if not passed with url.  do we really want to do this?
+        // 
+        return Building.index({project_id: Shared.getProjectId()}).$promise.then(function (response) {
+          if (response.hasOwnProperty('id')) {
+            // TODO add to url?
+            Shared.setBuildingId(response.id);
+          } else {
+            // Project with no building
+            return $q.reject('No building ID');
+          }
+        }, function () {
           return $q.reject('No building ID');
-        }
-      }, function () {
-        return $q.reject('No building ID');
-      });
+        });
+      }
     };
 
     var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
       Shared.startSpinner();
+      Shared.setIds($stateParams);
       if (Shared.getBuildingId() === null) {
-        if ($stateParams.hasOwnProperty('id')) {
-          // buildingId, but no projectId
-          Shared.setBuildingId($stateParams.id);
-        } else {
-          return getBuilding($q, Shared, Building).then(function () {
-            return Story.index({
-              building_id: Shared.getBuildingId()
-            }).$promise;
-          }, function (error) {
-            if (error == 'No project ID') return $q.reject(error);
-            // Ignore lack of buildingId on the building tab with a projectId
-            return $q.when([]);
-          });
-        }
+        return getBuilding($q, Shared, Building).then(function () {
+          return Story.index({
+            building_id: Shared.getBuildingId()
+          }).$promise;
+        }, function (error) {
+          if (error == 'No project ID') return $q.reject(error);
+          // Ignore lack of buildingId on the building tab with a projectId
+          return $q.when([]);
+        });
       }
       return Story.index({
         building_id: Shared.getBuildingId()
       }).$promise;
     };
 
-    var getStories = function ($q, Story, Shared, Building) {
+    var getStories = function ($q, $stateParams, Story, Shared, Building) {
       Shared.startSpinner();
+      Shared.setIds($stateParams);
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
           console.log('getBuilding returned success');
@@ -75,8 +77,9 @@ cbecc.config([
       }).$promise;
     };
 
-    var getConstructions = function ($q, Construction, Shared, Building) {
+    var getConstructions = function ($q, $stateParams, Construction, Shared, Building) {
       Shared.startSpinner();
+      Shared.setIds($stateParams);
       // Construction data have no dependencies, but just to reduce latency:
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
@@ -86,8 +89,9 @@ cbecc.config([
       return Construction.index().$promise;
     };
 
-    var getConstructionDefaults = function ($q, ConstructionDefaults, Shared, Building) {
+    var getConstructionDefaults = function ($q, $stateParams, ConstructionDefaults, Shared, Building) {
       Shared.startSpinner();
+      Shared.setIds($stateParams);
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
           return ConstructionDefaults.index({
