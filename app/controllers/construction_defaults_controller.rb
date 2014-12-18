@@ -4,13 +4,24 @@ class ConstructionDefaultsController < ApplicationController
 
   respond_to :json, :html
 
+  # angular using only: index, create
+
   def index
     @project.construction_default
     respond_with(@project.construction_default)
   end
 
+  def create
+    @project.construction_default = ConstructionDefault.new(construction_default_params)
+    @project.construction_default.save
+    respond_with(@project.construction_default)
+  end
+
+
+
   def show
-    respond_with(@construction_default)
+    @project.construction_default
+    respond_with(@project.construction_default)
   end
 
   def new
@@ -19,12 +30,6 @@ class ConstructionDefaultsController < ApplicationController
   end
 
   def edit
-  end
-
-  def create
-    @project.construction_default = ConstructionDefault.new(construction_default_params)
-    @project.construction_default.save
-    respond_with(@project.construction_default)
   end
 
   def update
@@ -47,6 +52,6 @@ class ConstructionDefaultsController < ApplicationController
   end
 
     def construction_default_params
-      params.require(:construction_default).permit(:external_wall, :internal_wall, :roof, :window, :skylight, :raised_floor, :slab_on_grade, project_attributes: [:id])
+      params.require(:construction_default).permit(:exterior_wall, :interior_wall, :underground_wall, :roof, :window, :skylight, :exterior_floor, :interior_floor, :underground_floor, :project_id)
     end
 end

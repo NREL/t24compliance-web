@@ -94,12 +94,12 @@ cbecc.config([
       Shared.setIds($stateParams);
       if (Shared.getBuildingId() === null) {
         return getBuilding($q, Shared, Building).then(function () {
-          return ConstructionDefaults.index({
+          return ConstructionDefaults.show({
             project_id: Shared.getProjectId()
           }).$promise;
         });
       }
-      return ConstructionDefaults.index({
+      return ConstructionDefaults.show({
         project_id: Shared.getProjectId()
       }).$promise;
     };

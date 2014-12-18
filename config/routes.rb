@@ -30,12 +30,10 @@ Rails.application.routes.draw do
   end
 
   # depend on project
-  # also add these non-nested urls
-  #resources :buildings
-  resources :construction_defaults
+  resources :construction_defaults     # only index, create for angular
 
   # depend on building
-  resources :building_stories
+  resources :building_stories      # only index, create for angular
 
 
 

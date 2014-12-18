@@ -107,7 +107,7 @@ class Project
   has_many :fluid_systems, dependent: :destroy
 
   has_one :simulation, dependent: :destroy
-  has_one :construction_default
+  has_one :construction_default, dependent: :destroy
   belongs_to :user
 
 

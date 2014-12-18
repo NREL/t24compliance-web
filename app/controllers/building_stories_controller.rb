@@ -23,8 +23,6 @@ class BuildingStoriesController < ApplicationController
   end
 
   def update
-
-    logger.info("HI!")
     @building_story.update(building_story_params)
     respond_with(@building_story)
   end

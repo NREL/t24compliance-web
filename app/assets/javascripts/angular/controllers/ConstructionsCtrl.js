@@ -10,11 +10,11 @@ cbecc.controller('ConstructionsCtrl', [
     //collapsible panels
     $scope.panels = [{
       title: "Exterior Wall Construction",
-      name: 'external_wall',
+      name: 'exterior_wall',
       open: true
     }, {
       title: "Interior Wall Construction",
-      name: 'internal_wall'
+      name: 'interior_wall'
     }, {
       title: "Underground Wall Construction",
       name: 'underground_wall'
@@ -80,10 +80,26 @@ cbecc.controller('ConstructionsCtrl', [
     $scope.submit = function () {
       console.log("submit");
 
+      function success(response) {
+        toaster.pop('success', 'Construction defaults successfully saved');
+        $location.path(Shared.constructionsPath());
+
+      }
+
+      function failure(response) {
+          console.log("failure", response);
+          toaster.pop('error', 'An error occurred while saving', response.statusText);
+      }
+
+      var construction_defaults = {};
       $scope.panels.forEach(function (panel) {
-
-
+        construction_defaults[panel.name]  = panel.selected ? panel.selected.id : null;
       });
+      console.log("CONSTRUCTION DEFAULTS:");
+      console.log(construction_defaults);
+
+      ConstructionDefaults.createUpdate({project_id: Shared.getProjectId()}, construction_defaults);
+
 
     };
 

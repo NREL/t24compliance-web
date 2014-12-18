@@ -2,8 +2,8 @@ class ConstructionDefault
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :external_wall, type: String
-  field :internal_wall, type: String
+  field :exterior_wall, type: String
+  field :interior_wall, type: String
   field :underground_wall, type: String
   field :roof, type: String
   field :window, type: String
@@ -16,8 +16,8 @@ class ConstructionDefault
 
   def self.display_names
     construction_default_names = [
-        {db_field_name: 'external_wall', display_name: 'External Wall Construction'},
-        {db_field_name: 'internal_wall', display_name: 'Internal Wall Construction'},
+        {db_field_name: 'exterior_wall', display_name: 'Exterior Wall Construction'},
+        {db_field_name: 'interior_wall', display_name: 'Interior Wall Construction'},
         {db_field_name: 'underground_wall', display_name: 'Underground Wall Construction'},
         {db_field_name: 'roof', display_name: 'Roof Construction'},
         {db_field_name: 'window', display_name: 'Window Construction'},
