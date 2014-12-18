@@ -112,7 +112,21 @@ cbecc.config([
       return mainPromise();
     };
 
+    var getFenestrations = function ($q, $stateParams, Fenestration, Shared, Building) {
+      var mainPromise = function () {
+        return Fenestration.index().$promise;
+      };
 
+      Shared.startSpinner();
+      Shared.setIds($stateParams);
+      // Fenestration data have no dependencies, but just to reduce latency:
+      if (!Shared.getBuildingId()) {
+        return getBuilding($q, Shared, Building).then(function () {
+          return mainPromise();
+        });
+      }
+      return mainPromise();
+    };
     $urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
@@ -169,6 +183,7 @@ cbecc.config([
         templateUrl: 'constructions/constructions.html',
         resolve: {
           data: getConstructions,
+          fenData: getFenestrations,
           defaults: getConstructionDefaults
         }
       })

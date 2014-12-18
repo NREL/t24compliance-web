@@ -4,6 +4,7 @@ cbecc.controller('ConstructionsCtrl', [
 
     // construction data
     $scope.data = data;
+    $scope.fenData = fenData;
 
     // retrieve saved defaults (if any)
     $scope.defaults = defaults;
@@ -32,12 +33,6 @@ cbecc.controller('ConstructionsCtrl', [
       title: "Door Construction",
       name: 'door'
     }, {
-      title: "Window Construction",
-      name: 'window'
-    }, {
-      title: "Skylight Construction",
-      name: 'skylight'
-    }, {
       title: "Interior Floor Construction",
       name: 'interior_floor'
     }, {
@@ -57,14 +52,52 @@ cbecc.controller('ConstructionsCtrl', [
         enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
       };
 
-      // add retrieve selected and layers
+      // retrieve selected and layers
       sel = getSelected($scope.data, $scope.defaults[panel.name]);
       if (sel) {
         panel.selected = sel;
         panel.gridOptions.data = sel.layers;
       }
-
     });
+
+
+    $scope.fenPanels = [{
+      title: "Window Construction",
+      name: 'window',
+      open: true
+    }, {
+      title: "Skylight Construction",
+      name: 'skylight'
+    }];
+
+    $scope.fenPanels.forEach(function (panel) {
+      panel.fenGridOptions = {
+        columnDefs: [
+          {name: 'name'},
+          {name: 'type'},
+          {name: 'certification_method'},
+          {name: 'u_factor'},
+          {name: 'solar_heat_gain_coefficient'},
+          {name: 'visible_transmittance'},
+          {name: 'number_of_panes'},
+          {name: 'frame_type'},
+          {name: 'divider_type'},
+          {name: 'tint'},
+          {name: 'gas_fill'},
+          {name: 'low_emissivity_coating'}],
+        enableColumnMenus: false,
+        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+        enableSorting: false,
+        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+      };
+
+      // retrieve selected
+      sel = getSelected($scope.fenData, $scope.defaults[panel.name]);
+      if (sel) {
+        panel.selected = sel;
+      }
+    });
+
 
     // Modal Settings
     $scope.openLibraryModal = function (index, rowEntity) {
@@ -112,18 +145,24 @@ cbecc.controller('ConstructionsCtrl', [
       $scope.panels.forEach(function (panel) {
         construction_defaults[panel.name]  = panel.selected ? panel.selected.id : null;
       });
-      console.log("CONSTRUCTION DEFAULTS:");
-      console.log(construction_defaults);
+      $scope.fenPanels.forEach(function (panel) {
+        construction_defaults[panel.name]  = panel.selected ? panel.selected.id : null;
+      });
 
       ConstructionDefaults.createUpdate({project_id: Shared.getProjectId()}, construction_defaults, success, failure);
 
 
     };
 
-    // Remove Button
+    // Remove Buttons
     $scope.removeConstruction = function (index) {
       $scope.panels[index].selected = null;
       $scope.panels[index].gridOptions.data = [];
+    };
+
+    $scope.removeFenestration = function (index) {
+      $scope.fenPanels[index].selected = null;
+      $scope.fenPanels[index].fenGridOptions.data = [];
     };
   }
 ]);

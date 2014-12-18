@@ -16,5 +16,4 @@ class Fenestration
   field :gas_fill, type: String
   field :low_emissivity_coating, type: String
 
-
 end

@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     end
   end
 
+  # libraries
+  resources :constructions, only: [:show, :index]
+  resources :fenestrations, only: [:show, :index]
+
   # depend on project
   resources :construction_defaults     # only index, create for angular
 
@@ -41,7 +45,7 @@ Rails.application.routes.draw do
 
   # non-revised below
 
-  resources :constructions, only: [:show, :index]
+
 
   resources :windows
 

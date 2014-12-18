@@ -27,6 +27,33 @@
   </accordion-group>
 </accordion>
 
+<div class="row">
+  <div class="col-md-12 pad-left-40">
+    <div class="inline-heading">
+      <h2>Fenestration Defaults |</h2> You can refine these defaults down to the individual surface later. But this will
+      take care of most of the surfaces in your building.
+    </div>
+  </div>
+</div>
+
+<accordion close-others="false">
+  <accordion-group ng-repeat="panel in fenPanels" is-open="fenPanels[$index].open">
+    <accordion-heading>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': fenPanels[$index].open, 'glyphicon-chevron-right': !fenPanels[$index].open}"></i>
+      {{panel.title}}<span ng-show="fenPanels[$index].selected"> &mdash; <strong>{{fenPanels[$index].selected.name}}</strong></span>
+    </accordion-heading>
+    <div ng-hide="fenPanels[$index].selected">
+      <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index)">Select a Fenestration</button>
+    </div>
+    <div ng-show="fenPanels[$index].selected">
+      <div ui-grid="fenPanels[$index].gridOptions" class="layersGrid" ui-grid-resize-columns></div>
+      <br>
+      <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index, panels[$index].selected)">Change Fenestration</button>
+      <button type="button" class="btn btn-danger" ng-show="fenPanels[$index].selected" ng-click="removeConstruction($index)">Remove Fenestration</button>
+    </div>
+  </accordion-group>
+</accordion>
+
 <div class="row pad-bot-20">
   <div class="control-group col-md-1">
     <div class="controls">
