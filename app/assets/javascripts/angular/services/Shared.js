@@ -37,28 +37,36 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
     }
     return path;
   }
-  // service.buildingPath = function() {
-  //   var path = "";
-  //   if (this.projectId) {
-  //     path = path + "#/projects/" + this.projectId + "/buildings";
-  //     if (this.buildingId) {
-  //       path = path + "/" + this.buildingId;
-  //     }
-  //   }
-  //   else {
-  //     path = "#/buildings"; //can't actually navigate here without project id...
-  //   }
-  //   // return "#/building";
-  //   return path;
-  // }
-  // service.constructionsPath = function() {
-  //   var path = "#/constructions";
-  //   var id = Shared.getProjectId();
-  //   if (id != null) {
-  //     path = path + "/" + id;
-  //   }
-  //   return path;
-  // }
+  service.buildingPath = function() {
+    var path = "";
+    if (projectId) {
+      path = path + "/projects/" + projectId + "/buildings";
+      if (buildingId) {
+        path = path + "/" + buildingId;
+      }
+    }
+    else {
+      path = "/buildings"; //can't actually navigate here without project id...
+    }
+    return path;
+  }
+  service.constructionsPath = function() {
+    if (projectId && buildingId) {
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/constructions"
+    }
+    else {
+      //shouldn't be able to get to this
+      return "/constructions"
+    }
+
+  }
+  service.startSpinner = function () {
+    usSpinnerService.spin('spinner');
+  };
+
+  service.stopSpinner = function () {
+    usSpinnerService.stop('spinner');
+  };
 
   return service;
 }]);
