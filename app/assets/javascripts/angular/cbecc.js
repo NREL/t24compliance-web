@@ -280,7 +280,7 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $s
       $state.go('project');
     } else if (error == 'No building ID') {
       toaster.pop('error', error, "Please create a building.");
-      $state.go('building');
+      $state.go('building', {project_id: Shared.getProjectId()});
     } else {
       console.error('$stateChangeError - Unrecognized error message:', error);
     }
