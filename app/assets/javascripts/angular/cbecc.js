@@ -194,6 +194,7 @@ cbecc.config([
         templateUrl: 'constructions/constructions.html',
         resolve: {
           data: getConstructions,
+          fenData: getFenestrations,
           defaults: getConstructionDefaults //this will redirect if project or building not set
         }
       })

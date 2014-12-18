@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'Construction', 'ConstructionDefaults', 'Shared', 'data', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, Construction, ConstructionDefaults, Shared, data, defaults) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'Construction', 'ConstructionDefaults', 'Fenestration', 'Shared', 'data', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, Construction, ConstructionDefaults, Fenestration, Shared, data, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
@@ -94,7 +94,9 @@ cbecc.controller('ConstructionsCtrl', [
       // retrieve selected
       sel = getSelected($scope.fenData, $scope.defaults[panel.name]);
       if (sel) {
+
         panel.selected = sel;
+        panel.fenGridOptions.data = [sel];
       }
     });
 
@@ -125,7 +127,34 @@ cbecc.controller('ConstructionsCtrl', [
       });
     };
 
-    // save
+    // Modal Settings
+    $scope.openFenLibraryModal = function (index, rowEntity) {
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        controller: 'ModalFenestrationLibraryCtrl',
+        templateUrl: 'constructions/fen_library.html',
+        windowClass: 'wide-modal',
+        resolve: {
+          params: function () {
+            return {
+              data: $scope.fenData,
+              rowEntity: rowEntity,
+              title: $scope.fenPanels[index].title
+            };
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedFen) {
+        $scope.fenPanels[index].selected = selectedFen;
+        $scope.fenPanels[index].fenGridOptions.data = [selectedFen];
+      }, function () {
+        // Modal canceled
+      });
+    };
+
+
+    // save (constructions and fenestrations saved in same record
     $scope.submit = function () {
       console.log("submit");
 
@@ -273,3 +302,138 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     };
   }
 ]);
+
+cbecc.controller('ModalFenestrationLibraryCtrl', [
+  '$scope', '$modalInstance', '$interval', 'Fenestration', 'uiGridConstants', 'params', function ($scope, $modalInstance, $interval, Fenestration, uiGridConstants, params) {
+    $scope.data = params.data;
+    $scope.title = params.title;
+    $scope.selected = null;
+
+    $scope.fenestrationGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        minWidth: 400
+      }, {
+        name: 'type',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        }
+      }, {
+        name: 'certification_method',
+        enableHiding: true,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        maxWidth: 218
+      }, {
+        name: 'u_factor',
+        enableHiding: true,
+        filters: [{
+          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+          placeholder: 'At least'
+        }, {
+          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+          placeholder: 'No more than'
+        }]
+      }, {
+        name: 'solar_heat_gain_coefficient',
+        enableHiding: true,
+        filters: [{
+          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+          placeholder: 'At least'
+        }, {
+          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+          placeholder: 'No more than'
+        }]
+      }, {
+        name: 'visible_transmittance',
+        enableHiding: true,
+        filters: [{
+          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+          placeholder: 'At least'
+        }, {
+          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+          placeholder: 'No more than'
+        }]
+      }, {
+        name: 'number_of_panes',
+        enableHiding: true,
+        filters: [{
+          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+          placeholder: 'At least'
+        }, {
+          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+          placeholder: 'No more than'
+        }]
+      }, {
+        name: 'frame_type',
+        enableHiding: true,
+          filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        minWidth: 300
+      }, {
+        name: 'divider_type',
+        enableHiding: true,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        },
+        minWidth: 300
+      }, {
+        name: 'tint',
+        enableHiding: true,
+          filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        }
+      }, {
+        name: 'gas_fill',
+        enableHiding: true,
+          filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        }
+      }, {
+        name: 'low_emissivity_coating',
+        enableHiding: true,
+          filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        }
+
+    }],
+      data: 'data',
+      enableFiltering: true,
+      enableRowHeaderSelection: false,
+      enableRowSelection: true,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selected = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected = null;
+          }
+        });
+        if (typeof(params.rowEntity) !== 'undefined' && params.rowEntity) {
+          $interval(function () {
+            $scope.gridApi.selection.selectRow(params.rowEntity);
+          }, 0, 1);
+        }
+      }
+    };
+
+    $scope.ok = function () {
+      $modalInstance.close($scope.selected);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  }
+]);
+
