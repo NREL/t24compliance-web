@@ -5,10 +5,10 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
 
   service.setIds = function($stateParams) {
     console.log("calling set ids")
-    if ($stateParams.project_id !== null) {
+    if ($stateParams.project_id) {
       this.setProjectId($stateParams.project_id);
     }
-    if ($stateParams.building_id !== null) {
+    if ($stateParams.building_id) {
       this.setBuildingId($stateParams.building_id);
     }
   };
