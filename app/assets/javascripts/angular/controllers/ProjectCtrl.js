@@ -15,11 +15,8 @@ cbecc.controller('ProjectCtrl', [
     // new vs edit
     var proj_id = Shared.getProjectId();
     if (proj_id) {
-      Shared.setProjectId(proj_id);
-      console.log('Current ProjectID: ', proj_id);
       $scope.project = Project.show({id: proj_id});
-    }
-    else {
+    } else {
       $scope.project = new Project();
     }
 

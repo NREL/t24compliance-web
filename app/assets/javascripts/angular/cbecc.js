@@ -22,12 +22,10 @@ cbecc.config([
     });
 
     var getBuilding = function ($q, Shared, Building) {
-      if (Shared.getProjectId() === null) {
+      if (!Shared.getProjectId()) {
         return $q.reject('No project ID');
       }
-      if (Shared.getBuildingId() === null) {
-        // try to look up building id if not passed with url.  do we really want to do this?
-        // 
+      if (!Shared.getBuildingId()) {
         return Building.index({project_id: Shared.getProjectId()}).$promise.then(function (response) {
           if (response.hasOwnProperty('id')) {
             // TODO add to url?
@@ -45,7 +43,7 @@ cbecc.config([
     var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
       Shared.startSpinner();
       Shared.setIds($stateParams);
-      if (Shared.getBuildingId() === null) {
+      if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
           return Story.index({
             building_id: Shared.getBuildingId()

@@ -3,8 +3,8 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
   var projectId = null;
   var buildingId = null;
 
-  service.setIds = function($stateParams) {
-    console.log("calling set ids")
+  service.setIds = function ($stateParams) {
+    console.log("calling set ids");
     if ($stateParams.project_id) {
       this.setProjectId($stateParams.project_id);
     }
@@ -13,8 +13,10 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
     }
   };
   service.setProjectId = function (value) {
-    console.log("setting proj id to "+value);
-    projectId = value;
+    if (value != projectId) {
+      console.log("setting proj id to " + value);
+      projectId = value;
+    }
   };
 
   service.getProjectId = function () {
@@ -22,44 +24,47 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
   };
 
   service.setBuildingId = function (value) {
-    console.log("set bid called with value: "+value);
-    buildingId = value;
+    if (value != buildingId) {
+      console.log("set bid called with value: " + value);
+      buildingId = value;
+    }
   };
 
   service.getBuildingId = function () {
     return buildingId;
   };
 
-  service.projectPath = function() {
+  service.projectPath = function () {
     var path = "/projects";
     if (projectId) {
-      path = path + "/" + projectId;
+      path += "/" + projectId;
     }
     return path;
-  }
-  service.buildingPath = function() {
+  };
+
+  service.buildingPath = function () {
     var path = "";
     if (projectId) {
-      path = path + "/projects/" + projectId + "/buildings";
+      path = "/projects/" + projectId + "/buildings";
       if (buildingId) {
-        path = path + "/" + buildingId;
+        path += "/" + buildingId;
       }
-    }
-    else {
+    } else {
       path = "/buildings"; //can't actually navigate here without project id...
     }
     return path;
-  }
-  service.constructionsPath = function() {
+  };
+  
+  service.constructionsPath = function () {
     if (projectId && buildingId) {
       return "/projects/" + projectId + "/buildings/" + buildingId + "/constructions"
-    }
-    else {
+    } else {
       //shouldn't be able to get to this
       return "/constructions"
     }
 
-  }
+  };
+
   service.startSpinner = function () {
     usSpinnerService.spin('spinner');
   };
