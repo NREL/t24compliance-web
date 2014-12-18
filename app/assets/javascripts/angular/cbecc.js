@@ -152,7 +152,7 @@ cbecc.config([
       })
       .state({
         name: 'constructions',
-        url: '/constructions',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/constructions',
         controller: 'ConstructionsCtrl',
         templateUrl: 'constructions/constructions.html',
         resolve: {
