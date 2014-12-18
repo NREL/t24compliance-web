@@ -6,6 +6,7 @@ class ConstructionDefault
   field :interior_wall, type: String
   field :underground_wall, type: String
   field :roof, type: String
+  field :door, type: String
   field :window, type: String
   field :skylight, type: String
   field :interior_floor, type: String

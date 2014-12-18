@@ -52,6 +52,6 @@ class ConstructionDefaultsController < ApplicationController
   end
 
     def construction_default_params
-      params.require(:construction_default).permit(:exterior_wall, :interior_wall, :underground_wall, :roof, :window, :skylight, :exterior_floor, :interior_floor, :underground_floor, :project_id)
+      params.require(:construction_default).permit(:exterior_wall, :interior_wall, :underground_wall, :roof, :door, :window, :skylight, :exterior_floor, :interior_floor, :underground_floor, :project_id)
     end
 end

@@ -2,10 +2,17 @@ cbecc.controller('ConstructionsCtrl', [
   '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'Construction', 'ConstructionDefaults', 'Shared', 'data', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, Construction, ConstructionDefaults, Shared, data, defaults) {
     Shared.stopSpinner();
 
+    // construction data
     $scope.data = data;
 
-    //retrieve saved defaults (if any)
+    // retrieve saved defaults (if any)
     $scope.defaults = defaults;
+
+    // retrieve each saved default record from ids
+    function getSelected(the_data, the_id) {
+      res = _.find(the_data, { 'id': the_id });
+      return res;
+    }
 
     //collapsible panels
     $scope.panels = [{
@@ -40,6 +47,7 @@ cbecc.controller('ConstructionsCtrl', [
       title: "Underground Floor Construction",
       name: 'underground_floor'
     }];
+
     $scope.panels.forEach(function (panel) {
       panel.gridOptions = {
         columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
@@ -48,6 +56,14 @@ cbecc.controller('ConstructionsCtrl', [
         enableSorting: false,
         enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
       };
+
+      // add retrieve selected and layers
+      sel = getSelected($scope.data, $scope.defaults[panel.name]);
+      if (sel) {
+        panel.selected = sel;
+        panel.gridOptions.data = sel.layers;
+      }
+
     });
 
     // Modal Settings
