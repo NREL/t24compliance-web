@@ -81,6 +81,11 @@ cbecc.config([
 
     var getConstructions = function ($q, $stateParams, Construction, Shared, Building) {
       var mainPromise = function () {
+        var exteriorWallData = Shared.loadFromCache('exterior_walls');
+        if (exteriorWallData !== null) {
+          return $q.when(exteriorWallData);
+        }
+        // Not in cache yet :(
         return Construction.index().$promise;
       };
 
@@ -269,7 +274,7 @@ cbecc.config([
   }
 ]);
 
-cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $state, toaster, Shared) {
+cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', function ($rootScope, $state, toaster, Shared, Construction) {
   $rootScope.$on("$stateChangeSuccess", function () {
     Shared.stopSpinner();
   });
@@ -284,5 +289,10 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $s
     } else {
       console.error('$stateChangeError - Unrecognized error message:', error);
     }
+  });
+
+  // Initialize cache with static data
+  Construction.index().$promise.then(function (response) {
+    Shared.saveToCache('exterior_walls', response);
   });
 }]);

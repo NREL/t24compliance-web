@@ -1,7 +1,9 @@
-cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
+cbecc.factory('Shared', ['$cacheFactory', 'usSpinnerService', function ($cacheFactory, usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
+  var cache = $cacheFactory('constructionsCache');
+  var cacheKeys = [];
 
   service.setIds = function ($stateParams) {
     console.log("calling set ids");
@@ -54,7 +56,7 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
     }
     return path;
   };
-  
+
   service.constructionsPath = function () {
     if (projectId && buildingId) {
       return "/projects/" + projectId + "/buildings/" + buildingId + "/constructions"
@@ -81,6 +83,20 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
 
   service.stopSpinner = function () {
     usSpinnerService.stop('spinner');
+  };
+
+  service.loadFromCache = function (key) {
+    if (cacheKeys.indexOf(key) == -1) {
+      return null;
+    }
+    return cache.get(key);
+  };
+
+  service.saveToCache = function (key, value) {
+    if (cacheKeys.indexOf(key) == -1) {
+      cacheKeys.push(key);
+    }
+    cache.put(key, value === undefined ? null : value);
   };
 
   return service;
