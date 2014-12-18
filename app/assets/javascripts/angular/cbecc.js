@@ -28,14 +28,17 @@ cbecc.config([
       if (!Shared.getBuildingId()) {
         return Building.index({project_id: Shared.getProjectId()}).$promise.then(function (response) {
           if (response.hasOwnProperty('id')) {
-            // TODO add to url?
             Shared.setBuildingId(response.id);
           } else {
             // Project with no building
             return $q.reject('No building ID');
           }
-        }, function () {
-          return $q.reject('No building ID');
+        }, function (response) {
+          if (response.status == 404) {
+            Shared.setProjectId(null);
+            return $q.reject('Invalid project ID');
+          }
+          return $q.reject('Unknown error while retrieving building ID');
         });
       }
     };
@@ -52,9 +55,11 @@ cbecc.config([
         return getBuilding($q, Shared, Building).then(function () {
           return mainPromise();
         }, function (error) {
-          if (error == 'No project ID') return $q.reject(error);
-          // Ignore lack of buildingId on the building tab with a projectId
-          return $q.when([]);
+          if (error == 'No building ID') {
+            // Ignore lack of buildingId on the building tab with a valid projectId
+            return $q.when([]);
+          }
+          return $q.reject(error);
         });
       }
       return mainPromise();
@@ -295,14 +300,14 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', function
   });
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
     Shared.stopSpinner();
-    if (error == 'No project ID') {
+    if (error == 'No project ID' || error == 'Invalid project ID') {
       toaster.pop('error', error, "Please create or open a project.");
       $state.go('project');
     } else if (error == 'No building ID') {
       toaster.pop('error', error, 'Please create a building.');
       $state.go('building', {project_id: Shared.getProjectId()});
     } else {
-      console.error('$stateChangeError - Unrecognized error message:', error);
+      console.error('Unhandled state change error:', error);
     }
   });
   $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {

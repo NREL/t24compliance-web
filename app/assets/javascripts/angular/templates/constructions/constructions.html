@@ -26,21 +26,6 @@
         <button type="button" class="btn btn-danger" ng-show="panels[$index].selected" ng-click="removeConstruction($index)">Remove Construction</button>
       </div>
     </accordion-group>
-  </accordion>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12 pad-left-40">
-    <div class="inline-heading">
-      <h2>Fenestration Defaults |</h2> You can refine these defaults down to the individual surface later. But this will
-      take care of most of the surfaces in your building.
-    </div>
-  </div>
-</div>
-
-<div class="row pad-bot-20">
-  <accordion close-others="false">
     <accordion-group ng-repeat="panel in fenPanels" is-open="fenPanels[$index].open">
       <accordion-heading>
         <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': fenPanels[$index].open, 'glyphicon-chevron-right': !fenPanels[$index].open}"></i>
