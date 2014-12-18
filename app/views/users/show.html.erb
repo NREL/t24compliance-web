@@ -18,7 +18,7 @@
     <% @projects.each do |p| %>
       <tr>
         <th> <%= p.name %></th>
-        <th> <a href="/wizard#/project/<%= p.id %>">Open in Wizard</a> | <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %></th>
+        <th> <a href="/wizard#/projects/<%= p.id %>">Open in Wizard</a> | <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %></th>
       </tr>
     <% end %>
   </table>
