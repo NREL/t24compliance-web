@@ -8,3 +8,24 @@
     </div>
   </div>
 </div>
+<div class="row pad-top-20 pad-bot-20">
+  <button type="button" ng-click="addAirSystem()" class="btn btn-success col-md-1">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Air System
+  </button>
+  <button type="button" ng-click="duplicateSystem()" class="btn btn-info col-md-1 col-md-offset-9" ng-disabled="!selected">Duplicate</button>
+  <button type="button" ng-click="deleteSystem()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
+</div>
+<accordion close-others="false">
+  <accordion-group ng-repeat="panel in systemPanels" is-open="systemPanels[$index].open">
+    <accordion-heading>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': systemPanels[$index].open, 'glyphicon-chevron-right': !systemPanels[$index].open}"></i>
+      {{panel.title}} | <small>Select the overall system or the components to edit the settings of each system.</small>
+    </accordion-heading>
+  </accordion-group>
+  <accordion-group ng-repeat="panel in plantPanels" is-open="plantPanels[$index].open">
+    <accordion-heading>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': plantPanels[$index].open, 'glyphicon-chevron-right': !plantPanels[$index].open}"></i>
+      {{panel.title}} | <small>Select the overall system or the components to edit the settings of each system.</small>
+    </accordion-heading>
+  </accordion-group>
+</accordion>

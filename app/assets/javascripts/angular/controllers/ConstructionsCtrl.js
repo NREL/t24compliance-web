@@ -1,7 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
   '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'Construction', 'ConstructionDefaults', 'Shared', 'data', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, Construction, ConstructionDefaults, Shared, data, defaults) {
-    Shared.stopSpinner();
-
     $scope.data = data;
 
     //retrieve saved defaults (if any)

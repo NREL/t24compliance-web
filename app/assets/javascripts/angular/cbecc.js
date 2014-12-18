@@ -241,6 +241,9 @@ cbecc.config([
 ]);
 
 cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $state, toaster, Shared) {
+  $rootScope.$on("$stateChangeSuccess", function () {
+    Shared.stopSpinner();
+  });
   $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
     Shared.stopSpinner();
     if (error == 'No project ID') {
