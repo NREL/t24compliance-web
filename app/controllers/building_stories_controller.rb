@@ -2,7 +2,7 @@ class BuildingStoriesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
   before_action :set_building_story, only: [:show, :edit, :update, :destroy]
-  before_action :get_building, only: [:index, :update]
+  before_action :get_building, only: [:index, :update, :create]
   respond_to :json, :html
 
   def index
@@ -34,8 +34,6 @@ class BuildingStoriesController < ApplicationController
     clean_params = building_stories_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
 
-    @building = Building.find(params[:building_id])
-
     # add / update
     stories = []
     if clean_params.has_key?('_json')
@@ -60,8 +58,8 @@ class BuildingStoriesController < ApplicationController
 
     # TODO: add error handling?
     # TODO: couldn't get this to respond with index action...
-    respond_with(@building.building_stories.first)
-
+    respond_with stories.first || BuildingStory.new
+ 
   end
 
   def destroy
