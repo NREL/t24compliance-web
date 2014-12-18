@@ -47,7 +47,6 @@ cbecc.config([
         }).$promise;
       };
 
-      Shared.startSpinner();
       Shared.setIds($stateParams);
       if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
@@ -68,7 +67,6 @@ cbecc.config([
         }).$promise;
       };
 
-      Shared.startSpinner();
       Shared.setIds($stateParams);
       if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
@@ -81,10 +79,14 @@ cbecc.config([
 
     var getConstructions = function ($q, $stateParams, Construction, Shared, Building) {
       var mainPromise = function () {
+        var exteriorWallData = Shared.loadFromCache('exterior_walls');
+        if (exteriorWallData !== null) {
+          return $q.when(exteriorWallData);
+        }
+        // Not in cache yet :(
         return Construction.index().$promise;
       };
 
-      Shared.startSpinner();
       Shared.setIds($stateParams);
       // Construction data have no dependencies, but just to reduce latency:
       if (!Shared.getBuildingId()) {
@@ -102,7 +104,6 @@ cbecc.config([
         }).$promise;
       };
 
-      Shared.startSpinner();
       Shared.setIds($stateParams);
       if (!Shared.getBuildingId()) {
         return getBuilding($q, Shared, Building).then(function () {
@@ -285,20 +286,31 @@ cbecc.config([
   }
 ]);
 
-cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', function ($rootScope, $state, toaster, Shared) {
-  $rootScope.$on("$stateChangeSuccess", function () {
+cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', function ($rootScope, $state, toaster, Shared, Construction) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    Shared.startSpinner();
+  });
+  $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     Shared.stopSpinner();
   });
-  $rootScope.$on("$stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
     Shared.stopSpinner();
     if (error == 'No project ID') {
       toaster.pop('error', error, "Please create or open a project.");
       $state.go('project');
     } else if (error == 'No building ID') {
-      toaster.pop('error', error, "Please create a building.");
+      toaster.pop('error', error, 'Please create a building.');
       $state.go('building', {project_id: Shared.getProjectId()});
     } else {
       console.error('$stateChangeError - Unrecognized error message:', error);
     }
+  });
+  $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+    console.error('State not found:', unfoundState.to);
+  });
+
+  // Initialize cache with static data
+  Construction.index().$promise.then(function (response) {
+    Shared.saveToCache('exterior_walls', response);
   });
 }]);
