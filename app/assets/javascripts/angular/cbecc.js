@@ -88,7 +88,7 @@ cbecc.config([
         if (exteriorWallData !== null) {
           return $q.when(exteriorWallData);
         }
-        // Not in cache yet :(
+        // Not in cache yet
         return Construction.index().$promise;
       };
 
@@ -106,7 +106,15 @@ cbecc.config([
       var mainPromise = function () {
         return ConstructionDefaults.index({
           project_id: Shared.getProjectId()
-        }).$promise;
+        }).$promise.then(function (response) {
+            return $q.when(response);
+          }, function (response) {
+            if (response.status == 404) {
+              Shared.setProjectId(null);
+              return $q.reject('Invalid project ID');
+            }
+            return $q.reject('Unknown error while retrieving construction defaults');
+          });
       };
 
       Shared.setIds($stateParams);
@@ -120,10 +128,14 @@ cbecc.config([
 
     var getFenestrations = function ($q, $stateParams, Fenestration, Shared, Building) {
       var mainPromise = function () {
+        var fenestrationData = Shared.loadFromCache('fenestration');
+        if (fenestrationData !== null) {
+          return $q.when(fenestrationData);
+        }
+        // Not in cache yet
         return Fenestration.index().$promise;
       };
 
-      Shared.startSpinner();
       Shared.setIds($stateParams);
       // Fenestration data have no dependencies, but just to reduce latency:
       if (!Shared.getBuildingId()) {
@@ -133,6 +145,7 @@ cbecc.config([
       }
       return mainPromise();
     };
+
     $urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
@@ -291,7 +304,7 @@ cbecc.config([
   }
 ]);
 
-cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', function ($rootScope, $state, toaster, Shared, Construction) {
+cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', 'Fenestration', function ($rootScope, $state, toaster, Shared, Construction, Fenestration) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.startSpinner();
   });
@@ -303,11 +316,12 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', function
     if (error == 'No project ID' || error == 'Invalid project ID') {
       toaster.pop('error', error, "Please create or open a project.");
       $state.go('project');
-    } else if (error == 'No building ID') {
+    } else if (error == 'No building ID' || error == 'Invalid building ID') {
       toaster.pop('error', error, 'Please create a building.');
       $state.go('building', {project_id: Shared.getProjectId()});
     } else {
       console.error('Unhandled state change error:', error);
+      $state.go('project');
     }
   });
   $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
@@ -317,5 +331,8 @@ cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', function
   // Initialize cache with static data
   Construction.index().$promise.then(function (response) {
     Shared.saveToCache('exterior_walls', response);
+  });
+  Fenestration.index().$promise.then(function (response) {
+    Shared.saveToCache('fenestration', response);
   });
 }]);

@@ -40,8 +40,18 @@ cbecc.controller('BuildingCtrl', [
       console.log("new building");
       $scope.building = new Building();
     } else {
-      console.log("existing building: id "+Shared.getBuildingId());
-      $scope.building = Building.show({project_id: Shared.getProjectId(), id: Shared.getBuildingId()});
+      console.log("existing building: id " + Shared.getBuildingId());
+      Building.show({project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).$promise.then(function (response) {
+        $scope.building = response;
+      }, function (response) {
+        if (response.status == 404) {
+          Shared.setBuildingId(null);
+          toaster.pop('error', 'Invalid building ID');
+          $location.path(Shared.buildingPath());
+        } else {
+          toaster.pop('error', 'Unable to retrieve building');
+        }
+      });
     }
 
     // save
@@ -65,7 +75,7 @@ cbecc.controller('BuildingCtrl', [
         Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
 
         Shared.setBuildingId(the_id);
-        console.log("redirecting to "+Shared.buildingPath());
+        console.log("redirecting to " + Shared.buildingPath());
         $location.path(Shared.buildingPath());
 
       }
