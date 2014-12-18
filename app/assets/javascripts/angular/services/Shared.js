@@ -65,6 +65,16 @@ cbecc.factory('Shared', ['usSpinnerService', function (usSpinnerService) {
 
   };
 
+  service.spacesPath = function () {
+    if (projectId && buildingId) {
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/spaces"
+    } else {
+      //shouldn't be able to get to this
+      return "/spaces"
+    }
+
+  };
+
   service.startSpinner = function () {
     usSpinnerService.spin('spinner');
   };

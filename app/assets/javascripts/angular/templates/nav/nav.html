@@ -4,7 +4,7 @@
     <li class="app-nav-item" ng-class="{ active: isActive('/projects(/[0-9a-f]{24})?$')}"><a href="#{{projectPath()}}">Project</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/buildings(/[0-9a-f]{24})?$')}"><a href="#{{buildingPath()}}">Building</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/constructions')}"><a href="#{{constructionsPath()}}">Constructions</a></li>
-    <li class="app-nav-item" ng-class="{ active: isActive('/spaces')}"><a href="#/spaces">Spaces</a></li>
+    <li class="app-nav-item" ng-class="{ active: isActive('/spaces')}"><a href="#{{spacesPath()}}">Spaces</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/systems')}"><a href="#/systems">Systems</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/zones')}"><a href="#/zones">Thermal Zones</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/review')}"><a href="#/review">Review and Edit</a></li>

@@ -13,5 +13,8 @@ cbecc.controller("NavCtrl", [
     $scope.constructionsPath = function() {
       return Shared.constructionsPath();
     };
+    $scope.spacesPath = function() {
+      return Shared.spacesPath();
+    }
   }
 ]);

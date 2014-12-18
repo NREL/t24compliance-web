@@ -163,8 +163,18 @@ cbecc.config([
         }
       })
       .state({
+        name: 'constructions_placeholder',
+        url: '/constructions',
+        controller: 'ConstructionsCtrl',
+        templateUrl: 'constructions/constructions.html',
+        resolve: {
+          data: getConstructions,
+          defaults: getConstructionDefaults //this will redirect if project or building not set
+        }
+      })
+      .state({
         name: 'spaces',
-        url: '/spaces',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/spaces',
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
@@ -207,6 +217,15 @@ cbecc.config([
             templateUrl: 'spaces/lighting.html'
           }
         ]
+      })
+      .state({
+        name: 'spaces_placeholder',
+        url: '/spaces',
+        controller: 'SpacesCtrl',
+        templateUrl: 'spaces/spaces.html',
+        resolve: {
+          storyData: getStories
+        }
       })
       .state({
         name: 'systems',
