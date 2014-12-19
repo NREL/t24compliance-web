@@ -224,7 +224,7 @@ cbecc.config([
         templateUrl: 'spaces/spaces.html',
         resolve: {
           storyData: getStories,
-          spaces: dataProvider.list('spaces',{building_id: "549418a4945ab4c252000101"})  
+          spaces: dataProvider.list('spaces',{})  
         },
         children: [
           {
