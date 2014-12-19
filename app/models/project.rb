@@ -110,6 +110,8 @@ class Project
   has_one :construction_default, dependent: :destroy
   belongs_to :user
 
+  # Validations
+  validates_presence_of :name
 
   # callbacks
   before_create :build_model

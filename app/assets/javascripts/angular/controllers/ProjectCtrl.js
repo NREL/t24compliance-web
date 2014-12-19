@@ -9,6 +9,11 @@ cbecc.controller('ProjectCtrl', [
       exceptional_condition: true
     };
 
+    function toCamelCase(input) {
+      return input.toLowerCase();
+    }
+
+
     Shared.setIds($stateParams);
     // new vs edit
     var proj_id = Shared.getProjectId();
@@ -25,6 +30,8 @@ cbecc.controller('ProjectCtrl', [
     // save
     $scope.submit = function () {
       console.log("submit");
+      $scope.errors = {} ; //clean up server errors
+
 
       function success(response) {
         toaster.pop('success', 'Project successfully saved');
@@ -39,13 +46,24 @@ cbecc.controller('ProjectCtrl', [
 
       function failure(response) {
         console.log("failure", response);
-        toaster.pop('error', 'An error occurred while saving', response.statusText);
+        toaster.pop('error', 'An error occurred while saving');
 
-        _.each(response.data, function (errors, key) {
-          _.each(errors, function (e) {
-            $scope.form[key].$dirty = true;
-            $scope.form[key].$setValidity(e, false);
-          });
+
+//        _.each(response.data, function (errors) {
+//          _.each(errors, function (e, key) {
+
+//            console.log(key);
+//            $scope.form[key].$dirty = true;
+            // e is an array of errors...need to
+            // e should be in camelCase or it might cause problems?
+
+//            $scope.form[key].$setValidity(e, false);
+//          });
+//        });
+
+        return angular.forEach(response.data.errors, function(errors, field) {
+          $scope.form[field].$setValidity('server', false);
+          return $scope.errors[field] = errors.join(', ');
         });
       }
 
@@ -57,6 +75,19 @@ cbecc.controller('ProjectCtrl', [
 
     };
 
+    // Form Errors
+    $scope.errorClass = function(name) {
+      var s = $scope.form[name];
+      return s.$invalid && s.$dirty ? "has-error" : "";
+    };
+
+    $scope.errorMessage = function(name) {
+      result = [];
+      _.each($scope.form[name].$error, function(key, value) {
+        result.push(value);
+      });
+      return result.join(", ");
+    };
 
     //FORM TODO:  when saving, check if exceptional_condition_modeling is true.  If so, save exceptional_condition_narrative.
     // Exceptional_condition_modeling doesn't actually have a field

@@ -6,20 +6,22 @@
     <div class="inline-heading"><h2>Project |</h2> Project team contacts and overall settings.</div>
   </div>
 </div>
-<form class="form-horizontal" role="form" name="projectForm">
+<form class="form-horizontal" ng-submit="submit()"  name="form" novalidate>
   <div class="row pad-bot-20">
 
     <div class="col-md-6">
 
-      <div class="form-group" ng-class="errors.name ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('name')">
         <label for="name" class="col-md-2 control-label col-md-offset-1">
           Project Name
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="name" class="form-control" ng-model="project.name">
+          <input type="text" name="name" class="form-control" ng-model="project.name" server-error>
+          <span class="errors" ng-show="form.name.$dirty && form.name.$invalid">
+            <span ng-show="form.name.$error.server">{{errors.name}}</span>
+          </span>
         </div>
-        <div field_error errors="errors" field="name"></div>
       </div>
       <div class="form-group" ng-class="errors.compliance_type ? 'error' : ''">
         <label for="compliance_type" class="col-md-2 control-label col-md-offset-1">
@@ -460,7 +462,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" ng-click="submit()" class="btn btn-success">Save</button>
+      <button type="submit" class="btn btn-success">Save</button>
     </div>
   </div>
 
