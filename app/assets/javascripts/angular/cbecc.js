@@ -21,28 +21,6 @@ cbecc.config([
       shadow: false
     });
 
-    var getBuilding = function ($q, Shared, Building) {
-      if (!Shared.getProjectId()) {
-        return $q.reject('No project ID');
-      }
-      if (!Shared.getBuildingId()) {
-        return Building.index({project_id: Shared.getProjectId()}).$promise.then(function (response) {
-          if (response.hasOwnProperty('id')) {
-            Shared.setBuildingId(response.id);
-          } else {
-            // Project with no building
-            return $q.reject('No building ID');
-          }
-        }, function (response) {
-          if (response.status == 404) {
-            Shared.setProjectId(null);
-            return $q.reject('Invalid project ID');
-          }
-          return $q.reject('Unknown error while retrieving building ID');
-        });
-      }
-    };
-
     var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
       var mainPromise = function () {
         return Story.index({
@@ -154,19 +132,29 @@ cbecc.config([
       .state({
         name: 'introduction',
         url: '/',
-        templateUrl: 'introduction/introduction.html'
+        templateUrl: 'introduction/introduction.html',
+        data: {
+          buildingNotRequired: true //if unset, we'll assume building required
+        }
       })
       .state({
         name: 'project',
         url: '/projects',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html'
+        templateUrl: 'project/project.html',
+        data: {
+          buildingNotRequired: true //if unset, we'll assume building required
+        }
       })
       .state({
         name: 'projectDetails',
         url: '/projects/{project_id:[0-9a-f]{24}}',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html'
+        templateUrl: 'project/project.html',
+        data: {
+          buildingNotRequired: true //if unset, we'll assume building required
+        }
+
       })
       .state({
         name: 'building',
@@ -305,9 +293,17 @@ cbecc.config([
   }
 ]);
 
-cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'api', 'Construction', 'Fenestration', function ($rootScope, $state, toaster, Shared, api, Construction, Fenestration) {
+cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Construction', 'Fenestration', function ($rootScope, $state, $q, toaster, Shared, api, data, Construction, Fenestration) {
   api.add('spaces');
+  api.add('buildings');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    // console.log('calling set ids from run');
+    Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
+    // console.log('exited set ids in run.  proj id =  ' + Shared.getProjectId() + ' building id = '+Shared.getBuildingId());
+    // if not specified, we assume that building is required
+    if (toState.data === undefined || !toState.data.buildingNotRequired) {
+      Shared.requireBuilding($q, data); //if building id is unset, this will try to set via index on building
+    }
     Shared.startSpinner();
   });
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
