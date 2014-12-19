@@ -2,11 +2,12 @@ class SpacesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource param_method: :space_params
   before_action :set_space, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_building, only: [:index]
   respond_to :html, :json
 
   def index
-    @spaces = Space.all
+    # always scope by building
+    @spaces = (@building.nil?) ? [] : @building.building_stories.inject([]) { |spaces, story| spaces + story.spaces }
     respond_with(@spaces)
   end
 
@@ -39,6 +40,11 @@ class SpacesController < ApplicationController
   end
 
   private
+
+    def set_building
+      @building = (params[:building_id].present?) ? Building.find(params[:building_id]) : nil
+    end
+
     def set_space
       @space = Space.find(params[:id])
     end
