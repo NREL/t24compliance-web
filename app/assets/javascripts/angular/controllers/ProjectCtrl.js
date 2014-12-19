@@ -9,11 +9,6 @@ cbecc.controller('ProjectCtrl', [
       exceptional_condition: true
     };
 
-    function toCamelCase(input) {
-      return input.toLowerCase();
-    }
-
-
     Shared.setIds($stateParams);
     // new vs edit
     var proj_id = Shared.getProjectId();
@@ -53,19 +48,6 @@ cbecc.controller('ProjectCtrl', [
       function failure(response) {
         console.log("failure", response);
         toaster.pop('error', 'An error occurred while saving');
-
-
-//        _.each(response.data, function (errors) {
-//          _.each(errors, function (e, key) {
-
-//            console.log(key);
-//            $scope.form[key].$dirty = true;
-            // e is an array of errors...need to
-            // e should be in camelCase or it might cause problems?
-
-//            $scope.form[key].$setValidity(e, false);
-//          });
-//        });
 
         return angular.forEach(response.data.errors, function(errors, field) {
           $scope.form[field].$setValidity('server', false);
