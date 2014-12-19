@@ -1,7 +1,7 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'Story', 'storyData', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, Story, storyData) {
-    // Global space data
-    $scope.spaces = [];
+  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'storyData','spaces', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, storyData, spaces) {
+
+    $scope.spaces = spaces;
     $scope.stories = storyData;
 
     $scope.tabs = [{
@@ -93,7 +93,7 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
       });
     }
   };
-
+  $scope.spacesGridOptions.data = $scope.spaces;
   // Buttons
   $scope.addSpace = function () {
     $scope.spacesGridOptions.data.push({

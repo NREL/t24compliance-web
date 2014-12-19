@@ -9,7 +9,7 @@ var cbecc = angular.module('cbecc', [
   'angularSpinner']);
 
 cbecc.config([
-  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider) {
+  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider',function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
 
     usSpinnerConfigProvider.setDefaults({
       lines: 13,
@@ -223,7 +223,8 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          storyData: getStories
+          storyData: getStories,
+          spaces: dataProvider.list('spaces',{})  
         },
         children: [
           {
@@ -304,7 +305,8 @@ cbecc.config([
   }
 ]);
 
-cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'Construction', 'Fenestration', function ($rootScope, $state, toaster, Shared, Construction, Fenestration) {
+cbecc.run(['$rootScope', '$state', 'toaster', 'Shared', 'api', 'Construction', 'Fenestration', function ($rootScope, $state, toaster, Shared, api, Construction, Fenestration) {
+  api.add('spaces');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.startSpinner();
   });

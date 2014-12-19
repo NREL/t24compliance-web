@@ -3,7 +3,7 @@ class SpacesController < ApplicationController
   load_and_authorize_resource param_method: :space_params
   before_action :set_space, only: [:show, :edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @spaces = Space.all
