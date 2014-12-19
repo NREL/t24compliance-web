@@ -275,24 +275,70 @@ cbecc.config([
       })
       .state({
         name: 'systems',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/systems',
+        controller: 'SystemsCtrl',
+        templateUrl: 'systems/systems.html'
+      })
+      .state({
+        name: 'systems_placeholder',
         url: '/systems',
         controller: 'SystemsCtrl',
         templateUrl: 'systems/systems.html'
       })
       .state({
         name: 'zones',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/zones',
+        controller: 'ZonesCtrl',
+        templateUrl: 'zones/zones.html',
+        children: [
+          {
+            name: 'main',
+            url: '',
+            templateUrl: 'zones/main.html'
+          },
+          {
+            name: 'spaces',
+            url: '/spaces',
+            templateUrl: 'zones/spaces.html'
+          },
+          {
+            name: 'systems',
+            url: '/systems',
+            templateUrl: 'zones/systems.html'
+          },
+          {
+            name: 'terminals',
+            url: '/terminals',
+            templateUrl: 'zones/terminals.html'
+          }
+        ]
+      })
+      .state({
+        name: 'zones_placeholder',
         url: '/zones',
         controller: 'ZonesCtrl',
         templateUrl: 'zones/zones.html'
       })
       .state({
         name: 'review',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/review',
+        controller: 'ReviewCtrl',
+        templateUrl: 'review/review.html'
+      })
+      .state({
+        name: 'review_placeholder',
         url: '/review',
         controller: 'ReviewCtrl',
         templateUrl: 'review/review.html'
       })
       .state({
         name: 'compliance',
+        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/compliance',
+        controller: 'ComplianceCtrl',
+        templateUrl: 'compliance/compliance.html'
+      })
+      .state({
+        name: 'compliance_placeholder',
         url: '/compliance',
         controller: 'ComplianceCtrl',
         templateUrl: 'compliance/compliance.html'
