@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$cacheFactory', 'usSpinnerService', function ($cacheFactory, usSpinnerService) {
+cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q, $cacheFactory, usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -34,6 +34,32 @@ cbecc.factory('Shared', ['$cacheFactory', 'usSpinnerService', function ($cacheFa
 
   service.getBuildingId = function () {
     return buildingId;
+  };
+
+  //this actually loads building if needed 
+  //and throws error if that fails
+  service.requireBuilding = function ($q, data) {
+    if (!this.getProjectId()) {
+      return $q.reject('No project ID');
+    }
+    if (!this.getBuildingId()) {
+      return data.list('buildings',{}).then(function (response) {
+        console.log('building returned!');
+        console.log(response);
+        if (response.hasOwnProperty('id')) {
+          this.setBuildingId(response.id);
+        } else {
+          // Project with no building
+          return $q.reject('No building ID');
+        }
+      }, function (response) {
+        if (response.status == 404) {
+          this.setProjectId(null);
+          return $q.reject('Invalid project ID');
+        }
+        return $q.reject('Unknown error while retrieving building ID');
+      });
+    }
   };
 
   service.projectPath = function () {
