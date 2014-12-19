@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'Construction', 'ConstructionDefaults', 'Fenestration', 'Shared', 'data', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, Construction, ConstructionDefaults, Fenestration, Shared, data, fenData, defaults) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Fenestration', 'Shared', 'data', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Fenestration, Shared, data, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
@@ -11,15 +11,13 @@ cbecc.controller('ConstructionsCtrl', [
 
     // retrieve each saved default record from ids
     function getSelected(the_data, the_id) {
-      res = _.find(the_data, { 'id': the_id });
-      return res;
+      return _.find(the_data, {'id': the_id});
     }
 
     //collapsible panels
     $scope.panels = [{
       title: "Exterior Wall Construction",
-      name: 'exterior_wall',
-      open: true
+      name: 'exterior_wall'
     }, {
       title: "Interior Wall Construction",
       name: 'interior_wall'
@@ -53,18 +51,20 @@ cbecc.controller('ConstructionsCtrl', [
       };
 
       // retrieve selected and layers
-      sel = getSelected($scope.data, $scope.defaults[panel.name]);
+      var sel = getSelected($scope.data, $scope.defaults[panel.name]);
       if (sel) {
         panel.selected = sel;
         panel.gridOptions.data = sel.layers;
+        panel.open = true;
+      } else {
+        panel.open = false;
       }
     });
 
 
     $scope.fenPanels = [{
       title: "Window Construction",
-      name: 'window',
-      open: true
+      name: 'window'
     }, {
       title: "Skylight Construction",
       name: 'skylight'
@@ -92,11 +92,13 @@ cbecc.controller('ConstructionsCtrl', [
       };
 
       // retrieve selected
-      sel = getSelected($scope.fenData, $scope.defaults[panel.name]);
+      var sel = getSelected($scope.fenData, $scope.defaults[panel.name]);
       if (sel) {
-
         panel.selected = sel;
         panel.fenGridOptions.data = [sel];
+        panel.open = true;
+      } else {
+        panel.open = false;
       }
     });
 
@@ -166,16 +168,16 @@ cbecc.controller('ConstructionsCtrl', [
       }
 
       function failure(response) {
-          console.log("failure", response);
-          toaster.pop('error', 'An error occurred while saving', response.statusText);
+        console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving', response.statusText);
       }
 
       var construction_defaults = {};
       $scope.panels.forEach(function (panel) {
-        construction_defaults[panel.name]  = panel.selected ? panel.selected.id : null;
+        construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
       });
       $scope.fenPanels.forEach(function (panel) {
-        construction_defaults[panel.name]  = panel.selected ? panel.selected.id : null;
+        construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
       });
 
       ConstructionDefaults.createUpdate({project_id: Shared.getProjectId()}, construction_defaults, success, failure);
@@ -203,60 +205,51 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     $scope.layerData = [];
     $scope.selected = null;
 
+    var textFilter = function () {
+      return {condition: uiGridConstants.filter.CONTAINS};
+    };
+    var numberFilter = function () {
+      return [{
+        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+        placeholder: 'At least'
+      }, {
+        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+        placeholder: 'No more than'
+      }];
+    };
+
     $scope.constructionsGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter(),
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        filter: textFilter()
       }, {
         name: 'framing_configuration',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter(),
         maxWidth: 218
       }, {
         name: 'framing_size',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter(),
         maxWidth: 159
       }, {
         name: 'cavity_insulation_r_value',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter()
       }, {
         name: 'continuous_insulation_r_value',
         enableHiding: false,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        filters: numberFilter()
       }, {
         name: 'continuous_insulation_material_name',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter(),
         minWidth: 300
       }],
       data: 'data',
@@ -309,101 +302,73 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
     $scope.title = params.title;
     $scope.selected = null;
 
+    var textFilter = function () {
+      return {condition: uiGridConstants.filter.CONTAINS};
+    };
+    var numberFilter = function () {
+      return [{
+        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+        placeholder: 'At least'
+      }, {
+        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+        placeholder: 'No more than'
+      }];
+    };
+
     $scope.fenestrationGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        filter: textFilter(),
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        filter: textFilter()
       }, {
         name: 'certification_method',
-        enableHiding: true,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        enableHiding: false,
+        filter: textFilter(),
         maxWidth: 218
       }, {
         name: 'u_factor',
-        enableHiding: true,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        enableHiding: false,
+        filters: numberFilter()
       }, {
         name: 'solar_heat_gain_coefficient',
-        enableHiding: true,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        enableHiding: false,
+        filters: numberFilter()
       }, {
         name: 'visible_transmittance',
-        enableHiding: true,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        enableHiding: false,
+        filters: numberFilter()
       }, {
         name: 'number_of_panes',
-        enableHiding: true,
-        filters: [{
-          condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-          placeholder: 'At least'
-        }, {
-          condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-          placeholder: 'No more than'
-        }]
+        enableHiding: false,
+        filters: numberFilter()
       }, {
         name: 'frame_type',
-        enableHiding: true,
-          filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        enableHiding: false,
+        filter: textFilter(),
         minWidth: 300
       }, {
         name: 'divider_type',
-        enableHiding: true,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        },
+        enableHiding: false,
+        filter: textFilter(),
         minWidth: 300
       }, {
         name: 'tint',
-        enableHiding: true,
-          filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        enableHiding: false,
+        filter: textFilter()
       }, {
         name: 'gas_fill',
-        enableHiding: true,
-          filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
+        enableHiding: false,
+        filter: textFilter()
       }, {
         name: 'low_emissivity_coating',
-        enableHiding: true,
-          filter: {
-          condition: uiGridConstants.filter.CONTAINS
-        }
-
-    }],
+        enableHiding: false,
+        filter: textFilter()
+      }],
       data: 'data',
       enableFiltering: true,
       enableRowHeaderSelection: false,

@@ -20,8 +20,14 @@ cbecc.controller('ProjectCtrl', [
     if (proj_id) {
       Project.show({id: proj_id}).$promise.then(function (response) {
         $scope.project = response;
-      }, function () {
-        toaster.pop('error', 'Unable to retrieve project', 'Invalid projectId');
+      }, function (response) {
+        if (response.status == 404) {
+          Shared.setProjectId(null);
+          toaster.pop('error', 'Invalid project ID', 'Please create or open a project.');
+          $location.path(Shared.projectPath());
+        } else {
+          toaster.pop('error', 'Unable to retrieve project');
+        }
       });
     } else {
       $scope.project = new Project();
