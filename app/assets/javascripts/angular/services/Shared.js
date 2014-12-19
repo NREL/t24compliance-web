@@ -132,5 +132,6 @@ cbecc.factory('Shared', ['$cacheFactory', 'usSpinnerService', function ($cacheFa
     cache.put(key, value === undefined ? null : value);
   };
 
+
   return service;
 }]);
