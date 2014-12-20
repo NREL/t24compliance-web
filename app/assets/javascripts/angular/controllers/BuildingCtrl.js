@@ -85,15 +85,12 @@ cbecc.controller('BuildingCtrl', [
         console.log("failure", response);
         toaster.pop('error', 'An error occurred while saving');
 
-        // special case
-        if ($scope.building.total_story_count < 1) {
-          console.log('No Stories defined');
-          $scope.errors['total_story_count'] = 'can\'t be less than 1';
-        }
-
         return angular.forEach(response.data.errors, function(errors, field) {
-          $scope.form[field].$setValidity('server', false);
-          $scope.form[field].$dirty = true;
+          console.log(field);
+          if (field !== 'total_story_count') {
+            $scope.form[field].$setValidity('server', false);
+            $scope.form[field].$dirty = true;
+          }
           return $scope.errors[field] = errors.join(', ');
         });
 
@@ -108,7 +105,7 @@ cbecc.controller('BuildingCtrl', [
         $scope.building.relocatable_public_school_building = 0;
       }
 
-      // STORIES
+      // update STORIES
       console.log("STORIES:");
       $scope.building.total_story_count = $scope.storiesGridOptions.data.length;
       console.log($scope.building.total_story_count);
@@ -164,7 +161,6 @@ cbecc.controller('BuildingCtrl', [
 
     $scope.storyError = function() {
       return ($scope.building.total_story_count < 1) ? "has-error" : "";
-
     }
   }
 ]);

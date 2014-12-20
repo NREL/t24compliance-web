@@ -111,8 +111,8 @@
         </label>
         <div class="col-md-2">
           <p class="special-output"><span class="label label-info">{{storiesGridOptions.data.length}}</span></p>
-          <div class="errors" ng-show="building.total_story_count < 1">
-            <span class="has-error" ng-show="building.total_story_count < 1">{{ errors.total_story_count }}</span>
+          <div class="errors" ng-show="errors.total_story_count">
+            <span class="has-error" ng-show="errors.total_story_count">{{ errors.total_story_count }}</span>
           </div>
         </div>
       </div>
