@@ -112,6 +112,12 @@ class Project
 
   # Validations
   validates_presence_of :name
+  validates_presence_of :exceptional_condition_no_cooling_system
+  validates_presence_of :exceptional_condition_rated_capacity
+  validates_presence_of :exceptional_condition_water_heater
+  #validates_presence_of :exceptional_condition_narrative
+  validates_presence_of :zip_code
+  validates_numericality_of :zip_code
 
   # callbacks
   before_create :build_model
@@ -244,6 +250,8 @@ class Project
           xml.send(:ExcptCondWCC, 'No')
           xml.send(:AutoHardSize, 1)
           xml.send(:AutoEffInput, 1)
+
+          # TODO: need to include analysis type and software version here too?  (required per SDD inputs)
 
           # go through children if they have something to add, call their methods
           kids = self.class.children_models

@@ -33,6 +33,14 @@ cbecc.controller('ProjectCtrl', [
       console.log("submit");
       $scope.errors = {} ; //clean up server errors
 
+      console.log('EXCEPTIONALs');
+      console.log('no cooling: ', $scope.project.exceptional_condition_no_cooling_system);
+      console.log('rated capacity: ', $scope.project.exceptional_condition_rated_capacity);
+      console.log('water heater: ', $scope.project.exceptional_condition_water_heater);
+
+      //TODO:  when saving, check if exceptional_condition_modeling is true.  If so, save exceptional_condition_narrative.
+      // Exceptional_condition_modeling doesn't actually have a field
+
 
       function success(response) {
         toaster.pop('success', 'Project successfully saved');
@@ -69,8 +77,6 @@ cbecc.controller('ProjectCtrl', [
       return s.$invalid && s.$dirty ? "has-error" : "";
     };
 
-    //FORM TODO:  when saving, check if exceptional_condition_modeling is true.  If so, save exceptional_condition_narrative.
-    // Exceptional_condition_modeling doesn't actually have a field
 
 
   }
