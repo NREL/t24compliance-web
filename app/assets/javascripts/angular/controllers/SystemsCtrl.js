@@ -3,15 +3,20 @@ cbecc.controller('SystemsCtrl', [
     //collapsible panels
     $scope.systemPanels = [{
       title: 'VAV Air Systems',
+      name: 'VAV',
       open: true
     }, {
-      title: 'PVAV Air Systems'
+      title: 'PVAV Air Systems',
+      name: 'PVAV'
     }, {
-      title: 'PTAC Zone Systems'
+      title: 'PTAC Zone Systems',
+      name: 'PTAC'
     }, {
-      title: 'MAU Air Systems'
+      title: 'MAU Air Systems',
+      name: 'MAU'
     }, {
-      title: 'Exhaust Systems'
+      title: 'Exhaust Systems',
+      name: 'Exhaust'
     }];
 
     $scope.plantPanels = [{
@@ -23,5 +28,9 @@ cbecc.controller('SystemsCtrl', [
     }, {
       title: 'Condenser Plant'
     }];
+
+    //get systems by type
+
+
   }
 ]);
