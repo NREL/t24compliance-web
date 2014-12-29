@@ -160,7 +160,7 @@ cbecc.controller('BuildingCtrl', [
     };
 
     $scope.storyError = function() {
-      return ($scope.building.total_story_count < 1) ? "has-error" : "";
+      return !$scope.storiesGridOptions.data.length ? "has-error" : "";
     }
   }
 ]);
