@@ -21,27 +21,27 @@ cbecc.config([
       shadow: false
     });
 
-    var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
-      var mainPromise = function () {
-        return Story.index({
-          building_id: Shared.getBuildingId()
-        }).$promise;
-      };
+    // var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
+    //   var mainPromise = function () {
+    //     return Story.index({
+    //       building_id: Shared.getBuildingId()
+    //     }).$promise;
+    //   };
 
-      Shared.setIds($stateParams);
-      if (!Shared.getBuildingId()) {
-        return getBuilding($q, Shared, Building).then(function () {
-          return mainPromise();
-        }, function (error) {
-          if (error == 'No building ID') {
-            // Ignore lack of buildingId on the building tab with a valid projectId
-            return $q.when([]);
-          }
-          return $q.reject(error);
-        });
-      }
-      return mainPromise();
-    };
+    //   Shared.setIds($stateParams);
+    //   if (!Shared.getBuildingId()) {
+    //     return getBuilding($q, Shared, Building).then(function () {
+    //       return mainPromise();
+    //     }, function (error) {
+    //       if (error == 'No building ID') {
+    //         // Ignore lack of buildingId on the building tab with a valid projectId
+    //         return $q.when([]);
+    //       }
+    //       return $q.reject(error);
+    //     });
+    //   }
+    //   return mainPromise();
+    // };
 
     var getStories = function ($q, $stateParams, Story, Shared, Building) {
       var mainPromise = function () {
@@ -161,8 +161,14 @@ cbecc.config([
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings',
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
+        // this needs to be updated to allow unset (new) building
         resolve: {
-          data: getStoriesForBuildingTab
+          data: function($q,Shared,data){
+            return Shared.requireBuilding($q,data).then(
+              function() { 
+                return data.list('building_stories', Shared.defaultParams());
+              });
+          }
         }
       })
       .state({ //shouldn't be clickable without projectid
@@ -171,7 +177,13 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          data: getStoriesForBuildingTab
+          // this needs to be updated to allow unset (new) building
+          data: function($q,Shared,data){
+            return Shared.requireBuilding($q,data).then(
+              function() { 
+                return data.list('building_stories', Shared.defaultParams());
+              });
+          }
         }
       })
       .state({
@@ -180,7 +192,13 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          data: getStoriesForBuildingTab
+          data: function($q,Shared,data){
+            // this needs to be updated to allow unset (new) building
+            return Shared.requireBuilding($q,data).then(
+              function() { 
+                return data.list('building_stories', Shared.defaultParams());
+              });
+          }
         }
       })
       .state({
@@ -211,8 +229,12 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          storyData: getStories,
-          spaces: dataProvider.list('spaces',{})  
+          storyData: function(){return []},
+          spaces: function($q, data, Shared) {
+            return Shared.requireBuilding($q, data).then(function(response){
+              return data.list('spaces',Shared.defaultParams()) 
+            }) 
+          }
         },
         children: [
           {
@@ -293,17 +315,20 @@ cbecc.config([
   }
 ]);
 
+
 cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Construction', 'Fenestration', function ($rootScope, $state, $q, toaster, Shared, api, data, Construction, Fenestration) {
   api.add('spaces');
   api.add('buildings');
+  api.add('building_stories');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     // console.log('calling set ids from run');
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
     // console.log('exited set ids in run.  proj id =  ' + Shared.getProjectId() + ' building id = '+Shared.getBuildingId());
     // if not specified, we assume that building is required
-    if (toState.data === undefined || !toState.data.buildingNotRequired) {
-      Shared.requireBuilding($q, data); //if building id is unset, this will try to set via index on building
-    }
+    // if (toState.data === undefined || !toState.data.buildingNotRequired) {
+      // debugger
+      // Shared.requireBuilding($q, data); //if building id is unset, this will try to set via index on building
+    // }
     Shared.startSpinner();
   });
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
