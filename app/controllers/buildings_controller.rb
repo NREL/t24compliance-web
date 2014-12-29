@@ -9,10 +9,9 @@ class BuildingsController < ApplicationController
   def index
     # index should return array, even though we only have 1 building / project
     Rails.logger.debug "in buildings index"
-    res = []
-    res << @project.building
-    Rails.logger.debug "res = #{res.inspect}"
-    respond_with(res)
+    @buildings = (@project.building.present?) ? [@project.building] : []
+    Rails.logger.debug "@buildings = #{@buildings.inspect}"
+    respond_with(@buildings)
   end
 
   def show
