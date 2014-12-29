@@ -5,6 +5,10 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
   var cache = $cacheFactory('constructionsCache');
   var cacheKeys = [];
 
+  service.defaultParams = function() {
+    return { project_id: this.getProjectId(), building_id: this.getBuildingId() }
+  };
+
   service.setIds = function ($stateParams) {
     console.log("calling set ids");
     if ($stateParams.project_id) {
@@ -36,31 +40,33 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     return buildingId;
   };
 
-  //this actually loads building if needed 
-  //and throws error if that fails
-  service.requireBuilding = function ($q, data) {
+  service.requireBuilding = function($q, data) {
+    var deferred = $q.defer();
+    var scope = this;
     if (!this.getProjectId()) {
-      return $q.reject('No project ID');
+      deferred.reject('No project ID');
     }
-    if (!this.getBuildingId()) {
-      return data.list('buildings',{}).then(function (response) {
-        console.log('building returned!');
-        console.log(response);
-        if (response.hasOwnProperty('id')) {
-          this.setBuildingId(response.id);
-        } else {
-          // Project with no building
-          return $q.reject('No building ID');
-        }
-      }, function (response) {
-        if (response.status == 404) {
-          this.setProjectId(null);
-          return $q.reject('Invalid project ID');
-        }
-        return $q.reject('Unknown error while retrieving building ID');
-      });
+    else {
+      if (!this.getBuildingId()) {
+        data.list('buildings',this.defaultParams()).then(
+          function(response) {
+            if (response.length > 0 && response[0].hasOwnProperty('id')) {
+              scope.setBuildingId(response[0].id);
+              deferred.resolve("success");
+            }
+          },
+          function(response) {
+            console.log('returning failure')
+            deferred.reject('error retrieving building');
+          }
+        );
+      }
+      else {
+        deferred.resolve('Building ID already set');
+      }
     }
-  };
+    return deferred.promise;
+  }
 
   service.projectPath = function () {
     var path = "/projects";
