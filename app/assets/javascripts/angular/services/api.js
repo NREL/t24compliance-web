@@ -1,7 +1,7 @@
-cbecc.factory('api', function ($resource, Shared) {
+cbecc.factory('api', function ($resource) {
  
     var api = {
-      defaultConfig : {id: '@id', project_id: Shared.getProjectId, building_id: Shared.getBuildingId },//"549418a4945ab4c252000101"},
+      defaultConfig : {id: '@id' },//"549418a4945ab4c252000101"},
  
       extraMethods: {
         'bulkUpdate' : {
