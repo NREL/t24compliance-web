@@ -163,13 +163,11 @@ cbecc.config([
         templateUrl: 'building/building.html',
         // this needs to be updated to allow unset (new) building
         resolve: {
-          data: function($q,Shared,data){
-            return Shared.requireBuilding($q,data).then(
-              function() { 
-                return data.list('building_stories', Shared.defaultParams());
-              });
-          }
-        }
+          data: ['$q', 'Shared', 'data', 'reqbuilding', function($q,Shared,data,reqbuilding){
+            return data.list('building_stories', Shared.defaultParams());
+          }]
+        },
+        parent: "reqbuilding"
       })
       .state({ //shouldn't be clickable without projectid
         name: 'buildingPlaceholder',
@@ -183,6 +181,17 @@ cbecc.config([
               function() { 
                 return data.list('building_stories', Shared.defaultParams());
               });
+          }
+        }
+      })
+      .state({
+        abstract: true,
+        name: 'reqbuilding',
+        template: '<ui-view>',
+        resolve: {
+          reqbuilding: function($q, Shared, data) {
+            console.log("in parent")
+            return Shared.requireBuilding($q, data).then(function(){return true});
           }
         }
       })
@@ -372,8 +381,8 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Co
     // console.log('exited set ids in run.  proj id =  ' + Shared.getProjectId() + ' building id = '+Shared.getBuildingId());
     // if not specified, we assume that building is required
     // if (toState.data === undefined || !toState.data.buildingNotRequired) {
-      // debugger
-      // Shared.requireBuilding($q, data); //if building id is unset, this will try to set via index on building
+    //   // debugger
+    //   Shared.requireBuilding($q, data); //if building id is unset, this will try to set via index on building
     // }
     Shared.startSpinner();
   });
