@@ -39,7 +39,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     return buildingId;
   };
 
-  service.requireBuilding = function($q, data) {
+  service.lookupBuilding = function($q, data, requireBuilding) {
     var deferred = $q.defer();
     var scope = this;
     if (!this.getProjectId()) {
@@ -53,10 +53,22 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
               scope.setBuildingId(response[0].id);
               deferred.resolve("success");
             }
+            else {
+              if (requireBuilding) {
+                deferred.reject("No building ID")
+              }
+              else {
+                deferred.resolve("Unable to look up building but building not required.")
+              }
+            }
           },
           function(response) {
-            console.log('returning failure')
-            deferred.reject('error retrieving building');
+            if (requireBuilding) {
+              deferred.reject("No building ID")
+            }
+            else {
+              deferred.resolve("Error looking up building but building not required.")
+            }
           }
         );
       }

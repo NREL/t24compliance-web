@@ -129,45 +129,61 @@ cbecc.config([
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
     stateHelperProvider
+    // use abstract state as parents to force requirebuilding to resolve before resolution blocks in child states.
+      .state({
+        abstract: true,
+        name: 'requirebuilding',
+        template: '<ui-view>',
+        resolve: {
+          lookupbuilding: function($q, Shared, data) {
+            var require = true;
+            return Shared.lookupBuilding($q, data, require);
+          }
+        }
+      })
+      .state({
+        abstract: true,
+        name: 'lookupbuilding',
+        template: '<ui-view>',
+        resolve: {
+          lookupbuilding: function($q, Shared, data) {
+            console.log("starting building look up")
+            var require = false;
+            return Shared.lookupBuilding($q, data, require);
+            console.log("finish building lookup")
+          }
+        }
+      })
       .state({
         name: 'introduction',
         url: '/',
         templateUrl: 'introduction/introduction.html',
-        data: {
-          buildingNotRequired: true //if unset, we'll assume building required
-        }
       })
       .state({
         name: 'project',
         url: '/projects',
         controller: 'ProjectCtrl',
         templateUrl: 'project/project.html',
-        data: {
-          buildingNotRequired: true //if unset, we'll assume building required
-        }
       })
       .state({
         name: 'projectDetails',
         url: '/projects/{project_id:[0-9a-f]{24}}',
         controller: 'ProjectCtrl',
         templateUrl: 'project/project.html',
-        data: {
-          buildingNotRequired: true //if unset, we'll assume building required
-        }
-
+        parent: 'lookupbuilding'
       })
       .state({
         name: 'building',
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings',
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
-        // this needs to be updated to allow unset (new) building
         resolve: {
-          data: ['$q', 'Shared', 'data', 'reqbuilding', function($q,Shared,data,reqbuilding){
+          data: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+            //does this set stories correctly for new building?
             return data.list('building_stories', Shared.defaultParams());
           }]
         },
-        parent: "reqbuilding"
+        parent: "lookupbuilding"
       })
       .state({ //shouldn't be clickable without projectid
         name: 'buildingPlaceholder',
@@ -175,25 +191,12 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          // this needs to be updated to allow unset (new) building
-          data: function($q,Shared,data){
-            return Shared.requireBuilding($q,data).then(
-              function() { 
-                return data.list('building_stories', Shared.defaultParams());
-              });
-          }
-        }
-      })
-      .state({
-        abstract: true,
-        name: 'reqbuilding',
-        template: '<ui-view>',
-        resolve: {
-          reqbuilding: function($q, Shared, data) {
-            console.log("in parent")
-            return Shared.requireBuilding($q, data).then(function(){return true});
-          }
-        }
+          data: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+            console.log("in child")
+            return data.list('building_stories', Shared.defaultParams());
+          }]
+        },
+        parent: "lookupbuilding"
       })
       .state({
         name: 'buildingDetails',
@@ -201,14 +204,11 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          data: function($q,Shared,data){
-            // this needs to be updated to allow unset (new) building
-            return Shared.requireBuilding($q,data).then(
-              function() { 
-                return data.list('building_stories', Shared.defaultParams());
-              });
-          }
-        }
+            data: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+              return data.list('building_stories', Shared.defaultParams());
+            }]
+        },
+        parent: "requirebuilding"
       })
       .state({
         name: 'constructions',
@@ -375,15 +375,9 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Co
   api.add('spaces');
   api.add('buildings');
   api.add('building_stories');
+  api.add('construction_defaults');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    // console.log('calling set ids from run');
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
-    // console.log('exited set ids in run.  proj id =  ' + Shared.getProjectId() + ' building id = '+Shared.getBuildingId());
-    // if not specified, we assume that building is required
-    // if (toState.data === undefined || !toState.data.buildingNotRequired) {
-    //   // debugger
-    //   Shared.requireBuilding($q, data); //if building id is unset, this will try to set via index on building
-    // }
     Shared.startSpinner();
   });
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -396,7 +390,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Co
       $state.go('project');
     } else if (error == 'No building ID' || error == 'Invalid building ID') {
       toaster.pop('error', error, 'Please create a building.');
-      $state.go('building', {project_id: Shared.getProjectId()});
+      $state.go('lookupbuilding.building', {project_id: Shared.getProjectId()});
     } else {
       console.error('Unhandled state change error:', error);
       $state.go('project');
