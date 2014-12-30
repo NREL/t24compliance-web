@@ -42,6 +42,8 @@ gem 'bower-rails'
 
 gem 'angular-rails-templates'
 
+gem 'font-awesome-rails'
+
 # For simulation of CBECC-Com Files
 gem 'docker-api', require: 'docker'
 gem 'sidekiq'

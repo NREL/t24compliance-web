@@ -15,6 +15,18 @@ cbecc.controller("NavCtrl", [
     };
     $scope.spacesPath = function() {
       return Shared.spacesPath();
-    }
+    };
+    $scope.systemsPath = function() {
+      return Shared.systemsPath();
+    };
+    $scope.zonesPath = function() {
+      return Shared.zonesPath();
+    };
+    $scope.reviewPath = function() {
+      return Shared.reviewPath();
+    };
+    $scope.compliancePath = function() {
+      return Shared.compliancePath();
+    };
   }
 ]);

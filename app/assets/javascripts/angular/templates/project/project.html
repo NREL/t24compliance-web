@@ -6,33 +6,36 @@
     <div class="inline-heading"><h2>Project |</h2> Project team contacts and overall settings.</div>
   </div>
 </div>
-<form class="form-horizontal" role="form" name="projectForm">
+<form class="form-horizontal" ng-submit="submit()"  name="form" novalidate>
   <div class="row pad-bot-20">
 
     <div class="col-md-6">
 
-      <div class="form-group" ng-class="errors.name ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('name')">
         <label for="name" class="col-md-2 control-label col-md-offset-1">
           Project Name
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="name" class="form-control" ng-model="project.name">
+          <input type="text" name="name" class="form-control" ng-model="project.name" server-error>
+          <div class="errors" ng-show="form.name.$dirty && form.name.$invalid">
+            <span class="has-error" ng-show="form.name.$error.server">{{ errors.name }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="name"></div>
       </div>
-      <div class="form-group" ng-class="errors.compliance_type ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('compliance_type')">
         <label for="compliance_type" class="col-md-2 control-label col-md-offset-1">
           Compliance Type
         </label>
 
         <div class="col-md-5">
-          <select class="form-control" ng-model="project.compliance_type"
+          <select class="form-control" name="compliance_type" ng-model="project.compliance_type"
                   ng-options="ct as ct for ct in project_compliance_type_enums">
           </select>
-
+          <div class="errors" ng-show="form.compliance_type.$dirty && form.compliance_type.$invalid">
+            <span class="has-error" ng-show="form.compliance_type.$error.server">{{ errors.compliance_type }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="compliance_type"></div>
       </div>
       <div class="form-group">
         <label class="col-md-2 control-label col-md-offset-1">Simplified Geometry Only</label>
@@ -41,58 +44,70 @@
           <p>This tool offers simplified geometry and is not eligible for daylighting compliance.</p>
         </div>
       </div>
-      <div class="form-group" ng-class="errors.run_title ? 'error' : ''">
+
+      <div class="form-group" ng-class="errorClass('run_title')">
         <label for="run_title" class="col-md-2 control-label col-md-offset-1">
           Run Title
         </label>
-
         <div class="col-md-5">
           <input type="text" name="run_title" class="form-control" ng-model="project.run_title">
+          <div class="errors" ng-show="form.run_title.$dirty && form.run_title.$invalid">
+            <span class="has-error" ng-show="form.run_title.$error.server">{{ errors.run_title }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="run_title"></div>
+
       </div>
     </div>
 
     <div class="col-md-6">
-      <div class="form-group" ng-class="errors.address ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('address')">
         <label for="address" class="col-md-2 control-label col-md-offset-1">
           Address
         </label>
 
         <div class="col-md-5">
           <input type="text" name="address" class="form-control" ng-model="project.address">
+          <div class="errors" ng-show="form.address.$dirty && form.address.$invalid">
+            <span class="has-error" ng-show="form.address.$error.server">{{ errors.run_title }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="address"></div>
       </div>
-      <div class="form-group" ng-class="errors.address ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('city')">
         <label for="city" class="col-md-2 control-label col-md-offset-1">
           City
         </label>
 
         <div class="col-md-5">
           <input type="text" name="city" class="form-control" ng-model="project.city">
+          <div class="errors" ng-show="form.city.$dirty && form.city.$invalid">
+            <span class="has-error" ng-show="form.city.$error.server">{{ errors.city }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="city"></div>
+
       </div>
-      <div class="form-group" ng-class="errors.state ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('state')">
         <label for="state" class="col-md-2 control-label col-md-offset-1">
           State
         </label>
 
         <div class="col-md-5">
           <input type="text" name="state" class="form-control" ng-model="project.state">
+          <div class="errors" ng-show="form.state.$dirty && form.state.$invalid">
+            <span class="has-error" ng-show="form.state.$error.server">{{ errors.state }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="state"></div>
       </div>
-      <div class="form-group" ng-class="errors.zip_code ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('zip_code')">
         <label for="zip_code" class="col-md-2 control-label col-md-offset-1">
           Zip Code
         </label>
 
         <div class="col-md-5">
           <input type="text" name="zip_code" class="form-control" ng-model="project.zip_code">
+          <div class="errors" ng-show="form.zip_code.$dirty && form.zip_code.$invalid">
+            <span class="has-error" ng-show="form.zip_code.$error.server">{{ errors.zip_code }}</span>
+          </div>
         </div>
-        <div field_error errors="errors" field="zip_code"></div>
       </div>
     </div>
   </div>
@@ -108,278 +123,326 @@
          <div class="col-md-6">
 
           <div class="form-heading">Owner Information</div>
-          <div class="form-group" ng-class="errors.owner_organization ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('owner_organization')">
             <label for="owner_organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
               <input type="text" name="owner_organization" class="form-control"
                      ng-model="project.owner_organization">
+              <div class="errors" ng-show="form.owner_organization.$dirty && form.owner_organization.$invalid">
+                <span class="has-error" ng-show="form.owner_organization.$error.server">{{ errors.owner_organization }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="owner_organization"></div>
           </div>
-          <div class="form-group" ng-class="errors.owner_name ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('owner_name')">
             <label for="owner_name" class="col-md-2 control-label col-md-offset-1">
              Contact Name
             </label>
             <div class="col-md-5">
               <input type="text" name="owner_name" class="form-control"
                      ng-model="project.owner_name">
+              <div class="errors" ng-show="form.owner_name.$dirty && form.owner_name.$invalid">
+                <span class="has-error" ng-show="form.owner_name.$error.server">{{ errors.owner_name }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="owner_name"></div>
           </div>
-          <div class="form-group" ng-class="errors.owner_title ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('owner_title')">
             <label for="owner_title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
               <input type="text" name="owner_title" class="form-control"
                      ng-model="project.owner_title">
+              <div class="errors" ng-show="form.owner_title.$dirty && form.owner_title.$invalid">
+                <span class="has-error" ng-show="form.owner_title.$error.server">{{ errors.owner_title }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="owner_title"></div>
           </div>
-          <div class="form-group" ng-class="errors.owner_email ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('owner_email')">
             <label for="owner_email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
               <input type="text" name="owner_email" class="form-control"
                      ng-model="project.owner_email">
+              <div class="errors" ng-show="form.owner_email.$dirty && form.owner_email.$invalid">
+                <span class="has-error" ng-show="form.owner_email.$error.server">{{ errors.owner_email }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="owner_email"></div>
           </div>
-          <div class="form-group" ng-class="errors.owner_phone ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('owner_phone')">
             <label for="owner_phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
               <input type="text" name="owner_phone" class="form-control"
                      ng-model="project.owner_phone">
+              <div class="errors" ng-show="form.owner_phone.$dirty && form.owner_phone.$invalid">
+                <span class="has-error" ng-show="form.owner_phone.$error.server">{{ errors.owner_phone }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="owner_phone"></div>
           </div>
 
           <div class="form-heading">HVAC Engineer</div>
-          <div class="form-group" ng-class="errors.hvac_engineer_organization ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('hvac_engineer_organization')">
             <label for="hvac_engineer_organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
               <input type="text" name="hvac_engineer_organization" class="form-control"
                      ng-model="project.hvac_engineer_organization">
+              <div class="errors" ng-show="form.hvac_engineer_organization.$dirty && form.hvac_engineer_organization.$invalid">
+                <span class="has-error" ng-show="form.hvac_engineer_organization.$error.server">{{ errors.hvac_engineer_organization }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="hvac_engineer_organization"></div>
           </div>
-          <div class="form-group" ng-class="errors.hvac_engineer_name ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('hvac_engineer_name')">
             <label for="hvac_engineer_name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
               <input type="text" name="hvac_engineer_name" class="form-control"
                      ng-model="project.hvac_engineer_name">
+              <div class="errors" ng-show="form.hvac_engineer_name.$dirty && form.hvac_engineer_name.$invalid">
+                <span class="has-error" ng-show="form.hvac_engineer_name.$error.server">{{ errors.hvac_engineer_name }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="hvac_engineer_name"></div>
           </div>
-          <div class="form-group" ng-class="errors.hvac_engineer_title ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('hvac_engineer_title')">
             <label for="hvac_engineer_title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
               <input type="text" name="hvac_engineer_title" class="form-control"
                      ng-model="project.hvac_engineer_title">
+              <div class="errors" ng-show="form.hvac_engineer_title.$dirty && form.hvac_engineer_title.$invalid">
+                <span class="has-error" ng-show="form.hvac_engineer_title.$error.server">{{ errors.hvac_engineer_title }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="hvac_engineer_title"></div>
           </div>
-          <div class="form-group" ng-class="errors.hvac_engineer_email ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('hvac_engineer_email')">
             <label for="hvac_engineer_email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
               <input type="text" name="hvac_engineer_email" class="form-control"
                      ng-model="project.hvac_engineer_email">
+              <div class="errors" ng-show="form.hvac_engineer_email.$dirty && form.hvac_engineer_email.$invalid">
+                <span class="has-error" ng-show="form.hvac_engineer_email.$error.server">{{ errors.hvac_engineer_email }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="hvac_engineer_email"></div>
           </div>
-          <div class="form-group" ng-class="errors.hvac_engineer_phone ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('hvac_engineer_phone')">
             <label for="hvac_engineer_phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
               <input type="text" name="hvac_engineer_phone" class="form-control"
                      ng-model="project.hvac_engineer_phone">
+              <div class="errors" ng-show="form.hvac_engineer_phone.$dirty && form.hvac_engineer_phone.$invalid">
+                <span class="has-error" ng-show="form.hvac_engineer_phone.$error.server">{{ errors.hvac_engineer_phone }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="hvac_engineer_phone"></div>
           </div>
 
           <div class="form-heading">Energy Modeler</div>
-          <div class="form-group" ng-class="errors.energy_modeler_organization ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('energy_modeler_organization')">
             <label for="energy_modeler_organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
               <input type="text" name="energy_modeler_organization" class="form-control"
                      ng-model="project.energy_modeler_organization">
+              <div class="errors" ng-show="form.energy_modeler_organization.$dirty && form.energy_modeler_organization.$invalid">
+                <span class="has-error" ng-show="form.energy_modeler_organization.$error.server">{{ errors.energy_modeler_organization }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="energy_modeler_organization"></div>
           </div>
-          <div class="form-group" ng-class="errors.energy_modeler_name ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('energy_modeler_name')">
             <label for="energy_modeler_name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
               <input type="text" name="energy_modeler_name" class="form-control"
                      ng-model="project.energy_modeler_name">
+              <div class="errors" ng-show="form.energy_modeler_name.$dirty && form.energy_modeler_name.$invalid">
+                <span class="has-error" ng-show="form.energy_modeler_name.$error.server">{{ errors.energy_modeler_name }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="energy_modeler_name"></div>
           </div>
-          <div class="form-group" ng-class="errors.energy_modeler_title ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('energy_modeler_title')">
             <label for="energy_modeler_title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
               <input type="text" name="energy_modeler_title" class="form-control"
                      ng-model="project.energy_modeler_title">
+              <div class="errors" ng-show="form.energy_modeler_title.$dirty && form.energy_modeler_title.$invalid">
+                <span class="has-error" ng-show="form.energy_modeler_title.$error.server">{{ errors.energy_modeler_title }}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="energy_modeler_title"></div>
           </div>
-          <div class="form-group" ng-class="errors.energy_modeler_email ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('energy_modeler_email')">
             <label for="energy_modeler_email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
               <input type="text" name="energy_modeler_email" class="form-control"
                      ng-model="project.energy_modeler_email">
+              <div class="errors" ng-show="form.energy_modeler_email.$dirty && form.energy_modeler_email.$invalid">
+                <span class="has-error" ng-show="form.energy_modeler_email.$error.server">{{ errors.energy_modeler_email}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="energy_modeler_email"></div>
           </div>
-          <div class="form-group" ng-class="errors.energy_modeler_phone ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('energy_modeler_phone')">
             <label for="energy_modeler_phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
               <input type="text" name="energy_modeler_phone" class="form-control"
                      ng-model="project.energy_modeler_phone">
+              <div class="errors" ng-show="form.energy_modeler_phone.$dirty && form.energy_modeler_phone.$invalid">
+                <span class="has-error" ng-show="form.energy_modeler_phone.$error.server">{{ errors.energy_modeler_phone}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="energy_modeler_phone"></div>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-heading">Architect</div>
-          <div class="form-group" ng-class="errors.architect_organization ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('architect_organization')">
             <label for="architect_organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
               <input type="text" name="architect_organization" class="form-control"
                      ng-model="project.architect_organization">
+              <div class="errors" ng-show="form.architect_organization.$dirty && form.architect_organization.$invalid">
+                <span class="has-error" ng-show="form.architect_organization.$error.server">{{ errors.architect_organization}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="architect_organization"></div>
           </div>
-          <div class="form-group" ng-class="errors.architect_name ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('architect_name')">
             <label for="architect_name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
               <input type="text" name="architect_name" class="form-control"
                      ng-model="project.architect_name">
+              <div class="errors" ng-show="form.architect_name.$dirty && form.architect_name.$invalid">
+                <span class="has-error" ng-show="form.architect_name.$error.server">{{ errors.architect_name}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="architect_name"></div>
           </div>
-          <div class="form-group" ng-class="errors.architect_title ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('architect_title')">
             <label for="architect_title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
               <input type="text" name="architect_title" class="form-control"
                      ng-model="project.architect_title">
+              <div class="errors" ng-show="form.architect_title.$dirty && form.architect_title.$invalid">
+                <span class="has-error" ng-show="form.architect_title.$error.server">{{ errors.architect_title}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="architect_title"></div>
           </div>
-          <div class="form-group" ng-class="errors.architect_email ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('architect_email')">
             <label for="architect_email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
               <input type="text" name="architect_email" class="form-control"
                      ng-model="project.architect_email">
+              <div class="errors" ng-show="form.architect_email.$dirty && form.architect_email.$invalid">
+                <span class="has-error" ng-show="form.architect_email.$error.server">{{ errors.architect_email}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="architect_email"></div>
           </div>
-          <div class="form-group" ng-class="errors.architect_phone ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('architect_phone')">
             <label for="architect_phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
               <input type="text" name="architect_phone" class="form-control"
                      ng-model="project.architect_phone">
+              <div class="errors" ng-show="form.architect_phone.$dirty && form.architect_phone.$invalid">
+                <span class="has-error" ng-show="form.architect_phone.$error.server">{{ errors.architect_phone}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="architect_phone"></div>
           </div>
 
           <div class="form-heading">Lighting Designer</div>
-          <div class="form-group" ng-class="errors.lighting_designer_organization ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('lighting_designer_organization')">
             <label for="lighting_designer_organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
               <input type="text" name="lighting_designer_organization" class="form-control"
                      ng-model="project.lighting_designer_organization">
+              <div class="errors" ng-show="form.lighting_designer_organization.$dirty && form.lighting_designer_organization.$invalid">
+                <span class="has-error" ng-show="form.lighting_designer_organization.$error.server">{{ errors.lighting_designer_organization}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="lighting_designer_organization"></div>
           </div>
-          <div class="form-group" ng-class="errors.lighting_designer_name ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('lighting_designer_name')">
             <label for="lighting_designer_name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
               <input type="text" name="lighting_designer_name" class="form-control"
                      ng-model="project.lighting_designer_name">
+              <div class="errors" ng-show="form.lighting_designer_name.$dirty && form.lighting_designer_name.$invalid">
+                <span class="has-error" ng-show="form.lighting_designer_name.$error.server">{{ errors.lighting_designer_name}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="lighting_designer_name"></div>
           </div>
-          <div class="form-group" ng-class="errors.lighting_designer_title ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('lighting_designer_title')">
             <label for="lighting_designer_title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
               <input type="text" name="lighting_designer_title" class="form-control"
                      ng-model="project.lighting_designer_title">
+              <div class="errors" ng-show="form.lighting_designer_title.$dirty && form.lighting_designer_title.$invalid">
+                <span class="has-error" ng-show="form.lighting_designer_title.$error.server">{{ errors.lighting_designer_title}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="lighting_designer_title"></div>
           </div>
-          <div class="form-group" ng-class="errors.lighting_designer_email ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('lighting_designer_email')">
             <label for="lighting_designer_email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
               <input type="text" name="lighting_designer_email" class="form-control"
                      ng-model="project.lighting_designer_email">
+              <div class="errors" ng-show="form.lighting_designer_email.$dirty && form.lighting_designer_email.$invalid">
+                <span class="has-error" ng-show="form.lighting_designer_email.$error.server">{{ errors.lighting_designer_email}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="lighting_designer_email"></div>
           </div>
-          <div class="form-group" ng-class="errors.lighting_designer_phone ? 'error' : ''">
+          <div class="form-group" ng-class="errorClass('lighting_designer_phone')">
             <label for="lighting_designer_phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
               <input type="text" name="lighting_designer_phone" class="form-control"
                      ng-model="project.lighting_designer_phone">
+              <div class="errors" ng-show="form.lighting_designer_phone.$dirty && form.lighting_designer_phone.$invalid">
+                <span class="has-error" ng-show="form.lighting_designer_phone.$error.server">{{ errors.lighting_designer_phone}}</span>
+              </div>
             </div>
-            <div field_error errors="errors" field="lighting_designer_phone"></div>
           </div>
         </div>
       </div>
     </accordion-group>
   </accordion>
-
-
   <accordion>
     <accordion-group is-open="status['exceptional_condition']">
       <accordion-heading>
         <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': status['exceptional_condition'] , 'glyphicon-chevron-right': !status['exceptional_condition']}"></i>
         Exceptional Conditions
       </accordion-heading>
-      <div class="form-group" ng-class="errors.exceptional_condition_no_cooling_system ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('exceptional_condition_no_cooling_system')">
         <div class="col-md-1">
           <input
             bs-switch
@@ -390,12 +453,15 @@
             switch-off-text="No"
             ng-true-value="'Yes'"
             ng-false-value="'No'">
+          <div class="errors" ng-show="form.exceptional_condition_no_cooling_system.$dirty && form.exceptional_condition_no_cooling_system.$invalid">
+            <span class="has-error" ng-show="form.exceptional_condition_no_cooling_system.$error.server">{{ errors.exceptional_condition_no_cooling_system}}</span>
+          </div>
          </div>
         <div class="col-md-11 pad-top-5">
           <label for="exceptional_condition_no_cooling_system">Is any cooling equipment modeled which will not be installed in the actual building?</label>
         </div>
       </div>
-      <div class="form-group" ng-class="errors.exceptional_condition_rated_capacity ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('exceptional_condition_rated_capacity')">
         <div class="col-md-1">
           <input
               bs-switch
@@ -406,12 +472,15 @@
               switch-off-text="No"
               ng-true-value="'Yes'"
               ng-false-value="'No'">
+          <div class="errors" ng-show="form.exceptional_condition_rated_capacity.$dirty && form.exceptional_condition_rated_capacity.$invalid">
+            <span class="has-error" ng-show="form.exceptional_condition_rated_capacity.$error.server">{{ errors.exceptional_condition_rated_capacity}}</span>
+          </div>
         </div>
         <div class="col-md-11 pad-top-5">
           <label for="exceptional_condition_rated_capacity">Does the rated capacity of any HVAC equipment installed for your project not match the value used in the compliance analysis?</label>
         </div>
       </div>
-      <div class="form-group" ng-class="errors.exceptional_condition_water_heater ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('exceptional_condition_water_heater')">
         <div class="col-md-1">
           <input
               bs-switch
@@ -422,12 +491,15 @@
               switch-off-text="No"
               ng-true-value="'Yes'"
               ng-false-value="'No'">
+          <div class="errors" ng-show="form.exceptional_condition_water_heater.$dirty && form.exceptional_condition_water_heater.$invalid">
+            <span class="has-error" ng-show="form.exceptional_condition_water_heater.$error.server">{{ errors.exceptional_condition_water_heater}}</span>
+          </div>
         </div>
         <div class="col-md-11 pad-top-5">
           <label for="exceptional_condition_water_heater">Is service water heating excluded from the design of this building?</label>
         </div>
       </div>
-      <div class="form-group" ng-class="errors.exceptional_condition_modeling ? 'error' : ''">
+      <div class="form-group" ng-class="errorClass('exceptional_condition_modeling')">
         <div class="col-md-1">
           <input
               bs-switch
@@ -438,21 +510,25 @@
               switch-off-text="No"
               ng-true-value="'Yes'"
               ng-false-value="'No'">
+          <div class="errors" ng-show="form.exceptional_condition_narrative.$dirty && form.exceptional_condition_narrative.$invalid">
+            <span class="has-error" ng-show="form.exceptional_condition_narrative.$error.server">{{ errors.exceptional_condition_narrative }}</span>
+          </div>
         </div>
         <div class="col-md-11 pad-top-5">
           <label for="exceptional_condition_modeling">Are significant modeling approximations used in this proposed design model?
             If so, a separate narrative must be provided.</label>
         </div>
       </div>
-      <div class="form-group" ng-show="projectForm.exceptional_condition_modeling.$viewValue == true" ng-class="errors.exceptional_condition_narrative ? 'error' : ''">
+      <div class="form-group" ng-show="form.exceptional_condition_modeling.$viewValue == true" ng-class="errorClass('exceptional_condition_narrative')">
         <label for="exceptional_condition_narrative" class="col-md-2 control-label col-md-offset-1">
           Please provide a narrative:
         </label>
         <div class="col-md-4">
           <textarea rows="5" name="exceptional_condition_narrative" class="form-control"
                  ng-model="project.exceptional_condition_narrative"></textarea>
+
         </div>
-        <div field_error errors="errors" field="exceptional_condition_narrative"></div>
+
       </div>
     </accordion-group>
   </accordion>
@@ -460,7 +536,7 @@
 
   <div class="control-group">
     <div class="controls">
-      <button type="submit" ng-click="submit()" class="btn btn-success">Save</button>
+      <button type="submit" class="btn btn-success">Save</button>
     </div>
   </div>
 

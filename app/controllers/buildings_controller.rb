@@ -7,8 +7,11 @@ class BuildingsController < ApplicationController
   respond_to :json, :html
 
   def index
-    @project.building
-    respond_with(@project.building)
+    # index should return array, even though we only have 1 building / project
+    Rails.logger.debug "in buildings index"
+    @buildings = (@project.building.present?) ? [@project.building] : []
+    Rails.logger.debug "@buildings = #{@buildings.inspect}"
+    respond_with(@buildings)
   end
 
   def show

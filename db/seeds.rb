@@ -48,6 +48,24 @@ data['constructions'].each_with_index do |c, index|
   end
 end
 
+# SPACE TYPE DEFAULTS
+file = File.read(File.join(Rails.root,"lib/assets/space_function_library.json"))
+data = JSON.parse(file)
+
+data['space_functions'].each_with_index do |c, index|
+  sf = SpaceFunctionDefault.find_or_create_by(name: c['name'])
+  if sf
+    puts "Adding/Updating Space Function Default: #{sf.name}"
+
+    # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+    # need to be removed
+    c = sf.as_json.merge(c)
+    sf.update(c)
+    sf.save!
+  end
+end
+
+
 # import some cbecc com models
 f = File.join(Rails.root,"spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
 p = Project.from_sdd_xml(f)

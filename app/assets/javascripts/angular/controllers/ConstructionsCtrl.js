@@ -1,13 +1,13 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Fenestration', 'Shared', 'data', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Fenestration, Shared, data, fenData, defaults) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Fenestration', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Fenestration, Shared, constData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
-    $scope.data = data;
+    $scope.data = constData;
     $scope.fenData = fenData;
 
     // retrieve saved defaults (if any)
-    $scope.defaults = defaults;
+    $scope.defaults = defaults[0];
 
     // retrieve each saved default record from ids
     function getSelected(the_data, the_id) {
@@ -205,51 +205,47 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     $scope.layerData = [];
     $scope.selected = null;
 
-    var textFilter = function () {
-      return {condition: uiGridConstants.filter.CONTAINS};
-    };
-    var numberFilter = function () {
-      return [{
-        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-        placeholder: 'At least'
-      }, {
-        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-        placeholder: 'No more than'
-      }];
-    };
+    var textFilter = {condition: uiGridConstants.filter.CONTAINS};
+    var numberFilter = [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
 
     $scope.constructionsGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: textFilter()
+        filter: angular.copy(textFilter)
       }, {
         name: 'framing_configuration',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         maxWidth: 218
       }, {
         name: 'framing_size',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         maxWidth: 159
       }, {
         name: 'cavity_insulation_r_value',
         enableHiding: false,
-        filters: numberFilter()
+        filters: angular.copy(numberFilter)
       }, {
         name: 'continuous_insulation_r_value',
         enableHiding: false,
-        filters: numberFilter()
+        filters: angular.copy(numberFilter)
       }, {
         name: 'continuous_insulation_material_name',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         minWidth: 300
       }],
       data: 'data',
@@ -302,72 +298,68 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
     $scope.title = params.title;
     $scope.selected = null;
 
-    var textFilter = function () {
-      return {condition: uiGridConstants.filter.CONTAINS};
-    };
-    var numberFilter = function () {
-      return [{
-        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-        placeholder: 'At least'
-      }, {
-        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-        placeholder: 'No more than'
-      }];
-    };
+    var textFilter = {condition: uiGridConstants.filter.CONTAINS};
+    var numberFilter = [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
 
     $scope.fenestrationGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: textFilter()
+        filter: angular.copy(textFilter)
       }, {
         name: 'certification_method',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         maxWidth: 218
       }, {
         name: 'u_factor',
         enableHiding: false,
-        filters: numberFilter()
+        filters: angular.copy(numberFilter)
       }, {
         name: 'solar_heat_gain_coefficient',
         enableHiding: false,
-        filters: numberFilter()
+        filters: angular.copy(numberFilter)
       }, {
         name: 'visible_transmittance',
         enableHiding: false,
-        filters: numberFilter()
+        filters: angular.copy(numberFilter)
       }, {
         name: 'number_of_panes',
         enableHiding: false,
-        filters: numberFilter()
+        filters: angular.copy(numberFilter)
       }, {
         name: 'frame_type',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         minWidth: 300
       }, {
         name: 'divider_type',
         enableHiding: false,
-        filter: textFilter(),
+        filter: angular.copy(textFilter),
         minWidth: 300
       }, {
         name: 'tint',
         enableHiding: false,
-        filter: textFilter()
+        filter: angular.copy(textFilter)
       }, {
         name: 'gas_fill',
         enableHiding: false,
-        filter: textFilter()
+        filter: angular.copy(textFilter)
       }, {
         name: 'low_emissivity_coating',
         enableHiding: false,
-        filter: textFilter()
+        filter: angular.copy(textFilter)
       }],
       data: 'data',
       enableFiltering: true,

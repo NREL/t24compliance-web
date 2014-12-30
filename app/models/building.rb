@@ -39,6 +39,18 @@ class Building
   has_many :zone_systems, dependent: :destroy
   belongs_to :project
 
+  # Validation
+  validates_presence_of :name
+  validates_presence_of :building_azimuth
+  validates_presence_of :total_story_count
+  validates_presence_of :above_grade_story_count
+  validates_numericality_of :total_story_count, only_integer: true, greater_than: 0
+  validates_numericality_of :above_grade_story_count, only_integer: true
+  validates_numericality_of :building_azimuth
+  validates_numericality_of :total_floor_area, allow_nil: true
+  validates_numericality_of :living_unit_count, only_integer: true, allow_nil: true
+
+  # validates_presence_of :whole_building_modeled
 
   def self.children_models
     children = [
