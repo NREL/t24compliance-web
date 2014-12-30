@@ -1,13 +1,13 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Fenestration', 'Shared', 'data', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Fenestration, Shared, data, fenData, defaults) {
+  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Fenestration', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Fenestration, Shared, constData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
-    $scope.data = data;
+    $scope.data = constData;
     $scope.fenData = fenData;
 
     // retrieve saved defaults (if any)
-    $scope.defaults = defaults;
+    $scope.defaults = defaults[0];
 
     // retrieve each saved default record from ids
     function getSelected(the_data, the_id) {

@@ -69,14 +69,6 @@ cbecc.config([
         // Not in cache yet
         return Construction.index().$promise;
       };
-
-      Shared.setIds($stateParams);
-      // Construction data have no dependencies, but just to reduce latency:
-      if (!Shared.getBuildingId()) {
-        return getBuilding($q, Shared, Building).then(function () {
-          return mainPromise();
-        });
-      }
       return mainPromise();
     };
 
@@ -113,14 +105,6 @@ cbecc.config([
         // Not in cache yet
         return Fenestration.index().$promise;
       };
-
-      Shared.setIds($stateParams);
-      // Fenestration data have no dependencies, but just to reduce latency:
-      if (!Shared.getBuildingId()) {
-        return getBuilding($q, Shared, Building).then(function () {
-          return mainPromise();
-        });
-      }
       return mainPromise();
     };
 
@@ -216,10 +200,17 @@ cbecc.config([
         controller: 'ConstructionsCtrl',
         templateUrl: 'constructions/constructions.html',
         resolve: {
-          data: getConstructions,
+          // reqBuilding: function($q, Shared, data) {
+          //   var require = true;
+          //   return Shared.lookupBuilding($q, data, require);
+          // }
+          constData: getConstructions,
           fenData: getFenestrations,
-          defaults: getConstructionDefaults
-        }
+          defaults: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
+            return data.list('construction_defaults',Shared.defaultParams());
+          }]
+        },
+        parent: 'requirebuilding'
       })
       .state({
         name: 'constructions_placeholder',
