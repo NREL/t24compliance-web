@@ -177,7 +177,7 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          data: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
             console.log("in child")
             return data.list('building_stories', Shared.defaultParams());
           }]
@@ -223,7 +223,7 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          storyData: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
+          stories: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
             return data.list('building_stories',Shared.defaultParams()) 
           }],
           spaces: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
@@ -274,9 +274,7 @@ cbecc.config([
         url: '/spaces',
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
-        resolve: {
-          storyData: getStories
-        }
+        parent: 'requirebuilding'
       })
       .state({
         name: 'systems',

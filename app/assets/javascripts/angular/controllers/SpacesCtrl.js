@@ -1,8 +1,8 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'storyData','spaces', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, storyData, spaces) {
+  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'stories','spaces', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, stories, spaces) {
 
     $scope.spaces = spaces;
-    $scope.stories = storyData;
+    $scope.stories = stories;
 
     $scope.tabs = [{
       heading: 'Spaces',
