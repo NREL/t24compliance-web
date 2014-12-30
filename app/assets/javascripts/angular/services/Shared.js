@@ -10,7 +10,6 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
   };
 
   service.setIds = function ($stateParams) {
-    console.log("calling set ids");
     if ($stateParams.project_id) {
       this.setProjectId($stateParams.project_id);
     }
@@ -91,22 +90,56 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
 
   service.constructionsPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/constructions"
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/constructions";
     } else {
       //shouldn't be able to get to this
-      return "/constructions"
+      return "/constructions";
     }
-
   };
 
   service.spacesPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/spaces"
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/spaces";
     } else {
       //shouldn't be able to get to this
-      return "/spaces"
+      return "/spaces";
     }
+  };
 
+  service.systemsPath = function () {
+    if (projectId && buildingId) {
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/systems";
+    } else {
+      //shouldn't be able to get to this
+      return "/systems";
+    }
+  };
+
+  service.zonesPath = function () {
+    if (projectId && buildingId) {
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/zones";
+    } else {
+      //shouldn't be able to get to this
+      return "/zones";
+    }
+  };
+
+  service.reviewPath = function () {
+    if (projectId && buildingId) {
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/review";
+    } else {
+      //shouldn't be able to get to this
+      return "/review";
+    }
+  };
+
+  service.compliancePath = function () {
+    if (projectId && buildingId) {
+      return "/projects/" + projectId + "/buildings/" + buildingId + "/compliance";
+    } else {
+      //shouldn't be able to get to this
+      return "/compliance";
+    }
   };
 
   service.startSpinner = function () {
@@ -130,6 +163,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     }
     cache.put(key, value === undefined ? null : value);
   };
+
 
   return service;
 }]);

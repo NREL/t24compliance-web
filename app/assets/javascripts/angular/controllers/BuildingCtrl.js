@@ -57,6 +57,7 @@ cbecc.controller('BuildingCtrl', [
     // save
     $scope.submit = function () {
       console.log("submit");
+      $scope.errors = {} ; //clean up server errors
 
       function success(response) {
         toaster.pop('success', 'Building successfully saved');
@@ -82,14 +83,17 @@ cbecc.controller('BuildingCtrl', [
 
       function failure(response) {
         console.log("failure", response);
-        toaster.pop('error', 'An error occurred while saving', response.statusText);
+        toaster.pop('error', 'An error occurred while saving');
 
-        _.each(response.data, function (errors, key) {
-          _.each(errors, function (e) {
-            $scope.form[key].$dirty = true;
-            $scope.form[key].$setValidity(e, false);
-          });
+        return angular.forEach(response.data.errors, function(errors, field) {
+          console.log(field);
+          if (field !== 'total_story_count') {
+            $scope.form[field].$setValidity('server', false);
+            $scope.form[field].$dirty = true;
+          }
+          return $scope.errors[field] = errors.join(', ');
         });
+
       }
 
       // set project ID
@@ -101,9 +105,11 @@ cbecc.controller('BuildingCtrl', [
         $scope.building.relocatable_public_school_building = 0;
       }
 
-      // STORIES
-      $scope.building.total_story_count = $scope.stories.length;
-      console.log('total stories:', $scope.building.total_story_count);
+      // update STORIES
+      console.log("STORIES:");
+      $scope.building.total_story_count = $scope.storiesGridOptions.data.length;
+      console.log($scope.building.total_story_count);
+
 
       // create vs update
       if (Shared.getBuildingId()) {
@@ -146,5 +152,15 @@ cbecc.controller('BuildingCtrl', [
     $scope.storiesBelow = function () {
       // TODO
     };
+
+    // Form Errors
+    $scope.errorClass = function(name) {
+      var s = $scope.form[name];
+      return s.$invalid && s.$dirty ? "has-error" : "";
+    };
+
+    $scope.storyError = function() {
+      return !$scope.storiesGridOptions.data.length ? "has-error" : "";
+    }
   }
 ]);
