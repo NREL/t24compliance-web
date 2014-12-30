@@ -21,92 +21,29 @@ cbecc.config([
       shadow: false
     });
 
-    // var getStoriesForBuildingTab = function ($q, $stateParams, Story, Shared, Building) {
-    //   var mainPromise = function () {
-    //     return Story.index({
-    //       building_id: Shared.getBuildingId()
-    //     }).$promise;
-    //   };
-
-    //   Shared.setIds($stateParams);
-    //   if (!Shared.getBuildingId()) {
-    //     return getBuilding($q, Shared, Building).then(function () {
-    //       return mainPromise();
-    //     }, function (error) {
-    //       if (error == 'No building ID') {
-    //         // Ignore lack of buildingId on the building tab with a valid projectId
-    //         return $q.when([]);
-    //       }
-    //       return $q.reject(error);
-    //     });
-    //   }
-    //   return mainPromise();
-    // };
-
-    var getStories = function ($q, $stateParams, Story, Shared, Building) {
-      var mainPromise = function () {
-        return Story.index({
-          building_id: Shared.getBuildingId()
-        }).$promise;
-      };
-
-      Shared.setIds($stateParams);
-      if (!Shared.getBuildingId()) {
-        return getBuilding($q, Shared, Building).then(function () {
-          console.log('getBuilding returned success');
-          return mainPromise();
-        });
-      }
-      return mainPromise();
-    };
-
-    var getConstructions = function ($q, $stateParams, Construction, Shared, Building) {
+    var getConstructions = ['$q', '$stateParams','data','Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
         var exteriorWallData = Shared.loadFromCache('exterior_walls');
         if (exteriorWallData !== null) {
           return $q.when(exteriorWallData);
         }
         // Not in cache yet
-        return Construction.index().$promise;
+        return data.list('constructions');
       };
       return mainPromise();
-    };
+    }];
 
-    var getConstructionDefaults = function ($q, $stateParams, ConstructionDefaults, Shared, Building) {
-      var mainPromise = function () {
-        return ConstructionDefaults.index({
-          project_id: Shared.getProjectId()
-        }).$promise.then(function (response) {
-            return $q.when(response);
-          }, function (response) {
-            if (response.status == 404) {
-              Shared.setProjectId(null);
-              return $q.reject('Invalid project ID');
-            }
-            return $q.reject('Unknown error while retrieving construction defaults');
-          });
-      };
-
-      Shared.setIds($stateParams);
-      if (!Shared.getBuildingId()) {
-        return getBuilding($q, Shared, Building).then(function () {
-          return mainPromise();
-        });
-      }
-      return mainPromise();
-    };
-
-    var getFenestrations = function ($q, $stateParams, Fenestration, Shared, Building) {
+    var getFenestrations = ['$q','$stateParams','data','Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
         var fenestrationData = Shared.loadFromCache('fenestration');
         if (fenestrationData !== null) {
           return $q.when(fenestrationData);
         }
         // Not in cache yet
-        return Fenestration.index().$promise;
+        return data.list('fenestrations');
       };
       return mainPromise();
-    };
+    }];
 
     $urlRouterProvider.when('', '/').otherwise('404');
 
@@ -355,10 +292,12 @@ cbecc.config([
 ]);
 
 
-cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Construction', 'Fenestration', function ($rootScope, $state, $q, toaster, Shared, api, data, Construction, Fenestration) {
+cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $q, toaster, Shared, api, data) {
   api.add('spaces');
   api.add('buildings');
   api.add('building_stories');
+  api.add('constructions');
+  api.add('fenestrations');
   api.add('construction_defaults');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
@@ -385,10 +324,10 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', 'Co
   });
 
   // Initialize cache with static data
-  Construction.index().$promise.then(function (response) {
+  data.list('constructions').then(function (response) {
     Shared.saveToCache('exterior_walls', response);
   });
-  Fenestration.index().$promise.then(function (response) {
+  data.list('fenestrations').then(function (response) {
     Shared.saveToCache('fenestration', response);
   });
 }]);
