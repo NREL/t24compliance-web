@@ -113,7 +113,7 @@ cbecc.config([
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
     stateHelperProvider
-    // use abstract state as parents to force requirebuilding to resolve before resolution blocks in child states.
+      //states that require building should have requirebuilding as parent.
       .state({
         abstract: true,
         name: 'requirebuilding',
@@ -125,6 +125,8 @@ cbecc.config([
           }
         }
       })
+      // states that have lookupbuilding as parent will throw error if there is no project id
+      // and will try to set building id but not error out if it is unavailable.
       .state({
         abstract: true,
         name: 'lookupbuilding',
@@ -162,7 +164,7 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          data: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
             //does this set stories correctly for new building?
             return data.list('building_stories', Shared.defaultParams());
           }]
@@ -188,7 +190,7 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-            data: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+            stories: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
               return data.list('building_stories', Shared.defaultParams());
             }]
         },
@@ -200,10 +202,6 @@ cbecc.config([
         controller: 'ConstructionsCtrl',
         templateUrl: 'constructions/constructions.html',
         resolve: {
-          // reqBuilding: function($q, Shared, data) {
-          //   var require = true;
-          //   return Shared.lookupBuilding($q, data, require);
-          // }
           constData: getConstructions,
           fenData: getFenestrations,
           defaults: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
@@ -217,11 +215,7 @@ cbecc.config([
         url: '/constructions',
         controller: 'ConstructionsCtrl',
         templateUrl: 'constructions/constructions.html',
-        resolve: {
-          data: getConstructions,
-          fenData: getFenestrations,
-          defaults: getConstructionDefaults //this will redirect if project or building not set
-        }
+        parent: 'requirebuilding'
       })
       .state({
         name: 'spaces',
@@ -229,7 +223,9 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          storyData: function(){return []},
+          storyData: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
+            return data.list('building_stories',Shared.defaultParams()) 
+          }],
           spaces: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
             return data.list('spaces',Shared.defaultParams()) 
           }]
