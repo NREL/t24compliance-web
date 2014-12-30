@@ -239,12 +239,11 @@ cbecc.config([
         templateUrl: 'spaces/spaces.html',
         resolve: {
           storyData: function(){return []},
-          spaces: function($q, data, Shared) {
-            return Shared.requireBuilding($q, data).then(function(response){
-              return data.list('spaces',Shared.defaultParams()) 
-            }) 
-          }
+          spaces: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
+            return data.list('spaces',Shared.defaultParams()) 
+          }]
         },
+        parent: 'requirebuilding',
         children: [
           {
             name: 'main',
