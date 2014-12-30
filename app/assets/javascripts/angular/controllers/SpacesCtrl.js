@@ -7,31 +7,31 @@ cbecc.controller('SpacesCtrl', [
     $scope.tabs = [{
       heading: 'Spaces',
       path: '/spaces',
-      route: 'spaces.main'
+      route: 'requirebuilding.spaces.main'
     }, {
       heading: 'Space Type Settings',
       path: '/spaces/settings',
-      route: 'spaces.settings'
+      route: 'requirebuilding.spaces.settings'
     }, {
       heading: 'Surfaces: Walls, Floors, Ceilings, and Roofs',
       path: '/spaces/surfaces',
-      route: 'spaces.surfaces'
+      route: 'requirebuilding.spaces.surfaces'
     }, {
       heading: 'Sub-surfaces: Windows, Doors, and Skylights',
       path: '/spaces/subsurfaces',
-      route: 'spaces.subsurfaces'
+      route: 'requirebuilding.spaces.subsurfaces'
     }, {
       heading: 'Ventilation & Exhaust',
       path: '/spaces/ventilation',
-      route: 'spaces.ventilation'
+      route: 'requirebuilding.spaces.ventilation'
     }, {
       heading: 'Loads',
       path: '/spaces/loads',
-      route: 'spaces.loads'
+      route: 'requirebuilding.spaces.loads'
     }, {
       heading: 'Lighting',
       path: '/spaces/lighting',
-      route: 'spaces.lighting'
+      route: 'requirebuilding.spaces.lighting'
     }];
 
     function updateActiveTab() {
