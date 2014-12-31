@@ -29,9 +29,8 @@ class BuildingsController < ApplicationController
 
   def create
     @project.building = Building.new(building_params)
-    @building = @project.building
     @project.building.save
-    respond_with(@project, @building)
+    respond_with(@project.building)
   end
 
   def update
