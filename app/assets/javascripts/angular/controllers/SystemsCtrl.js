@@ -58,7 +58,6 @@ cbecc.controller('SystemsCtrl', [
 
     //TODO: get systems by type
     $scope.ptacs = [];
-    $scope.ptac_fans = [];
 
     // PTAC general UI Grid
     $scope.ptacGridOptions = {
@@ -101,28 +100,28 @@ cbecc.controller('SystemsCtrl', [
         name: 'fan_name',
         displayName: 'Fan Name'
       },{
-        name: 'control_method',
+        name: 'fan_control_method',
         displayName: 'Control Method'
       }, {
-        name: 'flow_efficiency',
+        name: 'fan_flow_efficiency',
         displayName: 'Flow Efficiency'
       }, {
-        name: 'total_static_pressure',
+        name: 'fan_total_static_pressure',
         displayName: 'Total Static Pressure'
       }, {
-        name: 'motor_position',
+        name: 'fan_motor_position',
         displayName: 'Motor Position'
       }, {
-        name: 'motor_hp',
+        name: 'fan_motor_hp',
         displayName: 'Motor HP'
       }, {
-        name: 'motor_type',
+        name: 'fan_motor_type',
         displayName: 'Motor Type'
       }, {
-        name: 'motor_pole_count',
+        name: 'fan_motor_pole_count',
         displayName: 'Motor Pole Count'
       }, {
-        name: 'motor_efficiency',
+        name: 'fan_motor_efficiency',
         displayName: 'Motor Efficiency'
       }],
       enableCellEditOnFocus: true,
@@ -143,23 +142,94 @@ cbecc.controller('SystemsCtrl', [
         });
       }
     };
-    $scope.ptacGridOptions.data = $scope.ptac_fans;
+    $scope.ptacFanGridOptions.data = $scope.ptacs;
+    // cooling coil
+    $scope.ptacCoolGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        displayName: 'System Name'
+      }, {
+        name: 'coil_cooling_name',
+        displayName: 'Coil Name'
+      },{
+        name: 'coil_cooling_type',
+        displayName: 'Type'
+      },{
+        name: 'coil_cooling_fuel_source',
+        displayName: 'Fuel Source'
+      },{
+          name: 'coil_cooling_condenser_type',
+          displayName: 'Condenser Type'
+      }],
+      enableCellEditOnFocus: true,
+      enableColumnMenus: false,
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      enableSorting: false,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selected = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected = null;
+          }
+        });
+      }
+    };
+    $scope.ptacCoolGridOptions.data = $scope.ptacs;
+    // heating coil
+    $scope.ptacHeatGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        displayName: 'System Name'
+      }, {
+        name: 'coil_heating_name',
+        displayName: 'Coil Name'
+      },{
+        name: 'coil_heating_type',
+        displayName: 'Type'
+      },{
+        name: 'coil_cooling_fluid_segment_in_reference',
+        displayName: 'Fluid Segment In'
+      },{
+        name: 'coil_cooling_fluid_segment_out_reference',
+        displayName: 'Fluid Segment Out'
+      }],
+      enableCellEditOnFocus: true,
+      enableColumnMenus: false,
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      enableSorting: false,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selected = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected = null;
+          }
+        });
+      }
+    };
+    $scope.ptacHeatGridOptions.data = $scope.ptacs;
 
-    //add functions
+    // add functions
+    // TODO: this should add entries in all grids across vertical tabs
     $scope.addPTAC = function () {
       $scope.ptacs.push({
-          name: "PTAC " + ($scope.ptacs.length + 1),
-          status: 'New',
-          fan_control: 'Constant Volume'
-      });
-    };
-    // Buttons
-    $scope.addStory = function () {
-      $scope.stories.push({
-        name: "Story " + ($scope.stories.length + 1),
-        z: 0,
-        floor_to_floor_height: 14,
-        floor_to_ceiling_height: 10
+        name: "PTAC " + ($scope.ptacs.length + 1),
+        status: 'New',
+        fan_control: 'Constant Volume',
+        fan_name: "Fan " + ($scope.ptacs.length + 1),
+        fan_control_method: 'Constant Volume',
+        coil_cooling_name: "Cooling Coil " + ($scope.ptacs.length + 1),
+        coil_heating_name: "Heating Coil " + ($scope.ptacs.length + 1)
+
       });
     };
 

@@ -2,16 +2,15 @@
   <div class="col-md-3">
       <ul class="nav nav-pills nav-stacked">
         <li ng-class="getTabClass('ptac', 0)"><button type="button" ng-click="setActiveTab('ptac', 0)" ng-class="getTabClass('ptac', 0)">PTAC General System Settings</button></li>
-        <li ng-class="getTabClass('ptac', 1)"><button type="button" ng-click="setActiveTab('ptac', 1)" ng-class="getTabClass('ptac', 1)">Outdoor Air</button></li>
-        <li ng-class="getTabClass('ptac', 2)"><button type="button" ng-click="setActiveTab('ptac', 2)" ng-class="getTabClass('ptac', 2)">Fan</button></li>
-        <li ng-class="getTabClass('ptac', 3)"><button type="button" ng-click="setActiveTab('ptac', 3)" ng-class="getTabClass('ptac', 3)">DX Cooling Coil</button></li>
-        <li ng-class="getTabClass('ptac', 4)"><button type="button" ng-click="setActiveTab('ptac', 4)" ng-class="getTabClass('ptac', 4)">Gas Heating Coil</button></li>
+        <li ng-class="getTabClass('ptac', 1)"><button type="button" ng-click="setActiveTab('ptac', 1)" ng-class="getTabClass('ptac', 1)">Fan</button></li>
+        <li ng-class="getTabClass('ptac', 2)"><button type="button" ng-click="setActiveTab('ptac', 2)" ng-class="getTabClass('ptac', 2)">DX Cooling Coil</button></li>
+        <li ng-class="getTabClass('ptac', 3)"><button type="button" ng-click="setActiveTab('ptac', 3)" ng-class="getTabClass('ptac', 3)">Gas Heating Coil</button></li>
       </ul>
   </div>
   <div class="col-md-9">
     <div class="row">
       <p>Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.</p>
-      <button type="button" ng-click="addPTAC()" class="btn btn-success col-md-2">
+      <button type="button" ng-click="addPTAC()" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> PTAC System
       </button>
     </div>
@@ -23,19 +22,15 @@
           </div>
 
           <div ng-show="isActiveTab('ptac', 1)" id="ptac1">
-            {{tab2}}
-          </div>
-
-          <div ng-show="isActiveTab('ptac', 2)" id="ptac2">
             <div ui-grid="ptacFanGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
           </div>
 
-          <div ng-show="isActiveTab('ptac', 3)" id="ptac3">
-            {{tab4}}
+          <div ng-show="isActiveTab('ptac', 2)" id="ptac2">
+            <div ui-grid="ptacCoolGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
           </div>
 
-          <div ng-show="isActiveTab('ptac', 4)" id="ptac4">
-            {{tab5}}
+          <div ng-show="isActiveTab('ptac', 3)" id="ptac3">
+            <div ui-grid="ptacHeatGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
           </div>
 
         </div>
