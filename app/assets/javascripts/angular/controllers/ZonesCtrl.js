@@ -4,25 +4,26 @@ cbecc.controller('ZonesCtrl', [
     $scope.tabs = [{
       heading: 'Create Zones',
       path: '/zones',
-      route: 'zones.main'
+      route: 'requirebuilding.zones.main'
     }, {
       heading: 'Attach Spaces',
       path: '/zones/spaces',
-      route: 'zones.spaces'
+      route: 'requirebuilding.zones.spaces'
     }, {
       heading: 'Attach Systems',
       path: '/zones/systems',
-      route: 'zones.systems'
+      route: 'requirebuilding.zones.systems'
     }, {
       heading: 'Attach Terminals',
       path: '/zones/terminals',
-      route: 'zones.terminals'
+      route: 'requirebuilding.zones.terminals'
     }];
 
     function updateActiveTab() {
-      // Reset tabs if the main Spaces nav button is clicked
+      // Reset tabs if the main nav button is clicked or the page is refreshed
       $scope.tabs.filter(function (element) {
-        if ($location.path() === element.path) element.active = true;
+        var regex = new RegExp('^/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}' + element.path + '$');
+        if (regex.test($location.path())) element.active = true;
       });
     }
 
