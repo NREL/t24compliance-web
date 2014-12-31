@@ -44,11 +44,6 @@ cbecc.controller('ProjectCtrl', [
       console.log("submit");
       $scope.errors = {}; //clean up server errors
 
-      console.log('EXCEPTIONALS');
-      console.log('no cooling: ', $scope.project.exceptional_condition_no_cooling_system);
-      console.log('rated capacity: ', $scope.project.exceptional_condition_rated_capacity);
-      console.log('water heater: ', $scope.project.exceptional_condition_water_heater);
-
       // Exceptional_condition_modeling doesn't actually have a field, clear narrative if checkbox is 'No'
       if ($scope.project.exceptional_condition_modeling == 'No') {
         $scope.project.exceptional_condition_narrative = null;
@@ -56,7 +51,7 @@ cbecc.controller('ProjectCtrl', [
 
       function success(response) {
         toaster.pop('success', 'Project successfully saved');
-        the_id = response.hasOwnProperty('id') ? response.id : response._id;
+        var the_id = response.hasOwnProperty('id') ? response.id : response._id;
 
         // go back to form with id of what was just saved
         Shared.setProjectId(the_id);
@@ -67,11 +62,17 @@ cbecc.controller('ProjectCtrl', [
 
       function failure(response) {
         console.log("failure", response);
-        toaster.pop('error', 'An error occurred while saving');
+        if (response.status == 422) {
+          var len = Object.keys(response.data.errors).length;
+          toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));
+        } else {
+          toaster.pop('error', 'An error occurred while saving');
+        }
 
-        return angular.forEach(response.data.errors, function (errors, field) {
+        angular.forEach(response.data.errors, function (errors, field) {
           $scope.form[field].$setValidity('server', false);
-          return $scope.errors[field] = errors.join(', ');
+          $scope.form[field].$dirty = true;
+          $scope.errors[field] = errors.join(', ');
         });
       }
 
