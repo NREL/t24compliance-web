@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   get 'wizard' => 'projects#wizard'
+  get 'buildings' => 'buildings#index'
   resources :projects do
     resources :buildings
     resources :materials

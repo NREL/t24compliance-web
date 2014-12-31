@@ -1,7 +1,7 @@
 {
   "name": "angular-ui-router.stateHelper",
   "main": "statehelper.js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/marklagendijk/ui-router.stateHelper",
   "authors": [
     "Mark Lagendijk <mark@lagendijk.info>"
@@ -33,11 +33,11 @@
   "devDependencies": {
     "angular-mocks": ">=1.2.8"
   },
-  "_release": "1.2.0",
+  "_release": "1.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.2.0",
-    "commit": "fad3d6dea3a456589c8037f93922c164d5dfa4f0"
+    "tag": "1.2.1",
+    "commit": "5fd7c99d7aa67d1c89682adb952b9d7a6a757eb7"
   },
   "_source": "git://github.com/marklagendijk/ui-router.stateHelper.git",
   "_target": "*",

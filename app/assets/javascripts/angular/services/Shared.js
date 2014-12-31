@@ -1,9 +1,13 @@
-cbecc.factory('Shared', ['$cacheFactory', 'usSpinnerService', function ($cacheFactory, usSpinnerService) {
+cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q, $cacheFactory, usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
   var cache = $cacheFactory('constructionsCache');
   var cacheKeys = [];
+
+  service.defaultParams = function() {
+    return { project_id: this.getProjectId(), building_id: this.getBuildingId() }
+  };
 
   service.setIds = function ($stateParams) {
     if ($stateParams.project_id) {
@@ -34,6 +38,46 @@ cbecc.factory('Shared', ['$cacheFactory', 'usSpinnerService', function ($cacheFa
   service.getBuildingId = function () {
     return buildingId;
   };
+
+  service.lookupBuilding = function($q, data, requireBuilding) {
+    var deferred = $q.defer();
+    var scope = this;
+    if (!this.getProjectId()) {
+      deferred.reject('No project ID');
+    }
+    else {
+      if (!this.getBuildingId()) {
+        data.list('buildings',this.defaultParams()).then(
+          function(response) {
+            if (response.length > 0 && response[0].hasOwnProperty('id')) {
+              scope.setBuildingId(response[0].id);
+              deferred.resolve("success");
+            }
+            else {
+              if (requireBuilding) {
+                deferred.reject("No building ID")
+              }
+              else {
+                deferred.resolve("Unable to look up building but building not required.")
+              }
+            }
+          },
+          function(response) {
+            if (requireBuilding) {
+              deferred.reject("No building ID")
+            }
+            else {
+              deferred.resolve("Error looking up building but building not required.")
+            }
+          }
+        );
+      }
+      else {
+        deferred.resolve('Building ID already set');
+      }
+    }
+    return deferred.promise;
+  }
 
   service.projectPath = function () {
     var path = "/projects";

@@ -7,8 +7,8 @@ class ConstructionDefaultsController < ApplicationController
   # angular using only: index, create
 
   def index
-    @project.construction_default
-    respond_with(@project.construction_default)
+    defaults = (@project.construction_default.present?) ? [@project.construction_default] : []
+    respond_with(defaults)
   end
 
   def create

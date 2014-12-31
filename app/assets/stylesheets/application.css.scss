@@ -11,6 +11,7 @@
 @import "angular-ui-grid/ui-grid";
 @import "bootstrap-switch/dist/css/bootstrap3/bootstrap-switch";
 @import "angularjs-toaster/toaster";
+@import "font-awesome";
 
 $sansFontFamily: 'PT Sans', sans-serif;
 $baseFontSize: 15px;
@@ -117,7 +118,7 @@ a.hover {
   color: #C60;
 }
 
-input[type='text'] {
+input[type='text'], select.form-control, .nav-pills > li > a {
   border-radius: 0;
 }
 .alert.alert-error {

@@ -1,5 +1,5 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Building', 'Story', 'Shared', 'data', function ($scope, $window, $stateParams, $resource, $location, toaster, Building, Story, Shared, data) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Building', 'Story', 'Shared', 'stories', function ($scope, $window, $stateParams, $resource, $location, toaster, Building, Story, Shared, stories) {
     Shared.setIds($stateParams);
 
     // Stories UI Grid
@@ -34,7 +34,7 @@ cbecc.controller('BuildingCtrl', [
       }
     };
 
-    $scope.stories = data;
+    $scope.stories = stories;
     $scope.storiesGridOptions.data = $scope.stories;
     if (Shared.getBuildingId() === null) {
       console.log("new building");
@@ -61,7 +61,7 @@ cbecc.controller('BuildingCtrl', [
 
       function success(response) {
         toaster.pop('success', 'Building successfully saved');
-        var the_id = typeof response['id'] === "undefined" ? response['_id'] : response['id'];
+        var the_id = response.hasOwnProperty('id') ? response.id : response._id;
         Shared.setBuildingId(the_id);
         console.log("BLDG ID: ", the_id);
         // UPDATE STORIES
@@ -83,15 +83,19 @@ cbecc.controller('BuildingCtrl', [
 
       function failure(response) {
         console.log("failure", response);
-        toaster.pop('error', 'An error occurred while saving');
+        if (response.status == 422) {
+          var len = Object.keys(response.data.errors).length;
+          toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));
+        } else {
+          toaster.pop('error', 'An error occurred while saving');
+        }
 
-        return angular.forEach(response.data.errors, function(errors, field) {
-          console.log(field);
+        angular.forEach(response.data.errors, function(errors, field) {
           if (field !== 'total_story_count') {
             $scope.form[field].$setValidity('server', false);
             $scope.form[field].$dirty = true;
           }
-          return $scope.errors[field] = errors.join(', ');
+          $scope.errors[field] = errors.join(', ');
         });
 
       }
@@ -160,7 +164,7 @@ cbecc.controller('BuildingCtrl', [
     };
 
     $scope.storyError = function() {
-      return ($scope.building.total_story_count < 1) ? "has-error" : "";
-    }
+      return !$scope.storiesGridOptions.data.length ? "has-error" : "";
+    };
   }
 ]);
