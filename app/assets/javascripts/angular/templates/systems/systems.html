@@ -9,10 +9,10 @@
   </div>
 </div>
 <div class="row pad-top-20 pad-bot-20">
-  <button type="button" ng-click="addAirSystem()" class="btn btn-success col-md-1">
+  <button type="button" ng-click="addAirSystem()" class="btn btn-success col-md-2">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Air System
   </button>
-  <button type="button" ng-click="duplicateSystem()" class="btn btn-info col-md-1 col-md-offset-9" ng-disabled="!selected">Duplicate</button>
+  <button type="button" ng-click="duplicateSystem()" class="btn btn-info col-md-1 col-md-offset-8" ng-disabled="!selected">Duplicate</button>
   <button type="button" ng-click="deleteSystem()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
 </div>
 <accordion close-others="false">
@@ -21,6 +21,15 @@
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': systemPanels[$index].open, 'glyphicon-chevron-right': !systemPanels[$index].open}"></i>
       {{panel.title}} | <small>Select the overall system or the components to edit the settings of each system.</small>
     </accordion-heading>
+
+    <div class="system" ng-switch on="panel.name">
+      <div ng-switch-when="PTAC"><div ng-include="'systems/ptac.html'"></div></div>
+      <div ng-switch-when="VAV"><div ng-include="'systems/vav.html'" ></div></div>
+      <div ng-switch-when="PVAV"><div ng-include="'systems/pvav.html'" ></div></div>
+      <div ng-switch-when="MAU"><div ng-include="'systems/mau.html'" ></div></div>
+      <div ng-switch-when="Exhaust"><div ng-include="'systems/exhaust.html'" ></div></div>
+    </div>
+
   </accordion-group>
   <accordion-group ng-repeat="panel in plantPanels" is-open="plantPanels[$index].open">
     <accordion-heading>

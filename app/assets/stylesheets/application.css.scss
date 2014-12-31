@@ -118,7 +118,7 @@ a.hover {
   color: #C60;
 }
 
-input[type='text'] {
+input[type='text'], select.form-control, .nav-pills > li > a {
   border-radius: 0;
 }
 .alert.alert-error {

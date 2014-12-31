@@ -9,7 +9,7 @@ var cbecc = angular.module('cbecc', [
   'angularSpinner']);
 
 cbecc.config([
-  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider',function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
+  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider', function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
 
     usSpinnerConfigProvider.setDefaults({
       lines: 13,
@@ -21,7 +21,7 @@ cbecc.config([
       shadow: false
     });
 
-    var getConstructions = ['$q', '$stateParams','data','Shared', function ($q, $stateParams, data, Shared) {
+    var getConstructions = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
         var exteriorWallData = Shared.loadFromCache('exterior_walls');
         if (exteriorWallData !== null) {
@@ -33,7 +33,7 @@ cbecc.config([
       return mainPromise();
     }];
 
-    var getFenestrations = ['$q','$stateParams','data','Shared', function ($q, $stateParams, data, Shared) {
+    var getFenestrations = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
         var fenestrationData = Shared.loadFromCache('fenestration');
         if (fenestrationData !== null) {
@@ -45,7 +45,7 @@ cbecc.config([
       return mainPromise();
     }];
 
-    $urlRouterProvider.when('', '/').otherwise('404');
+    //$urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
@@ -56,10 +56,10 @@ cbecc.config([
         name: 'requirebuilding',
         template: '<ui-view>',
         resolve: {
-          lookupbuilding: function($q, Shared, data) {
+          lookupbuilding: ['$q', 'Shared', 'data', function ($q, Shared, data) {
             var require = true;
             return Shared.lookupBuilding($q, data, require);
-          }
+          }]
         }
       })
       // states that have lookupbuilding as parent will throw error if there is no project id
@@ -69,24 +69,25 @@ cbecc.config([
         name: 'lookupbuilding',
         template: '<ui-view>',
         resolve: {
-          lookupbuilding: function($q, Shared, data) {
-            console.log("starting building look up")
+          lookupbuilding: ['$q', 'Shared', 'data', function ($q, Shared, data) {
+            console.log("starting building look up");
             var require = false;
             return Shared.lookupBuilding($q, data, require);
-            console.log("finish building lookup")
-          }
+            // Unreachable
+            //console.log("finish building lookup");
+          }]
         }
       })
       .state({
         name: 'introduction',
         url: '/',
-        templateUrl: 'introduction/introduction.html',
+        templateUrl: 'introduction/introduction.html'
       })
       .state({
         name: 'project',
         url: '/projects',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html',
+        templateUrl: 'project/project.html'
       })
       .state({
         name: 'projectDetails',
@@ -101,7 +102,7 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
+          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             //does this set stories correctly for new building?
             return data.list('building_stories', Shared.defaultParams());
           }]
@@ -114,8 +115,8 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
-            console.log("in child")
+          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
+            console.log("in child");
             return data.list('building_stories', Shared.defaultParams());
           }]
         },
@@ -127,9 +128,9 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
-            stories: ['$q', 'Shared', 'data', 'lookupbuilding', function($q,Shared,data,lookupbuilding){
-              return data.list('building_stories', Shared.defaultParams());
-            }]
+          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
+            return data.list('building_stories', Shared.defaultParams());
+          }]
         },
         parent: "requirebuilding"
       })
@@ -141,8 +142,8 @@ cbecc.config([
         resolve: {
           constData: getConstructions,
           fenData: getFenestrations,
-          defaults: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
-            return data.list('construction_defaults',Shared.defaultParams());
+          defaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('construction_defaults', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding'
@@ -160,51 +161,43 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          stories: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
-            return data.list('building_stories',Shared.defaultParams()) 
+          stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('building_stories', Shared.defaultParams());
           }],
-          spaces: ['$q','data','Shared','lookupbuilding', function($q, data, Shared, lookupbuilding) {
-            return data.list('spaces',Shared.defaultParams()) 
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding',
-        children: [
-          {
-            name: 'main',
-            url: '',
-            templateUrl: 'spaces/main.html'
-          },
-          {
-            name: 'settings',
-            url: '/settings',
-            templateUrl: 'spaces/settings.html'
-          },
-          {
-            name: 'surfaces',
-            url: '/surfaces',
-            templateUrl: 'spaces/surfaces.html'
-          },
-          {
-            name: 'subsurfaces',
-            url: '/subsurfaces',
-            templateUrl: 'spaces/subsurfaces.html'
-          },
-          {
-            name: 'ventilation',
-            url: '/ventilation',
-            templateUrl: 'spaces/ventilation.html'
-          },
-          {
-            name: 'loads',
-            url: '/loads',
-            templateUrl: 'spaces/loads.html'
-          },
-          {
-            name: 'lighting',
-            url: '/lighting',
-            templateUrl: 'spaces/lighting.html'
-          }
-        ]
+        children: [{
+          name: 'main',
+          url: '',
+          templateUrl: 'spaces/main.html'
+        }, {
+          name: 'settings',
+          url: '/settings',
+          templateUrl: 'spaces/settings.html'
+        }, {
+          name: 'surfaces',
+          url: '/surfaces',
+          templateUrl: 'spaces/surfaces.html'
+        }, {
+          name: 'subsurfaces',
+          url: '/subsurfaces',
+          templateUrl: 'spaces/subsurfaces.html'
+        }, {
+          name: 'ventilation',
+          url: '/ventilation',
+          templateUrl: 'spaces/ventilation.html'
+        }, {
+          name: 'loads',
+          url: '/loads',
+          templateUrl: 'spaces/loads.html'
+        }, {
+          name: 'lighting',
+          url: '/lighting',
+          templateUrl: 'spaces/lighting.html'
+        }]
       })
       .state({
         name: 'spaces_placeholder',
@@ -217,79 +210,81 @@ cbecc.config([
         name: 'systems',
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/systems',
         controller: 'SystemsCtrl',
-        templateUrl: 'systems/systems.html'
+        templateUrl: 'systems/systems.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: 'systems_placeholder',
         url: '/systems',
         controller: 'SystemsCtrl',
-        templateUrl: 'systems/systems.html'
+        templateUrl: 'systems/systems.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: 'zones',
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/zones',
         controller: 'ZonesCtrl',
         templateUrl: 'zones/zones.html',
-        children: [
-          {
-            name: 'main',
-            url: '',
-            templateUrl: 'zones/main.html'
-          },
-          {
-            name: 'spaces',
-            url: '/spaces',
-            templateUrl: 'zones/spaces.html'
-          },
-          {
-            name: 'systems',
-            url: '/systems',
-            templateUrl: 'zones/systems.html'
-          },
-          {
-            name: 'terminals',
-            url: '/terminals',
-            templateUrl: 'zones/terminals.html'
-          }
-        ]
+        parent: 'requirebuilding',
+        children: [{
+          name: 'main',
+          url: '',
+          templateUrl: 'zones/main.html'
+        }, {
+          name: 'spaces',
+          url: '/spaces',
+          templateUrl: 'zones/spaces.html'
+        }, {
+          name: 'systems',
+          url: '/systems',
+          templateUrl: 'zones/systems.html'
+        }, {
+          name: 'terminals',
+          url: '/terminals',
+          templateUrl: 'zones/terminals.html'
+        }]
       })
       .state({
         name: 'zones_placeholder',
         url: '/zones',
         controller: 'ZonesCtrl',
-        templateUrl: 'zones/zones.html'
+        templateUrl: 'zones/zones.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: 'review',
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/review',
         controller: 'ReviewCtrl',
-        templateUrl: 'review/review.html'
+        templateUrl: 'review/review.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: 'review_placeholder',
         url: '/review',
         controller: 'ReviewCtrl',
-        templateUrl: 'review/review.html'
+        templateUrl: 'review/review.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: 'compliance',
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/compliance',
         controller: 'ComplianceCtrl',
-        templateUrl: 'compliance/compliance.html'
+        templateUrl: 'compliance/compliance.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: 'compliance_placeholder',
         url: '/compliance',
         controller: 'ComplianceCtrl',
-        templateUrl: 'compliance/compliance.html'
+        templateUrl: 'compliance/compliance.html',
+        parent: 'requirebuilding'
       })
       .state({
         name: '404',
         url: '/404',
         templateUrl: '404/404.html'
       });
-  }
-]);
+  }]);
 
 
 cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $q, toaster, Shared, api, data) {
@@ -313,7 +308,9 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
       $state.go('project');
     } else if (error == 'No building ID' || error == 'Invalid building ID') {
       toaster.pop('error', error, 'Please create a building.');
-      $state.go('lookupbuilding.building', {project_id: Shared.getProjectId()});
+      $state.go('lookupbuilding.building', {
+        project_id: Shared.getProjectId()
+      });
     } else {
       console.error('Unhandled state change error:', error);
       $state.go('project');
