@@ -114,7 +114,7 @@ cbecc.controller('BuildingCtrl', [
       // create vs update
       if (Shared.getBuildingId()) {
         console.log('Update Bldg');
-        Building.update({project_id: Shared.getProjectId()}, $scope.building, success, failure);
+        data.update('buildings', $scope.building).then(success).catch(failure);
       } else {
         console.log('Create Bldg');
         console.log($scope.building);

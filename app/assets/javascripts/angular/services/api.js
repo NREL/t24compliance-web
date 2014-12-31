@@ -4,9 +4,12 @@ cbecc.factory('api', ['$resource', 'Shared', function ($resource, Shared) {
     defaultConfig: {id: '@id', building_id: Shared.getBuildingId()},
 
     extraMethods: {
-      'bulkUpdate': {
-        method: 'POST'
-      }
+      'update' : {
+          method: 'PUT'
+      },
+      // 'bulkUpdate': {
+      //   method: 'POST'
+      // }
     },
 
     add: function (config) {
