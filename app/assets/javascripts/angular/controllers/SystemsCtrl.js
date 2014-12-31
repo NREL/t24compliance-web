@@ -29,6 +29,33 @@ cbecc.controller('SystemsCtrl', [
       title: 'Condenser Plant'
     }];
 
+    function initTabs() {
+      tabClasses = {};
+      tabClasses['ptac']  = ["default","default","default","default","default"];
+    }
+
+    $scope.getTabClass = function (panelName, tabNum) {
+      return "btn btn-" + tabClasses[panelName][tabNum];
+    };
+
+    $scope.setActiveTab = function (panelName, tabNum) {
+      initTabs();
+      tabClasses[panelName][tabNum] = "primary";
+    };
+
+    $scope.isActiveTab = function (panelName, tabNum){
+      if (tabClasses[panelName][tabNum] === 'primary') {
+        return true;
+      }
+      else {
+        return false;
+      }
+    };
+
+    //Initialize
+    initTabs();
+    $scope.setActiveTab('ptac', 0);
+
     //get systems by type
     $scope.ptacs = [];
 
@@ -63,8 +90,6 @@ cbecc.controller('SystemsCtrl', [
       }
     };
     $scope.ptacGridOptions.data = $scope.ptacs;
-
-
 
 
     //add functions

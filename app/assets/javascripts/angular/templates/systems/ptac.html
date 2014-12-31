@@ -1,8 +1,14 @@
 <div class="row">
-  <div class="col-md-2">
-
+  <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <li ng-class="getTabClass('ptac', 0)"><button type="button" ng-click="setActiveTab('ptac', 0)" ng-class="getTabClass('ptac', 0)">PTAC General System Settings</button></li>
+        <li ng-class="getTabClass('ptac', 1)"><button type="button" ng-click="setActiveTab('ptac', 1)" ng-class="getTabClass('ptac', 1)">Outdoor Air</button></li>
+        <li ng-class="getTabClass('ptac', 2)"><button type="button" ng-click="setActiveTab('ptac', 2)" ng-class="getTabClass('ptac', 2)">Fan</button></li>
+        <li ng-class="getTabClass('ptac', 3)"><button type="button" ng-click="setActiveTab('ptac', 3)" ng-class="getTabClass('ptac', 3)">DX Cooling Coil</button></li>
+        <li ng-class="getTabClass('ptac', 4)"><button type="button" ng-click="setActiveTab('ptac', 4)" ng-class="getTabClass('ptac', 4)">Gas Heating Coil</button></li>
+      </ul>
   </div>
-  <div class="col-md-10">
+  <div class="col-md-9">
     <div class="row">
       <p>Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.</p>
       <button type="button" ng-click="addPTAC()" class="btn btn-success col-md-2">
@@ -11,7 +17,29 @@
     </div>
     <div class="row pad-top-20">
       <div class="col-md-11">
-        <div ui-grid="ptacGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+        <div class="tab-content">
+          <div ng-hide="!isActiveTab('ptac', 0)" id="ptac0">
+            <div ui-grid="ptacGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+          </div>
+
+          <div ng-show="isActiveTab('ptac', 1)" id="ptac1">
+            {{tab2}}
+          </div>
+
+          <div ng-show="isActiveTab('ptac', 2)" id="ptac2">
+            {{tab3}}
+          </div>
+
+          <div ng-show="isActiveTab('ptac', 3)" id="ptac3">
+            {{tab4}}
+          </div>
+
+          <div ng-show="isActiveTab('ptac', 4)" id="ptac4">
+            {{tab5}}
+          </div>
+
+        </div>
+
       </div>
     </div>
   </div>

@@ -146,7 +146,7 @@ cbecc.config([
       return mainPromise();
     };
 
-    $urlRouterProvider.when('', '/').otherwise('404');
+    //$urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
