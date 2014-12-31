@@ -15,11 +15,12 @@
         <label for="name" class="col-md-2 control-label col-md-offset-1">
           Building Name
         </label>
-
         <div class="col-md-6">
           <input type="text" name="name" class="form-control" ng-model="building.name" size="50" server-error>
-          <div class="errors" ng-show="form.name.$dirty && form.name.$invalid">
-            <span class="has-error" ng-show="form.name.$error.server">{{ errors.name }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="form.name.$dirty && form.name.$invalid">
+              <span class="has-error" ng-show="form.name.$error.server">{{ errors.name }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -29,11 +30,12 @@
         <label for="building_azimuth" class="col-md-2 control-label col-md-offset-1">
           Azimuth
         </label>
-
         <div class="col-md-2">
           <input type="text" name="building_azimuth" class="form-control" ng-model="building.building_azimuth" server-error>
-          <div class="errors" ng-show="form.building_azimuth.$dirty && form.building_azimuth.$invalid">
-            <span class="has-error" ng-show="form.building_azimuth.$error.server">{{ errors.building_azimuth }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="form.building_azimuth.$dirty && form.building_azimuth.$invalid">
+              <span class="has-error" ng-show="form.building_azimuth.$error.server">{{ errors.building_azimuth }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -42,13 +44,15 @@
   <div class="row pad-bot-20">
     <div class="col-md-5">
       <div class="form-group" ng-class="errorClass('relocatable_public_school_building')">
-        <div class="checkbox row">
-          <label class="col-md-5 control-label col-md-offset-3">
+        <div class="col-md-5 col-md-offset-3">
+          <label class="control-label">
             <input type="checkbox" name="relocatable_public_school_building" ng-model="building.relocatable_public_school_building" ng-true-value="1" ng-false-value="0" server-error>
             Relocatable Public School Building
           </label>
-          <div class="errors" ng-show="form.relocatable_public_school_building.$dirty && form.relocatable_public_school_building.$invalid">
-            <span class="has-error" ng-show="form.relocatable_public_school_building.$error.server">{{ errors.relocatable_public_school_building }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="form.relocatable_public_school_building.$dirty && form.relocatable_public_school_building.$invalid">
+              <span class="has-error" ng-show="form.relocatable_public_school_building.$error.server">{{ errors.relocatable_public_school_building }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -62,8 +66,10 @@
         </label>
         <div class="col-md-2">
           <input type="text" name="total_floor_area" class="form-control" ng-model="building.total_floor_area" size="50" server-error>
-          <div class="errors" ng-show="form.total_floor_area.$dirty && form.total_floor_area.$invalid">
-            <span class="has-error" ng-show="form.total_floor_area.$error.server">{{ errors.total_floor_area }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="form.total_floor_area.$dirty && form.total_floor_area.$invalid">
+              <span class="has-error" ng-show="form.total_floor_area.$error.server">{{ errors.total_floor_area }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -75,14 +81,15 @@
         </label>
         <div class="col-md-2">
           <input type="text" name="living_unit_count" class="form-control" ng-model="building.living_unit_count" server-error>
-          <div class="errors" ng-show="form.living_unit_count.$dirty && form.living_unit_count.$invalid">
-            <span class="has-error" ng-show="form.living_unit_count.$error.server">{{ errors.living_unit_count }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="form.living_unit_count.$dirty && form.living_unit_count.$invalid">
+              <span class="has-error" ng-show="form.living_unit_count.$error.server">{{ errors.living_unit_count }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <div class="row pad-bot-20">
     <div class="col-md-12 pad-left-40">
       <div class="inline-heading">
@@ -98,8 +105,10 @@
         </label>
         <div class="col-md-2">
           <input type="text" name="above_grade_story_count" class="form-control" ng-model="building.above_grade_story_count" server-error>
-          <div class="errors" ng-show="form.above_grade_story_count.$dirty && form.above_grade_story_count.$invalid">
-            <span class="has-error" ng-show="form.above_grade_story_count.$error.server">{{ errors.above_grade_story_count }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="form.above_grade_story_count.$dirty && form.above_grade_story_count.$invalid">
+              <span class="has-error" ng-show="form.above_grade_story_count.$error.server">{{ errors.above_grade_story_count }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -111,8 +120,10 @@
         </label>
         <div class="col-md-2">
           <p class="special-output"><span class="label label-info">{{storiesGridOptions.data.length}}</span></p>
-          <div class="errors" ng-show="errors.total_story_count">
-            <span class="has-error" ng-show="errors.total_story_count">{{ errors.total_story_count }}</span>
+          <div class="row">
+            <div class="errors col-md-12" ng-show="errors.total_story_count">
+              <span class="has-error" ng-show="errors.total_story_count">{{ errors.total_story_count }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -126,7 +137,6 @@
     <button type="button" ng-click="deleteStory()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
   </div>
   <div ui-grid="storiesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-
   <div class="row pad-bot-20 pad-top-20">
     <div class="control-group col-md-1">
       <div class="controls">
@@ -134,5 +144,4 @@
       </div>
     </div>
   </div>
-
 </form>
