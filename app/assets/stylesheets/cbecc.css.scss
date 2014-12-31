@@ -58,6 +58,18 @@
   padding-top: 5px;
 }
 
+.mar-top-5 {
+  margin-top: 5px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.full-width {
+  width: 100%;
+}
+
 .section-desc {
   font-size: 120%;
 }
@@ -108,17 +120,18 @@
   width: 100%;
   height: 80px;
 }
+
 .spaceCreatorGrid {
   height: 61px;
 }
+
 // Hide selected cell
 .ui-grid-cell-focus {
   background-color: inherit;
 }
 
 // Toast Styling
-:not(.no-enter)#toast-container > div.ng-enter
-{
+:not(.no-enter)#toast-container > div.ng-enter {
   -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
   -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
   -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
@@ -127,6 +140,6 @@
 }
 
 .special-output {
-  font-weight:bold;
+  font-weight: bold;
   font-size: 150%;
 }
