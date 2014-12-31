@@ -1,5 +1,5 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Building', 'Story', 'Shared', 'stories', function ($scope, $window, $stateParams, $resource, $location, toaster, Building, Story, Shared, stories) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Story', 'Shared', 'stories', function ($scope, $window, $stateParams, $resource, $location, toaster, data, Story, Shared, stories) {
     Shared.setIds($stateParams);
 
     // Stories UI Grid
@@ -38,10 +38,10 @@ cbecc.controller('BuildingCtrl', [
     $scope.storiesGridOptions.data = $scope.stories;
     if (Shared.getBuildingId() === null) {
       console.log("new building");
-      $scope.building = new Building();
+      $scope.building = {} //empty building
     } else {
       console.log("existing building: id " + Shared.getBuildingId());
-      Building.show({project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).$promise.then(function (response) {
+      data.show('buildings', {project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).then(function (response) {
         $scope.building = response;
       }, function (response) {
         if (response.status == 404) {
@@ -117,7 +117,8 @@ cbecc.controller('BuildingCtrl', [
         Building.update({project_id: Shared.getProjectId()}, $scope.building, success, failure);
       } else {
         console.log('Create Bldg');
-        Building.create({project_id: Shared.getProjectId()}, $scope.building, success, failure);
+        console.log($scope.building);
+        data.create('buildings', $scope.building).then(success).catch(failure);
       }
 
     };
