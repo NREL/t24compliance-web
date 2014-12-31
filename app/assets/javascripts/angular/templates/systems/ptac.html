@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col-md-3">
-      <ul class="nav nav-pills nav-stacked">
-        <li ng-class="getTabClass('ptac', 0)"><button type="button" ng-click="setActiveTab('ptac', 0)" ng-class="getTabClass('ptac', 0)">PTAC General System Settings</button></li>
-        <li ng-class="getTabClass('ptac', 1)"><button type="button" ng-click="setActiveTab('ptac', 1)" ng-class="getTabClass('ptac', 1)">Fan</button></li>
-        <li ng-class="getTabClass('ptac', 2)"><button type="button" ng-click="setActiveTab('ptac', 2)" ng-class="getTabClass('ptac', 2)">DX Cooling Coil</button></li>
-        <li ng-class="getTabClass('ptac', 3)"><button type="button" ng-click="setActiveTab('ptac', 3)" ng-class="getTabClass('ptac', 3)">Gas Heating Coil</button></li>
-      </ul>
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="ptac_navigation">
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('ptac', 0)" ng-class="getTabClass('ptac', 0)">PTAC General System Settings</button>
+      <button type="button" ng-click="setActiveTab('ptac', 1)" ng-class="getTabClass('ptac', 1)">Fan</button>
+      <button type="button" ng-click="setActiveTab('ptac', 2)" ng-class="getTabClass('ptac', 2)">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('ptac', 3)" ng-class="getTabClass('ptac', 3)">Gas Heating Coil</button>
+    </div>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-10">
     <div class="row">
       <p>Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.</p>
       <button type="button" ng-click="addPTAC()" class="btn btn-success">
@@ -15,7 +15,7 @@
       </button>
     </div>
     <div class="row pad-top-20">
-      <div class="col-md-11">
+      <div class="col-md-12">
         <div class="tab-content">
           <div ng-hide="!isActiveTab('ptac', 0)" id="ptac0">
             <div ui-grid="ptacGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
