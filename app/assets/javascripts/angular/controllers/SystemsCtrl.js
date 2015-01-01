@@ -3,20 +3,20 @@ cbecc.controller('SystemsCtrl', [
     //collapsible panels
     $scope.systemPanels = [{
       title: 'VAV Air Systems',
-      name: 'VAV',
+      name: 'vavs',
       open: true
     }, {
       title: 'PVAV Air Systems',
-      name: 'PVAV'
+      name: 'pvavs'
     }, {
       title: 'PTAC Zone Systems',
-      name: 'PTAC'
+      name: 'ptacs'
     }, {
       title: 'MAU Air Systems',
-      name: 'MAU'
+      name: 'maus'
     }, {
       title: 'Exhaust Systems',
-      name: 'Exhaust'
+      name: 'exhausts'
     }];
 
     $scope.plantPanels = [{
@@ -28,6 +28,14 @@ cbecc.controller('SystemsCtrl', [
     }, {
       title: 'Condenser Plant'
     }];
+
+    // put all systems in array for panels
+    $scope.systems = {};
+    $scope.systems.ptacs = [];
+    $scope.systems.vavs = [];
+    $scope.systems.pvavs = [];
+    $scope.systems.maus = [];
+    $scope.systems.exhausts = [];
 
     function initTabs() {
       tabClasses = {};
@@ -57,7 +65,7 @@ cbecc.controller('SystemsCtrl', [
     $scope.setActiveTab('ptac', 0);
 
     //TODO: get systems by type
-    $scope.ptacs = [];
+    $scope.systems.ptacs = [];
 
     // PTAC general UI Grid
     $scope.ptacGridOptions = {
@@ -89,7 +97,7 @@ cbecc.controller('SystemsCtrl', [
         });
       }
     };
-    $scope.ptacGridOptions.data = $scope.ptacs;
+    $scope.ptacGridOptions.data = $scope.systems.ptacs;
 
     // PTAC fan UI Grid
     $scope.ptacFanGridOptions = {
@@ -142,7 +150,7 @@ cbecc.controller('SystemsCtrl', [
         });
       }
     };
-    $scope.ptacFanGridOptions.data = $scope.ptacs;
+    $scope.ptacFanGridOptions.data = $scope.systems.ptacs;
     // cooling coil
     $scope.ptacCoolGridOptions = {
       columnDefs: [{
@@ -179,7 +187,7 @@ cbecc.controller('SystemsCtrl', [
         });
       }
     };
-    $scope.ptacCoolGridOptions.data = $scope.ptacs;
+    $scope.ptacCoolGridOptions.data = $scope.systems.ptacs;
     // heating coil
     $scope.ptacHeatGridOptions = {
       columnDefs: [{
@@ -216,19 +224,19 @@ cbecc.controller('SystemsCtrl', [
         });
       }
     };
-    $scope.ptacHeatGridOptions.data = $scope.ptacs;
+    $scope.ptacHeatGridOptions.data = $scope.systems.ptacs;
 
     // add functions
     // TODO: this should add entries in all grids across vertical tabs
     $scope.addPTAC = function () {
-      $scope.ptacs.push({
-        name: "PTAC " + ($scope.ptacs.length + 1),
+      $scope.systems.ptacs.push({
+        name: "PTAC " + ($scope.systems.ptacs.length + 1),
         status: 'New',
         fan_control: 'Constant Volume',
-        fan_name: "Fan " + ($scope.ptacs.length + 1),
+        fan_name: "Fan " + ($scope.systems.ptacs.length + 1),
         fan_control_method: 'Constant Volume',
-        coil_cooling_name: "Cooling Coil " + ($scope.ptacs.length + 1),
-        coil_heating_name: "Heating Coil " + ($scope.ptacs.length + 1)
+        coil_cooling_name: "Cooling Coil " + ($scope.systems.ptacs.length + 1),
+        coil_heating_name: "Heating Coil " + ($scope.systems.ptacs.length + 1)
 
       });
     };
