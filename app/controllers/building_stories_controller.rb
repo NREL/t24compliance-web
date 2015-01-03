@@ -50,7 +50,7 @@ class BuildingStoriesController < ApplicationController
       end
     end
 
-    # delete ?
+    # setting building_stories to new list of stories will delete old ones
     @building.building_stories = stories
     @building.save
 

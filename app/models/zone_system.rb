@@ -22,6 +22,11 @@ class ZoneSystem
   has_many :coil_heatings, dependent: :destroy
   has_many :fans, dependent: :destroy
 
+  accepts_nested_attributes_for :fans
+  accepts_nested_attributes_for :coil_coolings
+  accepts_nested_attributes_for :coil_heatings
+
+
 
   def self.children_models
     children = [

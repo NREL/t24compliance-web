@@ -1,5 +1,7 @@
 cbecc.controller('SystemsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', 'Shared', function ($scope, $window, $routeParams, $resource, $location, Shared) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Shared', 'System', function ($scope, $window, $stateParams, $resource, $location, toaster, Shared, System) {
+    // TODO:  get saved system and organize by types
+
     //collapsible panels
     $scope.systemPanels = [{
       title: 'VAV Air Systems',
@@ -106,31 +108,40 @@ cbecc.controller('SystemsCtrl', [
         displayName: 'System Name'
       }, {
         name: 'fan_name',
-        displayName: 'Fan Name'
+        displayName: 'Fan Name',
+        field: 'fan.name'
       },{
         name: 'fan_control_method',
-        displayName: 'Control Method'
+        displayName: 'Control Method',
+        field: 'fan.control_method'
       }, {
         name: 'fan_flow_efficiency',
-        displayName: 'Flow Efficiency'
+        displayName: 'Flow Efficiency',
+        field: 'fan.flow_efficiency'
       }, {
         name: 'fan_total_static_pressure',
-        displayName: 'Total Static Pressure'
+        displayName: 'Total Static Pressure',
+        field: 'fan.total_static_pressure'
       }, {
         name: 'fan_motor_position',
-        displayName: 'Motor Position'
+        displayName: 'Motor Position',
+        field: 'fan.motor_position'
       }, {
         name: 'fan_motor_hp',
-        displayName: 'Motor HP'
+        displayName: 'Motor HP',
+        field: 'fan.motor_hp'
       }, {
         name: 'fan_motor_type',
-        displayName: 'Motor Type'
+        displayName: 'Motor Type',
+        field: 'fan.motor_type'
       }, {
         name: 'fan_motor_pole_count',
-        displayName: 'Motor Pole Count'
+        displayName: 'Motor Pole Count',
+        field: 'fan.motor_pole_count'
       }, {
         name: 'fan_motor_efficiency',
-        displayName: 'Motor Efficiency'
+        displayName: 'Motor Efficiency',
+        field: 'fan.motor_efficiency'
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,
@@ -158,16 +169,20 @@ cbecc.controller('SystemsCtrl', [
         displayName: 'System Name'
       }, {
         name: 'coil_cooling_name',
-        displayName: 'Coil Name'
+        displayName: 'Coil Name',
+        field: 'coil_cooling.name'
       },{
         name: 'coil_cooling_type',
-        displayName: 'Type'
+        displayName: 'Type',
+        field: 'coil_cooling.type'
       },{
         name: 'coil_cooling_fuel_source',
-        displayName: 'Fuel Source'
+        displayName: 'Fuel Source',
+        field: 'coil_cooling.fuel_source'
       },{
           name: 'coil_cooling_condenser_type',
-          displayName: 'Condenser Type'
+          displayName: 'Condenser Type',
+          field: 'coil_cooling.condenser_type'
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,
@@ -195,16 +210,20 @@ cbecc.controller('SystemsCtrl', [
         displayName: 'System Name'
       }, {
         name: 'coil_heating_name',
-        displayName: 'Coil Name'
+        displayName: 'Coil Name',
+        field: 'coil_heating.name'
       },{
         name: 'coil_heating_type',
-        displayName: 'Type'
+        displayName: 'Type',
+        field: 'coil_heating.type'
       },{
         name: 'coil_cooling_fluid_segment_in_reference',
-        displayName: 'Fluid Segment In'
+        displayName: 'Fluid Segment In',
+        field: 'coil_heating.fluid_segment_in_reference'
       },{
         name: 'coil_cooling_fluid_segment_out_reference',
-        displayName: 'Fluid Segment Out'
+        displayName: 'Fluid Segment Out',
+        field: 'coil_heating.fluid_segment_out_reference'
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,
@@ -226,19 +245,67 @@ cbecc.controller('SystemsCtrl', [
     };
     $scope.ptacHeatGridOptions.data = $scope.systems.ptacs;
 
-    // add functions
-    // TODO: this should add entries in all grids across vertical tabs
+    // add functions  (adds entries in al grids across vertical tabs inside a panel)
     $scope.addPTAC = function () {
       $scope.systems.ptacs.push({
         name: "PTAC " + ($scope.systems.ptacs.length + 1),
         status: 'New',
+        type: 'PTAC',
         fan_control: 'Constant Volume',
-        fan_name: "Fan " + ($scope.systems.ptacs.length + 1),
-        fan_control_method: 'Constant Volume',
-        coil_cooling_name: "Cooling Coil " + ($scope.systems.ptacs.length + 1),
-        coil_heating_name: "Heating Coil " + ($scope.systems.ptacs.length + 1)
+        fan: {
+          name: "Fan " + ($scope.systems.ptacs.length + 1),
+          control_method: 'Constant Volume'
+        },
+        coil_cooling: {
+          name: "Cooling Coil " + ($scope.systems.ptacs.length + 1)
+        },
+        coil_heating: {
+          name: "Heating Coil " + ($scope.systems.ptacs.length + 1)
+        }
 
       });
+    };
+
+    // save
+    // TODO:finish this
+    $scope.submit = function () {
+      console.log("submit");
+      $scope.errors = {}; //clean up server errors
+
+      console.log($scope.systems);
+
+      function success(response) {
+        toaster.pop('success', 'Systems successfully saved');
+        console.log("redirecting to " + Shared.systemsPath());
+        $location.path(Shared.systemsPath());
+
+      }
+
+      function failure(response) {
+        console.log("failure", response);
+        if (response.status == 422) {
+          var len = Object.keys(response.data.errors).length;
+          toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));
+        } else {
+          toaster.pop('error', 'An error occurred while saving');
+        }
+        angular.forEach(response.data.errors, function(errors, field) {
+          $scope.form[field].$setValidity('server', false);
+          $scope.form[field].$dirty = true;
+          $scope.errors[field] = errors.join(', ');
+        });
+      }
+
+      // collapse all system types into 1 array for saving
+      systems = [];
+      for (var type in $scope.systems) {
+        $scope.systems[type].forEach(function (s) {
+          systems.push(s);
+        });
+      }
+
+      System.createUpdate({building_id: Shared.getBuildingId()}, systems, success, failure);
+
     };
 
   }
