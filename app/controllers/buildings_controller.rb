@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource param_method: :building_params
-  before_action :set_building, only: [:edit, :update, :destroy]
+  before_action :set_building, only: [:edit, :update, :destroy,:show]
   before_action :get_project
 
   respond_to :json, :html
@@ -29,9 +29,8 @@ class BuildingsController < ApplicationController
 
   def create
     @project.building = Building.new(building_params)
-    @building = @project.building
     @project.building.save
-    respond_with(@project, @building)
+    respond_with(@project.building)
   end
 
   def update

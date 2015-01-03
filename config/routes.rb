@@ -17,9 +17,8 @@ Rails.application.routes.draw do
   end
 
   get 'wizard' => 'projects#wizard'
-  get 'buildings' => 'buildings#index'
+  resources :buildings
   resources :projects do
-    resources :buildings
     resources :materials
     resources :construct_assemblies
     resources :simulations do

@@ -21,12 +21,15 @@ cbecc.provider('data', {
     $get: function (api) {
       
       var data = {
- 
+        // new: function(resource, params) {
+        //   return new api[resource](params);
+        // },
+
         list: function (resource, query) {
           return api[resource].query(query).$promise;  
         },
         
-        get : function (resource, query) {
+        show : function (resource, query) {
             return api[resource].get(query).$promise;
         },
  
