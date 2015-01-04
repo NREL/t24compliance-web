@@ -1,10 +1,10 @@
 <div class="row">
   <div class="">
     <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="ptac_navigation">
-      <button class="btn-wrap" type="button" ng-click="setActiveTab('ptac', 0)" ng-class="getTabClass('ptac', 0)">PTAC General System Settings</button>
-      <button type="button" ng-click="setActiveTab('ptac', 1)" ng-class="getTabClass('ptac', 1)">Fan</button>
-      <button type="button" ng-click="setActiveTab('ptac', 2)" ng-class="getTabClass('ptac', 2)">DX Cooling Coil</button>
-      <button type="button" ng-click="setActiveTab('ptac', 3)" ng-class="getTabClass('ptac', 3)">Gas Heating Coil</button>
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('ptacs', 'general')" ng-class="getTabClass('ptacs', 'general')">PTAC General System Settings</button>
+      <button type="button" ng-click="setActiveTab('ptacs', 'fan')" ng-class="getTabClass('ptacs', 'fan')">Fan</button>
+      <button type="button" ng-click="setActiveTab('ptacs', 'coil_cooling')" ng-class="getTabClass('ptacs', 'coil_cooling')">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('ptacs', 'coil_heating')" ng-class="getTabClass('ptacs', 'coil_heating')">Gas Heating Coil</button>
     </div>
   </div>
   <div class="col-md-10">
@@ -18,28 +18,14 @@
     <div class="row pad-top-20">
       <div class="col-md-12">
         <div class="tab-content">
-          <div ng-hide="!isActiveTab('ptac', 0)" id="ptac0">
-            <div ui-grid="ptacGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+          <div ng-repeat="tab in systemTabs.ptacs" ng-show="isActiveTab('ptacs', tab)">
+            <div ui-grid="gridOptions.ptacs[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
           </div>
-
-          <div ng-show="isActiveTab('ptac', 1)" id="ptac1">
-            <div ui-grid="ptacFanGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-          </div>
-
-          <div ng-show="isActiveTab('ptac', 2)" id="ptac2">
-            <div ui-grid="ptacCoolGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-          </div>
-
-          <div ng-show="isActiveTab('ptac', 3)" id="ptac3">
-            <div ui-grid="ptacHeatGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-          </div>
-
         </div>
-
       </div>
     </div>
   </div>
-
 </div>
+
 
 
