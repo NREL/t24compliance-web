@@ -293,7 +293,7 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
 ]);
 
 cbecc.controller('ModalFenestrationLibraryCtrl', [
-  '$scope', '$modalInstance', '$interval', 'Fenestration', 'uiGridConstants', 'params', function ($scope, $modalInstance, $interval, Fenestration, uiGridConstants, params) {
+  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, params) {
     $scope.data = params.data;
     $scope.title = params.title;
     $scope.selected = null;
