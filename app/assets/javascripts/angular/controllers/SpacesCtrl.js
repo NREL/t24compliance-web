@@ -1,12 +1,23 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'stories', 'spaces', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, stories, spaces) {
+  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'uiGridConstants', 'Shared', 'stories', 'spaces', 'constructions', function ($scope, $window, $location, $routeParams, $resource, $stateParams, uiGridConstants, Shared, stories, spaces, constructions) {
     $scope.data = {
       stories: stories,
       spaces: spaces,
+      constructions: constructions,
+      surfaces: [],
       spacesGridOptions: {},
       settingsGridOptions: {},
+      surfacesGridOptions: {},
       selectedSpace: null,
-      gridApi: {}
+      gridApi: {},
+      textFilter: {condition: uiGridConstants.filter.CONTAINS},
+      numberFilter: [{
+        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+        placeholder: 'At least'
+      }, {
+        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+        placeholder: 'No more than'
+      }]
     };
 
     $scope.tabs = [{
@@ -99,6 +110,21 @@ cbecc.controller('SpacesCtrl', [
       }
     };
 
+    // save
+    $scope.submit = function () {
+      console.log("submit");
+
+      function success(response) {
+        toaster.pop('success', 'Spaces successfully saved');
+        $location.path(Shared.spacesPath());
+      }
+
+      function failure(response) {
+        console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving', response.statusText);
+      }
+    };
+
   }]);
 
 cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
@@ -180,7 +206,7 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
   };
 }]);
 
-cbecc.controller('SubtabSettingsCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
+cbecc.controller('SubtabSettingsCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
   // Initialize Settings UI Grid
   if (_.isEmpty($scope.data.settingsGridOptions)) {
     $scope.data.settingsGridOptions = {
@@ -226,6 +252,100 @@ cbecc.controller('SubtabSettingsCtrl', ['$scope', '$modal', 'uiGridConstants', f
       }
     };
   }
+
+}]);
+
+cbecc.controller('SubtabSurfacesCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
+  $scope.selectedSurface = null;
+
+  $scope.dropdowns = [
+    'Interior',
+    'Exterior',
+    'Underground'
+  ];
+  $scope.currentWallDropdown = 0;
+  $scope.currentFloorDropdown = 0;
+
+  // Initialize Surfaces UI Grid
+  if (_.isEmpty($scope.data.surfacesGridOptions)) {
+    $scope.data.surfacesGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        displayName: 'Surface Name',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
+        }
+      }, {
+        name: 'space_name',
+        enableHiding: false
+      }, {
+        name: 'surface_type',
+        enableHiding: false
+      }, {
+        name: 'story',
+        enableHiding: false
+      }, {
+        name: 'area',
+        enableHiding: false
+      }, {
+        name: 'azimuth',
+        enableHiding: false
+      }, {
+        name: 'construction',
+        enableHiding: false
+      }, {
+        name: 'adjacent_space',
+        enableHiding: false
+      }, {
+        name: 'tilt',
+        enableHiding: false
+      }, {
+        name: 'wall_height',
+        enableHiding: false
+      }, {
+        name: 'exposed_perimeter',
+        enableHiding: false
+      }],
+      data: $scope.data.surfaces,
+      enableCellEditOnFocus: true,
+      enableFiltering: true,
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.data.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selectedSurface = row.entity;
+          } else {
+            // No rows selected
+            $scope.selectedSurface = null;
+          }
+        });
+      }
+    };
+  }
+
+  // Buttons
+  $scope.addWall = function (type) {
+    console.log('addWall called:', type);
+  };
+  $scope.addFloor = function (type) {
+    console.log('addFloor called:', type);
+  };
+  $scope.addCeiling = function () {
+    console.log('addCeiling called');
+  };
+  $scope.addRoof = function () {
+    console.log('addRoof called');
+  };
+  $scope.duplicateSurface = function () {
+    console.log('duplicateSurface called');
+  };
+  $scope.deleteSurface = function () {
+    console.log('deleteSurface called');
+  };
 
 }]);
 

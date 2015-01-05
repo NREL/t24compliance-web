@@ -162,6 +162,9 @@ cbecc.config([
           }],
           spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('spaces', Shared.defaultParams());
+          }],
+          constructions: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('construction_defaults', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding',
