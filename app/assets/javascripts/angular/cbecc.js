@@ -45,7 +45,7 @@ cbecc.config([
       return mainPromise();
     }];
 
-    //$urlRouterProvider.when('', '/').otherwise('404');
+    $urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
@@ -70,11 +70,8 @@ cbecc.config([
         template: '<ui-view>',
         resolve: {
           lookupbuilding: ['$q', 'Shared', 'data', function ($q, Shared, data) {
-            console.log("starting building look up");
             var require = false;
             return Shared.lookupBuilding($q, data, require);
-            // Unreachable
-            //console.log("finish building lookup");
           }]
         }
       })
@@ -116,7 +113,6 @@ cbecc.config([
         templateUrl: 'building/building.html',
         resolve: {
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
-            console.log("in child");
             return data.list('building_stories', Shared.defaultParams());
           }]
         },
