@@ -1,8 +1,13 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'stories','spaces', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, stories, spaces) {
-
-    $scope.spaces = spaces;
-    $scope.stories = stories;
+  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'Shared', 'stories', 'spaces', function ($scope, $window, $location, $routeParams, $resource, $stateParams, Shared, stories, spaces) {
+    $scope.data = {
+      stories: stories,
+      spaces: spaces,
+      spacesGridOptions: {},
+      settingsGridOptions: {},
+      selectedSpace: null,
+      gridApi: {}
+    };
 
     $scope.tabs = [{
       heading: 'Spaces',
@@ -35,97 +40,116 @@ cbecc.controller('SpacesCtrl', [
     }];
 
     function updateActiveTab() {
-      // Reset tabs if the main Spaces nav button is clicked
+      // Reset tabs if the main nav button is clicked or the page is refreshed
       $scope.tabs.filter(function (element) {
-        if ($location.path() === element.path) element.active = true;
+        var regex = new RegExp('^/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}' + element.path + '$');
+        if (regex.test($location.path())) element.active = true;
       });
     }
 
     updateActiveTab();
     $scope.$on('$locationChangeSuccess', function () {
+      // Reset row selection
+      $scope.data.selectedSpace = null;
+
+      // Update active subtab
       updateActiveTab();
     });
+
+    // Buttons
+    $scope.data.addSpace = function () {
+      $scope.data.spaces.push({
+        name: "Space " + ($scope.data.spaces.length + 1),
+        floor_to_ceiling_height: 14,
+        story: null,
+        area: 400,
+        conditioning_type: 'Directly Conditioned',
+        envelope_status: 'New',
+        lighting_status: 'New',
+
+        space_function: 'Small Office',
+        occupant_density: 10,
+        hot_water_heating_rate: 0.18,
+        receptacle_power_density: 1.5
+      });
+    };
+    $scope.data.duplicateSpace = function () {
+      $scope.data.spaces.push({
+        name: "Space " + ($scope.data.spaces.length + 1),
+        floor_to_ceiling_height: $scope.data.selectedSpace.floor_to_ceiling_height,
+        story: $scope.data.selectedSpace.story,
+        area: $scope.data.selectedSpace.area,
+        conditioning_type: $scope.data.selectedSpace.conditioning_type,
+        envelope_status: $scope.data.selectedSpace.envelope_status,
+        lighting_status: $scope.data.selectedSpace.lighting_status,
+
+        space_function: $scope.data.selectedSpace.space_function,
+        occupant_density: $scope.data.selectedSpace.occupant_density,
+        hot_water_heating_rate: $scope.data.selectedSpace.hot_water_heating_rate,
+        receptacle_power_density: $scope.data.selectedSpace.receptacle_power_density
+      });
+    };
+    $scope.data.deleteSpace = function () {
+      var index = $scope.data.spaces.indexOf($scope.data.selectedSpace);
+      $scope.data.spaces.splice(index, 1);
+      if (index > 0) {
+        $scope.data.gridApi.selection.toggleRowSelection($scope.data.spaces[index - 1]);
+      } else {
+        $scope.data.selectedSpace = null;
+      }
+    };
+
   }]);
 
 cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
-  // Spaces UI Grid
-  $scope.spacesGridOptions = {
-    columnDefs: [{
-      name: 'name',
-      displayName: 'Space Name',
-      enableHiding: false,
-      filter: {
-        condition: uiGridConstants.filter.CONTAINS
-      }
-    }, {
-      name: 'floor_to_ceiling_height',
-      enableHiding: false
-    }, {
-      name: 'story',
-      enableHiding: false
-    }, {
-      name: 'area',
-      enableHiding: false
-    }, {
-      name: 'conditioning_type',
-      enableHiding: false
-    }, {
-      name: 'envelope_status',
-      enableHiding: false
-    }, {
-      name: 'lighting_status',
-      enableHiding: false
-    }],
-    enableCellEditOnFocus: true,
-    enableFiltering: true,
-    enableRowHeaderSelection: true,
-    enableRowSelection: true,
-    multiSelect: false,
-    onRegisterApi: function (gridApi) {
-      $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected = null;
+  // Initialize Spaces UI Grid
+  if (_.isEmpty($scope.data.spacesGridOptions)) {
+    $scope.data.spacesGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        displayName: 'Space Name',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
         }
-      });
-    }
-  };
-  $scope.spacesGridOptions.data = $scope.spaces;
-  // Buttons
-  $scope.addSpace = function () {
-    $scope.spacesGridOptions.data.push({
-      name: "Space " + ($scope.spacesGridOptions.data.length + 1),
-      floor_to_ceiling_height: 14,
-      story: 1,
-      area: 400,
-      conditioning_type: 'Directly Conditioned',
-      envelope_status: 'New',
-      lighting_status: 'New'
-    });
-  };
-  $scope.duplicateSpace = function () {
-    $scope.spacesGridOptions.data.push({
-      name: "Space " + ($scope.spacesGridOptions.data.length + 1),
-      floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
-      story: $scope.selected.story,
-      area: $scope.selected.area,
-      conditioning_type: $scope.selected.conditioning_type,
-      envelope_status: $scope.selected.envelope_status,
-      lighting_status: $scope.selected.lighting_status
-    });
-  };
-  $scope.deleteSpace = function () {
-    var index = $scope.spacesGridOptions.data.indexOf($scope.selected);
-    $scope.spacesGridOptions.data.splice(index, 1);
-    if (index > 0) {
-      $scope.gridApi.selection.toggleRowSelection($scope.spacesGridOptions.data[index - 1]);
-    } else {
-      $scope.selected = null;
-    }
-  };
+      }, {
+        name: 'floor_to_ceiling_height',
+        enableHiding: false
+      }, {
+        name: 'story',
+        enableHiding: false
+      }, {
+        name: 'area',
+        enableHiding: false
+      }, {
+        name: 'conditioning_type',
+        enableHiding: false
+      }, {
+        name: 'envelope_status',
+        enableHiding: false
+      }, {
+        name: 'lighting_status',
+        enableHiding: false
+      }],
+      data: $scope.data.spaces,
+      enableCellEditOnFocus: true,
+      enableFiltering: true,
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.data.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.data.selectedSpace = row.entity;
+          } else {
+            // No rows selected
+            $scope.data.selectedSpace = null;
+          }
+        });
+      }
+    };
+  }
 
   // Modal Settings
   $scope.openSpaceCreatorModal = function () {
@@ -139,7 +163,7 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
     modalInstance.result.then(function (spaceGroups) {
       _.each(spaceGroups, function (spaceGroup) {
         for (var i = 0; i < spaceGroup.quantity; ++i) {
-          $scope.spacesGridOptions.data.push({
+          $scope.data.spaces.push({
             name: spaceGroup.name + ' ' + (i + 1),
             floor_to_ceiling_height: spaceGroup.floor_to_ceiling_height,
             story: spaceGroup.story,
@@ -157,82 +181,56 @@ cbecc.controller('SubtabSpacesCtrl', ['$scope', '$modal', 'uiGridConstants', fun
 }]);
 
 cbecc.controller('SubtabSettingsCtrl', ['$scope', '$modal', 'uiGridConstants', function ($scope, $modal, uiGridConstants) {
-  // Settings UI Grid
-  $scope.settingsGridOptions = {
-    columnDefs: [{
-      name: 'space_name',
-      enableHiding: false,
-      filter: {
-        condition: uiGridConstants.filter.CONTAINS
-      }
-    }, {
-      name: 'space_function',
-      enableHiding: false
-    }, {
-      name: 'occupancy',
-      enableHiding: false
-    }, {
-      name: 'hot_water_use',
-      enableHiding: false
-    }, {
-      name: 'sensible',
-      enableHiding: false
-    }, {
-      name: 'latent',
-      enableHiding: false
-    }, {
-      name: 'schedule_group',
-      enableHiding: false
-    }, {
-      name: 'plug_loads',
-      enableHiding: false
-    }],
-    enableCellEditOnFocus: true,
-    enableFiltering: true,
-    enableRowHeaderSelection: true,
-    enableRowSelection: true,
-    multiSelect: false,
-    onRegisterApi: function (gridApi) {
-      $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected = null;
+  // Initialize Settings UI Grid
+  if (_.isEmpty($scope.data.settingsGridOptions)) {
+    $scope.data.settingsGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        displayName: 'Space Name',
+        enableHiding: false,
+        filter: {
+          condition: uiGridConstants.filter.CONTAINS
         }
-      });
-    }
-  };
-
-  // Buttons
-  $scope.duplicateSpace = function () {
-    $scope.spacesGridOptions.data.push({
-      space_name: "Space " + ($scope.spacesGridOptions.data.length + 1),
-      floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height,
-      story: $scope.selected.story,
-      area: $scope.selected.area,
-      conditioning_type: $scope.selected.conditioning_type,
-      envelope_status: $scope.selected.envelope_status,
-      lighting_status: $scope.selected.lighting_status
-    });
-  };
-  $scope.deleteSpace = function () {
-    var index = $scope.spacesGridOptions.data.indexOf($scope.selected);
-    $scope.spacesGridOptions.data.splice(index, 1);
-    if (index > 0) {
-      $scope.gridApi.selection.toggleRowSelection($scope.spacesGridOptions.data[index - 1]);
-    } else {
-      $scope.selected = null;
-    }
-  };
+      }, {
+        name: 'space_function',
+        enableHiding: false
+      }, {
+        name: 'occupant_density',
+        displayName: 'Occupancy',
+        enableHiding: false
+      }, {
+        name: 'hot_water_heating_rate',
+        displayName: 'Hot Water Use',
+        enableHiding: false
+      }, {
+        name: 'receptacle_power_density',
+        displayName: 'Plug Loads',
+        enableHiding: false
+      }],
+      data: $scope.data.spaces,
+      enableCellEditOnFocus: true,
+      enableFiltering: true,
+      enableRowHeaderSelection: true,
+      enableRowSelection: true,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.data.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.data.selectedSpace = row.entity;
+          } else {
+            // No rows selected
+            $scope.data.selectedSpace = null;
+          }
+        });
+      }
+    };
+  }
 
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
   '$scope', '$modalInstance', 'uiGridConstants', function ($scope, $modalInstance, uiGridConstants) {
-    $scope.selected = null;
-
     $scope.spaceGroups = [];
 
     $scope.addSpaceGroup = function () {
