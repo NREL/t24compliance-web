@@ -1,8 +1,8 @@
 class BuildingStoriesController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
   before_action :set_building_story, only: [:show, :edit, :update, :destroy]
-  before_action :get_building, only: [:index, :update, :create]
+  before_action :get_building, only: [:index, :update, :create, :bulk_sync]
+  load_and_authorize_resource :building #the resource is building
   respond_to :json, :html
 
   def index
@@ -27,15 +27,20 @@ class BuildingStoriesController < ApplicationController
     respond_with(@building_story)
   end
 
-  # OVERWRITING CREATE AS BULK UPDATE
   def create
+    
+  end
+
+  # receives hash with form {building_id: ..., data: [array of building_stories]}
+  def bulk_sync
+    logger.info("in builk sync")
     clean_params = building_stories_params
-    logger.info("CLEAN PARAMS: #{clean_params.inspect}")
+    logger.info("CLEAN in bulk PARAMS: #{clean_params.inspect}")
 
     # add / update
     stories = []
-    if clean_params.has_key?('_json')
-      clean_params[:_json].each do |rec|
+    if clean_params.has_key?('data')
+      clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
         if rec.has_key?('id') and !rec['id'].nil?
 
@@ -80,6 +85,6 @@ class BuildingStoriesController < ApplicationController
 
     #for update_all
     def building_stories_params
-      params.permit(:building_id, _json: [:id, :name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id])
+      params.permit(:building_id, data: [:id, :name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id])
     end
 end
