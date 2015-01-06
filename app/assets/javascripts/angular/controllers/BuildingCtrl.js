@@ -37,10 +37,8 @@ cbecc.controller('BuildingCtrl', [
     $scope.stories = stories;
     $scope.storiesGridOptions.data = $scope.stories;
     if (Shared.getBuildingId() === null) {
-      console.log("new building");
-      $scope.building = {} //empty building
+      $scope.building = {}; //empty building
     } else {
-      console.log("existing building: id " + Shared.getBuildingId());
       data.show('buildings', {project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).then(function (response) {
         $scope.building = response;
       }, function (response) {
@@ -63,9 +61,7 @@ cbecc.controller('BuildingCtrl', [
         toaster.pop('success', 'Building successfully saved');
         var the_id = response.hasOwnProperty('id') ? response.id : response._id;
         Shared.setBuildingId(the_id);
-        console.log("BLDG ID: ", the_id);
         // UPDATE STORIES
-        console.log($scope.stories);
         $scope.stories.forEach(function (s) {
           // ensure each story has a building_id defined
           if (s.building_id != the_id) {
@@ -76,7 +72,6 @@ cbecc.controller('BuildingCtrl', [
         Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
 
         Shared.setBuildingId(the_id);
-        console.log("redirecting to " + Shared.buildingPath());
         $location.path(Shared.buildingPath());
 
       }
@@ -102,7 +97,6 @@ cbecc.controller('BuildingCtrl', [
 
       // set project ID
       $scope.building.project_id = Shared.getProjectId();
-      console.log('checkbox: ', $scope.building.relocatable_public_school_building);
       if ($scope.building.relocatable_public_school_building) {
         $scope.building.relocatable_public_school_building = 1;
       } else {
@@ -110,18 +104,13 @@ cbecc.controller('BuildingCtrl', [
       }
 
       // update STORIES
-      console.log("STORIES:");
       $scope.building.total_story_count = $scope.storiesGridOptions.data.length;
-      console.log($scope.building.total_story_count);
 
 
       // create vs update
       if (Shared.getBuildingId()) {
-        console.log('Update Bldg');
         data.update('buildings', $scope.building).then(success).catch(failure);
       } else {
-        console.log('Create Bldg');
-        console.log($scope.building);
         data.create('buildings', $scope.building).then(success).catch(failure);
       }
 

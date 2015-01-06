@@ -10,14 +10,22 @@ cbecc.controller('SpacesCtrl', [
       surfacesGridOptions: {},
       selectedSpace: null,
       gridApi: {},
-      textFilter: {condition: uiGridConstants.filter.CONTAINS},
+      textFilter: {
+        condition: uiGridConstants.filter.CONTAINS
+      },
       numberFilter: [{
         condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
         placeholder: 'At least'
       }, {
         condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
         placeholder: 'No more than'
-      }]
+      }],
+      enums: {
+        space_function: $window.spaces_space_function_enums,
+        conditioning_type: $window.spaces_conditioning_type_enums,
+        envelope_status: $window.spaces_envelope_status_enums,
+        lighting_status: $window.spaces_lighting_status_enums
+      }
     };
 
     $scope.tabs = [{
@@ -350,75 +358,90 @@ cbecc.controller('SubtabSurfacesCtrl', ['$scope', 'uiGridConstants', function ($
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
-  '$scope', '$modalInstance', 'uiGridConstants', function ($scope, $modalInstance, uiGridConstants) {
+  '$scope', '$window', '$modalInstance', 'uiGridConstants', function ($scope, $window, $modalInstance, uiGridConstants) {
     $scope.spaceGroups = [];
+
+    $scope.spaceFunctions = [];
+    _.each($window.spaces_space_function_enums, function (val, index) {
+      $scope.spaceFunctions.push({
+        id: index,
+        value: val
+      });
+    });
+
+    $scope.gridOptions = {
+      columnDefs: [{
+        name: 'quantity',
+        displayName: '# of Spaces of This Type'
+      }, {
+        name: 'name',
+        displayName: 'Name + 1,2,3...'
+      }, {
+        name: 'space_type_or_function',
+        editableCellTemplate: 'ui-grid/dropdownEditor',
+        cellFilter: 'mapEnums:"spaces_space_function_enums"',
+        editDropdownOptionsArray: $scope.spaceFunctions
+      }, {
+        name: 'floor_to_ceiling_height'
+      }, {
+        name: 'story',
+        width: 71
+      }, {
+        name: 'area',
+        displayName: 'Area (ft2)',
+        width: 98
+      }, {
+        name: 'conditioning_type'
+      }, {
+        name: 'envelope_status'
+      }, {
+        name: 'lighting_status'
+      }],
+      data: [{
+        quantity: 20,
+        name: 'Small Office',
+        space_type_or_function: 0,
+        floor_to_ceiling_height: 10,
+        area: 250,
+        story: 1,
+        conditioning_type: 'Directly Conditioned',
+        envelope_status: 'New',
+        lighting_status: 'New'
+      }],
+      enableCellEditOnFocus: true,
+      enableColumnMenus: false,
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableSorting: false,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+    };
+
+    $scope.wallGridOptions = {
+      columnDefs: [{
+        name: 'external_walls',
+        displayName: '# of External Walls'
+      }, {
+        name: 'windows',
+        displayName: '# of Windows on External Walls'
+      }, {
+        name: 'internal_walls',
+        displayName: '# of Internal Walls'
+      }],
+      data: [{
+        external_walls: 1,
+        windows: 1,
+        internal_walls: 3
+      }],
+      enableCellEditOnFocus: true,
+      enableColumnMenus: false,
+      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+      enableSorting: false,
+      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+    };
 
     $scope.addSpaceGroup = function () {
       $scope.spaceGroups.push({
-        gridOptions: {
-          columnDefs: [{
-            name: 'quantity',
-            displayName: '# of Spaces of This Type'
-          }, {
-            name: 'name',
-            displayName: 'Name + 1,2,3...'
-          }, {
-            name: 'space_type_or_function'
-          }, {
-            name: 'floor_to_ceiling_height'
-          }, {
-            name: 'story',
-            width: 71
-          }, {
-            name: 'area',
-            displayName: 'Area (ft2)',
-            width: 98
-          }, {
-            name: 'conditioning_type'
-          }, {
-            name: 'envelope_status'
-          }, {
-            name: 'lighting_status'
-          }],
-          data: [{
-            quantity: 20,
-            name: 'Small Office',
-            space_type_or_function: 'Large Office ≥ 250ft',
-            floor_to_ceiling_height: 10,
-            area: 250,
-            story: 1,
-            conditioning_type: 'Directly Conditioned',
-            envelope_status: 'New',
-            lighting_status: 'New'
-          }],
-          enableCellEditOnFocus: true,
-          enableColumnMenus: false,
-          enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-          enableSorting: false,
-          enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
-        },
-        wallGridOptions: {
-          columnDefs: [{
-            name: 'external_walls',
-            displayName: '# of External Walls'
-          }, {
-            name: 'windows',
-            displayName: '# of Windows on External Walls'
-          }, {
-            name: 'internal_walls',
-            displayName: '# of Internal Walls'
-          }],
-          data: [{
-            external_walls: 1,
-            windows: 1,
-            internal_walls: 3
-          }],
-          enableCellEditOnFocus: true,
-          enableColumnMenus: false,
-          enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-          enableSorting: false,
-          enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
-        }
+        gridOptions: angular.copy($scope.gridOptions),
+        wallGridOptions: angular.copy($scope.wallGridOptions)
       });
     };
 

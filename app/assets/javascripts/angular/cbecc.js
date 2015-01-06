@@ -327,3 +327,14 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
     Shared.saveToCache('fenestration', response);
   });
 }]);
+
+
+cbecc.filter('mapEnums', ['$window', function ($window) {
+  return function (input, enums) {
+    var hash = {};
+    _.each($window[enums], function (val, index) {
+      hash[index] = val;
+    });
+    return hash[input];
+  };
+}]);
