@@ -330,9 +330,9 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
 
 
 cbecc.filter('mapEnums', ['$window', function ($window) {
-  return function (input, enums) {
+  return function (input, name) {
     var hash = {};
-    _.each($window[enums], function (val, index) {
+    _.each($window.enums[name], function (val, index) {
       hash[index] = val;
     });
     return hash[input];

@@ -19,13 +19,7 @@ cbecc.controller('SpacesCtrl', [
       }, {
         condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
         placeholder: 'No more than'
-      }],
-      enums: {
-        space_function: $window.spaces_space_function_enums,
-        conditioning_type: $window.spaces_conditioning_type_enums,
-        envelope_status: $window.spaces_envelope_status_enums,
-        lighting_status: $window.spaces_lighting_status_enums
-      }
+      }]
     };
 
     $scope.tabs = [{
@@ -362,7 +356,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
     $scope.spaceGroups = [];
 
     $scope.spaceFunctions = [];
-    _.each($window.spaces_space_function_enums, function (val, index) {
+    _.each($window.enums.spaces_space_function_enums, function (val, index) {
       $scope.spaceFunctions.push({
         id: index,
         value: val
