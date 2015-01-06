@@ -1,13 +1,13 @@
 <div ng-controller="SubtabSpacesCtrl">
   <div class="row pad-top-20 pad-bot-20">
-    <button type="button" ng-click="addSpace()" class="btn btn-success col-md-1">
+    <button type="button" ng-click="data.addSpace()" class="btn btn-success col-md-1">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Space
     </button>
     <button type="button" ng-click="openSpaceCreatorModal()" class="btn btn-success col-md-2">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Quick Space Creator
     </button>
-    <button type="button" ng-click="duplicateSpace()" class="btn btn-info col-md-1 col-md-offset-7" ng-disabled="!selected">Duplicate</button>
-    <button type="button" ng-click="deleteSpace()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
+    <button type="button" ng-click="data.duplicateSpace()" class="btn btn-info col-md-1 col-md-offset-7" ng-disabled="!data.selectedSpace">Duplicate</button>
+    <button type="button" ng-click="data.deleteSpace()" class="btn btn-danger col-md-1" ng-disabled="!data.selectedSpace">Delete</button>
   </div>
-  <div ui-grid="spacesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+  <div ui-grid="data.spacesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
 </div>

@@ -19,7 +19,6 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
   };
   service.setProjectId = function (value) {
     if (value != projectId) {
-      console.log("setting proj id to " + value);
       projectId = value;
     }
   };
@@ -30,7 +29,6 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
 
   service.setBuildingId = function (value) {
     if (value != buildingId) {
-      console.log("set bid called with value: " + value);
       buildingId = value;
     }
   };

@@ -45,7 +45,7 @@ cbecc.config([
       return mainPromise();
     }];
 
-    //$urlRouterProvider.when('', '/').otherwise('404');
+    $urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
 
@@ -70,11 +70,8 @@ cbecc.config([
         template: '<ui-view>',
         resolve: {
           lookupbuilding: ['$q', 'Shared', 'data', function ($q, Shared, data) {
-            console.log("starting building look up");
             var require = false;
             return Shared.lookupBuilding($q, data, require);
-            // Unreachable
-            //console.log("finish building lookup");
           }]
         }
       })
@@ -116,7 +113,6 @@ cbecc.config([
         templateUrl: 'building/building.html',
         resolve: {
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
-            console.log("in child");
             return data.list('building_stories', Shared.defaultParams());
           }]
         },
@@ -166,6 +162,9 @@ cbecc.config([
           }],
           spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('spaces', Shared.defaultParams());
+          }],
+          constructions: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('construction_defaults', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding',
@@ -327,4 +326,15 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   data.list('fenestrations').then(function (response) {
     Shared.saveToCache('fenestration', response);
   });
+}]);
+
+
+cbecc.filter('mapEnums', ['$window', function ($window) {
+  return function (input, name) {
+    var hash = {};
+    _.each($window.enums[name], function (val, index) {
+      hash[index] = val;
+    });
+    return hash[input];
+  };
 }]);

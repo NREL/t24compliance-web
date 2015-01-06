@@ -144,11 +144,16 @@
   font-size: 150%;
 }
 
-.btn-wrap{
-  white-space:normal !important;
-  max-width:200px;
+.btn-wrap {
+  white-space: normal !important;
+  max-width: 200px;
 }
 
 .panel-filled {
   background-color: red;
+}
+
+// For <a> without href
+a:hover {
+  cursor: pointer;
 }

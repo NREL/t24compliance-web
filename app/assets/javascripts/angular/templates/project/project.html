@@ -12,24 +12,24 @@
     <div class="col-md-6">
 
       <div class="form-group" ng-class="errorClass('name')">
-        <label for="name" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-name" class="col-md-2 control-label col-md-offset-1">
           Project Name
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="name" class="form-control" ng-model="project.name" server-error>
+          <input type="text" id="project-name" name="name" class="form-control" ng-model="project.name" server-error>
           <div class="errors" ng-show="form.name.$dirty && form.name.$invalid">
             <span class="has-error" ng-show="form.name.$error.server">{{ errors.name }}</span>
           </div>
         </div>
       </div>
       <div class="form-group" ng-class="errorClass('compliance_type')">
-        <label for="compliance_type" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-compliance-type" class="col-md-2 control-label col-md-offset-1">
           Compliance Type
         </label>
 
         <div class="col-md-5">
-          <select class="form-control" name="compliance_type" ng-model="project.compliance_type"
+          <select class="form-control" id="project-compliance-type" name="compliance_type" ng-model="project.compliance_type"
                   ng-options="ct as ct for ct in project_compliance_type_enums">
           </select>
           <div class="errors" ng-show="form.compliance_type.$dirty && form.compliance_type.$invalid">
@@ -46,11 +46,11 @@
       </div>
 
       <div class="form-group" ng-class="errorClass('run_title')">
-        <label for="run_title" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-run-title" class="col-md-2 control-label col-md-offset-1">
           Run Title
         </label>
         <div class="col-md-5">
-          <input type="text" name="run_title" class="form-control" ng-model="project.run_title">
+          <input type="text" id="project-run-title" name="run_title" class="form-control" ng-model="project.run_title">
           <div class="errors" ng-show="form.run_title.$dirty && form.run_title.$invalid">
             <span class="has-error" ng-show="form.run_title.$error.server">{{ errors.run_title }}</span>
           </div>
@@ -61,24 +61,24 @@
 
     <div class="col-md-6">
       <div class="form-group" ng-class="errorClass('address')">
-        <label for="address" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-address" class="col-md-2 control-label col-md-offset-1">
           Address
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="address" class="form-control" ng-model="project.address">
+          <input type="text" id="project-address" name="address" class="form-control" ng-model="project.address">
           <div class="errors" ng-show="form.address.$dirty && form.address.$invalid">
             <span class="has-error" ng-show="form.address.$error.server">{{ errors.run_title }}</span>
           </div>
         </div>
       </div>
       <div class="form-group" ng-class="errorClass('city')">
-        <label for="city" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-city" class="col-md-2 control-label col-md-offset-1">
           City
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="city" class="form-control" ng-model="project.city">
+          <input type="text" id="project-city" name="city" class="form-control" ng-model="project.city">
           <div class="errors" ng-show="form.city.$dirty && form.city.$invalid">
             <span class="has-error" ng-show="form.city.$error.server">{{ errors.city }}</span>
           </div>
@@ -86,24 +86,24 @@
 
       </div>
       <div class="form-group" ng-class="errorClass('state')">
-        <label for="state" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-state" class="col-md-2 control-label col-md-offset-1">
           State
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="state" class="form-control" ng-model="project.state">
+          <input type="text" id="project-state" name="state" class="form-control" ng-model="project.state">
           <div class="errors" ng-show="form.state.$dirty && form.state.$invalid">
             <span class="has-error" ng-show="form.state.$error.server">{{ errors.state }}</span>
           </div>
         </div>
       </div>
       <div class="form-group" ng-class="errorClass('zip_code')">
-        <label for="zip_code" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-zip-code" class="col-md-2 control-label col-md-offset-1">
           Zip Code
         </label>
 
         <div class="col-md-5">
-          <input type="text" name="zip_code" class="form-control" ng-model="project.zip_code">
+          <input type="text" id="project-zip-code" name="zip_code" class="form-control" ng-model="project.zip_code">
           <div class="errors" ng-show="form.zip_code.$dirty && form.zip_code.$invalid">
             <span class="has-error" ng-show="form.zip_code.$error.server">{{ errors.zip_code }}</span>
           </div>
@@ -124,11 +124,11 @@
 
           <div class="form-heading">Owner Information</div>
           <div class="form-group" ng-class="errorClass('owner_organization')">
-            <label for="owner_organization" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-owner-organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
-              <input type="text" name="owner_organization" class="form-control"
+              <input type="text" id="project-owner-organization" name="owner_organization" class="form-control"
                      ng-model="project.owner_organization">
               <div class="errors" ng-show="form.owner_organization.$dirty && form.owner_organization.$invalid">
                 <span class="has-error" ng-show="form.owner_organization.$error.server">{{ errors.owner_organization }}</span>
@@ -136,11 +136,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('owner_name')">
-            <label for="owner_name" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-owner-name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
-              <input type="text" name="owner_name" class="form-control"
+              <input type="text" id="project-owner-name" name="owner_name" class="form-control"
                      ng-model="project.owner_name">
               <div class="errors" ng-show="form.owner_name.$dirty && form.owner_name.$invalid">
                 <span class="has-error" ng-show="form.owner_name.$error.server">{{ errors.owner_name }}</span>
@@ -148,11 +148,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('owner_title')">
-            <label for="owner_title" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-owner-title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
-              <input type="text" name="owner_title" class="form-control"
+              <input type="text" id="project-owner-title" name="owner_title" class="form-control"
                      ng-model="project.owner_title">
               <div class="errors" ng-show="form.owner_title.$dirty && form.owner_title.$invalid">
                 <span class="has-error" ng-show="form.owner_title.$error.server">{{ errors.owner_title }}</span>
@@ -160,11 +160,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('owner_email')">
-            <label for="owner_email" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-owner-email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
-              <input type="text" name="owner_email" class="form-control"
+              <input type="text" id="project-owner-email" name="owner_email" class="form-control"
                      ng-model="project.owner_email">
               <div class="errors" ng-show="form.owner_email.$dirty && form.owner_email.$invalid">
                 <span class="has-error" ng-show="form.owner_email.$error.server">{{ errors.owner_email }}</span>
@@ -172,11 +172,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('owner_phone')">
-            <label for="owner_phone" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-owner-phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
-              <input type="text" name="owner_phone" class="form-control"
+              <input type="text" id="project-owner-phone" name="owner_phone" class="form-control"
                      ng-model="project.owner_phone">
               <div class="errors" ng-show="form.owner_phone.$dirty && form.owner_phone.$invalid">
                 <span class="has-error" ng-show="form.owner_phone.$error.server">{{ errors.owner_phone }}</span>
@@ -186,11 +186,11 @@
 
           <div class="form-heading">HVAC Engineer</div>
           <div class="form-group" ng-class="errorClass('hvac_engineer_organization')">
-            <label for="hvac_engineer_organization" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-hvac-engineer-organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
-              <input type="text" name="hvac_engineer_organization" class="form-control"
+              <input type="text" id="project-hvac-engineer-organization" name="hvac_engineer_organization" class="form-control"
                      ng-model="project.hvac_engineer_organization">
               <div class="errors" ng-show="form.hvac_engineer_organization.$dirty && form.hvac_engineer_organization.$invalid">
                 <span class="has-error" ng-show="form.hvac_engineer_organization.$error.server">{{ errors.hvac_engineer_organization }}</span>
@@ -198,11 +198,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('hvac_engineer_name')">
-            <label for="hvac_engineer_name" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-hvac-engineer-name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
-              <input type="text" name="hvac_engineer_name" class="form-control"
+              <input type="text" id="project-hvac-engineer-name" name="hvac_engineer_name" class="form-control"
                      ng-model="project.hvac_engineer_name">
               <div class="errors" ng-show="form.hvac_engineer_name.$dirty && form.hvac_engineer_name.$invalid">
                 <span class="has-error" ng-show="form.hvac_engineer_name.$error.server">{{ errors.hvac_engineer_name }}</span>
@@ -210,11 +210,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('hvac_engineer_title')">
-            <label for="hvac_engineer_title" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-hvac-engineer-title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
-              <input type="text" name="hvac_engineer_title" class="form-control"
+              <input type="text" id="project-hvac-engineer-title" name="hvac_engineer_title" class="form-control"
                      ng-model="project.hvac_engineer_title">
               <div class="errors" ng-show="form.hvac_engineer_title.$dirty && form.hvac_engineer_title.$invalid">
                 <span class="has-error" ng-show="form.hvac_engineer_title.$error.server">{{ errors.hvac_engineer_title }}</span>
@@ -222,11 +222,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('hvac_engineer_email')">
-            <label for="hvac_engineer_email" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-hvac-engineer-email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
-              <input type="text" name="hvac_engineer_email" class="form-control"
+              <input type="text" id="project-hvac-engineer-email" name="hvac_engineer_email" class="form-control"
                      ng-model="project.hvac_engineer_email">
               <div class="errors" ng-show="form.hvac_engineer_email.$dirty && form.hvac_engineer_email.$invalid">
                 <span class="has-error" ng-show="form.hvac_engineer_email.$error.server">{{ errors.hvac_engineer_email }}</span>
@@ -234,11 +234,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('hvac_engineer_phone')">
-            <label for="hvac_engineer_phone" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-hvac-engineer-phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
-              <input type="text" name="hvac_engineer_phone" class="form-control"
+              <input type="text" id="project-hvac-engineer-phone" name="hvac_engineer_phone" class="form-control"
                      ng-model="project.hvac_engineer_phone">
               <div class="errors" ng-show="form.hvac_engineer_phone.$dirty && form.hvac_engineer_phone.$invalid">
                 <span class="has-error" ng-show="form.hvac_engineer_phone.$error.server">{{ errors.hvac_engineer_phone }}</span>
@@ -248,11 +248,11 @@
 
           <div class="form-heading">Energy Modeler</div>
           <div class="form-group" ng-class="errorClass('energy_modeler_organization')">
-            <label for="energy_modeler_organization" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-energy-modeler-organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
-              <input type="text" name="energy_modeler_organization" class="form-control"
+              <input type="text" id="project-energy-modeler-organization" name="energy_modeler_organization" class="form-control"
                      ng-model="project.energy_modeler_organization">
               <div class="errors" ng-show="form.energy_modeler_organization.$dirty && form.energy_modeler_organization.$invalid">
                 <span class="has-error" ng-show="form.energy_modeler_organization.$error.server">{{ errors.energy_modeler_organization }}</span>
@@ -260,11 +260,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('energy_modeler_name')">
-            <label for="energy_modeler_name" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-energy-modeler-name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
-              <input type="text" name="energy_modeler_name" class="form-control"
+              <input type="text" id="project-energy-modeler-name" name="energy_modeler_name" class="form-control"
                      ng-model="project.energy_modeler_name">
               <div class="errors" ng-show="form.energy_modeler_name.$dirty && form.energy_modeler_name.$invalid">
                 <span class="has-error" ng-show="form.energy_modeler_name.$error.server">{{ errors.energy_modeler_name }}</span>
@@ -272,11 +272,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('energy_modeler_title')">
-            <label for="energy_modeler_title" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-energy-modeler-title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
-              <input type="text" name="energy_modeler_title" class="form-control"
+              <input type="text" id="project-energy-modeler-title" name="energy_modeler_title" class="form-control"
                      ng-model="project.energy_modeler_title">
               <div class="errors" ng-show="form.energy_modeler_title.$dirty && form.energy_modeler_title.$invalid">
                 <span class="has-error" ng-show="form.energy_modeler_title.$error.server">{{ errors.energy_modeler_title }}</span>
@@ -284,11 +284,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('energy_modeler_email')">
-            <label for="energy_modeler_email" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-energy-modeler-email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
-              <input type="text" name="energy_modeler_email" class="form-control"
+              <input type="text" id="project-energy-modeler-email" name="energy_modeler_email" class="form-control"
                      ng-model="project.energy_modeler_email">
               <div class="errors" ng-show="form.energy_modeler_email.$dirty && form.energy_modeler_email.$invalid">
                 <span class="has-error" ng-show="form.energy_modeler_email.$error.server">{{ errors.energy_modeler_email}}</span>
@@ -296,11 +296,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('energy_modeler_phone')">
-            <label for="energy_modeler_phone" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-energy-modeler-phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
-              <input type="text" name="energy_modeler_phone" class="form-control"
+              <input type="text" id="project-energy-modeler-phone" name="energy_modeler_phone" class="form-control"
                      ng-model="project.energy_modeler_phone">
               <div class="errors" ng-show="form.energy_modeler_phone.$dirty && form.energy_modeler_phone.$invalid">
                 <span class="has-error" ng-show="form.energy_modeler_phone.$error.server">{{ errors.energy_modeler_phone}}</span>
@@ -311,11 +311,11 @@
         <div class="col-md-6">
           <div class="form-heading">Architect</div>
           <div class="form-group" ng-class="errorClass('architect_organization')">
-            <label for="architect_organization" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-architect-organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
-              <input type="text" name="architect_organization" class="form-control"
+              <input type="text" id="project-architect-organization" name="architect_organization" class="form-control"
                      ng-model="project.architect_organization">
               <div class="errors" ng-show="form.architect_organization.$dirty && form.architect_organization.$invalid">
                 <span class="has-error" ng-show="form.architect_organization.$error.server">{{ errors.architect_organization}}</span>
@@ -323,11 +323,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('architect_name')">
-            <label for="architect_name" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-architect-name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
-              <input type="text" name="architect_name" class="form-control"
+              <input type="text" id="project-architect-name" name="architect_name" class="form-control"
                      ng-model="project.architect_name">
               <div class="errors" ng-show="form.architect_name.$dirty && form.architect_name.$invalid">
                 <span class="has-error" ng-show="form.architect_name.$error.server">{{ errors.architect_name}}</span>
@@ -335,11 +335,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('architect_title')">
-            <label for="architect_title" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-architect-title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
-              <input type="text" name="architect_title" class="form-control"
+              <input type="text" id="project-architect-title" name="architect_title" class="form-control"
                      ng-model="project.architect_title">
               <div class="errors" ng-show="form.architect_title.$dirty && form.architect_title.$invalid">
                 <span class="has-error" ng-show="form.architect_title.$error.server">{{ errors.architect_title}}</span>
@@ -347,11 +347,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('architect_email')">
-            <label for="architect_email" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-architect-email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
-              <input type="text" name="architect_email" class="form-control"
+              <input type="text" id="project-architect-email" name="architect_email" class="form-control"
                      ng-model="project.architect_email">
               <div class="errors" ng-show="form.architect_email.$dirty && form.architect_email.$invalid">
                 <span class="has-error" ng-show="form.architect_email.$error.server">{{ errors.architect_email}}</span>
@@ -359,11 +359,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('architect_phone')">
-            <label for="architect_phone" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-architect-phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
-              <input type="text" name="architect_phone" class="form-control"
+              <input type="text" id="project-architect-phone" name="architect_phone" class="form-control"
                      ng-model="project.architect_phone">
               <div class="errors" ng-show="form.architect_phone.$dirty && form.architect_phone.$invalid">
                 <span class="has-error" ng-show="form.architect_phone.$error.server">{{ errors.architect_phone}}</span>
@@ -373,11 +373,11 @@
 
           <div class="form-heading">Lighting Designer</div>
           <div class="form-group" ng-class="errorClass('lighting_designer_organization')">
-            <label for="lighting_designer_organization" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-lighting-designer-organization" class="col-md-2 control-label col-md-offset-1">
               Organization
             </label>
             <div class="col-md-5">
-              <input type="text" name="lighting_designer_organization" class="form-control"
+              <input type="text" id="project-lighting-designer-organization" name="lighting_designer_organization" class="form-control"
                      ng-model="project.lighting_designer_organization">
               <div class="errors" ng-show="form.lighting_designer_organization.$dirty && form.lighting_designer_organization.$invalid">
                 <span class="has-error" ng-show="form.lighting_designer_organization.$error.server">{{ errors.lighting_designer_organization}}</span>
@@ -385,11 +385,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('lighting_designer_name')">
-            <label for="lighting_designer_name" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-lighting-designer-name" class="col-md-2 control-label col-md-offset-1">
               Contact Name
             </label>
             <div class="col-md-5">
-              <input type="text" name="lighting_designer_name" class="form-control"
+              <input type="text" id="project-lighting-designer-name" name="lighting_designer_name" class="form-control"
                      ng-model="project.lighting_designer_name">
               <div class="errors" ng-show="form.lighting_designer_name.$dirty && form.lighting_designer_name.$invalid">
                 <span class="has-error" ng-show="form.lighting_designer_name.$error.server">{{ errors.lighting_designer_name}}</span>
@@ -397,11 +397,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('lighting_designer_title')">
-            <label for="lighting_designer_title" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-lighting-designer-title" class="col-md-2 control-label col-md-offset-1">
               Title
             </label>
             <div class="col-md-5">
-              <input type="text" name="lighting_designer_title" class="form-control"
+              <input type="text" id="project-lighting-designer-title" name="lighting_designer_title" class="form-control"
                      ng-model="project.lighting_designer_title">
               <div class="errors" ng-show="form.lighting_designer_title.$dirty && form.lighting_designer_title.$invalid">
                 <span class="has-error" ng-show="form.lighting_designer_title.$error.server">{{ errors.lighting_designer_title}}</span>
@@ -409,11 +409,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('lighting_designer_email')">
-            <label for="lighting_designer_email" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-lighting-designer-email" class="col-md-2 control-label col-md-offset-1">
               Email
             </label>
             <div class="col-md-5">
-              <input type="text" name="lighting_designer_email" class="form-control"
+              <input type="text" id="project-lighting-designer-email" name="lighting_designer_email" class="form-control"
                      ng-model="project.lighting_designer_email">
               <div class="errors" ng-show="form.lighting_designer_email.$dirty && form.lighting_designer_email.$invalid">
                 <span class="has-error" ng-show="form.lighting_designer_email.$error.server">{{ errors.lighting_designer_email}}</span>
@@ -421,11 +421,11 @@
             </div>
           </div>
           <div class="form-group" ng-class="errorClass('lighting_designer_phone')">
-            <label for="lighting_designer_phone" class="col-md-2 control-label col-md-offset-1">
+            <label for="project-lighting-designer-phone" class="col-md-2 control-label col-md-offset-1">
               Phone
             </label>
             <div class="col-md-5">
-              <input type="text" name="lighting_designer_phone" class="form-control"
+              <input type="text" id="project-lighting-designer-phone" name="lighting_designer_phone" class="form-control"
                      ng-model="project.lighting_designer_phone">
               <div class="errors" ng-show="form.lighting_designer_phone.$dirty && form.lighting_designer_phone.$invalid">
                 <span class="has-error" ng-show="form.lighting_designer_phone.$error.server">{{ errors.lighting_designer_phone}}</span>
@@ -448,6 +448,7 @@
             bs-switch
             ng-model="project.exceptional_condition_no_cooling_system"
             type="checkbox"
+            id="project-exceptional-condition-no-cooling-system"
             name="exceptional_condition_no_cooling_system"
             switch-on-text="Yes"
             switch-off-text="No"
@@ -458,7 +459,7 @@
           </div>
         </div>
         <div class="col-md-11 pad-top-5">
-          <label for="exceptional_condition_no_cooling_system">Is any cooling equipment modeled which will not be installed in the actual building?</label>
+          <label for="project-exceptional-condition-no-cooling-system">Is any cooling equipment modeled which will not be installed in the actual building?</label>
         </div>
       </div>
       <div class="form-group" ng-class="errorClass('exceptional_condition_rated_capacity')">
@@ -467,6 +468,7 @@
               bs-switch
               ng-model="project.exceptional_condition_rated_capacity"
               type="checkbox"
+              id="project-exceptional-condition-rated-capacity"
               name="exceptional_condition_rated_capacity"
               switch-on-text="Yes"
               switch-off-text="No"
@@ -477,7 +479,7 @@
           </div>
         </div>
         <div class="col-md-11 pad-top-5">
-          <label for="exceptional_condition_rated_capacity">Does the rated capacity of any HVAC equipment installed for your project not match the value used in the compliance analysis?</label>
+          <label for="project-exceptional-condition-rated-capacity">Does the rated capacity of any HVAC equipment installed for your project not match the value used in the compliance analysis?</label>
         </div>
       </div>
       <div class="form-group" ng-class="errorClass('exceptional_condition_water_heater')">
@@ -486,6 +488,7 @@
               bs-switch
               ng-model="project.exceptional_condition_water_heater"
               type="checkbox"
+              id="project-exceptional-condition-water-heater"
               name="exceptional_condition_water_heater"
               switch-on-text="Yes"
               switch-off-text="No"
@@ -496,7 +499,7 @@
           </div>
         </div>
         <div class="col-md-11 pad-top-5">
-          <label for="exceptional_condition_water_heater">Is service water heating excluded from the design of this building?</label>
+          <label for="project-exceptional-condition-water-heater">Is service water heating excluded from the design of this building?</label>
         </div>
       </div>
       <div class="form-group" ng-class="errorClass('exceptional_condition_modeling')">
@@ -505,6 +508,7 @@
               bs-switch
               ng-model="project.exceptional_condition_modeling"
               type="checkbox"
+              id="project-exceptional-condition-modeling"
               name="exceptional_condition_modeling"
               switch-on-text="Yes"
               switch-off-text="No"
@@ -515,16 +519,16 @@
           </div>
         </div>
         <div class="col-md-11 pad-top-5">
-          <label for="exceptional_condition_modeling">Are significant modeling approximations used in this proposed design model?
+          <label for="project-exceptional-condition-modeling">Are significant modeling approximations used in this proposed design model?
             If so, a separate narrative must be provided.</label>
         </div>
       </div>
       <div class="form-group" ng-show="form.exceptional_condition_modeling.$viewValue == true" ng-class="errorClass('exceptional_condition_narrative')">
-        <label for="exceptional_condition_narrative" class="col-md-2 control-label col-md-offset-1">
+        <label for="project-exceptional-condition-narrative" class="col-md-2 control-label col-md-offset-1">
           Please provide a narrative:
         </label>
         <div class="col-md-4">
-          <textarea rows="5" name="exceptional_condition_narrative" class="form-control"
+          <textarea rows="5" id="project-exceptional-condition-narrative" name="exceptional_condition_narrative" class="form-control"
                  ng-model="project.exceptional_condition_narrative"></textarea>
 
         </div>

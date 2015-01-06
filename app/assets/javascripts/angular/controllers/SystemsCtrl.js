@@ -36,12 +36,13 @@ cbecc.controller('SystemsCtrl', [
     }];
 
     // put all systems DATA in array for panels
-    $scope.systems = {};
-    $scope.systems.ptacs = [];
-    $scope.systems.vavs = [];
-    $scope.systems.pvavs = [];
-    $scope.systems.maus = [];
-    $scope.systems.exhausts = [];
+    $scope.systems = {
+      ptacs: [],
+      vavs: [],
+      pvavs: [],
+      maus: [],
+      exhausts: []
+    };
 
     // same for plants
     $scope.plants = {};
@@ -54,7 +55,7 @@ cbecc.controller('SystemsCtrl', [
     // this is used to initialize the grids and render active vertical tabs in the view
     // TODO: add other tab defs
     $scope.systemTabs = {};
-    $scope.systemTabs.ptacs = ['general','fan', 'coil_cooling', 'coil_heating'];
+    $scope.systemTabs.ptacs = ['general', 'fan', 'coil_cooling', 'coil_heating'];
 
     //TODO: get systems by type
     gridCols = {};
@@ -76,7 +77,7 @@ cbecc.controller('SystemsCtrl', [
       name: 'fan_name',
       displayName: 'Fan Name',
       field: 'fan.name'
-    },{
+    }, {
       name: 'fan_control_method',
       displayName: 'Control Method',
       field: 'fan.control_method'
@@ -116,15 +117,15 @@ cbecc.controller('SystemsCtrl', [
       name: 'coil_cooling_name',
       displayName: 'Coil Name',
       field: 'coil_cooling.name'
-    },{
+    }, {
       name: 'coil_cooling_type',
       displayName: 'Type',
       field: 'coil_cooling.type'
-    },{
+    }, {
       name: 'coil_cooling_fuel_source',
       displayName: 'Fuel Source',
       field: 'coil_cooling.fuel_source'
-    },{
+    }, {
       name: 'coil_cooling_condenser_type',
       displayName: 'Condenser Type',
       field: 'coil_cooling.condenser_type'
@@ -136,24 +137,25 @@ cbecc.controller('SystemsCtrl', [
       name: 'coil_heating_name',
       displayName: 'Coil Name',
       field: 'coil_heating.name'
-    },{
+    }, {
       name: 'coil_heating_type',
       displayName: 'Type',
       field: 'coil_heating.type'
-    },{
+    }, {
       name: 'coil_cooling_fluid_segment_in_reference',
       displayName: 'Fluid Segment In',
       field: 'coil_heating.fluid_segment_in_reference'
-    },{
+    }, {
       name: 'coil_cooling_fluid_segment_out_reference',
       displayName: 'Fluid Segment Out',
       field: 'coil_heating.fluid_segment_out_reference'
     }];
 
     // TODO: add other systems
-    $scope.gridOptions = {};
-    $scope.gridOptions.ptacs = {};
-    $scope.systemTabs.ptacs.forEach(function(tab) {
+    $scope.gridOptions = {
+      ptacs: {}
+    };
+    $scope.systemTabs.ptacs.forEach(function (tab) {
       console.log(tab);
       $scope.gridOptions.ptacs[tab] = {
         columnDefs: gridCols.ptacs[tab],
@@ -180,9 +182,13 @@ cbecc.controller('SystemsCtrl', [
 
     // TODO: this may cause problems when having multiple panels open
     function initTabs() {
-
       tabClasses = {};
-      tabClasses.ptacs = {general: 'default', fan: 'default', coil_cooling: 'default', coil_heating: 'default'};
+      tabClasses.ptacs = {
+        general: 'default',
+        fan: 'default',
+        coil_cooling: 'default',
+        coil_heating: 'default'
+      };
     }
 
     $scope.getTabClass = function (panelName, tabName) {
@@ -194,11 +200,10 @@ cbecc.controller('SystemsCtrl', [
       tabClasses[panelName][tabName] = "primary";
     };
 
-    $scope.isActiveTab = function (panelName, tabName){
+    $scope.isActiveTab = function (panelName, tabName) {
       if (tabClasses[panelName][tabName] === 'primary') {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     };
@@ -261,7 +266,7 @@ cbecc.controller('SystemsCtrl', [
         } else {
           toaster.pop('error', 'An error occurred while saving');
         }
-        angular.forEach(response.data.errors, function(errors, field) {
+        angular.forEach(response.data.errors, function (errors, field) {
           $scope.form[field].$setValidity('server', false);
           $scope.form[field].$dirty = true;
           $scope.errors[field] = errors.join(', ');
@@ -276,9 +281,10 @@ cbecc.controller('SystemsCtrl', [
         });
       }
 
-      System.createUpdate({building_id: Shared.getBuildingId()}, systems, success, failure);
+      System.createUpdate({
+        building_id: Shared.getBuildingId()
+      }, systems, success, failure);
 
     };
 
-  }
-]);
+  }]);
