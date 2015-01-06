@@ -37,8 +37,9 @@ Rails.application.routes.draw do
   resources :construction_defaults     # only index, create for angular
 
   # depend on building
-  resources :building_stories      # only index, create for angular
-
+  resources :building_stories do  
+    post 'bulk_sync', on: :collection    
+  end
 
 
 
