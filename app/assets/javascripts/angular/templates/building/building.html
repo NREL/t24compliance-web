@@ -130,11 +130,15 @@
     </div>
   </div>
   <div class="row pad-bot-20">
-    <button type="button" ng-click="addStory()" class="btn btn-success col-md-1 col-md-offset-1">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Story
-    </button>
-    <button type="button" ng-click="duplicateStory()" class="btn btn-info col-md-1 col-md-offset-7" ng-disabled="!selected">Duplicate</button>
-    <button type="button" ng-click="deleteStory()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
+    <div class="col-md-12">
+      <button type="button" ng-click="addStory()" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Story
+      </button>
+      <div class="pull-right">
+        <button type="button" ng-click="duplicateStory()" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteStory()" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+      </div>
+    </div>
   </div>
   <div ui-grid="storiesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
   <div class="row pad-bot-20 pad-top-20">
