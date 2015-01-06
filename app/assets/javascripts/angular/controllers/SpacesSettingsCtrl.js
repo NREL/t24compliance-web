@@ -1,4 +1,4 @@
-cbecc.controller('SubtabSettingsCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
+cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
   // Initialize Settings UI Grid
   if (_.isEmpty($scope.data.settingsGridOptions)) {
     $scope.data.settingsGridOptions = {
