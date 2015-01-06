@@ -16,7 +16,7 @@
   <button type="button" ng-click="deleteSystem()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
 </div>-->
 <accordion close-others="false">
-  <accordion-group ng-repeat="panel in systemPanels" is-open="systemPanels[$index].open">
+  <accordion-group ng-repeat="panel in systemPanels" is-open="systemPanels[$index].open" ng-show="hasSystem(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': systemPanels[$index].open, 'glyphicon-chevron-right': !systemPanels[$index].open}"></i>
       {{panel.title}}
@@ -37,7 +37,7 @@
     </div>
 
   </accordion-group>
-  <accordion-group ng-repeat="panel in plantPanels" is-open="plantPanels[$index].open">
+  <accordion-group ng-repeat="panel in plantPanels" is-open="plantPanels[$index].open" ng-show="hasPlant(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': plantPanels[$index].open, 'glyphicon-chevron-right': !plantPanels[$index].open}"></i>
       {{panel.title}} | <small>Select the overall system or the components to edit the settings of each system.</small>

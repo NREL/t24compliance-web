@@ -22,13 +22,17 @@ cbecc.controller('SystemsCtrl', [
     }];
 
     $scope.plantPanels = [{
-      title: 'Service Hot Water'
+      title: 'Service Hot Water',
+      name: 'shw'
     }, {
-      title: 'Chilled Water Plant'
+      title: 'Chilled Water Plant',
+      name: 'chilled_water'
     }, {
-      title: 'Hot Water Plant'
+      title: 'Hot Water Plant',
+      name: 'hot_water'
     }, {
-      title: 'Condenser Plant'
+      title: 'Condenser Plant',
+      name: 'condenser'
     }];
 
     // put all systems DATA in array for panels
@@ -38,6 +42,13 @@ cbecc.controller('SystemsCtrl', [
     $scope.systems.pvavs = [];
     $scope.systems.maus = [];
     $scope.systems.exhausts = [];
+
+    // same for plants
+    $scope.plants = {};
+    $scope.plants.shw = {};
+    $scope.plants.hot_water = {};
+    $scope.plants.chilled_water = {};
+    $scope.plants.condenser = {};
 
     // system tabs META
     // this is used to initialize the grids and render active vertical tabs in the view
@@ -167,6 +178,7 @@ cbecc.controller('SystemsCtrl', [
       $scope.gridOptions.ptacs[tab].data = $scope.systems.ptacs;
     });
 
+    // TODO: this may cause problems when having multiple panels open
     function initTabs() {
 
       tabClasses = {};
@@ -189,6 +201,14 @@ cbecc.controller('SystemsCtrl', [
       else {
         return false;
       }
+    };
+
+    $scope.hasSystems = function (panelName) {
+      return ($scope.systems[panelName].length > 0);
+    };
+
+    $scope.hasPlant = function(panelName) {
+      return ($scope.plants[panelName].length > 0);
     };
 
     // Initialize active tabs
