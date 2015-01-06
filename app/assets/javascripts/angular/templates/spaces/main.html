@@ -1,17 +1,15 @@
-<div ng-controller="SubtabSpacesCtrl">
-  <div class="row pad-top-20 pad-bot-20">
-    <div class="col-md-12">
-      <button type="button" ng-click="data.addSpace()" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Space
-      </button>
-      <button type="button" ng-click="openSpaceCreatorModal()" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Quick Space Creator
-      </button>
-      <div class="pull-right">
-        <button type="button" ng-click="data.duplicateSpace()" class="btn btn-info" ng-disabled="!data.selectedSpace">Duplicate</button>
-        <button type="button" ng-click="data.deleteSpace()" class="btn btn-danger" ng-disabled="!data.selectedSpace">Delete</button>
-      </div>
+<div class="row pad-top-20 pad-bot-20">
+  <div class="col-md-12">
+    <button type="button" ng-click="data.addSpace()" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Space
+    </button>
+    <button type="button" ng-click="openSpaceCreatorModal()" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Quick Space Creator
+    </button>
+    <div class="pull-right">
+      <button type="button" ng-click="data.duplicateSpace()" class="btn btn-info" ng-disabled="!data.selectedSpace">Duplicate</button>
+      <button type="button" ng-click="data.deleteSpace()" class="btn btn-danger" ng-disabled="!data.selectedSpace">Delete</button>
     </div>
   </div>
-  <div ui-grid="data.spacesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
 </div>
+<div ui-grid="data.spacesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>

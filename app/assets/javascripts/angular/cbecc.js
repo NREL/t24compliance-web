@@ -171,30 +171,37 @@ cbecc.config([
         children: [{
           name: 'main',
           url: '',
+          controller: 'SpacesMainCtrl',
           templateUrl: 'spaces/main.html'
         }, {
           name: 'settings',
           url: '/settings',
+          controller: 'SpacesSettingsCtrl',
           templateUrl: 'spaces/settings.html'
         }, {
           name: 'surfaces',
           url: '/surfaces',
+          controller: 'SpacesSurfacesCtrl',
           templateUrl: 'spaces/surfaces.html'
         }, {
           name: 'subsurfaces',
           url: '/subsurfaces',
+          controller: 'SpacesSubsurfacesCtrl',
           templateUrl: 'spaces/subsurfaces.html'
         }, {
           name: 'ventilation',
           url: '/ventilation',
+          controller: 'SpacesVentilationCtrl',
           templateUrl: 'spaces/ventilation.html'
         }, {
           name: 'loads',
           url: '/loads',
+          controller: 'SpacesLoadsCtrl',
           templateUrl: 'spaces/loads.html'
         }, {
           name: 'lighting',
           url: '/lighting',
+          controller: 'SpacesLightingCtrl',
           templateUrl: 'spaces/lighting.html'
         }]
       })
