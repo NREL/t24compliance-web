@@ -56,7 +56,7 @@ cbecc.controller('SystemsCtrl', [
     // this is used to initialize the grids and render active vertical tabs in the view
     // TODO: add other tab defs
     $scope.systemTabs = {};
-    $scope.systemTabs.ptacs = ['general', 'fan', 'coil_cooling', 'coil_heating'];
+    $scope.systemTabs.ptacs = ['general', 'fan', 'fan_motor', 'coil_cooling', 'coil_heating'];
 
     //TODO: get systems by type
     gridCols = {};
@@ -64,12 +64,6 @@ cbecc.controller('SystemsCtrl', [
     gridCols.ptacs.general = [{
       name: 'name',
       displayName: 'System Name'
-    }, {
-      name: 'status',
-      displayName: 'Status'
-    }, {
-      name: 'fan_control',
-      displayName: 'Fan Control Ration'
     }];
     gridCols.ptacs.fan = [{
       name: 'name',
@@ -79,10 +73,6 @@ cbecc.controller('SystemsCtrl', [
       displayName: 'Fan Name',
       field: 'fan.name'
     }, {
-      name: 'fan_control_method',
-      displayName: 'Control Method',
-      field: 'fan.control_method'
-    }, {
       name: 'fan_flow_efficiency',
       displayName: 'Flow Efficiency',
       field: 'fan.flow_efficiency'
@@ -90,6 +80,11 @@ cbecc.controller('SystemsCtrl', [
       name: 'fan_total_static_pressure',
       displayName: 'Total Static Pressure',
       field: 'fan.total_static_pressure'
+    }];
+    gridCols.ptacs.fan_motor = [{
+      name: 'fan_name',
+      displayName: 'Fan Name',
+      field: 'fan.name'
     }, {
       name: 'fan_motor_position',
       displayName: 'Motor Position',
@@ -118,18 +113,6 @@ cbecc.controller('SystemsCtrl', [
       name: 'coil_cooling_name',
       displayName: 'Coil Name',
       field: 'coil_cooling.name'
-    }, {
-      name: 'coil_cooling_type',
-      displayName: 'Type',
-      field: 'coil_cooling.type'
-    }, {
-      name: 'coil_cooling_fuel_source',
-      displayName: 'Fuel Source',
-      field: 'coil_cooling.fuel_source'
-    }, {
-      name: 'coil_cooling_condenser_type',
-      displayName: 'Condenser Type',
-      field: 'coil_cooling.condenser_type'
     }];
     gridCols.ptacs.coil_heating = [{
       name: 'name',
@@ -138,18 +121,6 @@ cbecc.controller('SystemsCtrl', [
       name: 'coil_heating_name',
       displayName: 'Coil Name',
       field: 'coil_heating.name'
-    }, {
-      name: 'coil_heating_type',
-      displayName: 'Type',
-      field: 'coil_heating.type'
-    }, {
-      name: 'coil_cooling_fluid_segment_in_reference',
-      displayName: 'Fluid Segment In',
-      field: 'coil_heating.fluid_segment_in_reference'
-    }, {
-      name: 'coil_cooling_fluid_segment_out_reference',
-      displayName: 'Fluid Segment Out',
-      field: 'coil_heating.fluid_segment_out_reference'
     }];
 
     // TODO: add other systems
@@ -187,6 +158,7 @@ cbecc.controller('SystemsCtrl', [
       tabClasses.ptacs = {
         general: 'default',
         fan: 'default',
+        fan_motor: 'default',
         coil_cooling: 'default',
         coil_heating: 'default'
       };
@@ -233,23 +205,26 @@ cbecc.controller('SystemsCtrl', [
 
     // add functions
     // TODO: add other systems
+    // NOTE:  this also adds fields that are defaulted.
+    // They won't be shown to users, but will be passed to rails
     $scope.addSystem = function (name) {
       switch (name) {
         case 'ptacs':
           $scope.systems.ptacs.push({
             name: "PTAC " + ($scope.systems.ptacs.length + 1),
-            status: 'New',
             type: 'PTAC',
-            fan_control: 'Constant Volume',
             fan: {
               name: "Fan " + ($scope.systems.ptacs.length + 1),
-              control_method: 'Constant Volume'
+              control_method: 'ConstantVolume'
             },
             coil_cooling: {
-              name: "Cooling Coil " + ($scope.systems.ptacs.length + 1)
+              name: "Cooling Coil " + ($scope.systems.ptacs.length + 1),
+              type: "DirectExpansion",
+              condenser_type: "Air"
             },
             coil_heating: {
-              name: "Heating Coil " + ($scope.systems.ptacs.length + 1)
+              name: "Heating Coil " + ($scope.systems.ptacs.length + 1),
+              type: "HotWater"
             }
           });
           break;
