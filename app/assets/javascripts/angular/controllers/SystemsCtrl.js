@@ -258,7 +258,23 @@ cbecc.controller('SystemsCtrl', [
             name: 'VAV' + ($scope.systems.vavs.length +1)
           });
       }
+    };
 
+    $scope.duplicateSystem = function (name) {
+      new_item = angular.copy($scope.selected);
+      delete new_item.$$hashKey;
+      new_item.name = new_item.name + " duplicate";
+      $scope.systems[name].push(new_item);
+    };
+
+    $scope.deleteSystem = function (name) {
+      var index = $scope.systems[name].indexOf($scope.selected);
+      $scope.systems[name].splice(index, 1);
+      if (index > 0) {
+        $scope.gridApi.selection.toggleRowSelection($scope.systems[name][index - 1]);
+      } else {
+        $scope.selected = null;
+      }
     };
 
     // save

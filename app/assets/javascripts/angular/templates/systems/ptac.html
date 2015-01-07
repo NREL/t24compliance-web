@@ -14,6 +14,10 @@
       <button type="button" ng-click="addSystem('ptacs')" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> PTAC System
       </button>
+      <div class="pull-right pad-right-20">
+        <button type="button" ng-click="duplicateSystem('ptacs')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteSystem('ptacs')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+      </div>
     </div>
     <div class="row pad-top-20">
       <div class="col-md-12">
