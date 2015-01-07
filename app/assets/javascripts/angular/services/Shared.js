@@ -5,8 +5,8 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
   var cache = $cacheFactory('constructionsCache');
   var cacheKeys = [];
 
-  service.defaultParams = function() {
-    return { project_id: this.getProjectId(), building_id: this.getBuildingId() }
+  service.defaultParams = function () {
+    return {project_id: this.getProjectId(), building_id: this.getBuildingId()}
   };
 
   service.setIds = function ($stateParams) {
@@ -37,7 +37,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     return buildingId;
   };
 
-  service.lookupBuilding = function($q, data, requireBuilding) {
+  service.lookupBuilding = function ($q, data, requireBuilding) {
     var deferred = $q.defer();
     var scope = this;
     if (!this.getProjectId()) {
@@ -45,8 +45,8 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     }
     else {
       if (!this.getBuildingId()) {
-        data.list('buildings',this.defaultParams()).then(
-          function(response) {
+        data.list('buildings', this.defaultParams()).then(
+          function (response) {
             if (response.length > 0 && response[0].hasOwnProperty('id')) {
               scope.setBuildingId(response[0].id);
               deferred.resolve("success");
@@ -60,7 +60,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
               }
             }
           },
-          function(response) {
+          function (response) {
             if (requireBuilding) {
               deferred.reject("No building ID")
             }
@@ -75,7 +75,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
       }
     }
     return deferred.promise;
-  }
+  };
 
   service.projectPath = function () {
     var path = "/projects";

@@ -342,10 +342,21 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
 
 cbecc.filter('mapEnums', ['$window', function ($window) {
   return function (input, name) {
-    var hash = {};
-    _.each($window.enums[name], function (val, index) {
-      hash[index] = val;
-    });
-    return hash[input];
+    return $window.enumsArr[name][input].value;
   };
-}]);
+}]).filter('mapStories', function () {
+  return function (input, $scope) {
+    var storiesHash = {};
+
+    // The data property can be found between 7-9 parents deep due to ng-include, ui-view, and modal scope hierarchies
+    while (_.isEmpty(storiesHash)) {
+      if ($scope.hasOwnProperty('data')) {
+        storiesHash = $scope.data.storiesHash;
+      } else {
+        $scope = $scope.$parent;
+      }
+    }
+
+    return storiesHash[input];
+  };
+});

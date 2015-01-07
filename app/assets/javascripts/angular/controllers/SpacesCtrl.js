@@ -5,21 +5,42 @@ cbecc.controller('SpacesCtrl', [
       spaces: spaces,
       constructions: constructions,
       surfaces: [],
-      spacesGridOptions: {},
-      settingsGridOptions: {},
-      surfacesGridOptions: {},
       selectedSpace: null,
-      gridApi: {},
-      textFilter: {
-        condition: uiGridConstants.filter.CONTAINS
-      },
-      numberFilter: [{
-        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-        placeholder: 'At least'
-      }, {
-        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-        placeholder: 'No more than'
-      }]
+      selectedSurface: null,
+      gridApi: {}
+    };
+
+    $scope.data.textFilter = {
+      condition: uiGridConstants.filter.CONTAINS
+    };
+
+    $scope.data.numberFilter = [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
+
+    $scope.data.storiesArr = [];
+    $scope.data.storiesHash = {};
+    _.each($scope.data.stories, function (story) {
+      $scope.data.storiesArr.push({
+        id: story.id,
+        value: story.name
+      });
+      $scope.data.storiesHash[story.id] = story.name;
+    });
+
+    $scope.data.sort = function(input) {
+      return function (a, b) {
+        if (a === b) {
+          return 0;
+        }
+        var strA = input[a].value;
+        var strB = input[b].value;
+        return strA < strB ? -1 : 1;
+      }
     };
 
     $scope.tabs = [{
@@ -64,27 +85,35 @@ cbecc.controller('SpacesCtrl', [
     $scope.$on('$locationChangeSuccess', function () {
       // Reset row selection
       $scope.data.selectedSpace = null;
+      $scope.data.selectedSurface = null;
 
       // Update active subtab
       updateActiveTab();
     });
 
     // Buttons
-    $scope.data.addSpace = function () {
-      $scope.data.spaces.push({
+    $scope.data.addSpace = function (input) {
+      var space = {
         name: "Space " + ($scope.data.spaces.length + 1),
         floor_to_ceiling_height: 14,
-        story: null,
+        story: $scope.data.stories[0].id,
         area: 400,
-        conditioning_type: 'Directly Conditioned',
-        envelope_status: 'New',
-        lighting_status: 'New',
+        conditioning_type: 0,
+        envelope_status: 0,
+        lighting_status: 0,
+        space_function: 0
+      };
 
-        space_function: 'Small Office',
-        occupant_density: 10,
-        hot_water_heating_rate: 0.18,
-        receptacle_power_density: 1.5
-      });
+      if (!_.isEmpty(input)) {
+        _.merge(space, input);
+      }
+
+      // TODO Lookup space defaults
+      space.occupant_density = 10;
+      space.hot_water_heating_rate = 0.18;
+      space.receptacle_power_density = 1.5;
+
+      $scope.data.spaces.push(space);
     };
     $scope.data.duplicateSpace = function () {
       $scope.data.spaces.push({
@@ -112,7 +141,7 @@ cbecc.controller('SpacesCtrl', [
       }
     };
 
-    // save
+// save
     $scope.submit = function () {
       console.log("submit");
 
@@ -126,4 +155,5 @@ cbecc.controller('SpacesCtrl', [
       }
     };
 
-  }]);
+  }])
+;

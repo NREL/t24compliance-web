@@ -6,7 +6,6 @@
 
 var enums = {
   project_climate_zone_enums: [
-    '- select -',
     'ClimateZone1',
     'ClimateZone2',
     'ClimateZone3',
@@ -25,7 +24,6 @@ var enums = {
     'ClimateZone16'
   ],
   project_weather_station_enums: [
-    '- select -',
     'ALTURAS_725958',
     'ARCATA_725945',
     'BAKERSFIELD_723840',
@@ -225,3 +223,17 @@ var enums = {
     'Future'
   ]
 };
+
+var enumsArr = {};
+//var enumsHash = {};
+_.each(enums, function (arr, name) {
+  enumsArr[name] = [];
+  //enumsHash[name] = {};
+  _.each(enums[name], function (value, index) {
+    enumsArr[name].push({
+      id: index,
+      value: value
+    });
+    //enumsHash[name][index] = value;
+  });
+});

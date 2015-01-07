@@ -1,6 +1,4 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
-  $scope.selectedSurface = null;
-
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$window', function ($scope, $window) {
   $scope.dropdowns = [
     'Interior',
     'Exterior',
@@ -9,66 +7,62 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', function ($
   $scope.currentWallDropdown = 0;
   $scope.currentFloorDropdown = 0;
 
-  // Initialize Surfaces UI Grid
-  if (_.isEmpty($scope.data.surfacesGridOptions)) {
-    $scope.data.surfacesGridOptions = {
-      columnDefs: [{
-        name: 'name',
-        displayName: 'Surface Name',
-        enableHiding: false,
-        filter: {
-          condition: uiGridConstants.filter.CONTAINS
+  // Surfaces UI Grid
+  $scope.surfacesGridOptions = {
+    columnDefs: [{
+      name: 'name',
+      displayName: 'Surface Name',
+      enableHiding: false,
+      filter: angular.copy($scope.data.textFilter)
+    }, {
+      name: 'space_name',
+      enableHiding: false
+    }, {
+      name: 'surface_type',
+      enableHiding: false
+    }, {
+      name: 'story',
+      enableHiding: false
+    }, {
+      name: 'area',
+      enableHiding: false
+    }, {
+      name: 'azimuth',
+      enableHiding: false
+    }, {
+      name: 'construction',
+      enableHiding: false
+    }, {
+      name: 'adjacent_space',
+      enableHiding: false
+    }, {
+      name: 'tilt',
+      enableHiding: false
+    }, {
+      name: 'wall_height',
+      enableHiding: false
+    }, {
+      name: 'exposed_perimeter',
+      enableHiding: false
+    }],
+    data: $scope.data.surfaces,
+    enableCellEditOnFocus: true,
+    enableFiltering: true,
+    enableRowHeaderSelection: true,
+    enableRowSelection: true,
+    multiSelect: false,
+    onRegisterApi: function (gridApi) {
+      $scope.data.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+        if (row.isSelected) {
+          $scope.selectedSurface = row.entity;
+        } else {
+          // No rows selected
+          $scope.selectedSurface = null;
         }
-      }, {
-        name: 'space_name',
-        enableHiding: false
-      }, {
-        name: 'surface_type',
-        enableHiding: false
-      }, {
-        name: 'story',
-        enableHiding: false
-      }, {
-        name: 'area',
-        enableHiding: false
-      }, {
-        name: 'azimuth',
-        enableHiding: false
-      }, {
-        name: 'construction',
-        enableHiding: false
-      }, {
-        name: 'adjacent_space',
-        enableHiding: false
-      }, {
-        name: 'tilt',
-        enableHiding: false
-      }, {
-        name: 'wall_height',
-        enableHiding: false
-      }, {
-        name: 'exposed_perimeter',
-        enableHiding: false
-      }],
-      data: $scope.data.surfaces,
-      enableCellEditOnFocus: true,
-      enableFiltering: true,
-      enableRowHeaderSelection: true,
-      enableRowSelection: true,
-      multiSelect: false,
-      onRegisterApi: function (gridApi) {
-        $scope.data.gridApi = gridApi;
-        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-          if (row.isSelected) {
-            $scope.selectedSurface = row.entity;
-          } else {
-            // No rows selected
-            $scope.selectedSurface = null;
-          }
-        });
-      }
-    };
-  }
+      });
+    }
+  };
 
   // Buttons
   $scope.addWall = function (type) {
