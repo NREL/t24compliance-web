@@ -43,6 +43,12 @@ cbecc.provider('data', {
  
         remove : function (resource, model) {
           return data.remove(resource, model).$promise;
+        },
+
+        bulkSync : function(resource, params) {
+          params['id'] = "bulk_sync"; //this allows us to use the url /resource/bulk_sync for this POST
+          params['format'] = "json";
+          return api[resource].bulkSync(params).$promise;
         }
       };
  

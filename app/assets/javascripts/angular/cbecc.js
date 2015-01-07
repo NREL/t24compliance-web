@@ -169,32 +169,39 @@ cbecc.config([
         },
         parent: 'requirebuilding',
         children: [{
+          // No controller here because the file is ng-included
           name: 'main',
           url: '',
           templateUrl: 'spaces/main.html'
         }, {
           name: 'settings',
           url: '/settings',
+          controller: 'SpacesSettingsCtrl',
           templateUrl: 'spaces/settings.html'
         }, {
           name: 'surfaces',
           url: '/surfaces',
+          controller: 'SpacesSurfacesCtrl',
           templateUrl: 'spaces/surfaces.html'
         }, {
           name: 'subsurfaces',
           url: '/subsurfaces',
+          controller: 'SpacesSubsurfacesCtrl',
           templateUrl: 'spaces/subsurfaces.html'
         }, {
           name: 'ventilation',
           url: '/ventilation',
+          controller: 'SpacesVentilationCtrl',
           templateUrl: 'spaces/ventilation.html'
         }, {
           name: 'loads',
           url: '/loads',
+          controller: 'SpacesLoadsCtrl',
           templateUrl: 'spaces/loads.html'
         }, {
           name: 'lighting',
           url: '/lighting',
+          controller: 'SpacesLightingCtrl',
           templateUrl: 'spaces/lighting.html'
         }]
       })
@@ -226,20 +233,24 @@ cbecc.config([
         templateUrl: 'zones/zones.html',
         parent: 'requirebuilding',
         children: [{
+          // No controller here because the file is ng-included
           name: 'main',
           url: '',
           templateUrl: 'zones/main.html'
         }, {
           name: 'spaces',
           url: '/spaces',
+          controller: 'ZonesSpacesCtrl',
           templateUrl: 'zones/spaces.html'
         }, {
           name: 'systems',
           url: '/systems',
+          controller: 'ZonesSystemsCtrl',
           templateUrl: 'zones/systems.html'
         }, {
           name: 'terminals',
           url: '/terminals',
+          controller: 'ZonesTerminalsCtrl',
           templateUrl: 'zones/terminals.html'
         }]
       })

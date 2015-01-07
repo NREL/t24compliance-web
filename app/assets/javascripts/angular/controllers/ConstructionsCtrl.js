@@ -162,9 +162,6 @@ cbecc.controller('ConstructionsCtrl', [
 
       function success(response) {
         toaster.pop('success', 'Construction defaults successfully saved');
-
-        $location.path(Shared.constructionsPath());
-
       }
 
       function failure(response) {
