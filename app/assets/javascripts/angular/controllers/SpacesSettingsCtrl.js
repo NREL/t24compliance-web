@@ -5,9 +5,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$window', function ($scope, $
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      filter: {
-        condition: uiGridConstants.filter.CONTAINS
-      }
+      filter: angular.copy($scope.data.textFilter)
     }, {
       name: 'space_function',
       enableHiding: false,

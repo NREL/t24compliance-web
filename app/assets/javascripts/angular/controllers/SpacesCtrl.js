@@ -32,7 +32,7 @@ cbecc.controller('SpacesCtrl', [
       $scope.data.storiesHash[story.id] = story.name;
     });
 
-    $scope.data.sort = function(input) {
+    $scope.data.sort = function (input) {
       return function (a, b) {
         if (a === b) {
           return 0;
@@ -40,7 +40,7 @@ cbecc.controller('SpacesCtrl', [
         var strA = input[a].value;
         var strB = input[b].value;
         return strA < strB ? -1 : 1;
-      }
+      };
     };
 
     $scope.tabs = [{
@@ -141,7 +141,7 @@ cbecc.controller('SpacesCtrl', [
       }
     };
 
-// save
+    // save
     $scope.submit = function () {
       console.log("submit");
 
@@ -155,5 +155,4 @@ cbecc.controller('SpacesCtrl', [
       }
     };
 
-  }])
-;
+  }]);
