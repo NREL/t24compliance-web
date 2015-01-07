@@ -8,15 +8,13 @@
     </div>
   </div>
 </div>
-<!--<div class="row pad-top-20 pad-bot-20">
-  <button type="button" ng-click="addAirSystem()" class="btn btn-success col-md-2">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Air System
+<div class="row pad-top-20 pad-left-40 pad-bot-20">
+  <button type="button" ng-click="openSystemCreatorModal()" class="btn btn-success col-md-2">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New System
   </button>
-  <button type="button" ng-click="duplicateSystem()" class="btn btn-info col-md-1 col-md-offset-8" ng-disabled="!selected">Duplicate</button>
-  <button type="button" ng-click="deleteSystem()" class="btn btn-danger col-md-1" ng-disabled="!selected">Delete</button>
-</div>-->
+</div>
 <accordion close-others="false">
-  <accordion-group ng-repeat="panel in systemPanels" is-open="systemPanels[$index].open" ng-show="hasSystem(panel.name)">
+  <accordion-group ng-repeat="panel in systemPanels" is-open="true" ng-show="hasSystems(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': systemPanels[$index].open, 'glyphicon-chevron-right': !systemPanels[$index].open}"></i>
       {{panel.title}}
@@ -48,7 +46,7 @@
 <div class="row pad-bot-20 pad-top-20">
   <div class="control-group col-md-1">
     <div class="controls">
-      <button type="submit" class="btn btn-success" ng-click="submit()">Save</button>
+      <button type="submit" class="btn btn-success" ng-click="submit()" ng-show="noSystems()">Save</button>
     </div>
   </div>
 </div>

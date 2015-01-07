@@ -15,6 +15,7 @@ u.save!
 
 u.projects.destroy_all
 
+=begin
 # CONSTRUCTION LIBRARIES
 file = File.read(File.join(Rails.root,"lib/assets/construction_library.json"))
 data = JSON.parse(file)
@@ -64,7 +65,7 @@ data['space_functions'].each_with_index do |c, index|
     sf.save!
   end
 end
-
+=end
 
 # import some cbecc com models
 f = File.join(Rails.root,"spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")

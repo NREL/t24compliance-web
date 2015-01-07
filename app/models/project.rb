@@ -112,9 +112,10 @@ class Project
 
   # Validations
   validates_presence_of :name
-  validates_presence_of :exceptional_condition_no_cooling_system
-  validates_presence_of :exceptional_condition_rated_capacity
-  validates_presence_of :exceptional_condition_water_heater
+  #validates_presence_of :exceptional_condition_no_cooling_system
+  #validates_presence_of :exceptional_condition_rated_capacity
+  #validates_presence_of :exceptional_condition_water_heater
+
   #validates_presence_of :exceptional_condition_narrative
   validates_presence_of :zip_code
   validates_numericality_of :zip_code

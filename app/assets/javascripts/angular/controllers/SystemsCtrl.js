@@ -1,5 +1,5 @@
 cbecc.controller('SystemsCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', 'toaster', 'Shared', 'System', function ($scope, $window, $stateParams, $resource, $location, toaster, Shared, System) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'Shared', 'System', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, Shared, System) {
     // TODO:  get saved system and organize by types
 
     //collapsible panels
@@ -38,6 +38,7 @@ cbecc.controller('SystemsCtrl', [
     // put all systems DATA in array for panels
     $scope.systems = {
       ptacs: [],
+      fpfc: [],
       vavs: [],
       pvavs: [],
       maus: [],
@@ -180,7 +181,7 @@ cbecc.controller('SystemsCtrl', [
       $scope.gridOptions.ptacs[tab].data = $scope.systems.ptacs;
     });
 
-    // TODO: this may cause problems when having multiple panels open
+    // TODO: this may cause problems when having multiple panels open, revise!
     function initTabs() {
       tabClasses = {};
       tabClasses.ptacs = {
@@ -216,31 +217,48 @@ cbecc.controller('SystemsCtrl', [
       return ($scope.plants[panelName].length > 0);
     };
 
+    $scope.noSystems = function () {
+      count = 0;
+      for (var type in $scope.systems) {
+        count = count + $scope.systems[type].length;
+      }
+      return count;
+    }
+
     // Initialize active tabs
+    // TODO: need this?
     initTabs();
     $scope.setActiveTab('ptacs', 'general');
 
 
-    // add functions  (adds entries in all grids across vertical tabs inside a panel)
+    // add functions
     // TODO: add other systems
-    $scope.addPTAC = function () {
-      $scope.systems.ptacs.push({
-        name: "PTAC " + ($scope.systems.ptacs.length + 1),
-        status: 'New',
-        type: 'PTAC',
-        fan_control: 'Constant Volume',
-        fan: {
-          name: "Fan " + ($scope.systems.ptacs.length + 1),
-          control_method: 'Constant Volume'
-        },
-        coil_cooling: {
-          name: "Cooling Coil " + ($scope.systems.ptacs.length + 1)
-        },
-        coil_heating: {
-          name: "Heating Coil " + ($scope.systems.ptacs.length + 1)
-        }
+    $scope.addSystem = function (name) {
+      switch (name) {
+        case 'ptacs':
+          $scope.systems.ptacs.push({
+            name: "PTAC " + ($scope.systems.ptacs.length + 1),
+            status: 'New',
+            type: 'PTAC',
+            fan_control: 'Constant Volume',
+            fan: {
+              name: "Fan " + ($scope.systems.ptacs.length + 1),
+              control_method: 'Constant Volume'
+            },
+            coil_cooling: {
+              name: "Cooling Coil " + ($scope.systems.ptacs.length + 1)
+            },
+            coil_heating: {
+              name: "Heating Coil " + ($scope.systems.ptacs.length + 1)
+            }
+          });
+          break;
+        case 'vavs':
+          $scope.systems.vavs.push({
+            name: 'VAV' + ($scope.systems.vavs.length +1)
+          });
+      }
 
-      });
     };
 
     // save
@@ -287,4 +305,84 @@ cbecc.controller('SystemsCtrl', [
 
     };
 
+    // Modal Settings
+    $scope.openSystemCreatorModal = function () {
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        controller: 'ModalSystemCreatorCtrl',
+        templateUrl: 'systems/systemCreator.html',
+        windowClass: 'wide-modal'
+      });
+
+      modalInstance.result.then(function (system) {
+        for (var i = 0; i < system.quantity; ++i) {
+          // explicitly set type and subtype if needed here.
+          if (system.type.indexOf("vav_") > -1 ) {
+            sys_type = 'vavs';
+            subtype = system.type.split('_')[1];
+          }
+          else if (system.type.indexOf("pvav_") > -1) {
+             sys_type = 'pvavs';
+            subtype = system.type.split('_')[1];
+          }
+          else {
+            sys_type = system.type;
+            subtype = '';
+          }
+          console.log("SYSTEM TYPE: ", sys_type);
+
+          $scope.addSystem(sys_type);
+        }
+      }, function () {
+        // Modal canceled
+      });
+    };
+
   }]);
+
+cbecc.controller('ModalSystemCreatorCtrl', [
+  '$scope', '$modalInstance', function ($scope, $modalInstance) {
+    $scope.quantity = 1;
+    $scope.type = '';
+
+    $scope.systemTypes = [
+      {id: 'ptacs', name: 'PTAC: Packaged Terminal Air Conditioner '},
+      {id: 'fpfcs', name: 'FPFC: Four-Pipe Fan Coil'},
+      {id: 'vavs', name: 'VAV: Packaged Variable Air Volume'},
+      {id: 'vav_crah', name: 'VAV-CRAH: Computer Room Air Handler'},
+      {id: 'vav_crac', name: 'VAV-CRAC: Computer Room Air Conditioner'},
+      {id: 'vav_psz', name: 'VAV-PSZ: Packaged Single Zone'},
+      {id: 'pvavs', name: 'PVAV: Packaged Variable Air Volume'},
+      {id: 'pvav_crah', name: 'PVAV-CRAH: Computer Room Air Handler'},
+      {id: 'pvav_crac',  name: 'PVAV-CRAC: Computer Room Air Conditioner'},
+      {id: 'pvav_psz', name: 'PVAV-PSZ: Packaged Single Zone'}
+    ];
+
+    $scope.systemDescriptions = {
+      ptacs: '',
+      fpfcs: '',
+      vavs: 'Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units. The plants required for this system are created with the system.',
+      vav_crah: '',
+      vav_crac: '',
+      vav_psz: '',
+      pvavs: '',
+      pvav_crah: '',
+      pvav_crac: '',
+      pvav_psz: ''
+    };
+
+
+    $scope.add = function () {
+      var data = {};
+      data.quantity = $scope.quantity;
+      data.type = $scope.type;
+      console.log(data);
+      $modalInstance.close(data);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  }]);
+
+
