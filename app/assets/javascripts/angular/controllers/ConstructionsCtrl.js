@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$window', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $window, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
+  '$scope', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data

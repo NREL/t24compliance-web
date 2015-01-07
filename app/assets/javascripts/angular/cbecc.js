@@ -340,9 +340,9 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
 }]);
 
 
-cbecc.filter('mapEnums', ['$window', function ($window) {
+cbecc.filter('mapEnums', ['Enums', function (Enums) {
   return function (input, name) {
-    return $window.enumsArr[name][input].value;
+    return Enums.enumsArr[name][input].value;
   };
 }]).filter('mapStories', function () {
   return function (input, $scope) {

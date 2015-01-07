@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$window', function ($scope, $window) {
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enums) {
   $scope.dropdowns = [
     'Interior',
     'Exterior',

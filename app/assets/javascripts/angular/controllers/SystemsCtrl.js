@@ -1,5 +1,5 @@
 cbecc.controller('SystemsCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'Shared', 'System', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, Shared, System) {
+  '$scope', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'Shared', 'System', function ($scope, $stateParams, $resource, $location, $modal, toaster, Shared, System) {
     // TODO:  get saved system and organize by types
 
     //collapsible panels

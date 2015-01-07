@@ -1,4 +1,4 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$window', '$modal', function ($scope, $window, $modal) {
+cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scope, $modal, Enums) {
   // Spaces UI Grid
 
   $scope.spacesGridOptions = {
@@ -33,40 +33,40 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$window', '$modal', function ($sc
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_conditioning_type_enums"',
-      editDropdownOptionsArray: $window.enumsArr.spaces_conditioning_type_enums,
+      editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
       filter: {
         condition: function (searchTerm, cellValue) {
-          var haystack = $window.enumsArr.spaces_conditioning_type_enums[cellValue].value;
+          var haystack = Enums.enumsArr.spaces_conditioning_type_enums[cellValue].value;
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
-      sortingAlgorithm: $scope.data.sort($window.enumsArr.spaces_conditioning_type_enums)
+      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_conditioning_type_enums)
     }, {
       name: 'envelope_status',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_envelope_status_enums"',
-      editDropdownOptionsArray: $window.enumsArr.spaces_envelope_status_enums,
+      editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
       filter: {
         condition: function (searchTerm, cellValue) {
-          var haystack = $window.enumsArr.spaces_envelope_status_enums[cellValue].value;
+          var haystack = Enums.enumsArr.spaces_envelope_status_enums[cellValue].value;
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
-      sortingAlgorithm: $scope.data.sort($window.enumsArr.spaces_envelope_status_enums)
+      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_envelope_status_enums)
     }, {
       name: 'lighting_status',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_lighting_status_enums"',
-      editDropdownOptionsArray: $window.enumsArr.spaces_lighting_status_enums,
+      editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
       filter: {
         condition: function (searchTerm, cellValue) {
-          var haystack = $window.enumsArr.spaces_lighting_status_enums[cellValue].value;
+          var haystack = Enums.enumsArr.spaces_lighting_status_enums[cellValue].value;
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
-      sortingAlgorithm: $scope.data.sort($window.enumsArr.spaces_lighting_status_enums)
+      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_lighting_status_enums)
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,
@@ -127,7 +127,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$window', '$modal', function ($sc
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
-  '$scope', '$window', '$modalInstance', 'uiGridConstants', 'params', function ($scope, $window, $modalInstance, uiGridConstants, params) {
+  '$scope', '$modalInstance', 'uiGridConstants', 'Enums', 'params', function ($scope, $modalInstance, uiGridConstants, Enums, params) {
     $scope.spaceGroups = [];
 
     $scope.data = params.data;
@@ -144,7 +144,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         displayName: 'Space Type or Function',
         editableCellTemplate: 'ui-grid/dropdownEditor',
         cellFilter: 'mapEnums:"spaces_space_function_enums"',
-        editDropdownOptionsArray: $window.enumsArr.spaces_space_function_enums
+        editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums
       }, {
         name: 'floor_to_ceiling_height'
       }, {
@@ -160,17 +160,17 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         name: 'conditioning_type',
         editableCellTemplate: 'ui-grid/dropdownEditor',
         cellFilter: 'mapEnums:"spaces_conditioning_type_enums"',
-        editDropdownOptionsArray: $window.enumsArr.spaces_conditioning_type_enums
+        editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums
       }, {
         name: 'envelope_status',
         editableCellTemplate: 'ui-grid/dropdownEditor',
         cellFilter: 'mapEnums:"spaces_envelope_status_enums"',
-        editDropdownOptionsArray: $window.enumsArr.spaces_envelope_status_enums
+        editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums
       }, {
         name: 'lighting_status',
         editableCellTemplate: 'ui-grid/dropdownEditor',
         cellFilter: 'mapEnums:"spaces_lighting_status_enums"',
-        editDropdownOptionsArray: $window.enumsArr.spaces_lighting_status_enums
+        editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums
       }],
       data: [{
         quantity: 20,

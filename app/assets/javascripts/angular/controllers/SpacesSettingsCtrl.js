@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSettingsCtrl', ['$scope', '$window', function ($scope, $window) {
+cbecc.controller('SpacesSettingsCtrl', ['$scope', 'Enums', function ($scope, Enums) {
   // Settings UI Grid
   $scope.settingsGridOptions = {
     columnDefs: [{
@@ -11,14 +11,14 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$window', function ($scope, $
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_space_function_enums"',
-      editDropdownOptionsArray: $window.enumsArr.spaces_space_function_enums,
+      editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums,
       filter: {
         condition: function (searchTerm, cellValue) {
-          var haystack = $window.enumsArr.spaces_space_function_enums[cellValue].value;
+          var haystack = Enums.enumsArr.spaces_space_function_enums[cellValue].value;
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
-      sortingAlgorithm: $scope.data.sort($window.enumsArr.spaces_space_function_enums)
+      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_space_function_enums)
     }, {
       name: 'occupant_density',
       displayName: 'Occupancy',
