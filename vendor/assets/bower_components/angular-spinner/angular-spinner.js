@@ -1,5 +1,5 @@
 /**
- * angular-spinner version 0.6.0
+ * angular-spinner version 0.6.1
  * License: MIT.
  * Copyright (C) 2013, 2014, Uri Shaked and contributors.
  */
@@ -9,7 +9,7 @@
 
 	function factory(angular, Spinner) {
 
-		angular
+		return angular
 			.module('angularSpinner', [])
 
 			.provider('usSpinnerConfig', function () {
@@ -17,7 +17,7 @@
 
 				return {
 					setDefaults: function (config) {
-						_config = config || _config;
+						_config = config || _config;
 					},
 					$get: function () {
 						return {
@@ -75,9 +75,9 @@
 						scope.$watch(attr.usSpinner, function (options) {
 							stopSpinner();
 
-							options = options || {};
+							options = options || {};
 							for (var property in usSpinnerConfig.config) {
-							    if (options[property] === undefined) {
+							    if (options[property] === undefined) {
 							        options[property] = usSpinnerConfig.config[property];
 							    }
 							}

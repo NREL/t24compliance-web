@@ -4,7 +4,7 @@
   "main": [
     "./ui-grid.css",
     "./ui-grid.eot",
-    "./ui-grid.js",
+    "./ui-grid-unstable.js",
     "./ui-grid.svg",
     "./ui-grid.ttf",
     "./ui-grid.woff"
