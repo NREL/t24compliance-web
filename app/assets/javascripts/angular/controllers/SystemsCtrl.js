@@ -36,21 +36,14 @@ cbecc.controller('SystemsCtrl', [
     saved_systems.forEach(function (system){
       switch (angular.lowercase(system.type)) {
         case 'ptac':
-          $scope.systems.ptac.fan.push(system.fan);
-          delete system.fan;
-          $scope.systems.ptac.coil_cooling.push(system.coil_cooling);
-          delete system.coil_cooling;
-          $scope.systems.ptac.coil_heating.push(system.coil_heating);
-          delete system.coil_heating;
-          $scope.systems.ptac.general.push(system);
+          $scope.systems.ptac.push(system);
           break;
         default:
           break;
       }
+      addDependentPlants(angular.lowercase(system.type));
     });
 
-    console.log('transformed systems: ');
-    console.log($scope.systems.ptac);
 
     //**** INITIALIZE ****
     //collapsible panels
@@ -262,7 +255,7 @@ cbecc.controller('SystemsCtrl', [
           });
         }
       };
-      $scope.gridOptions.ptac[tab].data = $scope.systems.ptac[tab];
+      $scope.gridOptions.ptac[tab].data = $scope.systems.ptac;
       console.log('data for tab:  ', tab);
       console.log($scope.gridOptions.ptac[tab].data);
     });
