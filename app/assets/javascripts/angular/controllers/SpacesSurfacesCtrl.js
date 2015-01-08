@@ -1,4 +1,6 @@
 cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enums) {
+  $scope.selectedSurface = null;
+
   $scope.dropdowns = [
     'Interior',
     'Exterior',
@@ -48,33 +50,91 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
     }, {
       name: 'surface_type',
       enableCellEdit: false,
-      enableHiding: false
+      enableHiding: false,
+      filter: angular.copy($scope.data.textFilter)
     }, {
       name: 'story',
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
-      enableHiding: false
+      enableHiding: false,
+      filter: {
+        condition: function (searchTerm, cellValue) {
+          var haystack = $scope.data.storiesHash[cellValue];
+          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
+        }
+      },
+      sortingAlgorithm: $scope.data.sort($scope.data.storiesArr)
     }, {
       name: 'area',
-      enableHiding: false
+      enableHiding: false,
+      filters: angular.copy($scope.data.numberFilter)
     }, {
       name: 'azimuth',
-      enableHiding: false
+      enableHiding: false,
+      filters: angular.copy($scope.data.numberFilter)
     }, {
       name: 'construction',
       enableHiding: false
     }, {
       name: 'adjacent_space',
-      enableHiding: false
+      enableHiding: false,
+      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!(row.entity.type == 'Ceiling' || row.entity.boundary == 'Interior')) {
+          return 'disabled-cell';
+        }
+        if (row.entity.space == row.entity.adjacent_space) {
+          return 'error-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'Ceiling' || $scope.row.entity.boundary == 'Interior');
+      },
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      cellFilter: 'mapSpaces:this',
+      editDropdownOptionsArray: $scope.spacesArr,
+      filter: {
+        condition: function (searchTerm, cellValue) {
+          var haystack = $scope.data.spacesHash[cellValue];
+          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
+        }
+      },
+      sortingAlgorithm: $scope.data.sort($scope.data.spacesArr)
     }, {
       name: 'tilt',
-      enableHiding: false
+      enableHiding: false,
+      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!(row.entity.type == 'Roof' || (row.entity.type == 'Wall' && row.entity.boundary == 'Underground'))) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground'));
+      },
+      filters: angular.copy($scope.data.numberFilter)
     }, {
       name: 'wall_height',
-      enableHiding: false
+      enableHiding: false,
+      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!(row.entity.type == 'Wall' && row.entity.boundary == 'Underground')) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
+      },
+      filters: angular.copy($scope.data.numberFilter)
     }, {
       name: 'exposed_perimeter',
-      enableHiding: false
+      enableHiding: false,
+      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!(row.entity.type == 'Floor' && row.entity.boundary == 'Underground')) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
+      },
+      filters: angular.copy($scope.data.numberFilter)
     }],
     data: $scope.data.surfaces,
     enableCellEditOnFocus: true,
@@ -97,7 +157,9 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
           rowEntity.story = $scope.data.spaces[newValue].story;
 
           var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
-          if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') regex += ' [0-9]+';
+          if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
+            regex += ' [0-9]+';
+          }
           regex += '$';
           if (new RegExp(regex).test(rowEntity.name)) {
             var name = $scope.spacesHash[newValue] + ' ' + rowEntity.type;

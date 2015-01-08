@@ -363,4 +363,8 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
   return function (input, $scope) {
     return $scope.$parent.$parent.$parent.$parent.$parent.$parent.spacesHash[input];
   };
+}).filter('mapSurfaces', function () {
+  return function (input, $scope) {
+    return $scope.$parent.$parent.$parent.$parent.$parent.$parent.surfacesHash[input];
+  };
 });

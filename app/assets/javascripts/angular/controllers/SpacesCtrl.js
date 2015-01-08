@@ -5,10 +5,18 @@ cbecc.controller('SpacesCtrl', [
       spaces: spaces,
       constructions: constructions,
       surfaces: [],
+      subsurfaces: [],
       selectedSpace: null,
       selectedSurface: null,
       gridApi: {}
     };
+
+    // Check for construction defaults
+    if ($scope.data.constructions.length) {
+      $scope.data.constructions = $scope.data.constructions[0];
+    } else {
+      $scope.data.constructions = null;
+    }
 
     $scope.data.textFilter = {
       condition: uiGridConstants.filter.CONTAINS
@@ -116,8 +124,11 @@ cbecc.controller('SpacesCtrl', [
 
       // TODO Lookup space defaults
       space.occupant_density = 10;
+      space.occupant_density_default = 10;
       space.hot_water_heating_rate = 0.18;
+      space.hot_water_heating_rate_default = 0.18;
       space.receptacle_power_density = 1.5;
+      space.receptacle_power_density_default = 1.5;
 
       $scope.data.spaces.push(space);
     };
