@@ -45,6 +45,11 @@ cbecc.controller('SpacesCtrl', [
         if (a === b) {
           return 0;
         }
+        if (a === null) {
+          return 1;
+        } else if (b === null) {
+          return -1;
+        }
         var strA = input[a].value;
         var strB = input[b].value;
         return strA < strB ? -1 : 1;

@@ -44,11 +44,11 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
       editDropdownOptionsArray: $scope.spacesArr,
       filter: {
         condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.spacesHash[cellValue];
+          var haystack = $scope.spacesHash[cellValue];
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
-      sortingAlgorithm: $scope.data.sort($scope.data.spacesArr)
+      sortingAlgorithm: $scope.data.sort($scope.spacesArr)
     }, {
       name: 'surface',
       displayName: 'Surface Name',

@@ -361,10 +361,30 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
   };
 }).filter('mapSpaces', function () {
   return function (input, $scope) {
-    return $scope.$parent.$parent.$parent.$parent.$parent.$parent.spacesHash[input];
+    var spacesHash = {};
+
+    while (_.isEmpty(spacesHash)) {
+      if ($scope.hasOwnProperty('spacesHash')) {
+        spacesHash = $scope.spacesHash;
+      } else {
+        $scope = $scope.$parent;
+      }
+    }
+    return spacesHash[input];
+    //return $scope.$parent.$parent.$parent.$parent.$parent.$parent.spacesHash[input];
   };
 }).filter('mapSurfaces', function () {
   return function (input, $scope) {
-    return $scope.$parent.$parent.$parent.$parent.$parent.$parent.surfacesHash[input];
+    var surfacesHash = {};
+
+    while (_.isEmpty(surfacesHash)) {
+      if ($scope.hasOwnProperty('surfacesHash')) {
+        surfacesHash = $scope.surfacesHash;
+      } else {
+        $scope = $scope.$parent;
+      }
+    }
+    return surfacesHash[input];
+    //return $scope.$parent.$parent.$parent.$parent.$parent.$parent.surfacesHash[input];
   };
 });
