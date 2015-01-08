@@ -7,6 +7,23 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
   $scope.currentWallDropdown = 0;
   $scope.currentFloorDropdown = 0;
 
+  $scope.spacesArr = [];
+  $scope.spacesHash = {};
+  _.each($scope.data.spaces, function (space, index) {
+    $scope.spacesArr.push({
+      id: index,
+      value: space.name
+    });
+    $scope.spacesHash[index] = space.name;
+  });
+
+  // Update stories if they were modified on the Spaces subtab
+  _.each($scope.data.surfaces, function (surface, index) {
+    if (surface.story != $scope.data.spaces[surface.space].story) {
+      surface.story = $scope.data.spaces[surface.space].story;
+    }
+  });
+
   // Surfaces UI Grid
   $scope.surfacesGridOptions = {
     columnDefs: [{
@@ -15,13 +32,27 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
       enableHiding: false,
       filter: angular.copy($scope.data.textFilter)
     }, {
-      name: 'space_name',
-      enableHiding: false
+      name: 'space',
+      displayName: 'Space Name',
+      enableHiding: false,
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      cellFilter: 'mapSpaces:this',
+      editDropdownOptionsArray: $scope.spacesArr,
+      filter: {
+        condition: function (searchTerm, cellValue) {
+          var haystack = $scope.data.spacesHash[cellValue];
+          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
+        }
+      },
+      sortingAlgorithm: $scope.data.sort($scope.data.spacesArr)
     }, {
       name: 'surface_type',
+      enableCellEdit: false,
       enableHiding: false
     }, {
       name: 'story',
+      enableCellEdit: false,
+      cellFilter: 'mapStories:this',
       enableHiding: false
     }, {
       name: 'area',
@@ -61,18 +92,49 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
           $scope.selectedSurface = null;
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (colDef.name == 'space' && newValue != oldValue) {
+          rowEntity.story = $scope.data.spaces[newValue].story;
+
+          var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
+          if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') regex += ' [0-9]+';
+          regex += '$';
+          if (new RegExp(regex).test(rowEntity.name)) {
+            var name = $scope.spacesHash[newValue] + ' ' + rowEntity.type;
+            if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
+              var len = _.filter($scope.data.surfaces, function (surface) {
+                return surface.space == newValue && surface.type == rowEntity.type;
+              }).length;
+              name += ' ' + len;
+            }
+            rowEntity.name = name;
+          }
+        }
+      });
     }
   };
 
   // Buttons
-  $scope.addWall = function (type) {
-    console.log('addWall called:', type);
+  $scope.addSurface = function (type, boundary) {
+    var spaceIndex = 0;
 
+    var name = $scope.spacesHash[spaceIndex] + ' ' + type;
+    var surfaceType = type;
+
+    if (type == 'Wall' || type == 'Floor') {
+      var len = _.filter($scope.data.surfaces, function (surface) {
+        return surface.space == spaceIndex && surface.type == type;
+      }).length;
+      name += ' ' + (len + 1);
+      surfaceType = boundary + ' ' + surfaceType;
+    }
     $scope.data.surfaces.push({
-      name: "Surface " + ($scope.data.surfaces.length + 1),
-      space_name: $scope.data.spaces[0].name,
-      surface_type: type + ' Wall',
-      story: 1,
+      name: name,
+      space: spaceIndex,
+      type: type,
+      boundary: boundary,
+      surface_type: surfaceType,
+      story: $scope.data.spaces[spaceIndex].story,
       area: null,
       azimuth: null,
       construction: null,
@@ -82,20 +144,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
       exposed_perimeter: null
     });
   };
-  $scope.addFloor = function (type) {
-    console.log('addFloor called:', type);
-  };
-  $scope.addCeiling = function () {
-    console.log('addCeiling called');
-  };
-  $scope.addRoof = function () {
-    console.log('addRoof called');
-  };
   $scope.duplicateSurface = function () {
-    console.log('duplicateSurface called');
+
   };
   $scope.deleteSurface = function () {
-    console.log('deleteSurface called');
+
   };
 
 }]);

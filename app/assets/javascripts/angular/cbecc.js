@@ -359,4 +359,8 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
 
     return storiesHash[input];
   };
+}).filter('mapSpaces', function () {
+  return function (input, $scope) {
+    return $scope.$parent.$parent.$parent.$parent.$parent.$parent.spacesHash[input];
+  };
 });

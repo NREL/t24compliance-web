@@ -43,6 +43,12 @@ cbecc.controller('SpacesCtrl', [
       };
     };
 
+    // TODO Test this when spaces can be saved and loaded
+    // Delete spaces that belong to nonexistent stories
+    $scope.data.spaces = _.filter($scope.data.spaces, function (space) {
+      return $scope.data.storiesHash.hasOwnProperty(space.story);
+    });
+
     $scope.tabs = [{
       heading: 'Spaces',
       path: '/spaces',
@@ -153,6 +159,8 @@ cbecc.controller('SpacesCtrl', [
         console.log("failure", response);
         toaster.pop('error', 'An error occurred while saving', response.statusText);
       }
+
+      // TODO Insert surfaces as children of spaces
     };
 
   }]);
