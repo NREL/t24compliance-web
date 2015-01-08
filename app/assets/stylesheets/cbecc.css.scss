@@ -129,6 +129,16 @@
   height: 61px;
 }
 
+.plantGrid {
+  height: 80px;
+  width: 100%;
+}
+
+.plantLargeGrid {
+  width:100%;
+  height: 220px;
+}
+
 // Hide selected cell
 .ui-grid-cell-focus {
   background-color: inherit;
