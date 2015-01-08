@@ -144,6 +144,27 @@
   background-color: inherit;
 }
 
+// Grid Cell Classes
+
+.disabled-cell {
+  background-color: #ddd !important;
+}
+
+.error-cell {
+  background-color: red !important;
+  .ui-grid-cell-contents {
+    color: white;
+  }
+}
+
+.green-cell {
+  color: #1c9253;
+}
+
+.red-cell {
+  color: #ac3933;
+}
+
 // Toast Styling
 :not(.no-enter)#toast-container > div.ng-enter {
   -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;

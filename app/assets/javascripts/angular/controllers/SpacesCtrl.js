@@ -1,26 +1,66 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$window', '$location', '$routeParams', '$resource', '$stateParams', 'uiGridConstants', 'Shared', 'stories', 'spaces', 'constructions', function ($scope, $window, $location, $routeParams, $resource, $stateParams, uiGridConstants, Shared, stories, spaces, constructions) {
+  '$scope', '$location', '$routeParams', '$resource', '$stateParams', 'uiGridConstants', 'Shared', 'stories', 'spaces', 'constructions', function ($scope, $location, $routeParams, $resource, $stateParams, uiGridConstants, Shared, stories, spaces, constructions) {
     $scope.data = {
       stories: stories,
       spaces: spaces,
       constructions: constructions,
       surfaces: [],
-      spacesGridOptions: {},
-      settingsGridOptions: {},
-      surfacesGridOptions: {},
+      subsurfaces: [],
       selectedSpace: null,
-      gridApi: {},
-      textFilter: {
-        condition: uiGridConstants.filter.CONTAINS
-      },
-      numberFilter: [{
-        condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-        placeholder: 'At least'
-      }, {
-        condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-        placeholder: 'No more than'
-      }]
+      selectedSurface: null,
+      gridApi: {}
     };
+
+    // Check for construction defaults
+    if ($scope.data.constructions.length) {
+      $scope.data.constructions = $scope.data.constructions[0];
+    } else {
+      $scope.data.constructions = null;
+    }
+
+    $scope.data.textFilter = {
+      condition: uiGridConstants.filter.CONTAINS
+    };
+
+    $scope.data.numberFilter = [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
+
+    $scope.data.storiesArr = [];
+    $scope.data.storiesHash = {};
+    _.each($scope.data.stories, function (story) {
+      $scope.data.storiesArr.push({
+        id: story.id,
+        value: story.name
+      });
+      $scope.data.storiesHash[story.id] = story.name;
+    });
+
+    $scope.data.sort = function (input) {
+      return function (a, b) {
+        if (a === b) {
+          return 0;
+        }
+        if (a === null) {
+          return 1;
+        } else if (b === null) {
+          return -1;
+        }
+        var strA = input[a].value;
+        var strB = input[b].value;
+        return strA < strB ? -1 : 1;
+      };
+    };
+
+    // TODO Test this when spaces can be saved and loaded
+    // Delete spaces that belong to nonexistent stories
+    $scope.data.spaces = _.filter($scope.data.spaces, function (space) {
+      return $scope.data.storiesHash.hasOwnProperty(space.story);
+    });
 
     $scope.tabs = [{
       heading: 'Spaces',
@@ -64,27 +104,38 @@ cbecc.controller('SpacesCtrl', [
     $scope.$on('$locationChangeSuccess', function () {
       // Reset row selection
       $scope.data.selectedSpace = null;
+      $scope.data.selectedSurface = null;
 
       // Update active subtab
       updateActiveTab();
     });
 
     // Buttons
-    $scope.data.addSpace = function () {
-      $scope.data.spaces.push({
+    $scope.data.addSpace = function (input) {
+      var space = {
         name: "Space " + ($scope.data.spaces.length + 1),
         floor_to_ceiling_height: 14,
-        story: null,
+        story: $scope.data.stories[0].id,
         area: 400,
-        conditioning_type: 'Directly Conditioned',
-        envelope_status: 'New',
-        lighting_status: 'New',
+        conditioning_type: 0,
+        envelope_status: 0,
+        lighting_status: 0,
+        space_function: 0
+      };
 
-        space_function: 'Small Office',
-        occupant_density: 10,
-        hot_water_heating_rate: 0.18,
-        receptacle_power_density: 1.5
-      });
+      if (!_.isEmpty(input)) {
+        _.merge(space, input);
+      }
+
+      // TODO Lookup space defaults
+      space.occupant_density = 10;
+      space.occupant_density_default = 10;
+      space.hot_water_heating_rate = 0.18;
+      space.hot_water_heating_rate_default = 0.18;
+      space.receptacle_power_density = 1.5;
+      space.receptacle_power_density_default = 1.5;
+
+      $scope.data.spaces.push(space);
     };
     $scope.data.duplicateSpace = function () {
       $scope.data.spaces.push({
@@ -124,6 +175,8 @@ cbecc.controller('SpacesCtrl', [
         console.log("failure", response);
         toaster.pop('error', 'An error occurred while saving', response.statusText);
       }
+
+      // TODO Insert surfaces as children of spaces
     };
 
   }]);

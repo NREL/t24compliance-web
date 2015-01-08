@@ -346,12 +346,51 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
 }]);
 
 
-cbecc.filter('mapEnums', ['$window', function ($window) {
+cbecc.filter('mapEnums', ['Enums', function (Enums) {
   return function (input, name) {
-    var hash = {};
-    _.each($window.enums[name], function (val, index) {
-      hash[index] = val;
-    });
-    return hash[input];
+    return Enums.enumsArr[name][input].value;
   };
-}]);
+}]).filter('mapStories', function () {
+  return function (input, $scope) {
+    var storiesHash = {};
+
+    // The data property can be found between 7-9 parents deep due to ng-include, ui-view, and modal scope hierarchies
+    while (_.isEmpty(storiesHash)) {
+      if ($scope.hasOwnProperty('data')) {
+        storiesHash = $scope.data.storiesHash;
+      } else {
+        $scope = $scope.$parent;
+      }
+    }
+
+    return storiesHash[input];
+  };
+}).filter('mapSpaces', function () {
+  return function (input, $scope) {
+    var spacesHash = {};
+
+    while (_.isEmpty(spacesHash)) {
+      if ($scope.hasOwnProperty('spacesHash')) {
+        spacesHash = $scope.spacesHash;
+      } else {
+        $scope = $scope.$parent;
+      }
+    }
+    return spacesHash[input];
+    //return $scope.$parent.$parent.$parent.$parent.$parent.$parent.spacesHash[input];
+  };
+}).filter('mapSurfaces', function () {
+  return function (input, $scope) {
+    var surfacesHash = {};
+
+    while (_.isEmpty(surfacesHash)) {
+      if ($scope.hasOwnProperty('surfacesHash')) {
+        surfacesHash = $scope.surfacesHash;
+      } else {
+        $scope = $scope.$parent;
+      }
+    }
+    return surfacesHash[input];
+    //return $scope.$parent.$parent.$parent.$parent.$parent.$parent.surfacesHash[input];
+  };
+});
