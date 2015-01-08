@@ -8,6 +8,8 @@
     </div>
   </div>
 </div>
+SYSTEMS: {{ systems.ptac.general }}     <br>
+PTAC GENERAL DATA: {{ gridOptions.ptac.general.data }}
 <div class="row pad-top-20 pad-left-40 pad-bot-20">
   <button type="button" ng-click="openSystemCreatorModal()" class="btn btn-success col-md-2">
     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New System
@@ -27,11 +29,12 @@
     </accordion-heading>
 
     <div class="system" ng-switch on="panel.name">
-      <div ng-switch-when="ptacs"><div ng-include="'systems/ptac.html'"></div></div>
-      <div ng-switch-when="vavs"><div ng-include="'systems/vav.html'" ></div></div>
-      <div ng-switch-when="pvavs"><div ng-include="'systems/pvav.html'" ></div></div>
-      <div ng-switch-when="maus"><div ng-include="'systems/mau.html'" ></div></div>
-      <div ng-switch-when="exhausts"><div ng-include="'systems/exhaust.html'" ></div></div>
+      <div ng-switch-when="ptac"><div ng-include="'systems/ptac.html'"></div></div>
+      <div ng-switch-when="fpfc"><div ng-include="'systems/fpfc.html'"></div></div>
+      <div ng-switch-when="vav"><div ng-include="'systems/vav.html'" ></div></div>
+      <div ng-switch-when="pvav"><div ng-include="'systems/pvav.html'" ></div></div>
+      <div ng-switch-when="mau"><div ng-include="'systems/mau.html'" ></div></div>
+      <div ng-switch-when="exhaust"><div ng-include="'systems/exhaust.html'" ></div></div>
     </div>
   </accordion-group>
 </accordion>

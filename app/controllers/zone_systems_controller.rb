@@ -1,13 +1,14 @@
 class ZoneSystemsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :building #the resource is building
   before_action :set_zone_system, only: [:show, :edit, :update, :destroy]
   before_action :get_building, only: [:index, :update, :create]
 
   respond_to :json, :html
 
   def index
-    @zone_systems = (@building.present?) ? @building.zone_systems : []
+    # return zone systems and air systems with all dependent records
+    @zone_systems = (@building.present?) ? @building.zone_systems.includes(:fans, :coil_coolings,:coil_heatings) : []
     respond_with(@zone_systems)
   end
 
@@ -23,15 +24,19 @@ class ZoneSystemsController < ApplicationController
   def edit
   end
 
-  # OVERWRITING CREATE AS BULK UPDATE
   def create
+  end
+
+  # receives hash with form {building_id: ..., data: [array of building_stories]}
+  # updates zone_systems and air_systems
+  def bulk_sync
     clean_params = zone_systems_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
 
     # add / update
     systems = []
-    if clean_params.has_key?('_json')
-      clean_params[:_json].each do |rec|
+    if clean_params.has_key?('data')
+      clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
         fans = []
         coil_coolings = []
@@ -129,6 +134,6 @@ class ZoneSystemsController < ApplicationController
 
     #for update_all
     def zone_systems_params
-      params.permit(:building_id, _json: [:id, :name, :building_id, :status, :type, :fan_control, :cooling_control, :count, :cooling_design_supply_air_temperature, :heating_design_supply_air_temperature, :exhaust_system_type, :exhaust_operation_mode, :exhaust_control_method, fan: [:id, :name, :control_method, :total_static_pressure, :flow_efficiency, :motor_hp, :motor_type, :motor_pole_count, :motor_efficiency, :motor_position], coil_cooling: [:id, :name, :type, :condenser_type], coil_heating: [:id, :name, :type, :fluid_segment_in_reference, :fluid_segment_out_reference ]])
+      params.permit(:building_id, data: [:id, :name, :building_id, :status, :type, :fan_control, :cooling_control, :count, :cooling_design_supply_air_temperature, :heating_design_supply_air_temperature, :exhaust_system_type, :exhaust_operation_mode, :exhaust_control_method, fan: [:id, :name, :control_method, :total_static_pressure, :flow_efficiency, :motor_hp, :motor_type, :motor_pole_count, :motor_efficiency, :motor_position], coil_cooling: [:id, :name, :type, :condenser_type], coil_heating: [:id, :name, :type, :fluid_segment_in_reference, :fluid_segment_out_reference ]])
     end
 end

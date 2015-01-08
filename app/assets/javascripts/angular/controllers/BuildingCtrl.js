@@ -72,7 +72,7 @@ cbecc.controller('BuildingCtrl', [
         // Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
         var params = Shared.defaultParams();
         params['data'] = $scope.stories;
-        data.bulkSync('building_stories', params)
+        data.bulkSync('building_stories', params);
         Shared.setBuildingId(the_id);
         $location.path(Shared.buildingPath());
 

@@ -217,6 +217,11 @@ cbecc.config([
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/systems',
         controller: 'SystemsCtrl',
         templateUrl: 'systems/systems.html',
+        resolve: {
+          saved_systems: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('zone_systems', Shared.defaultParams());
+          }]
+        },
         parent: 'requirebuilding'
       })
       .state({
@@ -304,6 +309,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   api.add('constructions');
   api.add('fenestrations');
   api.add('construction_defaults');
+  api.add('zone_systems');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
     Shared.startSpinner();
