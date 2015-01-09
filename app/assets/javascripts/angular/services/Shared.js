@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q, $cacheFactory, usSpinnerService) {
+cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', 'usSpinnerService', function ($q, $cacheFactory, $templateCache, usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -6,7 +6,10 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
   var cacheKeys = [];
 
   service.defaultParams = function () {
-    return {project_id: this.getProjectId(), building_id: this.getBuildingId()}
+    return {
+      project_id: this.getProjectId(),
+      building_id: this.getBuildingId()
+    };
   };
 
   service.setIds = function ($stateParams) {
@@ -42,35 +45,29 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     var scope = this;
     if (!this.getProjectId()) {
       deferred.reject('No project ID');
-    }
-    else {
+    } else {
       if (!this.getBuildingId()) {
         data.list('buildings', this.defaultParams()).then(
           function (response) {
             if (response.length > 0 && response[0].hasOwnProperty('id')) {
               scope.setBuildingId(response[0].id);
               deferred.resolve("success");
-            }
-            else {
+            } else {
               if (requireBuilding) {
-                deferred.reject("No building ID")
-              }
-              else {
-                deferred.resolve("Unable to look up building but building not required.")
+                deferred.reject("No building ID");
+              } else {
+                deferred.resolve("Unable to look up building but building not required.");
               }
             }
           },
           function (response) {
             if (requireBuilding) {
-              deferred.reject("No building ID")
+              deferred.reject("No building ID");
+            } else {
+              deferred.resolve("Error looking up building but building not required.");
             }
-            else {
-              deferred.resolve("Error looking up building but building not required.")
-            }
-          }
-        );
-      }
-      else {
+          });
+      } else {
         deferred.resolve('Building ID already set');
       }
     }
@@ -174,6 +171,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', 'usSpinnerService', function ($q
     cache.put(key, value === undefined ? null : value);
   };
 
+  $templateCache.put('ui-grid/customHeaderCell', "<div ng-class=\"{ 'sortable': sortable }\"><div class=\"ui-grid-vertical-bar\">&nbsp;</div><div class=\"ui-grid-cell-contents\" col-index=\"renderIndex\"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible=\"col.sort.direction\" ng-class=\"{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }\">&nbsp;</span><br><small ng-bind-html=\"col.colDef.secondLine\"></small></div><div class=\"ui-grid-column-menu-button\" ng-if=\"grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false\" class=\"ui-grid-column-menu-button\" ng-click=\"toggleMenu($event)\"><i class=\"ui-grid-icon-angle-down\">&nbsp;</i></div><div ng-if=\"filterable\" class=\"ui-grid-filter-container\" ng-repeat=\"colFilter in col.filters\"><input type=\"text\" class=\"ui-grid-filter-input\" ng-model=\"colFilter.term\" ng-attr-placeholder=\"{{colFilter.placeholder || ''}}\"><div class=\"ui-grid-filter-button\" ng-click=\"colFilter.term = null\"><i class=\"ui-grid-icon-cancel\" ng-show=\"!!colFilter.term\">&nbsp;</i><!-- use !! because angular interprets 'f' as false --></div></div></div>");
 
   return service;
 }]);
