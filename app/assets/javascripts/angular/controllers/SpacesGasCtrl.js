@@ -31,19 +31,19 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', function ($scope
       type: 'number',
       filters: angular.copy($scope.data.numberFilter)
     }, {
-      name: 'radiant_fraction',
+      name: 'gas_radiant_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: angular.copy($scope.data.numberFilter)
     }, {
-      name: 'latent_fraction',
+      name: 'gas_latent_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: angular.copy($scope.data.numberFilter)
     }, {
-      name: 'lost_fraction',
+      name: 'gas_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
@@ -81,9 +81,9 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', function ($scope
     var replacement = {
       gas_equipment: $scope.selectedSpace.gas_equipment,
       process_gas: $scope.selectedSpace.process_gas,
-      radiant_fraction: $scope.selectedSpace.radiant_fraction,
-      latent_fraction: $scope.selectedSpace.latent_fraction,
-      lost_fraction: $scope.selectedSpace.lost_fraction
+      gas_radiant_fraction: $scope.selectedSpace.gas_radiant_fraction,
+      gas_latent_fraction: $scope.selectedSpace.gas_latent_fraction,
+      gas_lost_fraction: $scope.selectedSpace.gas_lost_fraction
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {

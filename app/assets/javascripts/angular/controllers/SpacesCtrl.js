@@ -126,11 +126,21 @@ cbecc.controller('SpacesCtrl', [
         lighting_status: 0,
         space_function: 0,
 
+        process_electric: null,
+        refrigeration: null,
+        elevator_count: null,
+        escalator_count: null,
+        loads_radiant_fraction: null,
+        loads_latent_fraction: null,
+        loads_lost_fraction: null,
+        elevator_lost_fraction: null,
+        escalator_lost_fraction: null,
+
         gas_equipment: null,
         process_gas: null,
-        radiant_fraction: null,
-        latent_fraction: null,
-        lost_fraction: null
+        gas_radiant_fraction: null,
+        gas_latent_fraction: null,
+        gas_lost_fraction: null
       };
 
       if (!_.isEmpty(input)) {

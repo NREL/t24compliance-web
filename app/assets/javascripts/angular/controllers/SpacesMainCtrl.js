@@ -1,4 +1,4 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Enums', function ($scope, $modal, uiGridConstants, Enums) {
+cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scope, $modal, Enums) {
   // Spaces UI Grid
 
   $scope.spacesGridOptions = {
