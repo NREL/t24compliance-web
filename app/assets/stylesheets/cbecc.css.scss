@@ -10,7 +10,7 @@
 
 .inline-heading {
   padding-bottom: 50px;
-  font-color: #000;
+  color: #000;
   font-size: 130%;
   h2, h3 {
     color: #000;
@@ -142,6 +142,11 @@
 // Hide selected cell
 .ui-grid-cell-focus {
   background-color: inherit;
+}
+
+// Header second line
+.ui-grid-header-cell small {
+  padding-left: 5px;
 }
 
 // Grid Cell Classes
