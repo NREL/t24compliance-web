@@ -45,6 +45,8 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', function ($sco
     }, {
       name: 'loads_radiant_fraction',
       enableHiding: false,
+      cellClass: 'border-left-cell',
+      headerCellClass: 'border-left-cell',
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: angular.copy($scope.data.numberFilter)
@@ -63,6 +65,8 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', function ($sco
     }, {
       name: 'elevator_lost_fraction',
       enableHiding: false,
+      cellClass: 'border-left-cell',
+      headerCellClass: 'border-left-cell',
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: angular.copy($scope.data.numberFilter)

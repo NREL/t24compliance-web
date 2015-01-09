@@ -165,6 +165,10 @@
   color: #ac3933;
 }
 
+.border-left-cell {
+  border-left: 2px solid #909090;
+}
+
 // Toast Styling
 :not(.no-enter)#toast-container > div.ng-enter {
   -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
