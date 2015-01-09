@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   resources :zone_systems do
     post 'bulk_sync', on: :collection
   end
+  resources :fluid_systems do
+    post 'bulk_sync', on: :collection
+  end
 
 
 

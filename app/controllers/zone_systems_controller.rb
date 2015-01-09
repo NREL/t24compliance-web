@@ -2,7 +2,7 @@ class ZoneSystemsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :building #the resource is building
   before_action :set_zone_system, only: [:show, :edit, :update, :destroy]
-  before_action :get_building, only: [:index, :update, :create]
+  before_action :get_building, only: [:index, :update, :create, :bulk_sync]
 
   respond_to :json, :html
 
@@ -27,8 +27,8 @@ class ZoneSystemsController < ApplicationController
   def create
   end
 
-  # receives hash with form {building_id: ..., data: [array of building_stories]}
-  # updates zone_systems and air_systems
+  # receives hash with form {building_id: ..., data: [array of systems]}
+  # updates zone_systems and air_systems?
   def bulk_sync
     clean_params = zone_systems_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")

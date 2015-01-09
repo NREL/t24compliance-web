@@ -1,5 +1,5 @@
 cbecc.controller('SystemsCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'saved_systems', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, saved_systems) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'saved_systems', 'saved_plants', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, saved_systems, saved_plants) {
 
     // put all systems DATA in array for panels
     $scope.systems = {ptac: [], fpfc: [], vav: [], pvav: [], mau: [], exhaust: []};
@@ -30,8 +30,7 @@ cbecc.controller('SystemsCtrl', [
 
     //retrieve systems and process into view format
     $scope.retrievedSystems = saved_systems;
-    console.log('retrievedSystems: ');
-    console.log($scope.retrievedSystems);
+    $scope.retrievedPlants = saved_plants;
 
     saved_systems.forEach(function (system){
       switch (angular.lowercase(system.type)) {
@@ -91,35 +90,6 @@ cbecc.controller('SystemsCtrl', [
 
     gridPlantCols = {};
     gridPlantCols.hot_water = {};
-    gridPlantCols.hot_water.pump = [{
-      name: 'pump_operation_control',
-      displayName: 'Operation',
-      field: 'pump.operation_control'
-    }, {
-      name: 'pump_speed_control',
-      displayName: 'Speed Control',
-      field: 'pump.speed_control'
-    }, {
-      name: 'pump_flow_capacity',
-      displayName: 'Design Flow Rate',
-      field: 'pump.flow_capacity'
-    }, {
-      name: 'pump_motor_efficiency',
-      displayName: 'Motor Efficiency',
-      field: 'pump.motor_efficiency'
-    }, {
-      name: 'pump_impeller_efficiency',
-      displayName: 'Impeller Efficiency',
-      field: 'pump.impeller_efficiency'
-    }, {
-      name: 'pump_total_head',
-      displayName: 'Pump Head (ft2 H2O)',
-      field: 'pump.total_head'
-    }, {
-      name: 'pump_motor_hp',
-      displayName: 'Motor HP',
-      field: 'pump.motor_HP'
-    }];
     gridPlantCols.hot_water.boiler = [{
       name: 'boiler_name',
       displayName: 'Name',
@@ -144,6 +114,35 @@ cbecc.controller('SystemsCtrl', [
       name: 'boiler_thermal_efficiency',
       displayName: 'Thermal Efficiency',
       field: 'boiler.thermal_efficiency'
+    }];
+    gridPlantCols.hot_water.pump = [{
+      name: 'pump_operation_control',
+      displayName: 'Operation',
+      field: 'boiler.pump.operation_control'
+    }, {
+      name: 'pump_speed_control',
+      displayName: 'Speed Control',
+      field: 'boiler.pump.speed_control'
+    }, {
+      name: 'pump_flow_capacity',
+      displayName: 'Design Flow Rate',
+      field: 'boiler.pump.flow_capacity'
+    }, {
+      name: 'pump_motor_efficiency',
+      displayName: 'Motor Efficiency',
+      field: 'boiler.pump.motor_efficiency'
+    }, {
+      name: 'pump_impeller_efficiency',
+      displayName: 'Impeller Efficiency',
+      field: 'boiler.pump.impeller_efficiency'
+    }, {
+      name: 'pump_total_head',
+      displayName: 'Pump Head (ft2 H2O)',
+      field: 'boiler.pump.total_head'
+    }, {
+      name: 'pump_motor_hp',
+      displayName: 'Motor HP',
+      field: 'boiler.pump.motor_HP'
     }];
     gridPlantCols.hot_water.coil_heating = [{
       name: 'name',
@@ -283,9 +282,9 @@ cbecc.controller('SystemsCtrl', [
          columnDefs: gridPlantCols.hot_water[tab],
          enableCellEditOnFocus: editVal,
          enableColumnMenus: false,
-         enableRowHeaderSelection: true,
-         enableRowSelection: true,
-         enableSorting: false,
+         enableRowHeaderSelection: editVal,
+         enableRowSelection: editVal,
+         enableSorting: true,
          multiSelect: false,
          onRegisterApi: function (gridApi) {
            $scope.gridApi = gridApi;
@@ -490,13 +489,13 @@ cbecc.controller('SystemsCtrl', [
                  type:"PrimaryReturn"
                }
              ],
-             pump: {
-               name: "Base HW Pump",
-               operation_control: "OnDemand"
-             },
-             boiler: {
-               name: "Base Blr"
-             }
+             boilers:[ {
+               name: "Base Blr",
+               pump: {
+                 name: "Base HW Pump",
+                 operation_control: "OnDemand"
+               }
+             }]
            })
           }
           break;

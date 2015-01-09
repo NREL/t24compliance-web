@@ -50,6 +50,12 @@
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': plantPanels[$index].open, 'glyphicon-chevron-right': !plantPanels[$index].open}"></i>
       {{panel.title}}
+      <span ng-if="plants[panel.name].length">
+          |
+          <small>
+            <span class="label label-primary">{{plants[panel.name].length}}</span> added
+          </small>
+      </span>
     </accordion-heading>
 
     <div class="system" ng-switch on="panel.name">
