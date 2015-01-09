@@ -1,7 +1,7 @@
 <div class="row pad-top-20 pad-bot-20">
   <div class="col-md-12">
     <div class="btn-group" dropdown>
-      <button type="button" class="btn btn-info" ng-disabled="!data.spaces.length" ng-click="addSurface('Wall',dropdowns[currentWallDropdown])">
+      <button type="button" class="btn btn-info" ng-disabled="!data.spaces.length" ng-click="data.addSurface('Wall',dropdowns[currentWallDropdown])">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{dropdowns[currentWallDropdown]}} Wall
       </button>
       <button type="button" class="btn btn-info dropdown-toggle" ng-disabled="!data.spaces.length" dropdown-toggle>
@@ -12,7 +12,7 @@
       </ul>
     </div>
     <div class="btn-group" dropdown>
-      <button type="button" class="btn btn-info" ng-disabled="!data.spaces.length" ng-click="addSurface('Floor',dropdowns[currentFloorDropdown])">
+      <button type="button" class="btn btn-info" ng-disabled="!data.spaces.length" ng-click="data.addSurface('Floor',dropdowns[currentFloorDropdown])">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{dropdowns[currentFloorDropdown]}} Floor
       </button>
       <button type="button" class="btn btn-info dropdown-toggle" ng-disabled="!data.spaces.length" dropdown-toggle>
@@ -22,10 +22,10 @@
         <li ng-repeat="item in dropdowns" ng-class="{'active' : currentFloorDropdown == $index}"><a ng-click="$parent.currentFloorDropdown = $index">{{item}} Floor</a></li>
       </ul>
     </div>
-    <button type="button" ng-click="addSurface('Ceiling')" class="btn btn-info" ng-disabled="!data.spaces.length">
+    <button type="button" ng-click="data.addSurface('Ceiling')" class="btn btn-info" ng-disabled="!data.spaces.length">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ceiling
     </button>
-    <button type="button" ng-click="addSurface('Roof')" class="btn btn-info" ng-disabled="!data.spaces.length">
+    <button type="button" ng-click="data.addSurface('Roof')" class="btn btn-info" ng-disabled="!data.spaces.length">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Roof
     </button>
     <div class="pull-right">

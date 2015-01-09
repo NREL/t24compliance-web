@@ -10,7 +10,7 @@
 
 .inline-heading {
   padding-bottom: 50px;
-  font-color: #000;
+  color: #000;
   font-size: 130%;
   h2, h3 {
     color: #000;
@@ -144,6 +144,11 @@
   background-color: inherit;
 }
 
+// Header second line
+.ui-grid-header-cell small {
+  padding-left: 5px;
+}
+
 // Grid Cell Classes
 
 .disabled-cell {
@@ -163,6 +168,10 @@
 
 .red-cell {
   color: #ac3933;
+}
+
+.border-left-cell {
+  border-left: 2px solid #909090;
 }
 
 // Toast Styling
