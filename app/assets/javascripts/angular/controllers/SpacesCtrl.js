@@ -40,22 +40,6 @@ cbecc.controller('SpacesCtrl', [
       $scope.data.storiesHash[story.id] = story.name;
     });
 
-    $scope.data.sort = function (input) {
-      return function (a, b) {
-        if (a === b) {
-          return 0;
-        }
-        if (a === null) {
-          return 1;
-        } else if (b === null) {
-          return -1;
-        }
-        var strA = input[a].value;
-        var strB = input[b].value;
-        return strA < strB ? -1 : 1;
-      };
-    };
-
     // TODO Test this when spaces can be saved and loaded
     // Delete spaces that belong to nonexistent stories
     $scope.data.spaces = _.filter($scope.data.spaces, function (space) {
