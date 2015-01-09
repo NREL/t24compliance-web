@@ -81,9 +81,8 @@ cbecc.controller('SystemsCtrl', [
 
     // coil totals for plants
     $scope.display_coils_heating = calculateCoilsHeating();
-    console.log('DISPLAY COILS HEATING:');
-    console.log($scope.display_coils_heating);
-   // $scope.display_coils_heating = [{name: 'test coil', system_name: 'system name', system_type: 'system_type'}];
+    //console.log('DISPLAY COILS HEATING:');
+    //console.log($scope.display_coils_heating);
 
     gridPlantCols = {};
     gridPlantCols.hot_water = {};
@@ -151,8 +150,6 @@ cbecc.controller('SystemsCtrl', [
       name: 'system_type',
       displayName: 'System Type'
     }];
-
-
 
     //TODO: get systems by type
     gridCols = {
@@ -251,12 +248,7 @@ cbecc.controller('SystemsCtrl', [
         }
       };
       $scope.gridOptions.ptac[tab].data = $scope.systems.ptac;
-      console.log('data for tab:  ', tab);
-      console.log($scope.gridOptions.ptac[tab].data);
     });
-    console.log('out of loop data:');
-    console.log($scope.gridOptions.ptac);
-
 
     //Plant Grids
     $scope.gridPlantOptions = {
@@ -266,7 +258,7 @@ cbecc.controller('SystemsCtrl', [
       condenser: {}
     };
     $scope.plantTabs.hot_water.forEach(function (tab) {
-      console.log("TAB: ", tab);
+      //console.log("TAB: ", tab);
       editVal = '';
        if (tab === 'coil_heating') {
          editVal = false;
@@ -296,8 +288,8 @@ cbecc.controller('SystemsCtrl', [
        };
       if (tab === 'coil_heating') {
         $scope.gridPlantOptions.hot_water.coil_heating.data = $scope.display_coils_heating;
-        console.log('gridPlantOptions for hot_water.coil_heating: ');
-        console.log($scope.gridPlantOptions.hot_water.coil_heating);
+        //console.log('gridPlantOptions for hot_water.coil_heating: ');
+        //console.log($scope.gridPlantOptions.hot_water.coil_heating);
       }
       else {
         $scope.gridPlantOptions.hot_water[tab].data = $scope.plants.hot_water;
@@ -413,15 +405,14 @@ cbecc.controller('SystemsCtrl', [
           });
           break;
       }
-      console.log('data for ptac:');
-      console.log($scope.gridOptions.ptac.general.data);
+      //console.log('data for ptac:');
+     // console.log($scope.gridOptions.ptac.general.data);
 
       addDependentPlants(name);
       $scope.display_coils_heating = calculateCoilsHeating();
     };
 
     function calculateCoilsHeating() {
-      console.log('in calculateCoilsHeating');
       coils = [];
       if ($scope.plants.hot_water.length > 0) {
         for (var type in $scope.systems) {
@@ -442,9 +433,6 @@ cbecc.controller('SystemsCtrl', [
             });
           }
         }
-        console.log('COILS HEATING:');
-        console.log(coils);
-
       }
       return coils;
     }
