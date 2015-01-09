@@ -8,7 +8,7 @@ cbecc.controller('SpacesCtrl', [
       subsurfaces: [],
       selectedSpace: null,
       selectedSurface: null,
-      gridApi: {}
+      gridApiSpaces: {}
     };
 
     // Check for construction defaults
@@ -71,11 +71,11 @@ cbecc.controller('SpacesCtrl', [
       path: '/spaces/settings',
       route: 'requirebuilding.spaces.settings'
     }, {
-      heading: 'Surfaces: Walls, Floors, Ceilings, and Roofs',
+      heading: 'Surfaces',
       path: '/spaces/surfaces',
       route: 'requirebuilding.spaces.surfaces'
     }, {
-      heading: 'Sub-surfaces: Windows, Doors, and Skylights',
+      heading: 'Subsurfaces',
       path: '/spaces/subsurfaces',
       route: 'requirebuilding.spaces.subsurfaces'
     }, {
@@ -83,9 +83,13 @@ cbecc.controller('SpacesCtrl', [
       path: '/spaces/ventilation',
       route: 'requirebuilding.spaces.ventilation'
     }, {
-      heading: 'Loads',
+      heading: 'Electric Process Loads',
       path: '/spaces/loads',
       route: 'requirebuilding.spaces.loads'
+    }, {
+      heading: 'Natural Gas',
+      path: '/spaces/gas',
+      route: 'requirebuilding.spaces.gas'
     }, {
       heading: 'Lighting',
       path: '/spaces/lighting',
@@ -120,7 +124,13 @@ cbecc.controller('SpacesCtrl', [
         conditioning_type: 0,
         envelope_status: 0,
         lighting_status: 0,
-        space_function: 0
+        space_function: 0,
+
+        gas_equipment: null,
+        process_gas: null,
+        radiant_fraction: null,
+        latent_fraction: null,
+        lost_fraction: null
       };
 
       if (!_.isEmpty(input)) {
@@ -157,10 +167,48 @@ cbecc.controller('SpacesCtrl', [
       var index = $scope.data.spaces.indexOf($scope.data.selectedSpace);
       $scope.data.spaces.splice(index, 1);
       if (index > 0) {
-        $scope.data.gridApi.selection.toggleRowSelection($scope.data.spaces[index - 1]);
+        $scope.data.gridApiSpaces.selection.toggleRowSelection($scope.data.spaces[index - 1]);
       } else {
         $scope.data.selectedSpace = null;
       }
+    };
+
+    $scope.data.addSurface = function (type, boundary, spaceIndex) {
+      if (spaceIndex === undefined) {
+        spaceIndex = 0;
+      }
+
+      var name = $scope.data.spaces[spaceIndex].name + ' ' + type;
+      var surfaceType = type;
+
+      if (type == 'Wall' || type == 'Floor') {
+        var len = _.filter($scope.data.surfaces, function (surface) {
+          return surface.space == spaceIndex && surface.type == type;
+        }).length;
+        name += ' ' + (len + 1);
+        surfaceType = boundary + ' ' + surfaceType;
+      }
+      $scope.data.surfaces.push({
+        name: name,
+        space: spaceIndex,
+        type: type,
+        boundary: boundary,
+        surface_type: surfaceType,
+        story: $scope.data.spaces[spaceIndex].story,
+        area: null,
+        azimuth: null,
+        construction: null,
+        adjacent_space: null,
+        tilt: null,
+        wall_height: null,
+        exposed_perimeter: null
+      });
+    };
+    $scope.data.duplicateSurface = function () {
+      // TODO
+    };
+    $scope.data.deleteSurface = function () {
+      // TODO
     };
 
     // save

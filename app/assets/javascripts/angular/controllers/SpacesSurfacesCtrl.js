@@ -67,10 +67,12 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
     }, {
       name: 'area',
       enableHiding: false,
+      type: 'number',
       filters: angular.copy($scope.data.numberFilter)
     }, {
       name: 'azimuth',
       enableHiding: false,
+      type: 'number',
       filters: angular.copy($scope.data.numberFilter)
     }, {
       name: 'construction',
@@ -103,6 +105,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
     }, {
       name: 'tilt',
       enableHiding: false,
+      type: 'number',
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Roof' || (row.entity.type == 'Wall' && row.entity.boundary == 'Underground'))) {
           return 'disabled-cell';
@@ -115,6 +118,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
     }, {
       name: 'wall_height',
       enableHiding: false,
+      type: 'number',
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Wall' && row.entity.boundary == 'Underground')) {
           return 'disabled-cell';
@@ -127,6 +131,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
     }, {
       name: 'exposed_perimeter',
       enableHiding: false,
+      type: 'number',
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Floor' && row.entity.boundary == 'Underground')) {
           return 'disabled-cell';
@@ -175,43 +180,6 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
         }
       });
     }
-  };
-
-  // Buttons
-  $scope.addSurface = function (type, boundary) {
-    var spaceIndex = 0;
-
-    var name = $scope.spacesHash[spaceIndex] + ' ' + type;
-    var surfaceType = type;
-
-    if (type == 'Wall' || type == 'Floor') {
-      var len = _.filter($scope.data.surfaces, function (surface) {
-        return surface.space == spaceIndex && surface.type == type;
-      }).length;
-      name += ' ' + (len + 1);
-      surfaceType = boundary + ' ' + surfaceType;
-    }
-    $scope.data.surfaces.push({
-      name: name,
-      space: spaceIndex,
-      type: type,
-      boundary: boundary,
-      surface_type: surfaceType,
-      story: $scope.data.spaces[spaceIndex].story,
-      area: null,
-      azimuth: null,
-      construction: null,
-      adjacent_space: null,
-      tilt: null,
-      wall_height: null,
-      exposed_perimeter: null
-    });
-  };
-  $scope.duplicateSurface = function () {
-
-  };
-  $scope.deleteSurface = function () {
-
   };
 
 }]);

@@ -1,4 +1,4 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scope, $modal, Enums) {
+cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Enums', function ($scope, $modal, uiGridConstants, Enums) {
   // Spaces UI Grid
 
   $scope.spacesGridOptions = {
@@ -75,7 +75,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
-      $scope.data.gridApi = gridApi;
+      $scope.data.gridApiSpaces = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
           $scope.data.selectedSpace = row.entity;
@@ -118,6 +118,18 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
             envelope_status: config.envelope_status,
             lighting_status: config.lighting_status
           });
+
+          var spaceIndex = $scope.data.spaces.length - 1;
+          for (var j = 0; j < walls.internal_walls; ++j) {
+            $scope.data.addSurface('Wall', 'Interior', spaceIndex);
+          }
+          for (j = 0; j < walls.external_walls; ++j) {
+            $scope.data.addSurface('Wall', 'Exterior', spaceIndex);
+          }
+          //TODO
+          /*for (j = 0; j < walls.windows; ++j) {
+
+          }*/
         }
       });
     }, function () {

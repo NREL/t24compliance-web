@@ -199,6 +199,11 @@ cbecc.config([
           controller: 'SpacesLoadsCtrl',
           templateUrl: 'spaces/loads.html'
         }, {
+          name: 'gas',
+          url: '/gas',
+          controller: 'SpacesGasCtrl',
+          templateUrl: 'spaces/gas.html'
+        }, {
           name: 'lighting',
           url: '/lighting',
           controller: 'SpacesLightingCtrl',
