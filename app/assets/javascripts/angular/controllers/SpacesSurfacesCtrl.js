@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enums) {
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Enums', function ($scope, $sce, Enums) {
   $scope.selectedSurface = null;
 
   $scope.dropdowns = [
@@ -32,7 +32,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
       name: 'name',
       displayName: 'Surface Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter)
+      filter: angular.copy($scope.data.textFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',
       displayName: 'Space Name',
@@ -46,12 +47,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort($scope.spacesArr)
     }, {
       name: 'surface_type',
       enableCellEdit: false,
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter)
+      filter: angular.copy($scope.data.textFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
       enableCellEdit: false,
@@ -63,20 +66,34 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort($scope.data.storiesArr)
     }, {
       name: 'area',
+      secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
       enableHiding: false,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'azimuth',
+      secondLine: $sce.trustAsHtml('&deg;'),
       enableHiding: false,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!(row.entity.type == 'Roof' || (row.entity.type == 'Wall' && row.entity.boundary == 'Exterior'))) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Exterior'));
+      },
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'construction',
-      enableHiding: false
+      enableHiding: false,
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'adjacent_space',
       enableHiding: false,
@@ -101,22 +118,26 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort($scope.spacesArr)
     }, {
       name: 'tilt',
+      secondLine: $sce.trustAsHtml('&deg;'),
       enableHiding: false,
       type: 'number',
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-        if (!(row.entity.type == 'Roof' || (row.entity.type == 'Wall' && row.entity.boundary == 'Underground'))) {
+        if (row.entity.type != 'Roof') {
           return 'disabled-cell';
         }
       },
       cellEditableCondition: function ($scope) {
-        return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground'));
+        return $scope.row.entity.type == 'Roof';
       },
-      filters: angular.copy($scope.data.numberFilter)
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'wall_height',
+      secondLine: $sce.trustAsHtml('ft'),
       enableHiding: false,
       type: 'number',
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
@@ -127,9 +148,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
       },
-      filters: angular.copy($scope.data.numberFilter)
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'exposed_perimeter',
+      secondLine: $sce.trustAsHtml('ft'),
       enableHiding: false,
       type: 'number',
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
@@ -140,7 +163,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Enums', function ($scope, Enu
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
       },
-      filters: angular.copy($scope.data.numberFilter)
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.surfaces,
     enableCellEditOnFocus: true,

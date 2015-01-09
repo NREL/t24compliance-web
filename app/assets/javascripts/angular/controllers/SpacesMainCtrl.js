@@ -1,16 +1,18 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scope, $modal, Enums) {
+cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Enums', function ($scope, $sce, $modal, Enums) {
   // Spaces UI Grid
-
   $scope.spacesGridOptions = {
     columnDefs: [{
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter)
+      filter: angular.copy($scope.data.textFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'floor_to_ceiling_height',
+      secondLine: $sce.trustAsHtml('ft'),
       enableHiding: false,
-      filters: angular.copy($scope.data.numberFilter)
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
       enableHiding: false,
@@ -23,11 +25,14 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort($scope.data.storiesArr)
     }, {
       name: 'area',
+      secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
       enableHiding: false,
-      filters: angular.copy($scope.data.numberFilter)
+      filters: angular.copy($scope.data.numberFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'conditioning_type',
       enableHiding: false,
@@ -40,6 +45,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_conditioning_type_enums)
     }, {
       name: 'envelope_status',
@@ -53,6 +59,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_envelope_status_enums)
     }, {
       name: 'lighting_status',
@@ -66,6 +73,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_lighting_status_enums)
     }],
     data: $scope.data.spaces,
@@ -120,16 +128,16 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
           });
 
           var spaceIndex = $scope.data.spaces.length - 1;
-          for (var j = 0; j < walls.internal_walls; ++j) {
+          for (var j = 0; j < walls.interior_walls; ++j) {
             $scope.data.addSurface('Wall', 'Interior', spaceIndex);
           }
-          for (j = 0; j < walls.external_walls; ++j) {
+          for (j = 0; j < walls.exterior_walls; ++j) {
             $scope.data.addSurface('Wall', 'Exterior', spaceIndex);
           }
           //TODO
           /*for (j = 0; j < walls.windows; ++j) {
 
-          }*/
+           }*/
         }
       });
     }, function () {
@@ -139,7 +147,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
-  '$scope', '$modalInstance', 'uiGridConstants', 'Enums', 'params', function ($scope, $modalInstance, uiGridConstants, Enums, params) {
+  '$scope', '$sce', '$modalInstance', 'uiGridConstants', 'Enums', 'params', function ($scope, $sce, $modalInstance, uiGridConstants, Enums, params) {
     $scope.spaceGroups = [];
 
     $scope.data = params.data;
@@ -158,7 +166,9 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         cellFilter: 'mapEnums:"spaces_space_function_enums"',
         editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums
       }, {
-        name: 'floor_to_ceiling_height'
+        name: 'floor_to_ceiling_height',
+        secondLine: $sce.trustAsHtml('ft'),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'story',
         editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -166,7 +176,9 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         editDropdownOptionsArray: $scope.data.storiesArr
       }, {
         name: 'area',
-        displayName: 'Area (ft2)',
+        displayName: 'Area',
+        secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         width: 98
       }, {
         name: 'conditioning_type',
@@ -204,19 +216,19 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
 
     $scope.wallGridOptions = {
       columnDefs: [{
-        name: 'external_walls',
-        displayName: '# of External Walls'
+        name: 'exterior_walls',
+        displayName: '# of Exterior Walls'
       }, {
         name: 'windows',
-        displayName: '# of Windows on External Walls'
+        displayName: '# of Windows on Exterior Walls'
       }, {
-        name: 'internal_walls',
-        displayName: '# of Internal Walls'
+        name: 'interior_walls',
+        displayName: '# of Interior Walls'
       }],
       data: [{
-        external_walls: 1,
+        exterior_walls: 1,
         windows: 1,
-        internal_walls: 3
+        interior_walls: 3
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,

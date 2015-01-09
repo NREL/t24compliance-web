@@ -214,6 +214,21 @@ cbecc.controller('SpacesCtrl', [
         exposed_perimeter: null
       });
     };
+    $scope.data.restoreSpaceTypeDefaults = function () {
+      _.each($scope.data.spaces, function (space) {
+        space.occupant_density = space.occupant_density_default;
+        space.hot_water_heating_rate = space.hot_water_heating_rate_default;
+        space.receptacle_power_density = space.receptacle_power_density_default;
+        $scope.data.gridApi.core.notifyDataChange($scope.data.gridApi.grid, uiGridConstants.dataChange.EDIT);
+      });
+    };
+    $scope.data.modifiedSpaceTypeValues = function () {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return (space.occupant_density !== space.occupant_density_default ||
+        space.hot_water_heating_rate !== space.hot_water_heating_rate_default ||
+        space.receptacle_power_density !== space.receptacle_power_density_default);
+      }));
+    };
     $scope.data.duplicateSurface = function () {
       // TODO
     };

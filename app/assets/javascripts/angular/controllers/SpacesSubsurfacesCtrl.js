@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
+cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', function ($scope, $sce, uiGridConstants) {
   $scope.selectedSubsurface = null;
 
   $scope.spacesArr = [];
@@ -34,7 +34,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
       name: 'name',
       displayName: 'Subsurface Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter)
+      filter: angular.copy($scope.data.textFilter),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',
       displayName: 'Space Name',
@@ -48,6 +49,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort($scope.spacesArr)
     }, {
       name: 'surface',
@@ -62,22 +64,28 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
           return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
         }
       },
+      headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: $scope.data.sort($scope.data.surfacesArr)
     }, {
       name: 'subsurface_type',
       enableCellEdit: false,
-      enableHiding: false
+      enableHiding: false,
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
-      enableHiding: false
+      enableHiding: false,
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'area',
-      enableHiding: false
+      secondLine: $sce.trustAsHtml('ft'),
+      enableHiding: false,
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'construction',
-      enableHiding: false
+      enableHiding: false,
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.subsurfaces,
     enableCellEditOnFocus: true,
