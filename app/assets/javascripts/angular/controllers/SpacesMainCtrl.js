@@ -1,4 +1,4 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Enums', function ($scope, $sce, $modal, Enums) {
+cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums', function ($scope, $sce, $modal, Shared, Enums) {
   // Spaces UI Grid
   $scope.spacesGridOptions = {
     columnDefs: [{
@@ -26,7 +26,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Enums', functio
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort($scope.data.storiesArr)
+      sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
       secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
@@ -46,7 +46,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Enums', functio
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_conditioning_type_enums)
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_conditioning_type_enums)
     }, {
       name: 'envelope_status',
       enableHiding: false,
@@ -60,7 +60,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Enums', functio
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_envelope_status_enums)
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_envelope_status_enums)
     }, {
       name: 'lighting_status',
       enableHiding: false,
@@ -74,7 +74,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Enums', functio
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_lighting_status_enums)
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_lighting_status_enums)
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,

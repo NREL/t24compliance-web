@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Enums', function ($scope, $sce, Enums) {
+cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
   // Settings UI Grid
   $scope.settingsGridOptions = {
     columnDefs: [{
@@ -20,7 +20,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Enums', function ($sc
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_space_function_enums)
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_space_function_enums)
     }, {
       name: 'occupant_density',
       displayName: 'Occupancy',

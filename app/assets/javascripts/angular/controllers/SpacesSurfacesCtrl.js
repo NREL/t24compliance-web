@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Enums', function ($scope, $sce, Enums) {
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
   $scope.selectedSurface = null;
 
   $scope.dropdowns = [
@@ -48,7 +48,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Enums', function ($sc
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort($scope.spacesArr)
+      sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'surface_type',
       enableCellEdit: false,
@@ -67,7 +67,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Enums', function ($sc
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort($scope.data.storiesArr)
+      sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
       secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
@@ -119,7 +119,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Enums', function ($sc
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort($scope.spacesArr)
+      sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'tilt',
       secondLine: $sce.trustAsHtml('&deg;'),

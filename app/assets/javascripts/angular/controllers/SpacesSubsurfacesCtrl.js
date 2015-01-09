@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', function ($scope, $sce, uiGridConstants) {
+cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared', function ($scope, $sce, uiGridConstants, Shared) {
   $scope.selectedSubsurface = null;
 
   $scope.spacesArr = [];
@@ -50,7 +50,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', 
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort($scope.spacesArr)
+      sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'surface',
       displayName: 'Surface Name',
@@ -65,7 +65,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', 
         }
       },
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: $scope.data.sort($scope.data.surfacesArr)
+      sortingAlgorithm: Shared.sort($scope.data.surfacesArr)
     }, {
       name: 'subsurface_type',
       enableCellEdit: false,
