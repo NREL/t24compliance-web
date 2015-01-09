@@ -2,13 +2,13 @@ cbecc.controller('SystemsCtrl', [
   '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'saved_systems', 'saved_plants', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, saved_systems, saved_plants) {
 
     // put all systems DATA in array for panels
-    $scope.systems = {ptac: [], fpfc: [], vav: [], pvav: [], mau: [], exhaust: []};
+    $scope.systems = {ptac: [], fpfc: [], vav: [], pvav: [], exhaust: []};
     // same for plants
     $scope.plants = {shw: [], hot_water: [], chilled_water: [], condenser: []};
 
     // system tabs META
     // this is used to initialize the grids and render active vertical tabs in the view
-    $scope.systemTabs = {ptac: [], fpfc:[], vav: [], pvav: [], mau: [], exhaust: []};
+    $scope.systemTabs = {ptac: [], fpfc:[], vav: [], pvav: [], exhaust: []};
     $scope.systemTabs.ptac = ['general', 'fan', 'coil_cooling', 'coil_heating'];
     // TODO: add other tab defs
 
@@ -60,9 +60,6 @@ cbecc.controller('SystemsCtrl', [
       title: 'PVAV Air Systems',
       name: 'pvav'
     }, {
-      title: 'MAU Air Systems',
-      name: 'mau'
-    }, {
       title: 'Exhaust Systems',
       name: 'exhaust'
     }];
@@ -93,56 +90,56 @@ cbecc.controller('SystemsCtrl', [
     gridPlantCols.hot_water.boiler = [{
       name: 'boiler_name',
       displayName: 'Name',
-      field: 'boiler.name'
+      field: 'boilers[0].name'
     }, {
       name: 'boiler_fuel_source',
       displayName: 'Fuel Source',
-      field: 'boiler.fuel_source'
+      field: 'boilers[0].fuel_source'
     }, {
       name: 'boiler_draft_type',
       displayName: 'Draft Type',
-      field: 'boiler.draft_type'
+      field: 'boilers[0].draft_type'
     }, {
       name: 'boiler_capacity_rated',
       displayName: 'Rated Capacity',
-      field: 'boiler.capacity_rated'
+      field: 'boilers[0].capacity_rated'
     }, {
       name: 'boiler_afue',
       displayName: 'AFUE',
-      field: 'boiler.afue'
+      field: 'boilers[0].afue'
     }, {
       name: 'boiler_thermal_efficiency',
       displayName: 'Thermal Efficiency',
-      field: 'boiler.thermal_efficiency'
+      field: 'boilers[0].thermal_efficiency'
     }];
     gridPlantCols.hot_water.pump = [{
       name: 'pump_operation_control',
       displayName: 'Operation',
-      field: 'boiler.pump.operation_control'
+      field: 'boilers[0].pump.operation_control'
     }, {
       name: 'pump_speed_control',
       displayName: 'Speed Control',
-      field: 'boiler.pump.speed_control'
+      field: 'boilers[0].pump.speed_control'
     }, {
       name: 'pump_flow_capacity',
       displayName: 'Design Flow Rate',
-      field: 'boiler.pump.flow_capacity'
+      field: 'boilers[0].pump.flow_capacity'
     }, {
       name: 'pump_motor_efficiency',
       displayName: 'Motor Efficiency',
-      field: 'boiler.pump.motor_efficiency'
+      field: 'boilers[0].pump.motor_efficiency'
     }, {
       name: 'pump_impeller_efficiency',
       displayName: 'Impeller Efficiency',
-      field: 'boiler.pump.impeller_efficiency'
+      field: 'boilers[0].pump.impeller_efficiency'
     }, {
       name: 'pump_total_head',
       displayName: 'Pump Head (ft2 H2O)',
-      field: 'boiler.pump.total_head'
+      field: 'boilers[0].pump.total_head'
     }, {
       name: 'pump_motor_hp',
       displayName: 'Motor HP',
-      field: 'boiler.pump.motor_HP'
+      field: 'boilers[0].pump.motor_HP'
     }];
     gridPlantCols.hot_water.coil_heating = [{
       name: 'name',
@@ -163,7 +160,6 @@ cbecc.controller('SystemsCtrl', [
       fpfc: {},
       vav: {},
       pvav: {},
-      mau: {},
       exhaust: {}
     };
 
@@ -533,10 +529,43 @@ cbecc.controller('SystemsCtrl', [
       console.log($scope.systems);
 
       function success(response) {
-        toaster.pop('success', 'Systems successfully saved');
-        console.log("redirecting to " + Shared.systemsPath());
-        $location.path(Shared.systemsPath());
+       // toaster.pop('success', 'Systems successfully saved');
+       // console.log("redirecting to " + Shared.systemsPath());
 
+        // now save plants
+        // collapse all plant types into 1 array for saving
+        plants = [];
+        for (var type in $scope.plants) {
+          $scope.plants[type].forEach(function (s) {
+            plants.push(s);
+          });
+        }
+        var params = Shared.defaultParams();
+        params['data'] = plants;
+        console.log('PLANTS!!!!');
+        console.log(plants);
+        data.bulkSync('fluid_systems', params).then(success).catch(failure);
+
+        function success(response) {
+          toaster.pop('success', 'Systems successfully saved');
+          console.log("redirecting to " + Shared.systemsPath());
+
+        }
+
+        function failure(response) {
+          console.log("failure", response);
+          if (response.status == 422) {
+            var len = Object.keys(response.data.errors).length;
+            toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));
+          } else {
+            toaster.pop('error', 'An error occurred while saving');
+          }
+          angular.forEach(response.data.errors, function (errors, field) {
+            $scope.form[field].$setValidity('server', false);
+            $scope.form[field].$dirty = true;
+            $scope.errors[field] = errors.join(', ');
+          });
+        }
       }
 
       function failure(response) {
@@ -562,6 +591,7 @@ cbecc.controller('SystemsCtrl', [
         });
       }
 
+      // first save systems
       var params = Shared.defaultParams();
       params['data'] = systems;
       data.bulkSync('zone_systems', params).then(success).catch(failure);

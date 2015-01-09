@@ -26,9 +26,9 @@ class FluidSystem
   field :shw_system_count, type: Integer
   field :annual_solar_fraction, type: Float
 
-  has_many :fluid_segments, dependent: :destroy
-  has_many :chillers, dependent: :destroy
-  has_many :boilers, dependent: :destroy
+  has_many :fluid_segments, dependent: :destroy, autosave: true
+  has_many :chillers, dependent: :destroy, autosave: true
+  has_many :boilers, dependent: :destroy, autosave: true
   has_many :heat_rejections, dependent: :destroy
   has_many :water_heaters, dependent: :destroy
   belongs_to :project
