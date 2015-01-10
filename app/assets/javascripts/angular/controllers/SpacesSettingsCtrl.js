@@ -1,4 +1,8 @@
 cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
+  $scope.selected = {
+    space: null
+  };
+
   // Settings UI Grid
   $scope.settingsGridOptions = {
     columnDefs: [{
@@ -65,13 +69,13 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
-      $scope.data.gridApi = gridApi;
+      $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
-          $scope.data.selectedSpace = row.entity;
+          $scope.selected.space = row.entity;
         } else {
           // No rows selected
-          $scope.data.selectedSpace = null;
+          $scope.selected.space = null;
         }
       });
     }

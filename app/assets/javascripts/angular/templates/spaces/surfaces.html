@@ -29,8 +29,8 @@
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Roof
     </button>
     <div class="pull-right">
-      <button type="button" ng-click="duplicateSurface()" class="btn btn-info" ng-disabled="!selectedSurface">Duplicate</button>
-      <button type="button" ng-click="deleteSurface()" class="btn btn-danger" ng-disabled="!selectedSurface">Delete</button>
+      <button type="button" ng-click="data.duplicateSurface(selected)" class="btn btn-info" ng-disabled="!selected.surface">Duplicate</button>
+      <button type="button" ng-click="data.deleteSurface(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.surface">Delete</button>
     </div>
   </div>
 </div>

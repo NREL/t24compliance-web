@@ -5,10 +5,7 @@ cbecc.controller('SpacesCtrl', [
       spaces: spaces,
       constructions: constructions,
       surfaces: [],
-      subsurfaces: [],
-      selectedSpace: null,
-      selectedSurface: null,
-      gridApiSpaces: {}
+      subsurfaces: []
     };
 
     // Check for construction defaults
@@ -90,10 +87,6 @@ cbecc.controller('SpacesCtrl', [
 
     updateActiveTab();
     $scope.$on('$locationChangeSuccess', function () {
-      // Reset row selection
-      $scope.data.selectedSpace = null;
-      $scope.data.selectedSurface = null;
-
       // Update active subtab
       updateActiveTab();
     });
@@ -141,29 +134,41 @@ cbecc.controller('SpacesCtrl', [
 
       $scope.data.spaces.push(space);
     };
-    $scope.data.duplicateSpace = function () {
+    $scope.data.duplicateSpace = function (selected) {
+      // TODO handle children
+      var selectedSpace = selected.space;
       $scope.data.spaces.push({
         name: "Space " + ($scope.data.spaces.length + 1),
-        floor_to_ceiling_height: $scope.data.selectedSpace.floor_to_ceiling_height,
-        story: $scope.data.selectedSpace.story,
-        area: $scope.data.selectedSpace.area,
-        conditioning_type: $scope.data.selectedSpace.conditioning_type,
-        envelope_status: $scope.data.selectedSpace.envelope_status,
-        lighting_status: $scope.data.selectedSpace.lighting_status,
+        floor_to_ceiling_height: selectedSpace.floor_to_ceiling_height,
+        story: selectedSpace.story,
+        area: selectedSpace.area,
+        conditioning_type: selectedSpace.conditioning_type,
+        envelope_status: selectedSpace.envelope_status,
+        lighting_status: selectedSpace.lighting_status,
+        space_function: selectedSpace.space_function,
 
-        space_function: $scope.data.selectedSpace.space_function,
-        occupant_density: $scope.data.selectedSpace.occupant_density,
-        hot_water_heating_rate: $scope.data.selectedSpace.hot_water_heating_rate,
-        receptacle_power_density: $scope.data.selectedSpace.receptacle_power_density
+        gas_equipment: selectedSpace.gas_equipment,
+        process_gas: selectedSpace.process_gas,
+        gas_radiant_fraction: selectedSpace.gas_radiant_fraction,
+        gas_latent_fraction: selectedSpace.gas_latent_fraction,
+        gas_lost_fraction: selectedSpace.gas_lost_fraction,
+
+        occupant_density: selectedSpace.occupant_density,
+        occupant_density_default: selectedSpace.occupant_density_default,
+        hot_water_heating_rate: selectedSpace.hot_water_heating_rate,
+        hot_water_heating_rate_default: selectedSpace.hot_water_heating_rate_default,
+        receptacle_power_density: selectedSpace.receptacle_power_density,
+        receptacle_power_density_default: selectedSpace.receptacle_power_density_default
       });
     };
-    $scope.data.deleteSpace = function () {
-      var index = $scope.data.spaces.indexOf($scope.data.selectedSpace);
+    $scope.data.deleteSpace = function (selected, gridApi) {
+      // TODO handle children
+      var index = $scope.data.spaces.indexOf(selected.space);
       $scope.data.spaces.splice(index, 1);
       if (index > 0) {
-        $scope.data.gridApiSpaces.selection.toggleRowSelection($scope.data.spaces[index - 1]);
+        gridApi.selection.toggleRowSelection($scope.data.spaces[index - 1]);
       } else {
-        $scope.data.selectedSpace = null;
+        selected.space = null;
       }
     };
 
@@ -198,12 +203,12 @@ cbecc.controller('SpacesCtrl', [
         exposed_perimeter: null
       });
     };
-    $scope.data.restoreSpaceTypeDefaults = function () {
+    $scope.data.restoreSpaceTypeDefaults = function (gridApi) {
       _.each($scope.data.spaces, function (space) {
         space.occupant_density = space.occupant_density_default;
         space.hot_water_heating_rate = space.hot_water_heating_rate_default;
         space.receptacle_power_density = space.receptacle_power_density_default;
-        $scope.data.gridApi.core.notifyDataChange($scope.data.gridApi.grid, uiGridConstants.dataChange.EDIT);
+        gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     };
     $scope.data.modifiedSpaceTypeValues = function () {
@@ -213,11 +218,44 @@ cbecc.controller('SpacesCtrl', [
         space.receptacle_power_density !== space.receptacle_power_density_default);
       }));
     };
-    $scope.data.duplicateSurface = function () {
-      // TODO
+    $scope.data.duplicateSurface = function (selected) {
+      // TODO handle children
+      var selectedSurface = selected.surface;
+      var spaceIndex = selectedSurface.space;
+
+      var name = $scope.data.spaces[spaceIndex].name + ' ' + selectedSurface.type;
+      if (selectedSurface.type == 'Wall' || selectedSurface.type == 'Floor') {
+        var len = _.filter($scope.data.surfaces, function (surface) {
+          return surface.space == spaceIndex && surface.type == selectedSurface.type;
+        }).length;
+        name += ' ' + (len + 1);
+      }
+
+      $scope.data.surfaces.push({
+        name: name,
+        space: selectedSurface.space,
+        type: selectedSurface.type,
+        boundary: selectedSurface.boundary,
+        surface_type: selectedSurface.surface_type,
+        story: selectedSurface.story,
+        area: selectedSurface.area,
+        azimuth: selectedSurface.azimuth,
+        construction: selectedSurface.construction,
+        adjacent_space: selectedSurface.adjacent_space,
+        tilt: selectedSurface.tilt,
+        wall_height: selectedSurface.wall_height,
+        exposed_perimeter: selectedSurface.exposed_perimeter
+      });
     };
-    $scope.data.deleteSurface = function () {
-      // TODO
+    $scope.data.deleteSurface = function (selected, gridApi) {
+      // TODO handle children
+      var index = $scope.data.surfaces.indexOf(selected.surface);
+      $scope.data.surfaces.splice(index, 1);
+      if (index > 0) {
+        gridApi.selection.toggleRowSelection($scope.data.surfaces[index - 1]);
+      } else {
+        selected.surface = null;
+      }
     };
 
     // save

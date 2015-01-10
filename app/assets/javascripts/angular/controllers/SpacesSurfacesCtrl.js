@@ -1,5 +1,7 @@
 cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
-  $scope.selectedSurface = null;
+  $scope.selected = {
+    surface: null
+  };
 
   $scope.dropdowns = [
     'Interior',
@@ -19,6 +21,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     $scope.spacesHash[index] = space.name;
   });
 
+  // TODO make this global?
   // Update stories if they were modified on the Spaces subtab
   _.each($scope.data.surfaces, function (surface, index) {
     if (surface.story != $scope.data.spaces[surface.space].story) {
@@ -80,7 +83,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       secondLine: $sce.trustAsHtml('&deg;'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Roof' || (row.entity.type == 'Wall' && row.entity.boundary == 'Exterior'))) {
           return 'disabled-cell';
         }
@@ -97,7 +100,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     }, {
       name: 'adjacent_space',
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Ceiling' || row.entity.boundary == 'Interior')) {
           return 'disabled-cell';
         }
@@ -125,7 +128,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       secondLine: $sce.trustAsHtml('&deg;'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type != 'Roof') {
           return 'disabled-cell';
         }
@@ -140,7 +143,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       secondLine: $sce.trustAsHtml('ft'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Wall' && row.entity.boundary == 'Underground')) {
           return 'disabled-cell';
         }
@@ -155,7 +158,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       secondLine: $sce.trustAsHtml('ft'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Floor' && row.entity.boundary == 'Underground')) {
           return 'disabled-cell';
         }
@@ -173,13 +176,13 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
-      $scope.data.gridApi = gridApi;
+      $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
-          $scope.selectedSurface = row.entity;
+          $scope.selected.surface = row.entity;
         } else {
           // No rows selected
-          $scope.selectedSurface = null;
+          $scope.selected.surface = null;
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {

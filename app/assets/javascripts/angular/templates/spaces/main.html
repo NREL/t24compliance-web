@@ -8,8 +8,8 @@
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Quick Space Creator
       </button>
       <div class="pull-right">
-        <button type="button" ng-click="data.duplicateSpace()" class="btn btn-info" ng-disabled="!data.selectedSpace">Duplicate</button>
-        <button type="button" ng-click="data.deleteSpace()" class="btn btn-danger" ng-disabled="!data.selectedSpace">Delete</button>
+        <button type="button" ng-click="data.duplicateSpace(selected)" class="btn btn-info" ng-disabled="!selected.space">Duplicate</button>
+        <button type="button" ng-click="data.deleteSpace(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.space">Delete</button>
       </div>
     </div>
   </div>
