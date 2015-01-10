@@ -1,4 +1,4 @@
-cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function ($scope, $sce, uiGridConstants) {
+cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared', function ($scope, $sce, uiGridConstants, Shared) {
   $scope.selectedSpace = null;
 
   $scope.applySettingsActive = false;
@@ -17,7 +17,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function
       displayName: 'Space Name',
       enableCellEdit: false,
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_equipment',
@@ -25,7 +25,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'process_gas',
@@ -33,28 +33,28 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_radiant_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_latent_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.spaces,

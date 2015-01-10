@@ -1,4 +1,4 @@
-cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', function ($scope, $sce, uiGridConstants) {
+cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared', function ($scope, $sce, uiGridConstants, Shared) {
   $scope.selectedSpace = null;
 
   $scope.applySettingsActive = false;
@@ -18,7 +18,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', functi
       enableCellEdit: false,
       enableHiding: false,
       headerCellTemplate: 'ui-grid/customHeaderCell',
-      filter: angular.copy($scope.data.textFilter)
+      filter: Shared.textFilter()
     }, {
       name: 'process_electric',
       secondLine: $sce.trustAsHtml('W / ft<sup>2</sup>'),
@@ -26,7 +26,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', functi
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'refrigeration',
       secondLine: $sce.trustAsHtml('W / ft<sup>2</sup>'),
@@ -34,7 +34,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', functi
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'elevator_count',
       secondLine: $sce.trustAsHtml('ElevMechan / Space'),
@@ -42,14 +42,14 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', functi
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'escalator_count',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'loads_radiant_fraction',
       enableHiding: false,
@@ -58,21 +58,21 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', functi
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'loads_latent_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'loads_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'elevator_lost_fraction',
       enableHiding: false,
@@ -81,14 +81,14 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', functi
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }, {
       name: 'escalator_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter)
+      filters: Shared.numberFilter()
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,

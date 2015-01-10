@@ -9,7 +9,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space_function',
@@ -35,7 +35,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
           return 'red-cell';
         }
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'hot_water_heating_rate',
@@ -47,7 +47,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
           return 'red-cell';
         }
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'receptacle_power_density',
@@ -59,7 +59,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
           return 'red-cell';
         }
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.spaces,

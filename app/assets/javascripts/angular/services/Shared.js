@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', 'usSpinnerService', function ($q, $cacheFactory, $templateCache, usSpinnerService) {
+cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', 'usSpinnerService', 'uiGridConstants', function ($q, $cacheFactory, $templateCache, usSpinnerService, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -169,6 +169,22 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', 'usSpinnerServ
       cacheKeys.push(key);
     }
     cache.put(key, value === undefined ? null : value);
+  };
+
+  service.textFilter = function () {
+    return {
+      condition: uiGridConstants.filter.CONTAINS
+    };
+  };
+
+  service.numberFilter = function () {
+    return [{
+      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      placeholder: 'At least'
+    }, {
+      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      placeholder: 'No more than'
+    }];
   };
 
   service.sort = function (input) {

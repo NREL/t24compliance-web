@@ -35,7 +35,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       name: 'name',
       displayName: 'Surface Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',
@@ -56,7 +56,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       name: 'surface_type',
       enableCellEdit: false,
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
@@ -76,7 +76,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
       enableHiding: false,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'azimuth',
@@ -91,7 +91,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Exterior'));
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'construction',
@@ -136,7 +136,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return $scope.row.entity.type == 'Roof';
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'wall_height',
@@ -151,7 +151,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'exposed_perimeter',
@@ -166,7 +166,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.surfaces,

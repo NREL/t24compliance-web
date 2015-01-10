@@ -9,13 +9,13 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'floor_to_ceiling_height',
       secondLine: $sce.trustAsHtml('ft'),
       enableHiding: false,
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
@@ -35,7 +35,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       name: 'area',
       secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
       enableHiding: false,
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'conditioning_type',

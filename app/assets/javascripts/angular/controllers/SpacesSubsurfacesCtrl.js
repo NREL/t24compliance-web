@@ -34,7 +34,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', 
       name: 'name',
       displayName: 'Subsurface Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',

@@ -15,18 +15,6 @@ cbecc.controller('SpacesCtrl', [
       $scope.data.constructions = null;
     }
 
-    $scope.data.textFilter = {
-      condition: uiGridConstants.filter.CONTAINS
-    };
-
-    $scope.data.numberFilter = [{
-      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-      placeholder: 'At least'
-    }, {
-      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-      placeholder: 'No more than'
-    }];
-
     $scope.data.storiesArr = [];
     $scope.data.storiesHash = {};
     _.each($scope.data.stories, function (story) {
