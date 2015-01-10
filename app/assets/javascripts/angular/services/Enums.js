@@ -224,7 +224,22 @@ cbecc.factory('Enums', function () {
       'Altered',
       'Existing',
       'Future'
+    ],
+    boilers_draft_type_enums: [
+      'MechanicalNoncondensing',
+      'Condensing',
+      'Natural'
+    ],
+    pumps_operation_control_enums:[
+      'OnDemand',
+      'StandBy',
+      'Scheduled'
+    ],
+    pumps_speed_control_enums: [
+      'ConstantSpeed',
+      'VariableSpeed'
     ]
+
   };
 
 

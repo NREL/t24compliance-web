@@ -1,15 +1,16 @@
 cbecc.controller('SystemsCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'saved_systems', 'saved_plants', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, saved_systems, saved_plants) {
+  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, Enums, saved_systems, saved_plants) {
 
     // put all systems DATA in array for panels
-    $scope.systems = {ptac: [], fpfc: [], vav: [], pvav: [], exhaust: []};
+    $scope.systems = {ptac: [], fpfc: [], vav: [], pvav: []};
     // same for plants
     $scope.plants = {shw: [], hot_water: [], chilled_water: [], condenser: []};
 
     // system tabs META
     // this is used to initialize the grids and render active vertical tabs in the view
-    $scope.systemTabs = {ptac: [], fpfc:[], vav: [], pvav: [], exhaust: []};
+    $scope.systemTabs = {ptac: [], fpfc:[], vav: [], pvav: []};
     $scope.systemTabs.ptac = ['general', 'fan', 'coil_cooling', 'coil_heating'];
+    $scope.systemTabs.fpfc = ['general', 'fan', 'coil_cooling', 'coil_heating'];
     // TODO: add other tab defs
 
     $scope.plantTabs = {hot_water: [], chilled_water: [], condenser: [], shw: []};
@@ -29,20 +30,28 @@ cbecc.controller('SystemsCtrl', [
     }
 
     //retrieve systems and process into view format
-    $scope.retrievedSystems = saved_systems;
-    $scope.retrievedPlants = saved_plants;
-
     saved_systems.forEach(function (system){
       switch (angular.lowercase(system.type)) {
         case 'ptac':
           $scope.systems.ptac.push(system);
           break;
+        case 'fpfc':
+          $scope.systems.fpfc.push(system);
+          break;
         default:
           break;
       }
-      addDependentPlants(angular.lowercase(system.type));
     });
 
+    saved_plants.forEach(function (plant){
+       switch(plant.type) {
+         case 'HotWater':
+           $scope.plants.hot_water.push(plant);
+           break;
+         default:
+           break;
+       }
+    });
 
     //**** INITIALIZE ****
     //collapsible panels
@@ -59,9 +68,6 @@ cbecc.controller('SystemsCtrl', [
     }, {
       title: 'PVAV Air Systems',
       name: 'pvav'
-    }, {
-      title: 'Exhaust Systems',
-      name: 'exhaust'
     }];
 
     $scope.plantPanels = [{
@@ -78,11 +84,8 @@ cbecc.controller('SystemsCtrl', [
       name: 'condenser'
     }];
 
-
     // coil totals for plants
     $scope.display_coils_heating = calculateCoilsHeating();
-    //console.log('DISPLAY COILS HEATING:');
-    //console.log($scope.display_coils_heating);
 
     gridPlantCols = {};
     gridPlantCols.hot_water = {};
@@ -91,38 +94,51 @@ cbecc.controller('SystemsCtrl', [
       displayName: 'Name',
       field: 'boilers[0].name'
     }, {
-      name: 'boiler_fuel_source',
-      displayName: 'Fuel Source',
-      field: 'boilers[0].fuel_source'
-    }, {
       name: 'boiler_draft_type',
       displayName: 'Draft Type',
-      field: 'boilers[0].draft_type'
+      field: 'boilers[0].draft_type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      //cellFilter: 'mapEnums:"boilers_draft_type_enums"',
+      editDropdownOptionsArray: Enums.enumsArr.boilers_draft_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
     }, {
       name: 'boiler_capacity_rated',
       displayName: 'Rated Capacity',
       field: 'boilers[0].capacity_rated'
-    }, {
-      name: 'boiler_afue',
-      displayName: 'AFUE',
-      field: 'boilers[0].afue'
     }, {
       name: 'boiler_thermal_efficiency',
       displayName: 'Thermal Efficiency',
       field: 'boilers[0].thermal_efficiency'
     }];
     gridPlantCols.hot_water.pump = [{
+      name: "pump_name",
+      displayName: 'Pump Name',
+      field: 'boilers[0].pump.name'
+    },{
       name: 'pump_operation_control',
       displayName: 'Operation',
-      field: 'boilers[0].pump.operation_control'
+      field: 'boilers[0].pump.operation_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
     }, {
       name: 'pump_speed_control',
       displayName: 'Speed Control',
-      field: 'boilers[0].pump.speed_control'
+      field: 'boilers[0].pump.speed_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
     }, {
       name: 'pump_flow_capacity',
       displayName: 'Design Flow Rate',
       field: 'boilers[0].pump.flow_capacity'
+    }, {
+      name: 'pump_total_head',
+      displayName: 'Pump Head (ft2 H2O)',
+      field: 'boilers[0].pump.total_head'
     }, {
       name: 'pump_motor_efficiency',
       displayName: 'Motor Efficiency',
@@ -131,10 +147,6 @@ cbecc.controller('SystemsCtrl', [
       name: 'pump_impeller_efficiency',
       displayName: 'Impeller Efficiency',
       field: 'boilers[0].pump.impeller_efficiency'
-    }, {
-      name: 'pump_total_head',
-      displayName: 'Pump Head (ft2 H2O)',
-      field: 'boilers[0].pump.total_head'
     }, {
       name: 'pump_motor_hp',
       displayName: 'Motor HP',
@@ -156,8 +168,7 @@ cbecc.controller('SystemsCtrl', [
       ptac: {},
       fpfc: {},
       vav: {},
-      pvav: {},
-      exhaust: {}
+      pvav: {}
     };
 
     gridCols.ptac.general = [{
@@ -216,39 +227,51 @@ cbecc.controller('SystemsCtrl', [
       displayName: 'Coil Name',
       field: 'coil_heating.name'
     }];
+    gridCols.fpfc.general = [{
+      name: 'name',
+      displayName: 'System Name'
+    }];
+    gridCols.fpfc.general = angular.copy(gridCols.ptac.general);
+    gridCols.fpfc.fan = angular.copy(gridCols.ptac.fan);
+    gridCols.fpfc.coil_heating = angular.copy(gridCols.ptac.coil_heating);
+    gridCols.fpfc.coil_cooling = angular.copy(gridCols.fpfc.coil_cooling);
 
     // TODO: add other systems
     $scope.gridOptions = {
       ptac: {},
       fpfc: {},
       vav: {},
-      pvav: {},
-      mau: {},
-      exhaust: {}
+      pvav: {}
     };
-    $scope.systemTabs.ptac.forEach(function (tab) {
-      $scope.gridOptions.ptac[tab] = {
-        columnDefs: gridCols.ptac[tab],
-        enableCellEditOnFocus: true,
-        enableColumnMenus: false,
-        enableRowHeaderSelection: true,
-        enableRowSelection: true,
-        enableSorting: false,
-        multiSelect: false,
-        onRegisterApi: function (gridApi) {
-          $scope.gridApi = gridApi;
-          gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-            if (row.isSelected) {
-              $scope.selected = row.entity;
-            } else {
-              // No rows selected
-              $scope.selected = null;
+
+    for (var system in $scope.systemTabs) {
+      console.log("HI!! IN SYSTEM: ", system);
+      if ((system === 'ptac') || (system === 'fpfc')) {
+        $scope.systemTabs[system].forEach(function (tab) {
+          $scope.gridOptions[system][tab] = {
+            columnDefs: gridCols[system][tab],
+            enableCellEditOnFocus: true,
+            enableColumnMenus: false,
+            enableRowHeaderSelection: true,
+            enableRowSelection: true,
+            enableSorting: false,
+            multiSelect: false,
+            onRegisterApi: function (gridApi) {
+              $scope.gridApi = gridApi;
+              gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                if (row.isSelected) {
+                  $scope.selected = row.entity;
+                } else {
+                  // No rows selected
+                  $scope.selected = null;
+                }
+              });
             }
-          });
-        }
-      };
-      $scope.gridOptions.ptac[tab].data = $scope.systems.ptac;
-    });
+          };
+          $scope.gridOptions[system][tab].data = $scope.systems[system];
+        });
+      }
+    }
 
     //Plant Grids
     $scope.gridPlantOptions = {
@@ -307,11 +330,17 @@ cbecc.controller('SystemsCtrl', [
           $scope.tabClasses.ptac = {
             general: 'default',
             fan: 'default',
-            fan_motor: 'default',
             coil_cooling: 'default',
             coil_heating: 'default'
           };
           break;
+        case 'fpfc':
+          $scope.tabClasses.fpfc = {
+            general: 'default',
+            fan: 'default',
+            coil_cooling: 'default',
+            coil_heating: 'default'
+          };
         case 'hot_water':
           $scope.tabClasses.hot_water = {
             pump: 'default',
@@ -352,6 +381,7 @@ cbecc.controller('SystemsCtrl', [
     };
 
     $scope.noSystems = function () {
+
       count = 0;
       for (var type in $scope.systems) {
         count = count + $scope.systems[type].length;
@@ -370,6 +400,7 @@ cbecc.controller('SystemsCtrl', [
     // Initialize active tabs
     // TODO: clean this up
     $scope.setActiveTab('ptac', 'general');
+    $scope.setActiveTab('fpfc', 'general');
     $scope.setActiveTab('hot_water', 'pump');
 
 
@@ -399,19 +430,35 @@ cbecc.controller('SystemsCtrl', [
             }
           });
           break;
+        case 'fpfc':
+          $scope.systems.fpfc.push({
+            name: "FPFC " + ($scope.systems.fpfc.length + 1),
+            type: 'FPFC',
+            fan: {
+              name: "Fan " + ($scope.systems.fpfc.length + 1),
+              control_method: 'ConstantVolume'
+            },
+            coil_cooling: {
+              name: "Cooling Coil " + ($scope.systems.fpfc.length + 1),
+              type: "ChilledWater"
+            },
+            coil_heating: {
+              name: "Heating Coil " + ($scope.systems.fpfc.length + 1),
+              type: "HotWater"
+            }
+          });
+          break;
         case 'vav':
           $scope.systems.vav.push({
             name: 'VAV' + ($scope.systems.vav.length +1)
           });
           break;
       }
-      //console.log('data for ptac:');
-     // console.log($scope.gridOptions.ptac.general.data);
-
       addDependentPlants(name);
       $scope.display_coils_heating = calculateCoilsHeating();
     };
 
+    // this doesn't seem to be working from addSystem function
     function calculateCoilsHeating() {
       coils = [];
       if ($scope.plants.hot_water.length > 0) {
@@ -475,9 +522,12 @@ cbecc.controller('SystemsCtrl', [
              ],
              boilers:[ {
                name: "Base Blr",
+               type: "HotWater",
+               fuel_source: "Gas",
+               fluid_segment_in_reference: "BaseHWPrimRetSeg",
+               fluid_segment_out_reference: "BaseHWPrimSupSeg",
                pump: {
-                 name: "Base HW Pump",
-                 operation_control: "OnDemand"
+                 name: "Base HW Pump"
                }
              }]
            })
