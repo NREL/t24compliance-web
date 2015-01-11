@@ -16,12 +16,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'Shared', 'Enums', function ($scope
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapStories:this',
       editDropdownOptionsArray: $scope.data.storiesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.storiesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.data.storiesHash),
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'type',
@@ -29,12 +24,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'Shared', 'Enums', function ($scope
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"zones_type_enums"',
       editDropdownOptionsArray: Enums.enumsArr.zones_type_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.zones_type_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter(Enums.enumsArr.zones_type_enums),
       sortingAlgorithm: Shared.sort(Enums.enumsArr.zones_type_enums)
     }],
     data: $scope.data.zones,

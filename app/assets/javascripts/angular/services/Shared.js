@@ -171,9 +171,35 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', 'usSpinnerServ
     cache.put(key, value === undefined ? null : value);
   };
 
+  // Contains All condition, split by spaces
   service.textFilter = function () {
     return {
-      condition: uiGridConstants.filter.CONTAINS
+      condition: function (searchTerm, cellValue) {
+        var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
+        var value = cellValue.toLowerCase();
+        return _.every(terms, function (term) {
+          var regex = new RegExp(term);
+          return regex.test(value);
+        });
+      }
+    };
+  };
+
+  service.enumFilter = function (input) {
+    return {
+      condition: function (searchTerm, cellValue) {
+        if (cellValue === null) return false;
+        var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
+        var value = input[cellValue];
+        if (input instanceof Array) {
+          value = value.value;
+        }
+        value = value.toLowerCase();
+        return _.every(terms, function (term) {
+          var regex = new RegExp(term);
+          return regex.test(value);
+        });
+      }
     };
   };
 

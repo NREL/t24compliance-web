@@ -23,12 +23,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapStories:this',
       editDropdownOptionsArray: $scope.data.storiesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.storiesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
@@ -43,12 +38,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_conditioning_type_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_conditioning_type_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_conditioning_type_enums),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_conditioning_type_enums)
     }, {
@@ -57,12 +47,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_envelope_status_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_envelope_status_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_envelope_status_enums),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_envelope_status_enums)
     }, {
@@ -71,12 +56,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_lighting_status_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_lighting_status_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_lighting_status_enums),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_lighting_status_enums)
     }],

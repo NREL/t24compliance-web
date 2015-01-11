@@ -44,12 +44,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.spacesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
@@ -63,12 +58,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
       enableHiding: false,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.storiesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
@@ -114,13 +104,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          if (cellValue === null) return false;
-          var haystack = $scope.spacesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {

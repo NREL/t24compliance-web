@@ -17,12 +17,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_space_function_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_space_function_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_space_function_enums),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_space_function_enums)
     }, {
