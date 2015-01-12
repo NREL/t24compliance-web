@@ -1,6 +1,8 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants', 'Shared', 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, Shared, stories, spaces, constructions) {
+  '$scope', '$location', 'uiGridConstants', 'Shared', /*'constData', 'fenData',*/ 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, Shared, /*constData, fenData,*/ stories, spaces, constructions) {
     $scope.data = {
+      /*constData: constData,
+       fenData: fenData,*/
       stories: stories,
       spaces: spaces,
       constructions: constructions,
@@ -120,6 +122,14 @@ cbecc.controller('SpacesCtrl', [
       space.receptacle_power_density = 1.5;
       space.receptacle_power_density_default = 1.5;
 
+      space.exhaust_per_area = 10;
+      space.exhaust_per_area_default = 10;
+      space.exhaust_air_changes_per_hour = 0.18;
+      space.exhaust_air_changes_per_hour_default = 0.18;
+      space.exhaust_per_space = 250;
+      space.exhaust_per_space_default = 250;
+
+      $scope.data.updateTotalExhaust(space);
       $scope.data.spaces.push(space);
     };
     $scope.data.duplicateSpace = function (selected) {
@@ -191,7 +201,7 @@ cbecc.controller('SpacesCtrl', [
         exposed_perimeter: null
       });
     };
-    $scope.data.restoreSpaceTypeDefaults = function (gridApi) {
+    $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi) {
       _.each($scope.data.spaces, function (space) {
         space.occupant_density = space.occupant_density_default;
         space.hot_water_heating_rate = space.hot_water_heating_rate_default;
@@ -199,11 +209,27 @@ cbecc.controller('SpacesCtrl', [
         gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     };
-    $scope.data.modifiedSpaceTypeValues = function () {
+    $scope.data.modifiedSpaceTypeSettingsValues = function () {
       return !_.isEmpty(_.find($scope.data.spaces, function (space) {
         return (space.occupant_density !== space.occupant_density_default ||
         space.hot_water_heating_rate !== space.hot_water_heating_rate_default ||
         space.receptacle_power_density !== space.receptacle_power_density_default);
+      }));
+    };
+    $scope.data.restoreSpaceTypeVentilationDefaults = function (gridApi) {
+      _.each($scope.data.spaces, function (space) {
+        space.exhaust_per_area = space.exhaust_per_area_default;
+        space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
+        space.exhaust_per_space = space.exhaust_per_space_default;
+        $scope.data.updateTotalExhaust(space);
+        gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+      });
+    };
+    $scope.data.modifiedSpaceTypeVentilationValues = function () {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return (space.exhaust_per_area !== space.exhaust_per_area_default ||
+        space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default ||
+        space.exhaust_per_space !== space.exhaust_per_space_default);
       }));
     };
     $scope.data.duplicateSurface = function (selected) {
@@ -246,9 +272,66 @@ cbecc.controller('SpacesCtrl', [
       }
     };
 
+    $scope.data.addSubsurface = function (type, surfaceIndex) {
+      if (surfaceIndex === undefined) {
+        surfaceIndex = 0;
+      }
+
+      $scope.data.subsurfaces.push({
+        name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
+        space: $scope.data.surfaces[surfaceIndex].space,
+        surface: surfaceIndex,
+        type: type,
+        story: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].story,
+        area: null,
+        construction: null
+      });
+    };
+    $scope.data.duplicateSubsurface = function (selected) {
+      var selectedSubsurface = selected.subsurface;
+
+      $scope.data.subsurfaces.push({
+        name: selectedSubsurface.name,
+        space: selectedSubsurface.space,
+        surface: selectedSubsurface.surface,
+        type: selectedSubsurface.type,
+        story: selectedSubsurface.story,
+        area: selectedSubsurface.area,
+        construction: selectedSubsurface.construction
+      });
+    };
+    $scope.data.deleteSubsurface = function (selected, gridApi) {
+      var index = $scope.data.subsurfaces.indexOf(selected.subsurface);
+      $scope.data.subsurfaces.splice(index, 1);
+      if (index > 0) {
+        gridApi.selection.toggleRowSelection($scope.data.subsurfaces[index - 1]);
+      } else {
+        selected.subsurface = null;
+      }
+    };
+
+    $scope.data.updateTotalExhaust = function (space) {
+      space.total_exhaust = Math.round((space.exhaust_per_area * space.area) + (space.exhaust_air_changes_per_hour * space.floor_to_ceiling_height * space.area / 60) + space.exhaust_per_space);
+    };
+
     // save
     $scope.submit = function () {
       console.log("submit");
+
+      var spaces = angular.copy($scope.data.spaces);
+      var surfaces = angular.copy($scope.data.surfaces);
+      var subsurfaces = angular.copy($scope.data.subsurfaces);
+      _.each(spaces, function (space) {
+        space.surfaces = [];
+      });
+      _.each(surfaces, function (surface) {
+        surface.subsurfaces = [];
+        spaces[surface.space].surfaces.push(surface);
+      });
+      _.each(subsurfaces, function (subsurface) {
+        spaces[surfaces[subsurface.surface].space].surfaces[subsurface.surface].subsurfaces.push(subsurface);
+      });
+      console.log(spaces);
 
       function success(response) {
         toaster.pop('success', 'Spaces successfully saved');
@@ -258,8 +341,6 @@ cbecc.controller('SpacesCtrl', [
         console.log("failure", response);
         toaster.pop('error', 'An error occurred while saving', response.statusText);
       }
-
-      // TODO Insert surfaces as children of spaces
     };
 
   }]);

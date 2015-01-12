@@ -76,6 +76,11 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Shared', 'Enums', funct
           $scope.selected.space = null;
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (colDef.name == 'area' && newValue != oldValue) {
+          $scope.data.updateTotalExhaust(rowEntity);
+        }
+      });
     }
   };
 

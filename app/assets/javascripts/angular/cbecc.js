@@ -157,6 +157,8 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
+          /*constData: getConstructions,
+          fenData: getFenestrations,*/
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],

@@ -1,4 +1,4 @@
-cbecc.controller('SpacesLoadsCtrl', ['$scope', 'Shared', function ($scope, Shared) {
+cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
   $scope.selectedSpace = null;
 
   $scope.applySettingsActive = false;
@@ -134,6 +134,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'Shared', function ($scope, Share
     _.each(rows, function (row) {
       _.merge(row, replacement);
     });
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
   };
 

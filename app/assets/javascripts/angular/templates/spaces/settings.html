@@ -1,7 +1,7 @@
 <div class="row pad-top-20 pad-bot-20">
   <div class="col-md-12">
     <div class="pull-right">
-      <button type="button" ng-click="data.restoreSpaceTypeDefaults(gridApi)" class="btn btn-info" ng-disabled="!data.modifiedSpaceTypeValues()">Restore Defaults</button>
+      <button type="button" ng-click="data.restoreSpaceTypeSettingsDefaults(gridApi)" class="btn btn-info" ng-disabled="!data.modifiedSpaceTypeSettingsValues()">Restore Defaults</button>
       <button type="button" ng-click="data.duplicateSpace(selected)" class="btn btn-info" ng-disabled="!selected.space">Duplicate</button>
       <button type="button" ng-click="data.deleteSpace(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.space">Delete</button>
     </div>
