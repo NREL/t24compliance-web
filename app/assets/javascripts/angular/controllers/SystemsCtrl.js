@@ -884,7 +884,6 @@ cbecc.controller('SystemsCtrl', [
       console.log($scope.systems);
 
       function success(response) {
-<<<<<<< HEAD
        // toaster.pop('success', 'Systems successfully saved');
        // console.log("redirecting to " + Shared.systemsPath());
 
@@ -923,9 +922,6 @@ cbecc.controller('SystemsCtrl', [
             $scope.errors[field] = errors.join(', ');
           });
         }
-=======
-        toaster.pop('success', 'Systems successfully saved');
->>>>>>> 371c89beaad9543eac4de8cfbe026eb86266bed1
       }
 
       function failure(response) {

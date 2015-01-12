@@ -1,9 +1,17 @@
 .app-nav {
   padding: 20px 0;
+  background-color: #fff;
+  color: darkslategray;
+
+  .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: darkslategray;
+    background-color:#fff;
+    border-bottom: 2px solid #70be44;
+  }
 }
 
 .app-nav-item {
-  background-color: #ddd;
+  background-color: #fff;
   margin-right: 10px;
   font-size: 110%;
 }
