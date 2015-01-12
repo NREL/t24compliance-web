@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+SKIP_CONSTRUCTIONS = false
+
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
 
@@ -15,60 +17,60 @@ u.save!
 
 u.projects.destroy_all
 
-=begin
+unless SKIP_CONSTRUCTIONS
 # CONSTRUCTION LIBRARIES
-file = File.read(File.join(Rails.root,"lib/assets/construction_library.json"))
-data = JSON.parse(file)
+  file = File.read(File.join(Rails.root, "lib/assets/construction_library.json"))
+  data = JSON.parse(file)
 
-data['constructions'].each_with_index do |c, index|
-  cons = Construction.find_or_create_by(name: c['name'])
-  if cons
-    puts "Adding/Updating Construction: #{cons.name}"
+  data['constructions'].each_with_index do |c, index|
+    cons = Construction.find_or_create_by(name: c['name'])
+    if cons
+      puts "Adding/Updating Construction: #{cons.name}"
 
-    # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
-    # need to be removed
-    c = cons.as_json.merge(c)
-    cons.update(c)
-    cons.save!
+      # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+      # need to be removed
+      c = cons.as_json.merge(c)
+      cons.update(c)
+      cons.save!
+    end
   end
-end
 
-file = File.read(File.join(Rails.root,"lib/assets/fenestration_library.json"))
-data = JSON.parse(file)
+  file = File.read(File.join(Rails.root, "lib/assets/fenestration_library.json"))
+  data = JSON.parse(file)
 
-data['constructions'].each_with_index do |c, index|
-  fens = Fenestration.find_or_create_by(name: c['name'])
-  if fens
-    puts "Adding/Updating Fenestration: #{fens.name}"
+  data['constructions'].each_with_index do |c, index|
+    fens = Fenestration.find_or_create_by(name: c['name'])
+    if fens
+      puts "Adding/Updating Fenestration: #{fens.name}"
 
-    # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
-    # need to be removed
-    c = fens.as_json.merge(c)
-    fens.update(c)
-    fens.save!
+      # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+      # need to be removed
+      c = fens.as_json.merge(c)
+      fens.update(c)
+      fens.save!
+    end
   end
-end
 
 # SPACE TYPE DEFAULTS
-file = File.read(File.join(Rails.root,"lib/assets/space_function_library.json"))
-data = JSON.parse(file)
+  file = File.read(File.join(Rails.root, "lib/assets/space_function_library.json"))
+  data = JSON.parse(file)
 
-data['space_functions'].each_with_index do |c, index|
-  sf = SpaceFunctionDefault.find_or_create_by(name: c['name'])
-  if sf
-    puts "Adding/Updating Space Function Default: #{sf.name}"
+  data['space_functions'].each_with_index do |c, index|
+    sf = SpaceFunctionDefault.find_or_create_by(name: c['name'])
+    if sf
+      puts "Adding/Updating Space Function Default: #{sf.name}"
 
-    # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
-    # need to be removed
-    c = sf.as_json.merge(c)
-    sf.update(c)
-    sf.save!
+      # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+      # need to be removed
+      c = sf.as_json.merge(c)
+      sf.update(c)
+      sf.save!
+    end
   end
 end
-=end
 
 # import some cbecc com models
-f = File.join(Rails.root,"spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
+f = File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
 p = Project.from_sdd_xml(f)
 p.user_id = u.id
 p.save!
