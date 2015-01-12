@@ -1,72 +1,80 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scope, $modal, Enums) {
-  // Spaces UI Grid
+cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shared', 'Enums', function ($scope, $modal, uiGridConstants, Shared, Enums) {
+  $scope.selected = {
+    space: null
+  };
 
+  $scope.applySettingsActive = false;
+
+  $scope.editableCondition = function ($scope) {
+    while (!$scope.hasOwnProperty('applySettingsActive')) {
+      $scope = $scope.$parent;
+    }
+    return !$scope.applySettingsActive;
+  };
+
+  // Spaces UI Grid
   $scope.spacesGridOptions = {
     columnDefs: [{
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter)
+      cellEditableCondition: $scope.editableCondition,
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'floor_to_ceiling_height',
+      secondLine: Shared.html('ft'),
       enableHiding: false,
-      filters: angular.copy($scope.data.numberFilter)
+      cellEditableCondition: $scope.editableCondition,
+      filters: Shared.numberFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapStories:this',
       editDropdownOptionsArray: $scope.data.storiesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.storiesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
-      sortingAlgorithm: $scope.data.sort($scope.data.storiesArr)
+      filter: Shared.enumFilter($scope.data.storiesHash),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
+      secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
-      filters: angular.copy($scope.data.numberFilter)
+      cellEditableCondition: $scope.editableCondition,
+      filters: Shared.numberFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'conditioning_type',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_conditioning_type_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_conditioning_type_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_conditioning_type_enums)
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_conditioning_type_enums),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_conditioning_type_enums)
     }, {
       name: 'envelope_status',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_envelope_status_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_envelope_status_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_envelope_status_enums)
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_envelope_status_enums),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_envelope_status_enums)
     }, {
       name: 'lighting_status',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapEnums:"spaces_lighting_status_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = Enums.enumsArr.spaces_lighting_status_enums[cellValue].value;
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
-      sortingAlgorithm: $scope.data.sort(Enums.enumsArr.spaces_lighting_status_enums)
+      filter: Shared.enumFilter(Enums.enumsArr.spaces_lighting_status_enums),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_lighting_status_enums)
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,
@@ -75,16 +83,53 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
-      $scope.data.gridApi = gridApi;
+      $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
-          $scope.data.selectedSpace = row.entity;
+          $scope.selected.space = row.entity;
         } else {
           // No rows selected
-          $scope.data.selectedSpace = null;
+          $scope.selected.space = null;
+        }
+      });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (colDef.name == 'area' && newValue != oldValue) {
+          $scope.data.updateTotalExhaust(rowEntity);
         }
       });
     }
+  };
+
+  // Buttons
+  $scope.applySettings = function () {
+    $scope.applySettingsActive = true;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.spacesGridOptions.multiSelect = true;
+  };
+
+  $scope.confirmApplySettings = function () {
+    var replacement = {
+      floor_to_ceiling_height: $scope.selected.space.floor_to_ceiling_height,
+      story: $scope.selected.space.story,
+      area: $scope.selected.space.area,
+      conditioning_type: $scope.selected.space.conditioning_type,
+      envelope_status: $scope.selected.space.envelope_status,
+      lighting_status: $scope.selected.space.lighting_status
+    };
+    var rows = $scope.gridApi.selection.getSelectedRows();
+    _.each(rows, function (row) {
+      _.merge(row, replacement);
+      $scope.data.updateTotalExhaust(row);
+    });
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.resetApplySettings();
+  };
+
+  $scope.resetApplySettings = function () {
+    $scope.selected.space = null;
+    $scope.applySettingsActive = false;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.spacesGridOptions.multiSelect = false;
   };
 
   // Modal Settings
@@ -118,6 +163,17 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
             envelope_status: config.envelope_status,
             lighting_status: config.lighting_status
           });
+
+          var spaceIndex = $scope.data.spaces.length - 1;
+          for (var j = 0; j < walls.interior_walls; ++j) {
+            $scope.data.addSurface('Wall', 'Interior', spaceIndex);
+          }
+          for (j = 0; j < walls.exterior_walls; ++j) {
+            $scope.data.addSurface('Wall', 'Exterior', spaceIndex);
+            for (var k = 0; k < walls.windows; ++k) {
+              $scope.data.addSubsurface('Window', $scope.data.surfaces.length - 1);
+            }
+          }
         }
       });
     }, function () {
@@ -127,7 +183,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Enums', function ($scop
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
-  '$scope', '$modalInstance', 'uiGridConstants', 'Enums', 'params', function ($scope, $modalInstance, uiGridConstants, Enums, params) {
+  '$scope', '$modalInstance', 'uiGridConstants', 'Shared', 'Enums', 'params', function ($scope, $modalInstance, uiGridConstants, Shared, Enums, params) {
     $scope.spaceGroups = [];
 
     $scope.data = params.data;
@@ -146,7 +202,9 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         cellFilter: 'mapEnums:"spaces_space_function_enums"',
         editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums
       }, {
-        name: 'floor_to_ceiling_height'
+        name: 'floor_to_ceiling_height',
+        secondLine: Shared.html('ft'),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'story',
         editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -154,7 +212,9 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         editDropdownOptionsArray: $scope.data.storiesArr
       }, {
         name: 'area',
-        displayName: 'Area (ft2)',
+        displayName: 'Area',
+        secondLine: Shared.html('ft<sup>2</sup>'),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         width: 98
       }, {
         name: 'conditioning_type',
@@ -192,19 +252,19 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
 
     $scope.wallGridOptions = {
       columnDefs: [{
-        name: 'external_walls',
-        displayName: '# of External Walls'
+        name: 'exterior_walls',
+        displayName: '# of Exterior Walls'
       }, {
         name: 'windows',
-        displayName: '# of Windows on External Walls'
+        displayName: '# of Windows on Exterior Walls'
       }, {
-        name: 'internal_walls',
-        displayName: '# of Internal Walls'
+        name: 'interior_walls',
+        displayName: '# of Interior Walls'
       }],
       data: [{
-        external_walls: 1,
+        exterior_walls: 1,
         windows: 1,
-        internal_walls: 3
+        interior_walls: 3
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,

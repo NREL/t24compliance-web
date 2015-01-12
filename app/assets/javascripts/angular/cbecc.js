@@ -157,6 +157,8 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
+          /*constData: getConstructions,
+          fenData: getFenestrations,*/
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -199,6 +201,11 @@ cbecc.config([
           controller: 'SpacesLoadsCtrl',
           templateUrl: 'spaces/loads.html'
         }, {
+          name: 'gas',
+          url: '/gas',
+          controller: 'SpacesGasCtrl',
+          templateUrl: 'spaces/gas.html'
+        }, {
           name: 'lighting',
           url: '/lighting',
           controller: 'SpacesLightingCtrl',
@@ -217,6 +224,11 @@ cbecc.config([
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/systems',
         controller: 'SystemsCtrl',
         templateUrl: 'systems/systems.html',
+        resolve: {
+          saved_systems: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('zone_systems', Shared.defaultParams());
+          }]
+        },
         parent: 'requirebuilding'
       })
       .state({
@@ -231,6 +243,11 @@ cbecc.config([
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/zones',
         controller: 'ZonesCtrl',
         templateUrl: 'zones/zones.html',
+        resolve: {
+          stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('building_stories', Shared.defaultParams());
+          }]
+        },
         parent: 'requirebuilding',
         children: [{
           // No controller here because the file is ng-included
@@ -304,6 +321,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   api.add('constructions');
   api.add('fenestrations');
   api.add('construction_defaults');
+  api.add('zone_systems');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
     Shared.startSpinner();

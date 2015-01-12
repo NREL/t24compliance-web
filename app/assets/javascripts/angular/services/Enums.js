@@ -224,6 +224,11 @@ cbecc.factory('Enums', function () {
       'Altered',
       'Existing',
       'Future'
+    ],
+    zones_type_enums: [
+      'Conditioned',
+      'Plenum',
+      'Unconditioned'
     ]
   };
 

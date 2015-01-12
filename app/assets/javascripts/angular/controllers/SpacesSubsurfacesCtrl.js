@@ -1,5 +1,7 @@
-cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
-  $scope.selectedSubsurface = null;
+cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope, Shared) {
+  $scope.selected = {
+    subsurface: null
+  };
 
   $scope.spacesArr = [];
   $scope.spacesHash = {};
@@ -21,7 +23,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
     $scope.surfacesHash[index] = surface.name;
   });
 
-  // Update stories if they were modified on the Spaces subtab
+  // TODO Update stories if they were modified on the Spaces subtab
   _.each($scope.data.surfaces, function (surface, index) {
     if (surface.story != $scope.data.spaces[surface.space].story) {
       surface.story = $scope.data.spaces[surface.space].story;
@@ -34,7 +36,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
       name: 'name',
       displayName: 'Subsurface Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter)
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',
       displayName: 'Space Name',
@@ -42,13 +45,9 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.spacesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
-      sortingAlgorithm: $scope.data.sort($scope.spacesArr)
+      filter: Shared.enumFilter($scope.spacesHash),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'surface',
       displayName: 'Surface Name',
@@ -56,28 +55,34 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSurfaces:this',
       editDropdownOptionsArray: $scope.surfacesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.surfacesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
-      sortingAlgorithm: $scope.data.sort($scope.data.surfacesArr)
+      filter: Shared.enumFilter($scope.surfacesHash),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort($scope.surfacesArr)
     }, {
-      name: 'subsurface_type',
+      name: 'type',
+      displayName: 'Subsurface Type',
       enableCellEdit: false,
-      enableHiding: false
+      enableHiding: false,
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
-      enableHiding: false
+      enableHiding: false,
+      filter: Shared.enumFilter($scope.data.storiesHash),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'area',
-      enableHiding: false
+      secondLine: Shared.html('ft'),
+      enableHiding: false,
+      type: 'number',
+      filter: Shared.numberFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'construction',
-      enableHiding: false
+      enableHiding: false,
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.subsurfaces,
     enableCellEditOnFocus: true,
@@ -86,53 +91,15 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', function
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
-      $scope.data.gridApi = gridApi;
+      $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
-          $scope.selectedSubsurface = row.entity;
+          $scope.selected.subsurface = row.entity;
         } else {
           // No rows selected
-          $scope.selectedSubsurface = null;
+          $scope.selected.subsurface = null;
         }
       });
     }
   };
-
-  // Buttons
-  $scope.addSubsurface = function (type) {
-    /*var spaceIndex = 0;
-
-    var name = $scope.spacesHash[spaceIndex] + ' ' + type;
-    var surfaceType = type;
-
-    if (type == 'Wall' || type == 'Floor') {
-      var len = _.filter($scope.data.surfaces, function (surface) {
-        return surface.space == spaceIndex && surface.type == type;
-      }).length;
-      name += ' ' + (len + 1);
-      surfaceType = boundary + ' ' + surfaceType;
-    }
-    $scope.data.surfaces.push({
-      name: name,
-      space: spaceIndex,
-      type: type,
-      boundary: boundary,
-      surface_type: surfaceType,
-      story: $scope.data.spaces[spaceIndex].story,
-      area: null,
-      azimuth: null,
-      construction: null,
-      adjacent_space: null,
-      tilt: null,
-      wall_height: null,
-      exposed_perimeter: null
-    });*/
-  };
-  $scope.duplicateSubsurface = function () {
-
-  };
-  $scope.deleteSubsurface = function () {
-
-  };
-
 }]);

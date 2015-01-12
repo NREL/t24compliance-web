@@ -1,29 +1,30 @@
 <div class="row">
   <div class="">
     <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="ptac_navigation">
-      <button class="btn-wrap" type="button" ng-click="setActiveTab('ptacs', 'general')" ng-class="getTabClass('ptacs', 'general')">PTAC General System Settings</button>
-      <button type="button" ng-click="setActiveTab('ptacs', 'fan')" ng-class="getTabClass('ptacs', 'fan')">Fan</button>
-      <button type="button" ng-click="setActiveTab('ptacs', 'coil_cooling')" ng-class="getTabClass('ptacs', 'coil_cooling')">DX Cooling Coil</button>
-      <button type="button" ng-click="setActiveTab('ptacs', 'coil_heating')" ng-class="getTabClass('ptacs', 'coil_heating')">Gas Heating Coil</button>
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('ptac', 'general')" ng-class="getTabClass('ptac', 'general')">PTAC General System Settings</button>
+      <button type="button" ng-click="setActiveTab('ptac', 'fan')" ng-class="getTabClass('ptac', 'fan')">Fan</button>
+     <!-- <button type="button" ng-click="setActiveTab('ptac', 'fan_motor')" ng-class="getTabClass('ptac', 'fan_motor')">Fan Motor</button>-->
+      <button type="button" ng-click="setActiveTab('ptac', 'coil_cooling')" ng-class="getTabClass('ptac', 'coil_cooling')">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('ptac', 'coil_heating')" ng-class="getTabClass('ptac', 'coil_heating')">Gas Heating Coil</button>
     </div>
   </div>
   <div class="col-md-10">
     <div class="row">
       <p class="bold-text">Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.</p>
       <p>Select the overall system or the components to edit the settings of each system.</p>
-      <button type="button" ng-click="addSystem('ptacs')" class="btn btn-success">
+      <button type="button" ng-click="addSystem('ptac')" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> PTAC System
       </button>
       <div class="pull-right pad-right-20">
-        <button type="button" ng-click="duplicateSystem('ptacs')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
-        <button type="button" ng-click="deleteSystem('ptacs')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+        <button type="button" ng-click="duplicateSystem('ptac')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteSystem('ptac')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
       </div>
     </div>
     <div class="row pad-top-20">
       <div class="col-md-12">
         <div class="tab-content">
-          <div ng-repeat="tab in systemTabs.ptacs" ng-show="isActiveTab('ptacs', tab)">
-            <div ui-grid="gridOptions.ptacs[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+          <div ng-repeat="tab in systemTabs.ptac" ng-show="isActiveTab('ptac', tab)">
+            <div ui-grid="gridOptions.ptac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
           </div>
         </div>
       </div>

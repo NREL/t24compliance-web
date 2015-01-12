@@ -1,9 +1,9 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
+  '$scope', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
-    $scope.data = constData;
+    $scope.constData = constData;
     $scope.fenData = fenData;
 
     // retrieve saved defaults (if any)
@@ -16,28 +16,28 @@ cbecc.controller('ConstructionsCtrl', [
 
     //collapsible panels
     $scope.panels = [{
-      title: "Exterior Wall Construction",
+      title: 'Exterior Wall Construction',
       name: 'exterior_wall'
     }, {
-      title: "Interior Wall Construction",
+      title: 'Interior Wall Construction',
       name: 'interior_wall'
     }, {
-      title: "Underground Wall Construction",
+      title: 'Underground Wall Construction',
       name: 'underground_wall'
     }, {
-      title: "Roof Construction",
+      title: 'Roof Construction',
       name: 'roof'
     }, {
-      title: "Door Construction",
+      title: 'Door Construction',
       name: 'door'
     }, {
-      title: "Interior Floor Construction",
+      title: 'Interior Floor Construction',
       name: 'interior_floor'
     }, {
-      title: "Exterior Floor Construction",
+      title: 'Exterior Floor Construction',
       name: 'exterior_floor'
     }, {
-      title: "Underground Floor Construction",
+      title: 'Underground Floor Construction',
       name: 'underground_floor'
     }];
 
@@ -51,7 +51,7 @@ cbecc.controller('ConstructionsCtrl', [
       };
 
       // retrieve selected and layers
-      var sel = getSelected($scope.data, $scope.defaults[panel.name]);
+      var sel = getSelected($scope.constData, $scope.defaults[panel.name]);
       if (sel) {
         panel.selected = sel;
         panel.gridOptions.data = sel.layers;
@@ -63,10 +63,10 @@ cbecc.controller('ConstructionsCtrl', [
 
 
     $scope.fenPanels = [{
-      title: "Window Construction",
+      title: 'Window Construction',
       name: 'window'
     }, {
-      title: "Skylight Construction",
+      title: 'Skylight Construction',
       name: 'skylight'
     }];
 
@@ -113,7 +113,7 @@ cbecc.controller('ConstructionsCtrl', [
         resolve: {
           params: function () {
             return {
-              data: $scope.data,
+              data: $scope.constData,
               rowEntity: rowEntity,
               title: $scope.panels[index].title
             };
@@ -196,53 +196,53 @@ cbecc.controller('ConstructionsCtrl', [
 ]);
 
 cbecc.controller('ModalConstructionsLibraryCtrl', [
-  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, params) {
+  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
     $scope.title = params.title;
     $scope.layerData = [];
     $scope.selected = null;
 
-    var textFilter = {condition: uiGridConstants.filter.CONTAINS};
-    var numberFilter = [{
-      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-      placeholder: 'At least'
-    }, {
-      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-      placeholder: 'No more than'
-    }];
-
     $scope.constructionsGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: angular.copy(textFilter)
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'framing_configuration',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         maxWidth: 218
       }, {
         name: 'framing_size',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         maxWidth: 159
       }, {
         name: 'cavity_insulation_r_value',
+        secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
-        filters: angular.copy(numberFilter)
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'continuous_insulation_r_value',
+        secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
-        filters: angular.copy(numberFilter)
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'continuous_insulation_material_name',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 300
       }],
       data: 'data',
@@ -290,73 +290,79 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
 ]);
 
 cbecc.controller('ModalFenestrationLibraryCtrl', [
-  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, params) {
+  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
     $scope.title = params.title;
     $scope.selected = null;
-
-    var textFilter = {condition: uiGridConstants.filter.CONTAINS};
-    var numberFilter = [{
-      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
-      placeholder: 'At least'
-    }, {
-      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
-      placeholder: 'No more than'
-    }];
 
     $scope.fenestrationGridOptions = {
       columnDefs: [{
         name: 'name',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 400
       }, {
         name: 'type',
         enableHiding: false,
-        filter: angular.copy(textFilter)
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'certification_method',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         maxWidth: 218
       }, {
         name: 'u_factor',
+        secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
         enableHiding: false,
-        filters: angular.copy(numberFilter)
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'solar_heat_gain_coefficient',
+        secondLine: Shared.html('frac.'),
         enableHiding: false,
-        filters: angular.copy(numberFilter)
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'visible_transmittance',
+        secondLine: Shared.html('frac.'),
         enableHiding: false,
-        filters: angular.copy(numberFilter)
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'number_of_panes',
         enableHiding: false,
-        filters: angular.copy(numberFilter)
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'frame_type',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 300
       }, {
         name: 'divider_type',
         enableHiding: false,
-        filter: angular.copy(textFilter),
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 300
       }, {
         name: 'tint',
         enableHiding: false,
-        filter: angular.copy(textFilter)
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'gas_fill',
         enableHiding: false,
-        filter: angular.copy(textFilter)
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'low_emissivity_coating',
         enableHiding: false,
-        filter: angular.copy(textFilter)
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
       }],
       data: 'data',
       enableFiltering: true,

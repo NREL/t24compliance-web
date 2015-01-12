@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="hot_water_navigation">
+      <button type="button" ng-click="setActiveTab('hot_water', 'pump')" ng-class="getTabClass('hot_water', 'pump')">Pump</button>
+      <button type="button" ng-click="setActiveTab('hot_water', 'boiler')" ng-class="getTabClass('hot_water', 'boiler')">Boiler</button>
+      <button type="button" ng-click="setActiveTab('hot_water', 'coil_heating')" ng-class="getTabClass('hot_water', 'coil_heating')">Connected Heating Coils</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <p class="bold-text">Only one of each type of plant may be used in this tool. You have to combine all your hot water plants.</p>
+      <p>Select the overall system or the components to edit the settings of each system.</p>
+      <p class="bold-text" ng-if="isActiveTab('hot_water', 'coil_heating')">The following Heating Coils are connected to this Hot Water Plant.  If you need to edit any of these coils, go back to the system section above.</p>
+    </div>
+    <div class="row pad-top-20">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div ng-repeat="tab in plantTabs.hot_water" ng-show="isActiveTab('hot_water', tab)">
+            <div ui-grid="gridPlantOptions.hot_water[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12 app-nav" ng-include="'nav/nav.html'"></div>
 </div>
-<div class="row">
+<div class="row pad-bot-20">
   <div class="col-md-12">
     <div class="inline-heading">
       <h2>Thermal Zones |</h2> Create thermal zones, assign your spaces to zones, and attach them.
@@ -11,6 +11,14 @@
     </tabset>
     <div ui-view>
       <div ng-include="'zones/main.html'"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row pad-bot-20">
+  <div class="control-group col-md-1">
+    <div class="controls">
+      <button type="submit" ng-click="submit()" class="btn btn-success">Save</button>
     </div>
   </div>
 </div>

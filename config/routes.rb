@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   resources :building_stories do  
     post 'bulk_sync', on: :collection    
   end
+  resources :zone_systems do
+    post 'bulk_sync', on: :collection
+  end
 
 
 

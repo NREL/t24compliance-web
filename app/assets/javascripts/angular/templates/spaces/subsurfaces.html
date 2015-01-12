@@ -1,17 +1,17 @@
 <div class="row pad-top-20 pad-bot-20">
   <div class="col-md-12">
-    <button type="button" ng-click="addSubsurface('Window')" class="btn btn-info" ng-disabled="!data.surfaces.length">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ceiling
+    <button type="button" ng-click="data.addSubsurface('Window')" class="btn btn-info" ng-disabled="!data.surfaces.length">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Window
     </button>
-    <button type="button" ng-click="addSubsurface('Door')" class="btn btn-info" ng-disabled="!data.surfaces.length">
+    <button type="button" ng-click="data.addSubsurface('Door')" class="btn btn-info" ng-disabled="!data.surfaces.length">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Door
     </button>
-    <button type="button" ng-click="addSubsurface('Skylight')" class="btn btn-info" ng-disabled="!data.surfaces.length">
+    <button type="button" ng-click="data.addSubsurface('Skylight')" class="btn btn-info" ng-disabled="!data.surfaces.length">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Skylight
     </button>
     <div class="pull-right">
-      <button type="button" ng-click="duplicateSubsurface()" class="btn btn-info" ng-disabled="!selectedSubsurface">Duplicate</button>
-      <button type="button" ng-click="deleteSubsurface()" class="btn btn-danger" ng-disabled="!selectedSubsurface">Delete</button>
+      <button type="button" ng-click="data.duplicateSubsurface(selected)" class="btn btn-info" ng-disabled="!selected.subsurface">Duplicate</button>
+      <button type="button" ng-click="data.deleteSubsurface(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.subsurface">Delete</button>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Story', 'Shared', 'stories', function ($scope, $stateParams, $resource, $location, toaster, data, Story, Shared, stories) {
+  '$scope', '$stateParams', '$location', 'toaster', 'data', 'Story', 'Shared', 'stories', function ($scope, $stateParams, $location, toaster, data, Story, Shared, stories) {
     Shared.setIds($stateParams);
 
     // Stories UI Grid
@@ -72,7 +72,7 @@ cbecc.controller('BuildingCtrl', [
         // Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
         var params = Shared.defaultParams();
         params['data'] = $scope.stories;
-        data.bulkSync('building_stories', params)
+        data.bulkSync('building_stories', params);
         Shared.setBuildingId(the_id);
         $location.path(Shared.buildingPath());
 
