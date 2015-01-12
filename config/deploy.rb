@@ -29,6 +29,11 @@ set :puma_init_active_record, false # Change to true if using ActiveRecord
 
 set :nginx_template, 'config/deploy/templates/nginx_conf.erb'
 set :nginx_config_name, fetch(:application)
+# turn off sudo for nginx. later on it may be needed for some of the methods
+# https://github.com/platanus/capistrano3-nginx/blob/master/lib/capistrano/tasks/nginx.rake
+set :nginx_sudo_paths, []
+set :nginx_sudo_tasks, []
+
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
