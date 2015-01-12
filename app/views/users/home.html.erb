@@ -1,11 +1,17 @@
-<div class="row">
+<div class="row pad-bot-5">
   <div class="col-md-8">
      <div class="header-text pad-left-40">This site is designed to help you meet the <strong>Title 24 Compliance</strong> in California.  <%= link_to "Create an account", new_user_registration_path %> and follow the workflow to create a building model using simplified geometry inputs.</div>
   </div>
   <div class="col-md-4 green-border">
-    <div class="row pad-bot-5"><%= link_to "Open an Existing Project", user_path(current_user), class: "btn btn-success col-md-8 col-md-offset-2" %> </div>
-    <div class="row"><%= link_to "Start a New Project", wizard_path, class: "btn btn-success col-md-8 col-md-offset-2" %></div>
-
+    <div class="row">
+      <div class="col-md-8 col-md-offset-1">
+        <div class="pad-bot-10"><%= link_to "Open an Existing Project", user_path(current_user), class: "btn btn-success col-md-10" %><br/></div>
+        <div class=pad-top-10><%= link_to "Start a New Project", wizard_path, class: "btn btn-success col-md-10" %></div>
+      </div>
+      <div class="col">
+        <div class="col-md-2"><%= image_tag 'icon_help.png', alt: 'Help' %></div>
+      </div>
+    </div>
   </div>
 </div>
 
