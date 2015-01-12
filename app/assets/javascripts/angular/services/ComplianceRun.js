@@ -4,4 +4,12 @@ cbecc.factory('ComplianceRun', ['$resource', function($resource) {
             'run':  { method: 'POST' }
         }
     );
-}]);
+});
+
+cbecc.factory('ComplianceXml', function($resource) {
+    return $resource('/simulations/:id/xml', { project_id: '@projectId', id: '@id' },
+        {
+            'xml':  { method: 'GET' }
+        }
+    );
+});
