@@ -6,10 +6,10 @@ cbecc.factory('ComplianceRun', function($resource) {
     );
 });
 
-cbecc.factory('ComplianceXml', function($resource) {
-    return $resource('/simulations/:id/xml', { project_id: '@projectId', id: '@id' },
-        {
-            'xml':  { method: 'GET' }
-        }
-    );
-});
+//cbecc.factory('ComplianceXml', function($resource) {
+//    return $resource('/simulations/:id/xml', { project_id: '@projectId', id: '@id' },
+//        {
+//            'xml':  { method: 'GET' }
+//        }
+//    );
+//});
