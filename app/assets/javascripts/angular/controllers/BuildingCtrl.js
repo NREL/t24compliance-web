@@ -1,5 +1,7 @@
 cbecc.controller('BuildingCtrl', [
-  '$scope', '$stateParams', '$location', 'toaster', 'data', 'Story', 'Shared', 'stories', function ($scope, $stateParams, $location, toaster, data, Story, Shared, stories) {
+
+  '$scope', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', function ($scope, $stateParams, $resource, $location, toaster, data, Shared, stories) {
+
     Shared.setIds($stateParams);
 
     // Stories UI Grid

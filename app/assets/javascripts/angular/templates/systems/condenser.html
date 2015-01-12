@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="condenser_navigation">
+      <button type="button" ng-click="setActiveTab('condenser', 'pump')" ng-class="getTabClass('condenser', 'pump')">Pump</button>
+      <button type="button" ng-click="setActiveTab('condenser', 'heat_rejection')" ng-class="getTabClass('condenser', 'heat_rejection')">Cooling Tower</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <p>Select the components to edit the settings of each system.</p>
+    </div>
+    <div class="row pad-top-20">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div ng-repeat="tab in plantTabs.condenser" ng-show="isActiveTab('condenser', tab)">
+            <div ui-grid="gridPlantOptions.condenser[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

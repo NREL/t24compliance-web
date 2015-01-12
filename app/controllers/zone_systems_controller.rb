@@ -2,7 +2,7 @@ class ZoneSystemsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :building #the resource is building
   before_action :set_zone_system, only: [:show, :edit, :update, :destroy]
-  before_action :get_building, only: [:index, :update, :create]
+  before_action :get_building, only: [:index, :update, :create, :bulk_sync]
 
   respond_to :json, :html
 
@@ -27,8 +27,8 @@ class ZoneSystemsController < ApplicationController
   def create
   end
 
-  # receives hash with form {building_id: ..., data: [array of building_stories]}
-  # updates zone_systems and air_systems
+  # receives hash with form {building_id: ..., data: [array of systems]}
+  # updates zone_systems and air_systems?
   def bulk_sync
     clean_params = zone_systems_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
@@ -134,6 +134,6 @@ class ZoneSystemsController < ApplicationController
 
     #for update_all
     def zone_systems_params
-      params.permit(:building_id, data: [:id, :name, :building_id, :status, :type, :fan_control, :cooling_control, :count, :cooling_design_supply_air_temperature, :heating_design_supply_air_temperature, :exhaust_system_type, :exhaust_operation_mode, :exhaust_control_method, fan: [:id, :name, :control_method, :total_static_pressure, :flow_efficiency, :motor_hp, :motor_type, :motor_pole_count, :motor_efficiency, :motor_position], coil_cooling: [:id, :name, :type, :condenser_type], coil_heating: [:id, :name, :type, :fluid_segment_in_reference, :fluid_segment_out_reference ]])
+      params.permit(:project_id, :building_id, data: [:id, :name, :building_id, :status, :type, :fan_control, :cooling_control, :count, :cooling_design_supply_air_temperature, :heating_design_supply_air_temperature, :exhaust_system_type, :exhaust_operation_mode, :exhaust_control_method,:hvac_auto_sizing, :description, :air_distribution_type, fan: [:id, :name, :classification, :centrifugal_type, :modeling_method, :control_method, :total_static_pressure, :flow_efficiency, :motor_bhp, :motor_hp, :motor_type, :motor_pole_count, :motor_efficiency, :motor_position], coil_cooling: [:id, :name, :type, :condenser_type], coil_heating: [:id, :name, :type, :fluid_segment_in_reference, :fluid_segment_out_reference ]])
     end
 end

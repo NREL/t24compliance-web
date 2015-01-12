@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="fpfc_navigation">
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('fpfc', 'general')" ng-class="getTabClass('fpfc', 'general')">FPFC General System Settings</button>
+      <button type="button" ng-click="setActiveTab('fpfc', 'fan')" ng-class="getTabClass('fpfc', 'fan')">Fan</button>
+      <button type="button" ng-click="setActiveTab('fpfc', 'coil_cooling')" ng-class="getTabClass('fpfc', 'coil_cooling')">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('fpfc', 'coil_heating')" ng-class="getTabClass('fpfc', 'coil_heating')">Gas Heating Coil</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <p class="bold-text">Four-pipe Fan Coil: Ductless single-zone unit with hot water and chilled water coils.</p>
+      <p>Select the overall system or the components to edit the settings of each system.</p>
+      <button type="button" ng-click="addSystem('fpfc')" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> FPFC System
+      </button>
+      <div class="pull-right pad-right-20">
+        <button type="button" ng-click="duplicateSystem('fpfc')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteSystem('fpfc')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+      </div>
+    </div>
+    <div class="row pad-top-20">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div ng-repeat="tab in systemTabs.fpfc" ng-show="isActiveTab('fpfc', tab)">
+            <div ui-grid="gridOptions.fpfc[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
