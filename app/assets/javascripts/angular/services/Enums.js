@@ -238,8 +238,64 @@ cbecc.factory('Enums', function () {
     pumps_speed_control_enums: [
       'ConstantSpeed',
       'VariableSpeed'
+    ],
+    fans_classification_enums: [
+      'Centrifugal',
+      'Axial'
+    ],
+    fans_centrifugal_type_enums: [
+      'AirFoil',
+      'BackwardInclined',
+      'ForwardCurved'
+    ],
+    fans_modeling_method_enums: [
+      'StaticPressure',
+      'BrakeHorsePower',
+      'PowerPerUnitFlow'
+    ],
+    fans_motor_type_enums: [
+      'Open',
+      'Enclosed'
+    ],
+    fans_motor_position_enums: [
+      'InAirStream',
+      'NotInAirStream'
+    ],
+    fluid_systems_temperature_control_enums: [
+      'Fixed',
+      'Scheduled',
+      'OutsideAirReset',
+      'WetBulbReset',
+      'FixedDualSetpoint',
+      'ScheduledDualSetpoint'
+    ],
+    chillers_type_enums: [
+      'Centrifugal',
+      'Reciprocating',
+      'Scroll',
+      'Screw'
+    ],
+    chillers_condenser_type_enums: [
+      'Air',
+      'Fluid'
+    ],
+    heat_rejections_fan_type_enums: [
+      'Axial',
+      'Centrifugal'
+    ],
+    heat_rejections_modulation_control_enums: [
+      'Bypass',
+      'Cycling',
+      'TwoSpeed',
+      'VariableSpeedDrive'
+    ],
+    heat_rejections_type_enums: [
+      'OpenTower',
+      'ClosedTower',
+      'GroundSourceHeatExchanger',
+      'Lake',
+      'Well'
     ]
-
   };
 
 

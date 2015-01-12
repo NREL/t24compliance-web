@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :materials
     resources :construct_assemblies
-    resources :simulations do
+      resources :simulations do
       member do
         post :run
         get :run

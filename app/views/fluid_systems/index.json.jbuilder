@@ -5,8 +5,20 @@ json.array!(@fluid_systems) do |fluid_system|
   end
   json.boilers fluid_system.boilers do |boiler|
     json.(boiler, :id, :name, :type, :fuel_source, :draft_type, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :afue, :thermal_efficiency)
-      json.pump do
-        json.extract! boiler.pumps.first, :id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp
-      end
+    json.pump do
+      json.extract! boiler.pumps.first, :id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp
+    end
+  end
+  json.chillers fluid_system.chillers do |chiller|
+    json.(chiller, :id, :name, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :capacity_rated, :kw_per_ton, :iplv_kw_per_ton)
+    json.pump do
+      json.extract! chiller.pumps.first, :id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp
+    end
+  end
+  json.heat_rejections fluid_system.heat_rejections do |heat_rejection|
+    json.(heat_rejection, :id, :name, :type, :modulation_control, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :total_fan_hp, :fan_type)
+    json.pump do
+      json.extract! heat_rejection.pumps.first, :id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp
+    end
   end
 end

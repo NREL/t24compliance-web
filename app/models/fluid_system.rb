@@ -29,8 +29,8 @@ class FluidSystem
   has_many :fluid_segments, dependent: :destroy, autosave: true
   has_many :chillers, dependent: :destroy, autosave: true
   has_many :boilers, dependent: :destroy, autosave: true
-  has_many :heat_rejections, dependent: :destroy
-  has_many :water_heaters, dependent: :destroy
+  has_many :heat_rejections, dependent: :destroy, autosave: true
+  has_many :water_heaters, dependent: :destroy, autosave: true
   belongs_to :project
 
 

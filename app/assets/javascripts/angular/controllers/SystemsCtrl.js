@@ -15,6 +15,8 @@ cbecc.controller('SystemsCtrl', [
 
     $scope.plantTabs = {hot_water: [], chilled_water: [], condenser: [], shw: []};
     $scope.plantTabs.hot_water = ['pump', 'boiler', 'coil_heating'];
+    $scope.plantTabs.chilled_water = ['general', 'pump', 'chiller', 'coil_cooling'];
+    $scope.plantTabs.condenser = ['pump', 'heat_rejection'];
     //TODO: add other plant tab defs
 
     // initialize all sub-system hashes
@@ -48,6 +50,12 @@ cbecc.controller('SystemsCtrl', [
          case 'HotWater':
            $scope.plants.hot_water.push(plant);
            break;
+         case 'ChilledWater':
+           $scope.plants.chilled_water.push(plant);
+           break;
+         case 'CondenserWater':
+           $scope.plants.condenser.push(plant);
+           break;
          default:
            break;
        }
@@ -74,11 +82,12 @@ cbecc.controller('SystemsCtrl', [
       title: 'Service Hot Water',
       name: 'shw'
     }, {
-      title: 'Chilled Water Plant',
-      name: 'chilled_water'
-    }, {
       title: 'Hot Water Plant',
       name: 'hot_water'
+
+    }, {
+      title: 'Chilled Water Plant',
+      name: 'chilled_water'
     }, {
       title: 'Condenser Plant',
       name: 'condenser'
@@ -86,9 +95,9 @@ cbecc.controller('SystemsCtrl', [
 
     // coil totals for plants
     $scope.display_coils_heating = calculateCoilsHeating();
+    $scope.display_coils_cooling = calculateCoilsCooling();
 
-    gridPlantCols = {};
-    gridPlantCols.hot_water = {};
+    gridPlantCols = {hot_water: {}, chilled_water: {}, condenser: {}, shw: {}};
     gridPlantCols.hot_water.boiler = [{
       name: 'boiler_name',
       displayName: 'Name',
@@ -162,14 +171,186 @@ cbecc.controller('SystemsCtrl', [
       name: 'system_type',
       displayName: 'System Type'
     }];
+    gridPlantCols.chilled_water.general = [{
+      name: 'name',
+      displayName: 'Name'
+    },{
+      name: 'temperature_control',
+      display_Name: 'Temperature Control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fluid_systems_temperature_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    },{
+      name: 'reset_supply_hi',
+      display_Name: 'Reset Supply High'
+    },{
+      name: 'reset_supply_low',
+      display_Name: 'Reset Supply Low'
+    },{
+      name: 'reset_outdoor_high',
+      display_Name: 'Reset Outdoor High'
+    },{
+      name: 'reset_outdoor_low',
+      display_Name: 'Reset Outdoor Low'
+    }];
+    gridPlantCols.chilled_water.chiller = [{
+      name: 'chiller_name',
+      displayName: 'Name',
+      field: 'chillers[0].name'
+    },{
+      name: 'chiller_type',
+      displayName: 'Type',
+      field: 'chillers[0].type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.chillers_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    },{
+      name: 'chiller_condenser_type',
+      displayName: 'Condenser Type',
+      field: 'chillers[0].condenser_type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.chillers_condenser_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    },{
+      name: 'capacity_rated',
+      displayName: 'Capacity Rated',
+      field: 'chillers[0].capacity_rated'
+    },{
+      name: 'kw_per_ton',
+      displayName: 'kW per ton',
+      field: 'chillers[0].kw_per_ton'
+    },{
+      name: 'iplv_kw_per_ton',
+      displayName: 'IPLV per ton',
+      field: 'chillers[0].iplv_kw_per_ton'
+    }];
+    gridPlantCols.chilled_water.pump = [{
+      name: "pump_name",
+      displayName: 'Pump Name',
+      field: 'chillers[0].pump.name'
+    },{
+      name: 'pump_operation_control',
+      displayName: 'Operation',
+      field: 'chillers[0].pump.operation_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: 'pump_speed_control',
+      displayName: 'Speed Control',
+      field: 'chillers[0].pump.speed_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: 'pump_flow_capacity',
+      displayName: 'Design Flow Rate',
+      field: 'chillers[0].pump.flow_capacity'
+    }, {
+      name: 'pump_total_head',
+      displayName: 'Pump Head (ft2 H2O)',
+      field: 'chillers[0].pump.total_head'
+    }, {
+      name: 'pump_motor_efficiency',
+      displayName: 'Motor Efficiency',
+      field: 'chillers[0].pump.motor_efficiency'
+    }, {
+      name: 'pump_impeller_efficiency',
+      displayName: 'Impeller Efficiency',
+      field: 'chillers[0].pump.impeller_efficiency'
+    }, {
+      name: 'pump_motor_hp',
+      displayName: 'Motor HP',
+      field: 'chillers[0].pump.motor_HP'
+    }];
+    gridPlantCols.chilled_water.coil_cooling = angular.copy(gridPlantCols.hot_water.coil_heating);
+
+    gridPlantCols.condenser.heat_rejection = [{
+      name: "heat_rejection_name",
+      displayName: 'Name',
+      field: 'heat_rejections[0].name'
+    }, {
+      name: "heat_rejection_type",
+      displayName: 'Type',
+      field: 'heat_rejections[0].type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.heat_rejections_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: "heat_rejection_modulation_control",
+      displayName: 'Modulation Control',
+      field: 'heat_rejections[0].modulation_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.heat_rejections_modulation_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: "heat_rejection_capacity_rated",
+      displayName: 'Capacity Rated',
+      field: 'heat_rejections[0].capacity_rated'
+    }, {
+      name: "heat_rejection_total_fan_hp",
+      displayName: 'Total Fan HP',
+      field: 'heat_rejections[0].total_fan_hp'
+    }, {
+      name: "heat_rejection_fan_type",
+      displayName: 'Fan Type',
+      field: 'heat_rejections[0].fan_type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.heat_rejections_fan_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }];
+    gridPlantCols.condenser.pump = [{
+      name: "pump_name",
+      displayName: 'Pump Name',
+      field: 'heat_rejections[0].pump.name'
+    },{
+      name: 'pump_operation_control',
+      displayName: 'Operation',
+      field: 'heat_rejections[0].pump.operation_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: 'pump_speed_control',
+      displayName: 'Speed Control',
+      field: 'heat_rejections[0].pump.speed_control',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: 'pump_flow_capacity',
+      displayName: 'Design Flow Rate',
+      field: 'heat_rejections[0].pump.flow_capacity'
+    }, {
+      name: 'pump_total_head',
+      displayName: 'Pump Head (ft2 H2O)',
+      field: 'heat_rejections[0].pump.total_head'
+    }, {
+      name: 'pump_motor_efficiency',
+      displayName: 'Motor Efficiency',
+      field: 'heat_rejections[0].pump.motor_efficiency'
+    }, {
+      name: 'pump_impeller_efficiency',
+      displayName: 'Impeller Efficiency',
+      field: 'heat_rejections[0].pump.impeller_efficiency'
+    }, {
+      name: 'pump_motor_hp',
+      displayName: 'Motor HP',
+      field: 'heat_rejections[0].pump.motor_HP'
+    }];
 
     //TODO: get systems by type
-    gridCols = {
-      ptac: {},
-      fpfc: {},
-      vav: {},
-      pvav: {}
-    };
+    gridCols = { ptac: {}, fpfc: {}, vav: {}, pvav: {} };
 
     gridCols.ptac.general = [{
       name: 'name',
@@ -183,6 +364,30 @@ cbecc.controller('SystemsCtrl', [
       displayName: 'Fan Name',
       field: 'fan.name'
     }, {
+      name: 'fan_classification',
+      displayName: 'Classification',
+      field: 'fan.classification',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: 'fan_centrifugal_type',
+      displayName: 'Centrifugal Type',
+      field: 'fan.centrifugal_type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
+      name: 'fan_modeling_method',
+      displayName: 'Modeling Method',
+      field: 'fan.modeling_method',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
+    }, {
       name: 'fan_flow_efficiency',
       displayName: 'Flow Efficiency',
       field: 'fan.flow_efficiency'
@@ -191,9 +396,17 @@ cbecc.controller('SystemsCtrl', [
       displayName: 'Total Static Pressure',
       field: 'fan.total_static_pressure'
     }, {
+      name: 'fan_motor_bhp',
+      displayName: 'Motor BHP',
+      field: 'fan.motor_bhp'
+    }, {
       name: 'fan_motor_position',
       displayName: 'Motor Position',
-      field: 'fan.motor_position'
+      field: 'fan.motor_position',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
     }, {
       name: 'fan_motor_hp',
       displayName: 'Motor HP',
@@ -201,7 +414,11 @@ cbecc.controller('SystemsCtrl', [
     }, {
       name: 'fan_motor_type',
       displayName: 'Motor Type',
-      field: 'fan.motor_type'
+      field: 'fan.motor_type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
+      editDropdownIdLabel: 'value',
+      editDropdownValueLabel: 'value'
     }, {
       name: 'fan_motor_pole_count',
       displayName: 'Motor Pole Count',
@@ -232,20 +449,14 @@ cbecc.controller('SystemsCtrl', [
       displayName: 'System Name'
     }];
     gridCols.fpfc.general = angular.copy(gridCols.ptac.general);
-    gridCols.fpfc.fan = angular.copy(gridCols.ptac.fan);
     gridCols.fpfc.coil_heating = angular.copy(gridCols.ptac.coil_heating);
-    gridCols.fpfc.coil_cooling = angular.copy(gridCols.fpfc.coil_cooling);
+    gridCols.fpfc.coil_cooling = angular.copy(gridCols.ptac.coil_cooling);
+    gridCols.fpfc.fan = angular.copy(gridCols.ptac.fan);
 
-    // TODO: add other systems
-    $scope.gridOptions = {
-      ptac: {},
-      fpfc: {},
-      vav: {},
-      pvav: {}
-    };
-
+    //**** CREATE GRIDS ****
+    // System Grids
+    $scope.gridOptions = {ptac: {}, fpfc: {}, vav: {}, pvav: {}};
     for (var system in $scope.systemTabs) {
-      console.log("HI!! IN SYSTEM: ", system);
       if ((system === 'ptac') || (system === 'fpfc')) {
         $scope.systemTabs[system].forEach(function (tab) {
           $scope.gridOptions[system][tab] = {
@@ -273,52 +484,53 @@ cbecc.controller('SystemsCtrl', [
       }
     }
 
-    //Plant Grids
-    $scope.gridPlantOptions = {
-      hot_water: {},
-      chilled_water: {},
-      shw: {},
-      condenser: {}
-    };
-    $scope.plantTabs.hot_water.forEach(function (tab) {
-      //console.log("TAB: ", tab);
-      editVal = '';
-       if (tab === 'coil_heating') {
-         editVal = false;
-       }
-      else {
-         editVal = true;
-       }
-       $scope.gridPlantOptions.hot_water[tab] = {
-         columnDefs: gridPlantCols.hot_water[tab],
-         enableCellEditOnFocus: editVal,
-         enableColumnMenus: false,
-         enableRowHeaderSelection: editVal,
-         enableRowSelection: editVal,
-         enableSorting: true,
-         multiSelect: false,
-         onRegisterApi: function (gridApi) {
-           $scope.gridApi = gridApi;
-           gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-             if (row.isSelected) {
-               $scope.selected = row.entity;
-             } else {
-               // No rows selected
-               $scope.selected = null;
-             }
-           });
-         }
-       };
-      if (tab === 'coil_heating') {
-        $scope.gridPlantOptions.hot_water.coil_heating.data = $scope.display_coils_heating;
-        //console.log('gridPlantOptions for hot_water.coil_heating: ');
-        //console.log($scope.gridPlantOptions.hot_water.coil_heating);
-      }
-      else {
-        $scope.gridPlantOptions.hot_water[tab].data = $scope.plants.hot_water;
-      }
+    // Plant Grids
+    $scope.gridPlantOptions = {hot_water: {}, chilled_water: {}, shw: {}, condenser: {}};
+    for (var plant in $scope.plantTabs) {
+      if ((plant === 'hot_water') || (plant === 'chilled_water') || (plant === 'condenser')) {
+        $scope.plantTabs[plant].forEach(function (tab) {
+          editVal = '';
+          if ((tab === 'coil_heating') || (tab === 'coil_cooling')) {
+            editVal = false;
+          }
+          else {
+            editVal = true;
+          }
+          $scope.gridPlantOptions[plant][tab] = {
+            columnDefs: gridPlantCols[plant][tab],
+            enableCellEditOnFocus: editVal,
+            enableColumnMenus: false,
+            enableRowHeaderSelection: editVal,
+            enableRowSelection: editVal,
+            enableSorting: true,
+            multiSelect: false,
+            onRegisterApi: function (gridApi) {
+              $scope.gridApi = gridApi;
+              gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                if (row.isSelected) {
+                  $scope.selected = row.entity;
+                } else {
+                  // No rows selected
+                  $scope.selected = null;
+                }
+              });
+            }
+          };
+          if (tab === 'coil_heating') {
+            $scope.gridPlantOptions[plant].coil_heating.data = $scope.display_coils_heating;
+            //console.log('gridPlantOptions for hot_water.coil_heating: ');
+            //console.log($scope.gridPlantOptions.hot_water.coil_heating);
+          }
+          else if (tab === 'coil_cooling') {
+           $scope.gridPlantOptions[plant].coil_cooling.data = $scope.display_coils_cooling;
+          }
 
-    });
+          else {
+            $scope.gridPlantOptions[plant][tab].data = $scope.plants[plant];
+          }
+        });
+      }
+    }
 
     //**** VIEW HELPERS: TABS & CLASSES ****
     $scope.tabClasses = {};
@@ -341,6 +553,7 @@ cbecc.controller('SystemsCtrl', [
             coil_cooling: 'default',
             coil_heating: 'default'
           };
+          break;
         case 'hot_water':
           $scope.tabClasses.hot_water = {
             pump: 'default',
@@ -348,12 +561,30 @@ cbecc.controller('SystemsCtrl', [
             coil_heating: 'default'
           };
           break;
+        case 'chilled_water':
+          $scope.tabClasses.chilled_water = {
+            general: 'default',
+            pump:'default',
+            chiller: 'default',
+            coil_cooling: 'default'
+          };
+          break;
+        case 'condenser':
+          $scope.tabClasses.condenser = {
+            pump: 'default',
+            heat_rejection: 'default'
+          };
+          break;
+        default:
+          break;
       }
     }
-    //TODO: this doesn't work right...class gets overwritten
+
+    // TODO: this doesn't work
     $scope.getGridClass = function (panelName, tabName) {
       return $scope.gridClasses[panelName][tabName] || "";
     };
+    //TODO: end
 
     $scope.getTabClass = function (panelName, tabName) {
       return "btn btn-" + $scope.tabClasses[panelName][tabName];
@@ -402,7 +633,8 @@ cbecc.controller('SystemsCtrl', [
     $scope.setActiveTab('ptac', 'general');
     $scope.setActiveTab('fpfc', 'general');
     $scope.setActiveTab('hot_water', 'pump');
-
+    $scope.setActiveTab('chilled_water', 'general');
+    $scope.setActiveTab('condenser', 'pump');
 
     //**** ADD ****
     // add functions
@@ -463,7 +695,7 @@ cbecc.controller('SystemsCtrl', [
       coils = [];
       if ($scope.plants.hot_water.length > 0) {
         for (var type in $scope.systems) {
-          console.log("TYPE IS: ", type);
+          //console.log("TYPE IS: ", type);
           found = 0;
           for (i=0; i < $scope.systemTabs[type].length; i++) {
             if ($scope.systemTabs[type][i] === 'coil_heating') {
@@ -484,6 +716,31 @@ cbecc.controller('SystemsCtrl', [
       return coils;
     }
 
+    function calculateCoilsCooling() {
+      coils = [];
+      if ($scope.plants.chilled_water.length > 0) {
+        for (var type in $scope.systems) {
+          //console.log("TYPE IS: ", type);
+          found = 0;
+          for (i=0; i < $scope.systemTabs[type].length; i++) {
+            if ($scope.systemTabs[type][i] === 'coil_cooling') {
+              found = 1;
+            }
+          }
+          if (found == 1) {
+            $scope.systems[type].forEach( function (item) {
+              coils.push( {
+                name: item.coil_cooling.name,
+                system_name: item.name,
+                system_type: item.type
+              });
+            });
+          }
+        }
+      }
+      return coils;
+    }
+
     function addDependentPlants(name) {
       console.log('adding dependent plants for: ', name);
       switch (name) {
@@ -492,9 +749,10 @@ cbecc.controller('SystemsCtrl', [
           addPlant('hot_water');
           break;
         case 'fpfc':
-          //hot and chilled water
+          //hot and chilled water (and condenser?)
           addPlant('hot_water');
           addPlant('chilled_water');
+          addPlant('condenser');
           break;
         default:
           break;
@@ -530,7 +788,65 @@ cbecc.controller('SystemsCtrl', [
                  name: "Base HW Pump"
                }
              }]
-           })
+           });
+          }
+          break;
+        case 'chilled_water':
+          if ($scope.plants.chilled_water.length == 0) {
+            console.log('adding chilled_water plant');
+            $scope.plants.chilled_water.push({
+              name: "BaseChWSystem",
+              type: "ChilledWater",
+              temperature_control: "OutsideAirReset",
+              fluid_segments: [
+                {
+                  name:"BaseChWPrimSupSeg",
+                  type:"PrimarySupply"
+                },
+                {
+                  name:"BaseChWPrimRetSeg",
+                  type:"PrimaryReturn"
+                }
+              ],
+              chillers:[ {
+                name: "Base Chlr",
+                type: "Centrifugal",
+                fuel_source: "Electric",
+                condenser_type: "Air",
+                evaporator_fluid_segment_in_reference: "BaseChWPrimRetSeg",
+                evaporator_fluid_segment_out_reference: "BaseChWPrimSupSeg",
+                pump: {
+                  name: "Base ChW Pump"
+                }
+              }]
+            });
+          }
+          break;
+        case 'condenser':
+          if ($scope.plants.condenser.length == 0) {
+            console.log('adding condenser');
+            $scope.plants.condenser.push({
+              name: "BaseCWSystem",
+              type: "CondenserWater",
+              fluid_segments: [
+                {
+                  name:"BaseCWPrimSupSeg",
+                  type:"PrimarySupply"
+                },
+                {
+                  name:"BaseCWPrimRetSeg",
+                  type:"PrimaryReturn"
+                }
+              ],
+              heat_rejections:[{
+                name: "Base Tower",
+                fluid_segment_in_reference: "BaseCWPrimRetSeg",
+                fluid_segment_out_reference: "BaseCWPrimSupSeg",
+                pump: {
+                  name: "Base CW Pump"
+                }
+              }]
+            });
           }
           break;
         default:
@@ -580,13 +896,14 @@ cbecc.controller('SystemsCtrl', [
         }
         var params = Shared.defaultParams();
         params['data'] = plants;
-        console.log('PLANTS!!!!');
+        console.log('SAVING PLANTS!');
         console.log(plants);
         data.bulkSync('fluid_systems', params).then(success).catch(failure);
 
         function success(response) {
           toaster.pop('success', 'Systems successfully saved');
           console.log("redirecting to " + Shared.systemsPath());
+          $location.path(Shared.systemsPath());
 
         }
 
@@ -630,6 +947,7 @@ cbecc.controller('SystemsCtrl', [
       }
 
       // first save systems
+      console.log("SAVING SYSTEMS!");
       var params = Shared.defaultParams();
       params['data'] = systems;
       data.bulkSync('zone_systems', params).then(success).catch(failure);
@@ -691,12 +1009,12 @@ cbecc.controller('ModalSystemCreatorCtrl', [
 
     $scope.systemDescriptions = {
       ptac: 'Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.',
-      fpfc: '',
+      fpfc: 'Four-pipe fan coil: Ductless single-zone unit with hot water and chilled water coils.',
       vav: 'Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units. The plants required for this system are created with the system.',
       vav_crah: '',
       vav_crac: '',
       vav_psz: '',
-      pvav: '',
+      pvav: 'Packaged variable volume system: VAV reheat system with packaged VAV DX unit with bass heating and hot water reheat terminal units.',
       pvav_crah: '',
       pvav_crac: '',
       pvav_psz: ''

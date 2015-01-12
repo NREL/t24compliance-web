@@ -18,10 +18,11 @@ class ZoneSystem
   field :air_distribution_type, type: String
 
   belongs_to :building
-  has_many :coil_coolings, dependent: :destroy
-  has_many :coil_heatings, dependent: :destroy
-  has_many :fans, dependent: :destroy
+  has_many :coil_coolings, dependent: :destroy, autosave: true
+  has_many :coil_heatings, dependent: :destroy, autosave: true
+  has_many :fans, dependent: :destroy, autosave: true
 
+  # TODO: not sure we need this
   accepts_nested_attributes_for :fans
   accepts_nested_attributes_for :coil_coolings
   accepts_nested_attributes_for :coil_heatings
