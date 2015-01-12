@@ -81,7 +81,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
   // Buttons
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
-    $scope.clearAll();
+    $scope.data.clearAll($scope.gridApi);
     $scope.gasGridOptions.multiSelect = true;
   };
 
@@ -104,15 +104,8 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
   $scope.resetApplySettings = function () {
     $scope.selectedSpace = null;
     $scope.applySettingsActive = false;
-    $scope.clearAll();
+    $scope.data.clearAll($scope.gridApi);
     $scope.gasGridOptions.multiSelect = false;
-  };
-
-  $scope.selectAll = function () {
-    $scope.gridApi.selection.selectAllRows();
-  };
-  $scope.clearAll = function () {
-    $scope.gridApi.selection.clearSelectedRows();
   };
 
 }]);

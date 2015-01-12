@@ -82,6 +82,13 @@ cbecc.controller('SpacesCtrl', [
     });
 
     // Buttons
+    $scope.data.selectAll = function (gridApi) {
+      gridApi.selection.selectAllRows();
+    };
+    $scope.data.clearAll = function (gridApi) {
+      gridApi.selection.clearSelectedRows();
+    };
+
     $scope.data.addSpace = function (input) {
       var space = {
         name: "Space " + ($scope.data.spaces.length + 1),
