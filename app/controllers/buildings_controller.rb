@@ -44,6 +44,7 @@ class BuildingsController < ApplicationController
   end
 
   private
+
     def set_building
       @building = Building.find(params[:id])
     end

@@ -322,6 +322,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   api.add('fenestrations');
   api.add('construction_defaults');
   api.add('zone_systems');
+  api.add('simulations');
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
     Shared.startSpinner();

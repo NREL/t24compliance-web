@@ -33,7 +33,7 @@ class BuildingStoriesController < ApplicationController
 
   # receives hash with form {building_id: ..., data: [array of building_stories]}
   def bulk_sync
-    logger.info("in builk sync")
+    logger.info("in bulk sync")
     clean_params = building_stories_params
     logger.info("CLEAN in bulk PARAMS: #{clean_params.inspect}")
 

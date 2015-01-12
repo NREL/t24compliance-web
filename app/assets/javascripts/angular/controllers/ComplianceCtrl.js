@@ -1,8 +1,15 @@
+
+
 cbecc.controller('ComplianceCtrl', [
-  '$scope', 'Shared', 'Compliance', 'ComplianceRun', function ($scope, Shared, Compliance, ComplianceRun) {
-    $scope.runSimulation = function () {
+  '$scope', 'data', 'Shared', function ($scope, data, Shared) {
+    $scope.getXml = function () {
       console.log("submitting simulation to run queue");
-      $scope.run = ComplianceRun.run({projectId: Shared.getProjectId(), id: "549097466e6c6f4c2ac61900"});
+
+      var params = Shared.defaultParams();
+      params.data = { action: 'xml' };
+
+      console.log(params);
+      data.bulkSync('simulations', params);
     };
   }
 ]);
