@@ -25,10 +25,20 @@ $error-text: #FF0000;
   color: $error-text;    
 }
 
+.logo-img {
+  margin: -110px 0 -20px 10px; /* play with these to position the image */
+  position:absolute;
+  z-index:100;
+  width:100px;
+}
+
 .navbar {
 
-  background: #f9f9f9;
-  padding:10px;
+  background: #70be44;
+  color:#fff;
+  min-height:30px;
+  padding:0px;
+  margin-bottom: 60px;
 
   .navbar-inner {
     padding: 0;
@@ -37,11 +47,11 @@ $error-text: #FF0000;
   .nav > li {
     padding-left:30px;
     padding-right:30px;
-    font-size:120%;
+    font-size:100%;
   }
   .nav > li.active > a{
-    color: #000;
-    background: #e7e7e7;
+    color: #fff;
+    background: #70be44;
     &:hover {
       color:#fff
     }
@@ -49,13 +59,27 @@ $error-text: #FF0000;
   }
 
   .nav > li > a {
-    color: $button-grey;
-    background: #f9f9f9; /* Old browsers */
+    color: white;
+    background: #70be44; /* Old browsers */
     &:hover {
-      color: black;
+      color: lightgray;
+    }
+  }
+
+  .navbar-link {
+    color: white;
+    background: #70be44; /* Old browsers */
+    &:hover {
+      color: lightgray;
     }
   }
 }
+
+.nav-tabs > li > a{
+  color: white;
+  font-size:100%;
+}
+
 
 .typeahead.dropdown-menu {
   z-index: 200000;
@@ -175,42 +199,6 @@ input[type='text'], select.form-control, .nav-pills > li > a {
 
 .red {
   color: red;
-}
-
-.navbar {
-
-  background: #f9f9f9;
-
-  .navbar-inner {
-    padding: 0;
-
-  }
-  .nav > li {
-    padding-left:30px;
-    padding-right:30px;
-    font-size:120%;
-  }
-  .nav > li.active > a{
-    color: #000;
-    background: #e7e7e7;
-    &:hover {
-      color:#fff
-    }
-
-  }
-
-  .nav > li > a {
-    color: $button-grey;
-    background: #f9f9f9; /* Old browsers */
-    &:hover {
-      color: black;
-    }
-  }
-}
-
-.nav-tabs > li > a{
-  color: #0079c2;
-  font-size:110%;
 }
 
 .table-pad {
@@ -466,12 +454,25 @@ h2.header-large {
   padding:20px;
 }
 
+.pad-bot-5 {
+  padding-bottom: 5px;
+}
+
+.header-text {
+  color: darkslategray;
+  font-size: 130%;
+}
+
+.green-border {
+  border-left: 3px solid #70be44;
+}
 
 #flash_messages {
   color: green;
-  padding:20px;
+  padding:5px;
   margin-top:10px;
-  border: 3px solid green;
+  margin-bottom:10px;
+  border: 3px solid #70be44;
 }
 
 .edit-name {
@@ -487,4 +488,20 @@ h2.header-large {
   font-weight: normal;
 }
 
+.full-width {
+  width: 100%;
+}
 
+.footer {
+  background-color:lightgrey;
+  padding: 40px 0px 40px 0px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.pad-sides-sm {
+  padding-left:20px;
+  padding-right:20px;
+}

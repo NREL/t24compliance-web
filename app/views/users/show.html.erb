@@ -3,6 +3,8 @@
 <%= link_to "[ edit account ]", edit_user_registration_path(@user), class: "edit-link" %>
 <% if current_user.has_role? :admin %><%= link_to "[ edit roles ]", edit_user_path(@user), class: "edit-link" %><% end %></h3>
 
+<% if current_user.has_role? :admin %><%= link_to 'Admin Tasks', admin_path, class: 'btn btn-success' %></li><% end %>
+
 <h2>Projects</h2>
 
 <%= link_to 'New Project Wizard', wizard_path, class: 'btn btn-primary' %>

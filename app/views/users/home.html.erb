@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-8">
+     <div class="header-text pad-left-40">This site is designed to help you meet the <strong>Title 24 Compliance</strong> in California.  <%= link_to "Create an account", new_user_registration_path %> and follow the workflow to create a building model using simplified geometry inputs.</div>
+  </div>
+  <div class="col-md-4 green-border">
+    <div class="row pad-bot-5"><%= link_to "Open an Existing Project", user_path(current_user), class: "btn btn-success col-md-8 col-md-offset-2" %> </div>
+    <div class="row"><%= link_to "Start a New Project", wizard_path, class: "btn btn-success col-md-8 col-md-offset-2" %></div>
+
+  </div>
+</div>
+
+<div class="row pad-top-20 pad-sides-sm">
+  <%= image_tag 'home_02.png', alt: 'Description of workflow for Title 24 Compliance', class: 'full-width' %>
+
+</div>
+
+<div class="row pad-sides-sm">
+
+  <p class="footer centered">This application is powered by <%= link_to "OpenStudio", 'http://www.openstudio.net' %>, EnergyPlus, and CBECC-Com.</p>
+</div>

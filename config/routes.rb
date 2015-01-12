@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
-  root :to => "inputs#dashboard"
+  root :to => "users#home"
+
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
   resources :users
   get '/admin' => 'users#admin'
+  get '/home'  =>  'users#home'
 
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
