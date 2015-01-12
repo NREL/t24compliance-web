@@ -318,48 +318,49 @@ cbecc.config([
 
 
 cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $q, toaster, Shared, api, data) {
-  api.add('spaces');
-  api.add('buildings');
-  api.add('building_stories');
-  api.add('constructions');
-  api.add('fenestrations');
-  api.add('construction_defaults');
-  api.add('zone_systems');
-  api.add('fluid_systems');
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
-    Shared.startSpinner();
-  });
-  $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-    Shared.stopSpinner();
-  });
-  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-    Shared.stopSpinner();
-    if (error == 'No project ID' || error == 'Invalid project ID') {
-      toaster.pop('error', error, "Please create or open a project.");
-      $state.go('project');
-    } else if (error == 'No building ID' || error == 'Invalid building ID') {
-      toaster.pop('error', error, 'Please create a building.');
-      $state.go('lookupbuilding.building', {
-        project_id: Shared.getProjectId()
-      });
-    } else {
-      console.error('Unhandled state change error:', error);
-      $state.go('project');
-    }
-  });
-  $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
-    console.error('State not found:', unfoundState.to);
-  });
+    api.add('spaces');
+    api.add('buildings');
+    api.add('building_stories');
+    api.add('constructions');
+    api.add('fenestrations');
+    api.add('construction_defaults');
+    api.add('zone_systems');
+    api.add('fluid_systems');
+    api.add('simulations');
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
+        Shared.startSpinner();
+    });
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        Shared.stopSpinner();
+    });
+    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+        Shared.stopSpinner();
+        if (error == 'No project ID' || error == 'Invalid project ID') {
+            toaster.pop('error', error, "Please create or open a project.");
+            $state.go('project');
+        } else if (error == 'No building ID' || error == 'Invalid building ID') {
+            toaster.pop('error', error, 'Please create a building.');
+            $state.go('lookupbuilding.building', {
+                project_id: Shared.getProjectId()
+            });
+        } else {
+            console.error('Unhandled state change error:', error);
+            $state.go('project');
+        }
+    });
+    $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+        console.error('State not found:', unfoundState.to);
+    });
 
-  // Initialize cache with static data
-  data.list('constructions').then(function (response) {
-    Shared.saveToCache('exterior_walls', response);
-  });
-  data.list('fenestrations').then(function (response) {
-    Shared.saveToCache('fenestration', response);
-  });
-}]);
+    // Initialize cache with static data
+    data.list('constructions').then(function (response) {
+        Shared.saveToCache('exterior_walls', response);
+    });
+    data.list('fenestrations').then(function (response) {
+        Shared.saveToCache('fenestration', response);
+    });
+}]);,
 
 
 cbecc.filter('mapEnums', ['Enums', function (Enums) {

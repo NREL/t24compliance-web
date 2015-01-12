@@ -25,12 +25,6 @@ Rails.application.routes.draw do
   resources :projects do
     resources :materials
     resources :construct_assemblies
-      resources :simulations do
-      member do
-        post :run
-        get :xml
-      end
-    end
   end
 
   # libraries
@@ -44,6 +38,7 @@ Rails.application.routes.draw do
   resources :building_stories do  
     post 'bulk_sync', on: :collection    
   end
+
   resources :zone_systems do
     post 'bulk_sync', on: :collection
   end
@@ -51,12 +46,11 @@ Rails.application.routes.draw do
     post 'bulk_sync', on: :collection
   end
 
-
-
+  resources :simulations, only: [:show, :index] do
+    post 'bulk_sync', on: :collection
+  end
 
   # non-revised below
-
-
 
   resources :windows
 
@@ -153,11 +147,4 @@ Rails.application.routes.draw do
   resources :cartesian_points
 
   resources :poly_loops
-
-
-
-
-
-
-
 end

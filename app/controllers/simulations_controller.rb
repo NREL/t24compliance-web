@@ -1,34 +1,34 @@
 class SimulationsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource param_method: :simulation_params
-  before_action :set_simulation, only: [:show, :edit, :update, :destroy, :run]
+  load_and_authorize_resource #param_method: :simulation_params
+  before_action :set_simulation, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:bulk_sync]
 
   respond_to :json, :html
 
   # GET /simulations
   # GET /simulations.json
   def index
-    @simulations = params[:keywords] ? Simulation.where(filename: /#{params[:keywords]}/) : Simulation.all
-
+    @simulations = Simulation.all
   end
-  
 
-# GET /simulations/1
-# GET /simulations/1.json
+  # GET /simulations/1
+  # GET /simulations/1.json
   def show
+    respond_with @simulation
   end
 
-# GET /simulations/new
+  # GET /simulations/new
   def new
     @simulation = Simulation.new
   end
 
-# GET /simulations/1/edit
+  # GET /simulations/1/edit
   def edit
   end
 
-# POST /simulations
-# POST /simulations.json
+  # POST /simulations
+  # POST /simulations.json
   def create
     @simulation = Simulation.new(simulation_params)
 
@@ -43,8 +43,8 @@ class SimulationsController < ApplicationController
     end
   end
 
-# PATCH/PUT /simulations/1
-# PATCH/PUT /simulations/1.json
+  # PATCH/PUT /simulations/1
+  # PATCH/PUT /simulations/1.json
   def update
     respond_to do |format|
       if @simulation.update(simulation_params)
@@ -57,8 +57,8 @@ class SimulationsController < ApplicationController
     end
   end
 
-# DELETE /simulations/1
-# DELETE /simulations/1.json
+  # DELETE /simulations/1
+  # DELETE /simulations/1.json
   def destroy
     @simulation.destroy
     respond_to do |format|
@@ -67,30 +67,51 @@ class SimulationsController < ApplicationController
     end
   end
 
-  def run
-    @simulation.run
+  def bulk_sync
+    clean_params = simulation_params
+    logger.info "CLEAN PARAMS: #{clean_params.inspect}"
 
-    respond_with(@simulation)
-  end
+    p = Project.where(clean_params[:project_id]).first
+    if p
+      p.simulation.run
 
-  def xml
-    a = Tempfile.new(['sdd', '.xml'])
-    @xml_file_path = a.path
+      respond_with p.simulation
+    else
+      fail "Could not find project to run"
+    end
 
-    @simulation.project.xml_save(a.path)
+    case clean_params[:data][:action]
+      when 'xml'
+        # a = Tempfile.new(['sdd', '.xml'])
+        # @xml_file_path = a.path
+        #
+        # @simulation.project.xml_save(a.path)
+        #
+        # respond_with(@simulation)
+      when 'run'
 
-    respond_with(@simulation)
+      when 'check'
+
+      else
+        logger.warn "unknown action '#{clean_params[:data][:action]} on SimulationController.bulk_sync'"
+    end
   end
 
   private
-# Use callbacks to share common setup or constraints between actions.
+
+  # Use callbacks to share common setup or constraints between actions.
   def set_simulation
     @simulation = Simulation.find(params[:id])
   end
 
-# Never trust parameters from the scary internet, only allow the white list through.
-  def simulation_params
-    params.require(:simulation).permit(:filename)
+  def set_project
+    @project = Project.find(params[:project_id])
   end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def simulation_params
+    logger.info "validating parameters"
+    # params.require(:simulation).permit(:filename)
+    params.permit(:building_id, :project_id, :id, data: [:action])
+  end
 end
