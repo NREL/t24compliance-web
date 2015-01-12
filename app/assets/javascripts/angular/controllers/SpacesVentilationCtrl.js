@@ -1,5 +1,7 @@
 cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums', function ($scope, uiGridConstants, Shared, Enums) {
-  $scope.selectedSpace = null;
+  $scope.selected = {
+    space: null
+  };
 
   $scope.applySettingsActive = false;
 
@@ -92,10 +94,10 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (!$scope.applySettingsActive) {
           if (row.isSelected) {
-            $scope.selectedSpace = row.entity;
+            $scope.selected.space = row.entity;
           } else {
             // No rows selected
-            $scope.selectedSpace = null;
+            $scope.selected.space = null;
           }
         }
       });
@@ -114,9 +116,9 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
 
   $scope.confirmApplySettings = function () {
     var replacement = {
-      exhaust_per_area: $scope.selectedSpace.exhaust_per_area,
-      exhaust_air_changes_per_hour: $scope.selectedSpace.exhaust_air_changes_per_hour,
-      exhaust_per_space: $scope.selectedSpace.exhaust_per_space
+      exhaust_per_area: $scope.selected.space.exhaust_per_area,
+      exhaust_air_changes_per_hour: $scope.selected.space.exhaust_air_changes_per_hour,
+      exhaust_per_space: $scope.selected.space.exhaust_per_space
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {
@@ -128,7 +130,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   };
 
   $scope.resetApplySettings = function () {
-    $scope.selectedSpace = null;
+    $scope.selected.space = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
     $scope.ventilationGridOptions.multiSelect = false;

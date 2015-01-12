@@ -1,6 +1,15 @@
-cbecc.controller('SpacesSettingsCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
+cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums', function ($scope, uiGridConstants, Shared, Enums) {
   $scope.selected = {
     space: null
+  };
+
+  $scope.applySettingsActive = false;
+
+  $scope.editableCondition = function ($scope) {
+    while (!$scope.hasOwnProperty('applySettingsActive')) {
+      $scope = $scope.$parent;
+    }
+    return !$scope.applySettingsActive;
   };
 
   // Settings UI Grid
@@ -109,4 +118,52 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'Shared', 'Enums', function ($
       });
     }
   };
+
+  // Buttons
+  $scope.applySettings = function () {
+    $scope.applySettingsActive = true;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.settingsGridOptions.multiSelect = true;
+  };
+
+  $scope.confirmApplySettings = function () {
+    var replacement = {
+      space_function: $scope.selected.space.space_function,
+      occupant_density: $scope.selected.space.occupant_density,
+      occupant_density_default: $scope.selected.space.occupant_density_default,
+      hot_water_heating_rate: $scope.selected.space.hot_water_heating_rate,
+      hot_water_heating_rate_default: $scope.selected.space.hot_water_heating_rate_default,
+      receptacle_power_density: $scope.selected.space.receptacle_power_density,
+      receptacle_power_density_default: $scope.selected.space.receptacle_power_density_default
+    };
+    var rows = $scope.gridApi.selection.getSelectedRows();
+    _.each(rows, function (row) {
+      _.merge(row, replacement);
+      // Update unmodified exhaust values
+      if (row.exhaust_per_area == row.exhaust_per_area_default) {
+        row.exhaust_per_area = $scope.selected.space.exhaust_per_area_default;
+      }
+      if (row.exhaust_air_changes_per_hour == row.exhaust_air_changes_per_hour_default) {
+        row.exhaust_air_changes_per_hour =  $scope.selected.space.exhaust_air_changes_per_hour_default;
+      }
+      if (row.exhaust_per_space == row.exhaust_per_space_default) {
+        row.exhaust_per_space = $scope.selected.space.exhaust_per_space_default;
+      }
+      // Update exhaust defaults
+      row.exhaust_per_area_default = $scope.selected.space.exhaust_per_area_default;
+      row.exhaust_air_changes_per_hour_default = $scope.selected.space.exhaust_air_changes_per_hour_default;
+      row.exhaust_per_space_default = $scope.selected.space.exhaust_per_space_default;
+      $scope.data.updateTotalExhaust(row);
+    });
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.resetApplySettings();
+  };
+
+  $scope.resetApplySettings = function () {
+    $scope.selected.space = null;
+    $scope.applySettingsActive = false;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.settingsGridOptions.multiSelect = false;
+  };
+
 }]);
