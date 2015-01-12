@@ -8,6 +8,7 @@ set :rbenv_custom_path, '/opt/rbenv'
 #set :rbenv_type, :system
 set :user, ask('User name:', 'typically your NREL username')
 set :rbenv_ruby, 'jruby-1.7.15'
+set :branch, :develop
 set :tmp_dir, "/home/#{fetch(:user)}/tmp"
 set :rails_env, "staging"
 set :nginx_server_name, 'rordev-web.development.nrel.gov'

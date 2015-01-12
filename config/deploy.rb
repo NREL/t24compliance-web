@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.2.1'
+lock '3.3.5'
 
 # Change these
 set :repo_url, 'git@github.com:NREL/cbecc-com-web.git'
@@ -64,9 +64,8 @@ namespace :deploy do
   task :check_revision do
     on roles(:app) do
       unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
-        puts "Run `git push` to sync changes."
-        exit
+        puts "WARNING: HEAD is not the same as origin/master. Will deploy code on Github"
+        puts "WARNING: Run `git push` to sync changes."
       end
     end
   end
