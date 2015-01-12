@@ -115,12 +115,12 @@
 }
 
 // Grid Styling
-.layersGrid {
+.layers-grid {
   width: 668px;
   height: 220px;
 }
 
-.fenGrid {
+.fen-grid {
   width: 100%;
   height: 80px;
 }
@@ -133,12 +133,12 @@
   height: 63px;
 }
 
-.plantGrid {
+.plant-grid {
   height: 80px;
   width: 100%;
 }
 
-.plantLargeGrid {
+.plant-large-grid {
   width: 100%;
   height: 220px;
 }
@@ -173,6 +173,7 @@
 
 .red-cell {
   color: #ac3933;
+  font-weight: bold;
 }
 
 .border-left-cell {

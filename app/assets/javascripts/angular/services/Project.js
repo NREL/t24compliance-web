@@ -1,4 +1,4 @@
-cbecc.factory('Project', ['$resource','Shared',function($resource,Shared) {
+cbecc.factory('Project', ['$resource',function($resource) {
   return $resource('/projects/:id.json', { id: '@id' },
     {
       'create':  { method: 'POST' },

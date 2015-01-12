@@ -1,5 +1,5 @@
 cbecc.controller('ComplianceCtrl', [
-  '$scope', '$routeParams', '$resource', '$location', 'Shared', 'Compliance', 'ComplianceRun', function ($scope, $routeParams, $resource, $location, Shared, Compliance, ComplianceRun) {
+  '$scope', 'Shared', 'Compliance', 'ComplianceRun', function ($scope, Shared, Compliance, ComplianceRun) {
     $scope.runSimulation = function () {
       console.log("submitting simulation to run queue");
       $scope.run = ComplianceRun.run({projectId: Shared.getProjectId(), id: "549097466e6c6f4c2ac61900"});

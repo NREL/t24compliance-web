@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root :to => "inputs#dashboard"
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
   resources :users
@@ -24,7 +26,7 @@ Rails.application.routes.draw do
       resources :simulations do
       member do
         post :run
-        get :run
+        get :xml
       end
     end
   end
@@ -150,8 +152,6 @@ Rails.application.routes.draw do
 
   resources :poly_loops
 
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
 
 
 

@@ -1,5 +1,20 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$routeParams', '$resource', '$location', 'Shared', function ($scope, $routeParams, $resource, $location, Shared) {
+  '$scope', '$location', 'Shared', 'stories', function ($scope, $location, Shared, stories) {
+
+    $scope.data = {
+      stories: stories,
+      zones: []
+    };
+
+    $scope.data.storiesArr = [];
+    $scope.data.storiesHash = {};
+    _.each($scope.data.stories, function (story) {
+      $scope.data.storiesArr.push({
+        id: story.id,
+        value: story.name
+      });
+      $scope.data.storiesHash[story.id] = story.name;
+    });
 
     $scope.tabs = [{
       heading: 'Create Zones',
@@ -32,5 +47,39 @@ cbecc.controller('ZonesCtrl', [
       updateActiveTab();
     });
 
-  }
-]);
+
+    // Buttons
+    $scope.data.addZone = function () {
+      var zone = {
+        name: "Zone " + ($scope.data.zones.length + 1),
+        story: $scope.data.stories[0].id,
+        type: 0
+      };
+
+      $scope.data.zones.push(zone);
+    };
+    $scope.data.deleteZone = function (selected, gridApi) {
+      var index = $scope.data.zones.indexOf(selected.zone);
+      $scope.data.zones.splice(index, 1);
+      if (index > 0) {
+        gridApi.selection.toggleRowSelection($scope.data.zones[index - 1]);
+      } else {
+        selected.zone = null;
+      }
+    };
+
+    // save
+    $scope.submit = function () {
+      console.log("submit");
+
+      function success(response) {
+        toaster.pop('success', 'Spaces successfully saved');
+      }
+
+      function failure(response) {
+        console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving', response.statusText);
+      }
+    };
+
+  }]);

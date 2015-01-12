@@ -1,4 +1,4 @@
-cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function ($scope, $sce, uiGridConstants) {
+cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
   $scope.selectedSpace = null;
 
   $scope.applySettingsActive = false;
@@ -17,44 +17,44 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function
       displayName: 'Space Name',
       enableCellEdit: false,
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_equipment',
-      secondLine: $sce.trustAsHtml('Btu / (hr ft<sup>2</sup>)'),
+      secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'process_gas',
-      secondLine: $sce.trustAsHtml('Btu / (hr ft<sup>2</sup>)'),
+      secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_radiant_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_latent_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.spaces,
@@ -81,7 +81,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function
   // Buttons
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
-    $scope.clearAll();
+    $scope.data.clearAll($scope.gridApi);
     $scope.gasGridOptions.multiSelect = true;
   };
 
@@ -97,21 +97,15 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', function
     _.each(rows, function (row) {
       _.merge(row, replacement);
     });
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
   };
 
   $scope.resetApplySettings = function () {
     $scope.selectedSpace = null;
     $scope.applySettingsActive = false;
-    $scope.clearAll();
+    $scope.data.clearAll($scope.gridApi);
     $scope.gasGridOptions.multiSelect = false;
-  };
-
-  $scope.selectAll = function () {
-    $scope.gridApi.selection.selectAllRows();
-  };
-  $scope.clearAll = function () {
-    $scope.gridApi.selection.clearSelectedRows();
   };
 
 }]);

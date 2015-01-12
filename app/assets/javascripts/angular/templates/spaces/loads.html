@@ -1,7 +1,7 @@
 <div class="row pad-top-20 pad-bot-20">
   <div class="col-md-12">
-    <button type="button" ng-show="applySettingsActive" ng-click="selectAll()" class="btn btn-info">Select All</button>
-    <button type="button" ng-show="applySettingsActive" ng-click="clearAll()" class="btn btn-info">Clear All</button>
+    <button type="button" ng-show="applySettingsActive" ng-click="data.selectAll(gridApi)" class="btn btn-info">Select All</button>
+    <button type="button" ng-show="applySettingsActive" ng-click="data.clearAll(gridApi)" class="btn btn-info">Clear All</button>
     <div class="pull-right">
       <button type="button" ng-hide="applySettingsActive" ng-click="applySettings()" class="btn btn-info" ng-disabled="!selectedSpace">Apply Settings</button>
       <div class="btn-group" dropdown ng-show="applySettingsActive">

@@ -295,6 +295,11 @@ cbecc.factory('Enums', function () {
       'GroundSourceHeatExchanger',
       'Lake',
       'Well'
+    ],
+    zones_type_enums: [
+      'Conditioned',
+      'Plenum',
+      'Unconditioned'
     ]
   };
 

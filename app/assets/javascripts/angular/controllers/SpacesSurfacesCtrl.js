@@ -1,5 +1,7 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
-  $scope.selectedSurface = null;
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
+  $scope.selected = {
+    surface: null
+  };
 
   $scope.dropdowns = [
     'Interior',
@@ -19,6 +21,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     $scope.spacesHash[index] = space.name;
   });
 
+  // TODO make this global?
   // Update stories if they were modified on the Spaces subtab
   _.each($scope.data.surfaces, function (surface, index) {
     if (surface.story != $scope.data.spaces[surface.space].story) {
@@ -32,7 +35,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       name: 'name',
       displayName: 'Surface Name',
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',
@@ -41,46 +44,36 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.spacesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'surface_type',
       enableCellEdit: false,
       enableHiding: false,
-      filter: angular.copy($scope.data.textFilter),
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'story',
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
       enableHiding: false,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          var haystack = $scope.data.storiesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
-      secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
+      secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
       type: 'number',
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'azimuth',
-      secondLine: $sce.trustAsHtml('&deg;'),
+      secondLine: Shared.html('&deg;'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Roof' || (row.entity.type == 'Wall' && row.entity.boundary == 'Exterior'))) {
           return 'disabled-cell';
         }
@@ -88,7 +81,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Exterior'));
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'construction',
@@ -97,7 +90,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     }, {
       name: 'adjacent_space',
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Ceiling' || row.entity.boundary == 'Interior')) {
           return 'disabled-cell';
         }
@@ -111,21 +104,15 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
-      filter: {
-        condition: function (searchTerm, cellValue) {
-          if (cellValue === null) return false;
-          var haystack = $scope.spacesHash[cellValue];
-          return _.contains(haystack.toLowerCase(), searchTerm.toLowerCase());
-        }
-      },
+      filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/customHeaderCell',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'tilt',
-      secondLine: $sce.trustAsHtml('&deg;'),
+      secondLine: Shared.html('&deg;'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type != 'Roof') {
           return 'disabled-cell';
         }
@@ -133,14 +120,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return $scope.row.entity.type == 'Roof';
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'wall_height',
-      secondLine: $sce.trustAsHtml('ft'),
+      secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Wall' && row.entity.boundary == 'Underground')) {
           return 'disabled-cell';
         }
@@ -148,14 +135,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'exposed_perimeter',
-      secondLine: $sce.trustAsHtml('ft'),
+      secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!(row.entity.type == 'Floor' && row.entity.boundary == 'Underground')) {
           return 'disabled-cell';
         }
@@ -163,7 +150,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
       },
-      filters: angular.copy($scope.data.numberFilter),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }],
     data: $scope.data.surfaces,
@@ -173,13 +160,13 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
-      $scope.data.gridApi = gridApi;
+      $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
-          $scope.selectedSurface = row.entity;
+          $scope.selected.surface = row.entity;
         } else {
           // No rows selected
-          $scope.selectedSurface = null;
+          $scope.selected.surface = null;
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {

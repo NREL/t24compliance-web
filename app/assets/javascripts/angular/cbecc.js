@@ -157,6 +157,8 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
+          /*constData: getConstructions,
+          fenData: getFenestrations,*/
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -244,6 +246,11 @@ cbecc.config([
         url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/zones',
         controller: 'ZonesCtrl',
         templateUrl: 'zones/zones.html',
+        resolve: {
+          stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('building_stories', Shared.defaultParams());
+          }]
+        },
         parent: 'requirebuilding',
         children: [{
           // No controller here because the file is ng-included

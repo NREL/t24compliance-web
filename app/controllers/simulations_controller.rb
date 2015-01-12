@@ -73,6 +73,15 @@ class SimulationsController < ApplicationController
     respond_with(@simulation)
   end
 
+  def xml
+    a = Tempfile.new(['sdd', '.xml'])
+    @xml_file_path = a.path
+
+    @simulation.project.xml_save(a.path)
+
+    respond_with(@simulation)
+  end
+
   private
 # Use callbacks to share common setup or constraints between actions.
   def set_simulation

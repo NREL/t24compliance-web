@@ -20,7 +20,7 @@
         <button type="button" class="btn btn-info" ng-click="openLibraryModal($index)">Select a Construction</button>
       </div>
       <div ng-show="panels[$index].selected">
-        <div ui-grid="panels[$index].gridOptions" class="layersGrid" ui-grid-resize-columns></div>
+        <div ui-grid="panels[$index].gridOptions" class="layers-grid" ui-grid-resize-columns></div>
         <br>
         <button type="button" class="btn btn-info" ng-click="openLibraryModal($index, panels[$index].selected)">Change Construction</button>
         <button type="button" class="btn btn-danger" ng-show="panels[$index].selected" ng-click="removeConstruction($index)">Remove Construction</button>
@@ -35,7 +35,7 @@
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index)">Select a Fenestration</button>
       </div>
       <div ng-show="fenPanels[$index].selected">
-        <div ui-grid="fenPanels[$index].fenGridOptions" class="fenGrid" ui-grid-resize-columns></div>
+        <div ui-grid="fenPanels[$index].fenGridOptions" class="fen-grid" ui-grid-resize-columns></div>
         <br>
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index, fenPanels[$index].selected)">Change Fenestration</button>
         <button type="button" class="btn btn-danger" ng-show="fenPanels[$index].selected" ng-click="removeFenestration($index)">Remove Fenestration</button>

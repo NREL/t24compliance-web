@@ -1,4 +1,5 @@
 cbecc.controller('SystemsCtrl', [
+
   '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, Enums, saved_systems, saved_plants) {
 
     // put all systems DATA in array for panels
@@ -534,7 +535,7 @@ cbecc.controller('SystemsCtrl', [
 
     //**** VIEW HELPERS: TABS & CLASSES ****
     $scope.tabClasses = {};
-    $scope.gridClasses = {hot_water: {pump: 'plantGrid', boiler: 'plantGrid', coil_heating: 'plantLargeGrid'}, chilled_water: {}, shw: {}, condenser: {}};
+    $scope.gridClasses = {hot_water: {pump: 'plant-grid', boiler: 'plant-grid', coil_heating: 'plant-large-grid'}, chilled_water: {}, shw: {}, condenser: {}};
     // TODO: add all systems /plants
     function initTabs(name) {
       switch (name) {
@@ -883,6 +884,7 @@ cbecc.controller('SystemsCtrl', [
       console.log($scope.systems);
 
       function success(response) {
+<<<<<<< HEAD
        // toaster.pop('success', 'Systems successfully saved');
        // console.log("redirecting to " + Shared.systemsPath());
 
@@ -921,6 +923,9 @@ cbecc.controller('SystemsCtrl', [
             $scope.errors[field] = errors.join(', ');
           });
         }
+=======
+        toaster.pop('success', 'Systems successfully saved');
+>>>>>>> 371c89beaad9543eac4de8cfbe026eb86266bed1
       }
 
       function failure(response) {
