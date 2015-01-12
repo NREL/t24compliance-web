@@ -75,14 +75,14 @@ cbecc.config([
           }]
         }
       })
-      .state({
-        name: 'introduction',
-        url: '/',
-        templateUrl: 'introduction/introduction.html'
-      })
+     // .state({
+     //   name: 'introduction',
+     //   url: '/',
+     //   templateUrl: 'introduction/introduction.html'
+    //  })
       .state({
         name: 'project',
-        url: '/projects',
+        url: '/',
         controller: 'ProjectCtrl',
         templateUrl: 'project/project.html'
       })
@@ -360,7 +360,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
     data.list('fenestrations').then(function (response) {
         Shared.saveToCache('fenestration', response);
     });
-}]);,
+}]);
 
 
 cbecc.filter('mapEnums', ['Enums', function (Enums) {

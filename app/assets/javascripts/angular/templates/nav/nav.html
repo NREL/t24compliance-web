@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse" ng-controller="NavCtrl">
   <ul class="nav nav-pills">
-    <li class="app-nav-item" ng-class="{ active: isActive('/$')}"><a href="#/">Introduction</a></li>
-    <li class="app-nav-item" ng-class="{ active: isActive('/projects(/[0-9a-f]{24})?$')}"><a href="#{{projectPath()}}">Project</a></li>
+    <!--<li class="app-nav-item" ng-class="{ active: isActive('/$')}"><a href="#/">Introduction</a></li>-->
+    <li class="app-nav-item" ng-class="{ active: isActive('/(projects(/[0-9a-f]{24}))?$')}"><a href="#{{projectPath()}}">Project</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings(/[0-9a-f]{24})?$')}"><a href="#{{buildingPath()}}">Building</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/constructions')}"><a href="#{{constructionsPath()}}">Constructions</a></li>
     <li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/spaces')}"><a href="#{{spacesPath()}}">Spaces</a></li>
