@@ -1,4 +1,4 @@
-cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums', function ($scope, $sce, $modal, Shared, Enums) {
+cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'Shared', 'Enums', function ($scope, $modal, Shared, Enums) {
   $scope.selected = {
     space: null
   };
@@ -13,7 +13,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'floor_to_ceiling_height',
-      secondLine: $sce.trustAsHtml('ft'),
+      secondLine: Shared.html('ft'),
       enableHiding: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
@@ -28,7 +28,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
-      secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
+      secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
@@ -131,7 +131,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$sce', '$modal', 'Shared', 'Enums
 }]);
 
 cbecc.controller('ModalSpaceCreatorCtrl', [
-  '$scope', '$sce', '$modalInstance', 'uiGridConstants', 'Enums', 'params', function ($scope, $sce, $modalInstance, uiGridConstants, Enums, params) {
+  '$scope', '$modalInstance', 'uiGridConstants', 'Shared', 'Enums', 'params', function ($scope, $modalInstance, uiGridConstants, Shared, Enums, params) {
     $scope.spaceGroups = [];
 
     $scope.data = params.data;
@@ -151,7 +151,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums
       }, {
         name: 'floor_to_ceiling_height',
-        secondLine: $sce.trustAsHtml('ft'),
+        secondLine: Shared.html('ft'),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'story',
@@ -161,7 +161,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       }, {
         name: 'area',
         displayName: 'Area',
-        secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
+        secondLine: Shared.html('ft<sup>2</sup>'),
         headerCellTemplate: 'ui-grid/customHeaderCell',
         width: 98
       }, {

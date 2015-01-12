@@ -1,4 +1,4 @@
-cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared', function ($scope, $sce, uiGridConstants, Shared) {
+cbecc.controller('SpacesGasCtrl', ['$scope', 'Shared', function ($scope, Shared) {
   $scope.selectedSpace = null;
 
   $scope.applySettingsActive = false;
@@ -21,7 +21,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared'
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'gas_equipment',
-      secondLine: $sce.trustAsHtml('Btu / (hr ft<sup>2</sup>)'),
+      secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
@@ -29,7 +29,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared'
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'process_gas',
-      secondLine: $sce.trustAsHtml('Btu / (hr ft<sup>2</sup>)'),
+      secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',

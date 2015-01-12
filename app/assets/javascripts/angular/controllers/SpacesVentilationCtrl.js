@@ -1,3 +1,3 @@
-cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', function ($scope, uiGridConstants) {
+cbecc.controller('SpacesVentilationCtrl', ['$scope', function ($scope) {
 
 }]);

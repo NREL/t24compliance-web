@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$routeParams', '$resource', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $routeParams, $resource, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
+  '$scope', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
@@ -196,7 +196,7 @@ cbecc.controller('ConstructionsCtrl', [
 ]);
 
 cbecc.controller('ModalConstructionsLibraryCtrl', [
-  '$scope', '$sce', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $sce, $modalInstance, $interval, uiGridConstants, Shared, params) {
+  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
     $scope.title = params.title;
     $scope.layerData = [];
@@ -228,13 +228,13 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
         maxWidth: 159
       }, {
         name: 'cavity_insulation_r_value',
-        secondLine: $sce.trustAsHtml('ft<sup>2</sup> &deg;F hr / Btu'),
+        secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
         filters: Shared.numberFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'continuous_insulation_r_value',
-        secondLine: $sce.trustAsHtml('ft<sup>2</sup> &deg;F hr / Btu'),
+        secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
         filters: Shared.numberFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'
@@ -290,7 +290,7 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
 ]);
 
 cbecc.controller('ModalFenestrationLibraryCtrl', [
-  '$scope', '$sce', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $sce, $modalInstance, $interval, uiGridConstants, Shared, params) {
+  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
     $scope.title = params.title;
     $scope.selected = null;
@@ -315,19 +315,19 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
         maxWidth: 218
       }, {
         name: 'u_factor',
-        secondLine: $sce.trustAsHtml('Btu / (ft<sup>2</sup> &deg;F hr)'),
+        secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
         enableHiding: false,
         filters: Shared.numberFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'solar_heat_gain_coefficient',
-        secondLine: $sce.trustAsHtml('frac.'),
+        secondLine: Shared.html('frac.'),
         enableHiding: false,
         filters: Shared.numberFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
         name: 'visible_transmittance',
-        secondLine: $sce.trustAsHtml('frac.'),
+        secondLine: Shared.html('frac.'),
         enableHiding: false,
         filters: Shared.numberFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'

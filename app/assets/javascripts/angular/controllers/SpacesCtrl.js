@@ -1,5 +1,5 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', '$routeParams', '$resource', '$stateParams', 'uiGridConstants', 'Shared', 'stories', 'spaces', 'constructions', function ($scope, $location, $routeParams, $resource, $stateParams, uiGridConstants, Shared, stories, spaces, constructions) {
+  '$scope', '$location', 'uiGridConstants', 'Shared', 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, Shared, stories, spaces, constructions) {
     $scope.data = {
       stories: stories,
       spaces: spaces,

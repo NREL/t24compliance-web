@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
+cbecc.controller('SpacesSettingsCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
   $scope.selected = {
     space: null
   };
@@ -23,7 +23,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     }, {
       name: 'occupant_density',
       displayName: 'Occupancy',
-      secondLine: $sce.trustAsHtml('people / 1,000 ft<sup>2</sup>'),
+      secondLine: Shared.html('people / 1,000 ft<sup>2</sup>'),
       enableHiding: false,
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.occupant_density != row.entity.occupant_density_default) {
@@ -35,7 +35,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     }, {
       name: 'hot_water_heating_rate',
       displayName: 'Hot Water Use',
-      secondLine: $sce.trustAsHtml('gal / (hr person)'),
+      secondLine: Shared.html('gal / (hr person)'),
       enableHiding: false,
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.hot_water_heating_rate != row.entity.hot_water_heating_rate_default) {
@@ -47,7 +47,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
     }, {
       name: 'receptacle_power_density',
       displayName: 'Plug Loads',
-      secondLine: $sce.trustAsHtml('W / ft<sup>2</sup>'),
+      secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.receptacle_power_density != row.entity.receptacle_power_density_default) {

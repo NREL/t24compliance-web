@@ -1,4 +1,4 @@
-cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared', function ($scope, $sce, uiGridConstants, Shared) {
+cbecc.controller('SpacesLoadsCtrl', ['$scope', 'Shared', function ($scope, Shared) {
   $scope.selectedSpace = null;
 
   $scope.applySettingsActive = false;
@@ -21,7 +21,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', 'Share
       filter: Shared.textFilter()
     }, {
       name: 'process_electric',
-      secondLine: $sce.trustAsHtml('W / ft<sup>2</sup>'),
+      secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
@@ -29,7 +29,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', 'Share
       filters: Shared.numberFilter()
     }, {
       name: 'refrigeration',
-      secondLine: $sce.trustAsHtml('W / ft<sup>2</sup>'),
+      secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',
@@ -37,7 +37,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', '$sce', 'uiGridConstants', 'Share
       filters: Shared.numberFilter()
     }, {
       name: 'elevator_count',
-      secondLine: $sce.trustAsHtml('ElevMechan / Space'),
+      secondLine: Shared.html('ElevMechan / Space'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell',

@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', function ($scope, $sce, Shared, Enums) {
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
   $scope.selected = {
     surface: null
   };
@@ -63,14 +63,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
-      secondLine: $sce.trustAsHtml('ft<sup>2</sup>'),
+      secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'azimuth',
-      secondLine: $sce.trustAsHtml('&deg;'),
+      secondLine: Shared.html('&deg;'),
       enableHiding: false,
       type: 'number',
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
@@ -109,7 +109,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'tilt',
-      secondLine: $sce.trustAsHtml('&deg;'),
+      secondLine: Shared.html('&deg;'),
       enableHiding: false,
       type: 'number',
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
@@ -124,7 +124,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'wall_height',
-      secondLine: $sce.trustAsHtml('ft'),
+      secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
@@ -139,7 +139,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', '$sce', 'Shared', 'Enums', fun
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'exposed_perimeter',
-      secondLine: $sce.trustAsHtml('ft'),
+      secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {

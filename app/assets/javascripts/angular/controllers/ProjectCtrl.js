@@ -1,5 +1,5 @@
 cbecc.controller('ProjectCtrl', [
-  '$scope', '$rootScope', '$stateParams', '$resource', '$location', 'toaster', 'Project', 'Shared', 'Enums', function ($scope, $rootScope, $stateParams, $resource, $location, toaster, Project, Shared, Enums) {
+  '$scope', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', function ($scope, $stateParams, $location, toaster, Project, Shared, Enums) {
     // pull in global enum definitions
     $scope.project_compliance_type_enums = Enums.enums.project_compliance_type_enums;
 

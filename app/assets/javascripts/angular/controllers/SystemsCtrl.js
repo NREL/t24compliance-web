@@ -1,5 +1,5 @@
 cbecc.controller('SystemsCtrl', [
-  '$scope', '$window', '$stateParams', '$resource', '$location', '$modal', 'toaster', 'data', 'Shared', 'saved_systems', function ($scope, $window, $stateParams, $resource, $location, $modal, toaster, data, Shared, saved_systems) {
+  '$scope', '$modal', 'toaster', 'data', 'Shared', 'saved_systems', function ($scope, $modal, toaster, data, Shared, saved_systems) {
 
     // put all systems DATA in array for panels
     $scope.systems = {ptac: [], fpfc: [], vav: [], pvav: [], mau: [], exhaust: []};
@@ -535,9 +535,6 @@ cbecc.controller('SystemsCtrl', [
 
       function success(response) {
         toaster.pop('success', 'Systems successfully saved');
-        console.log("redirecting to " + Shared.systemsPath());
-        $location.path(Shared.systemsPath());
-
       }
 
       function failure(response) {

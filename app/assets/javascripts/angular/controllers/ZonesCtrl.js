@@ -1,5 +1,5 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$routeParams', '$resource', '$location', 'Shared', 'stories', function ($scope, $routeParams, $resource, $location, Shared, stories) {
+  '$scope', '$location', 'Shared', 'stories', function ($scope, $location, Shared, stories) {
 
     $scope.data = {
       stories: stories,

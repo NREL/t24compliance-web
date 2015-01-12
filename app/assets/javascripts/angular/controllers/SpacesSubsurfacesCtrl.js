@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', 'Shared', function ($scope, $sce, uiGridConstants, Shared) {
+cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope, Shared) {
   $scope.selectedSubsurface = null;
 
   $scope.spacesArr = [];
@@ -79,7 +79,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', '$sce', 'uiGridConstants', 
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'area',
-      secondLine: $sce.trustAsHtml('ft'),
+      secondLine: Shared.html('ft'),
       enableHiding: false,
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
