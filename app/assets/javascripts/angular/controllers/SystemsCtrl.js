@@ -312,7 +312,7 @@ cbecc.controller('SystemsCtrl', [
 
     //**** VIEW HELPERS: TABS & CLASSES ****
     $scope.tabClasses = {};
-    $scope.gridClasses = {hot_water: {pump: 'plantGrid', boiler: 'plantGrid', coil_heating: 'plantLargeGrid'}, chilled_water: {}, shw: {}, condenser: {}};
+    $scope.gridClasses = {hot_water: {pump: 'plant-grid', boiler: 'plant-grid', coil_heating: 'plant-large-grid'}, chilled_water: {}, shw: {}, condenser: {}};
     // TODO: add all systems /plants
     function initTabs(name) {
       switch (name) {
