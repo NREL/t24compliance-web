@@ -205,10 +205,26 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', 'usSpinnerServ
 
   service.numberFilter = function () {
     return [{
-      condition: uiGridConstants.filter.GREATER_THAN_OR_EQUAL,
+      condition: function (searchTerm, cellValue) {
+        var term = searchTerm.replace(/[^\d.-]/g, '');
+        if (term.length) {
+          term = Number(term);
+          if (isNaN(term)) term = 0;
+          return cellValue >= term;
+        }
+        return true;
+      },
       placeholder: 'At least'
     }, {
-      condition: uiGridConstants.filter.LESS_THAN_OR_EQUAL,
+      condition: function (searchTerm, cellValue) {
+        var term = searchTerm.replace(/[^\d.-]/g, '');
+        if (term.length) {
+          term = Number(term);
+          if (isNaN(term)) term = 0;
+          return cellValue <= term;
+        }
+        return true;
+      },
       placeholder: 'No more than'
     }];
   };
