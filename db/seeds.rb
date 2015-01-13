@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 SKIP_CONSTRUCTIONS = false
+SKIP_SPACES = true
 
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
@@ -50,7 +51,9 @@ unless SKIP_CONSTRUCTIONS
       fens.save!
     end
   end
+end
 
+unless SKIP_SPACES
 # SPACE TYPE DEFAULTS
   file = File.read(File.join(Rails.root, "lib/assets/space_function_library.json"))
   data = JSON.parse(file)
