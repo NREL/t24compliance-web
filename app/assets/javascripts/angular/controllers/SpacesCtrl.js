@@ -1,5 +1,5 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants', 'Shared', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, Shared, data, /*constData, fenData,*/ stories, spaces, constructions) {
+  '$scope', '$location', 'uiGridConstants','toaster', 'Shared', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, data, /*constData, fenData,*/ stories, spaces, constructions) {
     $scope.data = {
       /*constData: constData,
        fenData: fenData,*/
@@ -375,7 +375,10 @@ cbecc.controller('SpacesCtrl', [
         surface.subsurfaces = [];
         spaces[surface.space].surfaces.push(surface);
       });
+      console.log('spaces SURFACES');
+      console.log(spaces);
       _.each(subsurfaces, function (subsurface) {
+
         spaces[surfaces[subsurface.surface].space].surfaces[subsurface.surface].subsurfaces.push(subsurface);
       });
       console.log(spaces);

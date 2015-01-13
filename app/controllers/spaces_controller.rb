@@ -39,8 +39,9 @@ class SpacesController < ApplicationController
     # add / update
     if clean_params.has_key?('data')
       # process spaces grouped by story
-      clean_params['data'].group_by(&:building_story_id).each do |story, spaces|
+      clean_params['data'].group_by{|d| d['building_story_id']}.each do |story, spaces|
         logger.info("PROCESSING STORY: #{story}")
+        logger.info("")
         spaces = []
         spaces.each do |space|
           logger.info("REC: #{space.inspect}")
