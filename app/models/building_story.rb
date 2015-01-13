@@ -9,7 +9,7 @@ class BuildingStory
   field :floor_to_ceiling_height, type: Float
 
   belongs_to :building
-  has_many :spaces, dependent: :destroy
+  has_many :spaces, dependent: :destroy, autosave: true
 
 
   def self.children_models

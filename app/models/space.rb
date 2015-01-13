@@ -134,17 +134,21 @@ class Space
   field :high_rise_residential_conditioned_floor_area, type: Float
 
   belongs_to :building_story
-  has_many :interior_lighting_systems, dependent: :destroy
-  has_many :ceilings, dependent: :destroy
-  has_many :exterior_floors, dependent: :destroy
-  has_many :exterior_walls, dependent: :destroy
-  has_many :interior_floors, dependent: :destroy
-  has_many :interior_walls, dependent: :destroy
-  has_many :roofs, dependent: :destroy
-  has_many :underground_floors, dependent: :destroy
-  has_many :underground_walls, dependent: :destroy
+  has_many :interior_lighting_systems, dependent: :destroy, autosave: true
+  has_many :ceilings, dependent: :destroy, autosave: true
+  has_many :exterior_floors, dependent: :destroy, autosave: true
+  has_many :exterior_walls, dependent: :destroy, autosave: true
+  has_many :interior_floors, dependent: :destroy, autosave: true
+  has_many :interior_walls, dependent: :destroy, autosave: true
+  has_many :roofs, dependent: :destroy, autosave: true
+  has_many :underground_floors, dependent: :destroy, autosave: true
+  has_many :underground_walls, dependent: :destroy, autosave: true
   has_many :external_shading_objects, dependent: :destroy
   has_many :poly_loops, dependent: :destroy
+
+  # Validations
+  validates_presence_of :name
+  validates_uniqueness_of :name
 
 
   def self.children_models

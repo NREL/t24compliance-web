@@ -1,5 +1,5 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants', 'Shared', /*'constData', 'fenData',*/ 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, Shared, /*constData, fenData,*/ stories, spaces, constructions) {
+  '$scope', '$location', 'uiGridConstants', 'Shared', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, Shared, data, /*constData, fenData,*/ stories, spaces, constructions) {
     $scope.data = {
       /*constData: constData,
        fenData: fenData,*/
@@ -339,6 +339,10 @@ cbecc.controller('SpacesCtrl', [
         spaces[surfaces[subsurface.surface].space].surfaces[subsurface.surface].subsurfaces.push(subsurface);
       });
       console.log(spaces);
+      var params = Shared.defaultParams();
+      params['data'] = spaces;
+      data.bulkSync('spaces', params).then(success).catch(failure);
+
 
       function success(response) {
         toaster.pop('success', 'Spaces successfully saved');

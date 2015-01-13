@@ -23,7 +23,7 @@ class Roof
   field :roof_aged_thermal_emittance, type: Float
 
   belongs_to :space
-  has_many :skylights, dependent: :destroy
+  has_many :skylights, dependent: :destroy, autosave: true
   has_many :poly_loops, dependent: :destroy
 
 

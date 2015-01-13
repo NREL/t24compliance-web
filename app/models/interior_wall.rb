@@ -9,7 +9,7 @@ class InteriorWall
   field :area, type: Float
 
   belongs_to :space
-  has_many :doors, dependent: :destroy
+  has_many :doors, dependent: :destroy, autosave: true
   has_many :poly_loops, dependent: :destroy
 
 

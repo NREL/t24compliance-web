@@ -46,6 +46,10 @@ Rails.application.routes.draw do
     post 'bulk_sync', on: :collection
   end
 
+  resources :spaces do
+    post 'bulk_sync', on: :collection
+  end
+
   resources :simulations, only: [:show, :index] do
     post 'bulk_sync', on: :collection
   end
@@ -99,8 +103,6 @@ Rails.application.routes.draw do
   resources :space_function_defaults
 
   resources :schedules
-
-  resources :spaces
 
   resources :pumps
 
