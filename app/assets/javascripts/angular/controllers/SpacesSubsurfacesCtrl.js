@@ -25,8 +25,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope,
 
   // TODO Update stories if they were modified on the Spaces subtab
   _.each($scope.data.surfaces, function (surface, index) {
-    if (surface.story != $scope.data.spaces[surface.space].story) {
-      surface.story = $scope.data.spaces[surface.space].story;
+    if (surface.building_story_id != $scope.data.spaces[surface.space].building_story_id) {
+      surface.building_story_id = $scope.data.spaces[surface.space].building_story_id;
     }
   });
 
@@ -66,7 +66,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
-      name: 'story',
+      name: 'building_story_id',
+      displayName: 'Story',
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
       enableHiding: false,

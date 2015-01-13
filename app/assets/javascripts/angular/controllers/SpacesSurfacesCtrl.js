@@ -24,8 +24,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
   // TODO make this global?
   // Update stories if they were modified on the Spaces subtab
   _.each($scope.data.surfaces, function (surface, index) {
-    if (surface.story != $scope.data.spaces[surface.space].story) {
-      surface.story = $scope.data.spaces[surface.space].story;
+    if (surface.building_story_id != $scope.data.spaces[surface.space].building_story_id) {
+      surface.building_story_id = $scope.data.spaces[surface.space].building_story_id;
     }
   });
 
@@ -54,7 +54,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
-      name: 'story',
+      name: 'building_story_id',
+      displayName: 'Story',
       enableCellEdit: false,
       cellFilter: 'mapStories:this',
       enableHiding: false,
@@ -171,7 +172,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (colDef.name == 'space' && newValue != oldValue) {
-          rowEntity.story = $scope.data.spaces[newValue].story;
+          rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
 
           var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
           if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {

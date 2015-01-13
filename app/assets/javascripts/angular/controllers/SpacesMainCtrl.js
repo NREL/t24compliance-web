@@ -29,7 +29,8 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
-      name: 'story',
+      name: 'building_story_id',
+      displayName: 'Story',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -110,7 +111,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
   $scope.confirmApplySettings = function () {
     var replacement = {
       floor_to_ceiling_height: $scope.selected.space.floor_to_ceiling_height,
-      story: $scope.selected.space.story,
+      building_story_id: $scope.selected.space.building_story_id,
       area: $scope.selected.space.area,
       conditioning_type: $scope.selected.space.conditioning_type,
       envelope_status: $scope.selected.space.envelope_status,
@@ -157,7 +158,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
             name: config.name + ' ' + (i + 1),
             space_function: config.space_function,
             floor_to_ceiling_height: config.floor_to_ceiling_height,
-            story: config.story,
+            building_story_id: config.building_story_id,
             area: config.area,
             conditioning_type: config.conditioning_type,
             envelope_status: config.envelope_status,
@@ -206,7 +207,8 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         secondLine: Shared.html('ft'),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
-        name: 'story',
+        name: 'building_story_id',
+        displayName: 'Story',
         editableCellTemplate: 'ui-grid/dropdownEditor',
         cellFilter: 'mapStories:this',
         editDropdownOptionsArray: $scope.data.storiesArr
@@ -237,7 +239,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         name: 'Small Office',
         space_function: 0,
         floor_to_ceiling_height: 10,
-        story: $scope.data.stories[0].id,
+        building_story_id: $scope.data.stories[0].id,
         area: 250,
         conditioning_type: 0,
         envelope_status: 0,
