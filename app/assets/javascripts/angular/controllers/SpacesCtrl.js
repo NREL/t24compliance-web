@@ -371,16 +371,11 @@ cbecc.controller('SpacesCtrl', [
       _.each(spaces, function (space) {
         space.surfaces = [];
       });
-      _.each(surfaces, function (surface) {
-        surface.subsurfaces = [];
+      _.each(surfaces, function (surface, surfaceIndex) {
+        surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
         spaces[surface.space].surfaces.push(surface);
       });
-      console.log('spaces SURFACES');
-      console.log(spaces);
-      _.each(subsurfaces, function (subsurface) {
 
-        spaces[surfaces[subsurface.surface].space].surfaces[subsurface.surface].subsurfaces.push(subsurface);
-      });
       console.log(spaces);
       var params = Shared.defaultParams();
       params['data'] = spaces;
