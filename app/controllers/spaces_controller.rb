@@ -41,23 +41,36 @@ class SpacesController < ApplicationController
       # process spaces grouped by story
       clean_params['data'].group_by{|d| d['building_story_id']}.each do |story, spaces|
         logger.info("PROCESSING STORY: #{story}")
-        logger.info("")
-        spaces = []
+        story_spaces = []
         spaces.each do |space|
-          logger.info("REC: #{space.inspect}")
+          logger.info("Processing space: #{space.inspect}")
 
-          #extract surfaces
-          surfaces = space.extract!('surfaces')['surfaces']
-          surfs = {interior_walls: [], exterior_walls: [], underground_walls: [], roofs: [], ceilings:[], interior_floors: [], exterior_floors: [], underground_floors: []}
+          # extract surfaces
+          surfaces = space.extract!('surfaces')['surfaces'] || []
+
+          surfs = {'interior_walls' => [], 'exterior_walls' => [], 'underground_walls' => [], 'roofs' => [], 'ceilings' => [], 'interior_floors' => [], 'exterior_floors' => [], 'underground_floors' => []}
           logger.info("#{surfaces.size} surfaces")
           surfaces.each do |surface|
+            logger.info("Processing surface: #{surface.inspect}")
+            subs = {'doors' => [], 'windows' => [], 'skylights' => []}
+            sub_surfaces = surface.extract!('subsurfaces')['subsurfaces'] || []
+            logger.info("subsurfaces for #{surface['name']} are: #{sub_surfaces.inspect}")
 
-            subs = {doors: [], windows: [], skylights: []}
-            sub_surfaces = surface.extract!('subsurfaces')['subsurfaces']
-            logger.info("#{sub_surfaces.size} subsurface for #{surface.name}")
+
             sub_surfaces.each do |sub|
 
-              sub_klass = Object::const_get(sub.type)
+              sub_klass = Object::const_get(sub['type'])
+              sub_type = sub['type']
+
+              # TODO: handle construction
+              # TODO: remove for now
+              sub.extract!('construction')
+
+              # remove invalid attributes
+              sub.extract!('type')
+              # delete nil keys in case they are invalid for this subsurface type
+              sub.delete_if {|k, v| v.nil?}
+              logger.info("CLEAN subsurface: #{sub.inspect}")
 
               if sub.has_key?('id') and !sub['id'].nil?
                 # update
@@ -69,10 +82,25 @@ class SpacesController < ApplicationController
                 @sub.save
               end
               # add to subsurfaces for this surface
-              subs[sub.type.gsub(' ','_').downcase.pluralize] << @sub
+              subs[sub_type.gsub(' ','_').downcase.pluralize] << @sub
             end
 
-            klass = Object::const_get(surface.surface_type.gsub(' ', ''))
+            surface_type = surface['surface_type']
+
+            # TODO: handle adjacent space references
+            # TODO: for now, removing them
+            # TODO: also handle construction
+            surface.extract!('adjacent_space')
+
+            # removing invalid attributes
+            surface.extract!('surface_type')
+            surface.extract!('boundary')
+            surface.extract!('type')
+            # delete all nil values to remove values that are invalid for certain surfaces
+            surface.delete_if {|k, v| v.nil? }
+            logger.info("CLEAN surface: #{surface.inspect}")
+
+            klass = Object::const_get(surface_type.gsub(' ', ''))
             if surface.has_key?('id') and !surface['id'].nil?
               # update
               @surf = klass.find(surface['id'])
@@ -88,7 +116,7 @@ class SpacesController < ApplicationController
             end
             @surf.save
             # add to surfaces for this space
-            surfs[surface.surface_type.gsub(' ', '_').downcase.pluralize] << @surf
+            surfs[surface_type.gsub(' ', '_').downcase.pluralize] << @surf
           end
 
           # save the space with related surfaces
@@ -105,19 +133,19 @@ class SpacesController < ApplicationController
             @space[surf_name] = surfs[surf_name]
           end
           @space.save
-          spaces << @space
+          story_spaces << @space
         end
 
         # save the spaces to the story
         @story = BuildingStory.find(story)
-        @story.spaces = spaces
+        @story.spaces = story_spaces
         @story.save
 
       end
     end
 
     # TODO: add error handling?!
-    respond_with spaces.first || Space.new
+    respond_with Space.new
 
   end
 
