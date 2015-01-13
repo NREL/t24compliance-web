@@ -93,7 +93,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if (colDef.name == 'area' && newValue != oldValue) {
+        if ((colDef.name == 'floor_to_ceiling_height' || colDef.name == 'area') && newValue != oldValue) {
           $scope.data.updateTotalExhaust(rowEntity);
         }
       });
