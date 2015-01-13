@@ -30,7 +30,7 @@ cbecc.controller('SpacesCtrl', [
     // TODO Test this when spaces can be saved and loaded
     // Delete spaces that belong to nonexistent stories
     $scope.data.spaces = _.filter($scope.data.spaces, function (space) {
-      return $scope.data.storiesHash.hasOwnProperty(space.story);
+      return $scope.data.storiesHash.hasOwnProperty(space.building_story_id);
     });
 
     $scope.tabs = [{
@@ -93,7 +93,7 @@ cbecc.controller('SpacesCtrl', [
       var space = {
         name: "Space " + ($scope.data.spaces.length + 1),
         floor_to_ceiling_height: 14,
-        story: $scope.data.stories[0].id,
+        building_story_id: $scope.data.stories[0].id,
         area: 400,
         conditioning_type: 0,
         envelope_status: 0,
@@ -145,7 +145,7 @@ cbecc.controller('SpacesCtrl', [
       $scope.data.spaces.push({
         name: "Space " + ($scope.data.spaces.length + 1),
         floor_to_ceiling_height: selectedSpace.floor_to_ceiling_height,
-        story: selectedSpace.story,
+        building_story_id: selectedSpace.building_story_id,
         area: selectedSpace.area,
         conditioning_type: selectedSpace.conditioning_type,
         envelope_status: selectedSpace.envelope_status,
@@ -198,7 +198,7 @@ cbecc.controller('SpacesCtrl', [
         type: type,
         boundary: boundary,
         surface_type: surfaceType,
-        story: $scope.data.spaces[spaceIndex].story,
+        building_story_id: $scope.data.spaces[spaceIndex].building_story_id,
         area: null,
         azimuth: null,
         construction: null,
@@ -258,7 +258,7 @@ cbecc.controller('SpacesCtrl', [
         type: selectedSurface.type,
         boundary: selectedSurface.boundary,
         surface_type: selectedSurface.surface_type,
-        story: selectedSurface.story,
+        building_story_id: selectedSurface.building_story_id,
         area: selectedSurface.area,
         azimuth: selectedSurface.azimuth,
         construction: selectedSurface.construction,
@@ -289,7 +289,7 @@ cbecc.controller('SpacesCtrl', [
         space: $scope.data.surfaces[surfaceIndex].space,
         surface: surfaceIndex,
         type: type,
-        story: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].story,
+        building_story_id: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].building_story_id,
         area: null,
         construction: null
       });
@@ -302,7 +302,7 @@ cbecc.controller('SpacesCtrl', [
         space: selectedSubsurface.space,
         surface: selectedSubsurface.surface,
         type: selectedSubsurface.type,
-        story: selectedSubsurface.story,
+        building_story_id: selectedSubsurface.building_story_id,
         area: selectedSubsurface.area,
         construction: selectedSubsurface.construction
       });
