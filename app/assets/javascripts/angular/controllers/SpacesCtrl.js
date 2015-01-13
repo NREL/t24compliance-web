@@ -167,11 +167,41 @@ cbecc.controller('SpacesCtrl', [
       });
     };
     $scope.data.deleteSpace = function (selected, gridApi) {
-      // TODO handle children
-      var index = $scope.data.spaces.indexOf(selected.space);
-      $scope.data.spaces.splice(index, 1);
-      if (index > 0) {
-        gridApi.selection.toggleRowSelection($scope.data.spaces[index - 1]);
+      var spaceIndex = $scope.data.spaces.indexOf(selected.space);
+
+      // Delete subsurfaces
+      _.eachRight($scope.data.surfaces, function (surface, surfaceIndex) {
+        if (surface.space == spaceIndex) {
+          // Delete subsurfaces
+          $scope.data.subsurfaces = _.difference($scope.data.subsurfaces, _.where($scope.data.subsurfaces, {'surface': surfaceIndex}));
+
+          // Update subsurface surface parent
+          _.each($scope.data.subsurfaces, function (subsurface) {
+            if (subsurface.surface > surfaceIndex) {
+              subsurface.surface--;
+            }
+          });
+        }
+      });
+
+      // Delete surfaces
+      $scope.data.surfaces = _.difference($scope.data.surfaces, _.where($scope.data.surfaces, {'space': spaceIndex}));
+
+      // Update subsurface/surface parents
+      _.each($scope.data.subsurfaces, function (subsurface) {
+        if (subsurface.space > spaceIndex) {
+          subsurface.space--;
+        }
+      });
+      _.each($scope.data.surfaces, function (surface) {
+        if (surface.space > spaceIndex) {
+          surface.space--;
+        }
+      });
+
+      $scope.data.spaces.splice(spaceIndex, 1);
+      if (spaceIndex > 0) {
+        gridApi.selection.toggleRowSelection($scope.data.spaces[spaceIndex - 1]);
       } else {
         selected.space = null;
       }
@@ -269,11 +299,21 @@ cbecc.controller('SpacesCtrl', [
       });
     };
     $scope.data.deleteSurface = function (selected, gridApi) {
-      // TODO handle children
-      var index = $scope.data.surfaces.indexOf(selected.surface);
-      $scope.data.surfaces.splice(index, 1);
-      if (index > 0) {
-        gridApi.selection.toggleRowSelection($scope.data.surfaces[index - 1]);
+      var surfaceIndex = $scope.data.surfaces.indexOf(selected.surface);
+
+      // Delete subsurfaces
+      $scope.data.subsurfaces = _.difference($scope.data.subsurfaces, _.where($scope.data.subsurfaces, {'surface': surfaceIndex}));
+
+      // Update subsurface parents
+      _.each($scope.data.subsurfaces, function (subsurface) {
+        if (subsurface.surface > surfaceIndex) {
+          subsurface.surface--;
+        }
+      });
+
+      $scope.data.surfaces.splice(surfaceIndex, 1);
+      if (surfaceIndex > 0) {
+        gridApi.selection.toggleRowSelection($scope.data.surfaces[surfaceIndex - 1]);
       } else {
         selected.surface = null;
       }
@@ -308,10 +348,10 @@ cbecc.controller('SpacesCtrl', [
       });
     };
     $scope.data.deleteSubsurface = function (selected, gridApi) {
-      var index = $scope.data.subsurfaces.indexOf(selected.subsurface);
-      $scope.data.subsurfaces.splice(index, 1);
-      if (index > 0) {
-        gridApi.selection.toggleRowSelection($scope.data.subsurfaces[index - 1]);
+      var subsurfaceIndex = $scope.data.subsurfaces.indexOf(selected.subsurface);
+      $scope.data.subsurfaces.splice(subsurfaceIndex, 1);
+      if (subsurfaceIndex > 0) {
+        gridApi.selection.toggleRowSelection($scope.data.subsurfaces[subsurfaceIndex - 1]);
       } else {
         selected.subsurface = null;
       }
