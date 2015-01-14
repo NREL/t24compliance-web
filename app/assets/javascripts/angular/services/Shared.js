@@ -210,6 +210,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', '$sce', 'usSpi
         if (term.length) {
           term = Number(term);
           if (isNaN(term)) term = 0;
+          if (cellValue === null) return false;
           return cellValue >= term;
         }
         return true;
@@ -221,6 +222,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', '$sce', 'usSpi
         if (term.length) {
           term = Number(term);
           if (isNaN(term)) term = 0;
+          if (cellValue === null) return false;
           return cellValue <= term;
         }
         return true;
