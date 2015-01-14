@@ -12,7 +12,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
     });
     $scope.zonesHash[index] = zone.name;
   });
-  console.log($scope.data.spaces);
+
   // Spaces UI Grid
   $scope.spacesGridOptions = {
     columnDefs: [{

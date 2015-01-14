@@ -393,42 +393,23 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
   };
 }).filter('mapZones', function () {
   return function(input, $scope) {
-    var zonesHash = {};
-    while (_.isEmpty(zonesHash)) {
-      if ($scope.hasOwnProperty('zonesHash')) {
-        zonesHash = $scope.zonesHash;
-      } else {
-        $scope = $scope.$parent;
-      }
+    while (!$scope.hasOwnProperty('zonesHash')) {
+      $scope = $scope.$parent;
     }
-    return zonesHash[input];
+    return $scope.zonesHash[input];
   }
 }).filter('mapSpaces', function () {
   return function (input, $scope) {
-    var spacesHash = {};
-
-    while (_.isEmpty(spacesHash)) {
-      if ($scope.hasOwnProperty('spacesHash')) {
-        spacesHash = $scope.spacesHash;
-      } else {
-        $scope = $scope.$parent;
-      }
+    while (!$scope.hasOwnProperty('spacesHash')) {
+      $scope = $scope.$parent;
     }
-    return spacesHash[input];
-    //return $scope.$parent.$parent.$parent.$parent.$parent.$parent.spacesHash[input];
+    return $scope.spacesHash[input];
   };
 }).filter('mapSurfaces', function () {
   return function (input, $scope) {
-    var surfacesHash = {};
-
-    while (_.isEmpty(surfacesHash)) {
-      if ($scope.hasOwnProperty('surfacesHash')) {
-        surfacesHash = $scope.surfacesHash;
-      } else {
-        $scope = $scope.$parent;
-      }
+    while (!$scope.hasOwnProperty('surfacesHash')) {
+      $scope = $scope.$parent;
     }
-    return surfacesHash[input];
-    //return $scope.$parent.$parent.$parent.$parent.$parent.$parent.surfacesHash[input];
+    return $scope.surfacesHash[input];
   };
 });
