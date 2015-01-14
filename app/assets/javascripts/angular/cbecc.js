@@ -395,14 +395,13 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
   return function(input, $scope) {
     var zonesHash = {};
     while (_.isEmpty(zonesHash)) {
-      if ($scope.hasOwnProperty('data')) {
-        zonesHash = $scope.data.zonesHash;
-      }
-      else {
+      if ($scope.hasOwnProperty('zonesHash')) {
+        zonesHash = $scope.zonesHash;
+      } else {
         $scope = $scope.$parent;
       }
     }
-
+    return zonesHash[input];
   }
 }).filter('mapSpaces', function () {
   return function (input, $scope) {

@@ -4,8 +4,7 @@ cbecc.controller('ZonesCtrl', [
     $scope.data = {
       stories: stories,
       spaces: spaces,
-      zones: [],
-      spaces_to_zones: []
+      zones: []
     };
 
     $scope.data.storiesArr = [];
@@ -17,22 +16,6 @@ cbecc.controller('ZonesCtrl', [
       });
       $scope.data.storiesHash[story.id] = story.name;
     });
-
-    $scope.data.zonesHash = {};
-    _.each($scope.data.zones, function (zone) {
-      $scope.data.zonesHash[zone.id] = zone.name;
-    });
-
-    //populate spaces_to_zones with space id and name
-    _.each($scope.data.spaces, function (space) {
-      $scope.data.spaces_to_zones.push({
-        id: space.id,
-        space_name: space.name,
-        story: $scope.data.storiesHash[space.building_story_id]
-      });
-    });
-    console.log('SPACES TO ZONES');
-    console.log($scope.data.spaces_to_zones);
 
     $scope.tabs = [{
       heading: 'Create Zones',
@@ -91,7 +74,7 @@ cbecc.controller('ZonesCtrl', [
       console.log("submit");
 
       function success(response) {
-        toaster.pop('success', 'Spaces successfully saved');
+        toaster.pop('success', 'Thermal zones successfully saved');
       }
 
       function failure(response) {
