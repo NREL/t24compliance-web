@@ -1,6 +1,15 @@
-cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope, Shared) {
+cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
   $scope.selected = {
     subsurface: null
+  };
+
+  $scope.applySettingsActive = false;
+
+  $scope.editableCondition = function ($scope) {
+    while (!$scope.hasOwnProperty('applySettingsActive')) {
+      $scope = $scope.$parent;
+    }
+    return !$scope.applySettingsActive;
   };
 
   $scope.spacesArr = [];
@@ -96,4 +105,42 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope,
       });
     }
   };
+
+  // Buttons
+  $scope.applySettings = function () {
+    $scope.applySettingsActive = true;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.subsurfacesGridOptions.multiSelect = true;
+
+    $scope.subsurfacesGridOptions.columnDefs[3].enableFiltering = false;
+    $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = true;
+    $scope.subsurfacesGridOptions.columnDefs[3].filter.term = $scope.selected.subsurface.type;
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+  };
+
+  $scope.confirmApplySettings = function () {
+    var replacement = {
+      area: $scope.selected.subsurface.area,
+      construction: $scope.selected.subsurface.construction
+    };
+    var rows = $scope.gridApi.selection.getSelectedRows();
+    _.each(rows, function (row) {
+      _.merge(row, replacement);
+    });
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.resetApplySettings();
+  };
+
+  $scope.resetApplySettings = function () {
+    $scope.selected.subsurface = null;
+    $scope.applySettingsActive = false;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.subsurfacesGridOptions.multiSelect = false;
+
+    $scope.subsurfacesGridOptions.columnDefs[3].enableFiltering = true;
+    $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = false;
+    $scope.subsurfacesGridOptions.columnDefs[3].filter.term = '';
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+  };
+
 }]);
