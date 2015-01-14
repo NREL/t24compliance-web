@@ -38,7 +38,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space',
       displayName: 'Space Name',
@@ -48,14 +48,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
       filter: Shared.enumFilter($scope.spacesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'surface_type',
       enableCellEdit: false,
       enableHiding: false,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'building_story_id',
       displayName: 'Story',
@@ -63,7 +63,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       cellFilter: 'mapStories:this',
       enableHiding: false,
       filter: Shared.enumFilter($scope.data.storiesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
@@ -72,7 +72,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'azimuth',
       secondLine: Shared.html('&deg;'),
@@ -92,12 +92,12 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
         return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Exterior'));
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'construction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'adjacent_space',
       enableHiding: false,
@@ -121,7 +121,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
       filter: Shared.enumFilter($scope.spacesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'tilt',
@@ -142,7 +142,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
         return $scope.row.entity.type == 'Roof';
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'wall_height',
       secondLine: Shared.html('ft'),
@@ -162,7 +162,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
         return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'exposed_perimeter',
       secondLine: Shared.html('ft'),
@@ -182,7 +182,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
         return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.surfaces,
     enableCellEditOnFocus: true,

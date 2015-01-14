@@ -18,7 +18,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       enableCellEdit: false,
       enableHiding: false,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'gas_equipment',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
@@ -26,7 +26,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'process_gas',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
@@ -34,28 +34,28 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'gas_radiant_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'gas_latent_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'gas_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,

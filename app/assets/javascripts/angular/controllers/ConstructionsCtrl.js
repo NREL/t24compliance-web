@@ -263,7 +263,7 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
         name: 'name',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         minWidth: 400
       }, {
         name: 'compatible_surface_type',
@@ -278,36 +278,36 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
         name: 'type',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'framing_configuration',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         maxWidth: 218
       }, {
         name: 'framing_size',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         maxWidth: 159
       }, {
         name: 'cavity_insulation_r_value',
         secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'continuous_insulation_r_value',
         secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'continuous_insulation_material_name',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         minWidth: 300
       }],
       data: 'data',
@@ -375,7 +375,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
         name: 'name',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         minWidth: 400
       }, {
         name: 'fenestration_type',
@@ -391,45 +391,45 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
         displayName: 'Frame Type',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'fenestration_panes',
         displayName: 'Panes',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'fenestration_product_type',
         displayName: 'Product Type',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         visible: $scope.type == 'VerticalFenestration'
       }, {
         name: 'glazing_tint',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         visible: $scope.type == 'VerticalFenestration'
       }, {
         name: 'u_factor',
         secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'shgc',
         displayName: 'Solar Heat Gain Coefficient',
         secondLine: Shared.html('frac.'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         visible: $scope.type == 'VerticalFenestration'
       }, {
         name: 'skylight_curb',
         enableHiding: false,
         filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         visible: $scope.type == 'Skylight'
       }],
       data: 'data',

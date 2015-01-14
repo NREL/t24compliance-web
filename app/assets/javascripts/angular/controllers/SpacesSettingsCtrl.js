@@ -19,14 +19,14 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       displayName: 'Space Name',
       enableHiding: false,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space_function',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'occupant_density',
       displayName: 'Occupancy',
@@ -38,7 +38,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'hot_water_heating_rate',
       displayName: 'Hot Water Use',
@@ -50,7 +50,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'receptacle_power_density',
       displayName: 'Plug Loads',
@@ -62,7 +62,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,

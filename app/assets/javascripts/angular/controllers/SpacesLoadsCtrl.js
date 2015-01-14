@@ -17,14 +17,14 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       displayName: 'Space Name',
       enableCellEdit: false,
       enableHiding: false,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       filter: Shared.textFilter()
     }, {
       name: 'process_electric',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
@@ -32,7 +32,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
@@ -40,14 +40,14 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       secondLine: Shared.html('ElevMechan / Space'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
       name: 'escalator_count',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
@@ -56,21 +56,21 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       cellClass: 'border-left-cell',
       headerCellClass: 'border-left-cell',
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
       name: 'loads_latent_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
       name: 'loads_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
@@ -79,14 +79,14 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       cellClass: 'border-left-cell',
       headerCellClass: 'border-left-cell',
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
       name: 'escalator_lost_fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }],

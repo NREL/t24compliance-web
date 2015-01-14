@@ -20,14 +20,14 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'floor_to_ceiling_height',
       secondLine: Shared.html('ft'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'building_story_id',
       displayName: 'Story',
@@ -37,7 +37,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       cellFilter: 'mapStories:this',
       editDropdownOptionsArray: $scope.data.storiesArr,
       filter: Shared.enumFilter($scope.data.storiesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'area',
@@ -45,7 +45,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'conditioning_type',
       enableHiding: false,
@@ -53,7 +53,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'envelope_status',
       enableHiding: false,
@@ -61,7 +61,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'lighting_status',
       enableHiding: false,
@@ -69,7 +69,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
     }],
     data: $scope.data.spaces,
@@ -199,7 +199,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       }, {
         name: 'floor_to_ceiling_height',
         secondLine: Shared.html('ft'),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
       }, {
         name: 'building_story_id',
         displayName: 'Story',
@@ -210,7 +210,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         name: 'area',
         displayName: 'Area',
         secondLine: Shared.html('ft<sup>2</sup>'),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         width: 98
       }, {
         name: 'conditioning_type',

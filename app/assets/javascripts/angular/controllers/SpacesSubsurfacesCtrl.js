@@ -39,7 +39,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Subsurface Name',
       enableHiding: false,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space',
       displayName: 'Space Name',
@@ -48,7 +48,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
       filter: Shared.enumFilter($scope.spacesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
       name: 'surface',
@@ -58,7 +58,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       cellFilter: 'mapSurfaces:this',
       editDropdownOptionsArray: $scope.surfacesArr,
       filter: Shared.enumFilter($scope.surfacesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.surfacesArr)
     }, {
       name: 'type',
@@ -66,7 +66,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableCellEdit: false,
       enableHiding: false,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'building_story_id',
       displayName: 'Story',
@@ -74,18 +74,18 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       cellFilter: 'mapStories:this',
       enableHiding: false,
       filter: Shared.enumFilter($scope.data.storiesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'area',
       secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
       filters: Shared.numberFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'construction',
       enableHiding: false,
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.subsurfaces,
     enableCellEditOnFocus: true,

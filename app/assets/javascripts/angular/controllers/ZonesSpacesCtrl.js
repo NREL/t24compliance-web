@@ -21,7 +21,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
       enableHiding: false,
       enableCellEdit: false,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'building_story_id',
       displayName: 'Story',
@@ -29,7 +29,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
       cellFilter: 'mapStories:this',
       enableHiding: false,
       filter: Shared.enumFilter($scope.data.storiesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'thermal_zone',
@@ -38,7 +38,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
       cellFilter: 'mapZones:this',
       editDropdownOptionsArray: $scope.zonesArr,
       filter: Shared.enumFilter($scope.zonesHash),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell',
       sortingAlgorithm: Shared.sort($scope.zonesArr)
     }],
     data: $scope.data.spaces,
