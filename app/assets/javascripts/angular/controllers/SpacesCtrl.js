@@ -1,5 +1,5 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants','toaster', 'Shared', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, data, /*constData, fenData,*/ stories, spaces, constructions) {
+  '$scope', '$location', 'uiGridConstants','toaster', 'Shared', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'space_function_defaults', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, data, /*constData, fenData,*/ stories, spaces, space_function_defaults, constructions) {
     $scope.data = {
       /*constData: constData,
        fenData: fenData,*/
@@ -12,6 +12,9 @@ cbecc.controller('SpacesCtrl', [
 
     console.log("Saved Spaces:");
     console.log($scope.data.spaces);
+
+    console.log("SPACE FUNCTION DEFAULTS:");
+    console.log(space_function_defaults);
 
     // Check for construction defaults
     if ($scope.data.constructions.length) {

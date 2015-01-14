@@ -167,6 +167,9 @@ cbecc.config([
           }],
           constructions: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('construction_defaults', Shared.defaultParams());
+          }],
+          space_function_defaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('space_function_defaults', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding',
@@ -328,6 +331,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
     api.add('fluid_systems');
     api.add('spaces');
     api.add('simulations');
+    api.add('space_function_defaults');
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
         Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
         Shared.startSpinner();
