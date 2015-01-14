@@ -11,7 +11,9 @@ cbecc.controller('ConstructionsCtrl', [
 
     // retrieve each saved default record from ids
     function getSelected(the_data, the_id) {
-      return _.find(the_data, {'id': the_id});
+      return _.find(the_data, {
+        id: the_id
+      });
     }
 
     //collapsible panels
@@ -43,7 +45,12 @@ cbecc.controller('ConstructionsCtrl', [
 
     $scope.panels.forEach(function (panel) {
       panel.gridOptions = {
-        columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
+        columnDefs: [{
+          name: 'name',
+          displayName: 'Layer'
+        }, {
+          name: 'code_category'
+        }],
         enableColumnMenus: false,
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
         enableSorting: false,
@@ -72,19 +79,31 @@ cbecc.controller('ConstructionsCtrl', [
 
     $scope.fenPanels.forEach(function (panel) {
       panel.fenGridOptions = {
-        columnDefs: [
-          {name: 'name'},
-          {name: 'type'},
-          {name: 'certification_method'},
-          {name: 'u_factor'},
-          {name: 'solar_heat_gain_coefficient'},
-          {name: 'visible_transmittance'},
-          {name: 'number_of_panes'},
-          {name: 'frame_type'},
-          {name: 'divider_type'},
-          {name: 'tint'},
-          {name: 'gas_fill'},
-          {name: 'low_emissivity_coating'}],
+        columnDefs: [{
+          name: 'name'
+        }, {
+          name: 'fenestration_framing',
+          displayName: 'Frame Type'
+        }, {
+          name: 'fenestration_panes',
+          displayName: 'Panes'
+        }, {
+          name: 'fenestration_product_type',
+          displayName: 'Product Type',
+          visible: panel.name == 'window'
+        }, {
+          name: 'glazing_tint',
+          visible: panel.name == 'window'
+        }, {
+          name: 'u_factor'
+        }, {
+          name: 'shgc',
+          displayName: 'Solar Heat Gain Coefficient',
+          visible: panel.name == 'window'
+        }, {
+          name: 'skylight_curb',
+          visible: panel.name == 'skylight'
+        }],
         enableColumnMenus: false,
         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
         enableSorting: false,
@@ -141,7 +160,7 @@ cbecc.controller('ConstructionsCtrl', [
             return {
               data: $scope.fenData,
               rowEntity: rowEntity,
-              title: $scope.fenPanels[index].title
+              panel: $scope.fenPanels[index]
             };
           }
         }
@@ -177,7 +196,9 @@ cbecc.controller('ConstructionsCtrl', [
         construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
       });
 
-      ConstructionDefaults.createUpdate({project_id: Shared.getProjectId()}, construction_defaults, success, failure);
+      ConstructionDefaults.createUpdate({
+        project_id: Shared.getProjectId()
+      }, construction_defaults, success, failure);
 
 
     };
@@ -192,8 +213,7 @@ cbecc.controller('ConstructionsCtrl', [
       $scope.fenPanels[index].selected = null;
       $scope.fenPanels[index].fenGridOptions.data = [];
     };
-  }
-]);
+  }]);
 
 cbecc.controller('ModalConstructionsLibraryCtrl', [
   '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
@@ -262,7 +282,7 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
             $scope.layerData = [];
           }
         });
-        if (typeof(params.rowEntity) !== 'undefined' && params.rowEntity) {
+        if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
           $interval(function () {
             $scope.gridApi.selection.selectRow(params.rowEntity);
           }, 0, 1);
@@ -271,7 +291,12 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     };
 
     $scope.layersGridOptions = {
-      columnDefs: [{name: 'name', displayName: 'Layer'}, {name: 'code_category'}],
+      columnDefs: [{
+        name: 'name',
+        displayName: 'Layer'
+      }, {
+        name: 'code_category'
+      }],
       data: 'layerData',
       enableColumnMenus: false,
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
@@ -286,14 +311,19 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
-  }
-]);
+  }]);
 
 cbecc.controller('ModalFenestrationLibraryCtrl', [
   '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
-    $scope.title = params.title;
+    $scope.title = params.panel.title;
     $scope.selected = null;
+
+    if (params.panel.name == 'window') {
+      $scope.type = 'VerticalFenestration';
+    } else if (params.panel.name == 'skylight') {
+      $scope.type = 'Skylight';
+    }
 
     $scope.fenestrationGridOptions = {
       columnDefs: [{
@@ -303,16 +333,38 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
         headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 400
       }, {
-        name: 'type',
+        name: 'fenestration_type',
+        enableFiltering: false,
+        filter: {
+          noTerm: true,
+          term: $scope.type
+        },
+        visible: false
+      }, {
+        name: 'fenestration_framing',
+        displayName: 'Frame Type',
         enableHiding: false,
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
-        name: 'certification_method',
+        name: 'fenestration_panes',
+        displayName: 'Panes',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell'
+      }, {
+        name: 'fenestration_product_type',
+        displayName: 'Product Type',
         enableHiding: false,
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell',
-        maxWidth: 218
+        visible: $scope.type == 'VerticalFenestration'
+      }, {
+        name: 'glazing_tint',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/customHeaderCell',
+        visible: $scope.type == 'VerticalFenestration'
       }, {
         name: 'u_factor',
         secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
@@ -320,49 +372,19 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
         filters: Shared.numberFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell'
       }, {
-        name: 'solar_heat_gain_coefficient',
+        name: 'shgc',
+        displayName: 'Solar Heat Gain Coefficient',
         secondLine: Shared.html('frac.'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        headerCellTemplate: 'ui-grid/customHeaderCell',
+        visible: $scope.type == 'VerticalFenestration'
       }, {
-        name: 'visible_transmittance',
-        secondLine: Shared.html('frac.'),
-        enableHiding: false,
-        filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
-      }, {
-        name: 'number_of_panes',
-        enableHiding: false,
-        filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
-      }, {
-        name: 'frame_type',
+        name: 'skylight_curb',
         enableHiding: false,
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell',
-        minWidth: 300
-      }, {
-        name: 'divider_type',
-        enableHiding: false,
-        filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell',
-        minWidth: 300
-      }, {
-        name: 'tint',
-        enableHiding: false,
-        filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
-      }, {
-        name: 'gas_fill',
-        enableHiding: false,
-        filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
-      }, {
-        name: 'low_emissivity_coating',
-        enableHiding: false,
-        filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/customHeaderCell'
+        visible: $scope.type == 'Skylight'
       }],
       data: 'data',
       enableFiltering: true,
@@ -379,7 +401,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
             $scope.selected = null;
           }
         });
-        if (typeof(params.rowEntity) !== 'undefined' && params.rowEntity) {
+        if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
           $interval(function () {
             $scope.gridApi.selection.selectRow(params.rowEntity);
           }, 0, 1);
@@ -394,6 +416,4 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
-  }
-]);
-
+  }]);
