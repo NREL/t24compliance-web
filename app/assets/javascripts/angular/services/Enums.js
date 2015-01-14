@@ -309,7 +309,7 @@ cbecc.factory('Enums', function () {
     service.enumsArr[name] = [];
     _.each(service.enums[name], function (value, index) {
       service.enumsArr[name].push({
-        id: index,
+        id: value,
         value: value
       });
     });

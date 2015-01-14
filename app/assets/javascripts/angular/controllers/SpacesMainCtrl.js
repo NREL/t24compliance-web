@@ -51,31 +51,26 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapEnums:"spaces_conditioning_type_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
-      filter: Shared.enumFilter(Enums.enumsArr.spaces_conditioning_type_enums),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_conditioning_type_enums)
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'envelope_status',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapEnums:"spaces_envelope_status_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
-      filter: Shared.enumFilter(Enums.enumsArr.spaces_envelope_status_enums),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_envelope_status_enums)
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'lighting_status',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapEnums:"spaces_lighting_status_enums"',
       editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
-      filter: Shared.enumFilter(Enums.enumsArr.spaces_lighting_status_enums),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_lighting_status_enums)
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
+
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,
@@ -200,7 +195,6 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
         name: 'space_function',
         displayName: 'Space Type or Function',
         editableCellTemplate: 'ui-grid/dropdownEditor',
-        cellFilter: 'mapEnums:"spaces_space_function_enums"',
         editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums
       }, {
         name: 'floor_to_ceiling_height',
@@ -221,29 +215,26 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       }, {
         name: 'conditioning_type',
         editableCellTemplate: 'ui-grid/dropdownEditor',
-        cellFilter: 'mapEnums:"spaces_conditioning_type_enums"',
         editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums
       }, {
         name: 'envelope_status',
         editableCellTemplate: 'ui-grid/dropdownEditor',
-        cellFilter: 'mapEnums:"spaces_envelope_status_enums"',
         editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums
       }, {
         name: 'lighting_status',
         editableCellTemplate: 'ui-grid/dropdownEditor',
-        cellFilter: 'mapEnums:"spaces_lighting_status_enums"',
         editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums
       }],
       data: [{
         quantity: 20,
         name: 'Small Office',
-        space_function: 0,
+        space_function: Enums.enums.spaces_space_function_enums[0],
         floor_to_ceiling_height: 10,
         building_story_id: $scope.data.stories[0].id,
         area: 250,
-        conditioning_type: 0,
-        envelope_status: 0,
-        lighting_status: 0
+        conditioning_type: Enums.enums.spaces_conditioning_type_enums[0],
+        envelope_status: Enums.enums.spaces_envelope_status_enums[0],
+        lighting_status: Enums.enums.spaces_lighting_status_enums[0]
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,

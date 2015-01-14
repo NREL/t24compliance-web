@@ -23,13 +23,6 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'Shared', function ($scope,
     $scope.surfacesHash[index] = surface.name;
   });
 
-  // TODO Update stories if they were modified on the Spaces subtab
-  _.each($scope.data.surfaces, function (surface, index) {
-    if (surface.building_story_id != $scope.data.spaces[surface.space].building_story_id) {
-      surface.building_story_id = $scope.data.spaces[surface.space].building_story_id;
-    }
-  });
-
   // Subsurfaces UI Grid
   $scope.subsurfacesGridOptions = {
     columnDefs: [{

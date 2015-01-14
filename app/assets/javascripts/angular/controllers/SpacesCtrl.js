@@ -1,5 +1,5 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants','toaster', 'Shared', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'space_function_defaults', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, data, /*constData, fenData,*/ stories, spaces, space_function_defaults, constructions) {
+  '$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'space_function_defaults', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, /*constData, fenData,*/ stories, spaces, space_function_defaults, constructions) {
     $scope.data = {
       /*constData: constData,
        fenData: fenData,*/
@@ -101,10 +101,10 @@ cbecc.controller('SpacesCtrl', [
         floor_to_ceiling_height: 14,
         building_story_id: $scope.data.stories[0].id,
         area: 400,
-        conditioning_type: 0,
-        envelope_status: 0,
-        lighting_status: 0,
-        space_function: 0,
+        conditioning_type: Enums.enums.spaces_conditioning_type_enums[0],
+        envelope_status: Enums.enums.spaces_envelope_status_enums[0],
+        lighting_status: Enums.enums.spaces_lighting_status_enums[0],
+        space_function: Enums.enums.spaces_space_function_enums[0],
 
         process_electric: null,
         refrigeration: null,

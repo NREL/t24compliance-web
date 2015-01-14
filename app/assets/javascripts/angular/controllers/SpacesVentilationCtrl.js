@@ -26,10 +26,8 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableCellEdit: false,
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapEnums:"spaces_space_function_enums"',
-      filter: Shared.enumFilter(Enums.enumsArr.spaces_space_function_enums),
-      headerCellTemplate: 'ui-grid/customHeaderCell',
-      sortingAlgorithm: Shared.sort(Enums.enumsArr.spaces_space_function_enums)
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'exhaust_per_area',
       displayName: 'Per Area',
