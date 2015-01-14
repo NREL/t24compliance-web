@@ -23,11 +23,14 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
-      name: 'story',
-      enableHiding: false,
+      name: 'building_story_id',
+      displayName: 'Story',
       enableCellEdit: false,
-      filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/customHeaderCell'
+      cellFilter: 'mapStories:this',
+      enableHiding: false,
+      filter: Shared.enumFilter($scope.data.storiesHash),
+      headerCellTemplate: 'ui-grid/customHeaderCell',
+      sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'thermal_zone',
       enableHiding: false,
