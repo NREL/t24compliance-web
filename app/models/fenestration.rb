@@ -4,16 +4,24 @@ class Fenestration
   include Mongoid::Timestamps
 
   field :name, type: String
+  field :fenestration_type, type: String
+  field :fenestration_product_type, type: String
+  field :assembly_context, type: String
   field :certification_method, type: String
+  field :skylight_glazing, type: String
+  field :skylight_curb, type: String
+  field :operable_window_configuration, type: String
+  field :greenhouse_garden_window, type: Integer
+  field :fenestration_framing, type: String
+  field :fenestration_panes, type: String
+  field :glazing_tint, type: String
+  field :window_divider, type: String
+  field :diffusing, type: Integer
+  field :shgc, type: Float
+  field :shgc_center_of_glass, type: Float
   field :u_factor, type: Float
-  field :solar_heat_gain_coefficient, type: Float
+  field :u_factor_center_of_glass, type: Float
   field :visible_transmittance, type: Float
-  field :type, type: String
-  field :number_of_panes, type: Integer
-  field :frame_type, type: String
-  field :divider_type, type: String
-  field :tint, type: String
-  field :gas_fill, type: String
-  field :low_emissivity_coating, type: String
+  field :visible_transmittance_center_of_glass, type: Float
 
 end

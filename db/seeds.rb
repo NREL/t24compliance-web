@@ -7,7 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 SKIP_CONSTRUCTIONS = true
-SKIP_SPACES = false
+SKIP_FENESTRATION = false
+SKIP_SPACES = true
 
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
@@ -35,11 +36,13 @@ unless SKIP_CONSTRUCTIONS
       cons.save!
     end
   end
+end
 
+unless SKIP_FENESTRATION
   file = File.read(File.join(Rails.root, "lib/assets/fenestration_library.json"))
   data = JSON.parse(file)
 
-  data['constructions'].each_with_index do |c, index|
+  data['default_fenestrations'].each_with_index do |c, index|
     fens = Fenestration.find_or_create_by(name: c['name'])
     if fens
       puts "Adding/Updating Fenestration: #{fens.name}"
@@ -47,6 +50,9 @@ unless SKIP_CONSTRUCTIONS
       # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
       # need to be removed
       c = fens.as_json.merge(c)
+      # don't need these 2 fields
+      c.extract!('gas_fill')
+      c.extract!('low_emissivity_coating')
       fens.update(c)
       fens.save!
     end
