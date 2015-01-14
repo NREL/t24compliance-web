@@ -50,6 +50,13 @@ cbecc.controller('ZonesCtrl', [
 
 
     // Buttons
+    $scope.data.selectAll = function (gridApi) {
+      gridApi.selection.selectAllVisibleRows();
+    };
+    $scope.data.clearAll = function (gridApi) {
+      gridApi.selection.clearSelectedRows();
+    };
+
     $scope.data.addZone = function () {
       var zone = {
         name: "Zone " + ($scope.data.zones.length + 1),
