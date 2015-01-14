@@ -10,35 +10,41 @@
   </div>
 </div>
 <div class="row pad-bot-20">
+  <div class="col-md-12">
+    <button type="button" ng-click="expandAll()" class="btn btn-info">Expand All</button>
+    <button type="button" ng-click="collapseAll()" class="btn btn-info">Collapse All</button>
+  </div>
+</div>
+<div class="row pad-bot-20">
   <accordion class="col-md-12" close-others="false">
-    <accordion-group ng-repeat="panel in panels" is-open="panels[$index].open">
+    <accordion-group ng-repeat="panel in panels" is-open="panel.open">
       <accordion-heading>
-        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panels[$index].open, 'glyphicon-chevron-right': !panels[$index].open}"></i>
-        {{panel.title}}<span ng-show="panels[$index].selected"> &mdash; <strong>{{panels[$index].selected.name}}</strong></span>
+        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
+        {{panel.title}}<span ng-show="panel.selected"> &mdash; <strong>{{panel.selected.name}}</strong></span>
       </accordion-heading>
-      <div ng-hide="panels[$index].selected">
+      <div ng-hide="panel.selected">
         <button type="button" class="btn btn-info" ng-click="openLibraryModal($index)">Select a Construction</button>
       </div>
-      <div ng-show="panels[$index].selected">
-        <div ui-grid="panels[$index].gridOptions" class="layers-grid" ui-grid-resize-columns></div>
+      <div ng-show="panel.selected">
+        <div ui-grid="panel.gridOptions" class="layers-grid" ui-grid-resize-columns></div>
         <br>
-        <button type="button" class="btn btn-info" ng-click="openLibraryModal($index, panels[$index].selected)">Change Construction</button>
-        <button type="button" class="btn btn-danger" ng-show="panels[$index].selected" ng-click="removeConstruction($index)">Remove Construction</button>
+        <button type="button" class="btn btn-info" ng-click="openLibraryModal($index, panel.selected)">Change Construction</button>
+        <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeConstruction($index)">Remove Construction</button>
       </div>
     </accordion-group>
-    <accordion-group ng-repeat="panel in fenPanels" is-open="fenPanels[$index].open">
+    <accordion-group ng-repeat="panel in fenPanels" is-open="panel.open">
       <accordion-heading>
-        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': fenPanels[$index].open, 'glyphicon-chevron-right': !fenPanels[$index].open}"></i>
-        {{panel.title}}<span ng-show="fenPanels[$index].selected"> &mdash; <strong>{{fenPanels[$index].selected.name}}</strong></span>
+        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
+        {{panel.title}}<span ng-show="panel.selected"> &mdash; <strong>{{panel.selected.name}}</strong></span>
       </accordion-heading>
-      <div ng-hide="fenPanels[$index].selected">
+      <div ng-hide="panel.selected">
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index)">Select a Fenestration</button>
       </div>
-      <div ng-show="fenPanels[$index].selected">
-        <div ui-grid="fenPanels[$index].fenGridOptions" class="fen-grid" ui-grid-resize-columns></div>
+      <div ng-show="panel.selected">
+        <div ui-grid="panel.fenGridOptions" class="fen-grid" ui-grid-resize-columns></div>
         <br>
-        <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index, fenPanels[$index].selected)">Change Fenestration</button>
-        <button type="button" class="btn btn-danger" ng-show="fenPanels[$index].selected" ng-click="removeFenestration($index)">Remove Fenestration</button>
+        <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index, panel.selected)">Change Fenestration</button>
+        <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeFenestration($index)">Remove Fenestration</button>
       </div>
     </accordion-group>
   </accordion>

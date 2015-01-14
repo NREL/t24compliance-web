@@ -121,6 +121,24 @@ cbecc.controller('ConstructionsCtrl', [
       }
     });
 
+    // Buttons
+    $scope.expandAll = function () {
+      _.each($scope.panels, function(panel) {
+        panel.open = true;
+      });
+      _.each($scope.fenPanels, function(panel) {
+        panel.open = true;
+      });
+    };
+    $scope.collapseAll = function () {
+      _.each($scope.panels, function(panel) {
+        panel.open = false;
+      });
+      _.each($scope.fenPanels, function(panel) {
+        panel.open = false;
+      });
+    };
+
 
     // Modal Settings
     $scope.openLibraryModal = function (index, rowEntity) {
