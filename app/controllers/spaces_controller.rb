@@ -48,14 +48,13 @@ class SpacesController < ApplicationController
           # extract surfaces
           surfaces = space.extract!('surfaces')['surfaces'] || []
 
-          surfs = {'interior_walls' => [], 'exterior_walls' => [], 'underground_walls' => [], 'roofs' => [], 'ceilings' => [], 'interior_floors' => [], 'exterior_floors' => [], 'underground_floors' => []}
+          surfs = {interior_walls: [], exterior_walls: [], underground_walls: [], roofs: [], ceilings: [], interior_floors: [], exterior_floors: [], underground_floors: []}
           logger.info("#{surfaces.size} surfaces")
           surfaces.each do |surface|
             logger.info("Processing surface: #{surface.inspect}")
-            subs = {'doors' => [], 'windows' => [], 'skylights' => []}
+            subs = {doors: [], windows: [], skylights: []}
             sub_surfaces = surface.extract!('subsurfaces')['subsurfaces'] || []
             logger.info("subsurfaces for #{surface['name']} are: #{sub_surfaces.inspect}")
-
 
             sub_surfaces.each do |sub|
 
@@ -82,7 +81,7 @@ class SpacesController < ApplicationController
                 @sub.save
               end
               # add to subsurfaces for this surface
-              subs[sub_type.gsub(' ','_').downcase.pluralize] << @sub
+              subs[sub_type.gsub(' ','_').downcase.pluralize.to_sym] << @sub
             end
 
             surface_type = surface['surface_type']
@@ -100,6 +99,7 @@ class SpacesController < ApplicationController
             surface.delete_if {|k, v| v.nil? }
             logger.info("CLEAN surface: #{surface.inspect}")
 
+
             klass = Object::const_get(surface_type.gsub(' ', ''))
             if surface.has_key?('id') and !surface['id'].nil?
               # update
@@ -111,12 +111,25 @@ class SpacesController < ApplicationController
             end
 
             # assign related sub_surfaces (deletes old ones) and save
-            subs.each do |sub_name|
-              @surf[sub_name] = subs[sub_name]
+            # can't get loop to work, so explicitly setting them
+            # TODO: might be good to check if subsurfaces are even valid on the give surface
+            unless subs[:windows].empty?
+              @surf.windows = subs[:windows]
             end
+            unless subs[:skylights].empty?
+              @surf.skylights = subs[:skylights]
+            end
+            unless subs[:doors].empty?
+              @surf.doors = subs[:doors]
+            end
+
+            #subs.each do |sub_name, sub_array|
+            #  @surf[sub_name.to_sym] = sub_array unless sub_array.empty?
+            #end
+
             @surf.save
             # add to surfaces for this space
-            surfs[surface_type.gsub(' ', '_').downcase.pluralize] << @surf
+            surfs[surface_type.gsub(' ', '_').downcase.pluralize.to_sym] << @surf
           end
 
           # save the space with related surfaces
@@ -129,14 +142,25 @@ class SpacesController < ApplicationController
             @space = Space.new(space)
 
           end
-          surfs.each do |surf_name|
-            @space[surf_name] = surfs[surf_name]
-          end
+
+          # can't get loop to work, so explicitly setting them
+          #surfs.each do |surf_name, surf_array|
+          #  @space[surf_name.to_sym] = surf_array
+          #end
+          @space.interior_walls = surfs[:interior_walls]
+          @space.exterior_walls = surfs[:exterior_walls]
+          @space.underground_walls = surfs[:underground_walls]
+          @space.roofs = surfs[:roofs]
+          @space.ceilings = surfs[:ceilings]
+          @space.interior_floors = surfs[:interior_floors]
+          @space.exterior_floors = surfs[:exterior_floors]
+          @space.underground_floors = surfs[:underground_floors]
           @space.save
           story_spaces << @space
         end
 
         # save the spaces to the story
+        # TODO: add better handling for removing spaces (all spaces)
         @story = BuildingStory.find(story)
         @story.spaces = story_spaces
         @story.save
