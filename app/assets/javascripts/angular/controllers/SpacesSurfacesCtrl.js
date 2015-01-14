@@ -1,6 +1,15 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums', function ($scope, uiGridConstants, Shared, Enums) {
   $scope.selected = {
     surface: null
+  };
+
+  $scope.applySettingsActive = false;
+
+  $scope.editableCondition = function ($scope) {
+    while (!$scope.hasOwnProperty('applySettingsActive')) {
+      $scope = $scope.$parent;
+    }
+    return !$scope.applySettingsActive;
   };
 
   $scope.dropdowns = [
@@ -21,26 +30,20 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
     $scope.spacesHash[index] = space.name;
   });
 
-  // TODO make this global?
-  // Update stories if they were modified on the Spaces subtab
-  _.each($scope.data.surfaces, function (surface, index) {
-    if (surface.building_story_id != $scope.data.spaces[surface.space].building_story_id) {
-      surface.building_story_id = $scope.data.spaces[surface.space].building_story_id;
-    }
-  });
-
   // Surfaces UI Grid
   $scope.surfacesGridOptions = {
     columnDefs: [{
       name: 'name',
       displayName: 'Surface Name',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'space',
       displayName: 'Space Name',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
@@ -66,6 +69,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
       name: 'area',
       secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
@@ -80,6 +84,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
         }
       },
       cellEditableCondition: function ($scope) {
+        var mainScope = $scope;
+        while (!mainScope.hasOwnProperty('applySettingsActive')) {
+          mainScope = mainScope.$parent;
+        }
+        if (mainScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Exterior'));
       },
       filters: Shared.numberFilter(),
@@ -87,6 +96,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
     }, {
       name: 'construction',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'adjacent_space',
@@ -100,6 +110,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
         }
       },
       cellEditableCondition: function ($scope) {
+        var mainScope = $scope;
+        while (!mainScope.hasOwnProperty('applySettingsActive')) {
+          mainScope = mainScope.$parent;
+        }
+        if (mainScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Ceiling' || $scope.row.entity.boundary == 'Interior');
       },
       editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -119,6 +134,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
         }
       },
       cellEditableCondition: function ($scope) {
+        var mainScope = $scope;
+        while (!mainScope.hasOwnProperty('applySettingsActive')) {
+          mainScope = mainScope.$parent;
+        }
+        if (mainScope.applySettingsActive) return false;
         return $scope.row.entity.type == 'Roof';
       },
       filters: Shared.numberFilter(),
@@ -134,6 +154,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
         }
       },
       cellEditableCondition: function ($scope) {
+        var mainScope = $scope;
+        while (!mainScope.hasOwnProperty('applySettingsActive')) {
+          mainScope = mainScope.$parent;
+        }
+        if (mainScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
       },
       filters: Shared.numberFilter(),
@@ -149,6 +174,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
         }
       },
       cellEditableCondition: function ($scope) {
+        var mainScope = $scope;
+        while (!mainScope.hasOwnProperty('applySettingsActive')) {
+          mainScope = mainScope.$parent;
+        }
+        if (mainScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
       },
       filters: Shared.numberFilter(),
@@ -192,6 +222,48 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'Shared', 'Enums', function ($
         }
       });
     }
+  };
+
+  // Buttons
+  $scope.applySettings = function () {
+    $scope.applySettingsActive = true;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.surfacesGridOptions.multiSelect = true;
+
+    $scope.surfacesGridOptions.columnDefs[2].enableFiltering = false;
+    $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = true;
+    $scope.surfacesGridOptions.columnDefs[2].filter.term = $scope.selected.surface.surface_type;
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+  };
+
+  $scope.confirmApplySettings = function () {
+    var replacement = {
+      area: $scope.selected.surface.area,
+      azimuth: $scope.selected.surface.azimuth,
+      construction: $scope.selected.surface.construction,
+      adjacent_space: $scope.selected.surface.adjacent_space,
+      tilt: $scope.selected.surface.tilt,
+      wall_height: $scope.selected.surface.wall_height,
+      exposed_perimeter: $scope.selected.surface.exposed_perimeter
+    };
+    var rows = $scope.gridApi.selection.getSelectedRows();
+    _.each(rows, function (row) {
+      _.merge(row, replacement);
+    });
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.resetApplySettings();
+  };
+
+  $scope.resetApplySettings = function () {
+    $scope.selected.surface = null;
+    $scope.applySettingsActive = false;
+    $scope.data.clearAll($scope.gridApi);
+    $scope.surfacesGridOptions.multiSelect = false;
+
+    $scope.surfacesGridOptions.columnDefs[2].enableFiltering = true;
+    $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = false;
+    $scope.surfacesGridOptions.columnDefs[2].filter.term = '';
+    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
   };
 
 }]);

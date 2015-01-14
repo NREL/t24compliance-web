@@ -12,6 +12,7 @@ cbecc.config([
   '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider', function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
 
     usSpinnerConfigProvider.setDefaults({
+      color: '#70be44',
       lines: 13,
       length: 0,
       width: 22,

@@ -89,7 +89,7 @@ cbecc.controller('SpacesCtrl', [
 
     // Buttons
     $scope.data.selectAll = function (gridApi) {
-      gridApi.selection.selectAllRows();
+      gridApi.selection.selectAllVisibleRows();
     };
     $scope.data.clearAll = function (gridApi) {
       gridApi.selection.clearSelectedRows();
