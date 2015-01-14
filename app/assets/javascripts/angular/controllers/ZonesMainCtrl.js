@@ -22,10 +22,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'Shared', 'Enums', function ($scope
       name: 'type',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapEnums:"zones_type_enums"',
-      editDropdownOptionsArray: Enums.enumsArr.zones_type_enums,
-      filter: Shared.enumFilter(Enums.enumsArr.zones_type_enums),
-      sortingAlgorithm: Shared.sort(Enums.enumsArr.zones_type_enums)
+      editDropdownOptionsArray: Enums.enumsArr.zones_type_enums
     }],
     data: $scope.data.zones,
     enableCellEditOnFocus: true,

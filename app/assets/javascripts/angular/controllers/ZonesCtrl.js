@@ -1,5 +1,5 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$location', 'Shared', 'stories', function ($scope, $location, Shared, stories) {
+  '$scope', '$location', 'Shared', 'Enums', 'stories', function ($scope, $location, Shared, Enums, stories) {
 
     $scope.data = {
       stories: stories,
@@ -53,7 +53,7 @@ cbecc.controller('ZonesCtrl', [
       var zone = {
         name: "Zone " + ($scope.data.zones.length + 1),
         story: $scope.data.stories[0].id,
-        type: 0
+        type: Enums.enums.zones_type_enums[0]
       };
 
       $scope.data.zones.push(zone);
