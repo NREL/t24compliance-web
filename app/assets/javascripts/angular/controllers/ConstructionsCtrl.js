@@ -134,7 +134,7 @@ cbecc.controller('ConstructionsCtrl', [
             return {
               data: $scope.constData,
               rowEntity: rowEntity,
-              title: $scope.panels[index].title
+              panel: $scope.panels[index]
             };
           }
         }
@@ -218,9 +218,27 @@ cbecc.controller('ConstructionsCtrl', [
 cbecc.controller('ModalConstructionsLibraryCtrl', [
   '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
-    $scope.title = params.title;
+    $scope.title = params.panel.title;
     $scope.layerData = [];
     $scope.selected = null;
+
+    if (params.panel.name == 'exterior_wall') {
+      $scope.type = 'ExteriorWall';
+    } else if (params.panel.name == 'interior_wall') {
+      $scope.type = 'InteriorWall';
+    } else if (params.panel.name == 'underground_wall') {
+      $scope.type = 'UndergroundWall';
+    } else if (params.panel.name == 'roof') {
+      $scope.type = 'ExteriorRoof';
+    } else if (params.panel.name == 'door') {
+      $scope.type = 'Door';
+    } else if (params.panel.name == 'interior_floor') {
+      $scope.type = 'InteriorFloor';
+    } else if (params.panel.name == 'exterior_floor') {
+      $scope.type = 'ExteriorFloor';
+    } else if (params.panel.name == 'underground_floor') {
+      $scope.type = 'UndergroundFloor';
+    }
 
     $scope.constructionsGridOptions = {
       columnDefs: [{
@@ -229,6 +247,15 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/customHeaderCell',
         minWidth: 400
+      }, {
+        name: 'compatible_surface_type',
+        enableFiltering: false,
+        filter: {
+          condition: uiGridConstants.filter.EXACT,
+          noTerm: true,
+          term: $scope.type
+        },
+        visible: false
       }, {
         name: 'type',
         enableHiding: false,
@@ -336,6 +363,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', [
         name: 'fenestration_type',
         enableFiltering: false,
         filter: {
+          condition: uiGridConstants.filter.EXACT,
           noTerm: true,
           term: $scope.type
         },
