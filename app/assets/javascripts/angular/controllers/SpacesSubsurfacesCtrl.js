@@ -80,7 +80,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/customHeaderCell'
     }, {
       name: 'construction',
