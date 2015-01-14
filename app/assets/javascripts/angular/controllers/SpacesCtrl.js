@@ -10,6 +10,9 @@ cbecc.controller('SpacesCtrl', [
       subsurfaces: []
     };
 
+    console.log("Saved Spaces:");
+    console.log($scope.data.spaces);
+
     // Check for construction defaults
     if ($scope.data.constructions.length) {
       $scope.data.constructions = $scope.data.constructions[0];
