@@ -1,9 +1,11 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$location', 'Shared', 'Enums', 'stories', function ($scope, $location, Shared, Enums, stories) {
+  '$scope', '$location', 'Shared', 'Enums', 'stories', 'spaces', function ($scope, $location, Shared, Enums, stories, spaces) {
 
     $scope.data = {
       stories: stories,
-      zones: []
+      spaces: spaces,
+      zones: [],
+      spaces_to_zones: []
     };
 
     $scope.data.storiesArr = [];
@@ -15,6 +17,22 @@ cbecc.controller('ZonesCtrl', [
       });
       $scope.data.storiesHash[story.id] = story.name;
     });
+
+    $scope.data.zonesHash = {};
+    _.each($scope.data.zones, function (zone) {
+      $scope.data.zonesHash[zone.id] = zone.name;
+    });
+
+    //populate spaces_to_zones with space id and name
+    _.each($scope.data.spaces, function (space) {
+      $scope.data.spaces_to_zones.push({
+        id: space.id,
+        space_name: space.name,
+        story: $scope.data.storiesHash[space.building_story_id]
+      });
+    });
+    console.log('SPACES TO ZONES');
+    console.log($scope.data.spaces_to_zones);
 
     $scope.tabs = [{
       heading: 'Create Zones',

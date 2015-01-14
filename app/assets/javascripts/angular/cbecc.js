@@ -253,6 +253,9 @@ cbecc.config([
         resolve: {
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
+          }],
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding',
@@ -388,6 +391,19 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
 
     return storiesHash[input];
   };
+}).filter('mapZones', function () {
+  return function(input, $scope) {
+    var zonesHash = {};
+    while (_.isEmpty(zonesHash)) {
+      if ($scope.hasOwnProperty('data')) {
+        zonesHash = $scope.data.zonesHash;
+      }
+      else {
+        $scope = $scope.$parent;
+      }
+    }
+
+  }
 }).filter('mapSpaces', function () {
   return function (input, $scope) {
     var spacesHash = {};
