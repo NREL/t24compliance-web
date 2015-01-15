@@ -1,9 +1,10 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'fenData', 'defaults', function ($scope, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, fenData, defaults) {
+  '$scope', '$location', '$modal', 'uiGridConstants', 'toaster', 'ConstructionDefaults', 'Shared', 'constData', 'doorData', 'fenData', 'defaults', function ($scope, $location, $modal, uiGridConstants, toaster, ConstructionDefaults, Shared, constData, doorData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
     $scope.constData = constData;
+    $scope.doorData = doorData;
     $scope.fenData = fenData;
 
     // retrieve saved defaults (if any)
@@ -29,9 +30,6 @@ cbecc.controller('ConstructionsCtrl', [
     }, {
       title: 'Roof Construction',
       name: 'roof'
-    }, {
-      title: 'Door Construction',
-      name: 'door'
     }, {
       title: 'Interior Floor Construction',
       name: 'interior_floor'
@@ -62,6 +60,42 @@ cbecc.controller('ConstructionsCtrl', [
       if (sel) {
         panel.selected = sel;
         panel.gridOptions.data = sel.layers;
+        panel.open = true;
+      } else {
+        panel.open = false;
+      }
+    });
+
+
+    $scope.doorPanels = [{
+      title: 'Door Construction',
+      name: 'door'
+    }];
+
+    $scope.doorPanels.forEach(function (panel) {
+      panel.doorGridOptions = {
+        columnDefs: [{
+          name: 'name'
+        }, {
+          name: 'type'
+        }, {
+          name: 'certification_method'
+        }, {
+          name: 'u_factor'
+        }, {
+          name: 'open'
+        }],
+        enableColumnMenus: false,
+        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+        enableSorting: false,
+        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+      };
+
+      // retrieve selected
+      var sel = getSelected($scope.doorData, $scope.defaults[panel.name]);
+      if (sel) {
+        panel.selected = sel;
+        panel.doorGridOptions.data = [sel];
         panel.open = true;
       } else {
         panel.open = false;
@@ -121,21 +155,20 @@ cbecc.controller('ConstructionsCtrl', [
       }
     });
 
+
     // Buttons
     $scope.expandAll = function () {
-      _.each($scope.panels, function(panel) {
-        panel.open = true;
-      });
-      _.each($scope.fenPanels, function(panel) {
-        panel.open = true;
+      _.each(['panels', 'doorPanels', 'fenPanels'], function(panelType) {
+        _.each($scope[panelType], function(panel) {
+          panel.open = true;
+        });
       });
     };
     $scope.collapseAll = function () {
-      _.each($scope.panels, function(panel) {
-        panel.open = false;
-      });
-      _.each($scope.fenPanels, function(panel) {
-        panel.open = false;
+      _.each(['panels', 'doorPanels', 'fenPanels'], function(panelType) {
+        _.each($scope[panelType], function(panel) {
+          panel.open = false;
+        });
       });
     };
 
@@ -144,7 +177,7 @@ cbecc.controller('ConstructionsCtrl', [
     $scope.openLibraryModal = function (index, rowEntity) {
       var modalInstance = $modal.open({
         backdrop: 'static',
-        controller: 'ModalConstructionsLibraryCtrl',
+        controller: 'ModalConstructionLibraryCtrl',
         templateUrl: 'constructions/library.html',
         windowClass: 'wide-modal',
         resolve: {
@@ -161,6 +194,32 @@ cbecc.controller('ConstructionsCtrl', [
       modalInstance.result.then(function (selectedConstruction) {
         $scope.panels[index].selected = selectedConstruction;
         $scope.panels[index].gridOptions.data = selectedConstruction.layers;
+      }, function () {
+        // Modal canceled
+      });
+    };
+
+    // Modal Settings
+    $scope.openDoorLibraryModal = function (index, rowEntity) {
+      var modalInstance = $modal.open({
+        backdrop: 'static',
+        controller: 'ModalDoorLibraryCtrl',
+        templateUrl: 'constructions/door_library.html',
+        windowClass: 'wide-modal',
+        resolve: {
+          params: function () {
+            return {
+              data: $scope.doorData,
+              rowEntity: rowEntity,
+              panel: $scope.doorPanels[index]
+            };
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedDoor) {
+        $scope.doorPanels[index].selected = selectedDoor;
+        $scope.doorPanels[index].doorGridOptions.data = [selectedDoor];
       }, function () {
         // Modal canceled
       });
@@ -193,7 +252,7 @@ cbecc.controller('ConstructionsCtrl', [
     };
 
 
-    // save (constructions and fenestrations saved in same record
+    // save (constructions, doors, and fenestrations saved in same record
     $scope.submit = function () {
       console.log("submit");
 
@@ -208,6 +267,9 @@ cbecc.controller('ConstructionsCtrl', [
 
       var construction_defaults = {};
       $scope.panels.forEach(function (panel) {
+        construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
+      });
+      $scope.doorPanels.forEach(function (panel) {
         construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
       });
       $scope.fenPanels.forEach(function (panel) {
@@ -227,13 +289,18 @@ cbecc.controller('ConstructionsCtrl', [
       $scope.panels[index].gridOptions.data = [];
     };
 
+    $scope.removeDoor = function (index) {
+      $scope.doorPanels[index].selected = null;
+      $scope.doorPanels[index].doorGridOptions.data = [];
+    };
+
     $scope.removeFenestration = function (index) {
       $scope.fenPanels[index].selected = null;
       $scope.fenPanels[index].fenGridOptions.data = [];
     };
   }]);
 
-cbecc.controller('ModalConstructionsLibraryCtrl', [
+cbecc.controller('ModalConstructionLibraryCtrl', [
   '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
     $scope.data = params.data;
     $scope.title = params.panel.title;
@@ -347,6 +414,73 @@ cbecc.controller('ModalConstructionsLibraryCtrl', [
       enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
       enableSorting: false,
       enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+    };
+
+    $scope.ok = function () {
+      $modalInstance.close($scope.selected);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+  }]);
+
+cbecc.controller('ModalDoorLibraryCtrl', [
+  '$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
+    $scope.data = params.data;
+    $scope.title = params.panel.title;
+    $scope.selected = null;
+
+    $scope.doorGridOptions = {
+      columnDefs: [{
+        name: 'name',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        minWidth: 400
+      }, {
+        name: 'type',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      }, {
+        name: 'certification_method',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      }, {
+        name: 'u_factor',
+        secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
+        enableHiding: false,
+        filters: Shared.numberFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      }, {
+        name: 'open',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      }],
+      data: 'data',
+      enableFiltering: true,
+      enableRowHeaderSelection: false,
+      enableRowSelection: true,
+      multiSelect: false,
+      onRegisterApi: function (gridApi) {
+        $scope.gridApi = gridApi;
+        gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+          if (row.isSelected) {
+            $scope.selected = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected = null;
+          }
+        });
+        if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
+          $interval(function () {
+            $scope.gridApi.selection.selectRow(params.rowEntity);
+          }, 0, 1);
+        }
+      }
     };
 
     $scope.ok = function () {

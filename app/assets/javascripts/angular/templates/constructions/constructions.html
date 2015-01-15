@@ -32,6 +32,21 @@
         <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeConstruction($index)">Remove Construction</button>
       </div>
     </accordion-group>
+    <accordion-group ng-repeat="panel in doorPanels" is-open="panel.open">
+      <accordion-heading>
+        <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
+        {{panel.title}}<span ng-show="panel.selected"> &mdash; <strong>{{panel.selected.name}}</strong></span>
+      </accordion-heading>
+      <div ng-hide="panel.selected">
+        <button type="button" class="btn btn-info" ng-click="openDoorLibraryModal($index)">Select a Door</button>
+      </div>
+      <div ng-show="panel.selected">
+        <div ui-grid="panel.doorGridOptions" class="long-grid" ui-grid-resize-columns></div>
+        <br>
+        <button type="button" class="btn btn-info" ng-click="openDoorLibraryModal($index, panel.selected)">Change Door</button>
+        <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeDoor($index)">Remove Door</button>
+      </div>
+    </accordion-group>
     <accordion-group ng-repeat="panel in fenPanels" is-open="panel.open">
       <accordion-heading>
         <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
@@ -41,7 +56,7 @@
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index)">Select a Fenestration</button>
       </div>
       <div ng-show="panel.selected">
-        <div ui-grid="panel.fenGridOptions" class="fen-grid" ui-grid-resize-columns></div>
+        <div ui-grid="panel.fenGridOptions" class="long-grid" ui-grid-resize-columns></div>
         <br>
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index, panel.selected)">Change Fenestration</button>
         <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeFenestration($index)">Remove Fenestration</button>

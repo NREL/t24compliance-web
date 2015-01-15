@@ -12,7 +12,7 @@ json.array!(@spaces) do |space|
   end
 
   json.exterior_walls space.exterior_walls do |exterior_wall|
-    json.(exterior_wall, :id, :name, :area, :construct_assembly_reference)
+    json.(exterior_wall, :id, :name, :area, :azimuth, :construct_assembly_reference)
     json.set! :surface_type, 'Exterior Wall'
     json.doors exterior_wall.doors do |door|
       json.(door, :id, :name, :operation, :door_construction_reference, :area)
