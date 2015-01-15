@@ -102,7 +102,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       name: 'adjacent_space',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
-        if (!(row.entity.type == 'Ceiling' || row.entity.boundary == 'Interior')) {
+        if (row.entity.boundary != 'Interior') {
           return 'disabled-cell';
         }
         if (row.entity.space == row.entity.adjacent_space) {
@@ -115,7 +115,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
           mainScope = mainScope.$parent;
         }
         if (mainScope.applySettingsActive) return false;
-        return ($scope.row.entity.type == 'Ceiling' || $scope.row.entity.boundary == 'Interior');
+        return $scope.row.entity.boundary == 'Interior';
       },
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapSpaces:this',
