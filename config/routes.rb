@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   # libraries
   resources :constructions, only: [:show, :index]
   resources :fenestrations, only: [:show, :index]
+  resources :door_lookups, only: [:show, :index]
   resources :space_function_defaults, only: [:show, :index]
 
   # depend on project

@@ -7,7 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 SKIP_CONSTRUCTIONS = true
-SKIP_FENESTRATION = false
+SKIP_FENESTRATION = true
+SKIP_DOORS = false
 SKIP_SPACES = true
 
 u = User.find_or_create_by(email: 'test@nrel.gov')
@@ -58,6 +59,25 @@ unless SKIP_FENESTRATION
     end
   end
 end
+
+unless SKIP_DOORS
+  file = File.read(File.join(Rails.root, "lib/assets/door_construction_library.json"))
+  data = JSON.parse(file)
+
+  data['door_constructions'].each_with_index do |c, index|
+    door = DoorLookup.find_or_create_by(name: c['name'])
+    if door
+      puts "Adding/Updating Door: #{door.name}"
+
+      # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+      # need to be removed
+      c = door.as_json.merge(c)
+      door.update(c)
+      door.save!
+    end
+  end
+end
+
 
 unless SKIP_SPACES
 # SPACE TYPE DEFAULTS
