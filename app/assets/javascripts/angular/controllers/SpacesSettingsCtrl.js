@@ -73,11 +73,13 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.space = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.space = null;
+        if (!$scope.applySettingsActive) {
+          if (row.isSelected) {
+            $scope.selected.space = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected.space = null;
+          }
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {

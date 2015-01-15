@@ -96,11 +96,13 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.subsurface = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.subsurface = null;
+        if (!$scope.applySettingsActive) {
+          if (row.isSelected) {
+            $scope.selected.subsurface = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected.subsurface = null;
+          }
         }
       });
     }

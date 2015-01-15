@@ -193,11 +193,13 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.surface = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.surface = null;
+        if (!$scope.applySettingsActive) {
+          if (row.isSelected) {
+            $scope.selected.surface = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected.surface = null;
+          }
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {

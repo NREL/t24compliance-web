@@ -45,11 +45,13 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.zone = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.zone = null;
+        if (!$scope.applySettingsActive) {
+          if (row.isSelected) {
+            $scope.selected.zone = row.entity;
+          } else {
+            // No rows selected
+            $scope.selected.zone = null;
+          }
         }
       });
     }
