@@ -444,4 +444,8 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
     }
     return $scope.surfacesHash[input];
   };
+}).filter('parseRValue', function () {
+  return function (input) {
+    return input.replace('_', '.').replace(/[^\d.]/g, '');
+  };
 });
