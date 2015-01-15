@@ -9,45 +9,58 @@
   </div>
 </div>
 
-<div class="row pad-top-20 pad-left-40 pad-bot-20">
-
-  <button type="button" ng-click="openSystemCreatorModal()" class="btn btn-success col-md-2">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New System
-  </button>
+<div class="row pad-top-20 pad-bot-20">
+  <div class="col-md-12">
+    <button type="button" ng-click="openSystemCreatorModal()" class="btn btn-success">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New System
+    </button>
+  </div>
 </div>
 <accordion close-others="false">
   <accordion-group ng-repeat="panel in systemPanels" is-open="true" ng-show="hasSystems(panel.name)">
     <accordion-heading>
-      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': systemPanels[$index].open, 'glyphicon-chevron-right': !systemPanels[$index].open}"></i>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
       {{panel.title}}
       <span ng-if="systems[panel.name].length">
           |
           <small>
-          <span class="label label-primary">{{systems[panel.name].length}}</span> added
+            <span class="label label-primary">{{systems[panel.name].length}}</span> added
           </small>
       </span>
     </accordion-heading>
 
     <div class="system" ng-switch on="panel.name">
-      <div ng-switch-when="ptac"><div ng-include="'systems/ptac.html'"></div></div>
-      <div ng-switch-when="fpfc"><div ng-include="'systems/fpfc.html'"></div></div>
-      <div ng-switch-when="vav"><div ng-include="'systems/vav.html'" ></div></div>
-      <div ng-switch-when="pvav"><div ng-include="'systems/pvav.html'" ></div></div>
-      <div ng-switch-when="exhaust"><div ng-include="'systems/exhaust.html'" ></div></div>
+      <div ng-switch-when="ptac">
+        <div ng-include="'systems/ptac.html'"></div>
+      </div>
+      <div ng-switch-when="fpfc">
+        <div ng-include="'systems/fpfc.html'"></div>
+      </div>
+      <div ng-switch-when="vav">
+        <div ng-include="'systems/vav.html'"></div>
+      </div>
+      <div ng-switch-when="pvav">
+        <div ng-include="'systems/pvav.html'"></div>
+      </div>
+      <div ng-switch-when="exhaust">
+        <div ng-include="'systems/exhaust.html'"></div>
+      </div>
     </div>
   </accordion-group>
 </accordion>
 <div class="row pad-top-20">
-  <div class="col-md-12 pad-left-40">
+  <div class="col-md-12">
     <div class="inline-heading">
-      <div  ng-show="noPlants()"><h3>Add Your Fluid Systems |</h3> Edit the following fluid systems which are connected to the zone and air systems entered above.</div>
+      <div ng-show="noPlants()">
+        <h3>Add Your Fluid Systems |</h3> Edit the following fluid systems which are connected to the zone and air systems entered above.
+      </div>
     </div>
   </div>
 </div>
 <accordion close-others="false">
   <accordion-group ng-repeat="panel in plantPanels" is-open="true" ng-show="hasPlant(panel.name)">
     <accordion-heading>
-      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': plantPanels[$index].open, 'glyphicon-chevron-right': !plantPanels[$index].open}"></i>
+      <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
       {{panel.title}}
       <span ng-if="plants[panel.name].length">
           |
@@ -58,13 +71,21 @@
     </accordion-heading>
 
     <div class="system" ng-switch on="panel.name">
-      <div ng-switch-when="hot_water"><div ng-include="'systems/hot_water.html'"></div></div>
-      <div ng-switch-when="chilled_water"><div ng-include="'systems/chilled_water.html'"></div></div>
-      <div ng-switch-when="condenser"><div ng-include="'systems/condenser.html'"></div></div>
-      <div ng-switch-when="shw"><div ng-include="'systems/shw.html'"></div></div>
+      <div ng-switch-when="hot_water">
+        <div ng-include="'systems/hot_water.html'"></div>
+      </div>
+      <div ng-switch-when="chilled_water">
+        <div ng-include="'systems/chilled_water.html'"></div>
+      </div>
+      <div ng-switch-when="condenser">
+        <div ng-include="'systems/condenser.html'"></div>
+      </div>
+      <div ng-switch-when="shw">
+        <div ng-include="'systems/shw.html'"></div>
+      </div>
     </div>
   </accordion-group>
-
+</accordion>
 
 <div class="row pad-bot-20 pad-top-20">
   <div class="control-group col-md-1">
