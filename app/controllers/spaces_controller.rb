@@ -39,7 +39,9 @@ class SpacesController < ApplicationController
     # add / update
     if clean_params.has_key?('data')
       # process spaces grouped by story
-      clean_params['data'].group_by{|d| d['building_story_id']}.each do |story, spaces|
+      spaces_by_story = clean_params['data'].group_by{|d| d['building_story_id']}
+      logger.info("SPACES BY STORY: #{spaces_by_story}")
+      spaces_by_story.each do |story, spaces|
         logger.info("PROCESSING STORY: #{story}")
         story_spaces = []
         spaces.each do |space|
@@ -165,6 +167,16 @@ class SpacesController < ApplicationController
         @story.save
 
       end
+
+      # iterate through stories to catch special case where all spaces should be deleted
+      @building.building_stories.each do |story|
+         # look for key matching building_story_id
+         if !spaces_by_story.has_key?(story.id)
+           story.spaces = []
+           story.save
+         end
+      end
+
     end
 
     # TODO: add error handling?!
