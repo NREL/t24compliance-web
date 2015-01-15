@@ -296,6 +296,11 @@ cbecc.config([
           controller: 'ZonesSystemsCtrl',
           templateUrl: 'zones/systems.html'
         }, {
+          name: 'exhausts',
+          url: '/exhausts',
+          controller: 'ZonesExhaustsCtrl',
+          templateUrl: 'zones/exhausts.html'
+        },{
           name: 'terminals',
           url: '/terminals',
           controller: 'ZonesTerminalsCtrl',

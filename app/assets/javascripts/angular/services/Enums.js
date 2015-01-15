@@ -261,6 +261,14 @@ cbecc.factory('Enums', function () {
       'InAirStream',
       'NotInAirStream'
     ],
+    fans_control_method_enums: [
+      'ConstantVolume',
+      'VariableSpeedDrive',
+      'Dampers',
+      'InletVanes',
+      'VariablePitchBlades',
+      'TwoSpeed'
+    ],
     fluid_systems_temperature_control_enums: [
       'Fixed',
       'Scheduled',

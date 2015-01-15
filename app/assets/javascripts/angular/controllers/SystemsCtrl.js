@@ -5,7 +5,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     ptac: [],
     fpfc: [],
     vav: [],
-    pvav: []
+    pvav: [],
+    exhaust: []
   };
   // same for plants
   $scope.plants = {
@@ -45,7 +46,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     });
   });
 
-  //retrieve systems and process into view format
+  // retrieve systems and process into view format
+  // process exhaust system types here too (or they will get wiped out)
   _.each(saved_systems, function (system) {
     var type = system.type.toLowerCase();
     $scope.systems[type].push(system);

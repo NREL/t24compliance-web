@@ -5,8 +5,12 @@ cbecc.controller('ZonesCtrl', [
       stories: stories,
       spaces: spaces,
       zones: zones,
-      systems: systems
+      systems: systems,
+      exhausts: []
     };
+
+    // TODO: separate exhaust systems from other zone_systems
+    // TODO: push all systems back together when saving
 
     //console.log("Spaces");
     //console.log($scope.data.spaces);
@@ -40,6 +44,10 @@ cbecc.controller('ZonesCtrl', [
       path: '/zones/systems',
       route: 'requirebuilding.zones.systems'
     }, {
+      heading: 'Exhaust Systems',
+      path: '/zones/exhausts',
+      route: 'requirebuilding.zones.exhausts'
+    },{
       heading: 'Attach Terminals',
       path: '/zones/terminals',
       route: 'requirebuilding.zones.terminals'
@@ -89,11 +97,10 @@ cbecc.controller('ZonesCtrl', [
     // save
     $scope.submit = function () {
       console.log("submit");
-
       console.log($scope.data);
-
       console.log('saving zones');
       console.log($scope.data.zones);
+
       var params = Shared.defaultParams();
       params['data'] = $scope.data.zones;
       data.bulkSync('thermal_zones', params).then(success).catch(failure);
@@ -107,8 +114,19 @@ cbecc.controller('ZonesCtrl', [
 
         function success(response) {
           toaster.pop('success', 'Spaces updated with thermal zone references');
-         // $location.path(Shared.zonesPath());
 
+          var params = Shared.defaultParams();
+          params['data'] = $scope.data.systems;
+          data.bulkSync('systems', params).then(success).catch(failure);
+
+          function success(response) {
+            toaster.pop('success', 'Exhaust systems successfully saved');
+            $location.path(Shared.zonesPath());
+          }
+
+          function failure(response) {
+            toaster.pop('error',  'An error occurred while saving spaces', response.statusText);
+          }
         }
 
         function failure(response) {

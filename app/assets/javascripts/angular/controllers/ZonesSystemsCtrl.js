@@ -25,7 +25,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
     });
   });
 
-  // Spaces UI Grid
+  // Systems UI Grid
   $scope.systemsGridOptions = {
     columnDefs: [{
       name: 'name',
