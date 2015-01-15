@@ -436,8 +436,35 @@ cbecc.controller('ModalConstructionLibraryCtrl', [
       }, {
         name: 'slab_insulation_thermal_resistance',
         secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
+        cellFilter: 'parseRValue',
         enableHiding: false,
-        filter: Shared.textFilter(),
+        filters: [{
+          condition: function (searchTerm, cellValue) {
+            var term = searchTerm.replace(/[^\d.-]/g, '');
+            if (term.length) {
+              term = Number(term);
+              if (isNaN(term)) term = 0;
+              if (cellValue === null) return false;
+              var rValue = Number(cellValue.replace('_', '.').replace(/[^\d.]/g, ''));
+              return rValue >= term;
+            }
+            return true;
+          },
+          placeholder: 'At least'
+        }, {
+          condition: function (searchTerm, cellValue) {
+            var term = searchTerm.replace(/[^\d.-]/g, '');
+            if (term.length) {
+              term = Number(term);
+              if (isNaN(term)) term = 0;
+              if (cellValue === null) return false;
+              var rValue = Number(cellValue.replace('_', '.').replace(/[^\d.]/g, ''));
+              return rValue <= term;
+            }
+            return true;
+          },
+          placeholder: 'No more than'
+        }],
         headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
         visible: $scope.type == 'UndergroundFloor'
       }],
