@@ -391,6 +391,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
     console.error('State not found:', unfoundState.to);
   });
 
+/*
   // Initialize cache with static data
   data.list('constructions').then(function (response) {
     Shared.saveToCache('constructions', response);
@@ -401,6 +402,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   data.list('fenestrations').then(function (response) {
     Shared.saveToCache('fenestrations', response);
   });
+*/
 }]);
 
 

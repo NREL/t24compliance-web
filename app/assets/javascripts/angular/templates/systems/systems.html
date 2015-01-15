@@ -17,7 +17,7 @@
   </div>
 </div>
 <accordion close-others="false">
-  <accordion-group ng-repeat="panel in systemPanels" is-open="true" ng-show="hasSystems(panel.name)">
+  <accordion-group ng-repeat="panel in systemPanels" is-open="true" ng-if="hasSystems(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
       {{panel.title}}
@@ -58,7 +58,7 @@
   </div>
 </div>
 <accordion close-others="false">
-  <accordion-group ng-repeat="panel in plantPanels" is-open="true" ng-show="hasPlant(panel.name)">
+  <accordion-group ng-repeat="panel in plantPanels" is-open="true" ng-if="hasPlant(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
       {{panel.title}}

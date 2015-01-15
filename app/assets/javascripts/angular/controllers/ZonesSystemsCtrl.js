@@ -4,6 +4,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
     zone: null
   };
 
+  // array of plenum zones for dropdown
   $scope.plenumZonesArr = [];
   $scope.plenumZonesHash = {};
   _.each($scope.data.zones, function (zone, index) {
@@ -17,8 +18,9 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
 
   });
 
+  // array of (non-exhaust) HVAC systems
   $scope.systemsArr = [];
-  _.each($scope.data.systems, function (system, index) {
+  _.each($scope.data.non_exhaust_systems, function (system, index) {
     $scope.systemsArr.push({
       id: system.name,
       value: system.name

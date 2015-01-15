@@ -23,9 +23,9 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
   console.log("exhaustZonesArray");
   console.log(exhaustZonesArr);
 
-  // compare exhaustZonesArr with $scope.data.exhausts to see if rows need to be added
+  // compare exhaustZonesArr with $scope.data.exhausts to see if rows need to be added (for zones that have new spaces with exhaust)
   _.each(exhaustZonesArr, function (zone) {
-    var match = _.find($scope.data.exhausts, {id: zone.id});
+    var match = _.find($scope.data.exhausts, {zone_id: zone.id});
     if (!match) {
       console.log("NO MATCH FOR zone id: ", zone.id);
       // add to array
@@ -39,6 +39,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
   });
   console.log("data.exhausts");
   console.log($scope.data.exhausts);
+
 
   // Exhausts UI Grid
   $scope.exhaustsGridOptions = {

@@ -60,7 +60,7 @@ class ZoneSystemsController < ApplicationController
         cool = rec.extract!('coil_cooling')['coil_cooling']
         heat = rec.extract!('coil_heating')['coil_heating']
 
-        if cool.has_key?('id') and !cool['id'].nil?
+        if !cool.nil? and cool.has_key?('id') and !cool['id'].nil?
           @cool = CoilCooling.find(cool['id'])
           @cool.update(cool)
           coil_coolings << @cool
@@ -70,7 +70,7 @@ class ZoneSystemsController < ApplicationController
           coil_coolings << @cool
         end
 
-        if heat.has_key?('id') and !heat['id'].nil?
+        if !heat.nil? and heat.has_key?('id') and !heat['id'].nil?
           @heat = CoilHeating.find(heat['id'])
           @heat.update(heat)
           coil_heatings << @heat
