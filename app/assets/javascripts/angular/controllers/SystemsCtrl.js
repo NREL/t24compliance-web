@@ -848,21 +848,37 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     $scope.errors = {}; //clean up server errors
 
     console.log($scope.systems);
+    var params;
 
-    // now save plants
-    // collapse all plant types into 1 array for saving
-    var plants = [];
-    _.each($scope.plants, function (plant) {
-      _.each(plant, function (p) {
-        plants.push(p);
+    function success(response) {
+      // now save plants
+      // collapse all plant types into 1 array for saving
+      var plants = [];
+      _.each($scope.plants, function (plant) {
+        _.each(plant, function (p) {
+          plants.push(p);
+        });
       });
-    });
-    var params = Shared.defaultParams();
-    params.data = plants;
-    console.log('SAVING PLANTS!');
-    console.log(plants);
-    data.bulkSync('fluid_systems', params).then(success).catch(failure);
+      params = Shared.defaultParams();
+      params.data = plants;
+      console.log('SAVING PLANTS!');
+      console.log(plants);
+      data.bulkSync('fluid_systems', params).then(success).catch(failure);
 
+      function success(response) {
+        toaster.pop('success', 'Systems and Plants successfully saved');
+      }
+
+      function failure(response) {
+        console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving plants');
+      }
+    }
+
+    function failure(response) {
+      console.log("failure", response);
+      toaster.pop('error', 'An error occurred while saving systems');
+    }
 
     // collapse all system types into 1 array for saving
     var systems = [];
@@ -878,14 +894,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     params.data = systems;
     data.bulkSync('zone_systems', params).then(success).catch(failure);
 
-    function success(response) {
-      toaster.pop('success', 'Systems successfully saved');
-    }
-
-    function failure(response) {
-      console.log("failure", response);
-      toaster.pop('error', 'An error occurred while saving');
-    }
   };
 
   //**** Modal Settings ****
