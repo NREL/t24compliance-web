@@ -175,6 +175,7 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', '$sce', 'usSpi
   service.textFilter = function () {
     return {
       condition: function (searchTerm, cellValue) {
+        if (cellValue === null) return false;
         var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
         var value = cellValue.toLowerCase();
         return _.every(terms, function (term) {

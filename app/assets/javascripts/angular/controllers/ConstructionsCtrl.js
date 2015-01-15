@@ -11,9 +11,9 @@ cbecc.controller('ConstructionsCtrl', [
     $scope.defaults = defaults[0] || {};
 
     // retrieve each saved default record from ids
-    function getSelected(the_data, the_id) {
-      return _.find(the_data, {
-        id: the_id
+    function getSelected(data, id) {
+      return _.find(data, {
+        id: id
       });
     }
 
@@ -42,6 +42,46 @@ cbecc.controller('ConstructionsCtrl', [
     }];
 
     $scope.panels.forEach(function (panel) {
+      panel.constructionGridOptions = {
+        columnDefs: [{
+          name: 'name',
+          minWidth: 400
+        }, {
+          name: 'type'
+        }, {
+          name: 'framing_configuration',
+          maxWidth: 218,
+          visible: panel.name != 'underground_floor'
+        }, {
+          name: 'framing_size',
+          maxWidth: 159,
+          visible: panel.name != 'underground_floor'
+        }, {
+          name: 'cavity_insulation_r_value',
+          visible: panel.name != 'underground_floor'
+        }, {
+          name: 'continuous_insulation_r_value',
+          visible: panel.name != 'underground_floor'
+        }, {
+          name: 'continuous_insulation_material_name',
+          minWidth: 300,
+          visible: panel.name != 'underground_floor'
+        }, {
+          name: 'slab_type',
+          visible: panel.name == 'underground_floor'
+        }, {
+          name: 'slab_insulation_orientation',
+          visible: panel.name == 'underground_floor'
+        }, {
+          name: 'slab_insulation_thermal_resistance',
+          visible: panel.name == 'underground_floor'
+        }],
+        enableColumnMenus: false,
+        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+        enableSorting: false,
+        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+      };
+
       panel.gridOptions = {
         columnDefs: [{
           name: 'name',
@@ -59,6 +99,7 @@ cbecc.controller('ConstructionsCtrl', [
       var sel = getSelected($scope.constData, $scope.defaults[panel.name]);
       if (sel) {
         panel.selected = sel;
+        panel.constructionGridOptions.data = [sel];
         panel.gridOptions.data = sel.layers;
         panel.open = true;
       } else {
@@ -158,15 +199,15 @@ cbecc.controller('ConstructionsCtrl', [
 
     // Buttons
     $scope.expandAll = function () {
-      _.each(['panels', 'doorPanels', 'fenPanels'], function(panelType) {
-        _.each($scope[panelType], function(panel) {
+      _.each(['panels', 'doorPanels', 'fenPanels'], function (panelType) {
+        _.each($scope[panelType], function (panel) {
           panel.open = true;
         });
       });
     };
     $scope.collapseAll = function () {
-      _.each(['panels', 'doorPanels', 'fenPanels'], function(panelType) {
-        _.each($scope[panelType], function(panel) {
+      _.each(['panels', 'doorPanels', 'fenPanels'], function (panelType) {
+        _.each($scope[panelType], function (panel) {
           panel.open = false;
         });
       });
@@ -193,6 +234,7 @@ cbecc.controller('ConstructionsCtrl', [
 
       modalInstance.result.then(function (selectedConstruction) {
         $scope.panels[index].selected = selectedConstruction;
+        $scope.panels[index].constructionGridOptions.data = [selectedConstruction];
         $scope.panels[index].gridOptions.data = selectedConstruction.layers;
       }, function () {
         // Modal canceled
@@ -315,8 +357,6 @@ cbecc.controller('ModalConstructionLibraryCtrl', [
       $scope.type = 'UndergroundWall';
     } else if (params.panel.name == 'roof') {
       $scope.type = 'ExteriorRoof';
-    } else if (params.panel.name == 'door') {
-      $scope.type = 'Door';
     } else if (params.panel.name == 'interior_floor') {
       $scope.type = 'InteriorFloor';
     } else if (params.panel.name == 'exterior_floor') {
@@ -351,31 +391,55 @@ cbecc.controller('ModalConstructionLibraryCtrl', [
         enableHiding: false,
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-        maxWidth: 218
+        maxWidth: 218,
+        visible: $scope.type != 'UndergroundFloor'
       }, {
         name: 'framing_size',
         enableHiding: false,
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-        maxWidth: 159
+        maxWidth: 159,
+        visible: $scope.type != 'UndergroundFloor'
       }, {
         name: 'cavity_insulation_r_value',
         secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        visible: $scope.type != 'UndergroundFloor'
       }, {
         name: 'continuous_insulation_r_value',
         secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
         enableHiding: false,
         filters: Shared.numberFilter(),
-        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        visible: $scope.type != 'UndergroundFloor'
       }, {
         name: 'continuous_insulation_material_name',
         enableHiding: false,
         filter: Shared.textFilter(),
         headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-        minWidth: 300
+        minWidth: 300,
+        visible: $scope.type != 'UndergroundFloor'
+      }, {
+        name: 'slab_type',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        visible: $scope.type == 'UndergroundFloor'
+      }, {
+        name: 'slab_insulation_orientation',
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        visible: $scope.type == 'UndergroundFloor'
+      }, {
+        name: 'slab_insulation_thermal_resistance',
+        secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
+        enableHiding: false,
+        filter: Shared.textFilter(),
+        headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        visible: $scope.type == 'UndergroundFloor'
       }],
       data: 'data',
       enableFiltering: true,

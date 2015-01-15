@@ -4,8 +4,10 @@
 <div class="modal-body">
   <h4>Select a construction:</h4>
   <div ui-grid="constructionsGridOptions" ui-grid-auto-resize ui-grid-resize-columns ui-grid-selection></div>
-  <h4>Layers:</h4>
-  <div ui-grid="layersGridOptions" class="layers-grid" ui-grid-auto-resize ui-grid-resize-columns></div>
+  <div ng-if="type != 'UndergroundFloor'">
+    <h4>Layers:</h4>
+    <div ui-grid="layersGridOptions" class="layers-grid" ui-grid-auto-resize ui-grid-resize-columns></div>
+  </div>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" ng-click="ok()" ng-disabled="!selected">OK</button>
