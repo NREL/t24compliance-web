@@ -1,11 +1,16 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$location', 'Shared', 'Enums', 'stories', 'spaces', function ($scope, $location, Shared, Enums, stories, spaces) {
+  '$scope', '$location', 'toaster', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', function ($scope, $location, toaster, Shared, Enums, data, stories, spaces, zones) {
 
     $scope.data = {
       stories: stories,
       spaces: spaces,
-      zones: []
+      zones: zones
     };
+
+    console.log("Spaces");
+    console.log($scope.data.spaces);
+    console.log("Zones");
+    console.log($scope.data.zones);
 
     $scope.data.storiesArr = [];
     $scope.data.storiesHash = {};
@@ -80,13 +85,34 @@ cbecc.controller('ZonesCtrl', [
     $scope.submit = function () {
       console.log("submit");
 
+      console.log($scope.data);
+
+      console.log('saving zones');
+      var params = Shared.defaultParams();
+      params['data'] = $scope.data.zones;
+      data.bulkSync('thermal_zones', params).then(success).catch(failure);
+
       function success(response) {
         toaster.pop('success', 'Thermal zones successfully saved');
+
+        var params = Shared.defaultParams();
+        params['data'] = $scope.data.spaces;
+        data.bulkSync('spaces', params).then(success).catch(failure);
+
+        function success(response) {
+          toaster.pop('success', 'Spaces updated with thermal zone references');
+          $location.path(Shared.zonesPath());
+
+        }
+
+        function failure(response) {
+          toaster.pop('error', 'An error occurred while saving spaces', response.statusText);
+        }
       }
 
       function failure(response) {
         console.log("failure", response);
-        toaster.pop('error', 'An error occurred while saving', response.statusText);
+        toaster.pop('error', 'An error occurred while saving zones', response.statusText);
       }
     };
 

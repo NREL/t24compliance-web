@@ -55,6 +55,10 @@ Rails.application.routes.draw do
     post 'bulk_sync', on: :collection
   end
 
+  resources :thermal_zones do
+    post 'bulk_sync', on: :collection
+  end
+
   # non-revised below
 
   resources :windows
@@ -77,8 +81,6 @@ Rails.application.routes.draw do
 
   resources :air_segments
 
-  resources :thermal_zones
-
   resources :roofs
 
   resources :ceilings
@@ -88,8 +90,6 @@ Rails.application.routes.draw do
   resources :heat_rejections
 
   resources :evaporative_coolers
-
-  resources :zone_systems
 
   resources :external_shading_objects
 

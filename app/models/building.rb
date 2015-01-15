@@ -32,11 +32,11 @@ class Building
   field :nonresidential_story_count_electric_heat, type: Integer
   field :residential_story_count_electric_heat, type: Integer
 
-  has_many :building_stories, dependent: :destroy
+  has_many :building_stories, dependent: :destroy, autosave: true
   has_many :external_shading_objects, dependent: :destroy
-  has_many :thermal_zones, dependent: :destroy
-  has_many :air_systems, dependent: :destroy
-  has_many :zone_systems, dependent: :destroy
+  has_many :thermal_zones, dependent: :destroy, autosave: true
+  has_many :air_systems, dependent: :destroy, autosave: true
+  has_many :zone_systems, dependent: :destroy, autosave: true
   belongs_to :project
 
   # Validation

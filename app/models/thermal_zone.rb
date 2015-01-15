@@ -32,6 +32,10 @@ class ThermalZone
 
   belongs_to :building
 
+  #Validate
+  validates_presence_of :name
+  validates_uniqueness_of :name
+
 
   def self.children_models
     children = [

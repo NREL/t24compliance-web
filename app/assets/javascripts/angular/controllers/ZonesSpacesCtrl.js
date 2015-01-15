@@ -7,7 +7,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
   $scope.zonesHash = {};
   _.each($scope.data.zones, function (zone, index) {
     $scope.zonesArr.push({
-      id: index,
+      id: zone.id,
       value: zone.name
     });
     $scope.zonesHash[index] = zone.name;
@@ -32,14 +32,13 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
       headerCellTemplate: 'ui-grid/cbeccHeaderCell',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
-      name: 'thermal_zone',
+      name: 'thermal_zone_reference',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapZones:this',
+      editDropdownIdLabel: 'value',
       editDropdownOptionsArray: $scope.zonesArr,
-      filter: Shared.enumFilter($scope.zonesHash),
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell',
-      sortingAlgorithm: Shared.sort($scope.zonesArr)
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,
