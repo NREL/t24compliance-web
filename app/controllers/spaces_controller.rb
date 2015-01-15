@@ -35,6 +35,7 @@ class SpacesController < ApplicationController
 
     clean_params = spaces_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
+    spaces_by_story = {}
 
     # add / update
     if clean_params.has_key?('data')
@@ -168,15 +169,15 @@ class SpacesController < ApplicationController
 
       end
 
-      # iterate through stories to catch special case where all spaces should be deleted
-      @building.building_stories.each do |story|
-         # look for key matching building_story_id
-         if !spaces_by_story.has_key?("#{story.id}")
-           story.spaces = []
-           story.save
-         end
-      end
+    end
 
+    # iterate through stories to catch special case where all spaces should be deleted
+    @building.building_stories.each do |story|
+      # look for key matching building_story_id
+      if !spaces_by_story.has_key?("#{story.id}") or !clean_params.has_key?('data')
+        story.spaces = []
+        story.save
+      end
     end
 
     # TODO: add error handling?!
