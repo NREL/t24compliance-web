@@ -18,11 +18,13 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space_function',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums,
       filter: Shared.textFilter(),
@@ -37,6 +39,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           return 'red-cell';
         }
       },
+      cellEditableCondition: $scope.editableCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -49,6 +52,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           return 'red-cell';
         }
       },
+      cellEditableCondition: $scope.editableCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -61,6 +65,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           return 'red-cell';
         }
       },
+      cellEditableCondition: $scope.editableCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],

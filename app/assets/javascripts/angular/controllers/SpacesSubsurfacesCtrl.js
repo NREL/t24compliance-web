@@ -38,6 +38,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       name: 'name',
       displayName: 'Subsurface Name',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -45,6 +46,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Space Name',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
+      cellEditableCondition: $scope.editableCondition,
       cellFilter: 'mapSpaces:this',
       editDropdownOptionsArray: $scope.spacesArr,
       filter: Shared.enumFilter($scope.spacesHash),
@@ -55,6 +57,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Surface Name',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
+      cellEditableCondition: $scope.editableCondition,
       cellFilter: 'mapSurfaces:this',
       editDropdownOptionsArray: $scope.surfacesArr,
       filter: Shared.enumFilter($scope.surfacesHash),
@@ -79,12 +82,14 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       name: 'area',
       secondLine: Shared.html('ft'),
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'construction',
       enableHiding: false,
+      cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.subsurfaces,
