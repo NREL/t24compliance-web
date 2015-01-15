@@ -24,9 +24,9 @@ cbecc.config([
 
     var getConstructions = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
-        var exteriorWallData = Shared.loadFromCache('exterior_walls');
-        if (exteriorWallData !== null) {
-          return $q.when(exteriorWallData);
+        var constructionData = Shared.loadFromCache('constructions');
+        if (constructionData !== null) {
+          return $q.when(constructionData);
         }
         // Not in cache yet
         return data.list('constructions');
@@ -34,9 +34,21 @@ cbecc.config([
       return mainPromise();
     }];
 
+    var getDoors = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
+      var mainPromise = function () {
+        var doorData = Shared.loadFromCache('doors');
+        if (doorData !== null) {
+          return $q.when(doorData);
+        }
+        // Not in cache yet
+        return data.list('door_lookups');
+      };
+      return mainPromise();
+    }];
+
     var getFenestrations = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
-        var fenestrationData = Shared.loadFromCache('fenestration');
+        var fenestrationData = Shared.loadFromCache('fenestrations');
         if (fenestrationData !== null) {
           return $q.when(fenestrationData);
         }
@@ -76,11 +88,11 @@ cbecc.config([
           }]
         }
       })
-     // .state({
-     //   name: 'introduction',
-     //   url: '/',
-     //   templateUrl: 'introduction/introduction.html'
-    //  })
+      // .state({
+      //   name: 'introduction',
+      //   url: '/',
+      //   templateUrl: 'introduction/introduction.html'
+      //  })
       .state({
         name: 'project',
         url: '/',
@@ -138,6 +150,7 @@ cbecc.config([
         templateUrl: 'constructions/constructions.html',
         resolve: {
           constData: getConstructions,
+          doorData: getDoors,
           fenData: getFenestrations,
           defaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('construction_defaults', Shared.defaultParams());
@@ -159,7 +172,8 @@ cbecc.config([
         templateUrl: 'spaces/spaces.html',
         resolve: {
           /*constData: getConstructions,
-          fenData: getFenestrations,*/
+           doorData: getDoors,
+           fenData: getFenestrations,*/
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -332,53 +346,56 @@ cbecc.config([
 
 
 cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $q, toaster, Shared, api, data) {
-    api.add('spaces');
-    api.add('buildings');
-    api.add('building_stories');
-    api.add('constructions');
-    api.add('fenestrations');
-    api.add('door_lookups');
-    api.add('construction_defaults');
-    api.add('zone_systems');
-    api.add('fluid_systems');
-    api.add('spaces');
-    api.add('simulations');
-    api.add('space_function_defaults');
-    api.add('thermal_zones');
+  api.add('spaces');
+  api.add('buildings');
+  api.add('building_stories');
+  api.add('constructions');
+  api.add('fenestrations');
+  api.add('door_lookups');
+  api.add('construction_defaults');
+  api.add('zone_systems');
+  api.add('fluid_systems');
+  api.add('spaces');
+  api.add('simulations');
+  api.add('space_function_defaults');
+  api.add('thermal_zones');
 
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-        Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
-        Shared.startSpinner();
-    });
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        Shared.stopSpinner();
-    });
-    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-        Shared.stopSpinner();
-        if (error == 'No project ID' || error == 'Invalid project ID') {
-            toaster.pop('error', error, "Please create or open a project.");
-            $state.go('project');
-        } else if (error == 'No building ID' || error == 'Invalid building ID') {
-            toaster.pop('error', error, 'Please create a building.');
-            $state.go('lookupbuilding.building', {
-                project_id: Shared.getProjectId()
-            });
-        } else {
-            console.error('Unhandled state change error:', error);
-            $state.go('project');
-        }
-    });
-    $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
-        console.error('State not found:', unfoundState.to);
-    });
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+    Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
+    Shared.startSpinner();
+  });
+  $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    Shared.stopSpinner();
+  });
+  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+    Shared.stopSpinner();
+    if (error == 'No project ID' || error == 'Invalid project ID') {
+      toaster.pop('error', error, "Please create or open a project.");
+      $state.go('project');
+    } else if (error == 'No building ID' || error == 'Invalid building ID') {
+      toaster.pop('error', error, 'Please create a building.');
+      $state.go('lookupbuilding.building', {
+        project_id: Shared.getProjectId()
+      });
+    } else {
+      console.error('Unhandled state change error:', error);
+      $state.go('project');
+    }
+  });
+  $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+    console.error('State not found:', unfoundState.to);
+  });
 
-    // Initialize cache with static data
-    data.list('constructions').then(function (response) {
-        Shared.saveToCache('exterior_walls', response);
-    });
-    data.list('fenestrations').then(function (response) {
-        Shared.saveToCache('fenestration', response);
-    });
+  // Initialize cache with static data
+  data.list('constructions').then(function (response) {
+    Shared.saveToCache('constructions', response);
+  });
+  data.list('door_lookups').then(function (response) {
+    Shared.saveToCache('doors', response);
+  });
+  data.list('fenestrations').then(function (response) {
+    Shared.saveToCache('fenestrations', response);
+  });
 }]);
 
 
@@ -402,7 +419,7 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
     return storiesHash[input];
   };
 }).filter('mapZones', function () {
-  return function(input, $scope) {
+  return function (input, $scope) {
     while (!$scope.hasOwnProperty('zonesHash')) {
       $scope = $scope.$parent;
     }
