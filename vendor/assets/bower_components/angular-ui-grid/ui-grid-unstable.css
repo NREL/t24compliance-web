@@ -244,13 +244,13 @@ input[type="text"].ui-grid-filter-input:hover {
 .ui-grid-viewport {
   min-height: 20px;
   position: relative;
-  overflow: hidden;
 }
 .ui-grid-viewport :focus {
   outline: none;
 }
 .ui-grid-canvas {
   position: relative;
+  padding-top: 1px;
 }
 .ui-grid-row:nth-child(odd) .ui-grid-cell {
   background-color: #fdfdfd;
@@ -391,6 +391,10 @@ input[type="text"].ui-grid-filter-input:hover {
   -moz-background-clip: padding-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
+}
+.ui-grid-grid-footer {
+  float: left;
+  width: 100%;
 }
 .ui-grid-footer-viewport {
   overflow: hidden;

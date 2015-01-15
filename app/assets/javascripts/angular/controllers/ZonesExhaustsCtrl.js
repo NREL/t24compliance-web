@@ -41,19 +41,25 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
   console.log($scope.data.exhausts);
 
 
+  var minWidth = 150;
+
   // Exhausts UI Grid
   $scope.exhaustsGridOptions = {
     columnDefs: [{
       name: 'zone_name',
       displayName: 'Thermal Zone',
-      enableHiding: false,
       enableCellEdit: false,
+      enableHiding: false,
+      minWidth: minWidth,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+
     }, {
       name: 'fan_classification',
       displayName: 'Classification',
       field: 'fan.classification',
+      enableHiding: false,
+      minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -61,8 +67,88 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       name: 'fan_control_method',
       displayName: 'Control Method',
       field: 'fan.control_method',
+      enableHiding: false,
+      minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'type',
+      displayName: 'Fan Type',
+      field: 'fan.centrifugal_type',
+      enableHiding: false,
+      minWidth: minWidth,
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_flow_capacity',
+      displayName: 'Flow Capacity',
+      field: 'fan.flow_capacity',
+      enableHiding: false,
+      minWidth: minWidth,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_flow_minimum',
+      displayName: 'Flow Minimum',
+      field: 'fan.flow_minimum',
+      enableHiding: false,
+      minWidth: minWidth,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_modeling_method',
+      displayName: 'Modeling Method',
+      field: 'fan.modeling_method',
+      enableHiding: false,
+      minWidth: minWidth,
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_total_static_pressure',
+      displayName: 'Total Static Pressure',
+      field: 'fan.total_static_pressure',
+      enableHiding: false,
+      minWidth: minWidth,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_flow_efficiency',
+      displayName: 'Fan Minimum',
+      field: 'fan.flow_efficiency',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_motor_bhp',
+      displayName: 'Motor Brake HP',
+      field: 'fan.motor_bhp',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_motor_position',
+      displayName: 'Motor Position',
+      field: 'fan.motor_position',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_nameplate_hp',
+      displayName: 'Nameplate HP',
+      field: 'fan.motor_hp',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_motor_type',
+      displayName: 'Motor Type',
+      field: 'fan.motor_type',
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_pole_count',
+      displayName: 'Pole Count',
+      field: 'fan.pole_count',
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_motor_efficiency',
+      displayName: 'Motor Efficiency',
+      field: 'fan.motor_efficiency',
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
     data: $scope.data.exhausts,
