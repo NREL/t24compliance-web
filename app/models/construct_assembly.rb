@@ -212,4 +212,22 @@ class ConstructAssembly
       'FullyInsulatedSlab'
     ]
   end
+
+  def slab_insulation_thermal_resistance_enums
+    [
+      "R0",
+      "R5",
+      "R7_5",
+      "R10",
+      "R15",
+      "R20",
+      "R25",
+      "R30",
+      "R35",
+      "R40",
+      "R45",
+      "R50",
+      "R55"
+    ]
+  end
 end

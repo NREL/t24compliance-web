@@ -12,6 +12,9 @@ class Construction
   field :continuous_insulation_r_value, type: Float
   field :continuous_insulation_material_name, type: String
   field :layers, type: Array
+  field :slab_type, type: String
+  field :slab_insulation_orientation, type: String
+  field :slab_insulation_thermal_resistance, type: String
 
   index({compatible_surface_type: 1})
 
