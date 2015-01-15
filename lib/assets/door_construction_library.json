@@ -1,0 +1,102 @@
+{
+  "door_constructions": [
+    {
+      "name": "Swinging Door MetalInsulatedSingleLayerSectional",
+      "type": "MetalInsulatedSingleLayerSectionalDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 1.45,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door MetalInsulatedSingleLayerSectional",
+      "type": "MetalInsulatedSingleLayerSectionalDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 1.45,
+      "open": "NonSwinging"
+    },
+    {
+      "name": "Swinging Door MetalInsulatedSwinging",
+      "type": "MetalInsulatedSwingingDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.7,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door MetalInsulatedSwinging",
+      "type": "MetalInsulatedSwingingDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.7,
+      "open": "NonSwinging"
+    },
+    {
+      "name": "Swinging Door MetalUninsulatedDoubleLayer",
+      "type": "MetalUninsulatedDoubleLayerDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.5,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door MetalUninsulatedDoubleLayer",
+      "type": "MetalUninsulatedDoubleLayerDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.5,
+      "open": "NonSwinging"
+    },
+    {
+      "name": "Swinging Door MetalUninsulatedSingleLayer",
+      "type": "MetalUninsulatedSingleLayerDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.5,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door MetalUninsulatedSingleLayer",
+      "type": "MetalUninsulatedSingleLayerDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.5,
+      "open": "NonSwinging"
+    },
+    {
+      "name": "Swinging Door MetalUninsulatedSingleLayerRollup",
+      "type": "MetalUninsulatedSingleLayerRollupDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.6,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door MetalUninsulatedSingleLayerRollup",
+      "type": "MetalUninsulatedSingleLayerRollupDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.6,
+      "open": "NonSwinging"
+    },
+    {
+      "name": "Swinging Door WoodLessThan1.75inThick",
+      "type": "WoodLessThan1.75inThickDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 1.45,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door WoodLessThan1.75inThick",
+      "type": "WoodLessThan1.75inThickDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 1.45,
+      "open": "NonSwinging"
+    },
+    {
+      "name": "Swinging Door WoodGreaterThanOrEqualTo1.75inThick",
+      "type": "WoodGreaterThanOrEqualTo1.75inThickDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.179,
+      "open": "Swinging"
+    },
+    {
+      "name": "NonSwinging Door WoodGreaterThanOrEqualTo1.75inThick",
+      "type": "WoodGreaterThanOrEqualTo1.75inThickDoor",
+      "certification_method": "CECDefaultPerformance",
+      "u_factor": 0.179,
+      "open": "NonSwinging"
+    }
+  ]
+}
