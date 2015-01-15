@@ -27,6 +27,9 @@ class ZoneSystem
   accepts_nested_attributes_for :coil_coolings
   accepts_nested_attributes_for :coil_heatings
 
+  # Validations
+  validates_presence_of :name
+  validates_uniqueness_of :name, scope: :building_id
 
 
   def self.children_models

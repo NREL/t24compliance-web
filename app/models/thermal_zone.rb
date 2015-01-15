@@ -34,7 +34,7 @@ class ThermalZone
 
   #Validate
   validates_presence_of :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, scope: :building_id
 
 
   def self.children_models

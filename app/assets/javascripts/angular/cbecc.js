@@ -259,7 +259,11 @@ cbecc.config([
           }],
           zones: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('thermal_zones', Shared.defaultParams());
+          }],
+          systems: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('zone_systems', Shared.defaultParams());
           }]
+
         },
         parent: 'requirebuilding',
         children: [{

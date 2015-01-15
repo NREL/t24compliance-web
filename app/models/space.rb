@@ -148,7 +148,7 @@ class Space
 
   # Validations
   validates_presence_of :name
-  validates_uniqueness_of :name
+  # would want to validate uniqueness of name per building, but only have access to building_story here.
 
 
   def self.children_models

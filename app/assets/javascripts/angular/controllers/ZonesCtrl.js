@@ -1,17 +1,20 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$location', 'toaster', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', function ($scope, $location, toaster, Shared, Enums, data, stories, spaces, zones) {
+  '$scope', '$location', 'toaster', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', 'systems', function ($scope, $location, toaster, Shared, Enums, data, stories, spaces, zones, systems) {
 
     $scope.data = {
       stories: stories,
       spaces: spaces,
-      zones: zones
+      zones: zones,
+      systems: systems
     };
 
-    console.log("Spaces");
-    console.log($scope.data.spaces);
-    console.log("Zones");
-    console.log($scope.data.zones);
+    //console.log("Spaces");
+    //console.log($scope.data.spaces);
+    //console.log("Zones");
+    //console.log($scope.data.zones);
 
+
+    // ZONES shouldn't span multiple stories, but we are not enforcing that here
     $scope.data.storiesArr = [];
     $scope.data.storiesHash = {};
     _.each($scope.data.stories, function (story) {
@@ -21,6 +24,8 @@ cbecc.controller('ZonesCtrl', [
       });
       $scope.data.storiesHash[story.id] = story.name;
     });
+
+    console.log($scope.data.storiesHash[$scope.data.zones[0].building_story_id]);
 
     $scope.tabs = [{
       heading: 'Create Zones',
@@ -88,6 +93,7 @@ cbecc.controller('ZonesCtrl', [
       console.log($scope.data);
 
       console.log('saving zones');
+      console.log($scope.data.zones);
       var params = Shared.defaultParams();
       params['data'] = $scope.data.zones;
       data.bulkSync('thermal_zones', params).then(success).catch(failure);
@@ -101,7 +107,7 @@ cbecc.controller('ZonesCtrl', [
 
         function success(response) {
           toaster.pop('success', 'Spaces updated with thermal zone references');
-          $location.path(Shared.zonesPath());
+         // $location.path(Shared.zonesPath());
 
         }
 
