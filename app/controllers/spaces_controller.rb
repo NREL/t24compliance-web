@@ -48,7 +48,7 @@ class SpacesController < ApplicationController
           # extract surfaces
           surfaces = space.extract!('surfaces')['surfaces'] || []
 
-          surfs = {interior_walls: [], exterior_walls: [], underground_walls: [], roofs: [], ceilings: [], interior_floors: [], exterior_floors: [], underground_floors: []}
+          surfs = {interior_walls: [], exterior_walls: [], underground_walls: [], roofs: [], interior_floors: [], exterior_floors: [], underground_floors: []}
           logger.info("#{surfaces.size} surfaces")
           surfaces.each do |surface|
             logger.info("Processing surface: #{surface.inspect}")
@@ -151,7 +151,6 @@ class SpacesController < ApplicationController
           @space.exterior_walls = surfs[:exterior_walls]
           @space.underground_walls = surfs[:underground_walls]
           @space.roofs = surfs[:roofs]
-          @space.ceilings = surfs[:ceilings]
           @space.interior_floors = surfs[:interior_floors]
           @space.exterior_floors = surfs[:exterior_floors]
           @space.underground_floors = surfs[:underground_floors]

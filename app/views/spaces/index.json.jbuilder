@@ -54,9 +54,4 @@ json.array!(@spaces) do |space|
     end
   end
 
-  json.ceilings space.ceilings do |ceiling|
-    json.(ceiling, :id, :name, :construct_assembly_reference, :adjacent_space_reference)
-    json.set! :surface_type, 'Ceiling'
-  end
-
 end
