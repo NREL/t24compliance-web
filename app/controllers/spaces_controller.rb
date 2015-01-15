@@ -171,7 +171,7 @@ class SpacesController < ApplicationController
       # iterate through stories to catch special case where all spaces should be deleted
       @building.building_stories.each do |story|
          # look for key matching building_story_id
-         if !spaces_by_story.has_key?(story.id)
+         if !spaces_by_story.has_key?("#{story.id}")
            story.spaces = []
            story.save
          end
