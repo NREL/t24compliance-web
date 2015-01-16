@@ -2,7 +2,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
   var service = {};
   var projectId = null;
   var buildingId = null;
-  var cache = DSCacheFactory('constructionsCache', {
+  var cache = DSCacheFactory('libraries', {
     storageMode: 'localStorage',
     maxAge: 86400000 // 24 hours
   });

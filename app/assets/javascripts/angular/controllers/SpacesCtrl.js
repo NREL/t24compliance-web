@@ -1,12 +1,12 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'stories', 'spaces', 'space_function_defaults', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, stories, spaces, space_function_defaults, constructions) {
+  '$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructions) {
     $scope.data = {
       constData: constData,
       doorData: doorData,
       fenData: fenData,
       stories: stories,
       spaces: spaces,
-      spaceFunctionDefaults: space_function_defaults,
+      spaceFunctionDefaults: spaceFunctionDefaults,
       constructions: constructions,
       surfaces: [],
       subsurfaces: []

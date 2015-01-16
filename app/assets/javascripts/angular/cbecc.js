@@ -23,37 +23,36 @@ cbecc.config([
       shadow: false
     });
 
-    var getConstructions = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
-      var mainPromise = function () {
-        if (Shared.existsInCache('constructions')) {
-          return $q.when(Shared.loadFromCache('constructions'));
-        }
-        // Not in cache yet
-        return data.list('constructions');
-      };
-      return mainPromise();
+    var getConstructions = ['$q', 'data', 'Shared', function ($q, data, Shared) {
+      if (Shared.existsInCache('constructions')) {
+        return $q.when(Shared.loadFromCache('constructions'));
+      }
+      // Not in cache yet
+      return data.list('constructions');
     }];
 
-    var getDoors = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
-      var mainPromise = function () {
-        if (Shared.existsInCache('doors')) {
-          return $q.when(Shared.loadFromCache('doors'));
-        }
-        // Not in cache yet
-        return data.list('door_lookups');
-      };
-      return mainPromise();
+    var getDoors = ['$q', 'data', 'Shared', function ($q, data, Shared) {
+      if (Shared.existsInCache('doors')) {
+        return $q.when(Shared.loadFromCache('doors'));
+      }
+      // Not in cache yet
+      return data.list('door_lookups');
     }];
 
-    var getFenestrations = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
-      var mainPromise = function () {
-        if (Shared.existsInCache('fenestrations')) {
-          return $q.when(Shared.loadFromCache('fenestrations'));
-        }
-        // Not in cache yet
-        return data.list('fenestrations');
-      };
-      return mainPromise();
+    var getFenestrations = ['$q', 'data', 'Shared', function ($q, data, Shared) {
+      if (Shared.existsInCache('fenestrations')) {
+        return $q.when(Shared.loadFromCache('fenestrations'));
+      }
+      // Not in cache yet
+      return data.list('fenestrations');
+    }];
+
+    var getSpaceFunctionDefaults = ['$q', 'data', 'Shared', function ($q, data, Shared) {
+      if (Shared.existsInCache('spaceFunctionDefaults')) {
+        return $q.when(Shared.loadFromCache('spaceFunctionDefaults'));
+      }
+      // Not in cache yet
+      return data.list('space_function_defaults', Shared.defaultParams());
     }];
 
     $urlRouterProvider.when('', '/').otherwise('404');
@@ -172,6 +171,7 @@ cbecc.config([
           constData: getConstructions,
           doorData: getDoors,
           fenData: getFenestrations,
+          spaceFunctionDefaults: getSpaceFunctionDefaults,
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -180,9 +180,6 @@ cbecc.config([
           }],
           constructions: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('construction_defaults', Shared.defaultParams());
-          }],
-          space_function_defaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
-            return data.list('space_function_defaults', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding',
@@ -403,6 +400,11 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   if (!Shared.existsInCache('fenestrations')) {
     data.list('fenestrations').then(function (response) {
       Shared.saveToCache('fenestrations', response);
+    });
+  }
+  if (!Shared.existsInCache('spaceFunctionDefaults')) {
+    data.list('space_function_defaults').then(function (response) {
+      Shared.saveToCache('spaceFunctionDefaults', response);
     });
   }
 }]);
