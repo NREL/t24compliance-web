@@ -1,9 +1,10 @@
 cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $modal, toaster, data, Shared, Enums, saved_systems, saved_plants) {
 
-  // put all systems DATA in array for panels
+  // put all systems DATA in array for panels (even exhaust)
   $scope.systems = {
     ptac: [],
     fpfc: [],
+    szac: [],
     vav: [],
     pvav: [],
     exhaust: []
@@ -22,6 +23,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   $scope.systemTabs = {
     ptac: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     fpfc: ['general', 'fan', 'coil_cooling', 'coil_heating'],
+    szac: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     vav: [],
     pvav: []
   };
@@ -71,17 +73,24 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   //collapsible panels
   $scope.systemPanels = [{
     title: 'PTAC Zone Systems',
-    name: 'ptac'
+    name: 'ptac',
+    open: true
   }, {
     title: 'FPFC Zone Systems',
-    name: 'fpfc'
+    name: 'fpfc',
+    open: true
+  }, {
+    title: 'PSZ Systems',
+    name: 'szac',
+    open: true
   }, {
     title: 'VAV Air Systems',
     name: 'vav',
     open: true
   }, {
     title: 'PVAV Air Systems',
-    name: 'pvav'
+    name: 'pvav',
+    open: true
   }];
 
   $scope.plantPanels = [{
@@ -323,75 +332,118 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   $scope.gridCols = {
     ptac: {},
     fpfc: {},
+    szac: {},
     vav: {},
     pvav: {}
   };
 
   $scope.gridCols.ptac.general = [{
     name: 'name',
-    displayName: 'System Name'
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.fan = [{
     name: 'name',
-    displayName: 'System Name'
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_name',
     displayName: 'Fan Name',
-    field: 'fan.name'
+    field: 'fan.name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_classification',
     displayName: 'Classification',
     field: 'fan.classification',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums
+    editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_centrifugal_type',
     displayName: 'Centrifugal Type',
     field: 'fan.centrifugal_type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums
+    editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_modeling_method',
     displayName: 'Modeling Method',
     field: 'fan.modeling_method',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums
+    editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_flow_efficiency',
     displayName: 'Flow Efficiency',
-    field: 'fan.flow_efficiency'
+    field: 'fan.flow_efficiency',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_total_static_pressure',
     displayName: 'Total Static Pressure',
-    field: 'fan.total_static_pressure'
+    field: 'fan.total_static_pressure',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_bhp',
     displayName: 'Motor BHP',
-    field: 'fan.motor_bhp'
+    field: 'fan.motor_bhp',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_position',
     displayName: 'Motor Position',
     field: 'fan.motor_position',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums
+    editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_hp',
     displayName: 'Motor HP',
-    field: 'fan.motor_hp'
+    field: 'fan.motor_hp',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_type',
     displayName: 'Motor Type',
     field: 'fan.motor_type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums
+    editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_pole_count',
     displayName: 'Motor Pole Count',
-    field: 'fan.motor_pole_count'
+    field: 'fan.motor_pole_count',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_efficiency',
     displayName: 'Motor Efficiency',
-    field: 'fan.motor_efficiency'
+    field: 'fan.motor_efficiency',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.coil_cooling = [{
     name: 'name',
@@ -399,35 +451,108 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'coil_cooling_name',
     displayName: 'Coil Name',
-    field: 'coil_cooling.name'
+    field: 'coil_cooling.name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.coil_heating = [{
     name: 'name',
-    displayName: 'System Name'
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+
   }, {
     name: 'coil_heating_name',
     displayName: 'Coil Name',
-    field: 'coil_heating.name'
+    field: 'coil_heating.name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.fpfc.general = [{
     name: 'name',
-    displayName: 'System Name'
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.fpfc.general = angular.copy($scope.gridCols.ptac.general);
   $scope.gridCols.fpfc.coil_heating = angular.copy($scope.gridCols.ptac.coil_heating);
   $scope.gridCols.fpfc.coil_cooling = angular.copy($scope.gridCols.ptac.coil_cooling);
   $scope.gridCols.fpfc.fan = angular.copy($scope.gridCols.ptac.fan);
+  $scope.gridCols.szac.general = [{
+    name: 'name',
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  },{
+    name: 'sub_type',
+    displayName: 'Sub-Type',
+    editableCellTemplate: 'ui-grid/dropdownEditor',
+    editDropdownOptionsArray: Enums.enumsArr.air_systems_sub_type_enums,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }];
+  $scope.gridCols.szac.fan = angular.copy($scope.gridCols.ptac.fan);
+  $scope.gridCols.szac.coil_cooling = [{
+    name: 'name',
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'coil_cooling_name',
+    displayName: 'Coil Name',
+    field: 'coil_cooling.name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'coil_cooling_dxeer',
+    displayName: 'DXEER',
+    field: 'coil_cooling.dxeer',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }];
+  $scope.gridCols.szac.coil_heating = [{
+    name: 'name',
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'coil_heating_name',
+    displayName: 'Coil Name',
+    field: 'coil_heating.name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'coil_heating_furnace_afue',
+    displayName: 'Furnace AFUE',
+    field: 'coil_heating.furnace_afue',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }];
+
 
   //**** CREATE GRIDS ****
   // System Grids
   $scope.gridOptions = {
     ptac: {},
     fpfc: {},
+    szac: {},
     vav: {},
     pvav: {}
   };
   _.each($scope.systemTabs, function (tabs, type) {
-    if (type == 'ptac' || type == 'fpfc') {
+    if (type == 'ptac' || type == 'fpfc' || type == 'szac') {
       _.each(tabs, function (tab) {
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],
@@ -534,6 +659,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           coil_heating: 'default'
         };
         break;
+      case 'szac':
+        $scope.tabClasses.szac = {
+          general: 'default',
+          fan: 'default',
+          coil_cooling: 'default',
+          coil_heating: 'default'
+        };
+        break;
       case 'hot_water':
         $scope.tabClasses.hot_water = {
           pump: 'default',
@@ -605,6 +738,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   // TODO: clean this up
   $scope.setActiveTab('ptac', 'general');
   $scope.setActiveTab('fpfc', 'general');
+  $scope.setActiveTab('szac', 'general');
   $scope.setActiveTab('hot_water', 'pump');
   $scope.setActiveTab('chilled_water', 'general');
   $scope.setActiveTab('condenser', 'pump');
@@ -653,6 +787,28 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           coil_heating: {
             name: "Heating Coil " + index,
             type: "HotWater"
+          }
+        });
+        break;
+      case 'szac':
+        index = $scope.systems.szac.length + 1;
+        $scope.systems.szac.push({
+          name: "PSZ" + index,
+          type: 'SZAC',
+          sub_type: 'SinglePackage',
+          fan: {
+            name: "Fan " + index,
+            control_method: 'ConstantVolume'
+          },
+          coil_cooling: {
+            name: "Cooling Coil " + index,
+            type: "DirectExpansion"
+
+          },
+          coil_heating: {
+            name: "Heating Coil " + index,
+            type: "Furnace",
+            fuel_source: "NaturalGas"
           }
         });
         break;
@@ -730,6 +886,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
         addPlant('hot_water');
         addPlant('chilled_water');
         addPlant('condenser');
+        break;
+      case 'szac':
+        //nothing to add
         break;
     }
   }
@@ -942,6 +1101,9 @@ cbecc.controller('ModalSystemCreatorCtrl', [
       id: 'fpfc',
       name: 'FPFC: Four-Pipe Fan Coil'
     }, {
+      id: 'szac',
+      name: 'PSZ: Packaged Single Zone Air Conditioner'
+    }, {
       id: 'vav',
       name: 'VAV: Packaged Variable Air Volume'
     }, {
@@ -970,6 +1132,7 @@ cbecc.controller('ModalSystemCreatorCtrl', [
     $scope.systemDescriptions = {
       ptac: 'Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.',
       fpfc: 'Four-pipe fan coil: Ductless single-zone unit with hot water and chilled water coils.',
+      szac: 'Packaged single zone: This system can only serve one zone and includes a DX cooling coil and a gas heating coil.',
       vav: 'Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units. The plants required for this system are created with the system.',
       vav_crah: '',
       vav_crac: '',

@@ -1,4 +1,4 @@
-class AirSystem
+  class AirSystem
   include Mongoid::Document
   include Mongoid::Timestamps
 

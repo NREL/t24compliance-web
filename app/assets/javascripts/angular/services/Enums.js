@@ -308,6 +308,12 @@ cbecc.factory('Enums', function () {
       'Conditioned',
       'Plenum',
       'Unconditioned'
+    ],
+    air_systems_sub_type_enums: [
+      'SinglePackage',
+      'SplitSystem',
+      'CRAC',
+      'CRAH'
     ]
   };
 

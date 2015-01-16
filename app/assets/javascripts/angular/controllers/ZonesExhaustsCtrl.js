@@ -115,16 +115,22 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       name: 'fan_flow_efficiency',
       displayName: 'Fan Minimum',
       field: 'fan.flow_efficiency',
+      enableHiding: false,
+      minWidth: minWidth,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'fan_motor_bhp',
       displayName: 'Motor Brake HP',
       field: 'fan.motor_bhp',
+      enableHiding: false,
+      minWidth: minWidth,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'fan_motor_position',
       displayName: 'Motor Position',
       field: 'fan.motor_position',
+      enableHiding: false,
+      minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -132,11 +138,15 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       name: 'fan_nameplate_hp',
       displayName: 'Nameplate HP',
       field: 'fan.motor_hp',
+      enableHiding: false,
+      minWidth: minWidth,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'fan_motor_type',
       displayName: 'Motor Type',
       field: 'fan.motor_type',
+      enableHiding: false,
+      minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -144,11 +154,15 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       name: 'fan_pole_count',
       displayName: 'Pole Count',
       field: 'fan.pole_count',
+      enableHiding: false,
+      minWidth: minWidth,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'fan_motor_efficiency',
       displayName: 'Motor Efficiency',
       field: 'fan.motor_efficiency',
+      enableHiding: false,
+      minWidth: minWidth,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
     data: $scope.data.exhausts,

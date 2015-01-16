@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="szac_navigation">
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('szac', 'general')" ng-class="getTabClass('szac', 'general')">PSZ General System Settings</button>
+      <button type="button" ng-click="setActiveTab('szac', 'fan')" ng-class="getTabClass('szac', 'fan')">Fan</button>
+      <!-- <button type="button" ng-click="setActiveTab('szac', 'fan_motor')" ng-class="getTabClass('szac', 'fan_motor')">Fan Motor</button>-->
+      <button type="button" ng-click="setActiveTab('szac', 'coil_cooling')" ng-class="getTabClass('szac', 'coil_cooling')">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('szac', 'coil_heating')" ng-class="getTabClass('szac', 'coil_heating')">Gas Heating Coil</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <p class="bold-text">Packaged single zone air conditioner: This system can only serve one zone and includes a DX cooling coil and a gas heating coil.</p>
+      <p>Select the overall system or the components to edit the settings of each system.</p>
+      <button type="button" ng-click="addSystem('szac')" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> PZAC System
+      </button>
+      <div class="pull-right pad-right-20">
+        <button type="button" ng-click="duplicateSystem('szac')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteSystem('szac')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+      </div>
+    </div>
+    <div class="row pad-top-20">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div ng-repeat="tab in systemTabs.szac" ng-show="isActiveTab('szac', tab)">
+            <div ui-grid="gridOptions.szac[tab]" ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
