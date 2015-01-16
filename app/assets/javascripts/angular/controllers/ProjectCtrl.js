@@ -37,6 +37,7 @@ cbecc.controller('ProjectCtrl', [
       $scope.project.exceptional_condition_rated_capacity = 'No';
       $scope.project.exceptional_condition_water_heater = 'No';
       $scope.project.exceptional_condition_modeling = 'No';
+      $scope.project.geometry_input_type = 'Simplified';
     }
 
     // save

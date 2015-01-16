@@ -6,7 +6,8 @@ cbecc.controller('ZonesCtrl', [
       spaces: spaces,
       zones: zones,
       systems: systems,
-      exhausts: []
+      exhausts: [],
+      terminals: []
     };
 
     // pull exhaust systems out of systems (will be pushed back together before saving)
@@ -53,8 +54,6 @@ cbecc.controller('ZonesCtrl', [
       });
       $scope.data.storiesHash[story.id] = story.name;
     });
-
-    console.log($scope.data.storiesHash[$scope.data.zones[0].building_story_id]);
 
     $scope.tabs = [{
       heading: 'Create Zones',

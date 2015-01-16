@@ -1,3 +1,92 @@
-cbecc.controller('ZonesTerminalsCtrl', ['$scope', function ($scope) {
+cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
+
+  $scope.selected = {
+    zone: null
+  };
+
+  // find all zones with an HVAC reference that requires a terminal  (SZAC, PVAV, VAV)
+  terminalZonesArr = [];
+  _.each(_.filter($scope.data.zones, {type: 'Conditioned'}), function (zone) {
+    console.log("ZONE:");
+    console.log(zone);
+    system = _.find($scope.data.systems, {name: zone.primary_air_conditioning_system_reference});
+    console.log("SYSTEM:");
+    console.log(system);
+    if (system !== null) {
+
+      if (_.contains(['SZAC', 'VAV', 'PVAV'], system.type)) {
+        terminalZonesArr.push({
+          id: zone.id,
+          value: zone.name,
+          system_type: system.type
+        });
+      }
+    }
+
+  });
+
+  // compare terminalZonesArr with $scope.data.terminals to see if rows need to be added (for new zone)
+  _.each(terminalZonesArr, function (zone) {
+    var match = _.find($scope.data.terminals, {zone_served_reference: zone.zone_served_reference});
+    if (!match) {
+      console.log("NO MATCH FOR zone id: ", zone.id);
+      // determine defaults based on system type
+      terminal_type = "";
+      if (zone.system_type === 'SZAC') {
+        terminal_type = "Uncontrolled";
+      }
+      // add to array
+      $scope.data.terminals.push({
+        zone_served_reference: zone.value,
+        name: zone.value + ' Terminal',
+        type: terminal_type
+      })
+
+    }
+  });
+
+  // Systems UI Grid
+  $scope.terminalsGridOptions = {
+    columnDefs: [{
+      name: 'zone_served_reference',
+      displayName: 'Thermal Zone',
+      enableHiding: false,
+      enableCellEdit: false,
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    },{
+      name: 'name',
+      displayName: 'Terminal Name',
+      enableHiding: false,
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'type',
+      displayName: 'Terminal Type',
+      enableHiding: false,
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.terminal_units_type_enums,
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }],
+    data: $scope.data.terminals,
+    enableCellEditOnFocus: true,
+    enableFiltering: true,
+    enableRowHeaderSelection: true,
+    enableRowSelection: true,
+    multiSelect: false,
+    onRegisterApi: function (gridApi) {
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+        if (row.isSelected) {
+          $scope.selected.terminal = row.entity;
+        } else {
+          // No rows selected
+          $scope.selected.terminal = null;
+        }
+      });
+    }
+  };
+
 
 }]);

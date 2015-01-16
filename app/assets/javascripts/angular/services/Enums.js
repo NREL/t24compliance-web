@@ -328,6 +328,13 @@ cbecc.factory('Enums', function () {
       'SplitSystem',
       'CRAC',
       'CRAH'
+    ],
+    terminal_units_type_enums: [
+      'Uncontrolled',
+      'VAVReheatBox',
+      'ParallelFanBox',
+      'SeriesFanBox',
+      'VAVNoReheatBox'
     ]
   };
 
