@@ -33,7 +33,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Per Area',
       secondLine: Shared.html('cfm / ft<sup>2</sup>'),
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.exhaust_per_area != row.entity.exhaust_per_area_default) {
           return 'red-cell';
         }
@@ -47,7 +47,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Per Volume',
       secondLine: Shared.html('ACH'),
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.exhaust_air_changes_per_hour != row.entity.exhaust_air_changes_per_hour_default) {
           return 'red-cell';
         }

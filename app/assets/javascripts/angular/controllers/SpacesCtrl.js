@@ -4,9 +4,9 @@ cbecc.controller('SpacesCtrl', [
       constData: constData,
       doorData: doorData,
       fenData: fenData,
+      spaceFunctionDefaults: spaceFunctionDefaults,
       stories: stories,
       spaces: spaces,
-      spaceFunctionDefaults: spaceFunctionDefaults,
       constructions: constructions,
       surfaces: [],
       subsurfaces: []
@@ -73,6 +73,11 @@ cbecc.controller('SpacesCtrl', [
       space.exhaust_per_area_default = defaults.exhaust_per_area;
       space.exhaust_air_changes_per_hour_default = defaults.exhaust_air_changes_per_hour;
       space.total_exhaust = Shared.calculateTotalExhaust(space);
+
+      space.function_schedule_group = defaults.function_schedule_group == '- specify -' ? null : defaults.function_schedule_group;
+      space.ventilation_per_person = defaults.ventilation_per_person;
+      space.ventilation_per_area = defaults.ventilation_per_area;
+      space.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
     });
 
     // Check for construction defaults
@@ -90,12 +95,6 @@ cbecc.controller('SpacesCtrl', [
         value: story.name
       });
       $scope.data.storiesHash[story.id] = story.name;
-    });
-
-    // TODO Test this when spaces can be saved and loaded
-    // Delete spaces that belong to nonexistent stories
-    $scope.data.spaces = _.filter($scope.data.spaces, function (space) {
-      return $scope.data.storiesHash.hasOwnProperty(space.building_story_id);
     });
 
     $scope.tabs = [{
@@ -186,20 +185,26 @@ cbecc.controller('SpacesCtrl', [
         _.merge(space, input);
       }
 
-      // TODO Lookup space defaults
-      space.occupant_density = 10;
-      space.occupant_density_default = 10;
-      space.hot_water_heating_rate = 0.18;
-      space.hot_water_heating_rate_default = 0.18;
-      space.receptacle_power_density = 1.5;
-      space.receptacle_power_density_default = 1.5;
+      var defaults = _.find($scope.data.spaceFunctionDefaults, {
+        name: space.space_function
+      });
+      space.occupant_density = defaults.occupant_density;
+      space.occupant_density_default = defaults.occupant_density;
+      space.hot_water_heating_rate = defaults.hot_water_heating_rate;
+      space.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
+      space.receptacle_power_density = defaults.receptacle_power_density;
+      space.receptacle_power_density_default = defaults.receptacle_power_density;
+      space.exhaust_per_area = defaults.exhaust_per_area;
+      space.exhaust_per_area_default = defaults.exhaust_per_area;
+      space.exhaust_air_changes_per_hour = defaults.exhaust_air_changes_per_hour;
+      space.exhaust_air_changes_per_hour_default = defaults.exhaust_air_changes_per_hour;
+      space.total_exhaust = Shared.calculateTotalExhaust(space);
 
-      space.exhaust_per_area = 10;
-      space.exhaust_per_area_default = 10;
-      space.exhaust_air_changes_per_hour = 0.18;
-      space.exhaust_air_changes_per_hour_default = 0.18;
+      space.function_schedule_group = defaults.function_schedule_group == '- specify -' ? null : defaults.function_schedule_group;
+      space.ventilation_per_person = defaults.ventilation_per_person;
+      space.ventilation_per_area = defaults.ventilation_per_area;
+      space.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
 
-      $scope.data.updateTotalExhaust(space);
       $scope.data.spaces.push(space);
     };
     $scope.data.duplicateSpace = function (selected) {
@@ -226,7 +231,18 @@ cbecc.controller('SpacesCtrl', [
         hot_water_heating_rate: selectedSpace.hot_water_heating_rate,
         hot_water_heating_rate_default: selectedSpace.hot_water_heating_rate_default,
         receptacle_power_density: selectedSpace.receptacle_power_density,
-        receptacle_power_density_default: selectedSpace.receptacle_power_density_default
+        receptacle_power_density_default: selectedSpace.receptacle_power_density_default,
+        exhaust_per_area: selectedSpace.exhaust_per_area,
+        exhaust_per_area_default: selectedSpace.exhaust_per_area,
+        exhaust_air_changes_per_hour: selectedSpace.exhaust_air_changes_per_hour,
+        exhaust_air_changes_per_hour_default: selectedSpace.exhaust_air_changes_per_hour,
+        exhaust_per_space: selectedSpace.exhaust_per_space,
+        total_exhaust: selectedSpace.total_exhaust,
+
+        function_schedule_group: selectedSpace.function_schedule_group,
+        ventilation_per_person: selectedSpace.ventilation_per_person,
+        ventilation_per_area: selectedSpace.ventilation_per_area,
+        ventilation_air_changes_per_hour: selectedSpace.ventilation_air_changes_per_hour
       });
     };
     $scope.data.deleteSpace = function (selected, gridApi) {
@@ -316,7 +332,7 @@ cbecc.controller('SpacesCtrl', [
         space.receptacle_power_density !== space.receptacle_power_density_default);
       }));
     };
-    $scope.data.restoreSpaceTypeVentilationDefaults = function (gridApi) {
+    $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi) {
       _.each($scope.data.spaces, function (space) {
         space.exhaust_per_area = space.exhaust_per_area_default;
         space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
@@ -324,7 +340,7 @@ cbecc.controller('SpacesCtrl', [
         gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     };
-    $scope.data.modifiedSpaceTypeVentilationValues = function () {
+    $scope.data.modifiedSpaceTypeExhaustValues = function () {
       return !_.isEmpty(_.find($scope.data.spaces, function (space) {
         return (space.exhaust_per_area !== space.exhaust_per_area_default || space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default);
       }));
