@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     post 'bulk_sync', on: :collection    
   end
 
+  # this handles air and zone systems
   resources :zone_systems do
     post 'bulk_sync', on: :collection
   end
@@ -60,12 +61,32 @@ Rails.application.routes.draw do
     post 'bulk_sync', on: :collection
   end
 
+  # don't need direct routes for these (accessed through other controllers)
+  # resources :air_systems
+  # resources :windows
+  # resources :underground_floors
+  # resources :fans
+  # resources :coil_coolings
+  # resources :terminal_units
+  # resources :air_segments
+  # resources :roofs
+  # resources :ceilings
+  # resources :heat_rejections
+  # resources :interior_walls
+  # resources :exterior_floors
+  # resources :pumps
+  # resources :boilers
+  # resources :chillers
+  # resources :fluid_segments
+  # resources :coil_heatings
+  # resources :doors
+  # resources :skylights
+  # resources :underground_walls
+  # resources :interior_floors
+  # resources :exterior_walls
+
   # non-revised below
-
-  resources :windows
-
-  resources :underground_floors
-
+=begin
   resources :holidays
 
   resources :design_days
@@ -74,29 +95,11 @@ Rails.application.routes.draw do
 
   resources :outside_air_controls
 
-  resources :fans
-
-  resources :coil_coolings
-
-  resources :terminal_units
-
-  resources :air_segments
-
-  resources :roofs
-
-  resources :ceilings
-
   resources :recirculation_dhw_systems
-
-  resources :heat_rejections
 
   resources :evaporative_coolers
 
   resources :external_shading_objects
-
-  resources :interior_walls
-
-  resources :exterior_floors
 
   resources :curve_double_quadratics
 
@@ -104,29 +107,11 @@ Rails.application.routes.draw do
 
   resources :schedules
 
-  resources :pumps
-
   resources :water_heaters
 
-  resources :boilers
+  resources :door_constructions
 
-  resources :chillers
-
-  resources :fluid_segments
-
-  resources :fluid_systems
-
-  resources :coil_heatings
-
-  resources :doors
-
-  resources :skylights
-
-  resources :underground_walls
-
-  resources :interior_floors
-
-  resources :exterior_walls
+  resources :fenestration_constructions
 
   resources :interior_lighting_systems
 
@@ -136,17 +121,12 @@ Rails.application.routes.draw do
 
   resources :luminaires
 
-  resources :door_constructions
-
-  resources :fenestration_constructions
-
   resources :schedule_weeks
 
   resources :schedule_days
 
-  resources :air_systems
-
   resources :cartesian_points
 
   resources :poly_loops
+=end
 end

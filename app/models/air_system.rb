@@ -38,9 +38,9 @@
   field :air_distribution_type, type: String
 
   belongs_to :building
-  has_many :air_segments, dependent: :destroy
-  has_many :terminal_units, dependent: :destroy
-  has_many :outside_air_controls, dependent: :destroy
+  has_many :air_segments, dependent: :destroy, autosave: true
+  has_many :terminal_units, dependent: :destroy, autosave: true
+  has_many :outside_air_controls, dependent: :destroy, autosave: true
 
 
   def self.children_models
