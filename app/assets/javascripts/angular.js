@@ -7,6 +7,7 @@
 //= require angular-animate
 //= require angular-bootstrap
 //= require angular-bootstrap-switch
+//= require angular-cache
 //= require angular-mocks
 //= require angular-rails-templates
 //= require angular-resource
@@ -19,6 +20,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-switch
 //= require lodash
+//= require lz-string
 //= require spin.js/spin
 //= require_tree ./angular/templates
 //= require_tree ./angular

@@ -2,6 +2,7 @@ var cbecc = angular.module('cbecc', [
   'templates',
   'ngAnimate', 'ngResource', 'ngRoute',
   'toaster',
+  'angular-data.DSCacheFactory',
   'ui.grid', 'ui.grid.autoResize', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.selection',
   'ui.router', 'ui.router.stateHelper',
   'ui.bootstrap',
@@ -24,9 +25,8 @@ cbecc.config([
 
     var getConstructions = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
-        var constructionData = Shared.loadFromCache('constructions');
-        if (constructionData !== null) {
-          return $q.when(constructionData);
+        if (Shared.existsInCache('constructions')) {
+          return $q.when(Shared.loadFromCache('constructions'));
         }
         // Not in cache yet
         return data.list('constructions');
@@ -36,9 +36,8 @@ cbecc.config([
 
     var getDoors = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
-        var doorData = Shared.loadFromCache('doors');
-        if (doorData !== null) {
-          return $q.when(doorData);
+        if (Shared.existsInCache('doors')) {
+          return $q.when(Shared.loadFromCache('doors'));
         }
         // Not in cache yet
         return data.list('door_lookups');
@@ -48,9 +47,8 @@ cbecc.config([
 
     var getFenestrations = ['$q', '$stateParams', 'data', 'Shared', function ($q, $stateParams, data, Shared) {
       var mainPromise = function () {
-        var fenestrationData = Shared.loadFromCache('fenestrations');
-        if (fenestrationData !== null) {
-          return $q.when(fenestrationData);
+        if (Shared.existsInCache('fenestrations')) {
+          return $q.when(Shared.loadFromCache('fenestrations'));
         }
         // Not in cache yet
         return data.list('fenestrations');
@@ -171,9 +169,9 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          /*constData: getConstructions,
-           doorData: getDoors,
-           fenData: getFenestrations,*/
+          constData: getConstructions,
+          doorData: getDoors,
+          fenData: getFenestrations,
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -300,7 +298,7 @@ cbecc.config([
           url: '/exhausts',
           controller: 'ZonesExhaustsCtrl',
           templateUrl: 'zones/exhausts.html'
-        },{
+        }, {
           name: 'terminals',
           url: '/terminals',
           controller: 'ZonesTerminalsCtrl',
@@ -391,18 +389,22 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
     console.error('State not found:', unfoundState.to);
   });
 
-/*
   // Initialize cache with static data
-  data.list('constructions').then(function (response) {
-    Shared.saveToCache('constructions', response);
-  });
-  data.list('door_lookups').then(function (response) {
-    Shared.saveToCache('doors', response);
-  });
-  data.list('fenestrations').then(function (response) {
-    Shared.saveToCache('fenestrations', response);
-  });
-*/
+  if (!Shared.existsInCache('constructions')) {
+    data.list('constructions').then(function (response) {
+      Shared.saveToCache('constructions', response);
+    });
+  }
+  if (!Shared.existsInCache('doors')) {
+    data.list('door_lookups').then(function (response) {
+      Shared.saveToCache('doors', response);
+    });
+  }
+  if (!Shared.existsInCache('fenestrations')) {
+    data.list('fenestrations').then(function (response) {
+      Shared.saveToCache('fenestrations', response);
+    });
+  }
 }]);
 
 
