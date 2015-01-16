@@ -122,7 +122,7 @@ class ZoneSystemsController < ApplicationController
             @sys.save
           end
           zone_systems << @sys
-        elsif %w(SZAC).include? rec['type']
+        elsif %w(SZAC PVAV VAV).include? rec['type']
           # AIR SYSTEMS: 1 air segment (supply) contains fan and coils.  1 air segment (return)
           # TODO: what to set 'path' to in airseg?  (do it from zones tab)
           segments = []

@@ -25,7 +25,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     fpfc: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     szac: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     vav: [],
-    pvav: []
+    pvav: ['general', 'fan', 'coil_cooling', 'coil_heating']
   };
 
   // TODO: add other plant tab defs
@@ -550,7 +550,46 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
-
+  $scope.gridCols.pvav.general = [{
+    name: 'name',
+    displayName: 'System Name',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+/*  }, {
+    name: 'control_system_type',
+    displayName: 'Control System',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'reheat_control_method',
+    displayName: 'Reheat Control',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'cooling_control',
+    displayName: 'Cooling Control',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'cool_reset_supply_high',
+    displayName: 'Cool Reset Supply High',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+  }, {
+    name: 'cool_reset_supply_low',
+    displayName: 'Cool Reset Supply Low',
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'  */
+  }];
+  $scope.gridCols.pvav.fan = angular.copy($scope.gridCols.ptac.fan);
+  $scope.gridCols.pvav.coil_heating = angular.copy($scope.gridCols.ptac.coil_heating);
+  $scope.gridCols.pvav.coil_cooling = angular.copy($scope.gridCols.ptac.coil_cooling);
 
   //**** CREATE GRIDS ****
   // System Grids
@@ -562,7 +601,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     pvav: {}
   };
   _.each($scope.systemTabs, function (tabs, type) {
-    if (type == 'ptac' || type == 'fpfc' || type == 'szac') {
+    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav') {
       _.each(tabs, function (tab) {
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],
@@ -677,6 +716,22 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           coil_heating: 'default'
         };
         break;
+      case 'pvav':
+        $scope.tabClasses.pvav = {
+          general: 'default',
+          fan: 'default',
+          coil_cooling: 'default',
+          coil_heating: 'default'
+        };
+        break;
+      case 'vav':
+        $scope.tabClasses.vav = {
+          general: 'default',
+          fan: 'default',
+          coil_cooling: 'default',
+          coil_heating: 'default'
+        };
+        break;
       case 'hot_water':
         $scope.tabClasses.hot_water = {
           pump: 'default',
@@ -749,6 +804,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   $scope.setActiveTab('ptac', 'general');
   $scope.setActiveTab('fpfc', 'general');
   $scope.setActiveTab('szac', 'general');
+  $scope.setActiveTab('pvav', 'general');
   $scope.setActiveTab('hot_water', 'pump');
   $scope.setActiveTab('chilled_water', 'general');
   $scope.setActiveTab('condenser', 'pump');
@@ -819,6 +875,26 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
             name: "Heating Coil " + index,
             type: "Furnace",
             fuel_source: "NaturalGas"
+          }
+        });
+        break;
+      case 'pvav':
+        index = $scope.systems.pvav.length + 1;
+        $scope.systems.pvav.push({
+          name: "PVAV" + index,
+          type: 'PVAV',
+          fan: {
+            name: "Fan " + index,
+            control_method: 'VariableSpeedDrive'
+          },
+          coil_cooling: {
+            name: "Cooling Coil " + index,
+            type: "DirectExpansion"
+
+          },
+          coil_heating: {
+            name: "Heating Coil " + index,
+            type: "HotWater"
           }
         });
         break;
@@ -899,6 +975,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
         break;
       case 'szac':
         //nothing to add
+        break;
+      case 'pvav':
+        //hot_water plant only
+        addPlant('hot_water');
         break;
     }
   }

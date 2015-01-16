@@ -1,1 +1,33 @@
-PVAV TEMPLATE!
+<div class="row">
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="pvav_navigation">
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('pvav', 'general')" ng-class="getTabClass('pvav', 'general')">PVAV General System Settings</button>
+      <button type="button" ng-click="setActiveTab('pvav', 'fan')" ng-class="getTabClass('pvav', 'fan')">Fan</button>
+      <!-- <button type="button" ng-click="setActiveTab('pvav', 'fan_motor')" ng-class="getTabClass('pvav', 'fan_motor')">Fan Motor</button>-->
+      <button type="button" ng-click="setActiveTab('pvav', 'coil_cooling')" ng-class="getTabClass('pvav', 'coil_cooling')">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('pvav', 'coil_heating')" ng-class="getTabClass('pvav', 'coil_heating')">Hot Water Coil</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <p class="bold-text">Packaged variable volume system: VAV reheat system with packaged VAV DX unit with bass heating and hot water reheat terminal units.</p>
+      <p>Select the overall system or the components to edit the settings of each system.</p>
+      <button type="button" ng-click="addSystem('pvav')" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> PVAV System
+      </button>
+      <div class="pull-right pad-right-20">
+        <button type="button" ng-click="duplicateSystem('pvav')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteSystem('pvav')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+      </div>
+    </div>
+    <div class="row pad-top-20">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div ng-repeat="tab in systemTabs.pvav" ng-show="isActiveTab('pvav', tab)">
+            <div ui-grid="gridOptions.pvav[tab]" ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

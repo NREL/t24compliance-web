@@ -269,6 +269,20 @@ cbecc.factory('Enums', function () {
       'VariablePitchBlades',
       'TwoSpeed'
     ],
+    coil_coolings_type_enums: [
+      'ChilledWater',
+      'DirectExpansion'
+    ],
+    coil_coolings_condenser_type_enums: [
+      'Air',
+      'WaterSource'
+    ],
+    coil_heatings_type_enums: [
+      'Resistance',
+      'Furnace',
+      'HeatPump',
+      'HotWater'
+    ],
     fluid_systems_temperature_control_enums: [
       'Fixed',
       'Scheduled',
