@@ -34,7 +34,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       displayName: 'Occupancy',
       secondLine: Shared.html('people / 1,000 ft<sup>2</sup>'),
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.occupant_density != row.entity.occupant_density_default) {
           return 'red-cell';
         }
@@ -47,7 +47,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       displayName: 'Hot Water Use',
       secondLine: Shared.html('gal / (hr person)'),
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.hot_water_heating_rate != row.entity.hot_water_heating_rate_default) {
           return 'red-cell';
         }
@@ -60,7 +60,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       displayName: 'Plug Loads',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.receptacle_power_density != row.entity.receptacle_power_density_default) {
           return 'red-cell';
         }
@@ -90,33 +90,39 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         // Update unmodified defaults
         if (colDef.name == 'space_function' && newValue != oldValue) {
-          // TODO Lookup space defaults
+          var defaults = _.find($scope.data.spaceFunctionDefaults, {
+            name: newValue
+          });
+
           if (rowEntity.occupant_density == rowEntity.occupant_density_default) {
-            rowEntity.occupant_density = 10;
+            rowEntity.occupant_density = defaults.occupant_density;
           }
           if (rowEntity.hot_water_heating_rate == rowEntity.hot_water_heating_rate_default) {
-            rowEntity.hot_water_heating_rate = 0.18;
+            rowEntity.hot_water_heating_rate = defaults.hot_water_heating_rate;
           }
           if (rowEntity.receptacle_power_density == rowEntity.receptacle_power_density_default) {
-            rowEntity.receptacle_power_density = 1.5;
+            rowEntity.receptacle_power_density = defaults.receptacle_power_density;
           }
           if (rowEntity.exhaust_per_area == rowEntity.exhaust_per_area_default) {
-            rowEntity.exhaust_per_area = 10;
+            rowEntity.exhaust_per_area = defaults.exhaust_per_area;
           }
           if (rowEntity.exhaust_air_changes_per_hour == rowEntity.exhaust_air_changes_per_hour_default) {
-            rowEntity.exhaust_air_changes_per_hour = 0.18;
-          }
-          if (rowEntity.exhaust_per_space == rowEntity.exhaust_per_space_default) {
-            rowEntity.exhaust_per_space = 250;
+            rowEntity.exhaust_air_changes_per_hour = defaults.exhaust_air_changes_per_hour;
           }
 
-          rowEntity.occupant_density_default = 10;
-          rowEntity.hot_water_heating_rate_default = 0.18;
-          rowEntity.receptacle_power_density_default = 1.5;
+          rowEntity.occupant_density_default = defaults.occupant_density;
+          rowEntity.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
+          rowEntity.receptacle_power_density_default = defaults.receptacle_power_density;
+          rowEntity.exhaust_per_area_default = defaults.exhaust_per_area;
+          rowEntity.exhaust_air_changes_per_hour_default = defaults.exhaust_air_changes_per_hour;
 
-          rowEntity.exhaust_per_area_default = 10;
-          rowEntity.exhaust_air_changes_per_hour_default = 0.18;
-          rowEntity.exhaust_per_space_default = 250;
+          // Schedules/Ventilation are not modifiable by the user
+          rowEntity.function_schedule_group = defaults.function_schedule_group == '- specify -' ? null : defaults.function_schedule_group;
+          rowEntity.ventilation_per_person = defaults.ventilation_per_person;
+          rowEntity.ventilation_per_area = defaults.ventilation_per_area;
+          rowEntity.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
+
+          rowEntity.total_exhaust = Shared.calculateTotalExhaust(rowEntity);
 
           gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
         }
@@ -149,7 +155,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         row.exhaust_per_area = $scope.selected.space.exhaust_per_area_default;
       }
       if (row.exhaust_air_changes_per_hour == row.exhaust_air_changes_per_hour_default) {
-        row.exhaust_air_changes_per_hour =  $scope.selected.space.exhaust_air_changes_per_hour_default;
+        row.exhaust_air_changes_per_hour = $scope.selected.space.exhaust_air_changes_per_hour_default;
       }
       if (row.exhaust_per_space == row.exhaust_per_space_default) {
         row.exhaust_per_space = $scope.selected.space.exhaust_per_space_default;
