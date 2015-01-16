@@ -95,16 +95,20 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
 
   $scope.plantPanels = [{
     title: 'Service Hot Water',
-    name: 'shw'
+    name: 'shw',
+    open: true
   }, {
     title: 'Hot Water Plant',
-    name: 'hot_water'
+    name: 'hot_water',
+    open: true
   }, {
     title: 'Chilled Water Plant',
-    name: 'chilled_water'
+    name: 'chilled_water',
+    open: true
   }, {
     title: 'Condenser Plant',
-    name: 'condenser'
+    name: 'condenser',
+    open: true
   }];
 
   // coil totals for plants
@@ -488,7 +492,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     enableHiding: false,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-  },{
+  }, {
     name: 'sub_type',
     displayName: 'Sub-Type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -1084,6 +1088,21 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
       }
     }, function () {
       // Modal canceled
+    });
+  };
+
+  $scope.expandAll = function () {
+    _.each(['systemPanels', 'plantPanels'], function (panelType) {
+      _.each($scope[panelType], function (panel) {
+        panel.open = true;
+      });
+    });
+  };
+  $scope.collapseAll = function () {
+    _.each(['systemPanels', 'plantPanels'], function (panelType) {
+      _.each($scope[panelType], function (panel) {
+        panel.open = false;
+      });
     });
   };
 

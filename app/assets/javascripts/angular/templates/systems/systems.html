@@ -14,10 +14,12 @@
     <button type="button" ng-click="openSystemCreatorModal()" class="btn btn-success">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New System
     </button>
+    <button type="button" ng-click="expandAll()" class="btn btn-info">Expand All</button>
+    <button type="button" ng-click="collapseAll()" class="btn btn-info">Collapse All</button>
   </div>
 </div>
 <accordion close-others="false">
-  <accordion-group ng-repeat="panel in systemPanels" is-open="true" ng-if="hasSystems(panel.name)">
+  <accordion-group ng-repeat="panel in systemPanels" is-open="panel.open" ng-if="hasSystems(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
       {{panel.title}}
@@ -61,7 +63,7 @@
   </div>
 </div>
 <accordion close-others="false">
-  <accordion-group ng-repeat="panel in plantPanels" is-open="true" ng-if="hasPlant(panel.name)">
+  <accordion-group ng-repeat="panel in plantPanels" is-open="panel.open" ng-if="hasPlant(panel.name)">
     <accordion-heading>
       <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': panel.open, 'glyphicon-chevron-right': !panel.open}"></i>
       {{panel.title}}
