@@ -8,6 +8,8 @@ class ExteriorWall
   field :area, type: Float
   field :display_perimeter, type: Float
   field :azimuth, type: Float
+  # should not go in XML:
+  field :construction_library_id, type: BSON::ObjectId
 
   belongs_to :space
   has_many :windows, dependent: :destroy, autosave: true

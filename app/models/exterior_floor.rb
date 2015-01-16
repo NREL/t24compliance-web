@@ -6,6 +6,8 @@ class ExteriorFloor
   field :status, type: String
   field :construct_assembly_reference, type: String
   field :area, type: Float
+  # should not go in XML:
+  field :construction_library_id, type: BSON::ObjectId
 
   belongs_to :space
   has_many :poly_loops, dependent: :destroy

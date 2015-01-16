@@ -34,10 +34,15 @@ class ZoneSystemsController < ApplicationController
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
 
     # add / update
-    systems = []
+    zone_systems = []
+    air_systems = []
     if clean_params.has_key?('data')
       clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
+
+        #air vs zone systems
+       # if ['PTAC', 'FPFC'].
+
         fans = []
         coil_coolings = []
         coil_heatings = []
@@ -87,21 +92,20 @@ class ZoneSystemsController < ApplicationController
           @sys.coil_coolings = coil_coolings
           @sys.coil_heatings = coil_heatings
           @sys.update(rec)
-          systems << @sys
+
         else
           @sys = ZoneSystem.new(rec)
           @sys.fans = fans
           @sys.coil_coolings = coil_coolings
           @sys.coil_heatings = coil_heatings
           @sys.save
-          systems << @sys
         end
-
+        zone_systems << @sys
       end
     end
 
     # delete
-    @building.zone_systems = systems
+    @building.zone_systems = zone_systems
     @building.save
 
     # TODO: add error handling?!

@@ -7,6 +7,8 @@ class Door
   field :operation, type: String
   field :door_construction_reference, type: String
   field :area, type: Float
+  # should not go in XML:
+  field :construction_library_id, type: BSON::ObjectId
 
   belongs_to :exterior_wall
   belongs_to :interior_wall

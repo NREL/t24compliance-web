@@ -21,6 +21,8 @@ class Roof
   field :crrc_product_id, type: String
   field :roof_aged_solar_reflectance, type: Float
   field :roof_aged_thermal_emittance, type: Float
+  # should not go in XML:
+  field :construction_library_id, type: BSON::ObjectId
 
   belongs_to :space
   has_many :skylights, dependent: :destroy, autosave: true

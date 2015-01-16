@@ -9,6 +9,8 @@ class InteriorFloor
   field :interior_solar_absorptance, type: Float
   field :interior_thermal_absorptance, type: Float
   field :interior_visible_absorptance, type: Float
+  # should not go in XML:
+  field :construction_library_id, type: BSON::ObjectId
 
   belongs_to :space
   has_many :poly_loops, dependent: :destroy

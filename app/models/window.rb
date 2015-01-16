@@ -6,6 +6,8 @@ class Window
   field :status, type: String
   field :fenestration_construction_reference, type: String
   field :area, type: Float
+  # should not go in XML:
+  field :construction_library_id, type: BSON::ObjectId
 
   belongs_to :exterior_wall
   has_many :poly_loops, dependent: :destroy
