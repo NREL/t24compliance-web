@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'wizard' => 'projects#wizard'
   resources :buildings
   resources :projects do
+    get 'download', on: :member
     resources :materials
     resources :construct_assemblies
   end

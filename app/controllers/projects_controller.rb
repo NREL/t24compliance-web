@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :download]
 
   respond_to :json, :html
 
@@ -44,6 +44,12 @@ class ProjectsController < ApplicationController
   end
 
   def wizard
+
+  end
+
+  def download
+    xml = @project.to_sdd_xml
+    send_data xml, :filename => "#{@project.name.gsub(' ', '_')}_sdd.xml", :type => "text/plain"
 
   end
 
