@@ -161,8 +161,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     field: 'boilers[0].pump.flow_capacity'
   }, {
     name: 'pump_total_head',
-    displayName: 'Pump Head (ft2 H2O)',
-    field: 'boilers[0].pump.total_head'
+    displayName: 'Pump Head',
+    secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
+    field: 'boilers[0].pump.total_head',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
@@ -247,8 +249,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     field: 'chillers[0].pump.flow_capacity'
   }, {
     name: 'pump_total_head',
-    displayName: 'Pump Head (ft2 H2O)',
-    field: 'chillers[0].pump.total_head'
+    displayName: 'Pump Head',
+    secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
+    field: 'chillers[0].pump.total_head',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
@@ -316,8 +320,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     field: 'heat_rejections[0].pump.flow_capacity'
   }, {
     name: 'pump_total_head',
-    displayName: 'Pump Head (ft2 H2O)',
-    field: 'heat_rejections[0].pump.total_head'
+    displayName: 'Pump Head',
+    secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
+    field: 'heat_rejections[0].pump.total_head',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
