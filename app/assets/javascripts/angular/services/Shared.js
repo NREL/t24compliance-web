@@ -1,9 +1,11 @@
-cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', '$sce', 'usSpinnerService', 'uiGridConstants', function ($q, $cacheFactory, $templateCache, $sce, usSpinnerService, uiGridConstants) {
+cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($q, $templateCache, $sce, DSCacheFactory, usSpinnerService, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
-  var cache = $cacheFactory('constructionsCache');
-  var cacheKeys = [];
+  var cache = DSCacheFactory('constructionsCache', {
+    storageMode: 'localStorage',
+    maxAge: 86400000 // 24 hours
+  });
 
   service.defaultParams = function () {
     return {
@@ -157,18 +159,47 @@ cbecc.factory('Shared', ['$q', '$cacheFactory', '$templateCache', '$sce', 'usSpi
     usSpinnerService.stop('spinner');
   };
 
+  service.existsInCache = function (key) {
+    var info = cache.info(key);
+    return info !== undefined && !info.isExpired;
+  };
+
   service.loadFromCache = function (key) {
-    if (cacheKeys.indexOf(key) == -1) {
+    if (!service.existsInCache(key)) {
       return null;
     }
-    return cache.get(key);
+    //var start = new Date().getTime();
+    var decompressed = LZString.decompressFromUTF16(cache.get(key));
+    //var end = new Date().getTime();
+    //console.log('Decompressed ' + key + ' in ' + (end - start) + ' ms');
+    return JSON.parse(decompressed);
   };
 
   service.saveToCache = function (key, value) {
-    if (cacheKeys.indexOf(key) == -1) {
-      cacheKeys.push(key);
-    }
-    cache.put(key, value === undefined ? null : value);
+    // Test compression algorithms
+    /*var start = new Date().getTime();
+     var str = JSON.stringify(value);
+     console.log(key + ' stringify.length: ' + str.length);
+     var end = new Date().getTime();
+     console.log('    Execution time: ' + (end-start) + ' ms');
+
+     start = new Date().getTime();
+     console.log(key + ' compress.length: ' + LZString.compress(str).length);
+     end = new Date().getTime();
+     console.log('    Execution time: ' + (end-start) + ' ms');
+
+     start = new Date().getTime();
+     console.log(key + ' compressToUTF16.length: ' + LZString.compressToUTF16(str).length);
+     end = new Date().getTime();
+     console.log('    Execution time: ' + (end-start) + ' ms');
+
+     start = new Date().getTime();
+     console.log(key + ' compressToUint8Array.length: ' + LZString.compressToUint8Array(str).length);
+     end = new Date().getTime();
+     console.log('    Execution time: ' + (end-start) + ' ms');*/
+
+    var compressed = LZString.compressToUTF16(JSON.stringify(value));
+    cache.put(key, compressed);
   };
 
   // Contains All condition, split by spaces
