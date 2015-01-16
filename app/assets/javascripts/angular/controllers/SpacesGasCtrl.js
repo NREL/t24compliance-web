@@ -20,7 +20,8 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'gas_equipment',
+      name: 'gas_equipment_power_density',
+      displayName: 'Gas Equipment',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
@@ -28,7 +29,8 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'process_gas',
+      name: 'process_gas_power_density',
+      displayName: 'Process Gas',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
@@ -36,21 +38,24 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'gas_radiant_fraction',
+      name: 'process_gas_radiation_fraction',
+      displayName: 'Gas Radiant Fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'gas_latent_fraction',
+      name: 'process_gas_latent_fraction',
+      displayName: 'Gas Latent Fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'gas_lost_fraction',
+      name: 'process_gas_lost_fraction',
+      displayName: 'Gas Lost Fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',

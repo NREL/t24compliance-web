@@ -240,9 +240,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,
-      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-      enableSorting: false,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+      enableSorting: false
     };
 
     $scope.wallGridOptions = {
@@ -263,9 +261,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', [
       }],
       enableCellEditOnFocus: true,
       enableColumnMenus: false,
-      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-      enableSorting: false,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+      enableSorting: false
     };
 
     $scope.addSpaceGroup = function () {

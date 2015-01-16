@@ -20,7 +20,8 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       filter: Shared.textFilter()
     }, {
-      name: 'process_electric',
+      name: 'process_electrical_power_density',
+      displayName: 'Process Electric',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
@@ -28,7 +29,8 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       type: 'number',
       filters: Shared.numberFilter()
     }, {
-      name: 'refrigeration',
+      name: 'commercial_refrigeration_epd',
+      displayName: 'Refrigeration',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
@@ -37,7 +39,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       filters: Shared.numberFilter()
     }, {
       name: 'elevator_count',
-      secondLine: Shared.html('ElevMechan / Space'),
+      secondLine: Shared.html('ElevMech / Space'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
@@ -45,13 +47,15 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       filters: Shared.numberFilter()
     }, {
       name: 'escalator_count',
+      secondLine: Shared.html('Escal / Space'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
-      name: 'loads_radiant_fraction',
+      name: 'process_electrical_radiation_fraction',
+      displayName: 'Loads Radiant Fraction',
       enableHiding: false,
       cellClass: 'border-left-cell',
       headerCellClass: 'border-left-cell',
@@ -60,14 +64,16 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       type: 'number',
       filters: Shared.numberFilter()
     }, {
-      name: 'loads_latent_fraction',
+      name: 'process_electrical_latent_fraction',
+      displayName: 'Loads Latent Fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
     }, {
-      name: 'loads_lost_fraction',
+      name: 'process_electrical_lost_fraction',
+      displayName: 'Loads Lost Fraction',
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',

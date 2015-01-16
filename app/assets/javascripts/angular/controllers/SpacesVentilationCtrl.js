@@ -61,11 +61,6 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Per Space',
       secondLine: Shared.html('cfm'),
       enableHiding: false,
-      cellClass: function(grid, row, col, rowRenderIndex, colRenderIndex) {
-        if (row.entity.exhaust_per_space != row.entity.exhaust_per_space_default) {
-          return 'red-cell';
-        }
-      },
       cellEditableCondition: $scope.editableCondition,
       type: 'number',
       filters: Shared.numberFilter(),
@@ -115,8 +110,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.confirmApplySettings = function () {
     var replacement = {
       exhaust_per_area: $scope.selected.space.exhaust_per_area,
-      exhaust_air_changes_per_hour: $scope.selected.space.exhaust_air_changes_per_hour,
-      exhaust_per_space: $scope.selected.space.exhaust_per_space
+      exhaust_air_changes_per_hour: $scope.selected.space.exhaust_air_changes_per_hour
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {

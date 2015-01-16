@@ -144,7 +144,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'wall_height',
+      name: 'height',
+      displayName: 'Wall Height',
       secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
@@ -164,7 +165,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'exposed_perimeter',
+      name: 'perimeter_exposed',
+      displayName: 'Exposed Perimeter',
       secondLine: Shared.html('ft'),
       enableHiding: false,
       type: 'number',
@@ -245,8 +247,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       construction: $scope.selected.surface.construction,
       adjacent_space: $scope.selected.surface.adjacent_space,
       tilt: $scope.selected.surface.tilt,
-      wall_height: $scope.selected.surface.wall_height,
-      exposed_perimeter: $scope.selected.surface.exposed_perimeter
+      height: $scope.selected.surface.height,
+      perimeter_exposed: $scope.selected.surface.perimeter_exposed
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {

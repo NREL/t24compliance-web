@@ -1,20 +1,79 @@
 cbecc.controller('SpacesCtrl', [
-  '$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', /*'constData', 'fenData',*/ 'stories', 'spaces', 'space_function_defaults', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, /*constData, fenData,*/ stories, spaces, space_function_defaults, constructions) {
+  '$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', /*'constData', 'doorData', 'fenData',*/ 'stories', 'spaces', 'space_function_defaults', 'constructions', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, /*constData, doorData, fenData,*/ stories, spaces, space_function_defaults, constructions) {
     $scope.data = {
       /*constData: constData,
+       doorData: doorData,
        fenData: fenData,*/
       stories: stories,
       spaces: spaces,
+      spaceFunctionDefaults: space_function_defaults,
       constructions: constructions,
       surfaces: [],
       subsurfaces: []
     };
 
-    console.log("Saved Spaces:");
-    console.log($scope.data.spaces);
+    // Load saved spaces
+    var surfaceIndex = 0;
+    _.each($scope.data.spaces, function (space, spaceIndex) {
+      _.each(['interior_walls', 'exterior_walls', 'underground_walls', 'interior_floors', 'exterior_floors', 'underground_floors', 'roofs'], function (surfaceType) {
+        _.each(space[surfaceType], function (surface) {
+          _.each(['doors', 'skylights', 'windows'], function (subsurfaceType) {
+            _.each(surface[subsurfaceType], function (subsurface) {
+              subsurface.space = spaceIndex;
+              subsurface.surface = surfaceIndex;
+              subsurface.building_story_id = space.building_story_id;
+              if (subsurfaceType == 'doors') {
+                subsurface.construction = subsurface.construct_assembly_reference;
+              } else {
+                subsurface.construction = subsurface.fenestration_construction_reference;
+              }
+              $scope.data.subsurfaces.push(subsurface);
+            });
+            delete surface[subsurfaceType];
+          });
+          surface.space = spaceIndex;
+          if (surfaceType == 'interior_floors') {
+            surface.type = 'Floor';
+            surface.boundary = 'Interior';
+            surface.adjacent_space = surface.adjacent_space_reference;
+          } else if (surfaceType == 'exterior_floors') {
+            surface.type = 'Floor';
+            surface.boundary = 'Exterior';
+          } else if (surfaceType == 'underground_floors') {
+            surface.type = 'Floor';
+            surface.boundary = 'Underground';
+          } else if (surfaceType == 'interior_walls') {
+            surface.type = 'Wall';
+            surface.boundary = 'Interior';
+            surface.adjacent_space = surface.adjacent_space_reference;
+          } else if (surfaceType == 'exterior_walls') {
+            surface.type = 'Wall';
+            surface.boundary = 'Exterior';
+          } else if (surfaceType == 'underground_walls') {
+            surface.type = 'Wall';
+            surface.boundary = 'Underground';
+          } else if (surfaceType == 'roofs') {
+            surface.type = 'Roof';
+            surface.boundary = null;
+          }
+          surface.building_story_id = space.building_story_id;
+          surface.construction = surface.construct_assembly_reference;
+          $scope.data.surfaces.push(surface);
+          surfaceIndex++;
+        });
+        delete space[surfaceType];
+      });
 
-    console.log("SPACE FUNCTION DEFAULTS:");
-    console.log(space_function_defaults);
+      var defaults = _.find($scope.data.spaceFunctionDefaults, {
+        name: space.space_function
+      });
+      space.occupant_density_default = defaults.occupant_density;
+      space.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
+      space.receptacle_power_density_default = defaults.receptacle_power_density;
+      space.exhaust_per_area_default = defaults.exhaust_per_area;
+      space.exhaust_air_changes_per_hour_default = defaults.exhaust_air_changes_per_hour;
+      space.total_exhaust = Shared.calculateTotalExhaust(space);
+    });
 
     // Check for construction defaults
     if ($scope.data.constructions.length) {
@@ -139,8 +198,6 @@ cbecc.controller('SpacesCtrl', [
       space.exhaust_per_area_default = 10;
       space.exhaust_air_changes_per_hour = 0.18;
       space.exhaust_air_changes_per_hour_default = 0.18;
-      space.exhaust_per_space = 250;
-      space.exhaust_per_space_default = 250;
 
       $scope.data.updateTotalExhaust(space);
       $scope.data.spaces.push(space);
@@ -240,8 +297,8 @@ cbecc.controller('SpacesCtrl', [
         construction: null,
         adjacent_space: null,
         tilt: null,
-        wall_height: null,
-        exposed_perimeter: null
+        height: null,
+        perimeter_exposed: null
       });
     };
     $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi) {
@@ -263,16 +320,13 @@ cbecc.controller('SpacesCtrl', [
       _.each($scope.data.spaces, function (space) {
         space.exhaust_per_area = space.exhaust_per_area_default;
         space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
-        space.exhaust_per_space = space.exhaust_per_space_default;
         $scope.data.updateTotalExhaust(space);
         gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     };
     $scope.data.modifiedSpaceTypeVentilationValues = function () {
       return !_.isEmpty(_.find($scope.data.spaces, function (space) {
-        return (space.exhaust_per_area !== space.exhaust_per_area_default ||
-        space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default ||
-        space.exhaust_per_space !== space.exhaust_per_space_default);
+        return (space.exhaust_per_area !== space.exhaust_per_area_default || space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default);
       }));
     };
     $scope.data.duplicateSurface = function (selected) {
@@ -300,8 +354,8 @@ cbecc.controller('SpacesCtrl', [
         construction: selectedSurface.construction,
         adjacent_space: selectedSurface.adjacent_space,
         tilt: selectedSurface.tilt,
-        wall_height: selectedSurface.wall_height,
-        exposed_perimeter: selectedSurface.exposed_perimeter
+        height: selectedSurface.height,
+        perimeter_exposed: selectedSurface.perimeter_exposed
       });
     };
     $scope.data.deleteSurface = function (selected, gridApi) {
@@ -340,13 +394,16 @@ cbecc.controller('SpacesCtrl', [
         construction: null
       });
     };
-    $scope.data.duplicateSubsurface = function (selected) {
+    $scope.data.duplicateSubsurface = function (selected, newParent) {
       var selectedSubsurface = selected.subsurface;
+
+      var surface = newParent === undefined ? selectedSubsurface.surface : newParent;
+      var space = $scope.data.surfaces[surface].space;
 
       $scope.data.subsurfaces.push({
         name: selectedSubsurface.name,
-        space: selectedSubsurface.space,
-        surface: selectedSubsurface.surface,
+        space: space,
+        surface: surface,
         type: selectedSubsurface.type,
         building_story_id: selectedSubsurface.building_story_id,
         area: selectedSubsurface.area,
@@ -364,7 +421,7 @@ cbecc.controller('SpacesCtrl', [
     };
 
     $scope.data.updateTotalExhaust = function (space) {
-      space.total_exhaust = Math.round((space.exhaust_per_area * space.area) + (space.exhaust_air_changes_per_hour * space.floor_to_ceiling_height * space.area / 60) + space.exhaust_per_space);
+      space.total_exhaust = Shared.calculateTotalExhaust(space);
     };
 
     // save
@@ -382,9 +439,8 @@ cbecc.controller('SpacesCtrl', [
         spaces[surface.space].surfaces.push(surface);
       });
 
-      console.log(spaces);
       var params = Shared.defaultParams();
-      params['data'] = spaces;
+      params.data = spaces;
       data.bulkSync('spaces', params).then(success).catch(failure);
 
 
