@@ -1,4 +1,4 @@
-/*! ui-grid - v3.0.0-RC.18-c456117 - 2015-01-15
+/*! ui-grid - v3.0.0-RC.18-1cf5065 - 2015-01-16
 * Copyright (c) 2015 ; License: MIT */
 (function () {
   'use strict';
@@ -101,8 +101,8 @@
     },
     scrollbars: {
       NEVER: 0,
-      ALWAYS: 1,
-      WHEN_NEEDED: 2
+      ALWAYS: 1
+      //WHEN_NEEDED: 2
     }
   });
 
@@ -2425,9 +2425,9 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
 
               // todo: this isn't working when scrolling down.  it works fine for up.  tested on Chrome
               // Let the parent container scroll if the grid is already at the top/bottom
-                if ((scrollEvent.y && scrollEvent.y.percentage !== 0 && scrollEvent.y.percentage !== 1) ||
+                if ((scrollEvent.y && scrollEvent.y.percentage !== 0 && scrollEvent.y.percentage !== 1 && containerCtrl.viewport[0].scrollTop !== 0 ) ||
                     (scrollEvent.x && scrollEvent.x.percentage !== 0 && scrollEvent.x.percentage !== 1)) {
-                evt.preventDefault();
+                  evt.preventDefault();
               }
 
               scrollEvent.fireThrottledScrollingEvent();
@@ -3258,7 +3258,7 @@ angular.module('ui.grid').directive('uiGrid',
                 var width = 0;
                 for (var i = 0; i < cols.length; i++) {
                   var col = cols[i];
-                  width += col.drawnWidth;
+                  width += col.drawnWidth || col.width || 0;
                 }
 
                 myWidth = width;
@@ -3288,7 +3288,7 @@ angular.module('ui.grid').directive('uiGrid',
             }
 
             grid.renderContainers.body.registerViewportAdjuster(function (adjustment) {
-              if ( myWidth === 0 ){
+              if ( myWidth === 0 || !myWidth ){
                 updateContainerWidth();
               }
               // Subtract our own width
@@ -6670,7 +6670,7 @@ angular.module('ui.grid')
        * @name enableVerticalScrollbar
        * @propertyOf ui.grid.class:GridOptions
        * @description uiGridConstants.scrollbars.ALWAYS by default. This settings controls the vertical scrollbar for the grid.
-       * Supported values: uiGridConstants.scrollbars.ALWAYS, uiGridConstants.scrollbars.NEVER, uiGridConstants.scrollbars.WHEN_NEEDED.
+       * Supported values: uiGridConstants.scrollbars.ALWAYS, uiGridConstants.scrollbars.NEVER
        */
       baseOptions.enableVerticalScrollbar = typeof(baseOptions.enableVerticalScrollbar) !== "undefined" ? baseOptions.enableVerticalScrollbar : uiGridConstants.scrollbars.ALWAYS;
       
@@ -6679,7 +6679,7 @@ angular.module('ui.grid')
        * @name enableHorizontalScrollbar
        * @propertyOf ui.grid.class:GridOptions
        * @description uiGridConstants.scrollbars.ALWAYS by default. This settings controls the horizontal scrollbar for the grid.
-       * Supported values: uiGridConstants.scrollbars.ALWAYS, uiGridConstants.scrollbars.NEVER, uiGridConstants.scrollbars.WHEN_NEEDED.
+       * Supported values: uiGridConstants.scrollbars.ALWAYS, uiGridConstants.scrollbars.NEVER
        */
       baseOptions.enableHorizontalScrollbar = typeof(baseOptions.enableHorizontalScrollbar) !== "undefined" ? baseOptions.enableHorizontalScrollbar : uiGridConstants.scrollbars.ALWAYS;
   
@@ -6773,7 +6773,7 @@ angular.module('ui.grid')
    * @param {Grid} grid the grid the render container is in
    * @param {object} options the render container options
    */
-.factory('GridRenderContainer', ['gridUtil', function(gridUtil) {
+.factory('GridRenderContainer', ['gridUtil', 'uiGridConstants', function(gridUtil, uiGridConstants) {
   function GridRenderContainer(name, grid, options) {
     var self = this;
 
@@ -7480,24 +7480,22 @@ angular.module('ui.grid')
     var styles = {};
 
     if (self.name === 'body') {
-      styles['overflow-x'] = 'scroll';
+      styles['overflow-x'] = self.grid.options.enableHorizontalScrollbar === uiGridConstants.scrollbars.NEVER ? 'hidden' : 'scroll';
       if (self.grid.hasRightContainerColumns()) {
         styles['overflow-y'] = 'hidden';
       }
       else {
-        styles['overflow-y'] = 'scroll';
+        styles['overflow-y'] = self.grid.options.enableVerticalScrollbar === uiGridConstants.scrollbars.NEVER ? 'hidden' : 'scroll';
       }
     }
     else if (self.name === 'left') {
       styles['overflow-x'] = 'hidden';
-      styles['overflow-y'] = 'hidden';
+      styles['overflow-y'] = self.grid.isRTL() ? (self.grid.options.enableVerticalScrollbar === uiGridConstants.scrollbars.NEVER ? 'hidden' : 'scroll') : 'hidden';
     }
     else {
       styles['overflow-x'] = 'hidden';
-      styles['overflow-y'] = 'scroll';
+      styles['overflow-y'] = !self.grid.isRTL() ? (self.grid.options.enableVerticalScrollbar === uiGridConstants.scrollbars.NEVER ? 'hidden' : 'scroll') : 'hidden';
     }
-
-    // if (self.grid.isRTL()) {
 
     return styles;
 
@@ -12361,7 +12359,7 @@ module.filter('px', function() {
                     }
 
                     // Re-broadcast a cellNav event so we re-focus the right cell
-                    uiGridCtrl.cellNav.broadcastCellNav(lastRowCol);
+                    //uiGridCtrl.cellNav.broadcastCellNav(lastRowCol);
                   });
                 });
               });
@@ -13434,6 +13432,9 @@ module.filter('px', function() {
     var service = {
       initializeGrid: function (grid) {
         
+        grid.expandable = {};
+        grid.expandable.expandedAll = false;
+
         /**
          *  @ngdoc object
          *  @name enableExpandable
@@ -13463,6 +13464,20 @@ module.filter('px', function() {
          *  </pre>  
          */
         grid.options.expandableRowHeight = grid.options.expandableRowHeight || 150;
+
+        /**
+         *  @ngdoc object
+         *  @name 
+         *  @propertyOf  ui.grid.expandable.api:GridOptions
+         *  @description Width in pixels of the expandable column. Defaults to 40
+         *  @example
+         *  <pre>
+         *    $scope.gridOptions = {
+         *      expandableRowHeaderWidth: 40
+         *    }
+         *  </pre>  
+         */
+        grid.options.expandableRowHeaderWidth = grid.options.expandableRowHeaderWidth || 40;
 
         /**
          *  @ngdoc object
@@ -13555,6 +13570,19 @@ module.filter('px', function() {
                */              
               collapseAllRows: function() {
                 service.collapseAllRows(grid);
+              },
+
+              /**
+               * @ngdoc method
+               * @name toggleAllRows
+               * @methodOf  ui.grid.expandable.api:PublicApi
+               * @description Toggle all subgrids.
+               * <pre>
+               *      gridApi.expandable.toggleAllRows();
+               * </pre>
+               */              
+              toggleAllRows: function() {
+                service.toggleAllRows(grid);
               }
             }
           }
@@ -13565,14 +13593,13 @@ module.filter('px', function() {
       
       toggleRowExpansion: function (grid, row) {
         row.isExpanded = !row.isExpanded;
-
         if (row.isExpanded) {
           row.height = row.grid.options.rowHeight + grid.options.expandableRowHeight;
         }
         else {
           row.height = row.grid.options.rowHeight;
+          grid.expandable.expandedAll = false;
         }
-
         grid.api.expandable.raise.rowExpandedStateChanged(row);
       },
       
@@ -13582,6 +13609,7 @@ module.filter('px', function() {
             service.toggleRowExpansion(grid, row);
           }
         });
+        grid.expandable.expandedAll = true;
         grid.refresh();
       },
       
@@ -13591,7 +13619,17 @@ module.filter('px', function() {
             service.toggleRowExpansion(grid, row);
           }
         });
+        grid.expandable.expandedAll = false;
         grid.refresh();
+      },
+
+      toggleAllRows: function(grid) {
+        if (grid.expandable.expandedAll) {
+          service.collapseAllRows(grid);
+        }
+        else {
+          service.expandAllRows(grid);
+        }
       }
     };
     return service;
@@ -13627,9 +13665,10 @@ module.filter('px', function() {
                   exporterSuppressExport: true, 
                   enableColumnResizing: false, 
                   enableColumnMenu: false,
-                  width: 40
+                  width: uiGridCtrl.grid.options.expandableRowHeaderWidth || 40
                 };
                 expandableRowHeaderColDef.cellTemplate = $templateCache.get('ui-grid/expandableRowHeader');
+                expandableRowHeaderColDef.headerCellTemplate = $templateCache.get('ui-grid/expandableTopRowHeader');
                 uiGridCtrl.grid.addRowHeaderColumn(expandableRowHeaderColDef);
               }
               uiGridExpandableService.initializeGrid(uiGridCtrl.grid);
@@ -17192,7 +17231,9 @@ module.filter('px', function() {
           uiGridCtrl.grid.buildColumns()
             .then(function() {
               // Then refresh the grid canvas, rebuilding the styles so that the scrollbar updates its size
-              uiGridCtrl.grid.refreshCanvas(true);
+              uiGridCtrl.grid.refreshCanvas(true).then( function() {
+                uiGridCtrl.grid.refresh();
+              });
             });
         }
 
@@ -19681,6 +19722,11 @@ angular.module('ui.grid').run(['$templateCache', function($templateCache) {
     "<div ng-if=\"expandableRow.shouldRenderFiller()\" style=\"float:left; margin-top: 2px; margin-bottom: 2px\" ng-style=\"{ width: (grid.getViewportWidth()) + 'px',\n" +
     "              height: grid.options.expandableRowHeight + 'px', 'margin-left': grid.options.rowHeader.rowHeaderWidth + 'px' }\"><i class=\"ui-grid-icon-spin5 ui-grid-animate-spin\" ng-style=\"{ 'margin-top': ( grid.options.expandableRowHeight/2 - 5) + 'px',\n" +
     "            'margin-left' : ((grid.getViewportWidth() - grid.options.rowHeader.rowHeaderWidth)/2 - 5) + 'px' }\"></i></div>"
+  );
+
+
+  $templateCache.put('ui-grid/expandableTopRowHeader',
+    "<div class=\"ui-grid-row-header-cell ui-grid-expandable-buttons-cell\"><div class=\"ui-grid-cell-contents\"><i ng-class=\"{ 'ui-grid-icon-plus-squared' : !grid.expandable.expandedAll, 'ui-grid-icon-minus-squared' : grid.expandable.expandedAll }\" ng-click=\"grid.api.expandable.toggleAllRows()\"></i></div></div>"
   );
 
 
