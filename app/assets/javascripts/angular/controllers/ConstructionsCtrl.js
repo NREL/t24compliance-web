@@ -77,9 +77,7 @@ cbecc.controller('ConstructionsCtrl', [
           visible: panel.name == 'underground_floor'
         }],
         enableColumnMenus: false,
-        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-        enableSorting: false,
-        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+        enableSorting: false
       };
 
       panel.gridOptions = {
@@ -90,9 +88,7 @@ cbecc.controller('ConstructionsCtrl', [
           name: 'code_category'
         }],
         enableColumnMenus: false,
-        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-        enableSorting: false,
-        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+        enableSorting: false
       };
 
       // retrieve selected and layers
@@ -127,9 +123,7 @@ cbecc.controller('ConstructionsCtrl', [
           name: 'open'
         }],
         enableColumnMenus: false,
-        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-        enableSorting: false,
-        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+        enableSorting: false
       };
 
       // retrieve selected
@@ -180,9 +174,7 @@ cbecc.controller('ConstructionsCtrl', [
           visible: panel.name == 'skylight'
         }],
         enableColumnMenus: false,
-        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-        enableSorting: false,
-        enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+        enableSorting: false
       };
 
       // retrieve selected
@@ -466,6 +458,19 @@ cbecc.controller('ModalConstructionLibraryCtrl', [
           placeholder: 'No more than'
         }],
         headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+        sortingAlgorithm: function (a, b) {
+          if (a === b) {
+            return 0;
+          }
+          if (a === null) {
+            return 1;
+          } else if (b === null) {
+            return -1;
+          }
+          var numA = Number(a.replace('_', '.').replace(/[^\d.]/g, ''));
+          var numB = Number(b.replace('_', '.').replace(/[^\d.]/g, ''));
+          return numA < numB ? -1 : 1;
+        },
         visible: $scope.type == 'UndergroundFloor'
       }],
       data: 'data',
@@ -502,9 +507,7 @@ cbecc.controller('ModalConstructionLibraryCtrl', [
       }],
       data: 'layerData',
       enableColumnMenus: false,
-      enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
-      enableSorting: false,
-      enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER
+      enableSorting: false
     };
 
     $scope.ok = function () {
