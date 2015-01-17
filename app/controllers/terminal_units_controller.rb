@@ -10,6 +10,7 @@ class TerminalUnitsController < ApplicationController
   def index
     @terminal_units = []
     @systems = (@building.present?) ? @building.air_systems : []
+    logger.info("systems: #{@systems.inspect}")
     @systems.each do |sys|
       units = sys.terminal_units
       units.each do |unit|
@@ -35,13 +36,13 @@ class TerminalUnitsController < ApplicationController
   # updates terminal_units and related components
   def bulk_sync
 
-    terminal_units = []
+    clean_params = terminal_units_params
+    logger.info("CLEAN PARAMS: #{clean_params.inspect}")
+
+    terminal_units = {}
     if clean_params.has_key?('data')
       clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
-
-
-        fans = []
 
         # extract fan / coil attributes in case they are there
         fan = rec.extract!('fan')['fan']
@@ -80,6 +81,7 @@ class TerminalUnitsController < ApplicationController
         elsif rec['type'] === 'VAVNoReheatBox'
         elsif rec['type'] === 'ParallelFanBox' or rec['type'] === 'SeriesFanBox'
           # save a fan
+          fans = []
         else
           # uncontrolled or unset, save nothing else!
         end
@@ -96,8 +98,12 @@ class TerminalUnitsController < ApplicationController
           end
         end
         @unit.save
+
+
       end
     end
+
+
 
     # TODO: add error handling?!
     respond_with terminal_units.first || TerminalUnit.new
@@ -133,6 +139,6 @@ class TerminalUnitsController < ApplicationController
     end
 
     def terminal_units_params
-      params.permit(:project_id, :building_id, data: [:id, :name, :status, :type, :zone_served_reference, :count, :minimum_air_fraction_schedule_reference, :primary_air_segment_reference, :primary_air_flow_maximum, :primary_air_flow_minimum, :heating_air_flow_maximum, :reheat_control_method, :induced_air_zone_reference, :induction_ratio, :fan_power_per_flow, :parallel_box_fan_flow_fraction])
+      params.permit(:project_id, :building_id, data: [:id, :name, :air_system_id, :status, :type, :zone_served_reference, :count, :minimum_air_fraction_schedule_reference, :primary_air_segment_reference, :primary_air_flow_maximum, :primary_air_flow_minimum, :heating_air_flow_maximum, :reheat_control_method, :induced_air_zone_reference, :induction_ratio, :fan_power_per_flow, :parallel_box_fan_flow_fraction])
     end
 end

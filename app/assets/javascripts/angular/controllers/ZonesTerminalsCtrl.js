@@ -7,18 +7,18 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
   // find all zones with an HVAC reference that requires a terminal  (SZAC, PVAV, VAV)
   terminalZonesArr = [];
   _.each(_.filter($scope.data.zones, {type: 'Conditioned'}), function (zone) {
-    console.log("ZONE:");
-    console.log(zone);
+    //console.log("ZONE:");
+    //console.log(zone);
     system = _.find($scope.data.systems, {name: zone.primary_air_conditioning_system_reference});
-    console.log("SYSTEM:");
-    console.log(system);
+    //console.log("SYSTEM:");
+    //console.log(system);
     if (system !== null) {
-
       if (_.contains(['SZAC', 'VAV', 'PVAV'], system.type)) {
         terminalZonesArr.push({
           id: zone.id,
-          value: zone.name,
-          system_type: system.type
+          name: zone.name,
+          system_type: system.type,
+          air_system_id: system.id
         });
       }
     }
@@ -27,9 +27,9 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
 
   // compare terminalZonesArr with $scope.data.terminals to see if rows need to be added (for new zone)
   _.each(terminalZonesArr, function (zone) {
-    var match = _.find($scope.data.terminals, {zone_served_reference: zone.zone_served_reference});
+    var match = _.find($scope.data.terminals, {zone_served_reference:  zone.name });
     if (!match) {
-      console.log("NO MATCH FOR zone id: ", zone.name);
+      console.log("NO MATCH FOR zone name: ", zone.name);
       // determine defaults based on system type
       terminal_type = "";
       if (zone.system_type === 'SZAC') {
@@ -37,9 +37,10 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       }
       // add to array
       $scope.data.terminals.push({
-        zone_served_reference: zone.value,
-        name: zone.value + ' Terminal',
-        type: terminal_type
+        zone_served_reference: zone.name,
+        name: zone.name + ' Terminal',
+        type: terminal_type,
+        air_system_id: zone.air_system_id
       })
 
     }

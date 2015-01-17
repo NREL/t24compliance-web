@@ -14,9 +14,11 @@ cbecc.controller('ZonesCtrl', [
     $scope.data.exhausts = _.filter($scope.data.systems, {type: 'Exhaust'});
     $scope.data.non_exhaust_systems = _.filter($scope.data.systems, function(system) { return system.type !== 'Exhaust'});
 
-    console.log('separated systems:');
-    console.log($scope.data.exhausts);
-    console.log($scope.data.non_exhaust_systems);
+    //console.log('separated systems:');
+    //console.log($scope.data.exhausts);
+    //console.log($scope.data.non_exhaust_systems);
+    console.log('terminals:');
+    console.log($scope.data.terminals);
 
     // add zone_id, zone_name to exhaust systems object
     _.each($scope.data.zones, function (zone) {
@@ -164,7 +166,18 @@ cbecc.controller('ZonesCtrl', [
 
           function success(response) {
             toaster.pop('success', 'Exhaust systems successfully saved');
-            $location.path(Shared.zonesPath());
+            var params = Shared.defaultParams();
+            params['data'] = terminals;
+            data.bulkSync('terminal_units', params).then(success).catch(failure);
+
+            function success(response) {
+              toaster.pop('success', 'Terminal units successfully saved');
+              $location.path(Shared.zonesPath());
+            }
+
+            function failure(response) {
+              toaster.pop('error', 'An error occurred while saving terminal units', response.statusText);
+            }
           }
 
           function failure(response) {
