@@ -5,9 +5,13 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
   };
 
   // find all zones that contain a space that has exhaust
-  exhaustZonesArr = [];
-  _.each(_.filter($scope.data.zones, {type: 'Conditioned'}), function (zone) {
-    _.each(_.filter($scope.data.spaces, {thermal_zone_reference: zone.name}), function (space) {
+  var exhaustZonesArr = [];
+  _.each(_.filter($scope.data.zones, {
+    type: 'Conditioned'
+  }), function (zone) {
+    _.each(_.filter($scope.data.spaces, {
+      thermal_zone_reference: zone.name
+    }), function (space) {
       if (Shared.calculateTotalExhaust(space) > 0) {
         //console.log("TOTAL EXHAUST FOR ", space.name, ": ", Shared.calculateTotalExhaust(space) );
         exhaustZonesArr.push({
@@ -25,7 +29,9 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
 
   // compare exhaustZonesArr with $scope.data.exhausts to see if rows need to be added (for zones that have new spaces with exhaust)
   _.each(exhaustZonesArr, function (zone) {
-    var match = _.find($scope.data.exhausts, {zone_id: zone.id});
+    var match = _.find($scope.data.exhausts, {
+      zone_id: zone.id
+    });
     if (!match) {
       console.log("NO MATCH FOR zone id: ", zone.id);
       // add to array
@@ -34,7 +40,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
         zone_name: zone.value,
         name: zone.value + ' Exhaust System',
         type: 'Exhaust'
-      })
+      });
     }
   });
   console.log("data.exhausts");
@@ -53,7 +59,6 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-
     }, {
       name: 'fan_classification',
       displayName: 'Classification',

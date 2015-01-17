@@ -1,15 +1,18 @@
 cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
-
   $scope.selected = {
     zone: null
   };
 
   // find all zones with an HVAC reference that requires a terminal  (SZAC, PVAV, VAV)
-  terminalZonesArr = [];
-  _.each(_.filter($scope.data.zones, {type: 'Conditioned'}), function (zone) {
+  var terminalZonesArr = [];
+  _.each(_.filter($scope.data.zones, {
+    type: 'Conditioned'
+  }), function (zone) {
     //console.log("ZONE:");
     //console.log(zone);
-    system = _.find($scope.data.systems, {name: zone.primary_air_conditioning_system_reference});
+    var system = _.find($scope.data.systems, {
+      name: zone.primary_air_conditioning_system_reference
+    });
     //console.log("SYSTEM:");
     //console.log(system);
     if (system !== null) {
@@ -22,16 +25,17 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
         });
       }
     }
-
   });
 
   // compare terminalZonesArr with $scope.data.terminals to see if rows need to be added (for new zone)
   _.each(terminalZonesArr, function (zone) {
-    var match = _.find($scope.data.terminals, {zone_served_reference:  zone.name });
+    var match = _.find($scope.data.terminals, {
+      zone_served_reference: zone.name
+    });
     if (!match) {
       console.log("NO MATCH FOR zone name: ", zone.name);
       // determine defaults based on system type
-      terminal_type = "";
+      var terminal_type = "";
       if (zone.system_type === 'SZAC') {
         terminal_type = "Uncontrolled";
       }
@@ -41,7 +45,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
         name: zone.name + ' Terminal',
         type: terminal_type,
         air_system_id: zone.air_system_id
-      })
+      });
 
     }
   });
@@ -55,7 +59,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       enableCellEdit: false,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-    },{
+    }, {
       name: 'name',
       displayName: 'Terminal Name',
       enableHiding: false,
@@ -88,6 +92,5 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       });
     }
   };
-
 
 }]);

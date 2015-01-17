@@ -1,11 +1,13 @@
 cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
-
   $scope.selected = {
     zone: null
   };
 
   // array of plenum zones for dropdown
-  $scope.plenumZonesArr = [{id: "", value: ""}];
+  $scope.plenumZonesArr = [{
+    id: "",
+    value: ""
+  }];
   $scope.plenumZonesHash = {};
   _.each($scope.data.zones, function (zone, index) {
     if (zone.type === 'Plenum') {
@@ -15,7 +17,6 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       });
       $scope.plenumZonesHash[index] = zone.name;
     }
-
   });
 
   // array of (non-exhaust) HVAC systems
@@ -36,7 +37,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       enableCellEdit: false,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-    },{
+    }, {
       name: 'type',
       enableFiltering: false,
       filter: {
@@ -61,16 +62,15 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       editDropdownOptionsArray: $scope.plenumZonesArr,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-    },
-      {
-        name: 'return_plenum_zone_reference',
-        displayName: 'Return Plenum Zone',
-        enableHiding: false,
-        editableCellTemplate: 'ui-grid/dropdownEditor',
-        editDropdownOptionsArray: $scope.plenumZonesArr,
-        filter: Shared.textFilter(),
-        headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-      }],
+    }, {
+      name: 'return_plenum_zone_reference',
+      displayName: 'Return Plenum Zone',
+      enableHiding: false,
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: $scope.plenumZonesArr,
+      filter: Shared.textFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }],
     data: $scope.data.zones,
     enableCellEditOnFocus: true,
     enableFiltering: true,

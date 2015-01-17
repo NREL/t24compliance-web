@@ -20,16 +20,16 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       filter: Shared.textFilter()
-   // }, {
-   //   name: 'building_story_id',
-   //   displayName: 'Story',
-   //   enableHiding: false,
-   //   cellEditableCondition: $scope.editableCondition,
-   //   editableCellTemplate: 'ui-grid/dropdownEditor',
-   //   cellFilter: 'mapStories:this',
-   //   editDropdownOptionsArray: $scope.data.storiesArr,
-   //   filter: Shared.enumFilter($scope.data.storiesHash),
-   //   sortingAlgorithm: Shared.sort($scope.data.storiesHash)
+      // }, {
+      //   name: 'building_story_id',
+      //   displayName: 'Story',
+      //   enableHiding: false,
+      //   cellEditableCondition: $scope.editableCondition,
+      //   editableCellTemplate: 'ui-grid/dropdownEditor',
+      //   cellFilter: 'mapStories:this',
+      //   editDropdownOptionsArray: $scope.data.storiesArr,
+      //   filter: Shared.enumFilter($scope.data.storiesHash),
+      //   sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'type',
       enableHiding: false,
