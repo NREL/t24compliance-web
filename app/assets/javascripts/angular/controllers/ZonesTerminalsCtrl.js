@@ -29,7 +29,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
   _.each(terminalZonesArr, function (zone) {
     var match = _.find($scope.data.terminals, {zone_served_reference: zone.zone_served_reference});
     if (!match) {
-      console.log("NO MATCH FOR zone id: ", zone.id);
+      console.log("NO MATCH FOR zone id: ", zone.name);
       // determine defaults based on system type
       terminal_type = "";
       if (zone.system_type === 'SZAC') {

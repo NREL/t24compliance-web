@@ -271,6 +271,9 @@ cbecc.config([
           }],
           systems: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('zone_systems', Shared.defaultParams());
+          }],
+          terminals: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('terminal_units', Shared.defaultParams());
           }]
 
         },
@@ -359,6 +362,7 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   api.add('simulations');
   api.add('space_function_defaults');
   api.add('thermal_zones');
+  api.add('terminal_units');
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id

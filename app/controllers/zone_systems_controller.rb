@@ -10,7 +10,6 @@ class ZoneSystemsController < ApplicationController
     @systems = []
     # return zone systems and air systems with dependent fan & coils.  Add to same array for jbuilder view
     @zone_systems = (@building.present?) ? @building.zone_systems.includes(:fans, :coil_coolings,:coil_heatings) : []
-    logger.info("ZONE SYSTEMS: #{@zone_systems[0].inspect}")
     @zone_systems.each do |zone|
       sys = zone
       sys['fan'] = zone.fans.first
@@ -139,6 +138,8 @@ class ZoneSystemsController < ApplicationController
               segments << seg
               @sys.update(rec)
             end
+            # TODO: if this is an updated air system, update terminal unit references!
+
           else
             @sys = AirSystem.new(rec)
             sup_seg = AirSegment.new({name: "#{rec['name']} SupplyAirSeg", type: 'Supply'})

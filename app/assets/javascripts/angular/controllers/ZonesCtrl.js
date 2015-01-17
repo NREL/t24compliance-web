@@ -1,5 +1,5 @@
 cbecc.controller('ZonesCtrl', [
-  '$scope', '$location', 'toaster', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', 'systems', function ($scope, $location, toaster, Shared, Enums, data, stories, spaces, zones, systems) {
+  '$scope', '$location', 'toaster', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', 'systems', 'terminals', function ($scope, $location, toaster, Shared, Enums, data, stories, spaces, zones, systems, terminals) {
 
     $scope.data = {
       stories: stories,
@@ -7,7 +7,7 @@ cbecc.controller('ZonesCtrl', [
       zones: zones,
       systems: systems,
       exhausts: [],
-      terminals: []
+      terminals: terminals
     };
 
     // pull exhaust systems out of systems (will be pushed back together before saving)

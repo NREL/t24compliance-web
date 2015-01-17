@@ -24,9 +24,10 @@ Rails.application.routes.draw do
   resources :buildings
   resources :projects do
     get 'download', on: :member
-    resources :materials
-    resources :construct_assemblies
   end
+
+  resources :materials
+  resources :construct_assemblies
 
   # libraries
   resources :constructions, only: [:show, :index]
@@ -49,16 +50,16 @@ Rails.application.routes.draw do
   resources :fluid_systems do
     post 'bulk_sync', on: :collection
   end
-
   resources :spaces do
     post 'bulk_sync', on: :collection
   end
-
   resources :simulations, only: [:show, :index] do
     post 'bulk_sync', on: :collection
   end
-
   resources :thermal_zones do
+    post 'bulk_sync', on: :collection
+  end
+  resources :terminal_units do
     post 'bulk_sync', on: :collection
   end
 
@@ -68,7 +69,6 @@ Rails.application.routes.draw do
   # resources :underground_floors
   # resources :fans
   # resources :coil_coolings
-  # resources :terminal_units
   # resources :air_segments
   # resources :roofs
   # resources :ceilings

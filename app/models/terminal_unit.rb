@@ -19,8 +19,8 @@ class TerminalUnit
   field :parallel_box_fan_flow_fraction, type: Float
 
   belongs_to :air_system
-  has_many :coil_heatings, dependent: :destroy
-  has_many :fans, dependent: :destroy
+  has_many :coil_heatings, dependent: :destroy, autosave: true
+  has_many :fans, dependent: :destroy, autosave: true
 
 
   def self.children_models
