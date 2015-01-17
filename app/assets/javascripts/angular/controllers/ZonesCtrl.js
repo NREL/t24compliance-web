@@ -34,7 +34,7 @@ cbecc.controller('ZonesCtrl', [
 
       }
     });
-    console.log('adjusted exhaust systems (should have zone_id and zone_name');
+    console.log('adjusted exhaust systems (should have zone_id and zone_name)');
     console.log($scope.data.exhausts);
 
     // TODO: separate exhaust systems from other zone_systems
