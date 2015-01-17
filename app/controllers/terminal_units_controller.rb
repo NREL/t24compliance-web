@@ -10,10 +10,11 @@ class TerminalUnitsController < ApplicationController
   def index
     @terminal_units = []
     @systems = (@building.present?) ? @building.air_systems : []
-    logger.info("systems: #{@systems.inspect}")
     @systems.each do |sys|
       units = sys.terminal_units
       units.each do |unit|
+        unit['fan'] = unit.fans.first || nil
+        unit['coil_heating'] = unit.coil_heatings.first || nil
         @terminal_units << unit
       end
     end
@@ -59,7 +60,7 @@ class TerminalUnitsController < ApplicationController
         # based on type of terminal unit, also save a fan or coil
         if rec['type'] === 'VAVReheatBox'
           # save/update a hot water heating coil (no user-defined fields)
-          if @unit.coil_heatings.nil?
+          if @unit.coil_heatings.empty?
             coil_heatings = []
             # save it
             # retrieve hot water plant to set references (should only be 1)
@@ -74,6 +75,7 @@ class TerminalUnitsController < ApplicationController
               end
             end
             coil = CoilHeating.new({name: "#{rec['name'] + 'ReheatCoil'}", type: 'HotWater', fluid_segment_in_reference: in_ref, fluid_segment_out_reference: out_ref })
+            coil.save
             coil_heatings << coil
             @unit.coil_heatings = coil_heatings
           end
