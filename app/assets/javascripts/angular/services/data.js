@@ -1,22 +1,5 @@
 cbecc.provider('data', {
-
-  list: function (resource, query) {
-    return [
-      'data',
-      function (data) { // inject the data service
-        return data.list(resource, query);
-      }];
-  },
-
-  get: function (resource, query) {
-    return [
-      'data',
-      function (data) {
-        return data.get(resource, query);
-      }];
-  },
-
-  $get: function (api) {
+  $get: ['$q', 'api', 'Shared', function ($q, api, Shared) {
 
     var data = {
       // new: function(resource, params) {
@@ -24,7 +7,21 @@ cbecc.provider('data', {
       // },
 
       list: function (resource, query) {
-        return api[resource].query(query).$promise;
+        // Check cache for construction libraries
+        var caches = ['constructions', 'door_lookups', 'fenestrations', 'space_function_defaults'];
+        if (_.contains(caches, resource)) {
+          if (Shared.existsInCache(resource)) {
+            return $q.when(Shared.loadFromCache(resource));
+          }
+        }
+
+        var promise = api[resource].query(query).$promise;
+        promise.then(function (response) {
+          if (_.contains(caches, resource)) {
+            Shared.saveToCache(resource, response);
+          }
+        });
+        return promise;
       },
 
       show: function (resource, query) {
@@ -51,5 +48,5 @@ cbecc.provider('data', {
     };
 
     return data;
-  }
+  }]
 });

@@ -23,38 +23,6 @@ cbecc.config([
       shadow: false
     });
 
-    var getConstructions = ['$q', 'data', 'Shared', function ($q, data, Shared) {
-      if (Shared.existsInCache('constructions')) {
-        return $q.when(Shared.loadFromCache('constructions'));
-      }
-      // Not in cache yet
-      return data.list('constructions');
-    }];
-
-    var getDoors = ['$q', 'data', 'Shared', function ($q, data, Shared) {
-      if (Shared.existsInCache('doors')) {
-        return $q.when(Shared.loadFromCache('doors'));
-      }
-      // Not in cache yet
-      return data.list('door_lookups');
-    }];
-
-    var getFenestrations = ['$q', 'data', 'Shared', function ($q, data, Shared) {
-      if (Shared.existsInCache('fenestrations')) {
-        return $q.when(Shared.loadFromCache('fenestrations'));
-      }
-      // Not in cache yet
-      return data.list('fenestrations');
-    }];
-
-    var getSpaceFunctionDefaults = ['$q', 'data', 'Shared', function ($q, data, Shared) {
-      if (Shared.existsInCache('spaceFunctionDefaults')) {
-        return $q.when(Shared.loadFromCache('spaceFunctionDefaults'));
-      }
-      // Not in cache yet
-      return data.list('space_function_defaults', Shared.defaultParams());
-    }];
-
     $urlRouterProvider.when('', '/').otherwise('404');
 
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
@@ -146,9 +114,15 @@ cbecc.config([
         controller: 'ConstructionsCtrl',
         templateUrl: 'constructions/constructions.html',
         resolve: {
-          constData: getConstructions,
-          doorData: getDoors,
-          fenData: getFenestrations,
+          constData: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('constructions');
+          }],
+          doorData: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('door_lookups');
+          }],
+          fenData: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('fenestrations');
+          }],
           defaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('construction_defaults', Shared.defaultParams());
           }]
@@ -168,17 +142,25 @@ cbecc.config([
         controller: 'SpacesCtrl',
         templateUrl: 'spaces/spaces.html',
         resolve: {
-          constData: getConstructions,
-          doorData: getDoors,
-          fenData: getFenestrations,
-          spaceFunctionDefaults: getSpaceFunctionDefaults,
+          constData: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('constructions');
+          }],
+          doorData: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('door_lookups');
+          }],
+          fenData: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('fenestrations');
+          }],
+          spaceFunctionDefaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('space_function_defaults', Shared.defaultParams());
+          }],
           stories: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
           spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('spaces', Shared.defaultParams());
           }],
-          constructions: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+          constructionDefaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('construction_defaults', Shared.defaultParams());
           }]
         },
@@ -349,20 +331,7 @@ cbecc.config([
 
 
 cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $q, toaster, Shared, api, data) {
-  api.add('spaces');
-  api.add('buildings');
-  api.add('building_stories');
-  api.add('constructions');
-  api.add('fenestrations');
-  api.add('door_lookups');
-  api.add('construction_defaults');
-  api.add('zone_systems');
-  api.add('fluid_systems');
-  api.add('spaces');
-  api.add('simulations');
-  api.add('space_function_defaults');
-  api.add('thermal_zones');
-  api.add('terminal_units');
+  api.add(['spaces', 'buildings', 'building_stories', 'constructions', 'fenestrations', 'door_lookups', 'construction_defaults', 'zone_systems', 'fluid_systems', 'spaces', 'simulations', 'space_function_defaults', 'thermal_zones', 'terminal_units']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
@@ -389,28 +358,6 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
   $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
     console.error('State not found:', unfoundState.to);
   });
-
-  // Initialize cache with static data
-  if (!Shared.existsInCache('constructions')) {
-    data.list('constructions').then(function (response) {
-      Shared.saveToCache('constructions', response);
-    });
-  }
-  if (!Shared.existsInCache('doors')) {
-    data.list('door_lookups').then(function (response) {
-      Shared.saveToCache('doors', response);
-    });
-  }
-  if (!Shared.existsInCache('fenestrations')) {
-    data.list('fenestrations').then(function (response) {
-      Shared.saveToCache('fenestrations', response);
-    });
-  }
-  if (!Shared.existsInCache('spaceFunctionDefaults')) {
-    data.list('space_function_defaults').then(function (response) {
-      Shared.saveToCache('spaceFunctionDefaults', response);
-    });
-  }
 }]);
 
 
@@ -420,18 +367,11 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
   };
 }]).filter('mapStories', function () {
   return function (input, $scope) {
-    var storiesHash = {};
-
     // The data property can be found between 7-9 parents deep due to ng-include, ui-view, and modal scope hierarchies
-    while (_.isEmpty(storiesHash)) {
-      if ($scope.hasOwnProperty('data')) {
-        storiesHash = $scope.data.storiesHash;
-      } else {
-        $scope = $scope.$parent;
-      }
+    while (!$scope.hasOwnProperty('data')) {
+      $scope = $scope.$parent;
     }
-
-    return storiesHash[input];
+    return $scope.data.storiesHash[input];
   };
 }).filter('mapZones', function () {
   return function (input, $scope) {

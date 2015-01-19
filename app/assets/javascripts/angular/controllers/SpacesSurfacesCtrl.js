@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
+cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', 'ConstructionLibrary', function ($scope, uiGridConstants, Shared, ConstructionLibrary) {
   $scope.selected = {
     surface: null
   };
@@ -95,8 +95,18 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'construction',
+      allowConstructionEdit: true,
+      enableCellEdit: false,
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!row.entity.construction) {
+          return 'red-cell';
+        }
+        if (row.entity.construction == row.entity.constructionDefault) {
+          return 'green-cell';
+        }
+      },
+      cellTemplate: 'ui-grid/cbeccConstructionCell',
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'adjacent_space',
@@ -237,6 +247,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
     $scope.surfacesGridOptions.columnDefs[2].enableFiltering = false;
     $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = true;
     $scope.surfacesGridOptions.columnDefs[2].filter.term = $scope.selected.surface.surface_type;
+    $scope.surfacesGridOptions.columnDefs[6].allowConstructionEdit = false;
     $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
   };
 
@@ -267,7 +278,18 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', f
     $scope.surfacesGridOptions.columnDefs[2].enableFiltering = true;
     $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = false;
     $scope.surfacesGridOptions.columnDefs[2].filter.term = '';
+    $scope.surfacesGridOptions.columnDefs[6].allowConstructionEdit = true;
     $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+  };
+
+  $scope.changeConstruction = function (selectedSurface) {
+    var type = selectedSurface.surface_type + ' Construction';
+    ConstructionLibrary.openConstructionLibraryModal(type).then(function (selectedConstruction) {
+      selectedSurface.construction = selectedConstruction.name;
+      $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    }).catch(function () {
+      //selectedSurface.construction = null;
+    });
   };
 
 }]);

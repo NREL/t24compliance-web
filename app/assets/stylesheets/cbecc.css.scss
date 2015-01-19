@@ -181,6 +181,9 @@
 
 .green-cell {
   color: #1c9253;
+  .glyphicon {
+    color: #000;
+  }
 }
 
 .red-cell {
@@ -190,6 +193,11 @@
 
 .border-left-cell {
   border-left: 2px solid #909090;
+}
+
+.edit {
+  cursor: pointer;
+  font-size: 1.2em;
 }
 
 // Toast Styling
