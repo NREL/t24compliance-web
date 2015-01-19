@@ -20,7 +20,8 @@ cbecc.config([
       radius: 60,
       speed: 2.2,
       trail: 60,
-      shadow: false
+      shadow: false,
+      top: '450px'
     });
 
     $urlRouterProvider.when('', '/').otherwise('404');
