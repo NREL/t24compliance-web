@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation">
+<nav class="navbar navbar-default navbar-static-top<% if request.path == '/wizard' %> wizard<% end %>" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
       <%= link_to image_tag('logo.png'), root_path, class: 'navbar-brand' %>

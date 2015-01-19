@@ -64,7 +64,7 @@ body > .container {
   color: #fff;
   min-height: 30px;
   padding: 0;
-  margin-bottom: 0;
+  margin-bottom: 80px;
   .navbar-inner {
     padding: 0;
   }
@@ -97,6 +97,9 @@ body > .container {
     margin-top: -5px;
     margin-left: 10px;
   }
+}
+.navbar.wizard {
+  margin-bottom: 0;
 }
 
 /*
@@ -475,6 +478,9 @@ h2.header-large {
   }
 }
 
+.mar-top-neg-20 {
+  margin-top: -20px;
+}
 .pad-top-80 {
   padding-top: 80px;
 }
