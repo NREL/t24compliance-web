@@ -224,12 +224,14 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.changeConstruction = function (selectedSubsurface) {
     var type = selectedSubsurface.type + ' Construction';
     if (selectedSubsurface.type == 'Door') {
-      ConstructionLibrary.openDoorLibraryModal(type).then(function (selectedConstruction) {
+      var rowEntity = _.find($scope.data.doorData, {name: selectedSubsurface.construction});
+      ConstructionLibrary.openDoorLibraryModal(type, rowEntity).then(function (selectedConstruction) {
         selectedSubsurface.construction = selectedConstruction.name;
         $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     } else {
-      ConstructionLibrary.openFenLibraryModal(type).then(function (selectedConstruction) {
+      var rowEntity = _.find($scope.data.fenData, {name: selectedSubsurface.construction});
+      ConstructionLibrary.openFenLibraryModal(type, rowEntity).then(function (selectedConstruction) {
         selectedSubsurface.construction = selectedConstruction.name;
         $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
       });

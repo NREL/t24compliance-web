@@ -285,11 +285,10 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
 
   $scope.changeConstruction = function (selectedSurface) {
     var type = selectedSurface.surface_type + ' Construction';
-    ConstructionLibrary.openConstructionLibraryModal(type).then(function (selectedConstruction) {
+    var rowEntity = _.find($scope.data.constData, {name: selectedSurface.construction});
+    ConstructionLibrary.openConstructionLibraryModal(type, rowEntity).then(function (selectedConstruction) {
       selectedSurface.construction = selectedConstruction.name;
       $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
-    }).catch(function () {
-      //selectedSurface.construction = null;
     });
   };
 

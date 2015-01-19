@@ -90,7 +90,11 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
       });
       if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
         $interval(function () {
-          $scope.gridApi.selection.selectRow(params.rowEntity);
+          if (params.rowEntity.hasOwnProperty('$$hashKey')) {
+            $scope.gridApi.selection.selectRow(params.rowEntity);
+          } else {
+            $scope.gridApi.selection.selectRow(_.find($scope.data, {id: params.rowEntity.id}));
+          }
         }, 0, 1);
       }
     }
