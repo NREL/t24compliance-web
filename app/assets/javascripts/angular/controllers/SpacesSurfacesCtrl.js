@@ -110,13 +110,13 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'adjacent_space',
+      name: 'adjacent_space_reference',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.boundary != 'Interior') {
           return 'disabled-cell';
         }
-        if (row.entity.space == row.entity.adjacent_space) {
+        if (row.entity.space == row.entity.adjacent_space_reference) {
           return 'error-cell';
         }
       },
@@ -257,7 +257,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       area: $scope.selected.surface.area,
       azimuth: $scope.selected.surface.azimuth,
       construction: $scope.selected.surface.construction,
-      adjacent_space: $scope.selected.surface.adjacent_space,
+      adjacent_space_reference: $scope.selected.surface.adjacent_space_reference,
       tilt: $scope.selected.surface.tilt,
       height: $scope.selected.surface.height,
       perimeter_exposed: $scope.selected.surface.perimeter_exposed

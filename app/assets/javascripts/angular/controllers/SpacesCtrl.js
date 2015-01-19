@@ -6,20 +6,28 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     spaceFunctionDefaults: spaceFunctionDefaults,
     stories: stories,
     spaces: spaces,
-    constructionDefaults: constructionDefaults[0] || null,
+    constructionDefaults: constructionDefaults[0] || {},
     surfaces: [],
     subsurfaces: []
   };
 
-  $scope.data.lookupConstruction = function (search) {
-    return _.find(constData, search);
-  };
-  $scope.data.lookupDoor = function (search) {
-    return _.find(doorData, search);
-  };
-  $scope.data.lookupFenestration = function (search) {
-    return _.find(fenData, search);
-  };
+  // Lookup construction defaults
+  _.each(['interior_wall', 'exterior_wall', 'underground_wall', 'interior_floor', 'exterior_floor', 'underground_floor', 'roof', 'door', 'skylight', 'window'], function (type) {
+    var library = 'constData';
+    if (type == 'door') {
+      library = 'doorData';
+    } else if (type == 'window' || type == 'skylight') {
+      library = 'fenData';
+    }
+    var id = $scope.data.constructionDefaults[type];
+    if (id != null) {
+      $scope.data.constructionDefaults[type] = _.find($scope.data[library], {
+        id: id
+      });
+    } else {
+      $scope.data.constructionDefaults[type] = null;
+    }
+  });
 
   // Load saved spaces
   var surfaceIndex = 0;
@@ -31,10 +39,12 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
             subsurface.space = spaceIndex;
             subsurface.surface = surfaceIndex;
             subsurface.building_story_id = space.building_story_id;
+            var constructionDefault = $scope.data.constructionDefaults[subsurfaceType.slice(0, -1)];
+            if (constructionDefault) subsurface.constructionDefault = constructionDefault.name;
             if (subsurfaceType == 'doors') {
-              subsurface.construction = subsurface.construct_assembly_reference;
+              subsurface.construction = subsurface.door_construction_reference || subsurface.constructionDefault;
             } else {
-              subsurface.construction = subsurface.fenestration_construction_reference;
+              subsurface.construction = subsurface.fenestration_construction_reference || subsurface.constructionDefault;
             }
             $scope.data.subsurfaces.push(subsurface);
           });
@@ -44,7 +54,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         if (surfaceType == 'interior_floors') {
           surface.type = 'Floor';
           surface.boundary = 'Interior';
-          surface.adjacent_space = surface.adjacent_space_reference;
+          surface.adjacent_space_reference = surface.adjacent_space_reference;
         } else if (surfaceType == 'exterior_floors') {
           surface.type = 'Floor';
           surface.boundary = 'Exterior';
@@ -54,7 +64,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         } else if (surfaceType == 'interior_walls') {
           surface.type = 'Wall';
           surface.boundary = 'Interior';
-          surface.adjacent_space = surface.adjacent_space_reference;
+          surface.adjacent_space_reference = surface.adjacent_space_reference;
         } else if (surfaceType == 'exterior_walls') {
           surface.type = 'Wall';
           surface.boundary = 'Exterior';
@@ -66,9 +76,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
           surface.boundary = null;
         }
         surface.building_story_id = space.building_story_id;
-        var constructionDefault = $scope.data.lookupConstruction({
-          id: $scope.data.constructionDefaults[surfaceType.slice(0, -1)]
-        });
+        var constructionDefault = $scope.data.constructionDefaults[surfaceType.slice(0, -1)];
         if (constructionDefault) surface.constructionDefault = constructionDefault.name;
         surface.construction = surface.construct_assembly_reference || surface.constructionDefault;
         $scope.data.surfaces.push(surface);
@@ -162,29 +170,29 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
   $scope.data.addSpace = function (input) {
     var space = {
       name: "Space " + ($scope.data.spaces.length + 1),
-      floor_to_ceiling_height: 14,
+      floor_to_ceiling_height: null,
       building_story_id: $scope.data.stories[0].id,
-      area: 400,
+      area: null,
       conditioning_type: Enums.enums.spaces_conditioning_type_enums[0],
       envelope_status: Enums.enums.spaces_envelope_status_enums[0],
       lighting_status: Enums.enums.spaces_lighting_status_enums[0],
       space_function: Enums.enums.spaces_space_function_enums[0],
 
-      process_electric: null,
-      refrigeration: null,
+      process_electrical_power_density: null,
+      commercial_refrigeration_epd: null,
       elevator_count: null,
       escalator_count: null,
-      loads_radiant_fraction: null,
-      loads_latent_fraction: null,
-      loads_lost_fraction: null,
+      process_electrical_radiation_fraction: null,
+      process_electrical_latent_fraction: null,
+      process_electrical_lost_fraction: null,
       elevator_lost_fraction: null,
       escalator_lost_fraction: null,
 
-      gas_equipment: null,
-      process_gas: null,
-      gas_radiant_fraction: null,
-      gas_latent_fraction: null,
-      gas_lost_fraction: null
+      gas_equipment_power_density: null,
+      process_gas_power_density: null,
+      process_gas_radiation_fraction: null,
+      process_gas_latent_fraction: null,
+      process_gas_lost_fraction: null
     };
 
     if (!_.isEmpty(input)) {
@@ -214,8 +222,9 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     $scope.data.spaces.push(space);
   };
   $scope.data.duplicateSpace = function (selected) {
-    // TODO handle children
     var selectedSpace = selected.space;
+    var spaceIndex = $scope.data.spaces.indexOf(selectedSpace);
+
     $scope.data.spaces.push({
       name: "Space " + ($scope.data.spaces.length + 1),
       floor_to_ceiling_height: selectedSpace.floor_to_ceiling_height,
@@ -226,12 +235,6 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       lighting_status: selectedSpace.lighting_status,
       space_function: selectedSpace.space_function,
 
-      gas_equipment: selectedSpace.gas_equipment,
-      process_gas: selectedSpace.process_gas,
-      gas_radiant_fraction: selectedSpace.gas_radiant_fraction,
-      gas_latent_fraction: selectedSpace.gas_latent_fraction,
-      gas_lost_fraction: selectedSpace.gas_lost_fraction,
-
       occupant_density: selectedSpace.occupant_density,
       occupant_density_default: selectedSpace.occupant_density_default,
       hot_water_heating_rate: selectedSpace.hot_water_heating_rate,
@@ -239,16 +242,39 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       receptacle_power_density: selectedSpace.receptacle_power_density,
       receptacle_power_density_default: selectedSpace.receptacle_power_density_default,
       exhaust_per_area: selectedSpace.exhaust_per_area,
-      exhaust_per_area_default: selectedSpace.exhaust_per_area,
+      exhaust_per_area_default: selectedSpace.exhaust_per_area_default,
       exhaust_air_changes_per_hour: selectedSpace.exhaust_air_changes_per_hour,
-      exhaust_air_changes_per_hour_default: selectedSpace.exhaust_air_changes_per_hour,
+      exhaust_air_changes_per_hour_default: selectedSpace.exhaust_air_changes_per_hour_default,
       exhaust_per_space: selectedSpace.exhaust_per_space,
       total_exhaust: selectedSpace.total_exhaust,
 
       function_schedule_group: selectedSpace.function_schedule_group,
       ventilation_per_person: selectedSpace.ventilation_per_person,
       ventilation_per_area: selectedSpace.ventilation_per_area,
-      ventilation_air_changes_per_hour: selectedSpace.ventilation_air_changes_per_hour
+      ventilation_air_changes_per_hour: selectedSpace.ventilation_air_changes_per_hour,
+
+      process_electrical_power_density: selectedSpace.process_electrical_power_density,
+      commercial_refrigeration_epd: selectedSpace.commercial_refrigeration_epd,
+      elevator_count: selectedSpace.elevator_count,
+      escalator_count: selectedSpace.escalator_count,
+      process_electrical_radiation_fraction: selectedSpace.process_electrical_radiation_fraction,
+      process_electrical_latent_fraction: selectedSpace.process_electrical_latent_fraction,
+      process_electrical_lost_fraction: selectedSpace.process_electrical_lost_fraction,
+      elevator_lost_fraction: selectedSpace.elevator_lost_fraction,
+      escalator_lost_fraction: selectedSpace.escalator_lost_fraction,
+
+      gas_equipment_power_density: selectedSpace.gas_equipment_power_density,
+      process_gas_power_density: selectedSpace.process_gas_power_density,
+      process_gas_radiation_fraction: selectedSpace.process_gas_radiation_fraction,
+      process_gas_latent_fraction: selectedSpace.process_gas_latent_fraction,
+      process_gas_lost_fraction: selectedSpace.process_gas_lost_fraction
+    });
+
+    var surfaces = _.filter($scope.data.surfaces, function (surface) {
+      return surface.space == spaceIndex;
+    });
+    _.each(surfaces, function (surface) {
+      $scope.data.duplicateSurface({surface: surface}, $scope.data.spaces.length - 1);
     });
   };
   $scope.data.deleteSpace = function (selected, gridApi) {
@@ -307,6 +333,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       name += ' ' + (len + 1);
       surfaceType = boundary + ' ' + surfaceType;
     }
+    var constructionDefault = $scope.data.constructionDefaults[surfaceType.toLowerCase().replace(' ', '_')];
+    if (constructionDefault) constructionDefault = constructionDefault.name;
     $scope.data.surfaces.push({
       name: name,
       space: spaceIndex,
@@ -316,8 +344,9 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       building_story_id: $scope.data.spaces[spaceIndex].building_story_id,
       area: null,
       azimuth: null,
-      construction: null,
-      adjacent_space: null,
+      construction: constructionDefault,
+      constructionDefault: constructionDefault,
+      adjacent_space_reference: null,
       tilt: null,
       height: null,
       perimeter_exposed: null
@@ -351,10 +380,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       return (space.exhaust_per_area !== space.exhaust_per_area_default || space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default);
     }));
   };
-  $scope.data.duplicateSurface = function (selected) {
-    // TODO handle children
+  $scope.data.duplicateSurface = function (selected, newParent) {
     var selectedSurface = selected.surface;
-    var spaceIndex = selectedSurface.space;
+    var spaceIndex = newParent === undefined ? selectedSurface.space : newParent;
+    var surfaceIndex = $scope.data.surfaces.indexOf(selectedSurface);
 
     var name = $scope.data.spaces[spaceIndex].name + ' ' + selectedSurface.type;
     if (selectedSurface.type == 'Wall' || selectedSurface.type == 'Floor') {
@@ -374,10 +403,18 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       area: selectedSurface.area,
       azimuth: selectedSurface.azimuth,
       construction: selectedSurface.construction,
-      adjacent_space: selectedSurface.adjacent_space,
+      constructionDefault: selectedSurface.constructionDefault,
+      adjacent_space_reference: selectedSurface.adjacent_space_reference,
       tilt: selectedSurface.tilt,
       height: selectedSurface.height,
       perimeter_exposed: selectedSurface.perimeter_exposed
+    });
+
+    var subsurfaces = _.filter($scope.data.subsurfaces, function (subsurface) {
+      return subsurface.surface == surfaceIndex;
+    });
+    _.each(subsurfaces, function (subsurface) {
+      $scope.data.duplicateSubsurface({subsurface: subsurface}, $scope.data.surfaces.length - 1);
     });
   };
   $scope.data.deleteSurface = function (selected, gridApi) {
@@ -406,6 +443,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       surfaceIndex = 0;
     }
 
+    var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
+    if (constructionDefault) constructionDefault = constructionDefault.name;
     $scope.data.subsurfaces.push({
       name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
       space: $scope.data.surfaces[surfaceIndex].space,
@@ -413,7 +452,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       type: type,
       building_story_id: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].building_story_id,
       area: null,
-      construction: null
+      construction: constructionDefault,
+      constructionDefault: constructionDefault
     });
   };
   $scope.data.duplicateSubsurface = function (selected, newParent) {
@@ -429,7 +469,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       type: selectedSubsurface.type,
       building_story_id: selectedSubsurface.building_story_id,
       area: selectedSubsurface.area,
-      construction: selectedSubsurface.construction
+      construction: selectedSubsurface.construction,
+      constructionDefault: selectedSubsurface.constructionDefault
     });
   };
   $scope.data.deleteSubsurface = function (selected, gridApi) {
@@ -457,6 +498,9 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.surfaces = [];
     });
     _.each(surfaces, function (surface, surfaceIndex) {
+      // TODO construct_assembly_reference or construction?
+      surface.construct_assembly_reference = surface.construction;
+      delete surface.construction;
       surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
       spaces[surface.space].surfaces.push(surface);
     });

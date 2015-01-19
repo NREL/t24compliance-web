@@ -1,4 +1,4 @@
-cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
+cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', 'ConstructionLibrary', function ($scope, uiGridConstants, Shared, ConstructionLibrary) {
   $scope.selected = {
     subsurface: null
   };
@@ -88,8 +88,19 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'construction',
+      allowConstructionEdit: true,
+      enableCellEdit: false,
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!row.entity.construction) {
+          return 'red-cell';
+        }
+        if (row.entity.construction == row.entity.constructionDefault) {
+          return 'green-cell';
+        }
+      },
+      cellTemplate: 'ui-grid/cbeccConstructionCell',
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.subsurfaces,
@@ -148,6 +159,21 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = false;
     $scope.subsurfacesGridOptions.columnDefs[3].filter.term = '';
     $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+  };
+
+  $scope.changeConstruction = function (selectedSubsurface) {
+    var type = selectedSubsurface.type + ' Construction';
+    if (selectedSubsurface.type == 'Door') {
+      ConstructionLibrary.openDoorLibraryModal(type).then(function (selectedConstruction) {
+        selectedSubsurface.construction = selectedConstruction.name;
+        $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+      });
+    } else {
+      ConstructionLibrary.openFenLibraryModal(type).then(function (selectedConstruction) {
+        selectedSubsurface.construction = selectedConstruction.name;
+        $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+      });
+    }
   };
 
 }]);

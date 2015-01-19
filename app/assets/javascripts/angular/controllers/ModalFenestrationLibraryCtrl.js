@@ -7,7 +7,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
 
   if (params.type == 'Window Construction') {
     $scope.type = 'VerticalFenestration';
-  } else if (params.panel.name == 'Skylight Construction') {
+  } else if (params.type == 'Skylight Construction') {
     $scope.type = 'Skylight';
   }
 
