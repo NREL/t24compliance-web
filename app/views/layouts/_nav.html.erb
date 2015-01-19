@@ -1,17 +1,13 @@
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container-fluid">
-
+    <div class="navbar-header">
+      <%= link_to image_tag('logo.png'), root_path, class: 'navbar-brand' %>
+    </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar">
       <!--<%#= link_to 'T24 Compliance', root_path, class:'navbar-brand sitename' %>-->
-      <ul class="nav navbar-nav">
-
-      </ul>
-
       <% if user_signed_in? %>
-
         <ul class="nav navbar-nav navbar-right">
-
           <li><%= link_to 'Sign out', logout_path %></li>
         </ul>
         <p class="navbar-text navbar-right"><%= link_to 'My Account', user_path(current_user), class: "navbar-link" %></p>
@@ -20,10 +16,7 @@
           <li><%= link_to "Sign in", login_path %></li>
         </ul>
       <% end %>
-
     </div><!-- /.navbar-collapse -->
+
   </div><!-- /.container-fluid -->
 </nav>
-<div class="logo-img">
-  <%= link_to image_tag('logo.png'), root_path %>
-</div>

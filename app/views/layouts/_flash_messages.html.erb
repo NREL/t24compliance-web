@@ -1,4 +1,4 @@
-<div id="flash_messages">
+<div id="flash_messages" class="centered">
   <% flash.each do |key, value| %>
     <%= content_tag(:div, value, :class => "flash #{key}") %>
   <% end %>

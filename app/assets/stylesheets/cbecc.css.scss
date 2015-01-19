@@ -1,12 +1,19 @@
 .app-nav {
-  padding: 20px 0;
   background-color: #fff;
   color: darkslategray;
 
-  .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-    color: darkslategray;
-    background-color: #fff;
-    border-bottom: 2px solid #70be44;
+  .nav-pills {
+    font-family: 'Open Sans Condensed', 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-align: center;
+    li {
+      display: inline-block;
+      float: none;
+    }
+    li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+      color: darkslategray;
+      background-color: #fff;
+      border-bottom: 2px solid #70be44;
+    }
   }
 }
 
@@ -16,14 +23,24 @@
   font-size: 110%;
 }
 
+.nav-container {
+  padding-top: 20px;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 20px;
+}
+
 .inline-heading {
+  font-family: 'Droid Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding-bottom: 50px;
-  color: #000;
+  color: slategray;
   font-size: 130%;
   h2, h3 {
-    color: #000;
+    color: darkslategray;
     display: inline;
     font-weight: bold;
+    .divider {
+      color: #70be44;
+    }
   }
 }
 

@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row nav-container">
   <div class="col-md-12 app-nav" ng-include="'nav/nav.html'"></div>
 </div>
 <div class="row pad-bot-20">
   <div class="col-md-12">
     <div class="inline-heading">
-      <h2>Thermal Zones |</h2> Create thermal zones, assign your spaces to zones, and attach them.
+      <h2>Thermal Zones <span class="divider">|</span></h2> Create thermal zones, assign your spaces to zones, and attach them.
     </div>
     <tabset>
       <tab ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ui-sref="{{tab.route}}"></tab>
