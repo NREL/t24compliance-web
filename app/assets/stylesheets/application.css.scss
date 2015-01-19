@@ -68,10 +68,8 @@ body > .container {
   .navbar-inner {
     padding: 0;
   }
-  .nav > li {
-    padding-left: 30px;
+  .nav > li:last-child {
     padding-right: 30px;
-    font-size: 100%;
   }
   .nav > li.active > a {
     color: #fff;

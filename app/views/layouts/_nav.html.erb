@@ -5,12 +5,11 @@
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar">
-      <!--<%#= link_to 'T24 Compliance', root_path, class:'navbar-brand sitename' %>-->
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'My Account', user_path(current_user), class: "navbar-link" %></li>
           <li><%= link_to 'Sign out', logout_path %></li>
         </ul>
-        <p class="navbar-text navbar-right"><%= link_to 'My Account', user_path(current_user), class: "navbar-link" %></p>
       <% else %>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Sign in", login_path %></li>
