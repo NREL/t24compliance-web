@@ -206,7 +206,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
   service.textFilter = function () {
     return {
       condition: function (searchTerm, cellValue) {
-        if (cellValue === null) return false;
+        if (cellValue == null) return false;
         var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
         var value = cellValue.toLowerCase();
         return _.every(terms, function (term) {
@@ -220,7 +220,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
   service.enumFilter = function (input) {
     return {
       condition: function (searchTerm, cellValue) {
-        if (cellValue === null) return false;
+        if (cellValue == null) return false;
         var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
         var value = input[cellValue];
         if (input instanceof Array) {
@@ -242,7 +242,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
         if (term.length) {
           term = Number(term);
           if (isNaN(term)) term = 0;
-          if (cellValue === null) return false;
+          if (cellValue == null) return false;
           return cellValue >= term;
         }
         return true;
@@ -254,7 +254,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
         if (term.length) {
           term = Number(term);
           if (isNaN(term)) term = 0;
-          if (cellValue === null) return false;
+          if (cellValue == null) return false;
           return cellValue <= term;
         }
         return true;

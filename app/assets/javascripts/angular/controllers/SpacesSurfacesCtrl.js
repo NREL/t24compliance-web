@@ -107,6 +107,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'adjacent_space',
