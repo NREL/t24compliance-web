@@ -17,7 +17,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   _.each($scope.data.spaces, function (space, index) {
     $scope.spacesArr.push({
       id: index,
-      value: space.name
+      value: space.name,
+      surfaces: []
     });
     $scope.spacesHash[index] = space.name;
   });
@@ -30,6 +31,53 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       value: surface.name
     });
     $scope.surfacesHash[index] = surface.name;
+  });
+
+  $scope.doorCompatibleSpaces = [];
+  $scope.windowCompatibleSpaces = [];
+  $scope.skylightCompatibleSpaces = [];
+  _.each($scope.data.surfaces, function (surface, index) {
+    if (surface.type == 'Wall' && surface.boundary != 'Underground') {
+      if (_.isEmpty(_.find($scope.doorCompatibleSpaces, {id: surface.space}))) {
+        $scope.doorCompatibleSpaces.push(angular.copy($scope.spacesArr[surface.space]));
+      }
+      $scope.doorCompatibleSpaces[$scope.doorCompatibleSpaces.length - 1].surfaces.push({
+        id: index,
+        value: surface.name
+      });
+      if (surface.boundary == 'Exterior') {
+        if (_.isEmpty(_.find($scope.windowCompatibleSpaces, {id: surface.space}))) {
+          $scope.windowCompatibleSpaces.push(angular.copy($scope.spacesArr[surface.space]));
+        }
+        $scope.windowCompatibleSpaces[$scope.windowCompatibleSpaces.length - 1].surfaces.push({
+          id: index,
+          value: surface.name
+        });
+      }
+    } else if (surface.type == 'Roof') {
+      if (_.isEmpty(_.find($scope.skylightCompatibleSpaces, {id: surface.space}))) {
+        $scope.skylightCompatibleSpaces.push(angular.copy($scope.spacesArr[surface.space]));
+      }
+      $scope.skylightCompatibleSpaces[$scope.skylightCompatibleSpaces.length - 1].surfaces.push({
+        id: index,
+        value: surface.name
+      });
+    }
+  });
+
+  // Initialize subsurface dropdown options, update spaces
+  _.each($scope.data.subsurfaces, function (subsurface) {
+    subsurface.space = $scope.data.surfaces[subsurface.surface].space;
+    if (subsurface.type == 'Door') {
+      subsurface.spaceOptions = $scope.doorCompatibleSpaces;
+      subsurface.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: subsurface.space}).surfaces;
+    } else if (subsurface.type == 'Window') {
+      subsurface.spaceOptions = $scope.windowCompatibleSpaces;
+      subsurface.surfaceOptions = _.find($scope.windowCompatibleSpaces, {id: subsurface.space}).surfaces;
+    } else if (subsurface.type == 'Skylight') {
+      subsurface.spaceOptions = $scope.skylightCompatibleSpaces;
+      subsurface.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: subsurface.space}).surfaces;
+    }
   });
 
   // Subsurfaces UI Grid
@@ -48,7 +96,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellEditableCondition: $scope.editableCondition,
       cellFilter: 'mapSpaces:this',
-      editDropdownOptionsArray: $scope.spacesArr,
+      editDropdownRowEntityOptionsArrayPath: 'spaceOptions',
       filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
@@ -59,7 +107,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellEditableCondition: $scope.editableCondition,
       cellFilter: 'mapSurfaces:this',
-      editDropdownOptionsArray: $scope.surfacesArr,
+      editDropdownRowEntityOptionsArrayPath: 'surfaceOptions',
       filter: Shared.enumFilter($scope.surfacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.surfacesArr)
@@ -119,6 +167,18 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
             // No rows selected
             $scope.selected.subsurface = null;
           }
+        }
+      });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (colDef.name == 'space' && newValue != oldValue) {
+          if (rowEntity.type == 'Door') {
+            rowEntity.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: newValue}).surfaces;
+          } else if (rowEntity.type == 'Window') {
+            rowEntity.surfaceOptions = _.find($scope.windowCompatibleSpaces, {id: newValue}).surfaces;
+          } else if (rowEntity.type == 'Skylight') {
+            rowEntity.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: newValue}).surfaces;
+          }
+          rowEntity.surface = rowEntity.surfaceOptions[0].id;
         }
       });
     }

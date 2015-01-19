@@ -440,7 +440,16 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
   $scope.data.addSubsurface = function (type, surfaceIndex) {
     if (surfaceIndex === undefined) {
-      surfaceIndex = 0;
+      var surface = _.find($scope.data.surfaces, function (surface) {
+        if (type == 'Door') {
+          return surface.type == 'Wall' && surface.boundary != 'Underground';
+        } else if (type == 'Window') {
+          return surface.type == 'Wall' && surface.boundary == 'Exterior';
+        } else if (type == 'Skylight') {
+          return surface.type == 'Roof';
+        }
+      });
+      surfaceIndex = $scope.data.surfaces.indexOf(surface);
     }
 
     var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
