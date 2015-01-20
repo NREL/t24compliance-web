@@ -46,7 +46,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     }],
     data: [{
       quantity: 20,
-      name: 'Small Office',
+      name: '',
       space_function: Enums.enums.spaces_space_function_enums[0],
       floor_to_ceiling_height: 10,
       building_story_id: $scope.data.stories[0].id,
@@ -74,7 +74,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     data: [{
       exterior_walls: 1,
       windows: 1,
-      interior_walls: 3
+      interior_walls: 0
     }],
     enableCellEditOnFocus: true,
     enableColumnMenus: false,
@@ -94,14 +94,21 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     $scope.spaceGroups.splice(index, 1);
   };
 
+  $scope.okCondition = function() {
+    if (!$scope.spaceGroups.length) return false;
+    return _.every($scope.spaceGroups, function(spaceGroup) {
+      return spaceGroup.gridOptions.data[0].name.length > 0;
+    });
+  };
+
   $scope.ok = function () {
     var data = [];
-    for (var i = 0; i < $scope.spaceGroups.length; ++i) {
+    _.each($scope.spaceGroups, function(spaceGroup) {
       data.push({
-        config: $scope.spaceGroups[i].gridOptions.data[0],
-        walls: $scope.spaceGroups[i].wallGridOptions.data[0]
-      });
-    }
+        config: spaceGroup.gridOptions.data[0],
+        walls: spaceGroup.wallGridOptions.data[0]
+      })
+    });
     $modalInstance.close(data);
   };
 
