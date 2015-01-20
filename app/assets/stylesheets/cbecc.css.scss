@@ -60,6 +60,11 @@
   }
 }
 
+// Hide flash messages in wizard
+body > .container-fluid > .header-row.wizard {
+  display: none;
+}
+
 .gray-backgnd {
   background-color: #ccc;
 }

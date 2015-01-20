@@ -18,7 +18,7 @@
 <body>
   <%= render 'layouts/nav' %>
   <div class="container-fluid">
-    <div class="row-fluid header-row">
+    <div class="row-fluid header-row<% if request.path == '/wizard' %> wizard<% end %>">
      <!-- notices -->
       <%= render 'layouts/flash_messages' if !flash.empty? %>
     </div>

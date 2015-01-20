@@ -176,6 +176,12 @@ input[type='text'], select.form-control, .nav-pills > li > a {
   border-radius: 0;
 }
 
+.flash.alert {
+  border: 0 none;
+  margin: 0;
+  padding: 0;
+}
+
 .alert.alert-error {
   margin-top: 10px;
 }
@@ -520,7 +526,7 @@ h2.header-large {
   color: green;
   padding: 5px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   border: 3px solid #70be44;
 }
 
