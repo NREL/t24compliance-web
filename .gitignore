@@ -31,3 +31,6 @@ dump.rdb
 vendor/assets/bower_components/bootstrap
 
 .capistrano
+
+# ignore public assets
+public/assets/*
