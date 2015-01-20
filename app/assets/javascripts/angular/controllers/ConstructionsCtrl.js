@@ -97,9 +97,6 @@ cbecc.controller('ConstructionsCtrl', [
         panel.selected = sel;
         panel.constructionGridOptions.data = [sel];
         panel.gridOptions.data = sel.layers;
-        panel.open = true;
-      } else {
-        panel.open = false;
       }
     });
 
@@ -131,9 +128,6 @@ cbecc.controller('ConstructionsCtrl', [
       if (sel) {
         panel.selected = sel;
         panel.doorGridOptions.data = [sel];
-        panel.open = true;
-      } else {
-        panel.open = false;
       }
     });
 
@@ -182,9 +176,6 @@ cbecc.controller('ConstructionsCtrl', [
       if (sel) {
         panel.selected = sel;
         panel.fenGridOptions.data = [sel];
-        panel.open = true;
-      } else {
-        panel.open = false;
       }
     });
 
