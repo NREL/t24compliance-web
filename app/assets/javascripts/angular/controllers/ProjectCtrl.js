@@ -15,6 +15,7 @@ cbecc.controller('ProjectCtrl', [
     if (proj_id) {
       Project.show({id: proj_id}).$promise.then(function (response) {
         $scope.project = response;
+        $scope.project.geometry_input_type = 'Simplified';
         // Exceptional_condition_modeling doesn't actually have a field, Initialize checkbox
         if ($scope.project.exceptional_condition_narrative) {
           $scope.project.exceptional_condition_modeling = 'Yes';
