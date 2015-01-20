@@ -101,7 +101,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'area',
-      secondLine: Shared.html('ft'),
+      secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       type: 'number',

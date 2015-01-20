@@ -225,6 +225,20 @@ cbecc.factory('Enums', function () {
       'Existing',
       'Future'
     ],
+    luminaires_fixture_type_enums: [
+      'RecessedWithLens',
+      'RecessedOrDownlight',
+      'NotInCeiling'
+    ],
+    luminaires_lamp_type_enums: [
+      'LinearFluorescent',
+      'CFL',
+      'Incandescent',
+      'LED',
+      'MetalHalide',
+      'MercuryVapor',
+      'HighPressureSodium'
+    ],
     boilers_draft_type_enums: [
       'MechanicalNoncondensing',
       'Condensing',
