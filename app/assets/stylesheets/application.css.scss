@@ -547,10 +547,14 @@ h2.header-large {
   width: 100%;
 }
 
+.project-workflow-bg {
+  border-radius: 20px 20px 0 0;
+}
+
 .project-workflow-text {
   left: 5%;
   position: absolute;
-  top: 30px;
+  top: 9%;
   width: 90%;
 }
 
