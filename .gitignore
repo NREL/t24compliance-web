@@ -34,3 +34,4 @@ vendor/assets/bower_components/bootstrap
 
 # ignore public assets
 public/assets/*
+shared
