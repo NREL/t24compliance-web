@@ -1206,7 +1206,7 @@ cbecc.controller('ModalSystemCreatorCtrl', [
       name: 'PSZ: Packaged Single Zone Air Conditioner'
     }, {
       id: 'vav',
-      name: 'VAV: Packaged Variable Air Volume'
+      name: 'VAV: Variable Air Volume'
     }, {
       id: 'vav_crah',
       name: 'VAV-CRAH: Computer Room Air Handler'
