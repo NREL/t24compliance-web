@@ -33,41 +33,14 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.surfacesHash[index] = surface.name;
   });
 
-  $scope.doorCompatibleSpaces = [];
-  $scope.windowCompatibleSpaces = [];
-  $scope.skylightCompatibleSpaces = [];
-  _.each($scope.data.surfaces, function (surface, index) {
-    if (surface.type == 'Wall' && surface.boundary != 'Underground') {
-      if (_.isEmpty(_.find($scope.doorCompatibleSpaces, {id: surface.space}))) {
-        $scope.doorCompatibleSpaces.push(angular.copy($scope.spacesArr[surface.space]));
-      }
-      $scope.doorCompatibleSpaces[$scope.doorCompatibleSpaces.length - 1].surfaces.push({
-        id: index,
-        value: surface.name
-      });
-      if (surface.boundary == 'Exterior') {
-        if (_.isEmpty(_.find($scope.windowCompatibleSpaces, {id: surface.space}))) {
-          $scope.windowCompatibleSpaces.push(angular.copy($scope.spacesArr[surface.space]));
-        }
-        $scope.windowCompatibleSpaces[$scope.windowCompatibleSpaces.length - 1].surfaces.push({
-          id: index,
-          value: surface.name
-        });
-      }
-    } else if (surface.type == 'Roof') {
-      if (_.isEmpty(_.find($scope.skylightCompatibleSpaces, {id: surface.space}))) {
-        $scope.skylightCompatibleSpaces.push(angular.copy($scope.spacesArr[surface.space]));
-      }
-      $scope.skylightCompatibleSpaces[$scope.skylightCompatibleSpaces.length - 1].surfaces.push({
-        id: index,
-        value: surface.name
-      });
-    }
-  });
+  $scope.doorCompatibleSpaces = $scope.data.doorCompatibleSpaces();
+  $scope.windowCompatibleSpaces = $scope.data.windowCompatibleSpaces();
+  $scope.skylightCompatibleSpaces = $scope.data.skylightCompatibleSpaces();
 
   // Initialize subsurface dropdown options, update spaces
   _.each($scope.data.subsurfaces, function (subsurface) {
     subsurface.space = $scope.data.surfaces[subsurface.surface].space;
+    subsurface.building_story_id = $scope.data.spaces[subsurface.space].building_story_id;
     if (subsurface.type == 'Door') {
       subsurface.spaceOptions = $scope.doorCompatibleSpaces;
       subsurface.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: subsurface.space}).surfaces;
@@ -182,6 +155,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
             rowEntity.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: newValue}).surfaces;
           }
           rowEntity.surface = rowEntity.surfaceOptions[0].id;
+          rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
         }
       });
     }

@@ -114,6 +114,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       sortingAlgorithm: Shared.sort($scope.data.constHash)
     }, {
       name: 'adjacent_space_reference',
+      displayName: 'Adjacent Space',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.boundary != 'Interior') {

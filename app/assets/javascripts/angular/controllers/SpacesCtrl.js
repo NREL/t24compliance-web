@@ -462,12 +462,27 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       surfaceIndex = $scope.data.surfaces.indexOf(surface);
     }
 
+    var spaceOptions = [];
+    var surfaceOptions = [];
+    if (type == 'Door') {
+      spaceOptions = $scope.data.doorCompatibleSpaces();
+      surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
+    } else if (type == 'Window') {
+      spaceOptions = $scope.data.windowCompatibleSpaces();
+      surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
+    } else if (type == 'Skylight') {
+      spaceOptions = $scope.data.skylightCompatibleSpaces();
+      surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
+    }
+
     var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
     if (constructionDefault) constructionDefault = constructionDefault.id;
     $scope.data.subsurfaces.push({
       name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
       space: $scope.data.surfaces[surfaceIndex].space,
+      spaceOptions: spaceOptions,
       surface: surfaceIndex,
+      surfaceOptions: surfaceOptions,
       type: type,
       building_story_id: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].building_story_id,
       area: null,
@@ -500,6 +515,64 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     } else {
       selected.subsurface = null;
     }
+  };
+
+  $scope.data.doorCompatibleSpaces = function () {
+    var doorCompatibleSpaces = [];
+    _.each($scope.data.surfaces, function (surface, index) {
+      if (surface.type == 'Wall' && surface.boundary != 'Underground') {
+        if (_.isEmpty(_.find(doorCompatibleSpaces, {id: surface.space}))) {
+          doorCompatibleSpaces.push({
+            id: surface.space,
+            value: $scope.data.spaces[surface.space].name,
+            surfaces: []
+          });
+        }
+        doorCompatibleSpaces[doorCompatibleSpaces.length - 1].surfaces.push({
+          id: index,
+          value: surface.name
+        });
+      }
+    });
+    return doorCompatibleSpaces;
+  };
+  $scope.data.windowCompatibleSpaces = function () {
+    var windowCompatibleSpaces = [];
+    _.each($scope.data.surfaces, function (surface, index) {
+      if (surface.type == 'Wall' && surface.boundary == 'Exterior') {
+        if (_.isEmpty(_.find(windowCompatibleSpaces, {id: surface.space}))) {
+          windowCompatibleSpaces.push({
+            id: surface.space,
+            value: $scope.data.spaces[surface.space].name,
+            surfaces: []
+          });
+        }
+        windowCompatibleSpaces[windowCompatibleSpaces.length - 1].surfaces.push({
+          id: index,
+          value: surface.name
+        });
+      }
+    });
+    return windowCompatibleSpaces;
+  };
+  $scope.data.skylightCompatibleSpaces = function () {
+    var skylightCompatibleSpaces = [];
+    _.each($scope.data.surfaces, function (surface, index) {
+      if (surface.type == 'Roof') {
+        if (_.isEmpty(_.find(skylightCompatibleSpaces, {id: surface.space}))) {
+          skylightCompatibleSpaces.push({
+            id: surface.space,
+            value: $scope.data.spaces[surface.space].name,
+            surfaces: []
+          });
+        }
+        skylightCompatibleSpaces[skylightCompatibleSpaces.length - 1].surfaces.push({
+          id: index,
+          value: surface.name
+        });
+      }
+    });
+    return skylightCompatibleSpaces;
   };
 
   $scope.data.updateTotalExhaust = function (space) {

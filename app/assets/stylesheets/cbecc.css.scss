@@ -9,6 +9,10 @@
     li {
       display: inline-block;
       float: none;
+      margin: 0;
+      a {
+        padding: 10px 20px;
+      }
     }
     li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
       color: darkslategray;
@@ -128,7 +132,7 @@
   position: fixed;
 }
 
-.nav, .pagination, .carousel, .panel-title a {
+.pagination, .carousel, .panel-title a {
   cursor: pointer;
 }
 
