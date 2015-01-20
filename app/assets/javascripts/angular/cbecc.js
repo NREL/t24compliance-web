@@ -395,6 +395,22 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
     }
     return $scope.surfacesHash[input];
   };
+}).filter('mapSurfaceConstructions', function () {
+  return function (input, $scope) {
+    if (!input) return input;
+    while (!$scope.hasOwnProperty('data')) {
+      $scope = $scope.$parent;
+    }
+    return $scope.data.constHash[input];
+  };
+}).filter('mapSubsurfaceConstructions', function () {
+  return function (input, $scope) {
+    if (!input) return input;
+    while (!$scope.hasOwnProperty('data')) {
+      $scope = $scope.$parent;
+    }
+    return $scope.data.subsurfaceConstHash[input];
+  };
 }).filter('parseRValue', function () {
   return function (input) {
     return input.replace('_', '.').replace(/[^\d.]/g, '');

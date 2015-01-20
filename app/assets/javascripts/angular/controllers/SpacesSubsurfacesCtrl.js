@@ -135,21 +135,24 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'construction',
+      name: 'construction_library_id',
+      displayName: 'Construction',
       allowConstructionEdit: true,
       enableCellEdit: false,
+      cellFilter: 'mapSubsurfaceConstructions:this',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
-        if (!row.entity.construction) {
+        if (!row.entity.construction_library_id) {
           return 'red-cell';
         }
-        if (row.entity.construction == row.entity.constructionDefault) {
+        if (row.entity.construction_library_id == row.entity.constructionDefault) {
           return 'green-cell';
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',
-      filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      filter: Shared.enumFilter($scope.data.subsurfaceConstHash),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+      sortingAlgorithm: Shared.sort($scope.data.subsurfaceConstHash)
     }],
     data: $scope.data.subsurfaces,
     enableCellEditOnFocus: true,
@@ -199,7 +202,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.confirmApplySettings = function () {
     var replacement = {
       area: $scope.selected.subsurface.area,
-      construction: $scope.selected.subsurface.construction
+      construction_library_id: $scope.selected.subsurface.construction_library_id
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {
@@ -224,15 +227,15 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.changeConstruction = function (selectedSubsurface) {
     var type = selectedSubsurface.type + ' Construction';
     if (selectedSubsurface.type == 'Door') {
-      var rowEntity = _.find($scope.data.doorData, {name: selectedSubsurface.construction});
+      var rowEntity = _.find($scope.data.doorData, {id: selectedSubsurface.construction_library_id});
       ConstructionLibrary.openDoorLibraryModal(type, rowEntity).then(function (selectedConstruction) {
-        selectedSubsurface.construction = selectedConstruction.name;
+        selectedSubsurface.construction_library_id = selectedConstruction.id;
         $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     } else {
-      var rowEntity = _.find($scope.data.fenData, {name: selectedSubsurface.construction});
+      var rowEntity = _.find($scope.data.fenData, {id: selectedSubsurface.construction_library_id});
       ConstructionLibrary.openFenLibraryModal(type, rowEntity).then(function (selectedConstruction) {
-        selectedSubsurface.construction = selectedConstruction.name;
+        selectedSubsurface.construction_library_id = selectedConstruction.id;
         $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
       });
     }

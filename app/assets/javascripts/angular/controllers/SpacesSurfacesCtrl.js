@@ -94,21 +94,24 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'construction',
+      name: 'construction_library_id',
+      displayName: 'Construction',
       allowConstructionEdit: true,
       enableCellEdit: false,
+      cellFilter: 'mapSurfaceConstructions:this',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
-        if (!row.entity.construction) {
+        if (!row.entity.construction_library_id) {
           return 'red-cell';
         }
-        if (row.entity.construction == row.entity.constructionDefault) {
+        if (row.entity.construction_library_id == row.entity.constructionDefault) {
           return 'green-cell';
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',
-      filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      filter: Shared.enumFilter($scope.data.constHash),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+      sortingAlgorithm: Shared.sort($scope.data.constHash)
     }, {
       name: 'adjacent_space_reference',
       enableHiding: false,
@@ -256,7 +259,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     var replacement = {
       area: $scope.selected.surface.area,
       azimuth: $scope.selected.surface.azimuth,
-      construction: $scope.selected.surface.construction,
+      construction_library_id: $scope.selected.surface.construction_library_id,
       adjacent_space_reference: $scope.selected.surface.adjacent_space_reference,
       tilt: $scope.selected.surface.tilt,
       height: $scope.selected.surface.height,
@@ -285,9 +288,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
 
   $scope.changeConstruction = function (selectedSurface) {
     var type = selectedSurface.surface_type + ' Construction';
-    var rowEntity = _.find($scope.data.constData, {name: selectedSurface.construction});
+    var rowEntity = _.find($scope.data.constData, {
+      id: selectedSurface.construction_library_id
+    });
     ConstructionLibrary.openConstructionLibraryModal(type, rowEntity).then(function (selectedConstruction) {
-      selectedSurface.construction = selectedConstruction.name;
+      selectedSurface.construction_library_id = selectedConstruction.id;
       $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
     });
   };

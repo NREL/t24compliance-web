@@ -40,12 +40,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
             subsurface.surface = surfaceIndex;
             subsurface.building_story_id = space.building_story_id;
             var constructionDefault = $scope.data.constructionDefaults[subsurfaceType.slice(0, -1)];
-            if (constructionDefault) subsurface.constructionDefault = constructionDefault.name;
-            if (subsurfaceType == 'doors') {
-              subsurface.construction = subsurface.door_construction_reference || subsurface.constructionDefault;
-            } else {
-              subsurface.construction = subsurface.fenestration_construction_reference || subsurface.constructionDefault;
-            }
+            if (constructionDefault) subsurface.constructionDefault = constructionDefault.id;
+            subsurface.construction_library_id = subsurface.construction_library_id || subsurface.constructionDefault;
             $scope.data.subsurfaces.push(subsurface);
           });
           delete surface[subsurfaceType];
@@ -77,8 +73,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         }
         surface.building_story_id = space.building_story_id;
         var constructionDefault = $scope.data.constructionDefaults[surfaceType.slice(0, -1)];
-        if (constructionDefault) surface.constructionDefault = constructionDefault.name;
-        surface.construction = surface.construct_assembly_reference || surface.constructionDefault;
+        if (constructionDefault) surface.constructionDefault = constructionDefault.id;
+        surface.construction_library_id = surface.construction_library_id || surface.constructionDefault;
         $scope.data.surfaces.push(surface);
         surfaceIndex++;
       });
@@ -110,6 +106,20 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     });
     $scope.data.storiesHash[story.id] = story.name;
   });
+
+  $scope.data.constHash = {};
+  _.each($scope.data.constData, function (construction) {
+    $scope.data.constHash[construction.id] = construction.name;
+  });
+  $scope.data.doorHash = {};
+  _.each($scope.data.doorData, function (door) {
+    $scope.data.doorHash[door.id] = door.name;
+  });
+  $scope.data.fenHash = {};
+  _.each($scope.data.fenData, function (fenestration) {
+    $scope.data.fenHash[fenestration.id] = fenestration.name;
+  });
+  $scope.data.subsurfaceConstHash = _.merge($scope.data.doorHash, $scope.data.fenHash);
 
   $scope.tabs = [{
     heading: 'Spaces',
@@ -334,7 +344,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       surfaceType = boundary + ' ' + surfaceType;
     }
     var constructionDefault = $scope.data.constructionDefaults[surfaceType.toLowerCase().replace(' ', '_')];
-    if (constructionDefault) constructionDefault = constructionDefault.name;
+    if (constructionDefault) constructionDefault = constructionDefault.id;
     $scope.data.surfaces.push({
       name: name,
       space: spaceIndex,
@@ -344,7 +354,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       building_story_id: $scope.data.spaces[spaceIndex].building_story_id,
       area: null,
       azimuth: null,
-      construction: constructionDefault,
+      construction_library_id: constructionDefault,
       constructionDefault: constructionDefault,
       adjacent_space_reference: null,
       tilt: null,
@@ -402,7 +412,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       building_story_id: selectedSurface.building_story_id,
       area: selectedSurface.area,
       azimuth: selectedSurface.azimuth,
-      construction: selectedSurface.construction,
+      construction_library_id: selectedSurface.construction_library_id,
       constructionDefault: selectedSurface.constructionDefault,
       adjacent_space_reference: selectedSurface.adjacent_space_reference,
       tilt: selectedSurface.tilt,
@@ -453,7 +463,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     }
 
     var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
-    if (constructionDefault) constructionDefault = constructionDefault.name;
+    if (constructionDefault) constructionDefault = constructionDefault.id;
     $scope.data.subsurfaces.push({
       name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
       space: $scope.data.surfaces[surfaceIndex].space,
@@ -461,7 +471,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       type: type,
       building_story_id: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].building_story_id,
       area: null,
-      construction: constructionDefault,
+      construction_library_id: constructionDefault,
       constructionDefault: constructionDefault
     });
   };
@@ -478,7 +488,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       type: selectedSubsurface.type,
       building_story_id: selectedSubsurface.building_story_id,
       area: selectedSubsurface.area,
-      construction: selectedSubsurface.construction,
+      construction_library_id: selectedSubsurface.construction_library_id,
       constructionDefault: selectedSubsurface.constructionDefault
     });
   };
@@ -507,9 +517,6 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.surfaces = [];
     });
     _.each(surfaces, function (surface, surfaceIndex) {
-      // TODO construct_assembly_reference or construction?
-      surface.construct_assembly_reference = surface.construction;
-      delete surface.construction;
       surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
       spaces[surface.space].surfaces.push(surface);
     });
