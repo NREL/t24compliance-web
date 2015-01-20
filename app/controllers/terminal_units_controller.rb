@@ -100,12 +100,12 @@ class TerminalUnitsController < ApplicationController
           end
         end
         @unit.save
-
-
       end
+
+      # save / update air segment paths based on zone configs
+      save_air_system_paths
+
     end
-
-
 
     # TODO: add error handling?!
     respond_with terminal_units.first || TerminalUnit.new
@@ -138,6 +138,34 @@ class TerminalUnitsController < ApplicationController
 
     def get_project
       @project = Project.where(:id => params[:project_id]).first
+    end
+
+    def save_air_system_paths
+
+      systems = AirSystem.where(building_id: @building.id)
+      systems.each do |sys|
+        zone = ThermalZone.where(primary_air_conditioning_system_reference: sys.name).first
+        unless zone.nil?
+          logger.info("ZONE: #{zone.inspect}")
+          # supply
+          segment = sys.air_segments.where(type: 'Supply').first
+          if zone.supply_plenum_zone_reference.blank?
+            segment.path = 'Ducted'
+          else
+            segment.path = 'PlenumZones'
+          end
+          segment.save
+
+          # return
+          segment = sys.air_segments.where(type: 'Return').first
+          if zone.return_plenum_zone_reference.blank?
+            segment.path = 'Ducted'
+          else
+            segment.path = 'PlenumZones'
+          end
+          segment.save
+        end
+      end
     end
 
     def terminal_units_params

@@ -556,12 +556,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     enableHiding: false,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-/*  }, {
-    name: 'control_system_type',
-    displayName: 'Control System',
-    enableHiding: false,
-    filter: Shared.textFilter(),
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'reheat_control_method',
     displayName: 'Reheat Control',
@@ -574,7 +568,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     enableHiding: false,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-  }, {
+/*   }, {
     name: 'cool_reset_supply_high',
     displayName: 'Cool Reset Supply High',
     enableHiding: false,
@@ -589,7 +583,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }];
   $scope.gridCols.pvav.fan = angular.copy($scope.gridCols.ptac.fan);
   $scope.gridCols.pvav.coil_heating = angular.copy($scope.gridCols.ptac.coil_heating);
-  $scope.gridCols.pvav.coil_cooling = angular.copy($scope.gridCols.ptac.coil_cooling);
+  $scope.gridCols.pvav.coil_cooling = angular.copy($scope.gridCols.szac.coil_cooling);
 
   //**** CREATE GRIDS ****
   // System Grids
@@ -601,7 +595,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     pvav: {}
   };
   _.each($scope.systemTabs, function (tabs, type) {
-    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav') {
+    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav ') {
       _.each(tabs, function (tab) {
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],
@@ -883,14 +877,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
         $scope.systems.pvav.push({
           name: "PVAV" + index,
           type: 'PVAV',
+          cooling_control: 'WarmestResetFlowFirst',
           fan: {
             name: "Fan " + index,
             control_method: 'VariableSpeedDrive'
           },
           coil_cooling: {
             name: "Cooling Coil " + index,
-            type: "DirectExpansion"
-
+            type: "DirectExpansion",
+            fuel_source: 'Electric',
+            number_cooling_stages: 2
           },
           coil_heating: {
             name: "Heating Coil " + index,
