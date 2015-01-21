@@ -12,8 +12,15 @@ end
   <%= server %><% end %>
 }
 
+
 server {
-  listen 80;
+  listen         80;
+  server_name    <%= fetch(:nginx_server_name) %>;
+  return         301 https://$server_name$request_uri;
+}
+
+server {
+  listen 443 ssl;
 
   client_max_body_size 4G;
   keepalive_timeout 10;
