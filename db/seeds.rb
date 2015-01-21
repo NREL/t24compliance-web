@@ -6,10 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-SKIP_CONSTRUCTIONS = true
+SKIP_CONSTRUCTIONS = false
 SKIP_FENESTRATION = false
-SKIP_DOORS = true
-SKIP_SPACES = true
+SKIP_DOORS = false
+SKIP_SPACES = false
 
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]

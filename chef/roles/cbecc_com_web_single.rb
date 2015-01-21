@@ -11,7 +11,6 @@ run_list([
              "recipe[cbecc_com_web::ruby]",
              "recipe[cbecc_com_web::web]",
              "recipe[cbecc_com_web::run_simulations]",
-
          ])
 
 override_attributes(

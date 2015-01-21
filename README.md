@@ -91,7 +91,7 @@ To run the CBECC-Com simulations, then start the following:
 * Configure and restart nginx (if you changed the site config)
 
   ```
-  bundle exec cap vagrant puma:start
+  bundle exec cap vagrant deploy:seed
   bundle exec cap vagrant nginx:site:add
   bundle exec cap vagrant nginx:site:enable
   bundle exec cap vagrant nginx:reload
