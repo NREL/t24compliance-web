@@ -11,7 +11,7 @@
         <label class="col-md-3 control-label" for="building-name">Building Name</label>
         <div class="col-md-5">
           <input id="building-name" name="name" type="text" class="form-control" ng-model="building.name" server-error>
-          <p ng-show="form.name.$dirty && form.name.$invalid && form.name.$error.server" class="help-block">
+          <p ng-show="form.name.$error.server" class="help-block">
             <span class="has-error">{{ errors.name }}</span>
           </p>
         </div>
@@ -25,7 +25,7 @@
             <input id="building-building-azimuth" name="building_azimuth" type="number" class="form-control" ng-model="building.building_azimuth" server-error>
             <span class="input-group-addon">&deg;</span>
           </div>
-          <p ng-show="form.building_azimuth.$dirty && form.building_azimuth.$invalid && form.building_azimuth.$error.server" class="help-block">
+          <p ng-show="form.building_azimuth.$error.server" class="help-block">
             <span class="has-error">{{ errors.building_azimuth }}</span>
           </p>
         </div>
@@ -41,7 +41,7 @@
             <input id="building-total-floor-area" name="total_floor_area" type="number" class="form-control" ng-model="building.total_floor_area" server-error>
             <span class="input-group-addon">ft<sup>2</sup></span>
           </div>
-          <p ng-show="form.total_floor_area.$dirty && form.total_floor_area.$invalid && form.total_floor_area.$error.server" class="help-block">
+          <p ng-show="form.total_floor_area.$error.server" class="help-block">
             <span class="has-error">{{ errors.total_floor_area }}</span>
           </p>
         </div>
@@ -52,7 +52,7 @@
         <label class="col-md-3 control-label" for="building-living-unit-count">Conditioned Space Living Units</label>
         <div class="col-md-5">
           <input id="building-living-unit-count" name="living_unit_count" type="number" class="form-control" ng-model="building.living_unit_count" server-error>
-          <p ng-show="form.living_unit_count.$dirty && form.living_unit_count.$invalid && form.living_unit_count.$error.server" class="help-block">
+          <p ng-show="form.living_unit_count.$error.server" class="help-block">
             <span class="has-error">{{ errors.living_unit_count }}</span>
           </p>
         </div>
@@ -66,7 +66,7 @@
           <div class="checkbox">
             <label><input name="relocatable_public_school_building" type="checkbox" ng-model="building.relocatable_public_school_building" server-error> Relocatable Public School Building</label>
           </div>
-          <p ng-show="form.relocatable_public_school_building.$dirty && form.relocatable_public_school_building.$invalid && form.relocatable_public_school_building.$error.server" class="help-block">
+          <p ng-show="form.relocatable_public_school_building.$error.server" class="help-block">
             <span class="has-error">{{ errors.name }}</span>
           </p>
         </div>
@@ -85,15 +85,13 @@
         <span class="label label-info">{{above}}</span>
         <label class="control-label">Stories Above Ground</label></p>
       <div class="form-group" ng-class="storyError()">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <p class="special-output">
             <span class="label label-info" ng-class="{'label-danger': !stories.length}">{{stories.length}}</span>
             <label class="control-label">Total Stories</label></p>
-          <div class="row">
-            <div class="errors col-md-12" ng-show="errors.total_story_count">
-              <span class="has-error" ng-show="errors.total_story_count">{{ errors.total_story_count }}</span>
-            </div>
-          </div>
+          <p ng-show="errors.total_story_count" class="errors help-block">
+            <span class="has-error">{{ errors.total_story_count }}</span>
+          </p>
         </div>
       </div>
     </div>

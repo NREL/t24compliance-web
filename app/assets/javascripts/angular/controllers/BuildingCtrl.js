@@ -61,7 +61,10 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
   };
 
   if (Shared.getBuildingId() === null) {
-    $scope.building = {}; //empty building
+    // new building
+    $scope.building = {
+      building_azimuth: 0
+    };
   } else {
     data.show('buildings', {project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).then(function (response) {
       $scope.building = response;
@@ -132,7 +135,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
         toaster.pop('error', 'An error occurred while saving');
       }
 
-      angular.forEach(response.data.errors, function (errors, field) {
+      _.each(response.data.errors, function (errors, field) {
         if (field !== 'total_story_count') {
           $scope.form[field].$setValidity('server', false);
           $scope.form[field].$dirty = true;
@@ -172,9 +175,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
 
     if ($scope.stories.length) {
       var lowerStory = $scope.stories[$scope.stories.length - 1];
-      if ($scope.autoElevation) {
-        z = lowerStory.z + lowerStory.floor_to_floor_height;
-      }
+      z = lowerStory.z + lowerStory.floor_to_floor_height;
       floor_to_floor_height = lowerStory.floor_to_floor_height;
       floor_to_ceiling_height = lowerStory.floor_to_ceiling_height;
     }
@@ -187,6 +188,9 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
     });
 
     $scope.updateStoryCount();
+
+    // Clear potential error help text
+    if ($scope.hasOwnProperty('errors')) delete $scope.errors.total_story_count;
   };
   $scope.duplicateStory = function () {
     var lowerStory = $scope.stories[$scope.stories.length - 1];

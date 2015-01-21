@@ -16,12 +16,6 @@ cbecc.controller('ProjectCtrl', ['$scope', '$stateParams', '$location', 'toaster
     Project.show({id: proj_id}).$promise.then(function (response) {
       $scope.project = response;
       $scope.project.geometry_input_type = 'Simplified';
-      // Exceptional_condition_modeling doesn't actually have a field, Initialize checkbox
-      if ($scope.project.exceptional_condition_narrative) {
-        $scope.project.exceptional_condition_modeling = 'Yes';
-      } else {
-        $scope.project.exceptional_condition_modeling = 'No';
-      }
     }, function (response) {
       if (response.status == 404) {
         Shared.setProjectId(null);
@@ -33,23 +27,19 @@ cbecc.controller('ProjectCtrl', ['$scope', '$stateParams', '$location', 'toaster
     });
   } else {
     $scope.project = new Project();
-    // Initialize checkboxes
+    // Initialize defaults
+    $scope.project.geometry_input_type = 'Simplified';
+    $scope.project.state = 'CA';
     $scope.project.exceptional_condition_no_cooling_system = 'No';
     $scope.project.exceptional_condition_rated_capacity = 'No';
     $scope.project.exceptional_condition_water_heater = 'No';
-    $scope.project.exceptional_condition_modeling = 'No';
-    $scope.project.geometry_input_type = 'Simplified';
+    $scope.project.exceptional_condition_narrative = 'No';
   }
 
   // save
   $scope.submit = function () {
     console.log("submit");
     $scope.errors = {}; //clean up server errors
-
-    // Exceptional_condition_modeling doesn't actually have a field, clear narrative if checkbox is 'No'
-    if ($scope.project.exceptional_condition_modeling == 'No') {
-      $scope.project.exceptional_condition_narrative = null;
-    }
 
     function success(response) {
       toaster.pop('success', 'Project successfully saved');
@@ -91,5 +81,5 @@ cbecc.controller('ProjectCtrl', ['$scope', '$stateParams', '$location', 'toaster
     var s = $scope.form[name];
     return s.$invalid && s.$dirty ? "has-error" : "";
   };
-  
+
 }]);

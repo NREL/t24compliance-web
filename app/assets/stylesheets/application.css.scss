@@ -102,6 +102,26 @@ body > .container {
   }
 }
 
+@media(max-width: 767px) {
+  #sitenav {
+    .navbar-nav {
+      margin: 0;
+    }
+    .navbar-right {
+      margin-right: 0;
+    }
+    .navbar-nav > li > a {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+}
+@media(max-width: 991px) {
+  .text-right {
+    text-align: left;
+  }
+}
+
 #sitenav.wizard {
   margin-bottom: 0;
 }
@@ -181,7 +201,7 @@ a.hover {
   color: #c60;
 }
 
-input[type='text'], input[type='number'], .input-group-addon, select.form-control, .nav-pills > li > a {
+input[type='text'], input[type='number'], input[type='email'], input[type='tel'], .input-group-addon, select.form-control, .nav-pills > li > a {
   border-radius: 0;
 }
 
