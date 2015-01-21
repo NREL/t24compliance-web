@@ -35,28 +35,38 @@ directory "/var/www" do
   mode '02775'
 end
 
-# # setup the www directory
+# setup the www directory so that the group deploy can save files there
 # %w(/etc/nginx/sites-available /etc/nginx/sites-enabled).each do |d|
 #   directory d do
 #     #user 'www-data'
 #     group 'deploy'
-#     mode '0775'
+#     mode '02775'
+#     recursive true
 #   end
 # end
-
-# cron 'cbecc_com_json_backup' do
-#   minute '0'
-#   hour '6'
-#   user 'root'
-#   command %Q{
-#     cd ~ && curl -SL http://localhost/inputs.json -o inputs_$(date +%Y%m%d_%H%M%S).json
-#   }
+#
+# # remove some of the old files as they are not needed
+# bash "set_permissions_on_logs" do
+#   cwd '/var/log'
+#   code <<-EOH
+#     chmod 02775 nginx
+#     chmod 664 nginx/*
+#     chown -R nginx.deploy nginx
+#   EOH
 # end
 
-# Set an selinux bool to allow for the connection
+# Set an selinux bool to allow socket connections (need to find the sebool to allow this)
+bash "set_selinux_to_permissive" do
+  user 'root'
+  code <<-EOH
+    setenforce 0
+  EOH
+end
 
-# set ip tables
+
+# set iptables
 include_recipe "iptables"
+
 iptables_rule "default_ip_rules"
 
 

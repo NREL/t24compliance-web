@@ -27,7 +27,6 @@ docker_image 'nllong/cbecc-com' do
   cmd_timeout 20 * 60 # 20 minutes
 end
 
-
 # sidekiq
 # directory "/opt/local/bin" do
 #   owner 'deploy'

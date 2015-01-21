@@ -79,12 +79,6 @@ To run the CBECC-Com simulations, then start the following:
 *Note the use of `bundle exec` to protect against loading wrong gem dependencies*
 
 * Start the vagrant machine and make sure provision runs
-* [Vagrant Only] Log into the machine and manually make selinux permissive
-
-```
-vagrant ssh
-sudo setenforce 0
-```
 
 * Deploy the application
 
