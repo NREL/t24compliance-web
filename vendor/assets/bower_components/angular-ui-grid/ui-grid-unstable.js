@@ -1,4 +1,4 @@
-/*! ui-grid - v3.0.0-RC.18-1cf5065 - 2015-01-16
+/*! ui-grid - v3.0.0-RC.18-7f336d4 - 2015-01-21
 * Copyright (c) 2015 ; License: MIT */
 (function () {
   'use strict';
@@ -698,7 +698,6 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
           post: function ($scope, $elm, $attrs, uiGridCtrl) {
             //$elm.addClass($scope.col.getColClass(false));
             $scope.grid = uiGridCtrl.grid;
-            $scope.getExternalScopes = uiGridCtrl.getExternalScopes;
 
             $elm.addClass($scope.col.getColClass(false));
 
@@ -760,7 +759,6 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
 
             $scope.grid = uiGridCtrl.grid;
             $scope.colContainer = containerCtrl.colContainer;
-            $scope.getExternalScopes = uiGridCtrl.getExternalScopes;
 
             containerCtrl.footer = $elm;
 
@@ -824,7 +822,6 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
           pre: function ($scope, $elm, $attrs, uiGridCtrl) {
 
             $scope.grid = uiGridCtrl.grid;
-            $scope.getExternalScopes = uiGridCtrl.getExternalScopes;
 
             var footerTemplate = ($scope.grid.options.gridFooterTemplate) ? $scope.grid.options.gridFooterTemplate : defaultTemplate;
             gridUtil.getTemplate(footerTemplate)
@@ -910,7 +907,6 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
             var renderContainerCtrl = controllers[1];
 
             $scope.grid = uiGridCtrl.grid;
-            $scope.getExternalScopes = uiGridCtrl.getExternalScopes;
 
             $scope.renderContainer = uiGridCtrl.grid.renderContainers[renderContainerCtrl.containerId];
             
@@ -1165,7 +1161,6 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
 
             $scope.grid = uiGridCtrl.grid;
             $scope.colContainer = containerCtrl.colContainer;
-            $scope.getExternalScopes = uiGridCtrl.getExternalScopes;
 
 
 
@@ -2746,12 +2741,7 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
             });
           },
           post: function($scope, $elm, $attrs, controllers) {
-            var uiGridCtrl = controllers[0];
-            var containerCtrl = controllers[1];
 
-            // Sdd optional reference to externalScopes function to scope
-            //   so it can be retrieved in lower elements
-            $scope.getExternalScopes = uiGridCtrl.getExternalScopes;
           }
         };
       }
@@ -2952,15 +2942,14 @@ angular.module('ui.grid')
 
       var self = this;
 
-      // Extend options with ui-grid attribute reference
       self.grid = gridClassFactory.createGrid($scope.uiGrid);
+
+      //assign $scope.$parent if appScope not already assigned
+      self.grid.appScope = self.grid.appScope || $scope.$parent;
+
       $elm.addClass('grid' + self.grid.id);
       self.grid.rtl = gridUtil.getStyles($elm[0])['direction'] === 'rtl';
 
-
-      //add optional reference to externalScopes function to controller
-      //so it can be retrieved in lower elements that have isolate scope
-      self.getExternalScopes = $scope.getExternalScopes;
 
       // angular.extend(self.grid.options, );
 
@@ -3082,8 +3071,6 @@ angular.module('ui.grid')
  *  @element div
  *  @restrict EA
  *  @param {Object} uiGrid Options for the grid to use
- *  @param {Object=} external-scopes Add external-scopes='someScopeObjectYouNeed' attribute so you can access
- *            your scopes from within any custom templatedirective.  You access by $scope.getExternalScopes() function
  *
  *  @description Create a very basic grid.
  *
@@ -3123,8 +3110,7 @@ angular.module('ui.grid').directive('uiGrid',
       return {
         templateUrl: 'ui-grid/ui-grid',
         scope: {
-          uiGrid: '=',
-          getExternalScopes: '&?externalScopes' //optional functionwrapper around any needed external scope instances
+          uiGrid: '='
         },
         replace: true,
         transclude: true,
@@ -3211,7 +3197,7 @@ angular.module('ui.grid').directive('uiGrid',
                 grid.gridWidth = $scope.gridWidth = gridUtil.elementWidth($elm);
                 grid.gridHeight = $scope.gridHeight = gridUtil.elementHeight($elm);
 
-                grid.queueRefresh();
+                grid.refreshCanvas(true);
               }
 
               angular.element($window).on('resize', gridResize);
@@ -3345,6 +3331,16 @@ angular.module('ui.grid')
   
     // Get default options
     self.options = GridOptions.initialize( options );
+
+    /**
+     * @ngdoc object
+     * @name appScope
+     * @propertyOf ui.grid.class:Grid
+     * @description reference to the application scope (the parent scope of the ui-grid element).  Assigned in ui-grid controller
+     * <br/>
+     * use gridOptions.appScopeProvider to override the default assignment of $scope.$parent with any reference
+     */
+    self.appScope = self.options.appScopeProvider;
   
     self.headerHeight = self.options.headerRowHeight;
 
@@ -4458,7 +4454,7 @@ angular.module('ui.grid')
       var container = self.renderContainers[i];
 
       container.canvasHeightShouldUpdate = true;
-      container.visibleRowCache.length = 0;
+      container.visibleRowCache = [];
     }
     
     // rows.forEach(function (row) {
@@ -6744,11 +6740,20 @@ angular.module('ui.grid')
        * custom row template.  Can be set to either the name of a template file:
        * <pre> $scope.gridOptions.rowTemplate = 'row_template.html';</pre>
        * inline html 
-       * <pre>  $scope.gridOptions.rowTemplate = '<div style="background-color: aquamarine" ng-click="getExternalScopes().fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>';</pre>
+       * <pre>  $scope.gridOptions.rowTemplate = '<div style="background-color: aquamarine" ng-click="grid.appScope.fnOne(row)" ng-repeat="col in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ui-grid-cell></div>';</pre>
        * or the id of a precompiled template (TBD how to use this) can be provided.  
        * </br>Refer to the custom row template tutorial for more information.
        */
       baseOptions.rowTemplate = baseOptions.rowTemplate || 'ui-grid/ui-grid-row';
+
+      /**
+       * @ngdoc object
+       * @name appScopeProvider
+       * @propertyOf ui.grid.class:GridOptions
+       * @description by default, the parent scope of the ui-grid element will be assigned to grid.appScope
+       * this property allows you to assign any reference you want to grid.appScope
+       */
+      baseOptions.appScopeProvider = baseOptions.appScopeProvider || null;
       
       return baseOptions;
     }     
@@ -8041,30 +8046,6 @@ function escapeRegExp(str) {
   return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
 
-function QuickCache() {
-  var c = function(get, set) {
-    // Return the cached value of 'get' if it's stored
-    if (get && c.cache[get]) {
-      return c.cache[get];
-    }
-    // Otherwise set it and return it
-    else if (get && set) {
-      c.cache[get] = set;
-      return c.cache[get];
-    }
-    else {
-      return undefined;
-    }
-  };
-
-  c.cache = {};
-
-  c.clear = function () {
-    c.cache = {};
-  };
-
-  return c;
-}
 
 /**
  *  @ngdoc service
@@ -8076,33 +8057,6 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
   var defaultCondition = uiGridConstants.filter.STARTS_WITH;
 
   var rowSearcher = {};
-
-  // rowSearcher.searchColumn = function searchColumn(condition, item) {
-  //   var result;
-
-  //   var col = self.fieldMap[condition.columnDisplay];
-
-  //   if (!col) {
-  //       return false;
-  //   }
-  //   var sp = col.cellFilter.split(':');
-  //   var filter = col.cellFilter ? $filter(sp[0]) : null;
-  //   var value = item[condition.column] || item[col.field.split('.')[0]];
-  //   if (value === null || value === undefined) {
-  //       return false;
-  //   }
-  //   if (typeof filter === "function") {
-  //       var filterResults = filter(typeof value === "object" ? evalObject(value, col.field) : value, sp[1]).toString();
-  //       result = condition.regex.test(filterResults);
-  //   }
-  //   else {
-  //       result = condition.regex.test(typeof value === "object" ? evalObject(value, col.field).toString() : value.toString());
-  //   }
-  //   if (result) {
-  //       return true;
-  //   }
-  //   return false;
-  // };
 
   /**
    * @ngdoc function
@@ -8144,6 +8098,7 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
       return term;
     }
   };
+  
 
   /**
    * @ngdoc function
@@ -8163,24 +8118,6 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
 
     var term = rowSearcher.getTerm(filter);
     
-    // Term starts with and ends with a *, use 'contains' condition
-    // if (/^\*[\s\S]+?\*$/.test(term)) {
-    //   return uiGridConstants.filter.CONTAINS;
-    // }
-    // // Term starts with a *, use 'ends with' condition
-    // else if (/^\*/.test(term)) {
-    //   return uiGridConstants.filter.ENDS_WITH;
-    // }
-    // // Term ends with a *, use 'starts with' condition
-    // else if (/\*$/.test(term)) {
-    //   return uiGridConstants.filter.STARTS_WITH;
-    // }
-    // // Default to default condition
-    // else {
-    //   return defaultCondition;
-    // }
-
-    // If the term has *s then turn it into a regex
     if (/\*/.test(term)) {
       var regexpFlags = '';
       if (!filter.flags || !filter.flags.caseSensitive) {
@@ -8195,99 +8132,145 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
       return defaultCondition;
     }
   };
+  
+  
+  /**
+   * @ngdoc function
+   * @name setupFilters
+   * @methodOf ui.grid.service:rowSearcher
+   * @description For a given columns filters (either col.filters, or [col.filter] can be passed in),
+   * do all the parsing and pre-processing and store that data into a new filters object.  The object
+   * has the condition, the flags, the stripped term, and a parsed reg exp if there was one.
+   * 
+   * We could use a forEach in here, since it's much less performance sensitive, but since we're using 
+   * for loops everywhere else in this module...
+   * 
+   * @param {array} filters the filters from the column (col.filters or [col.filter])
+   * @returns {array} An array of parsed/preprocessed filters
+   */
+  rowSearcher.setupFilters = function setupFilters( filters ){
+    var newFilters = [];
+    
+    var filtersLength = filters.length;
+    for ( var i = 0; i < filtersLength; i++ ){
+      var filter = filters[i];
+      if ( filter.noTerm || filter.term ){
+        var newFilter = {};
+        
+        var regexpFlags = '';
+        if (!filter.flags || !filter.flags.caseSensitive) {
+          regexpFlags += 'i';
+        }
+    
+        if ( filter.term ){
+          // it is possible to have noTerm.  We don't need to copy that across, it was just a flag to avoid
+          // getting the filter ignored if the filter was a function that didn't use a term
+          newFilter.term = rowSearcher.stripTerm(filter);
+        }
+        
+        if ( filter.condition ){
+          newFilter.condition = filter.condition;
+        } else {
+          newFilter.condition = rowSearcher.guessCondition(filter);
+        }
 
-  rowSearcher.runColumnFilter = function runColumnFilter(grid, row, column, termCache, i, filter) {
+        newFilter.flags = angular.extend( { caseSensitive: false }, filter.flags );
+
+        if (newFilter.condition === uiGridConstants.filter.STARTS_WITH) {
+          newFilter.startswithRE = new RegExp('^' + newFilter.term, regexpFlags);
+        }
+        
+         if (newFilter.condition === uiGridConstants.filter.ENDS_WITH) {
+          newFilter.endswithRE = new RegExp(newFilter.term + '$', regexpFlags);
+        }
+
+        if (newFilter.condition === uiGridConstants.filter.CONTAINS) {
+          newFilter.containsRE = new RegExp(newFilter.term, regexpFlags);
+        }
+
+        if (newFilter.condition === uiGridConstants.filter.EXACT) {
+          newFilter.exactRE = new RegExp('^' + newFilter.term + '$', regexpFlags);
+        }
+        
+        newFilters.push(newFilter);
+      }
+    }
+    return newFilters;
+  };
+  
+
+  /**
+   * @ngdoc function
+   * @name runColumnFilter
+   * @methodOf ui.grid.service:rowSearcher
+   * @description Runs a single pre-parsed filter against a cell, returning true
+   * if the cell matches that one filter.
+   * 
+   * @param {Grid} grid the grid we're working against
+   * @param {GridRow} row the row we're matching against
+   * @param {GridCol} column the column that we're working against
+   * @param {object} filter the specific, preparsed, filter that we want to test
+   * @returns {boolean} true if we match (row stays visible)
+   */
+  rowSearcher.runColumnFilter = function runColumnFilter(grid, row, column, filter) {
     // Cache typeof condition
     var conditionType = typeof(filter.condition);
 
-    // Default to CONTAINS condition
-    if (conditionType === 'undefined' || !filter.condition) {
-      filter.condition = uiGridConstants.filter.CONTAINS;
-    }
-
     // Term to search for.
-    var term = rowSearcher.stripTerm(filter);
-
-    if ( !filter.noTerm && (term === null || term === undefined || term === '')) {
-      return true;
-    }
+    var term = filter.term;
 
     // Get the column value for this row
     var value = grid.getCellValue(row, column);
 
-    var regexpFlags = '';
-    if (!filter.flags || !filter.flags.caseSensitive) {
-      regexpFlags += 'i';
-    }
-
-    var cacheId = column.field + i;
-
     // If the filter's condition is a RegExp, then use it
     if (filter.condition instanceof RegExp) {
-      if (!filter.condition.test(value)) {
-        return false;
-      }
+      return filter.condition.test(value);
     }
+
     // If the filter's condition is a function, run it
-    else if (conditionType === 'function') {
+    if (conditionType === 'function') {
       return filter.condition(term, value, row, column);
     }
-    else if (filter.condition === uiGridConstants.filter.STARTS_WITH) {
-      var startswithRE = termCache(cacheId) ? termCache(cacheId) : termCache(cacheId, new RegExp('^' + term, regexpFlags));
+    
+    if (filter.startswithRE) {
+      return filter.startswithRE.test(value);
+    }
+    
+    if (filter.endswithRE) {
+      return filter.endswithRE.test(value);
+    }
+    
+    if (filter.containsRE) {
+      return filter.containsRE.test(value);
+    }
+    
+    if (filter.exactRE) {
+      return filter.exactRE.test(value);
+    }
+    
+    if (filter.condition === uiGridConstants.filter.GREATER_THAN) {
+      return (value > term);
+    }
 
-      if (!startswithRE.test(value)) {
-        return false;
-      }
+    if (filter.condition === uiGridConstants.filter.GREATER_THAN_OR_EQUAL) {
+      return (value >= term);
     }
-    else if (filter.condition === uiGridConstants.filter.ENDS_WITH) {
-      var endswithRE = termCache(cacheId) ? termCache(cacheId) : termCache(cacheId, new RegExp(term + '$', regexpFlags));
 
-      if (!endswithRE.test(value)) {
-        return false;
-      }
+    if (filter.condition === uiGridConstants.filter.LESS_THAN) {
+      return (value < term);
     }
-    else if (filter.condition === uiGridConstants.filter.CONTAINS) {
-      var containsRE = termCache(cacheId) ? termCache(cacheId) : termCache(cacheId, new RegExp(term, regexpFlags));
-
-      if (!containsRE.test(value)) {
-        return false;
-      }
+    
+    if (filter.condition === uiGridConstants.filter.LESS_THAN_OR_EQUAL) {
+      return (value <= term);
     }
-    else if (filter.condition === uiGridConstants.filter.EXACT) {
-      var exactRE = termCache(cacheId) ? termCache(cacheId) : termCache(cacheId,  new RegExp('^' + term + '$', regexpFlags));
-
-      if (!exactRE.test(value)) {
-        return false;
-      }
-    }
-    else if (filter.condition === uiGridConstants.filter.GREATER_THAN) {
-      if (value <= term) {
-        return false;
-      }
-    }
-    else if (filter.condition === uiGridConstants.filter.GREATER_THAN_OR_EQUAL) {
-      if (value < term) {
-        return false;
-      }
-    }
-    else if (filter.condition === uiGridConstants.filter.LESS_THAN) {
-      if (value >= term) {
-        return false;
-      }
-    }
-    else if (filter.condition === uiGridConstants.filter.LESS_THAN_OR_EQUAL) {
-      if (value > term) {
-        return false;
-      }
-    }
-    else if (filter.condition === uiGridConstants.filter.NOT_EQUAL) {
-      if (!angular.equals(value, term)) {
-        return false;
-      }
+    
+    if (filter.condition === uiGridConstants.filter.NOT_EQUAL) {
+      return angular.equals(value, term);
     }
 
     return true;
   };
+
 
   /**
    * @ngdoc boolean
@@ -8303,143 +8286,95 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
    * @ngdoc function
    * @name searchColumn
    * @methodOf ui.grid.service:rowSearcher
-   * @description Process filters on a given column against a given row. If the row meets the conditions on all the filters, return true.
+   * @description Process provided filters on provided column against a given row. If the row meets 
+   * the conditions on all the filters, return true.
    * @param {Grid} grid Grid to search in
    * @param {GridRow} row Row to search on
    * @param {GridCol} column Column with the filters to use
+   * @param {array} filters array of pre-parsed/preprocessed filters to apply
    * @returns {boolean} Whether the column matches or not.
    */
-  rowSearcher.searchColumn = function searchColumn(grid, row, column, termCache) {
-    var filters = [];
-
+  rowSearcher.searchColumn = function searchColumn(grid, row, column, filters) {
     if (grid.options.useExternalFiltering) {
       return true;
     }
     
-    if (typeof(column.filters) !== 'undefined' && column.filters && column.filters.length > 0) {
-      filters = column.filters;
-    } else {
-      // If filters array is not there, assume no filters for this column. 
-      // This array should have been built in GridColumn::updateColumnDef.
-      return true;
-    }
-    
-    for (var i in filters) {
+    var filtersLength = filters.length;
+    for (var i = 0; i < filtersLength; i++) {
       var filter = filters[i];
-
-      /*
-        filter: {
-          term: 'blah', // Search term to search for, could be a string, integer, etc.
-          condition: uiGridConstants.filter.CONTAINS // Type of match to do. Defaults to CONTAINS (i.e. looking in a string), but could be EXACT, GREATER_THAN, etc.
-          flags: { // Flags for the conditions
-            caseSensitive: false // Case-sensitivity defaults to false
-          }
-        }
-      */
-     
-      // Check for when no condition is supplied. In this case, guess the condition
-      // to use based on the filter's term. Cache this result.
-      if (!filter.condition) {
-        // Cache custom conditions, building the RegExp takes time
-        var conditionCacheId = 'cond-' + column.field + '-' + filter.term;
-        var condition = termCache(conditionCacheId) ? termCache(conditionCacheId) : termCache(conditionCacheId, rowSearcher.guessCondition(filter));
-
-        // Create a surrogate filter so as not to change
-        // the actual columnDef.filters.
-        filter = {
-          // Copy over the search term
-          term: filter.term,
-          // Use the guessed condition
-          condition: condition,
-          // Set flags, using passed flags if present
-          flags: angular.extend({
-            caseSensitive: false
-          }, filter.flags)
-        };
-      }
-
-      var ret = rowSearcher.runColumnFilter(grid, row, column, termCache, i, filter);
+      
+      var ret = rowSearcher.runColumnFilter(grid, row, column, filter);
       if (!ret) {
         return false;
       }
     }
 
     return true;
-    // }
-    // else {
-    //   // No filter conditions, default to true
-    //   return true;
-    // }
   };
+
 
   /**
    * @ngdoc function
    * @name search
    * @methodOf ui.grid.service:rowSearcher
-   * @description Run a search across
+   * @description Run a search across the given rows and columns, marking any rows that don't 
+   * match the stored col.filters or col.filter as invisible.
    * @param {Grid} grid Grid instance to search inside
    * @param {Array[GridRow]} rows GridRows to filter
    * @param {Array[GridColumn]} columns GridColumns with filters to process
    */
   rowSearcher.search = function search(grid, rows, columns) {
+    /*
+     * Added performance optimisations into this code base, as this logic creates deeply nested
+     * loops and is therefore very performance sensitive.  In particular, avoiding forEach as
+     * this impacts some browser optimisers (particularly Chrome), using iterators instead
+     */
+    
     // Don't do anything if we weren't passed any rows
     if (!rows) {
       return;
     }
 
-    // Create a term cache
-    var termCache = new QuickCache();
+    // Build list of filters to apply
+    var filterData = [];
 
-    // Build filtered column list
-    var filterCols = [];
-    columns.forEach(function (col) {
-      if (typeof(col.filters) !== 'undefined' && col.filters.length > 0) {
-        filterCols.push(col);
+    var colsLength = columns.length;
+    for (var i = 0; i < colsLength; i++) {
+      var col = columns[i];
+      
+      if (typeof(col.filters) !== 'undefined' && ( col.filters.length > 1 || col.filters.length === 1 && col.filters[0].term ) ) {
+        filterData.push( { col: col, filters: rowSearcher.setupFilters(col.filters) } );
       }
       else if (typeof(col.filter) !== 'undefined' && col.filter && ( typeof(col.filter.term) !== 'undefined' && col.filter.term || col.filter.noTerm ) ) {
-        filterCols.push(col);
+        filterData.push( { col: col, filters: rowSearcher.setupFilters([col.filter]) } );
       }
-    });
+    }
     
-    if (filterCols.length > 0) {
-      filterCols.forEach(function foreachFilterCol(col) {
-        rows.forEach(function foreachRow(row) {
-          if (row.forceInvisible || !rowSearcher.searchColumn(grid, row, col, termCache)) {
-            row.visible = false;
-          }
-        });
-      });
+    if (filterData.length > 0) {
+      // define functions outside the loop, performance optimisation
+      var foreachRow = function(grid, row, col, filters){
+        if (row.forceInvisible || !rowSearcher.searchColumn(grid, row, col, filters)) {
+          row.visible = false;
+        }
+      };
+      
+      var foreachFilterCol = function(grid, filterData){
+        var rowsLength = rows.length;
+        for ( var i = 0; i < rowsLength; i++){
+          foreachRow(grid, rows[i], filterData.col, filterData.filters);  
+        }
+      };
+
+      // nested loop itself - foreachFilterCol, which in turn calls foreachRow
+      var filterDataLength = filterData.length;
+      for ( var j = 0; j < filterDataLength; j++){
+        foreachFilterCol( grid, filterData[j] );  
+      }
 
       if (grid.api.core.raise.rowsVisibleChanged) {
         grid.api.core.raise.rowsVisibleChanged();
       }
-
-      // rows.forEach(function (row) {
-      //   var matchesAllColumns = true;
-
-      //   for (var i in filterCols) {
-      //     var col = filterCols[i];
-
-      //     if (!rowSearcher.searchColumn(grid, row, col, termCache)) {
-      //       matchesAllColumns = false;
-
-      //       // Stop processing other terms
-      //       break;
-      //     }
-      //   }
-
-      //   // Row doesn't match all the terms, don't display it
-      //   if (!matchesAllColumns) {
-      //     row.visible = false;
-      //   }
-      //   else {
-      //     row.visible = true;
-      //   }
-      // });
     }
-
-    // Reset the term cache
-    termCache.clear();
 
     return rows;
   };
@@ -13094,6 +13029,8 @@ module.filter('px', function() {
                 endEdit(true);
                 $scope.grid.api.edit.raise.afterCellEdit($scope.row.entity, $scope.col.colDef, cellModel($scope), origCellValue);
                 deregOnGridScroll();
+                deregOnEndCellEdit();
+                deregOnCancelCellEdit();
               });
 
               //end editing
@@ -13101,12 +13038,16 @@ module.filter('px', function() {
                 endEdit(retainFocus);
                 $scope.grid.api.edit.raise.afterCellEdit($scope.row.entity, $scope.col.colDef, cellModel($scope), origCellValue);
                 deregOnEndCellEdit();
+                deregOnGridScroll();
+                deregOnCancelCellEdit();
               });
 
               //cancel editing
               var deregOnCancelCellEdit = $scope.$on(uiGridEditConstants.events.CANCEL_CELL_EDIT, function () {
                 cancelEdit();
                 deregOnCancelCellEdit();
+                deregOnGridScroll();
+                deregOnEndCellEdit();
               });
 
               $scope.$broadcast(uiGridEditConstants.events.BEGIN_CELL_EDIT);
