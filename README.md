@@ -102,4 +102,6 @@ To run the CBECC-Com simulations, then start the following:
   # or
   bundle exec cap staging nginx:restart
   ```
+
+  `bundle exec cap vagrant nginx:site:add && bundle exec cap vagrant nginx:site:enable && bundle exec cap vagrant nginx:reload && bundle exec cap vagrant nginx:restart`
   
