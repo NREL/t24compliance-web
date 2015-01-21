@@ -116,10 +116,10 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!row.entity.construction_library_id) {
-          return 'red-cell';
+          return 'red-glyphicon';
         }
-        if (row.entity.construction_library_id == row.entity.constructionDefault) {
-          return 'green-cell';
+        if (row.entity.constructionDefault && row.entity.construction_library_id != row.entity.constructionDefault) {
+          return 'red-cell';
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',

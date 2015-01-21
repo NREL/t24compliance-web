@@ -210,16 +210,16 @@ body > .container-fluid > .header-row.wizard {
   }
 }
 
-.green-cell {
-  color: #1c9253;
+.red-cell {
+  color: #ac3933;
+  font-weight: bold;
   .glyphicon {
     color: #000;
   }
 }
 
-.red-cell {
+.red-glyphicon {
   color: #ac3933;
-  font-weight: bold;
 }
 
 .border-left-cell {

@@ -40,7 +40,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
             subsurface.surface = surfaceIndex;
             subsurface.building_story_id = space.building_story_id;
             var constructionDefault = $scope.data.constructionDefaults[subsurfaceType.slice(0, -1)];
-            if (constructionDefault) subsurface.constructionDefault = constructionDefault.id;
+            if (constructionDefault) {
+              subsurface.constructionDefault = constructionDefault.id;
+            } else {
+              subsurface.constructionDefault = null;
+            }
             subsurface.construction_library_id = subsurface.construction_library_id || subsurface.constructionDefault;
             $scope.data.subsurfaces.push(subsurface);
           });
@@ -73,7 +77,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         }
         surface.building_story_id = space.building_story_id;
         var constructionDefault = $scope.data.constructionDefaults[surfaceType.slice(0, -1)];
-        if (constructionDefault) surface.constructionDefault = constructionDefault.id;
+        if (constructionDefault) {
+          surface.constructionDefault = constructionDefault.id;
+        } else {
+          surface.constructionDefault = null;
+        }
         surface.construction_library_id = surface.construction_library_id || surface.constructionDefault;
         $scope.data.surfaces.push(surface);
         surfaceIndex++;
@@ -344,7 +352,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       surfaceType = boundary + ' ' + surfaceType;
     }
     var constructionDefault = $scope.data.constructionDefaults[surfaceType.toLowerCase().replace(' ', '_')];
-    if (constructionDefault) constructionDefault = constructionDefault.id;
+    if (constructionDefault) {
+      constructionDefault = constructionDefault.id;
+    } else {
+      constructionDefault = null;
+    }
     $scope.data.surfaces.push({
       name: name,
       space: spaceIndex,
@@ -367,8 +379,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.occupant_density = space.occupant_density_default;
       space.hot_water_heating_rate = space.hot_water_heating_rate_default;
       space.receptacle_power_density = space.receptacle_power_density_default;
-      gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
     });
+    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedSpaceTypeSettingsValues = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
@@ -377,13 +389,41 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.receptacle_power_density !== space.receptacle_power_density_default);
     }));
   };
+  $scope.data.restoreSurfaceConstructionDefaults = function (gridApi) {
+    _.each($scope.data.surfaces, function (surface) {
+      if (surface.constructionDefault) {
+        surface.construction_library_id = surface.constructionDefault;
+      }
+    });
+    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+  };
+  $scope.data.modifiedSurfaceConstructionDefaults = function () {
+    return !_.isEmpty(_.find($scope.data.surfaces, function (surface) {
+      if (!surface.constructionDefault) return false;
+      return (surface.construction_library_id !== surface.constructionDefault);
+    }));
+  };
+  $scope.data.restoreSubsurfaceConstructionDefaults = function (gridApi) {
+    _.each($scope.data.subsurfaces, function (subsurface) {
+      if (subsurface.constructionDefault) {
+        subsurface.construction_library_id = subsurface.constructionDefault;
+      }
+    });
+    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+  };
+  $scope.data.modifiedSubsurfaceConstructionDefaults = function () {
+    return !_.isEmpty(_.find($scope.data.subsurfaces, function (subsurface) {
+      if (!subsurface.constructionDefault) return false;
+      return (subsurface.construction_library_id !== subsurface.constructionDefault);
+    }));
+  };
   $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi) {
     _.each($scope.data.spaces, function (space) {
       space.exhaust_per_area = space.exhaust_per_area_default;
       space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
       $scope.data.updateTotalExhaust(space);
-      gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
     });
+    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedSpaceTypeExhaustValues = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
@@ -476,7 +516,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     }
 
     var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
-    if (constructionDefault) constructionDefault = constructionDefault.id;
+    if (constructionDefault) {
+      constructionDefault = constructionDefault.id;
+    } else {
+      constructionDefault = null;
+    }
     $scope.data.subsurfaces.push({
       name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
       space: $scope.data.surfaces[surfaceIndex].space,
