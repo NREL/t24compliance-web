@@ -117,7 +117,7 @@ body > .container {
   }
 }
 @media(max-width: 991px) {
-  .text-right {
+  .text-right, .form-horizontal .control-label.full-width {
     text-align: left;
   }
 }

@@ -101,6 +101,10 @@ body > .container-fluid > .header-row.wizard {
   margin-top: 5px;
 }
 
+.mar-bot-0 {
+  margin-bottom: 0;
+}
+
 .mar-bot-20 {
   margin-bottom: 20px;
 }
@@ -236,9 +240,12 @@ body > .container-fluid > .header-row.wizard {
   transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 }
 
-.special-output > .label {
-  font-weight: bold;
-  font-size: 1.25em;
+p.special-output {
+  margin-top: 8px;
+  .label {
+    font-weight: bold;
+    font-size: 1.25em;
+  }
 }
 
 .btn-wrap {
