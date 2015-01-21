@@ -1,10 +1,9 @@
-<nav class="navbar navbar-default navbar-static-top<% if request.path == '/wizard' %> wizard<% end %>" role="navigation">
+<nav id="sitenav" class="navbar navbar-default navbar-static-top<% if request.path == '/wizard' %> wizard<% end %>" role="navigation">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header pull-left">
       <%= link_to image_tag('logo.png'), root_path, class: 'navbar-brand' %>
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navbar">
+    <div class="navbar-header pull-right" id="navbar">
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'My Account', user_path(current_user), class: "navbar-link" %></li>
