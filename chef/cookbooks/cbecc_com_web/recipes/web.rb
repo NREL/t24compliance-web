@@ -35,25 +35,14 @@ directory "/var/www" do
   mode '02775'
 end
 
-# setup the www directory so that the group deploy can save files there
-# %w(/etc/nginx/sites-available /etc/nginx/sites-enabled).each do |d|
-#   directory d do
-#     #user 'www-data'
-#     group 'deploy'
-#     mode '02775'
-#     recursive true
-#   end
-# end
-#
-# # remove some of the old files as they are not needed
-# bash "set_permissions_on_logs" do
-#   cwd '/var/log'
-#   code <<-EOH
-#     chmod 02775 nginx
-#     chmod 664 nginx/*
-#     chown -R nginx.deploy nginx
-#   EOH
-# end
+# Remove the default site which seems to be installed in the conf.d directory and is loaded.
+bash 'delete_nginx_default_site' do
+  cwd 'etc/nginx/conf.d'
+  code <<-EOH
+    rm -f default.conf
+  EOH
+end
+
 
 # Set an selinux bool to allow socket connections (need to find the sebool to allow this)
 bash "set_selinux_to_permissive" do

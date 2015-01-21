@@ -14,11 +14,11 @@ run_list([
 
          ])
 
-default_attributes(
-    :java => {
-        :jdk_version => '7'
+override_attributes(
+    java: {
+        jdk_version: '7'
     },
-    :nginx => {
-        :default_site_enabled => false
+    nginx: {
+        default_site_enabled: false
     }
 )
