@@ -12,4 +12,5 @@ set :branch, :develop
 set :tmp_dir, "/home/#{fetch(:user)}/tmp"
 set :rails_env, "staging"
 set :nginx_server_name, 'rordev-web.development.nrel.gov'
+set :branch, :develop
 server 'rordev-web.development.nrel.gov', user: ENV['USER'], roles: %w{web app db}
