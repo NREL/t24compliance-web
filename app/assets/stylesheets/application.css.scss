@@ -59,7 +59,7 @@ body > .container {
   color: $error-text;
 }
 
-.navbar {
+#sitenav.navbar {
   background: #70be44;
   color: #fff;
   min-height: 30px;
@@ -67,6 +67,9 @@ body > .container {
   margin-bottom: 80px;
   .navbar-inner {
     padding: 0;
+  }
+  .nav > li {
+    display: inline-block;
   }
   .nav > li:last-child {
     padding-right: 30px;
@@ -98,8 +101,14 @@ body > .container {
     margin-left: 10px;
   }
 }
-.navbar.wizard {
+
+#sitenav.wizard {
   margin-bottom: 0;
+}
+
+.navbar-default {
+  background-color: white;
+  border: 0 none;
 }
 
 /*
@@ -172,7 +181,7 @@ a.hover {
   color: #c60;
 }
 
-input[type='text'], select.form-control, .nav-pills > li > a {
+input[type='text'], input[type='number'], .input-group-addon, select.form-control, .nav-pills > li > a {
   border-radius: 0;
 }
 
@@ -487,6 +496,7 @@ h2.header-large {
 .mar-top-neg-20 {
   margin-top: -20px;
 }
+
 .pad-top-80 {
   padding-top: 80px;
 }
@@ -593,6 +603,7 @@ h2.header-large {
   font-weight: 700;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Open Sans Condensed';
   src: url('OpenSans-CondLight-webfont.eot');
@@ -603,6 +614,7 @@ h2.header-large {
   font-weight: 300;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Open Sans Condensed';
   src: url('OpenSans-CondBold-webfont.eot');
