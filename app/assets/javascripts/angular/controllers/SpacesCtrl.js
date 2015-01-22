@@ -54,7 +54,13 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         if (surfaceType == 'interior_floors') {
           surface.type = 'Floor';
           surface.boundary = 'Interior';
-          surface.adjacent_space_reference = surface.adjacent_space_reference;
+          _.find($scope.data.spaces, function(space, spaceIndex) {
+            if (surface.adjacent_space_reference == space.name) {
+              surface.adjacent_space_reference = spaceIndex;
+              return true;
+            }
+            return false;
+          });
         } else if (surfaceType == 'exterior_floors') {
           surface.type = 'Floor';
           surface.boundary = 'Exterior';
@@ -64,7 +70,13 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         } else if (surfaceType == 'interior_walls') {
           surface.type = 'Wall';
           surface.boundary = 'Interior';
-          surface.adjacent_space_reference = surface.adjacent_space_reference;
+          _.find($scope.data.spaces, function(space, spaceIndex) {
+            if (surface.adjacent_space_reference == space.name) {
+              surface.adjacent_space_reference = spaceIndex;
+              return true;
+            }
+            return false;
+          });
         } else if (surfaceType == 'exterior_walls') {
           surface.type = 'Wall';
           surface.boundary = 'Exterior';
@@ -300,6 +312,15 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
     // Delete subsurfaces
     _.eachRight($scope.data.surfaces, function (surface, surfaceIndex) {
+      // Update adjacent spaces
+      if (surface.boundary == 'Interior') {
+        if (surface.adjacent_space_reference == spaceIndex) {
+          surface.adjacent_space_reference = null;
+        } else if (surface.adjacent_space_reference > spaceIndex) {
+          surface.adjacent_space_reference--;
+        }
+      }
+
       if (surface.space == spaceIndex) {
         // Delete subsurfaces
         $scope.data.subsurfaces = _.difference($scope.data.subsurfaces, _.where($scope.data.subsurfaces, {'surface': surfaceIndex}));
@@ -373,6 +394,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       height: null,
       perimeter_exposed: null
     });
+    if (boundary == 'Interior') {
+      var surfaceIndex = $scope.data.surfaces.length - 1;
+      $scope.data.surfaces[surfaceIndex].adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
+    }
   };
   $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi) {
     _.each($scope.data.spaces, function (space) {
@@ -561,6 +586,55 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     }
   };
 
+  $scope.data.compatibleAdjacentSpaces = function (surfaceIndex) {
+    var compatibleAdjacentSpaces = [];
+    var surface = $scope.data.surfaces[surfaceIndex];
+
+    if (surface.boundary == 'Interior') {
+      var storyId = $scope.data.spaces[surface.space].building_story_id;
+      if (surface.type == 'Wall') {
+        _.each($scope.data.spaces, function (space, spaceIndex) {
+          if (space.building_story_id == storyId && spaceIndex != surface.space) {
+            compatibleAdjacentSpaces.push({
+              id: spaceIndex,
+              value: space.name
+            });
+          }
+        });
+      } else if (surface.type == 'Floor') {
+        var storyIndex = null;
+        _.find($scope.data.storiesArr, function (story, key) {
+          if (story.id == storyId) {
+            storyIndex = key;
+            return true;
+          }
+          return false;
+        });
+        if (storyIndex) {
+          var storyBelow = $scope.data.storiesArr[storyIndex - 1].id;
+          _.each($scope.data.spaces, function (space, spaceIndex) {
+            if (space.building_story_id == storyBelow) {
+              compatibleAdjacentSpaces.push({
+                id: spaceIndex,
+                value: space.name
+              });
+            }
+          });
+        }
+      }
+    }
+    return compatibleAdjacentSpaces;
+  };
+  $scope.data.allCompatibleAdjacentSpaces = function () {
+    var compatibleAdjacentSpaces = {};
+    _.each($scope.data.surfaces, function (surface, surfaceIndex) {
+      if (surface.boundary == 'Interior') {
+        compatibleAdjacentSpaces[surfaceIndex] = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
+      }
+    });
+    return compatibleAdjacentSpaces;
+  };
+
   $scope.data.doorCompatibleSpaces = function () {
     var doorCompatibleSpaces = [];
     _.each($scope.data.surfaces, function (surface, index) {
@@ -634,6 +708,9 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.surfaces = [];
     });
     _.each(surfaces, function (surface, surfaceIndex) {
+      if (surface.adjacent_space_reference != null) {
+        surface.adjacent_space_reference = $scope.data.spaces[surface.adjacent_space_reference].name
+      }
       surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
       spaces[surface.space].surfaces.push(surface);
     });

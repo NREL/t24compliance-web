@@ -33,7 +33,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.occupant_density != row.entity.occupant_density_default) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellEditableCondition: $scope.editableCondition,
@@ -46,7 +46,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.hot_water_heating_rate != row.entity.hot_water_heating_rate_default) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellEditableCondition: $scope.editableCondition,
@@ -59,7 +59,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.receptacle_power_density != row.entity.receptacle_power_density_default) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellEditableCondition: $scope.editableCondition,

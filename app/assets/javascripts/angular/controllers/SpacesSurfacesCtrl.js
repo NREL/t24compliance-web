@@ -27,6 +27,15 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     $scope.spacesHash[index] = space.name;
   });
 
+  // Initialize adjacent space dropdown options, update stories
+  var compatibleAdjacentSpaces = $scope.data.allCompatibleAdjacentSpaces();
+  _.each($scope.data.surfaces, function (surface, surfaceIndex) {
+    surface.building_story_id = $scope.data.spaces[surface.space].building_story_id;
+    if (surface.boundary == 'Interior') {
+      surface.adjacencyOptions = compatibleAdjacentSpaces[surfaceIndex];
+    }
+  });
+
   // Surfaces UI Grid
   $scope.surfacesGridOptions = {
     columnDefs: [{
@@ -95,10 +104,10 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!row.entity.construction_library_id) {
-          return 'red-glyphicon';
+          return 'required-cell msg-select-a-construction';
         }
         if (row.entity.constructionDefault && row.entity.construction_library_id != row.entity.constructionDefault) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',
@@ -113,17 +122,20 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         if (row.entity.boundary != 'Interior') {
           return 'disabled-cell';
         }
-        if (row.entity.space == row.entity.adjacent_space_reference) {
-          return 'error-cell';
+        if (!row.entity.adjacencyOptions.length) {
+          return 'error-cell msg-no-compatible-spaces';
+        }
+        if (row.entity.adjacent_space_reference == null) {
+          return 'required-cell msg-select-adjacent-space';
         }
       },
       cellEditableCondition: function ($scope) {
         if ($scope.grid.appScope.applySettingsActive) return false;
-        return $scope.row.entity.boundary == 'Interior';
+        return $scope.row.entity.boundary == 'Interior' && $scope.row.entity.adjacencyOptions.length;
       },
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapHash:grid.appScope.spacesHash',
-      editDropdownOptionsArray: $scope.spacesArr,
+      editDropdownRowEntityOptionsArrayPath: 'adjacencyOptions',
       filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
@@ -198,8 +210,10 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (colDef.name == 'space' && newValue != oldValue) {
+          // Update story
           rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
 
+          // Update name
           var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
           if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
             regex += ' [0-9]+';
@@ -214,6 +228,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
               name += ' ' + len;
             }
             rowEntity.name = name;
+          }
+
+          // Update adjacent space
+          if (rowEntity.boundary == 'Interior') {
+            var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
+            rowEntity.adjacent_space_reference = null;
+            rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
+            gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
           }
         }
       });

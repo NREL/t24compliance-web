@@ -90,6 +90,14 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if ((colDef.name == 'floor_to_ceiling_height' || colDef.name == 'area') && newValue != oldValue) {
           $scope.data.updateTotalExhaust(rowEntity);
+        } else if (colDef.name == 'building_story_id' && newValue != oldValue) {
+          // Remove adjacent spaces
+          var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+          _.each($scope.data.surfaces, function(surface) {
+            if (surface.boundary == 'Interior' && surface.space == spaceIndex) {
+              surface.adjacent_space_reference = null;
+            }
+          });
         }
       });
     }
