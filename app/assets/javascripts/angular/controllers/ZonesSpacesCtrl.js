@@ -26,7 +26,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
       name: 'building_story_id',
       displayName: 'Story',
       enableCellEdit: false,
-      cellFilter: 'mapStories:this',
+      cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       enableHiding: false,
       filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell',

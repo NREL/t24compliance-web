@@ -6,10 +6,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.applySettingsActive = false;
 
   $scope.editableCondition = function ($scope) {
-    while (!$scope.hasOwnProperty('applySettingsActive')) {
-      $scope = $scope.$parent;
-    }
-    return !$scope.applySettingsActive;
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   $scope.spacesArr = [];
@@ -68,7 +65,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellEditableCondition: $scope.editableCondition,
-      cellFilter: 'mapSpaces:this',
+      cellFilter: 'mapHash:grid.appScope.spacesHash',
       editDropdownRowEntityOptionsArrayPath: 'spaceOptions',
       filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
@@ -79,7 +76,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellEditableCondition: $scope.editableCondition,
-      cellFilter: 'mapSurfaces:this',
+      cellFilter: 'mapHash:grid.appScope.surfacesHash',
       editDropdownRowEntityOptionsArrayPath: 'surfaceOptions',
       filter: Shared.enumFilter($scope.surfacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
@@ -95,7 +92,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       name: 'building_story_id',
       displayName: 'Story',
       enableCellEdit: false,
-      cellFilter: 'mapStories:this',
+      cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       enableHiding: false,
       filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -112,7 +109,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Construction',
       allowConstructionEdit: true,
       enableCellEdit: false,
-      cellFilter: 'mapSubsurfaceConstructions:this',
+      cellFilter: 'mapHash:grid.appScope.data.subsurfaceConstHash',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!row.entity.construction_library_id) {

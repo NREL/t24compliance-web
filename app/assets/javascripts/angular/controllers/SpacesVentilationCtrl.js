@@ -6,10 +6,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.applySettingsActive = false;
 
   $scope.editableCondition = function ($scope) {
-    while (!$scope.hasOwnProperty('applySettingsActive')) {
-      $scope = $scope.$parent;
-    }
-    return !$scope.applySettingsActive;
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   // Ventilation & Exhaust UI Grid

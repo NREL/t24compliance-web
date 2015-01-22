@@ -20,11 +20,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
       name: 'z',
       displayName: 'Height Above Ground',
       cellEditableCondition: function ($scope) {
-        var mainScope = $scope;
-        while (!mainScope.hasOwnProperty('autoElevation')) {
-          mainScope = mainScope.$parent;
-        }
-        if (mainScope.autoElevation && $scope.rowRenderIndex) return false;
+        if ($scope.grid.appScope.autoElevation && $scope.rowRenderIndex) return false;
         return true;
       }
     }, {
@@ -63,7 +59,9 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
   if (Shared.getBuildingId() === null) {
     // new building
     $scope.building = {
-      building_azimuth: 0
+      building_azimuth: 0,
+      living_unit_count: 0,
+      total_floor_area: 0
     };
   } else {
     data.show('buildings', {project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).then(function (response) {

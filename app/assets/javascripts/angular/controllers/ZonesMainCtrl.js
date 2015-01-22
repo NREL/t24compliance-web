@@ -6,10 +6,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
   $scope.applySettingsActive = false;
 
   $scope.editableCondition = function ($scope) {
-    while (!$scope.hasOwnProperty('applySettingsActive')) {
-      $scope = $scope.$parent;
-    }
-    return !$scope.applySettingsActive;
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   // Zones UI Grid
@@ -26,7 +23,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
       //   enableHiding: false,
       //   cellEditableCondition: $scope.editableCondition,
       //   editableCellTemplate: 'ui-grid/dropdownEditor',
-      //   cellFilter: 'mapStories:this',
+      //   cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       //   editDropdownOptionsArray: $scope.data.storiesArr,
       //   filter: Shared.enumFilter($scope.data.storiesHash),
       //   sortingAlgorithm: Shared.sort($scope.data.storiesHash)

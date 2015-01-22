@@ -366,50 +366,9 @@ cbecc.filter('mapEnums', ['Enums', function (Enums) {
   return function (input, name) {
     return Enums.enumsArr[name][input].value;
   };
-}]).filter('mapStories', function () {
-  return function (input, $scope) {
-    // The data property can be found between 7-9 parents deep due to ng-include, ui-view, and modal scope hierarchies
-    while (!$scope.hasOwnProperty('data')) {
-      $scope = $scope.$parent;
-    }
-    return $scope.data.storiesHash[input];
-  };
-}).filter('mapZones', function () {
-  return function (input, $scope) {
-    while (!$scope.hasOwnProperty('zonesHash')) {
-      $scope = $scope.$parent;
-    }
-    return $scope.zonesHash[input];
-  }
-}).filter('mapSpaces', function () {
-  return function (input, $scope) {
-    while (!$scope.hasOwnProperty('spacesHash')) {
-      $scope = $scope.$parent;
-    }
-    return $scope.spacesHash[input];
-  };
-}).filter('mapSurfaces', function () {
-  return function (input, $scope) {
-    while (!$scope.hasOwnProperty('surfacesHash')) {
-      $scope = $scope.$parent;
-    }
-    return $scope.surfacesHash[input];
-  };
-}).filter('mapSurfaceConstructions', function () {
-  return function (input, $scope) {
-    if (!input) return input;
-    while (!$scope.hasOwnProperty('data')) {
-      $scope = $scope.$parent;
-    }
-    return $scope.data.constHash[input];
-  };
-}).filter('mapSubsurfaceConstructions', function () {
-  return function (input, $scope) {
-    if (!input) return input;
-    while (!$scope.hasOwnProperty('data')) {
-      $scope = $scope.$parent;
-    }
-    return $scope.data.subsurfaceConstHash[input];
+}]).filter('mapHash', function () {
+  return function (input, hash) {
+    return hash[input];
   };
 }).filter('parseRValue', function () {
   return function (input) {

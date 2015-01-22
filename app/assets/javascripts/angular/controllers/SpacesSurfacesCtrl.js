@@ -6,10 +6,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
   $scope.applySettingsActive = false;
 
   $scope.editableCondition = function ($scope) {
-    while (!$scope.hasOwnProperty('applySettingsActive')) {
-      $scope = $scope.$parent;
-    }
-    return !$scope.applySettingsActive;
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   $scope.dropdowns = [
@@ -45,7 +42,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapSpaces:this',
+      cellFilter: 'mapHash:grid.appScope.spacesHash',
       editDropdownOptionsArray: $scope.spacesArr,
       filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
@@ -60,7 +57,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       name: 'building_story_id',
       displayName: 'Story',
       enableCellEdit: false,
-      cellFilter: 'mapStories:this',
+      cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       enableHiding: false,
       filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
@@ -84,11 +81,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       cellEditableCondition: function ($scope) {
-        var mainScope = $scope;
-        while (!mainScope.hasOwnProperty('applySettingsActive')) {
-          mainScope = mainScope.$parent;
-        }
-        if (mainScope.applySettingsActive) return false;
+        if ($scope.grid.appScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Roof' || ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Exterior'));
       },
       filters: Shared.numberFilter(),
@@ -98,7 +91,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       displayName: 'Construction',
       allowConstructionEdit: true,
       enableCellEdit: false,
-      cellFilter: 'mapSurfaceConstructions:this',
+      cellFilter: 'mapHash:grid.appScope.data.constHash',
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!row.entity.construction_library_id) {
@@ -125,15 +118,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       cellEditableCondition: function ($scope) {
-        var mainScope = $scope;
-        while (!mainScope.hasOwnProperty('applySettingsActive')) {
-          mainScope = mainScope.$parent;
-        }
-        if (mainScope.applySettingsActive) return false;
+        if ($scope.grid.appScope.applySettingsActive) return false;
         return $scope.row.entity.boundary == 'Interior';
       },
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapSpaces:this',
+      cellFilter: 'mapHash:grid.appScope.spacesHash',
       editDropdownOptionsArray: $scope.spacesArr,
       filter: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
@@ -149,11 +138,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       cellEditableCondition: function ($scope) {
-        var mainScope = $scope;
-        while (!mainScope.hasOwnProperty('applySettingsActive')) {
-          mainScope = mainScope.$parent;
-        }
-        if (mainScope.applySettingsActive) return false;
+        if ($scope.grid.appScope.applySettingsActive) return false;
         return $scope.row.entity.type == 'Roof';
       },
       filters: Shared.numberFilter(),
@@ -170,11 +155,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       cellEditableCondition: function ($scope) {
-        var mainScope = $scope;
-        while (!mainScope.hasOwnProperty('applySettingsActive')) {
-          mainScope = mainScope.$parent;
-        }
-        if (mainScope.applySettingsActive) return false;
+        if ($scope.grid.appScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Wall' && $scope.row.entity.boundary == 'Underground');
       },
       filters: Shared.numberFilter(),
@@ -191,11 +172,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       },
       cellEditableCondition: function ($scope) {
-        var mainScope = $scope;
-        while (!mainScope.hasOwnProperty('applySettingsActive')) {
-          mainScope = mainScope.$parent;
-        }
-        if (mainScope.applySettingsActive) return false;
+        if ($scope.grid.appScope.applySettingsActive) return false;
         return ($scope.row.entity.type == 'Floor' && $scope.row.entity.boundary == 'Underground');
       },
       filters: Shared.numberFilter(),

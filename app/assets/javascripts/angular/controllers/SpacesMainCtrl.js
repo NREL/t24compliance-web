@@ -6,10 +6,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
   $scope.applySettingsActive = false;
 
   $scope.editableCondition = function ($scope) {
-    while (!$scope.hasOwnProperty('applySettingsActive')) {
-      $scope = $scope.$parent;
-    }
-    return !$scope.applySettingsActive;
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   // Spaces UI Grid
@@ -34,7 +31,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       enableHiding: false,
       cellEditableCondition: $scope.editableCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapStories:this',
+      cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       editDropdownOptionsArray: $scope.data.storiesArr,
       filter: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',

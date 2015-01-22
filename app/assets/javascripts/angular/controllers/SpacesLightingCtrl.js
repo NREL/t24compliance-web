@@ -6,10 +6,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$modal', function ($scope, $m
   $scope.applySettingsActive = false;
 
   $scope.editableCondition = function ($scope) {
-    while (!$scope.hasOwnProperty('applySettingsActive')) {
-      $scope = $scope.$parent;
-    }
-    return !$scope.applySettingsActive;
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   // Modal Settings

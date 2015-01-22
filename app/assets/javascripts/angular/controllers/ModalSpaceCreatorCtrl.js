@@ -23,7 +23,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
       name: 'building_story_id',
       displayName: 'Story',
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellFilter: 'mapStories:this',
+      cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       editDropdownOptionsArray: $scope.data.storiesArr
     }, {
       name: 'area',
