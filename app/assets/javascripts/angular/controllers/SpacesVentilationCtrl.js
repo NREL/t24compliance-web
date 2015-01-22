@@ -32,7 +32,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.exhaust_per_area != row.entity.exhaust_per_area_default) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellEditableCondition: $scope.editableCondition,
@@ -46,7 +46,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.exhaust_air_changes_per_hour != row.entity.exhaust_air_changes_per_hour_default) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellEditableCondition: $scope.editableCondition,

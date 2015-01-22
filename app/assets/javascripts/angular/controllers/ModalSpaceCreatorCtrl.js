@@ -9,7 +9,12 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
       displayName: '# of Spaces of This Type'
     }, {
       name: 'name',
-      displayName: 'Name + 1,2,3...'
+      displayName: 'Name + 1,2,3...',
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (!row.entity.name) {
+          return 'required-cell msg-enter-a-name';
+        }
+      }
     }, {
       name: 'space_function',
       displayName: 'Space Type or Function',

@@ -34,7 +34,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.windowCompatibleSpaces = $scope.data.windowCompatibleSpaces();
   $scope.skylightCompatibleSpaces = $scope.data.skylightCompatibleSpaces();
 
-  // Initialize subsurface dropdown options, update spaces
+  // Initialize subsurface dropdown options, update spaces and stories
   _.each($scope.data.subsurfaces, function (subsurface) {
     subsurface.space = $scope.data.surfaces[subsurface.surface].space;
     subsurface.building_story_id = $scope.data.spaces[subsurface.space].building_story_id;
@@ -113,10 +113,10 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (!row.entity.construction_library_id) {
-          return 'red-glyphicon';
+          return 'required-cell';
         }
         if (row.entity.constructionDefault && row.entity.construction_library_id != row.entity.constructionDefault) {
-          return 'red-cell';
+          return 'modified-cell';
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',

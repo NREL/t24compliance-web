@@ -210,7 +210,7 @@ body > .container-fluid > .header-row.wizard {
   }
 }
 
-.red-cell {
+.modified-cell {
   color: #ac3933;
   font-weight: bold;
   .glyphicon {
@@ -218,8 +218,35 @@ body > .container-fluid > .header-row.wizard {
   }
 }
 
-.red-glyphicon {
+.required-cell {
   color: #ac3933;
+  form {
+    color: #333;
+  }
+}
+
+.msg-enter-a-name {
+  .ui-grid-cell-contents:after {
+    content: " - Enter a Name -";
+  }
+}
+
+.msg-select-a-construction {
+  .ui-grid-cell-contents:after {
+    content: " - Select a Construction -";
+  }
+}
+
+.msg-select-adjacent-space {
+  .ui-grid-cell-contents:after {
+    content: " - Select Adjacent Space -";
+  }
+}
+
+.msg-no-compatible-spaces {
+  .ui-grid-cell-contents:after {
+    content: "No compatible spaces";
+  }
 }
 
 .border-left-cell {
@@ -260,4 +287,32 @@ p.special-output {
 // For <a> without href
 a:hover {
   cursor: pointer;
+}
+
+// Spinning footer gear
+.fa-spin-slow {
+  -webkit-animation: spin 5000ms infinite linear;
+  animation: spin 5000ms infinite linear;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
 }
