@@ -1,1 +1,34 @@
-VAV TEMPLATE!
+<div class="row">
+  <div class="">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="vav_navigation">
+      <button class="btn-wrap" type="button" ng-click="setActiveTab('vav', 'general')" ng-class="getTabClass('vav', 'general')">VAV General System Settings</button>
+      <button type="button" ng-click="setActiveTab('vav', 'fan')" ng-class="getTabClass('vav', 'fan')">Fan</button>
+      <!-- <button type="button" ng-click="setActiveTab('vav', 'fan_motor')" ng-class="getTabClass('vav', 'fan_motor')">Fan Motor</button>-->
+      <button type="button" ng-click="setActiveTab('vav', 'coil_cooling')" ng-class="getTabClass('vav', 'coil_cooling')">DX Cooling Coil</button>
+      <button type="button" ng-click="setActiveTab('vav', 'coil_heating')" ng-class="getTabClass('vav', 'coil_heating')">Hot Water Coil</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <p class="bold-text">Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units.</p>
+      <p>Select the overall system or the components to edit the settings of each system.</p>
+      <button type="button" ng-click="addSystem('vav')" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> VAV System
+      </button>
+      <div class="pull-right pad-right-20">
+        <button type="button" ng-click="duplicateSystem('vav')" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
+        <button type="button" ng-click="deleteSystem('vav')" class="btn btn-danger" ng-disabled="!selected">Delete</button>
+      </div>
+    </div>
+    <div class="row pad-top-20">
+      <div class="col-md-12">
+        <div class="tab-content">
+          <div ng-repeat="tab in systemTabs.vav" ng-show="isActiveTab('vav', tab)">
+            <div ui-grid="gridOptions.vav[tab]" ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection class="system-grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

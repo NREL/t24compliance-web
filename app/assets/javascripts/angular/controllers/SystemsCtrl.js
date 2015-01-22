@@ -5,8 +5,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     ptac: [],
     fpfc: [],
     szac: [],
-    vav: [],
     pvav: [],
+    vav: [],
     exhaust: []
   };
   // same for plants
@@ -24,8 +24,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     ptac: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     fpfc: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     szac: ['general', 'fan', 'coil_cooling', 'coil_heating'],
-    vav: [],
-    pvav: ['general', 'fan', 'coil_cooling', 'coil_heating']
+    pvav: ['general', 'fan', 'coil_cooling', 'coil_heating'],
+    vav: ['general', 'fan', 'coil_cooling', 'coil_heating']
   };
 
   // TODO: add other plant tab defs
@@ -83,13 +83,13 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     title: 'PSZ Systems',
     name: 'szac',
     open: true
+  },{
+    title: 'PVAV Air Systems',
+    name: 'pvav',
+    open: true
   }, {
     title: 'VAV Air Systems',
     name: 'vav',
-    open: true
-  }, {
-    title: 'PVAV Air Systems',
-    name: 'pvav',
     open: true
   }];
 
@@ -162,7 +162,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'pump_total_head',
     displayName: 'Pump Head',
-    secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
+    secondLine: Shared.html('ft H<sub>2</sub>O'),
     field: 'boilers[0].pump.total_head',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -250,7 +250,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'pump_total_head',
     displayName: 'Pump Head',
-    secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
+    secondLine: Shared.html('ft H<sub>2</sub>O'),
     field: 'chillers[0].pump.total_head',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -264,6 +264,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'pump_motor_hp',
     displayName: 'Motor HP',
+    secondLine: Shared.html('hp'),
     field: 'chillers[0].pump.motor_HP'
   }];
   $scope.gridPlantCols.chilled_water.coil_cooling = angular.copy($scope.gridPlantCols.hot_water.coil_heating);
@@ -335,6 +336,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'pump_motor_hp',
     displayName: 'Motor HP',
+    secondLine: Shared.html('hp'),
     field: 'heat_rejections[0].pump.motor_HP'
   }];
 
@@ -588,6 +590,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   $scope.gridCols.pvav.fan = angular.copy($scope.gridCols.ptac.fan);
   $scope.gridCols.pvav.coil_heating = angular.copy($scope.gridCols.ptac.coil_heating);
   $scope.gridCols.pvav.coil_cooling = angular.copy($scope.gridCols.szac.coil_cooling);
+  $scope.gridCols.vav.general = angular.copy($scope.gridCols.pvav.general);
+  $scope.gridCols.vav.fan = angular.copy($scope.gridCols.fpfc.fan);
+  $scope.gridCols.vav.coil_heating = angular.copy($scope.gridCols.fpfc.coil_heating);
+  $scope.gridCols.vav.coil_cooling = angular.copy($scope.gridCols.fpfc.coil_cooling);
 
   //**** CREATE GRIDS ****
   // System Grids
@@ -599,7 +605,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     vav: {}
   };
   _.each($scope.systemTabs, function (tabs, type) {
-    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav') {
+    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav' || type == 'vav') {
       _.each(tabs, function (tab) {
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],
@@ -754,12 +760,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     }
   }
 
-  // TODO: this doesn't work
-  $scope.getGridClass = function (panelName, tabName) {
-    return $scope.gridClasses[panelName][tabName] || "";
-  };
-  //TODO: end
-
   $scope.getTabClass = function (panelName, tabName) {
     return "btn btn-" + $scope.tabClasses[panelName][tabName];
   };
@@ -803,6 +803,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   $scope.setActiveTab('fpfc', 'general');
   $scope.setActiveTab('szac', 'general');
   $scope.setActiveTab('pvav', 'general');
+  $scope.setActiveTab('vav', 'general');
   $scope.setActiveTab('hot_water', 'pump');
   $scope.setActiveTab('chilled_water', 'general');
   $scope.setActiveTab('condenser', 'pump');
@@ -883,17 +884,17 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           type: 'PVAV',
           cooling_control: 'WarmestResetFlowFirst',
           fan: {
-            name: "Fan " + index,
+            name: "PVAV " + index + " Fan",
             control_method: 'VariableSpeedDrive'
           },
           coil_cooling: {
-            name: "Cooling Coil " + index,
+            name: "PVAV " + index + " Cooling Coil",
             type: "DirectExpansion",
             fuel_source: 'Electric',
             number_cooling_stages: 2
           },
           coil_heating: {
-            name: "Heating Coil " + index,
+            name: "PVAV " + index + " Heating Coil",
             type: "HotWater"
           }
         });
@@ -901,7 +902,20 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
       case 'vav':
         index = $scope.systems.vav.length + 1;
         $scope.systems.vav.push({
-          name: 'VAV' + index
+          name: 'VAV' + index,
+          type: 'VAV',
+          fan: {
+            name: "VAV " + index + " Fan",
+            control_method: 'VariableSpeedDrive'
+          },
+          coil_cooling: {
+            name: "VAV " + index + " Cooling Coil",
+            type: "ChilledWater"
+          },
+          coil_heating: {
+            name: "VAV " + index + " Heating Coil",
+            type: "HotWater"
+          }
         });
         break;
     }
@@ -968,7 +982,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
         addPlant('hot_water');
         break;
       case 'fpfc':
-        //hot and chilled water (and condenser?)
+        //hot and chilled water (& condenser)
         addPlant('hot_water');
         addPlant('chilled_water');
         addPlant('condenser');
@@ -979,6 +993,12 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
       case 'pvav':
         //hot_water plant only
         addPlant('hot_water');
+        break;
+      case 'vav':
+        //hot and chilled water (& condenser)
+        addPlant('hot_water');
+        addPlant('chilled_water');
+        addPlant('condenser');
         break;
     }
   }
@@ -1212,40 +1232,16 @@ cbecc.controller('ModalSystemCreatorCtrl', [
       id: 'vav',
       name: 'VAV: Variable Air Volume'
     }, {
-      id: 'vav_crah',
-      name: 'VAV-CRAH: Computer Room Air Handler'
-    }, {
-      id: 'vav_crac',
-      name: 'VAV-CRAC: Computer Room Air Conditioner'
-    }, {
-      id: 'vav_psz',
-      name: 'VAV-PSZ: Packaged Single Zone'
-    }, {
       id: 'pvav',
       name: 'PVAV: Packaged Variable Air Volume'
-    }, {
-      id: 'pvav_crah',
-      name: 'PVAV-CRAH: Computer Room Air Handler'
-    }, {
-      id: 'pvav_crac',
-      name: 'PVAV-CRAC: Computer Room Air Conditioner'
-    }, {
-      id: 'pvav_psz',
-      name: 'PVAV-PSZ: Packaged Single Zone'
     }];
 
     $scope.systemDescriptions = {
       ptac: 'Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.',
       fpfc: 'Four-pipe fan coil: Ductless single-zone unit with hot water and chilled water coils.',
       szac: 'Packaged single zone: This system can only serve one zone and includes a DX cooling coil and a gas heating coil.',
-      vav: 'Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units. The plants required for this system are created with the system.',
-      vav_crah: '',
-      vav_crac: '',
-      vav_psz: '',
-      pvav: 'Packaged variable volume system: VAV reheat system with packaged VAV DX unit with bass heating and hot water reheat terminal units.',
-      pvav_crah: '',
-      pvav_crac: '',
-      pvav_psz: ''
+      vav: 'Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units.',
+      pvav: 'Packaged variable volume system: VAV reheat system with packaged VAV DX unit with bass heating and hot water reheat terminal units.'
     };
 
 

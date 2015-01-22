@@ -186,6 +186,10 @@ body > .container-fluid > .header-row.wizard {
   height: 220px;
 }
 
+.system-grid {
+  width: 100%;
+}
+
 // Hide selected cell
 .ui-grid-cell-focus {
   background-color: inherit;
