@@ -92,10 +92,10 @@ class Project
   has_many :schedule_days, dependent: :destroy
   has_many :schedule_weeks, dependent: :destroy
   has_many :schedules, dependent: :destroy
-  has_many :construct_assemblies, dependent: :destroy
-  has_many :materials, dependent: :destroy
-  has_many :fenestration_constructions, dependent: :destroy
-  has_many :door_constructions, dependent: :destroy
+  has_many :construct_assemblies, dependent: :destroy, autosave: true
+  has_many :materials, dependent: :destroy, autosave: true
+  has_many :fenestration_constructions, dependent: :destroy, autosave: true
+  has_many :door_constructions, dependent: :destroy, autosave: true
   has_many :space_function_defaults, dependent: :destroy
   has_many :luminaires, dependent: :destroy
   has_many :curve_linears, dependent: :destroy
@@ -282,20 +282,18 @@ class Project
 
   # This method generates the construction assemblies and materials based on library ids for the entire building
   def generate_constructions
-    # get all ids
-    construction_ids = []
-    fenestration_ids = []
-    door_ids = []
 
-    # delete old construction assemblies
-    # TODO? delete and resave or check that it exists?
-    self.construct_assemblies.destroy_all
-    self.materials.destroy_all
+    # TODO? delete and re-create or check that it exists and update?
+    # self.construct_assemblies.destroy_all
+    # self.materials.destroy_all
+    # self.fenestration_constructions.destroy_all
+    # self.door_construction.destroy_all
 
     # model names
     constructions = ['UndergroundWall', 'UndergroundFloor', 'InteriorWall', 'InteriorFloor', 'ExteriorWall', 'ExteriorFloor', 'Roof']
     fenestrations = ['Window', 'Skylight']
     doors = ['Door']
+    space_ids = []
 
     # get all building -> stories -> spaces (that's what constructions are attached to)
     stories = self.building.building_stories
@@ -310,19 +308,40 @@ class Project
 
     project_cas = []
     project_mats = []
+    project_fens = []
+    project_doors = []
 
+    # to find doors, windows, skylights
+    int_wall_ids = []
+    ext_wall_ids = []
+    roof_ids = []
+
+    # assign regular constructions
     constructions.each do |con|
       con_model = con.constantize
       instances = con_model.any_in(space_id: space_ids)
+
+      if con === 'InteriorWall'
+         int_wall_ids = instances.collect {|i| i.id}
+      elsif con === 'ExteriorWall'
+         ext_wall_ids = instances.collect {|i| i.id}
+      elsif con === 'Roof'
+         roof_ids = instances.collect {|i| i.id}
+      end
+
       logger.info("#{instances.size} instances of #{con}")
 
       instances.each do |instance|
         # get lib record
         lib = Construction.find(instance.construction_library_id)
-        # TODO: check that it doesn't exist yet
+        # TODO: check that it doesn't exist yet or skip?
         ca = self.construct_assemblies.find_or_create_by(name: lib.name)
         ca.compatible_surface_type = lib.compatible_surface_type
-        # TODO: if floors, save other attributes here
+        # save other attributes here (for floors)
+        ca.slab_type = lib.slab_type
+        ca.slab_insulation_orientation = lib.slab_insulation_orientation
+        ca.slab_insulation_thermal_resistance = lib.slab_insulation_thermal_resistance
+
         material_refs = []
         # material references
         logger.info("!!!!! LAYERS: #{lib['layers']}")
@@ -354,8 +373,73 @@ class Project
       end
     end
 
-    logger.info("PROJECT MATS: #{project_mats.inspect}")
+    # assign doors
+    door_instances =  Door.any_in(interior_wall_id: int_wall_ids)
+    other_instances = Door.any_in(exterior_wall_id: ext_wall_ids)
+    other_instances.each do |o|
+      door_instances << o
+    end
+    logger.info("Door instances: #{door_instances.size}")
+    door_instances.each do |instance|
+      # get lib record
+      lib = DoorLookup.find(instance.construction_library_id)
+      dc = self.door_constructions.find_or_create_by(name: lib.name)
+      # add other lib fields
+      lib.attributes.each_pair do |key, value|
+        unless %(created_at updated_at id _id).include? key
+          dc[key] = value
+        end
+      end
+      dc.save
 
+      # only save unique records to project
+      match = project_doors.find { |m| m['name'] === dc.name}
+      logger.info("MATCH: #{match} for door construction #{dc.name}")
+      project_doors << dc if match.nil?
+
+      # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
+      instance.door_construction_reference = dc.name
+      instance.save
+    end
+
+    # assign fenestrations
+    fenestrations.each do |fen|
+      fen_model = fen.constantize
+      if fen === 'Window'
+        instances = fen_model.any_in(exterior_wall_id: ext_wall_ids)
+      else
+        #skylight
+        instances = fen_model.any_in(roof_id: roof_ids)
+      end
+      logger.info("#{instances.size} instances of #{fen}")
+
+      instances.each do |instance|
+        # get lib record
+        lib = Fenestration.find(instance.construction_library_id)
+        # TODO: check that it doesn't exist yet or skip?
+        fc = self.fenestration_constructions.find_or_create_by(name: lib.name)
+        # save all lib attributes to construction instance
+        lib.attributes.each_pair do |key, value|
+          unless %(created_at updated_at id _id).include? key
+            fc[key] = value
+          end
+        end
+          fc.save
+
+        # only save unique records to project
+        match = project_fens.find { |m| m['name'] === fc.name}
+        logger.info("MATCH: #{match} for fen construction #{fc.name}")
+        project_fens << fc if match.nil?
+
+        # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
+        instance.fenestration_construction_reference = fc.name
+        instance.save
+      end
+    end
+
+    # save all to project
+    self.door_constructions = project_doors
+    self.fenestration_constructions = project_fens
     self.construct_assemblies = project_cas
     self.materials = project_mats
     self.save

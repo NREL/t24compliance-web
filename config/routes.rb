@@ -26,8 +26,11 @@ Rails.application.routes.draw do
     get 'download', on: :member
   end
 
+  # these belong to project. may not need routes for them
   resources :materials
   resources :construct_assemblies
+  resources :door_constructions
+  resources :fenestration_constructions
 
   # libraries
   resources :constructions, only: [:show, :index]
@@ -109,10 +112,6 @@ Rails.application.routes.draw do
   resources :schedules
 
   resources :water_heaters
-
-  resources :door_constructions
-
-  resources :fenestration_constructions
 
   resources :interior_lighting_systems
 
