@@ -561,12 +561,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Reheat Control',
     enableHiding: false,
     filter: Shared.textFilter(),
+    editableCellTemplate: 'ui-grid/dropdownEditor',
+    editDropdownOptionsArray: Enums.enumsArr.air_systems_reheat_control_method_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'cooling_control',
     displayName: 'Cooling Control',
     enableHiding: false,
     filter: Shared.textFilter(),
+    editableCellTemplate: 'ui-grid/dropdownEditor',
+    editDropdownOptionsArray: Enums.enumsArr.air_systems_cooling_control_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
 /*   }, {
     name: 'cool_reset_supply_high',
@@ -591,11 +595,11 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     ptac: {},
     fpfc: {},
     szac: {},
-    vav: {},
-    pvav: {}
+    pvav: {},
+    vav: {}
   };
   _.each($scope.systemTabs, function (tabs, type) {
-    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav ') {
+    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav') {
       _.each(tabs, function (tab) {
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],

@@ -39,6 +39,9 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       if (zone.system_type === 'SZAC') {
         terminal_type = "Uncontrolled";
       }
+      else if (zone.system_type === 'PVAV') {
+        terminal_type = "VAVReheatBox";
+      }
       // add to array
       $scope.data.terminals.push({
         zone_served_reference: zone.name,

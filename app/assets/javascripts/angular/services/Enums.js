@@ -343,6 +343,19 @@ cbecc.factory('Enums', function () {
       'CRAC',
       'CRAH'
     ],
+    air_systems_reheat_control_method_enums: [
+      'SingleMaximum',
+      'DualMaximum'
+    ],
+    air_systems_cooling_control_enums: [
+      'NoSATControl',
+      'Fixed',
+      'Scheduled',
+      'OutsideAirReset',
+      'WarmestResetFlowFirst',
+      'WarmestResetTemperatureFirst',
+      'WarmestReset'
+    ],
     terminal_units_type_enums: [
       'Uncontrolled',
       'VAVReheatBox',
