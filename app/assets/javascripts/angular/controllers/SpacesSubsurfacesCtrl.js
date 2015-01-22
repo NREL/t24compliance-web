@@ -5,10 +5,6 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
 
   $scope.applySettingsActive = false;
 
-  $scope.editableCondition = function ($scope) {
-    return !$scope.grid.appScope.applySettingsActive;
-  };
-
   $scope.spacesArr = [];
   $scope.spacesHash = {};
   _.each($scope.data.spaces, function (space, index) {
@@ -56,7 +52,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       name: 'name',
       displayName: 'Subsurface Name',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -64,7 +60,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Space Name',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       cellFilter: 'mapHash:grid.appScope.spacesHash',
       editDropdownRowEntityOptionsArrayPath: 'spaceOptions',
       filter: Shared.enumFilter($scope.spacesHash),
@@ -75,7 +71,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Surface Name',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       cellFilter: 'mapHash:grid.appScope.surfacesHash',
       editDropdownRowEntityOptionsArrayPath: 'surfaceOptions',
       filter: Shared.enumFilter($scope.surfacesHash),
@@ -100,7 +96,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       name: 'area',
       secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'

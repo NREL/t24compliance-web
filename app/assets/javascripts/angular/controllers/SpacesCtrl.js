@@ -693,6 +693,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     return skylightCompatibleSpaces;
   };
 
+  $scope.data.applySettingsCondition = function ($scope) {
+    return !$scope.grid.appScope.applySettingsActive;
+  };
+
   $scope.data.updateTotalExhaust = function (space) {
     space.total_exhaust = Shared.calculateTotalExhaust(space);
   };
