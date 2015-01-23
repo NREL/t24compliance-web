@@ -8,14 +8,11 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
   _.each(_.filter($scope.data.zones, {
     type: 'Conditioned'
   }), function (zone) {
-    //console.log("ZONE:");
-    //console.log(zone);
-    var system = _.find($scope.data.systems, {
-      name: zone.primary_air_conditioning_system_reference
-    });
-    //console.log("SYSTEM:");
-    //console.log(system);
-    if (system !== null) {
+
+    var system = _.find($scope.data.systems, {name: zone.primary_air_conditioning_system_reference});
+
+    if (system != null) {
+      console.log('SYSTEM:' + system);
       if (_.contains(['SZAC', 'VAV', 'PVAV'], system.type)) {
         terminalZonesArr.push({
           id: zone.id,

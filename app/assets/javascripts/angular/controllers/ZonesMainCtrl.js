@@ -63,9 +63,8 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
                }
             });
             _.each($scope.data.zones, function (zone) {
-               if (zone.supply_plenum_zone_reference == oldValue) zone.supply_plenum_zone_reference = newValue;
+              if (zone.supply_plenum_zone_reference == oldValue) zone.supply_plenum_zone_reference = newValue;
               if (zone.return_plenum_zone_reference == oldValue) zone.return_plenum_zone_reference = newValue;
-
             });
           }
           // update zone name on exhausts tab
@@ -75,6 +74,13 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
           // update zone name on terminals tab
           _.each($scope.data.terminals, function (terminal){
              if (terminal.zone_served_reference == oldValue) terminal.zone_served_reference = newValue;
+          });
+        }
+        if ((colDef.name == 'type') && newValue != oldValue && oldValue == 'Plenum') {
+          // clear out plenum references if zone type is no longer 'Plenum'
+          _.each($scope.data.zones, function (zone) {
+            if (zone.supply_plenum_zone_reference == rowEntity.name) zone.supply_plenum_zone_reference = '';
+            if (zone.return_plenum_zone_reference == rowEntity.name) zone.return_plenum_zone_reference = '';
           });
         }
       });
