@@ -942,57 +942,44 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     }
     addDependentPlants(name);
     $scope.display_coils_heating = calculateCoilsHeating();
+    $scope.display_coils_cooling = calculateCoilsCooling();
   };
 
   // this doesn't seem to be working from addSystem function
   function calculateCoilsHeating() {
-    var coils = [];
+    var hcoils = [];
     if ($scope.plants.hot_water.length) {
       _.each($scope.systems, function (systems, type) {
-        //console.log("TYPE IS: ", type);
-        var found = false;
-        _.each($scope.systemTabs[type], function (value) {
-          if (value == 'coil_heating') {
-            found = true;
+        _.each($scope.systems[type], function (item) {
+          if (item['coil_heating']['type'] === 'HotWater'){
+            hcoils.push({
+              name: item['coil_heating']['name'],
+              system_name: item['name'],
+              system_type: item['type']
+            });
           }
         });
-        if (found) {
-          _.each($scope.systems[type], function (item) {
-            coils.push({
-              name: item.coil_heating.name,
-              system_name: item.name,
-              system_type: item.type
-            });
-          });
-        }
       });
     }
-    return coils;
+    return hcoils;
   }
 
   function calculateCoilsCooling() {
-    var coils = [];
+    var ccoils = [];
     if ($scope.plants.chilled_water.length) {
       _.each($scope.systems, function (systems, type) {
-        //console.log("TYPE IS: ", type);
-        var found = false;
-        _.each($scope.systemTabs[type], function (value) {
-          if (value == 'coil_cooling') {
-            found = true;
+        _.each($scope.systems[type], function (item) {
+          if (item['coil_cooling']['type'] === 'ChilledWater') {
+            ccoils.push({
+              name: item['coil_cooling']['name'],
+              system_name: item['name'],
+              system_type: item['type']
+            });
           }
         });
-        if (found) {
-          _.each($scope.systems[type], function (item) {
-            coils.push({
-              name: item.coil_cooling.name,
-              system_name: item.name,
-              system_type: item.type
-            });
-          });
-        }
       });
     }
-    return coils;
+    return ccoils;
   }
 
   function addDependentPlants(name) {
