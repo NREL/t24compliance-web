@@ -5,31 +5,40 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
 
   $scope.applySettingsActive = false;
 
-  $scope.editableCondition = function ($scope) {
-    return !$scope.grid.appScope.applySettingsActive;
-  };
-
   // Spaces UI Grid
   $scope.spacesGridOptions = {
     columnDefs: [{
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'floor_to_ceiling_height',
       secondLine: Shared.html('ft'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        var storyIndex = null;
+        _.find($scope.data.storiesArr, function (story, index) {
+          if (story.id == row.entity.building_story_id) {
+            storyIndex = index;
+            return true;
+          }
+          return false;
+        });
+        if (row.entity.floor_to_ceiling_height != $scope.data.stories[storyIndex].floor_to_ceiling_height) {
+          return 'modified-cell';
+        }
+      },
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'building_story_id',
       displayName: 'Story',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       editDropdownOptionsArray: $scope.data.storiesArr,
@@ -40,13 +49,13 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       name: 'area',
       secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'conditioning_type',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
       filter: Shared.textFilter(),
@@ -54,7 +63,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
     }, {
       name: 'envelope_status',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
       filter: Shared.textFilter(),
@@ -62,7 +71,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
     }, {
       name: 'lighting_status',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
       filter: Shared.textFilter(),
@@ -91,9 +100,21 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
         if ((colDef.name == 'floor_to_ceiling_height' || colDef.name == 'area') && newValue != oldValue) {
           $scope.data.updateTotalExhaust(rowEntity);
         } else if (colDef.name == 'building_story_id' && newValue != oldValue) {
+          // Update floor_to_ceiling_height if it is unchanged
+          var oldStoryIndex = null;
+          var newStoryIndex = null;
+          _.each($scope.data.storiesArr, function (story, index) {
+            if (story.id == oldValue) oldStoryIndex = index;
+            if (story.id == newValue) newStoryIndex = index;
+          });
+          if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
+            rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+          }
+          gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+
           // Remove adjacent spaces
           var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
-          _.each($scope.data.surfaces, function(surface) {
+          _.each($scope.data.surfaces, function (surface) {
             if (surface.boundary == 'Interior' && surface.space == spaceIndex) {
               surface.adjacent_space_reference = null;
             }

@@ -3,10 +3,6 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
 
   $scope.applySettingsActive = false;
 
-  $scope.editableCondition = function ($scope) {
-    return !$scope.grid.appScope.applySettingsActive;
-  };
-
   // Natural Gas UI Grid
   $scope.gasGridOptions = {
     columnDefs: [{
@@ -21,7 +17,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       displayName: 'Gas Equipment',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -30,7 +26,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       displayName: 'Process Gas',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -38,7 +34,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       name: 'process_gas_radiation_fraction',
       displayName: 'Gas Radiant Fraction',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -46,7 +42,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       name: 'process_gas_latent_fraction',
       displayName: 'Gas Latent Fraction',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -54,7 +50,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       name: 'process_gas_lost_fraction',
       displayName: 'Gas Lost Fraction',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'

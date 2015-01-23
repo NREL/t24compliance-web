@@ -7,7 +7,7 @@
   </button>
   <hr>
   <div ng-repeat="spaceGroup in spaceGroups">
-    <div class="clearfix">
+    <div class="clearfix pad-bot-10">
       <button type="button" class="btn btn-danger pull-right" ng-click="removeSpaceGroup($index)">Remove</button>
     </div>
     <div ui-grid="spaceGroups[$index].gridOptions" class="space-creator-grid-1" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns></div>

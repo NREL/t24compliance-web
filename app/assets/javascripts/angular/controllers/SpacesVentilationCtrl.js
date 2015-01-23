@@ -5,10 +5,6 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
 
   $scope.applySettingsActive = false;
 
-  $scope.editableCondition = function ($scope) {
-    return !$scope.grid.appScope.applySettingsActive;
-  };
-
   // Ventilation & Exhaust UI Grid
   $scope.ventilationGridOptions = {
     columnDefs: [{
@@ -35,7 +31,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
           return 'modified-cell';
         }
       },
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -49,7 +45,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
           return 'modified-cell';
         }
       },
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -58,7 +54,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Per Space',
       secondLine: Shared.html('cfm'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'

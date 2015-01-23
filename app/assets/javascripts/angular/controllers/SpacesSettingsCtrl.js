@@ -5,23 +5,19 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
 
   $scope.applySettingsActive = false;
 
-  $scope.editableCondition = function ($scope) {
-    return !$scope.grid.appScope.applySettingsActive;
-  };
-
   // Settings UI Grid
   $scope.settingsGridOptions = {
     columnDefs: [{
       name: 'name',
       displayName: 'Space Name',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space_function',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums,
       filter: Shared.textFilter(),
@@ -36,7 +32,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           return 'modified-cell';
         }
       },
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -49,7 +45,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           return 'modified-cell';
         }
       },
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -62,7 +58,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           return 'modified-cell';
         }
       },
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],

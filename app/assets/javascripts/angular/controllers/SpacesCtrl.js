@@ -200,7 +200,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
   $scope.data.addSpace = function (input) {
     var space = {
       name: "Space " + ($scope.data.spaces.length + 1),
-      floor_to_ceiling_height: null,
+      floor_to_ceiling_height: $scope.data.stories[0].floor_to_ceiling_height,
       building_story_id: $scope.data.stories[0].id,
       area: null,
       conditioning_type: Enums.enums.spaces_conditioning_type_enums[0],
@@ -691,6 +691,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       }
     });
     return skylightCompatibleSpaces;
+  };
+
+  $scope.data.applySettingsCondition = function ($scope) {
+    return !$scope.grid.appScope.applySettingsActive;
   };
 
   $scope.data.updateTotalExhaust = function (space) {

@@ -5,10 +5,6 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
 
   $scope.applySettingsActive = false;
 
-  $scope.editableCondition = function ($scope) {
-    return !$scope.grid.appScope.applySettingsActive;
-  };
-
   $scope.dropdowns = [
     'Interior',
     'Exterior',
@@ -42,14 +38,14 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       name: 'name',
       displayName: 'Surface Name',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space',
       displayName: 'Space Name',
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapHash:grid.appScope.spacesHash',
       editDropdownOptionsArray: $scope.spacesArr,
@@ -75,7 +71,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       name: 'area',
       secondLine: Shared.html('ft<sup>2</sup>'),
       enableHiding: false,
-      cellEditableCondition: $scope.editableCondition,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
