@@ -48,6 +48,34 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
           }
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if ((colDef.name == 'name') && newValue != oldValue) {
+          // update space 'thermal_zone_reference'
+          _.each($scope.data.spaces, function (space) {
+            if (space.thermal_zone_reference == oldValue) {
+              space.thermal_zone_reference = newValue;
+            }
+          });
+          // plenum zones must also update supply / return plenum array and zone references on systems tab
+          if (rowEntity.type == 'Plenum') {
+            _.each($scope.plenumZonesArr, function (zone, index) {
+               if (zone['id'] == oldValue){
+                 zone['id'] = newValue;
+                 zone['value'] = newValue;
+               }
+            });
+            _.each($scope.data.zones, function (zone) {
+               if (zone.supply_plenum_zone_reference == oldValue) {
+                 zone.supply_plenum_zone_reference = newValue;
+               }
+              if (zone.return_plenum_zone_reference == oldValue) {
+                zone.return_plenum_zone_reference = newValue;
+              }
+            });
+
+          }
+        }
+      });
     }
   };
 
