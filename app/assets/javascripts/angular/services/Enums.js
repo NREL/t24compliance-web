@@ -264,8 +264,7 @@ cbecc.factory('Enums', function () {
     ],
     fans_modeling_method_enums: [
       'StaticPressure',
-      'BrakeHorsePower',
-      'PowerPerUnitFlow'
+      'BrakeHorsePower' /* don't show PowerPerUnitFlow option */
     ],
     fans_motor_type_enums: [
       'Open',

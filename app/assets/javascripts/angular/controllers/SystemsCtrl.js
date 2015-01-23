@@ -1,4 +1,4 @@
-cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $modal, toaster, data, Shared, Enums, saved_systems, saved_plants) {
+cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $modal, toaster, uiGridConstants, data, Shared, Enums, saved_systems, saved_plants) {
 
   // put all systems DATA in array for panels (even exhaust)
   $scope.systems = {
@@ -109,9 +109,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     open: true
   }];
 
-  // coil totals for plants
-  $scope.display_coils_heating = calculateCoilsHeating();
-  $scope.display_coils_cooling = calculateCoilsCooling();
 
   // initalize for grid
   $scope.selected = {
@@ -635,6 +632,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     pvav: {},
     vav: {}
   };
+  $scope.gridSystemApi = {
+    ptac: {},
+    fpfc: {},
+    szac: {},
+    pvav: {},
+    vav: {}
+  };
+
   _.each($scope.systemTabs, function (tabs, type) {
     if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav' || type == 'vav') {
       _.each(tabs, function (tab) {
@@ -648,8 +653,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           multiSelect: false,
           data: $scope.systems[type],
           onRegisterApi: function (gridApi) {
-            //This will keep overwriting gridApi
-            $scope.gridApi[type] = gridApi;
+             $scope.gridSystemApi[type] = gridApi;
              gridApi.selection.on.rowSelectionChanged($scope, function (row) {
              if (row.isSelected) {
              $scope.selected[type] = row.entity;
@@ -664,6 +668,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     }
   });
 
+  // coil totals for plants
+  $scope.display_coils_heating = calculateCoilsHeating();
+  $scope.display_coils_cooling = calculateCoilsCooling();
+
   // Plant Grids
   $scope.gridPlantOptions = {
     hot_water: {},
@@ -671,6 +679,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     shw: {},
     condenser: {}
   };
+
+  $scope.gridPlantApi = {
+    hot_water: {},
+    chilled_water: {},
+    shw: {},
+    condenser: {}
+  };
+
   _.each($scope.plantTabs, function (tabs, type) {
     if (type == 'hot_water' || type == 'chilled_water' || type == 'condenser') {
       _.each(tabs, function (tab) {
@@ -684,21 +700,39 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           enableRowHeaderSelection: false,
           enableRowSelection: false,
           enableColumnMenus: false,
-          enableSorting: true
+          enableSorting: true,
+          onRegisterApi: function (gridApi) {
+            $scope.gridPlantApi[type][tab] = gridApi;
+          }
         };
         if (tab == 'coil_heating') {
-          $scope.gridPlantOptions[type].coil_heating.data = $scope.display_coils_heating;
-          //console.log('gridPlantOptions for hot_water.coil_heating: ');
-          //console.log($scope.gridPlantOptions.hot_water.coil_heating);
-        } else if (tab == 'coil_cooling') {
-          $scope.gridPlantOptions[type].coil_cooling.data = $scope.display_coils_cooling;
-        } else {
+          $scope.gridPlantOptions[type][tab].data = 'display_coils_heating';
+        }
+        else if (tab == 'coil_cooling') {
+          $scope.gridPlantOptions[type][tab].data = 'display_coils_cooling';
+         }
+        else {
           $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
         }
       });
     }
   });
+/*
+  //watch coil display variables and update HW & CW plant grids as needed
+  $scope.$watch('display_coils_heating', function(newValue, oldValue) {
+     if (!_.isEmpty($scope.gridPlantApi['hot_water']['coil_heating'])) {
+       console.log($scope.gridPlantApi['hot_water']['coil_heating'].core.notifyDataChange);
+       console.log(newValue);
+       console.log(oldValue);
+      // $scope.gridPlantOptions['hot_water']['coil_heating'].data = newValue;
+       $scope.gridPlantApi['hot_water']['coil_heating'].core.notifyDataChange($scope.gridPlantApi['hot_water']['coil_heating'].grid, uiGridConstants.dataChange.EDIT);
+       console.log('WATCH!');
+       console.log($scope.gridPlantApi);
+     }
 
+    }
+  );
+*/
   //**** VIEW HELPERS: TABS & CLASSES ****
   $scope.tabClasses = {};
   $scope.gridClasses = {
