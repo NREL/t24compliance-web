@@ -102,6 +102,9 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           if (rowEntity.exhaust_air_changes_per_hour == rowEntity.exhaust_air_changes_per_hour_default) {
             rowEntity.exhaust_air_changes_per_hour = defaults.exhaust_air_changes_per_hour;
           }
+          if (rowEntity.commercial_refrigeration_epd == rowEntity.commercial_refrigeration_epd_default) {
+            rowEntity.commercial_refrigeration_epd = defaults.commercial_refrigeration_epd;
+          }
 
           rowEntity.occupant_density_default = defaults.occupant_density;
           rowEntity.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
@@ -116,6 +119,8 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           rowEntity.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
 
           rowEntity.total_exhaust = Shared.calculateTotalExhaust(rowEntity);
+
+          rowEntity.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
 
           gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
         }
@@ -150,14 +155,23 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       if (row.exhaust_air_changes_per_hour == row.exhaust_air_changes_per_hour_default) {
         row.exhaust_air_changes_per_hour = $scope.selected.space.exhaust_air_changes_per_hour_default;
       }
-      if (row.exhaust_per_space == row.exhaust_per_space_default) {
-        row.exhaust_per_space = $scope.selected.space.exhaust_per_space_default;
-      }
       // Update exhaust defaults
       row.exhaust_per_area_default = $scope.selected.space.exhaust_per_area_default;
       row.exhaust_air_changes_per_hour_default = $scope.selected.space.exhaust_air_changes_per_hour_default;
-      row.exhaust_per_space_default = $scope.selected.space.exhaust_per_space_default;
       $scope.data.updateTotalExhaust(row);
+
+      // Update unmodifiable schedules/ventilation
+      row.function_schedule_group = $scope.selected.space.function_schedule_group;
+      row.ventilation_per_person = $scope.selected.space.ventilation_per_person;
+      row.ventilation_per_area = $scope.selected.space.ventilation_per_area;
+      row.ventilation_air_changes_per_hour = $scope.selected.space.ventilation_air_changes_per_hour;
+
+      // Update unmodified refrigeration values
+      if (row.commercial_refrigeration_epd == row.commercial_refrigeration_epd_default) {
+        row.commercial_refrigeration_epd = $scope.selected.space.commercial_refrigeration_epd_default;
+      }
+      // Update refrigeration defaults
+      row.commercial_refrigeration_epd_default = $scope.selected.space.commercial_refrigeration_epd_default;
     });
     $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

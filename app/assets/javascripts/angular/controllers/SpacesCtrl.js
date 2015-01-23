@@ -115,6 +115,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     space.ventilation_per_person = defaults.ventilation_per_person;
     space.ventilation_per_area = defaults.ventilation_per_area;
     space.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
+    
+    space.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
   });
 
   $scope.data.storiesArr = [];
@@ -248,6 +250,9 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     space.ventilation_per_person = defaults.ventilation_per_person;
     space.ventilation_per_area = defaults.ventilation_per_area;
     space.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
+    
+    space.commercial_refrigeration_epd = defaults.commercial_refrigeration_epd;
+    space.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
 
     $scope.data.spaces.push(space);
   };
@@ -285,6 +290,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
       process_electrical_power_density: selectedSpace.process_electrical_power_density,
       commercial_refrigeration_epd: selectedSpace.commercial_refrigeration_epd,
+      commercial_refrigeration_epd_default: selectedSpace.commercial_refrigeration_epd_default,
       elevator_count: selectedSpace.elevator_count,
       escalator_count: selectedSpace.escalator_count,
       process_electrical_radiation_fraction: selectedSpace.process_electrical_radiation_fraction,
@@ -450,11 +456,23 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     });
     gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSpaceTypeExhaustValues = function () {
+  $scope.data.modifiedSpaceTypeExhaustDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
       return (space.exhaust_per_area !== space.exhaust_per_area_default || space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default);
     }));
   };
+  $scope.data.restoreRefrigerationDefaults = function (gridApi) {
+    _.each($scope.data.spaces, function (space) {
+      space.commercial_refrigeration_epd = space.commercial_refrigeration_epd_default;
+    });
+    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+  };
+  $scope.data.modifiedRefrigerationDefaults = function () {
+    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+      return (space.commercial_refrigeration_epd !== space.commercial_refrigeration_epd_default);
+    }));
+  };
+
   $scope.data.duplicateSurface = function (selected, newParent) {
     var selectedSurface = selected.surface;
     var spaceIndex = newParent === undefined ? selectedSurface.space : newParent;
