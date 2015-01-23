@@ -18,9 +18,6 @@ cbecc.controller('ZonesCtrl', [
       return system.type !== 'Exhaust';
     });
 
-    //console.log('separated systems:');
-    //console.log($scope.data.exhausts);
-    //console.log($scope.data.non_exhaust_systems);
     console.log('terminals:');
     console.log($scope.data.terminals);
 
@@ -41,14 +38,17 @@ cbecc.controller('ZonesCtrl', [
     console.log('adjusted exhaust systems (should have zone_id and zone_name)');
     console.log($scope.data.exhausts);
 
-    // TODO: separate exhaust systems from other zone_systems
-    // TODO: push all systems back together when saving
-
-    //console.log("Spaces");
-    //console.log($scope.data.spaces);
-    //console.log("Zones");
-    //console.log($scope.data.zones);
-
+    // check zone primary_air_conditioning_system_reference field against available system names, clear any non-found system names
+    _.each($scope.data.zones, function (zone) {
+      if (zone.primary_air_conditioning_system_reference){
+       var match =  _.find($scope.data.systems, {
+         name: zone.primary_air_conditioning_system_reference
+       });
+       if (!match) {
+         zone.primary_air_conditioning_system_reference = '';
+       }
+      }
+    });
 
     // ZONES shouldn't span multiple stories, but we are not enforcing that here
     $scope.data.storiesArr = [];
