@@ -843,16 +843,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           name: "PTAC " + index,
           type: 'PTAC',
           fan: {
-            name: "Fan " + index,
+            name: "PTAC " + index + " Fan",
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: "Cooling Coil " + index,
+            name: "PTAC " + index + " Cooling Coil",
             type: "DirectExpansion",
             condenser_type: "Air"
           },
           coil_heating: {
-            name: "Heating Coil " + index,
+            name: "PTAC " + index + " Heating Coil",
             type: "HotWater"
           }
         });
@@ -863,15 +863,15 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           name: "FPFC " + index,
           type: 'FPFC',
           fan: {
-            name: "Fan " + index,
+            name: "FPFC " + index + " Fan",
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: "Cooling Coil " + index,
+            name: "FPFC " + index + " Cooling Coil",
             type: "ChilledWater"
           },
           coil_heating: {
-            name: "Heating Coil " + index,
+            name: "FPFC " + index + " Heating Coil",
             type: "HotWater"
           }
         });
@@ -883,16 +883,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           type: 'SZAC',
           sub_type: 'SinglePackage',
           fan: {
-            name: "Fan " + index,
+            name: "PSZ" + index + " Fan",
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: "Cooling Coil " + index,
+            name: "PSZ" + index + "Cooling Coil",
             type: "DirectExpansion"
 
           },
           coil_heating: {
-            name: "Heating Coil " + index,
+            name: "PSZ" + index + " Heating Coil",
             type: "Furnace",
             fuel_source: "NaturalGas"
           }
