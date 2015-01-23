@@ -367,6 +367,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     pvav: {}
   };
 
+  min_width = 150;
+
   $scope.gridCols.ptac.general = [{
     name: 'name',
     displayName: 'System Name',
@@ -378,6 +380,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -385,6 +388,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Fan Name',
     field: 'fan.name',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -394,6 +398,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -403,6 +408,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -412,6 +418,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -419,6 +426,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Flow Efficiency',
     field: 'fan.flow_efficiency',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -426,6 +434,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Total Static Pressure',
     field: 'fan.total_static_pressure',
     enableHiding: false,
+    minWidth: min_width + 20,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -433,6 +442,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Motor BHP',
     field: 'fan.motor_bhp',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -442,6 +452,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -450,12 +461,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     secondLine: Shared.html('hp'),
     field: 'fan.motor_hp',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'fan_motor_type',
     displayName: 'Motor Type',
     field: 'fan.motor_type',
+    minWidth: min_width,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
     enableHiding: false,
@@ -466,6 +479,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Motor Pole Count',
     field: 'fan.motor_pole_count',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -473,6 +487,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     displayName: 'Motor Efficiency',
     field: 'fan.motor_efficiency',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
