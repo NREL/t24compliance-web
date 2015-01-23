@@ -662,6 +662,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
              $scope.selected[type] = null;
              }
              });
+
+            gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+              if ((colDef.name == 'name' || colDef.name == 'coil_heating_name' || colDef.name == 'coil_cooling_name') && newValue != oldValue) {
+                // update connected coils
+                $scope.display_coils_heating = calculateCoilsHeating();
+                $scope.display_coils_cooling = calculateCoilsCooling();
+              }
+            });
           }
         };
       });
@@ -717,22 +725,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
       });
     }
   });
-/*
-  //watch coil display variables and update HW & CW plant grids as needed
-  $scope.$watch('display_coils_heating', function(newValue, oldValue) {
-     if (!_.isEmpty($scope.gridPlantApi['hot_water']['coil_heating'])) {
-       console.log($scope.gridPlantApi['hot_water']['coil_heating'].core.notifyDataChange);
-       console.log(newValue);
-       console.log(oldValue);
-      // $scope.gridPlantOptions['hot_water']['coil_heating'].data = newValue;
-       $scope.gridPlantApi['hot_water']['coil_heating'].core.notifyDataChange($scope.gridPlantApi['hot_water']['coil_heating'].grid, uiGridConstants.dataChange.EDIT);
-       console.log('WATCH!');
-       console.log($scope.gridPlantApi);
-     }
 
-    }
-  );
-*/
   //**** VIEW HELPERS: TABS & CLASSES ****
   $scope.tabClasses = {};
   $scope.gridClasses = {
