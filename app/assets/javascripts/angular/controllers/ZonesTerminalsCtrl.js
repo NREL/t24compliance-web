@@ -51,12 +51,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
   });
 
   // Systems UI Grid
+  min_width = 160;
   $scope.terminalsGridOptions = {
     columnDefs: [{
       name: 'zone_served_reference',
       displayName: 'Thermal Zone',
       enableHiding: false,
       enableCellEdit: false,
+      minWidth: min_width,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
@@ -64,6 +66,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       displayName: 'Terminal Name',
       enableHiding: false,
       filter: Shared.textFilter(),
+      minWidth: min_width,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'type',
@@ -72,6 +75,65 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.terminal_units_type_enums,
       filter: Shared.textFilter(),
+      minWidth: min_width,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'primary_air_flow_maximum',
+      displayName: 'Max. Primary Flow',
+      enableHiding: false,
+      filter: Shared.numberFilter(),
+      minWidth: min_width,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'primary_air_flow_minimum',
+      displayName: 'Min. Primary Flow',
+      enableHiding: false,
+      filter: Shared.numberFilter(),
+      minWidth: min_width,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'heating_air_flow_maximum',
+      displayName: 'Max. Heating Flow',
+      enableHiding: false,
+      filter: Shared.numberFilter(),
+      minWidth: min_width,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'reheat_control_method',
+      displayName: 'Max. Heating Flow',
+      enableHiding: false,
+      filter: Shared.textFilter(),
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      minWidth: min_width,
+      editDropdownOptionsArray: Enums.enumsArr.terminal_units_reheat_control_method_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'induced_air_zone_reference',
+      displayName: 'Induced Air Zone',
+      enableHiding: false,
+      filter: Shared.textFilter(),
+      minWidth: min_width,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'induction_ratio',
+      displayName: 'Induction Ratio',
+      enableHiding: false,
+      filter: Shared.numberFilter(),
+      minWidth: min_width,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'fan_power_per_flow',
+      displayName: 'Terminal Fan Power',
+      enableHiding: false,
+      filter: Shared.numberFilter(),
+      minWidth: min_width + 20,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    }, {
+      name: 'parallel_box_fan_flow_fraction',
+      displayName: 'Parallel Box Flow Frac.',
+      enableHiding: false,
+      filter: Shared.numberFilter(),
+      minWidth: min_width + 20,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
     data: $scope.data.terminals,

@@ -361,6 +361,10 @@ cbecc.factory('Enums', function () {
       'ParallelFanBox',
       'SeriesFanBox',
       'VAVNoReheatBox'
+    ],
+    terminal_units_reheat_control_method_enums: [
+      'SingleMaximum',
+      'DualMaximum'
     ]
   };
 
