@@ -93,6 +93,8 @@ Rails.application.routes.draw do
   # resources :underground_walls
   # resources :interior_floors
   # resources :exterior_walls
+  # resources :interior_lighting_systems
+  # resources :outside_air_controls
 
   # non-revised below
 =begin
@@ -101,8 +103,6 @@ Rails.application.routes.draw do
   resources :design_days
 
   resources :recirculation_water_heaters
-
-  resources :outside_air_controls
 
   resources :recirculation_dhw_systems
 
@@ -118,8 +118,6 @@ Rails.application.routes.draw do
 
   resources :water_heaters
 
-  resources :interior_lighting_systems
-
   resources :curve_cubics
 
   resources :curve_quadratics
@@ -132,4 +130,5 @@ Rails.application.routes.draw do
 
   resources :poly_loops
 =end
+
 end
