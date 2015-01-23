@@ -19,7 +19,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
 
   // system tabs META
   // this is used to initialize the grids and render active vertical tabs in the view
-  // TODO: add other tab defs
   $scope.systemTabs = {
     ptac: ['general', 'fan', 'coil_cooling', 'coil_heating'],
     fpfc: ['general', 'fan', 'coil_cooling', 'coil_heating'],
@@ -28,7 +27,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     vav: ['general', 'fan', 'coil_cooling', 'coil_heating']
   };
 
-  // TODO: add other plant tab defs
   $scope.plantTabs = {
     hot_water: ['pump', 'boiler', 'coil_heating'],
     chilled_water: ['general', 'pump', 'chiller', 'coil_cooling'],
@@ -358,7 +356,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     field: 'heat_rejections[0].pump.motor_HP'
   }];
 
-  //TODO: get systems by type
   $scope.gridCols = {
     ptac: {},
     fpfc: {},
@@ -714,7 +711,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     shw: {},
     condenser: {}
   };
-  // TODO: add all systems /plants
+
   function initTabs(name) {
     switch (name) {
       case 'ptac':
@@ -831,7 +828,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
 
   //**** ADD ****
   // add functions
-  // TODO: add other systems
   // NOTE:  this also adds fields that are defaulted.
   // They won't be shown to users, but will be passed to rails
   $scope.addSystem = function (name) {
@@ -1120,11 +1116,11 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     //recalculate coils
     $scope.display_coils_heating = calculateCoilsHeating();
     $scope.display_coils_cooling = calculateCoilsCooling();
+
+    // TODO: remove plants if necessary
   };
 
   //**** SAVE ****
-  // TODO: add other systems
-  // TODO: add links back from plants into system parts (do this on rails side)
   $scope.submit = function () {
     console.log("submit");
     $scope.errors = {}; //clean up server errors
