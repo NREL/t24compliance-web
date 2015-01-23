@@ -23,7 +23,20 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     }, {
       name: 'floor_to_ceiling_height',
       secondLine: Shared.html('ft'),
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        var storyIndex = null;
+        _.find($scope.data.storiesArr, function (story, index) {
+          if (story.id == row.entity.building_story_id) {
+            storyIndex = index;
+            return true;
+          }
+          return false;
+        });
+        if (row.entity.floor_to_ceiling_height != $scope.data.stories[storyIndex].floor_to_ceiling_height) {
+          return 'modified-cell';
+        }
+      }
     }, {
       name: 'building_story_id',
       displayName: 'Story',
@@ -53,7 +66,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
       quantity: 20,
       name: '',
       space_function: Enums.enums.spaces_space_function_enums[0],
-      floor_to_ceiling_height: 10,
+      floor_to_ceiling_height: $scope.data.stories[0].floor_to_ceiling_height,
       building_story_id: $scope.data.stories[0].id,
       area: 250,
       conditioning_type: Enums.enums.spaces_conditioning_type_enums[0],
@@ -62,7 +75,25 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     }],
     enableCellEditOnFocus: true,
     enableColumnMenus: false,
-    enableSorting: false
+    enableSorting: false,
+    onRegisterApi: function (gridApi) {
+      $scope.gridApi = gridApi;
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (colDef.name == 'building_story_id' && newValue != oldValue) {
+          // Update floor_to_ceiling_height if it is unchanged
+          var oldStoryIndex = null;
+          var newStoryIndex = null;
+          _.each($scope.data.storiesArr, function (story, index) {
+            if (story.id == oldValue) oldStoryIndex = index;
+            if (story.id == newValue) newStoryIndex = index;
+          });
+          if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
+            rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+          }
+          gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+        }
+      });
+    }
   };
 
   $scope.wallGridOptions = {
@@ -99,16 +130,16 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     $scope.spaceGroups.splice(index, 1);
   };
 
-  $scope.okCondition = function() {
+  $scope.okCondition = function () {
     if (!$scope.spaceGroups.length) return false;
-    return _.every($scope.spaceGroups, function(spaceGroup) {
+    return _.every($scope.spaceGroups, function (spaceGroup) {
       return spaceGroup.gridOptions.data[0].name.length > 0;
     });
   };
 
   $scope.ok = function () {
     var data = [];
-    _.each($scope.spaceGroups, function(spaceGroup) {
+    _.each($scope.spaceGroups, function (spaceGroup) {
       data.push({
         config: spaceGroup.gridOptions.data[0],
         walls: spaceGroup.wallGridOptions.data[0]
