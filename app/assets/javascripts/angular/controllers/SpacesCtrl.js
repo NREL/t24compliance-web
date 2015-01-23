@@ -8,7 +8,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     spaces: spaces,
     constructionDefaults: constructionDefaults[0] || {},
     surfaces: [],
-    subsurfaces: []
+    subsurfaces: [],
+    luminaires: []
   };
 
   // Lookup construction defaults
@@ -621,6 +622,39 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     }
   };
 
+  $scope.data.addLuminaire = function () {
+    var luminaire = {
+      name: "Luminaire " + ($scope.data.luminaires.length + 1),
+      fixture_type: Enums.enums.luminaires_fixture_type_enums[1],
+      lamp_type: Enums.enums.luminaires_lamp_type_enums[0],
+      power: 0
+    };
+    _.merge(luminaire, $scope.data.luminaireHeatGain(luminaire.fixture_type));
+
+    $scope.data.luminaires.push(luminaire);
+  };
+  $scope.data.duplicateLuminaire = function (selected) {
+    var selectedLuminaire = selected.luminaire;
+
+    $scope.data.luminaires.push({
+      name: "Luminaire " + ($scope.data.luminaires.length + 1),
+      fixture_type: selectedLuminaire.fixture_type,
+      lamp_type: selectedLuminaire.lamp_type,
+      power: selectedLuminaire.power,
+      heat_gain_space_fraction: selectedLuminaire.heat_gain_space_fraction,
+      heat_gain_radiant_fraction: selectedLuminaire.heat_gain_radiant_fraction
+    });
+  };
+  $scope.data.deleteLuminaire = function (selected, gridApi) {
+    var luminaireIndex = $scope.data.luminaires.indexOf(selected.luminaire);
+    $scope.data.luminaires.splice(luminaireIndex, 1);
+    if (luminaireIndex > 0) {
+      gridApi.selection.toggleRowSelection($scope.data.luminaires[luminaireIndex - 1]);
+    } else {
+      selected.luminaire = null;
+    }
+  };
+
   $scope.data.compatibleAdjacentSpaces = function (surfaceIndex) {
     var compatibleAdjacentSpaces = [];
     var surface = $scope.data.surfaces[surfaceIndex];
@@ -734,6 +768,25 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
   $scope.data.updateTotalExhaust = function (space) {
     space.total_exhaust = Shared.calculateTotalExhaust(space);
+  };
+
+  $scope.data.luminaireHeatGain = function (fixtureType) {
+    if (fixtureType == 'RecessedWithLens') {
+      return {
+        heat_gain_space_fraction: 0.45,
+        heat_gain_radiant_fraction: 0.67
+      }
+    } else if (fixtureType == 'RecessedOrDownlight') {
+      return {
+        heat_gain_space_fraction: 0.69,
+        heat_gain_radiant_fraction: 0.58
+      }
+    } else if (fixtureType == 'NotInCeiling') {
+      return {
+        heat_gain_space_fraction: 1,
+        heat_gain_radiant_fraction: 0.54
+      }
+    }
   };
 
   // save

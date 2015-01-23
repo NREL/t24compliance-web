@@ -1,0 +1,20 @@
+<div class="modal-header inline-heading-modal">
+  <h3 class="modal-title">Luminaire Library</h3>
+</div>
+<div class="modal-body container-fluid">
+  <div class="row pad-bot-20">
+    <div class="col-md-12">
+      <button type="button" ng-click="data.addLuminaire()" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Luminaire
+      </button>
+      <div class="pull-right">
+        <button type="button" ng-click="data.duplicateLuminaire(selected)" class="btn btn-info" ng-disabled="!selected.luminaire">Duplicate</button>
+        <button type="button" ng-click="data.deleteLuminaire(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.luminaire">Delete</button>
+      </div>
+    </div>
+  </div>
+  <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-warning" ng-click="close()">Close</button>
+</div>
