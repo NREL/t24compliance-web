@@ -2,8 +2,8 @@ class TerminalUnitsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :building
   before_action :set_terminal_unit, only: [:show, :edit, :update, :destroy]
-  before_action :get_building, only: [:bulk_sync, :index]
-  before_action :get_project
+  before_action :get_building
+  before_action :get_project, only: [:bulk_sync]
 
   respond_to :json, :html
 
@@ -104,6 +104,8 @@ class TerminalUnitsController < ApplicationController
 
       # save / update air segment paths based on zone configs
       save_air_system_paths
+
+      # TODO: figure out how to delete terminal units no longer attached to a zone!
 
     end
 

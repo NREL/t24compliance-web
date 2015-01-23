@@ -26,11 +26,16 @@ Rails.application.routes.draw do
     get 'download', on: :member
   end
 
+  # TODO:  restrict to needed routes only (bulk_sync, index, show)
+
   # these belong to project. may not need routes for them
   resources :materials
   resources :construct_assemblies
   resources :door_constructions
   resources :fenestration_constructions
+  resources :luminaires, only: [:index, :show] do
+    post 'bulk_sync', on: :collection
+  end
 
   # libraries
   resources :constructions, only: [:show, :index]
@@ -118,8 +123,6 @@ Rails.application.routes.draw do
   resources :curve_cubics
 
   resources :curve_quadratics
-
-  resources :luminaires
 
   resources :schedule_weeks
 

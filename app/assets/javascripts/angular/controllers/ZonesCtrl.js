@@ -147,15 +147,21 @@ cbecc.controller('ZonesCtrl', [
     $scope.submit = function () {
       console.log("submit");
       console.log($scope.data);
-      console.log('saving zones');
-      console.log($scope.data.zones);
+      //console.log('saving zones');
+      //console.log($scope.data.zones);
 
       // add/update/delete exhaust system references and add to zone records (exhaust tab is not connected to zones data)
       _.each($scope.data.zones, function (zone) {
-        zone.exhaust_system_reference = _.filter($scope.data.exhausts, {
-          zone_name: zone.name
-        });
+        var ref = _.find($scope.data.exhausts, {zone_name: zone.name });
+        console.log("REF: ", ref);
+        if (ref) {
+          console.log("HI!");
+          zone.exhaust_system_reference = ref.name;
+        }
       });
+
+      console.log("saving these zones:");
+      console.log($scope.data.zones);
 
       // SAVE ZONES
       var params = Shared.defaultParams();
@@ -191,12 +197,13 @@ cbecc.controller('ZonesCtrl', [
           function success(response) {
             toaster.pop('success', 'Exhaust systems successfully saved');
             var params = Shared.defaultParams();
-            params.data = terminals;
+            params.data = $scope.data.terminals;
+            console.log("terminals to save:");
+            console.log($scope.data.terminals);
             data.bulkSync('terminal_units', params).then(success).catch(failure);
 
             function success(response) {
               toaster.pop('success', 'Terminal units successfully saved');
-              $location.path(Shared.zonesPath());
             }
 
             function failure(response) {

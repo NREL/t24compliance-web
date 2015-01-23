@@ -1,4 +1,4 @@
-cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructionDefaults', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructionDefaults) {
+cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructionDefaults', 'luminaires', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructionDefaults, luminaires) {
   $scope.data = {
     constData: constData,
     doorData: doorData,
@@ -9,7 +9,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     constructionDefaults: constructionDefaults[0] || {},
     surfaces: [],
     subsurfaces: [],
-    luminaires: []
+    luminaires: luminaires
   };
 
   // Lookup construction defaults
@@ -793,27 +793,38 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
   $scope.submit = function () {
     console.log("submit");
 
-    var spaces = angular.copy($scope.data.spaces);
-    var surfaces = angular.copy($scope.data.surfaces);
-    var subsurfaces = angular.copy($scope.data.subsurfaces);
-    _.each(spaces, function (space) {
-      space.surfaces = [];
-    });
-    _.each(surfaces, function (surface, surfaceIndex) {
-      if (surface.adjacent_space_reference != null) {
-        surface.adjacent_space_reference = $scope.data.spaces[surface.adjacent_space_reference].name
-      }
-      surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
-      spaces[surface.space].surfaces.push(surface);
-    });
-
     var params = Shared.defaultParams();
-    params.data = spaces;
-    data.bulkSync('spaces', params).then(success).catch(failure);
-
+    params.data = $scope.data.luminaires;
+    data.bulkSync('luminaires', params).then(success).catch(failure);
 
     function success(response) {
-      toaster.pop('success', 'Spaces successfully saved');
+      toaster.pop('success', 'Luminaires successfully saved');
+
+      var spaces = angular.copy($scope.data.spaces);
+      var surfaces = angular.copy($scope.data.surfaces);
+      var subsurfaces = angular.copy($scope.data.subsurfaces);
+      _.each(spaces, function (space) {
+        space.surfaces = [];
+      });
+      _.each(surfaces, function (surface, surfaceIndex) {
+        if (surface.adjacent_space_reference != null) {
+          surface.adjacent_space_reference = $scope.data.spaces[surface.adjacent_space_reference].name
+        }
+        surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
+        spaces[surface.space].surfaces.push(surface);
+      });
+
+      var params = Shared.defaultParams();
+      params.data = spaces;
+      data.bulkSync('spaces', params).then(success).catch(failure);
+
+      function success(response) {
+        toaster.pop('success', 'Spaces successfully saved');
+      }
+      function failure(response) {
+        console.log("failure", response);
+        toaster.pop('error', 'An error occurred while saving', response.statusText);
+      }
     }
 
     function failure(response) {
