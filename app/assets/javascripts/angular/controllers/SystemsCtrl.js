@@ -115,6 +115,23 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   $scope.display_coils_heating = calculateCoilsHeating();
   $scope.display_coils_cooling = calculateCoilsCooling();
 
+  // initalize for grid
+  $scope.selected = {
+    ptac: null,
+    fpfc: null,
+    szac: null,
+    pvav: null,
+    vav: null
+  };
+
+  $scope.gridApi = {
+    ptac: null,
+    fpfc: null,
+    szac: null,
+    pvav: null,
+    vav: null
+  };
+
   $scope.gridPlantCols = {
     hot_water: {},
     chilled_water: {},
@@ -176,6 +193,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'pump_motor_hp',
     displayName: 'Motor HP',
+    secondLine: Shared.html('hp'),
     field: 'boilers[0].pump.motor_HP'
   }];
   $scope.gridPlantCols.hot_water.coil_heating = [{
@@ -429,6 +447,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
   }, {
     name: 'fan_motor_hp',
     displayName: 'Motor HP',
+    secondLine: Shared.html('hp'),
     field: 'fan.motor_hp',
     enableHiding: false,
     filter: Shared.textFilter(),
@@ -618,15 +637,15 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
           data: $scope.systems[type],
           onRegisterApi: function (gridApi) {
             //This will keep overwriting gridApi
-            /*$scope.gridApi = gridApi;
+            $scope.gridApi[type] = gridApi;
              gridApi.selection.on.rowSelectionChanged($scope, function (row) {
              if (row.isSelected) {
-             $scope.selected = row.entity;
+             $scope.selected[type] = row.entity;
              } else {
              // No rows selected
-             $scope.selected = null;
+             $scope.selected[type] = null;
              }
-             });*/
+             });
           }
         };
       });
@@ -650,23 +669,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
         $scope.gridPlantOptions[type][tab] = {
           columnDefs: $scope.gridPlantCols[type][tab],
           enableCellEditOnFocus: editVal,
+          enableRowHeaderSelection: false,
+          enableRowSelection: false,
           enableColumnMenus: false,
-          enableRowHeaderSelection: editVal,
-          enableRowSelection: editVal,
-          enableSorting: true,
-          multiSelect: false,
-          onRegisterApi: function (gridApi) {
-            //Revise
-            /*$scope.gridApi = gridApi;
-             gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-             if (row.isSelected) {
-             $scope.selected = row.entity;
-             } else {
-             // No rows selected
-             $scope.selected = null;
-             }
-             });*/
-          }
+          enableSorting: true
         };
         if (tab == 'coil_heating') {
           $scope.gridPlantOptions[type].coil_heating.data = $scope.display_coils_heating;
@@ -1087,26 +1093,31 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'data', 'Shared'
     }
   }
 
-  //ACS I don't know if this will work
+
   $scope.duplicateSystem = function (name) {
-    var new_item = angular.copy($scope.selected);
+    var new_item = angular.copy($scope.selected[name]);
+    console.log("name:");
+    console.log(name);
+    console.log($scope.selected);
     delete new_item.$$hashKey;
     new_item.name += " duplicate";
     $scope.systems[name].push(new_item);
+    // recalculate coils
     $scope.display_coils_heating = calculateCoilsHeating();
+    $scope.display_coils_cooling = calculateCoilsCooling();
   };
 
-  //ACS this definitely won't work with gridApi
   $scope.deleteSystem = function (name) {
-    var index = $scope.systems[name].indexOf($scope.selected);
+    var index = $scope.systems[name].indexOf($scope.selected[name]);
     $scope.systems[name].splice(index, 1);
     if (index > 0) {
-      $scope.gridApi.selection.toggleRowSelection($scope.systems[name][index - 1]);
+      $scope.gridApi[name].selection.toggleRowSelection($scope.systems[name][index - 1]);
     } else {
-      $scope.selected = null;
-      //ACS why isn't this applied every time a row is deleted?
-      $scope.display_coils_heating = calculateCoilsHeating();
+      $scope.selected[name] = null;
     }
+    //recalculate coils
+    $scope.display_coils_heating = calculateCoilsHeating();
+    $scope.display_coils_cooling = calculateCoilsCooling();
   };
 
   //**** SAVE ****
