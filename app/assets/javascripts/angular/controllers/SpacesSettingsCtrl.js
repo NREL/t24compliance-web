@@ -105,6 +105,9 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           if (rowEntity.commercial_refrigeration_epd == rowEntity.commercial_refrigeration_epd_default) {
             rowEntity.commercial_refrigeration_epd = defaults.commercial_refrigeration_epd;
           }
+          if (rowEntity.gas_equipment_power_density == rowEntity.gas_equipment_power_density_default) {
+            rowEntity.gas_equipment_power_density = defaults.gas_equipment_power_density;
+          }
 
           rowEntity.occupant_density_default = defaults.occupant_density;
           rowEntity.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
@@ -121,6 +124,8 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           rowEntity.total_exhaust = Shared.calculateTotalExhaust(rowEntity);
 
           rowEntity.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
+          
+          rowEntity.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
           gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
         }
@@ -172,6 +177,13 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       }
       // Update refrigeration defaults
       row.commercial_refrigeration_epd_default = $scope.selected.space.commercial_refrigeration_epd_default;
+      
+      // Update unmodified gas values
+      if (row.gas_equipment_power_density == row.gas_equipment_power_density_default) {
+        row.gas_equipment_power_density = $scope.selected.space.gas_equipment_power_density_default;
+      }
+      // Update gas defaults
+      row.gas_equipment_power_density_default = $scope.selected.space.gas_equipment_power_density_default;
     });
     $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
