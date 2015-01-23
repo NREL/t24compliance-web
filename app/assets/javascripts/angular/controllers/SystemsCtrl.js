@@ -748,6 +748,19 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
           enableColumnMenus: false,
           onRegisterApi: function (gridApi) {
             $scope.gridPlantApi[type][tab] = gridApi;
+
+            gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+              if ((colDef.name == 'chiller_condenser_type') && newValue != oldValue) {
+                // add / remove condenser
+               if (newValue == 'Fluid') {
+                 addPlant('condenser');
+               }
+                else if (newValue == 'Air') {
+                 $scope.plants.condenser = [];
+                }
+              }
+            });
+
           }
         };
         if (tab == 'coil_heating') {
@@ -1046,27 +1059,27 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
     console.log('adding dependent plants for: ', name);
     switch (name) {
       case 'ptac':
-        //hot_water plant only
+        // hot_water plant only
         addPlant('hot_water');
         break;
       case 'fpfc':
-        //hot and chilled water (& condenser)
+        // hot and chilled water
+        // condenser will be added automatically if condenser_type = fluid
         addPlant('hot_water');
         addPlant('chilled_water');
-        addPlant('condenser');
         break;
       case 'szac':
-        //nothing to add
+        // nothing to add
         break;
       case 'pvav':
-        //hot_water plant only
+        // hot_water plant only
         addPlant('hot_water');
         break;
       case 'vav':
-        //hot and chilled water (& condenser)
+        // hot and chilled water
+        // condenser will be added automatically if condenser_type = fluid
         addPlant('hot_water');
         addPlant('chilled_water');
-        addPlant('condenser');
         break;
     }
   }
