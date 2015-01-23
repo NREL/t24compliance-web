@@ -26,6 +26,11 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       displayName: 'Refrigeration',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.commercial_refrigeration_epd != row.entity.commercial_refrigeration_epd_default) {
+          return 'modified-cell';
+        }
+      },
       cellEditableCondition: $scope.data.applySettingsCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
