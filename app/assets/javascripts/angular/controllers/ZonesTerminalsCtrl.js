@@ -51,7 +51,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
   });
 
   // Systems UI Grid
-  min_width = 160;
+  var min_width = 160;
   $scope.terminalsGridOptions = {
     columnDefs: [{
       name: 'zone_served_reference',

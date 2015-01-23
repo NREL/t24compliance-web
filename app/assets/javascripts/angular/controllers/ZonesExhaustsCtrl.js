@@ -58,7 +58,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       enableHiding: false,
       minWidth: minWidth,
       filter: Shared.textFilter(),
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_classification',
       displayName: 'Classification',
@@ -67,7 +67,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_control_method',
       displayName: 'Control Method',
@@ -76,7 +76,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'type',
       displayName: 'Fan Type',
@@ -85,21 +85,21 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_flow_capacity',
       displayName: 'Flow Capacity',
       field: 'fan.flow_capacity',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_flow_minimum',
       displayName: 'Flow Minimum',
       field: 'fan.flow_minimum',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_modeling_method',
       displayName: 'Modeling Method',
@@ -108,28 +108,29 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_total_static_pressure',
       displayName: 'Total Static Pressure',
       field: 'fan.total_static_pressure',
       enableHiding: false,
       minWidth: minWidth + 20,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_flow_efficiency',
       displayName: 'Fan Minimum',
       field: 'fan.flow_efficiency',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_bhp',
       displayName: 'Motor Brake HP',
+      secondLine: Shared.html('hp'),
       field: 'fan.motor_bhp',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_position',
       displayName: 'Motor Position',
@@ -138,14 +139,15 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_nameplate_hp',
       displayName: 'Nameplate HP',
+      secondLine: Shared.html('hp'),
       field: 'fan.motor_hp',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_type',
       displayName: 'Motor Type',
@@ -154,21 +156,21 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       minWidth: minWidth,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_pole_count',
       displayName: 'Pole Count',
       field: 'fan.pole_count',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_efficiency',
       displayName: 'Motor Efficiency',
       field: 'fan.motor_efficiency',
       enableHiding: false,
       minWidth: minWidth,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.exhausts,
     enableCellEditOnFocus: true,

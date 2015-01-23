@@ -3,7 +3,11 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
     space: null
   };
 
-  $scope.zonesArr = [];
+  // thermal zone references array for ZoneSpaces tab
+  $scope.zonesArr = [{
+    id: "",
+    value: ""
+  }];
   $scope.zonesHash = {};
   _.each($scope.data.zones, function (zone, index) {
     $scope.zonesArr.push({
@@ -12,6 +16,8 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
     });
     $scope.zonesHash[index] = zone.name;
   });
+  console.log('ZONES Arr');
+  console.log($scope.zonesArr);
 
   // Spaces UI Grid
   $scope.spacesGridOptions = {

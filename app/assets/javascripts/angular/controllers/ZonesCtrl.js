@@ -61,6 +61,7 @@ cbecc.controller('ZonesCtrl', [
       $scope.data.storiesHash[story.id] = story.name;
     });
 
+
     $scope.tabs = [{
       heading: 'Create Zones',
       path: '/zones',
@@ -115,6 +116,8 @@ cbecc.controller('ZonesCtrl', [
       $scope.data.zones.push(zone);
     };
     $scope.data.deleteZone = function (selected, gridApi) {
+      var zone_name = selected.zone.name;
+      console.log('Deleting zone: ', zone_name);
       var index = $scope.data.zones.indexOf(selected.zone);
       $scope.data.zones.splice(index, 1);
       if (index > 0) {
@@ -122,7 +125,22 @@ cbecc.controller('ZonesCtrl', [
       } else {
         selected.zone = null;
       }
-      // TODO: delete associated exhaust system (if any)
+      console.log('ZONE NAME: ', zone_name);
+      // delete associated exhaust system (by zone name, start at end)
+      _.eachRight($scope.data.exhausts, function(exhaust, ind){
+         if (exhaust.zone_name == zone_name) $scope.data.exhausts.splice(ind, 1);
+      });
+
+      // remove thermal_zone_references to this zone
+      _.each($scope.data.spaces, function (space) {
+        if (space.thermal_zone_reference == zone_name) space.thermal_zone_reference = null;
+      });
+
+     // delete associated terminal (start at end)
+      _.eachRight($scope.data.terminals, function (terminal, ind){
+        if (terminal.zone_served_reference == zone_name) $scope.data.terminals.splice(ind, 1);
+      });
+
     };
 
     // save
