@@ -192,11 +192,17 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
     field: 'boilers[0].pump.motor_HP'
   }];
   $scope.gridPlantCols.hot_water.coil_heating = [{
-    name: 'name'
+    name: 'name',
+    enableCellEdit: false,
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
-    name: 'system_name'
+    name: 'system_name',
+    enableCellEdit: false,
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
-    name: 'system_type'
+    name: 'system_type',
+    enableCellEdit: false,
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridPlantCols.chilled_water.general = [{
     name: 'name',

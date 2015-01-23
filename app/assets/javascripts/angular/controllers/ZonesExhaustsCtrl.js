@@ -114,7 +114,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       displayName: 'Total Static Pressure',
       field: 'fan.total_static_pressure',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: minWidth + 20,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'fan_flow_efficiency',
