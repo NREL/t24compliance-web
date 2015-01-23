@@ -54,7 +54,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', updateTotal, 'toaster', '
         if (surfaceType == 'interior_floors') {
           surface.type = 'Floor';
           surface.boundary = 'Interior';
-          _.find($scope.data.spaces, function(space, spaceIndex) {
+          _.find($scope.data.spaces, function (space, spaceIndex) {
             if (surface.adjacent_space_reference == space.name) {
               surface.adjacent_space_reference = spaceIndex;
               return true;
@@ -70,7 +70,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', updateTotal, 'toaster', '
         } else if (surfaceType == 'interior_walls') {
           surface.type = 'Wall';
           surface.boundary = 'Interior';
-          _.find($scope.data.spaces, function(space, spaceIndex) {
+          _.find($scope.data.spaces, function (space, spaceIndex) {
             if (surface.adjacent_space_reference == space.name) {
               surface.adjacent_space_reference = spaceIndex;
               return true;
@@ -115,8 +115,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', updateTotal, 'toaster', '
     space.ventilation_per_person = defaults.ventilation_per_person;
     space.ventilation_per_area = defaults.ventilation_per_area;
     space.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
-    
+
     space.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
+
+    space.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
   });
 
   $scope.data.storiesArr = [];
@@ -250,9 +252,12 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', updateTotal, 'toaster', '
     space.ventilation_per_person = defaults.ventilation_per_person;
     space.ventilation_per_area = defaults.ventilation_per_area;
     space.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
-    
+
     space.commercial_refrigeration_epd = defaults.commercial_refrigeration_epd;
     space.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
+
+    space.gas_equipment_power_density = defaults.gas_equipment_power_density;
+    space.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
     $scope.data.spaces.push(space);
   };
@@ -300,6 +305,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', updateTotal, 'toaster', '
       escalator_lost_fraction: selectedSpace.escalator_lost_fraction,
 
       gas_equipment_power_density: selectedSpace.gas_equipment_power_density,
+      gas_equipment_power_density_default: selectedSpace.gas_equipment_power_density_default,
       process_gas_power_density: selectedSpace.process_gas_power_density,
       process_gas_radiation_fraction: selectedSpace.process_gas_radiation_fraction,
       process_gas_latent_fraction: selectedSpace.process_gas_latent_fraction,
@@ -470,6 +476,17 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', updateTotal, 'toaster', '
   $scope.data.modifiedRefrigerationDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
       return (space.commercial_refrigeration_epd !== space.commercial_refrigeration_epd_default);
+    }));
+  };
+  $scope.data.restoreGasDefaults = function (gridApi) {
+    _.each($scope.data.spaces, function (space) {
+      space.gas_equipment_power_density = space.gas_equipment_power_density_default;
+    });
+    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+  };
+  $scope.data.modifiedGasDefaults = function () {
+    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+      return (space.gas_equipment_power_density !== space.gas_equipment_power_density_default);
     }));
   };
 

@@ -17,6 +17,11 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       displayName: 'Gas Equipment',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),
       enableHiding: false,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.gas_equipment_power_density != row.entity.gas_equipment_power_density_default) {
+          return 'modified-cell';
+        }
+      },
       cellEditableCondition: $scope.data.applySettingsCondition,
       type: 'number',
       filters: Shared.numberFilter(),
