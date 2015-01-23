@@ -52,7 +52,7 @@ class ThermalZonesController < ApplicationController
       end
     end
 
-    # delete old zones
+    # delete old zones (if data param was not there, means it was empty and stripped out so delete all)
     @building.thermal_zones = zones
     @building.save
 

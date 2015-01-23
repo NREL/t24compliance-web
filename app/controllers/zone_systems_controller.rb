@@ -159,7 +159,7 @@ class ZoneSystemsController < ApplicationController
       end
     end
 
-    # delete
+    # delete (if data param is not present, it was empty and stripped out, so delete all)
     @building.zone_systems = zone_systems
     @building.air_systems = air_systems
     @building.save

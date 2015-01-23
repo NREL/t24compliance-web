@@ -169,14 +169,14 @@ class FluidSystemsController < ApplicationController
         systems << @sys
       end
 
-      # delete
-      @project.fluid_systems = systems
-      @project.save
-
-      # now adjust FluidSegment In/Out references for all connected Zone Systems
-      save_fluid_segment_references
     end
 
+    # delete (if data param is not present, it was stripped out b/c it was empty, so delete all)
+    @project.fluid_systems = systems
+    @project.save
+
+    # now adjust FluidSegment In/Out references for all connected Zone Systems
+    save_fluid_segment_references
 
     # TODO: add error handling?!
     respond_with systems.first || FluidSystem.new

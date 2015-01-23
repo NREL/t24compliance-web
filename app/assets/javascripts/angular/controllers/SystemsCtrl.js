@@ -1181,7 +1181,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
     $scope.display_coils_heating = calculateCoilsHeating();
     $scope.display_coils_cooling = calculateCoilsCooling();
 
-    // TODO: remove plants if necessary
+    // remove plants if necessary (use coil information to remove)
+    if (!$scope.display_coils_heating.length){
+      // remove hot_water plant
+      $scope.plants.hot_water = [];
+    }
+    if (!$scope.display_coils_cooling.length){
+      // remove chilled_water plant (and condenser)
+      $scope.plants.chilled_water = [];
+      $scope.plants.condenser = [];
+    }
   };
 
   //**** SAVE ****
