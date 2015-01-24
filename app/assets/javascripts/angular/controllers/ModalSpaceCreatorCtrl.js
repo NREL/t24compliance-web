@@ -90,7 +90,7 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
           if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
             rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
           }
-          gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         }
       });
     }

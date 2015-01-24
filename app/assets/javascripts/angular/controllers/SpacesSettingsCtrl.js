@@ -127,7 +127,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           
           rowEntity.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
-          gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         }
       });
     }
@@ -185,7 +185,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       // Update gas defaults
       row.gas_equipment_power_density_default = $scope.selected.space.gas_equipment_power_density_default;
     });
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
   };
 

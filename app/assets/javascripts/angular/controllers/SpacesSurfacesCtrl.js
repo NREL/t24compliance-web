@@ -231,7 +231,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
             var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
             rowEntity.adjacent_space_reference = null;
             rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
-            gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
           }
         }
       });
@@ -248,7 +248,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = true;
     $scope.surfacesGridOptions.columnDefs[2].filter.term = $scope.selected.surface.surface_type;
     $scope.surfacesGridOptions.columnDefs[6].allowConstructionEdit = false;
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
 
   $scope.confirmApplySettings = function () {
@@ -265,7 +265,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     _.each(rows, function (row) {
       _.merge(row, replacement);
     });
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
   };
 
@@ -279,7 +279,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = false;
     $scope.surfacesGridOptions.columnDefs[2].filter.term = '';
     $scope.surfacesGridOptions.columnDefs[6].allowConstructionEdit = true;
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
 
   $scope.changeConstruction = function (selectedSurface) {
@@ -289,7 +289,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     });
     ConstructionLibrary.openConstructionLibraryModal(type, rowEntity).then(function (selectedConstruction) {
       selectedSurface.construction_library_id = selectedConstruction.id;
-      $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+      $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     });
   };
 

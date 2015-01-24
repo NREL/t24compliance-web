@@ -110,7 +110,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
           if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
             rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
           }
-          gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
 
           // Remove adjacent spaces
           var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
@@ -145,7 +145,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       _.merge(row, replacement);
       $scope.data.updateTotalExhaust(row);
     });
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
   };
 
