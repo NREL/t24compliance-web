@@ -163,7 +163,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.subsurfacesGridOptions.columnDefs[3].enableFiltering = false;
     $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = true;
     $scope.subsurfacesGridOptions.columnDefs[3].filter.term = $scope.selected.subsurface.type;
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
 
   $scope.confirmApplySettings = function () {
@@ -175,7 +175,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     _.each(rows, function (row) {
       _.merge(row, replacement);
     });
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
   };
 
@@ -188,7 +188,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.subsurfacesGridOptions.columnDefs[3].enableFiltering = true;
     $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = false;
     $scope.subsurfacesGridOptions.columnDefs[3].filter.term = '';
-    $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.COLUMN);
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
 
   $scope.changeConstruction = function (selectedSubsurface) {
@@ -197,13 +197,13 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       var rowEntity = _.find($scope.data.doorData, {id: selectedSubsurface.construction_library_id});
       ConstructionLibrary.openDoorLibraryModal(type, rowEntity).then(function (selectedConstruction) {
         selectedSubsurface.construction_library_id = selectedConstruction.id;
-        $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
       });
     } else {
       var rowEntity = _.find($scope.data.fenData, {id: selectedSubsurface.construction_library_id});
       ConstructionLibrary.openFenLibraryModal(type, rowEntity).then(function (selectedConstruction) {
         selectedSubsurface.construction_library_id = selectedConstruction.id;
-        $scope.gridApi.core.notifyDataChange($scope.gridApi.grid, uiGridConstants.dataChange.EDIT);
+        $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
       });
     }
   };

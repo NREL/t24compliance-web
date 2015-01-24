@@ -418,7 +418,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.hot_water_heating_rate = space.hot_water_heating_rate_default;
       space.receptacle_power_density = space.receptacle_power_density_default;
     });
-    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedSpaceTypeSettingsValues = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
@@ -433,7 +433,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         surface.construction_library_id = surface.constructionDefault;
       }
     });
-    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedSurfaceConstructionDefaults = function () {
     return !_.isEmpty(_.find($scope.data.surfaces, function (surface) {
@@ -447,7 +447,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         subsurface.construction_library_id = subsurface.constructionDefault;
       }
     });
-    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedSubsurfaceConstructionDefaults = function () {
     return !_.isEmpty(_.find($scope.data.subsurfaces, function (subsurface) {
@@ -461,7 +461,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
       $scope.data.updateTotalExhaust(space);
     });
-    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedSpaceTypeExhaustDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
@@ -472,7 +472,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     _.each($scope.data.spaces, function (space) {
       space.commercial_refrigeration_epd = space.commercial_refrigeration_epd_default;
     });
-    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedRefrigerationDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
@@ -483,7 +483,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     _.each($scope.data.spaces, function (space) {
       space.gas_equipment_power_density = space.gas_equipment_power_density_default;
     });
-    gridApi.core.notifyDataChange(gridApi.grid, uiGridConstants.dataChange.EDIT);
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedGasDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
