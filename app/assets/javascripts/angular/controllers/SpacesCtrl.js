@@ -12,6 +12,15 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     luminaires: luminaires
   };
 
+  $scope.data.lightingInputMethods = ['LPD', 'Luminaires'];
+  $scope.data.lightingInputMethodsArr = [];
+  _.each($scope.data.lightingInputMethods, function (lightingInputMethod) {
+    $scope.data.lightingInputMethodsArr.push({
+      id: lightingInputMethod,
+      value: lightingInputMethod
+    });
+  });
+
   // Lookup construction defaults
   _.each(['interior_wall', 'exterior_wall', 'underground_wall', 'interior_floor', 'exterior_floor', 'underground_floor', 'roof', 'door', 'skylight', 'window'], function (type) {
     var library = 'constData';
@@ -99,6 +108,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         $scope.data.surfaces.push(surface);
         surfaceIndex++;
       });
+      // TODO
+      space.lighting_input_method = $scope.data.lightingInputMethods[0];
       delete space[surfaceType];
     });
 
@@ -120,6 +131,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     space.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
 
     space.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
+
+    space.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
   });
 
   $scope.data.storiesArr = [];
@@ -260,6 +273,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     space.gas_equipment_power_density = defaults.gas_equipment_power_density;
     space.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
+    space.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
+    space.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
+    space.interior_lighting_power_density_non_regulated = 0;
+
     $scope.data.spaces.push(space);
   };
   $scope.data.duplicateSpace = function (selected) {
@@ -310,7 +327,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       process_gas_power_density: selectedSpace.process_gas_power_density,
       process_gas_radiation_fraction: selectedSpace.process_gas_radiation_fraction,
       process_gas_latent_fraction: selectedSpace.process_gas_latent_fraction,
-      process_gas_lost_fraction: selectedSpace.process_gas_lost_fraction
+      process_gas_lost_fraction: selectedSpace.process_gas_lost_fraction,
+
+      interior_lighting_power_density_regulated: selectedSpace.interior_lighting_power_density_regulated,
+      interior_lighting_power_density_regulated_default: selectedSpace.interior_lighting_power_density_regulated_default,
+      interior_lighting_power_density_non_regulated: selectedSpace.interior_lighting_power_density_non_regulated
     });
 
     var surfaces = _.filter($scope.data.surfaces, function (surface) {
@@ -488,6 +509,19 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
   $scope.data.modifiedGasDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
       return (space.gas_equipment_power_density !== space.gas_equipment_power_density_default);
+    }));
+  };
+  $scope.data.restoreLPDDefaults = function (gridApi) {
+    _.each($scope.data.spaces, function (space) {
+      if (space.lighting_input_method == 'LPD') {
+        space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
+      }
+    });
+    gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+  };
+  $scope.data.modifiedLPDDefaults = function () {
+    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+      return space.lighting_input_method == 'LPD' && space.interior_lighting_power_density_regulated != space.interior_lighting_power_density_regulated_default;
     }));
   };
 
@@ -821,6 +855,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       function success(response) {
         toaster.pop('success', 'Spaces successfully saved');
       }
+
       function failure(response) {
         console.log("failure", response);
         toaster.pop('error', 'An error occurred while saving', response.statusText);

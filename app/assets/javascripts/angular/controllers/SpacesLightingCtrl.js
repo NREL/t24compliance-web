@@ -1,9 +1,13 @@
-cbecc.controller('SpacesLightingCtrl', ['$scope', '$modal', 'Shared', 'Enums', function ($scope, $modal, Shared, Enums) {
+cbecc.controller('SpacesLightingCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shared', 'Enums', function ($scope, $modal, uiGridConstants, Shared, Enums) {
   $scope.selected = {
     space: null
   };
 
   $scope.applySettingsActive = false;
+
+  $scope.showLuminaires = function () {
+    return !_.isEmpty(_.find($scope.data.spaces, {lighting_input_method: 'Luminaires'}));
+  };
 
   // LPD UI Grid
   $scope.lpdGridOptions = {
@@ -15,11 +19,32 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$modal', 'Shared', 'Enums', f
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       filter: Shared.textFilter()
     }, {
+      name: 'lighting_input_method',
+      enableHiding: false,
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return !_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], $scope.row.entity.space_function);
+      },
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: $scope.data.lightingInputMethodsArr,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+      filter: Shared.textFilter()
+    }, {
       name: 'interior_lighting_power_density_regulated',
       displayName: 'Regulated LPD',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
-      cellEditableCondition: $scope.data.applySettingsCondition,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.lighting_input_method == 'Luminaires') {
+          return 'disabled-cell';
+        } else if (row.entity.interior_lighting_power_density_regulated != row.entity.interior_lighting_power_density_regulated_default) {
+          return 'modified-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return $scope.row.entity.lighting_input_method != 'Luminaires';
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
@@ -28,7 +53,15 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$modal', 'Shared', 'Enums', f
       displayName: 'Unregulated LPD',
       secondLine: Shared.html('W / ft<sup>2</sup>'),
       enableHiding: false,
-      cellEditableCondition: $scope.data.applySettingsCondition,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.lighting_input_method == 'Luminaires') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return $scope.row.entity.lighting_input_method != 'Luminaires';
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number',
       filters: Shared.numberFilter()
