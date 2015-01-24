@@ -105,7 +105,8 @@ class TerminalUnitsController < ApplicationController
       # save / update air segment paths based on zone configs
       save_air_system_paths
 
-      # TODO: figure out how to delete terminal units no longer attached to a zone!
+      # delete terminal units that no longer match an existing zone
+      delete_orphan_terminal_units
 
     end
 
@@ -166,6 +167,22 @@ class TerminalUnitsController < ApplicationController
             segment.path = 'PlenumZones'
           end
           segment.save
+        end
+      end
+    end
+
+    def delete_orphan_terminal_units
+      # delete all terminal units with a 'zone_served_reference' that doesn't match one of the existing zones
+      # units belong to air systems (not zones, to complicate things)
+      air_systems = @building.air_systems
+      system_ids = air_systems.collect {|i| i.id }
+      units = TerminalUnit.any_in(air_system_id: system_ids)
+      # retrieve zone names
+      zone_names = @building.thermal_zones.collect {|i| i.name}
+      units.each do |unit|
+        if ! zone_names.include? unit.zone_served_reference
+          logger.info("!!!! DESTROY UNIT: #{unit.name} . NO MATCHING ZONE")
+          unit.destroy
         end
       end
     end
