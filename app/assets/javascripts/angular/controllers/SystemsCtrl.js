@@ -1,4 +1,4 @@
-cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $modal, toaster, uiGridConstants, data, Shared, Enums, saved_systems, saved_plants) {
+cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, saved_systems, saved_plants) {
 
   // put all systems DATA in array for panels (even exhaust)
   $scope.systems = {
@@ -1062,7 +1062,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
   }
 
   function addDependentPlants(name) {
-    console.log('adding dependent plants for: ', name);
+    $log.debug('adding dependent plants for: ', name);
     switch (name) {
       case 'ptac':
         // hot_water plant only
@@ -1095,7 +1095,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
     switch (name) {
       case 'hot_water':
         if (!$scope.plants.hot_water.length) {
-          console.log('adding hot_water plant');
+          $log.debug('adding hot_water plant');
           $scope.plants.hot_water.push({
             name: "BaseHWSystem",
             type: "HotWater",
@@ -1121,7 +1121,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
         break;
       case 'chilled_water':
         if (!$scope.plants.chilled_water.length) {
-          console.log('adding chilled_water plant');
+          $log.debug('adding chilled_water plant');
           $scope.plants.chilled_water.push({
             name: "BaseChWSystem",
             type: "ChilledWater",
@@ -1149,7 +1149,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
         break;
       case 'condenser':
         if (!$scope.plants.condenser.length) {
-          console.log('adding condenser');
+          $log.debug('adding condenser');
           $scope.plants.condenser.push({
             name: "BaseCWSystem",
             type: "CondenserWater",
@@ -1177,9 +1177,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
 
   $scope.duplicateSystem = function (name) {
     var new_item = angular.copy($scope.selected[name]);
-    console.log("name:");
-    console.log(name);
-    console.log($scope.selected);
+    $log.debug("name:");
+    $log.debug(name);
+    $log.debug($scope.selected);
     delete new_item.$$hashKey;
     new_item.name += " duplicate";
     $scope.systems[name].push(new_item);
@@ -1214,10 +1214,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
 
   //**** SAVE ****
   $scope.submit = function () {
-    console.log("submit");
+    $log.debug('Submitting systems');
     $scope.errors = {}; //clean up server errors
 
-    console.log($scope.systems);
+    $log.debug($scope.systems);
     var params;
 
     function success(response) {
@@ -1231,8 +1231,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
       });
       params = Shared.defaultParams();
       params.data = plants;
-      console.log('SAVING PLANTS!');
-      console.log(plants);
+      $log.debug('Submitting plants');
+      $log.debug(plants);
       data.bulkSync('fluid_systems', params).then(success).catch(failure);
 
       function success(response) {
@@ -1240,13 +1240,13 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
       }
 
       function failure(response) {
-        console.log("failure", response);
+        $log.error('Failure submitting plants', response);
         toaster.pop('error', 'An error occurred while saving plants');
       }
     }
 
     function failure(response) {
-      console.log("failure", response);
+      $log.error('Failure submitting systems', response);
       toaster.pop('error', 'An error occurred while saving systems');
     }
 
@@ -1259,7 +1259,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
     });
 
     // first save systems
-    console.log("SAVING SYSTEMS!");
     params = Shared.defaultParams();
     params.data = systems;
     data.bulkSync('zone_systems', params).then(success).catch(failure);
@@ -1289,7 +1288,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$modal', 'toaster', 'uiGridConstants
         } else {
           sys_type = system.type;
         }
-        console.log("SYSTEM TYPE: ", sys_type);
+        $log.debug("SYSTEM TYPE: ", sys_type);
 
         $scope.addSystem(sys_type);
       }
@@ -1351,7 +1350,7 @@ cbecc.controller('ModalSystemCreatorCtrl', [
         quantity: $scope.quantity,
         type: $scope.type
       };
-      console.log(data);
+      $log.debug(data);
       $modalInstance.close(data);
     };
 

@@ -1,4 +1,4 @@
-cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums', function ($scope, uiGridConstants, Shared, Enums) {
+cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Shared', 'Enums', function ($scope, $log, uiGridConstants, Shared, Enums) {
 
   $scope.selected = {
     exhaust: null
@@ -13,7 +13,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       thermal_zone_reference: zone.name
     }), function (space) {
       if (Shared.calculateTotalExhaust(space) > 0) {
-        //console.log("TOTAL EXHAUST FOR ", space.name, ": ", Shared.calculateTotalExhaust(space) );
+        //$log.debug("TOTAL EXHAUST FOR ", space.name, ": ", Shared.calculateTotalExhaust(space) );
         exhaustZonesArr.push({
           id: zone.id,
           value: zone.name
@@ -24,8 +24,8 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
     });
   });
 
-  console.log("exhaustZonesArray");
-  console.log(exhaustZonesArr);
+  $log.debug("exhaustZonesArray");
+  $log.debug(exhaustZonesArr);
 
   // compare exhaustZonesArr with $scope.data.exhausts to see if rows need to be added (for zones that have new spaces with exhaust)
   _.each(exhaustZonesArr, function (zone) {
@@ -33,7 +33,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       zone_id: zone.id
     });
     if (!match) {
-      console.log("NO MATCH FOR zone id: ", zone.id);
+      $log.debug("NO MATCH FOR zone id: ", zone.id);
       // add to array
       $scope.data.exhausts.push({
         zone_id: zone.id,
@@ -43,8 +43,8 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', 'uiGridConstants', 'Shared', 'E
       });
     }
   });
-  console.log("data.exhausts");
-  console.log($scope.data.exhausts);
+  $log.debug("data.exhausts");
+  $log.debug($scope.data.exhausts);
 
 
   var minWidth = 150;

@@ -10,7 +10,9 @@ var cbecc = angular.module('cbecc', [
   'angularSpinner']);
 
 cbecc.config([
-  '$stateProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider', function ($stateProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
+  '$logProvider', '$stateProvider', '$provide', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider', function ($logProvider, $stateProvider, $provide, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
+
+    $logProvider.debugEnabled(true);
 
     usSpinnerConfigProvider.setDefaults({
       color: '#70be44',
@@ -334,7 +336,7 @@ cbecc.config([
   }]);
 
 
-cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $q, toaster, Shared, api, data) {
+cbecc.run(['$rootScope', '$state', '$log', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $log, $q, toaster, Shared, api, data) {
   api.add(['spaces', 'buildings', 'building_stories', 'constructions', 'fenestrations', 'door_lookups', 'construction_defaults', 'zone_systems', 'fluid_systems', 'spaces', 'simulations', 'space_function_defaults', 'thermal_zones', 'terminal_units', 'luminaires']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
@@ -355,12 +357,12 @@ cbecc.run(['$rootScope', '$state', '$q', 'toaster', 'Shared', 'api', 'data', fun
         project_id: Shared.getProjectId()
       });
     } else {
-      console.error('Unhandled state change error:', error);
+      $log.error('Unhandled state change error:', error);
       $state.go('project');
     }
   });
   $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
-    console.error('State not found:', unfoundState.to);
+    $log.error('State not found:', unfoundState.to);
   });
 }]);
 

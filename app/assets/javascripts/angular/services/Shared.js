@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($q, $templateCache, $sce, DSCacheFactory, usSpinnerService, uiGridConstants) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($log, $q, $templateCache, $sce, DSCacheFactory, usSpinnerService, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -171,7 +171,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
     //var start = new Date().getTime();
     var decompressed = LZString.decompressFromUTF16(cache.get(key));
     //var end = new Date().getTime();
-    //console.log('Decompressed ' + key + ' in ' + (end - start) + ' ms');
+    //$log.debug('Decompressed ' + key + ' in ' + (end - start) + ' ms');
     return JSON.parse(decompressed);
   };
 
@@ -179,24 +179,24 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
     // Test compression algorithms
     /*var start = new Date().getTime();
      var str = JSON.stringify(value);
-     console.log(key + ' stringify.length: ' + str.length);
+     $log.debug(key + ' stringify.length: ' + str.length);
      var end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');
+     $log.debug('    Execution time: ' + (end-start) + ' ms');
 
      start = new Date().getTime();
-     console.log(key + ' compress.length: ' + LZString.compress(str).length);
+     $log.debug(key + ' compress.length: ' + LZString.compress(str).length);
      end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');
+     $log.debug('    Execution time: ' + (end-start) + ' ms');
 
      start = new Date().getTime();
-     console.log(key + ' compressToUTF16.length: ' + LZString.compressToUTF16(str).length);
+     $log.debug(key + ' compressToUTF16.length: ' + LZString.compressToUTF16(str).length);
      end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');
+     $log.debug('    Execution time: ' + (end-start) + ' ms');
 
      start = new Date().getTime();
-     console.log(key + ' compressToUint8Array.length: ' + LZString.compressToUint8Array(str).length);
+     $log.debug(key + ' compressToUint8Array.length: ' + LZString.compressToUint8Array(str).length);
      end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');*/
+     $log.debug('    Execution time: ' + (end-start) + ' ms');*/
 
     var compressed = LZString.compressToUTF16(JSON.stringify(value));
     cache.put(key, compressed);
@@ -294,10 +294,10 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
     return Math.round(perArea + perVolume + perSpace);
   };
 
-  $templateCache.put('ui-grid/cbeccHeaderCell', '<div ng-class="{ \'sortable\': sortable }"><div class="ui-grid-vertical-bar">&nbsp;</div><div class="ui-grid-cell-contents" col-index="renderIndex"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible="!col.colDef.enableCellEdit && col.colDef.displayName != \'Construction\'" class="fa fa-lock"></span> <span ui-grid-visible="col.sort.direction" ng-class="{ \'ui-grid-icon-up-dir\': col.sort.direction == asc, \'ui-grid-icon-down-dir\': col.sort.direction == desc, \'ui-grid-icon-blank\': !col.sort.direction }">&nbsp;</span></div><div class="ui-grid-column-menu-button" ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false" class="ui-grid-column-menu-button" ng-click="toggleMenu($event)"><i class="ui-grid-icon-angle-down">&nbsp;</i></div><div ng-if="grid.options.enableFiltering && col.enableFiltering" class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><input type="text" class="ui-grid-filter-input" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || \'\'}}"><div class="ui-grid-filter-button" ng-click="colFilter.term = null"><i class="ui-grid-icon-cancel" ng-show="!!colFilter.term">&nbsp;</i><!-- use !! because angular interprets \'f\' as false --></div></div></div>');
-  $templateCache.put('ui-grid/cbeccHeaderCellWithUnits', '<div ng-class="{ \'sortable\': sortable }"><div class="ui-grid-vertical-bar">&nbsp;</div><div class="ui-grid-cell-contents" col-index="renderIndex"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible="!col.colDef.enableCellEdit && col.colDef.displayName != \'Construction\'" class="fa fa-lock"></span> <span ui-grid-visible="col.sort.direction" ng-class="{ \'ui-grid-icon-up-dir\': col.sort.direction == asc, \'ui-grid-icon-down-dir\': col.sort.direction == desc, \'ui-grid-icon-blank\': !col.sort.direction }">&nbsp;</span><br><small ng-bind-html="col.colDef.secondLine"></small></div><div class="ui-grid-column-menu-button" ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false" class="ui-grid-column-menu-button" ng-click="toggleMenu($event)"><i class="ui-grid-icon-angle-down">&nbsp;</i></div><div ng-if="grid.options.enableFiltering && col.enableFiltering" class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><input type="text" class="ui-grid-filter-input" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || \'\'}}"><div class="ui-grid-filter-button" ng-click="colFilter.term = null"><i class="ui-grid-icon-cancel" ng-show="!!colFilter.term">&nbsp;</i><!-- use !! because angular interprets \'f\' as false --></div></div></div>');
+  $templateCache.put('ui-grid/cbeccHeaderCell', '<div ng-class="{ \'sortable\': sortable }"><div class="ui-grid-vertical-bar">&nbsp;</div><div class="ui-grid-cell-contents" col-index="renderIndex"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible="!col.colDef.enableCellEdit && col.colDef.displayName != \'Construction\' && col.colDef.displayName != \'Luminaire\'" class="fa fa-lock"></span> <span ui-grid-visible="col.sort.direction" ng-class="{ \'ui-grid-icon-up-dir\': col.sort.direction == asc, \'ui-grid-icon-down-dir\': col.sort.direction == desc, \'ui-grid-icon-blank\': !col.sort.direction }">&nbsp;</span></div><div class="ui-grid-column-menu-button" ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false" class="ui-grid-column-menu-button" ng-click="toggleMenu($event)"><i class="ui-grid-icon-angle-down">&nbsp;</i></div><div ng-if="grid.options.enableFiltering && col.enableFiltering" class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><input type="text" class="ui-grid-filter-input" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || \'\'}}"><div class="ui-grid-filter-button" ng-click="colFilter.term = null"><i class="ui-grid-icon-cancel" ng-show="!!colFilter.term">&nbsp;</i><!-- use !! because angular interprets \'f\' as false --></div></div></div>');
+  $templateCache.put('ui-grid/cbeccHeaderCellWithUnits', '<div ng-class="{ \'sortable\': sortable }"><div class="ui-grid-vertical-bar">&nbsp;</div><div class="ui-grid-cell-contents" col-index="renderIndex"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible="!col.colDef.enableCellEdit && col.colDef.displayName != \'Construction\' && col.colDef.displayName != \'Luminaire\'" class="fa fa-lock"></span> <span ui-grid-visible="col.sort.direction" ng-class="{ \'ui-grid-icon-up-dir\': col.sort.direction == asc, \'ui-grid-icon-down-dir\': col.sort.direction == desc, \'ui-grid-icon-blank\': !col.sort.direction }">&nbsp;</span><br><small ng-bind-html="col.colDef.secondLine"></small></div><div class="ui-grid-column-menu-button" ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false" class="ui-grid-column-menu-button" ng-click="toggleMenu($event)"><i class="ui-grid-icon-angle-down">&nbsp;</i></div><div ng-if="grid.options.enableFiltering && col.enableFiltering" class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><input type="text" class="ui-grid-filter-input" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || \'\'}}"><div class="ui-grid-filter-button" ng-click="colFilter.term = null"><i class="ui-grid-icon-cancel" ng-show="!!colFilter.term">&nbsp;</i><!-- use !! because angular interprets \'f\' as false --></div></div></div>');
   $templateCache.put('ui-grid/cbeccConstructionCell', '<div class="ui-grid-cell-contents"><span class="glyphicon glyphicon-edit pull-right edit" ui-grid-visible=\"col.colDef.allowConstructionEdit\" aria-hidden="true" ng-click="grid.appScope.changeConstruction(row.entity)"></span><span>{{COL_FIELD CUSTOM_FILTERS}}</span></div>');
-  $templateCache.put('ui-grid/cbeccLuminaireCell', '<div class="ui-grid-cell-contents"><span class="glyphicon glyphicon-edit pull-right edit" aria-hidden="true" ng-click="grid.appScope.changeLuminaire(row.entity)"></span><span>{{COL_FIELD CUSTOM_FILTERS}}</span></div>');
+  $templateCache.put('ui-grid/cbeccLuminaireCell', '<div class="ui-grid-cell-contents"><span class="glyphicon glyphicon-edit pull-right edit" ui-grid-visible=\"col.colDef.allowLuminaireEdit\" aria-hidden="true" ng-click="grid.appScope.changeLuminaire(row.entity)"></span><span>{{COL_FIELD CUSTOM_FILTERS}}</span></div>');
 
   return service;
 }]);

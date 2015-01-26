@@ -1,5 +1,5 @@
 cbecc.controller('ConstructionsCtrl', [
-  '$scope', '$location', 'toaster', 'ConstructionDefaults', 'Shared', 'ConstructionLibrary', 'constData', 'doorData', 'fenData', 'defaults', function ($scope, $location, toaster, ConstructionDefaults, Shared, ConstructionLibrary, constData, doorData, fenData, defaults) {
+  '$scope', '$log', '$location', 'toaster', 'ConstructionDefaults', 'Shared', 'ConstructionLibrary', 'constData', 'doorData', 'fenData', 'defaults', function ($scope, $log, $location, toaster, ConstructionDefaults, Shared, ConstructionLibrary, constData, doorData, fenData, defaults) {
     Shared.stopSpinner();
 
     // construction data
@@ -221,14 +221,14 @@ cbecc.controller('ConstructionsCtrl', [
 
     // save (constructions, doors, and fenestrations saved in same record)
     $scope.submit = function () {
-      console.log("submit");
+      $log.debug('Submitting constructions');
 
       function success(response) {
         toaster.pop('success', 'Construction defaults successfully saved');
       }
 
       function failure(response) {
-        console.log("failure", response);
+        $log.error('Failure submitting constructions', response);
         toaster.pop('error', 'An error occurred while saving', response.statusText);
       }
 

@@ -52,7 +52,9 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
       });
       if ($scope.editable) {
         gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-          if (colDef.name == 'fixture_type' && newValue != oldValue) {
+          if (colDef.name == 'name' && newValue != oldValue) {
+            $scope.data.updateLumHash();
+          } else if (colDef.name == 'fixture_type' && newValue != oldValue) {
             _.merge(rowEntity, $scope.data.luminaireHeatGain(rowEntity.fixture_type));
           } else if (colDef.name == 'power' && newValue != oldValue) {
             _.each($scope.data.lightingSystems, function (lightingSystem) {

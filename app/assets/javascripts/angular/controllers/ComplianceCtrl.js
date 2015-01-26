@@ -1,13 +1,13 @@
-cbecc.controller('ComplianceCtrl', ['$scope', 'data', 'Shared', function ($scope, data, Shared) {
+cbecc.controller('ComplianceCtrl', ['$scope', '$log', 'data', 'Shared', function ($scope, $log, data, Shared) {
   $scope.getXml = function () {
-    console.log("submitting simulation to run queue");
+    $log.debug('Submitting simulation to run queue');
 
     var params = Shared.defaultParams();
     params.data = {
       action: 'xml'
     };
 
-    console.log(params);
+    $log.debug(params);
     data.bulkSync('simulations', params);
   };
 }]);
