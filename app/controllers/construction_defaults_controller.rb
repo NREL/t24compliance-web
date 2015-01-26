@@ -1,6 +1,8 @@
 class ConstructionDefaultsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_construction_default, only: [:show, :edit, :update, :destroy]
   before_action :get_project
+  load_and_authorize_resource :project #the resource is project
 
   respond_to :json, :html
 

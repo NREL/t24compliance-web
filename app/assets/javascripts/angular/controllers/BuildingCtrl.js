@@ -106,6 +106,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     function success(response) {
       toaster.pop('success', 'Building successfully saved');
       var the_id = response.hasOwnProperty('id') ? response.id : response._id;
+      $log.debug("Building ID: ", the_id );
       Shared.setBuildingId(the_id);
       // UPDATE STORIES
       $scope.stories.forEach(function (s) {

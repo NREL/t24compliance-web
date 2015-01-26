@@ -20,7 +20,9 @@ class Ability
       can [:show, :update], User, :id => user.id
       can :home, User
       can [:create, :wizard], Project
-      can [:edit, :show, :delete, :update], Project, :user_id => user.id
+      can [:show, :delete, :update], Project, :user_id => user.id
+      can [:create], Building
+      can [:show, :bulk_sync, :index], Building, :user_id => user.id
       Rails.logger.info("USER IS AUTHENTICATED: #{user.inspect}")
     # unauthenticated
     else

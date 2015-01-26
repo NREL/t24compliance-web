@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource param_method: :building_params
+  load_and_authorize_resource
   before_action :set_building, only: [:edit, :update, :destroy,:show]
   before_action :get_project
 
@@ -28,8 +28,11 @@ class BuildingsController < ApplicationController
   end
 
   def create
+    logger.info("HI!!")
     @project.building = Building.new(building_params)
+    @project.building.user = current_user
     @project.building.save
+    logger.info("building is: #{@project.building.inspect}")
     respond_with(@project.building)
   end
 

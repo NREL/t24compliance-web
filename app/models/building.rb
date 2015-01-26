@@ -38,6 +38,7 @@ class Building
   has_many :air_systems, dependent: :destroy, autosave: true
   has_many :zone_systems, dependent: :destroy, autosave: true
   belongs_to :project
+  belongs_to :user
 
   # Validation
   validates_presence_of :name
