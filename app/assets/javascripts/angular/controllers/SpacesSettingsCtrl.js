@@ -111,6 +111,9 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           if (rowEntity.interior_lighting_power_density_regulated == rowEntity.interior_lighting_power_density_regulated_default && rowEntity.lighting_input_method == 'LPD') {
             rowEntity.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
           }
+          if (rowEntity.interior_lighting_power_density_non_regulated == rowEntity.interior_lighting_power_density_non_regulated_default && rowEntity.lighting_input_method == 'LPD') {
+            rowEntity.interior_lighting_power_density_non_regulated = defaults.interior_lighting_power_density_non_regulated;
+          }
 
           rowEntity.occupant_density_default = defaults.occupant_density;
           rowEntity.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
@@ -131,6 +134,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           rowEntity.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
           rowEntity.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
+          rowEntity.interior_lighting_power_density_non_regulated_default = defaults.interior_lighting_power_density_non_regulated;
 
           gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         }
@@ -194,8 +198,12 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       if (row.interior_lighting_power_density_regulated == row.interior_lighting_power_density_regulated_default && row.lighting_input_method == 'LPD') {
         row.interior_lighting_power_density_regulated = $scope.selected.space.interior_lighting_power_density_regulated_default;
       }
+      if (row.interior_lighting_power_density_non_regulated == row.interior_lighting_power_density_non_regulated_default && row.lighting_input_method == 'LPD') {
+        row.interior_lighting_power_density_non_regulated = $scope.selected.space.interior_lighting_power_density_non_regulated_default;
+      }
       // Update LPD defaults
       row.interior_lighting_power_density_regulated_default = $scope.selected.space.interior_lighting_power_density_regulated_default;
+      row.interior_lighting_power_density_non_regulated_default = $scope.selected.space.interior_lighting_power_density_non_regulated_default;
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

@@ -1,8 +1,13 @@
-cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$modalInstance', 'Shared', 'Enums', 'params', function ($scope, $modalInstance, Shared, Enums, params) {
+cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInstance', 'Shared', 'Enums', 'params', function ($scope, $interval, $modalInstance, Shared, Enums, params) {
   $scope.data = params.data;
   $scope.selected = {
     luminaire: null
   };
+  $scope.editable = true;
+
+  $scope.luminaireGridApi = params.luminaireGridApi;
+
+  if (typeof (params.luminaireIndex) !== 'undefined') $scope.editable = false;
 
   $scope.gridOptions = {
     columnDefs: [{
@@ -30,9 +35,9 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$modalInstance', 'Share
       filter: Shared.textFilter()
     }],
     data: $scope.data.luminaires,
-    enableCellEditOnFocus: true,
+    enableCellEditOnFocus: $scope.editable,
     enableFiltering: true,
-    enableRowHeaderSelection: true,
+    enableRowHeaderSelection: $scope.editable,
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
@@ -45,15 +50,37 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$modalInstance', 'Share
           $scope.selected.luminaire = null;
         }
       });
-      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if (colDef.name == 'fixture_type' && newValue != oldValue) {
-          _.merge(rowEntity, $scope.data.luminaireHeatGain(rowEntity.fixture_type));
-        }
-      });
+      if ($scope.editable) {
+        gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+          if (colDef.name == 'fixture_type' && newValue != oldValue) {
+            _.merge(rowEntity, $scope.data.luminaireHeatGain(rowEntity.fixture_type));
+          } else if (colDef.name == 'power' && newValue != oldValue) {
+            _.each($scope.data.lightingSystems, function (lightingSystem) {
+              var luminaire = lightingSystem.luminaire_reference[0];
+              if (luminaire) {
+                lightingSystem.power = $scope.data.luminaires[luminaire].power * lightingSystem.luminaire_count[0];
+              }
+            });
+          }
+        });
+      } else {
+        $interval(function () {
+          $scope.gridApi.selection.selectRow($scope.gridOptions.data[params.luminaireIndex]);
+        }, 0, 1);
+      }
     }
   };
 
   $scope.close = function () {
-    $modalInstance.dismiss();
+    $modalInstance.close();
+  };
+
+  $scope.ok = function () {
+    var luminaireIndex = $scope.data.luminaires.indexOf($scope.selected.luminaire);
+    $modalInstance.close(luminaireIndex);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
   };
 }]);

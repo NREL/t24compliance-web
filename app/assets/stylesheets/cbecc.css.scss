@@ -253,6 +253,12 @@ body > .container-fluid > .header-row.wizard {
   }
 }
 
+.msg-select-a-luminaire {
+  .ui-grid-cell-contents:after {
+    content: " - Select a Luminaire -";
+  }
+}
+
 .border-left-cell {
   border-left: 2px solid #909090;
 }

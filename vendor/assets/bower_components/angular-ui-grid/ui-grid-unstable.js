@@ -1,4 +1,4 @@
-/*! ui-grid - v3.0.0-RC.18-68a22ae - 2015-01-23
+/*! ui-grid - v3.0.0-RC.18-a54e9a9 - 2015-01-25
 * Copyright (c) 2015 ; License: MIT */
 (function () {
   'use strict';
@@ -174,7 +174,7 @@ angular.module('ui.grid').directive('uiGridCell', ['$compile', '$parse', 'gridUt
           }
           
           // Register a data change watch that would get triggered whenever someone edits a cell or modifies column defs
-          var watchUid = $scope.grid.registerDataChangeCallback( updateClass, [uiGridConstants.dataChange.COLUMN, uiGridConstants.dataChange.EDIT]);
+          var dataChangeDereg = $scope.grid.registerDataChangeCallback( updateClass, [uiGridConstants.dataChange.COLUMN, uiGridConstants.dataChange.EDIT]);
           
           // watch the col and row to see if they change - which would indicate that we've scrolled or sorted or otherwise
           // changed the row/col that this cell relates to, and we need to re-evaluate cell classes and maybe other things
@@ -192,7 +192,7 @@ angular.module('ui.grid').directive('uiGridCell', ['$compile', '$parse', 'gridUt
           
           
           var deregisterFunction = function() {
-            $scope.grid.deregisterDataChangeCallback( watchUid );
+            dataChangeDereg();
             colWatchDereg();
             rowWatchDereg(); 
           };
@@ -725,11 +725,9 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
             }
 
             // Register a data change watch that would get triggered whenever someone edits a cell or modifies column defs
-            var watchUid = $scope.grid.registerDataChangeCallback( updateClass, [uiGridConstants.dataChange.COLUMN]);
+            var dataChangeDereg = $scope.grid.registerDataChangeCallback( updateClass, [uiGridConstants.dataChange.COLUMN]);
 
-            $scope.$on( '$destroy', function() {
-              $scope.grid.deregisterDataChangeCallback( watchUid ); 
-            });
+            $scope.$on( '$destroy', dataChangeDereg );
           }
         };
       }
@@ -942,20 +940,17 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
                 classAdded = $scope.col.headerCellClass;
               }
               contents.addClass(classAdded);
+              
+              var rightMostContainer = $scope.grid.renderContainers['right'] ? $scope.grid.renderContainers['right'] : $scope.grid.renderContainers['body'];
+              $scope.isLastCol = ( $scope.col === rightMostContainer.visibleColumnCache[ rightMostContainer.visibleColumnCache.length - 1 ] );
             };
   
-            if ($scope.col.headerCellClass) {
-              updateClass();
-            }
+            updateClass();
             
             // Register a data change watch that would get triggered whenever someone edits a cell or modifies column defs
-            var watchUid = $scope.grid.registerDataChangeCallback( updateClass, [uiGridConstants.dataChange.COLUMN]);
+            var dataChangeDereg = $scope.grid.registerDataChangeCallback( updateClass, [uiGridConstants.dataChange.COLUMN]);
 
-            var deregisterFunction = function() {
-              $scope.grid.deregisterDataChangeCallback( watchUid ); 
-            };
-
-            $scope.$on( '$destroy', deregisterFunction );            
+            $scope.$on( '$destroy', dataChangeDereg );            
 
 
             // Figure out whether this column is sortable or not
@@ -3655,7 +3650,7 @@ angular.module('ui.grid')
    * @param {array} types the types of data change you want to be informed of.  Values from 
    * the uiGridConstants.dataChange values ( ALL, EDIT, ROW, COLUMN, OPTIONS ).  Optional and defaults to
    * ALL 
-   * @returns {string} uid of the callback, can be used to deregister it again
+   * @returns {function} deregister function - a function that can be called to deregister this callback
    */
   Grid.prototype.registerDataChangeCallback = function registerDataChangeCallback(callback, types, _this) {
     var uid = gridUtil.nextUid();
@@ -3666,18 +3661,12 @@ angular.module('ui.grid')
       gridUtil.logError("Expected types to be an array or null in registerDataChangeCallback, value passed was: " + types );
     }
     this.dataChangeCallbacks[uid] = { callback: callback, types: types, _this:_this };
-    return uid;
-  };
-
-  /**
-   * @ngdoc function
-   * @name deregisterDataChangeCallback
-   * @methodOf ui.grid.class:Grid
-   * @description Delete the callback identified by the id.
-   * @param {string} uid the uid of the function that is to be deregistered
-   */
-  Grid.prototype.deregisterDataChangeCallback = function deregisterDataChangeCallback(uid) {
-    delete this.dataChangeCallbacks[uid];
+    
+    var self = this;
+    var deregisterFunction = function() {
+      delete self.dataChangeCallbacks[uid];
+    };
+    return deregisterFunction;
   };
 
   /**
@@ -8226,7 +8215,7 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
 
     // Get the column value for this row
     var value = grid.getCellValue(row, column);
-
+    
     // If the filter's condition is a RegExp, then use it
     if (filter.condition instanceof RegExp) {
       return filter.condition.test(value);
@@ -8253,6 +8242,17 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
       return filter.exactRE.test(value);
     }
     
+    if (filter.condition === uiGridConstants.filter.NOT_EQUAL) {
+      return angular.equals(value, term);
+    }
+
+    if (typeof(value) === 'number'){
+      var tempFloat = parseFloat(term);
+      if (!isNaN(tempFloat)) {
+        term = tempFloat;
+      }
+    }
+
     if (filter.condition === uiGridConstants.filter.GREATER_THAN) {
       return (value > term);
     }
@@ -8269,10 +8269,6 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
       return (value <= term);
     }
     
-    if (filter.condition === uiGridConstants.filter.NOT_EQUAL) {
-      return angular.equals(value, term);
-    }
-
     return true;
   };
 
@@ -8591,8 +8587,8 @@ module.service('rowSorter', ['$parse', 'uiGridConstants', function ($parse, uiGr
     if ( nulls !== null ){
       return nulls;
     } else {
-      var strA = a.toLowerCase(),
-          strB = b.toLowerCase();
+      var strA = a.toString().toLowerCase(),
+          strB = b.toString().toLowerCase();
   
       return strA === strB ? 0 : (strA < strB ? -1 : 1);
     }
@@ -11661,6 +11657,19 @@ module.filter('px', function() {
 
                 /**
                  * @ngdoc function
+                 * @name scrollToFocus
+                 * @methodOf  ui.grid.cellNav.api:PublicApi
+                 * @description brings the specified row and column fully into view if it isn't already
+                 * @param {object} $scope a scope we can broadcast events from
+                 * @param {GridRow} row grid row that we should make fully visible
+                 * @param {GridCol} col grid col to make fully visible
+                 */
+                scrollToIfNecessary: function ($scope, row, col) {
+                  service.scrollToIfNecessary(grid, $scope, row, col);
+                },
+
+                /**
+                 * @ngdoc function
                  * @name getFocusedCell
                  * @methodOf  ui.grid.cellNav.api:PublicApi
                  * @description returns the current (or last if Grid does not have focus) focused row and column
@@ -12284,10 +12293,12 @@ module.filter('px', function() {
                 if (uiGridCtrl.grid.api.cellNav.getFocusedCell() == null) {
                   return;
                 }
-
+                
                 // We have to wrap in TWO timeouts so that we run AFTER the scroll event is resolved.
                 $timeout(function () {
                   $timeout(function () {
+
+/* No longer trying to retain focus when scroll - too many side effects, particularly with editOnFocus
                     // Get the last row+col combo
                     var lastRowCol = uiGridCtrl.grid.api.cellNav.getFocusedCell();
 
@@ -12297,12 +12308,16 @@ module.filter('px', function() {
                     if ($document.activeElement === $document.body) {
                       $elm[0].focus();
                     }
+*/
+                    // make a dummy roCol
+                    var rowCol = { col: { uid: null }, row: { uid: null } };
 
-                    // Re-broadcast a cellNav event so we re-focus the right cell
-                    //uiGridCtrl.cellNav.broadcastCellNav(lastRowCol);
+                    // broadcast a cellNav event so we clear the focus on all cells
+                    uiGridCtrl.cellNav.broadcastCellNav(rowCol);
                   });
                 });
-              });
+              });  
+             
             }
           };
         }
@@ -12985,6 +13000,11 @@ module.filter('px', function() {
                 return;
               }
 
+              // if the cell isn't fully visible, and cellNav is present, scroll it to be fully visible before we start
+              if ( $scope.grid.api.cellNav ){
+                $scope.grid.api.cellNav.scrollToIfNecessary( $scope, $scope.row, $scope.col );
+              }
+              
               cellModel = $parse($scope.row.getQualifiedColField($scope.col));
               //get original value from the cell
               origCellValue = cellModel($scope);
@@ -15458,16 +15478,12 @@ module.filter('px', function() {
          */
         addObjects: function( grid, newObjects, $scope ){
           if ( grid.api.rowEdit ){
-            var callbackId = grid.registerDataChangeCallback( function() {
+            var dataChangeDereg = grid.registerDataChangeCallback( function() {
               grid.api.rowEdit.setRowsDirty( newObjects );
-              grid.deregisterDataChangeCallback( callbackId );
+              dataChangeDereg();
             }, [uiGridConstants.dataChange.ROW] );
             
-            var deregisterClosure = function() {
-              grid.deregisterDataChangeCallback( callbackId );
-            };
-  
-            grid.importer.$scope.$on( '$destroy', deregisterClosure );
+            grid.importer.$scope.$on( '$destroy', dataChangeDereg );
           }
 
           grid.importer.$scope.$apply( grid.options.importerDataAddCallback( grid, newObjects ) );
@@ -16569,11 +16585,13 @@ module.filter('px', function() {
             return adjustment;
           });
           
-          uiGridCtrl.grid.registerDataChangeCallback(function (grid) {
+          var dataChangeDereg = uiGridCtrl.grid.registerDataChangeCallback(function (grid) {
             if (!grid.options.useExternalPagination) {
               grid.options.totalItems = grid.rows.length;
             }
           }, [uiGridConstants.dataChange.ROW]);
+          
+          $scope.$on('$destroy', dataChangeDereg);
 
           var setShowing = function () {
             $scope.showingLow = ((options.paginationCurrentPage - 1) * options.paginationPageSize) + 1;
@@ -17053,19 +17071,10 @@ module.filter('px', function() {
 
               var displayResizers = function(){
                 
-                // remove any existing resizers.  This code is ugly, jQlite has lots of limitations!!
-                var children = $elm.children();
-                for ( var i = 0; i < children.length; i++ ){
-                  var isResizer = false;
-                  for ( var j = 0; j < children[i].classList.length; j++ ){
-                    if ( children[i].classList[j] === 'ui-grid-column-resizer'){
-                      isResizer = true;
-                    }
-                  }
-                  if ( isResizer ){
-                    var child = children[i]; // .remove();
-                    angular.element(child).remove();
-                  }
+                // remove any existing resizers.  
+                var resizers = $elm[0].getElementsByClassName('ui-grid-column-resizer');
+                for ( var i = 0; i < resizers.length; i++ ){
+                  angular.element(resizers[i]).remove();
                 } 
                 
                 // get the target column for the left resizer
@@ -17097,13 +17106,9 @@ module.filter('px', function() {
                 $timeout(displayResizers);
               };
               
-              var callbackId = grid.registerDataChangeCallback( waitDisplay, [uiGridConstants.dataChange.COLUMN] );
+              var dataChangeDereg = grid.registerDataChangeCallback( waitDisplay, [uiGridConstants.dataChange.COLUMN] );
               
-              var deregisterClosure = function() {
-                grid.deregisterDataChangeCallback( callbackId );
-              };
-
-              $scope.$on( '$destroy', deregisterClosure );
+              $scope.$on( '$destroy', dataChangeDereg );
             }
           }
         };
@@ -19465,7 +19470,7 @@ module.filter('px', function() {
             registerRowSelectionEvents();
             // register a dataChange callback so that we can change the selection configuration dynamically
             // if the user changes the options
-            var callbackId = $scope.grid.registerDataChangeCallback( function() {
+            var dataChangeDereg = $scope.grid.registerDataChangeCallback( function() {
               if ( $scope.grid.options.enableRowSelection && !$scope.grid.options.enableRowHeaderSelection &&
                 !$scope.registered ){
                 registerRowSelectionEvents();
@@ -19475,9 +19480,7 @@ module.filter('px', function() {
               }
             }, [uiGridConstants.dataChange.OPTIONS] );
 
-            $elm.on( '$destroy', function() {
-              $scope.grid.deregisterDataChangeCallback( callbackId );
-            });
+            $elm.on( '$destroy', dataChangeDereg);
           }
         };
       }]);
@@ -19613,7 +19616,7 @@ angular.module('ui.grid').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('ui-grid/uiGridHeaderCell',
-    "<div ng-class=\"{ 'sortable': sortable }\"><div class=\"ui-grid-vertical-bar\">&nbsp;</div><div class=\"ui-grid-cell-contents\" col-index=\"renderIndex\"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible=\"col.sort.direction\" ng-class=\"{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }\">&nbsp;</span></div><div class=\"ui-grid-column-menu-button\" ng-if=\"grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false\" class=\"ui-grid-column-menu-button\" ng-click=\"toggleMenu($event)\"><i class=\"ui-grid-icon-angle-down\">&nbsp;</i></div><div ng-if=\"filterable\" class=\"ui-grid-filter-container\" ng-repeat=\"colFilter in col.filters\"><input type=\"text\" class=\"ui-grid-filter-input\" ng-model=\"colFilter.term\" ng-attr-placeholder=\"{{colFilter.placeholder || ''}}\"><div class=\"ui-grid-filter-button\" ng-click=\"colFilter.term = null\"><i class=\"ui-grid-icon-cancel\" ng-show=\"!!colFilter.term\">&nbsp;</i><!-- use !! because angular interprets 'f' as false --></div></div></div>"
+    "<div ng-class=\"{ 'sortable': sortable }\"><div class=\"ui-grid-vertical-bar\">&nbsp;</div><div class=\"ui-grid-cell-contents\" col-index=\"renderIndex\"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible=\"col.sort.direction\" ng-class=\"{ 'ui-grid-icon-up-dir': col.sort.direction == asc, 'ui-grid-icon-down-dir': col.sort.direction == desc, 'ui-grid-icon-blank': !col.sort.direction }\">&nbsp;</span></div><div class=\"ui-grid-column-menu-button\" ng-if=\"grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false\" ng-click=\"toggleMenu($event)\" ng-class=\"{'ui-grid-column-menu-button-last-col': isLastCol}\"><i class=\"ui-grid-icon-angle-down\">&nbsp;</i></div><div ng-if=\"filterable\" class=\"ui-grid-filter-container\" ng-repeat=\"colFilter in col.filters\"><input type=\"text\" class=\"ui-grid-filter-input\" ng-model=\"colFilter.term\" ng-attr-placeholder=\"{{colFilter.placeholder || ''}}\"><div class=\"ui-grid-filter-button\" ng-click=\"colFilter.term = null\"><i class=\"ui-grid-icon-cancel\" ng-show=\"!!colFilter.term\">&nbsp;</i><!-- use !! because angular interprets 'f' as false --></div></div></div>"
   );
 
 

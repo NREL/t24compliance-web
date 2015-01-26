@@ -21,7 +21,17 @@
   </div>
 </div>
 <div ui-grid="lpdGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-<div ng-if="showLuminaires()">
+<div ng-if="showLightingSystems">
   <h3 class="pad-top-30">Luminaire Selection</h3>
+  <div class="row pad-bot-20">
+    <div class="col-md-12">
+      <button type="button" ng-hide="applySettingsActive" ng-click="data.addLightingSystem()" class="btn btn-info">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Luminaires
+      </button>
+      <div class="pull-right">
+        <button type="button" ng-hide="applySettingsActive" ng-click="data.deleteLightingSystem(selected, luminaireGridApi)" class="btn btn-danger" ng-disabled="!selected.lightingSystem">Delete</button>
+      </div>
+    </div>
+  </div>
   <div ui-grid="luminaireGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
 </div>

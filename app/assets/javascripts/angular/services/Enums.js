@@ -239,12 +239,53 @@ cbecc.factory('Enums', function () {
       'MercuryVapor',
       'HighPressureSodium'
     ],
+    interior_lighting_systems_status_enums: [
+      'New',
+      'Altered',
+      'Existing',
+      'Future'
+    ],
+    interior_lighting_systems_non_regulated_exclusion_enums: [
+      'ThemeParksThemeAndSpecialEffects',
+      'FilmOrPhotoStudioLightingSeparatelySwitched',
+      'DanceFloorOrTheatrical',
+      'TemporaryExhibitSeparatelySwitchedInCivicTransConvOrHotel',
+      'ManufacturerInstalledInFreezerVendingFoodPrepScientificOrIndEquip',
+      'ExamSurgicalNightOrEquipmentIntegratedInMedicalOrClinical',
+      'PlantGrowthOrMaintWithMultiLevelAstroTimer',
+      'LightingEquipmentForSale',
+      'LightingDemonstrationEquipInLightingEducationFacilities',
+      'CBCRequiredExitSign',
+      'CBCRequiredExitwayOrEgressNormallyOff',
+      'HotelMotelGuestroom',
+      'HighRiseResidentialDwellingUnit',
+      'TemporaryLightingSystems',
+      'SmallAgriculturalBuilding',
+      'SmallUnconditionedAgriculturalBuilding',
+      'HistoricBuilding',
+      'SmallNonresidentialParkingGarage',
+      'SignageLighting',
+      'ATMLighting',
+      'SmallRefrigeratedCases',
+      'ElevatorLighting'
+    ],
+    interior_lighting_systems_power_adjustment_factor_credit_type_enums: [
+      '- none specified -',
+      'PartialOnOccupantSensingControl',
+      'OccupantSensingControls-1to125SF',
+      'OccupantSensingControls-126to250SF',
+      'OccupantSensingControls-251to500SF',
+      'ManualDimming',
+      'MultisceneProgrammableControls',
+      'DemandResponsiveControl',
+      'CombinedManualDimmingPlusPartialOnOccupantSensingControl'
+    ],
     boilers_draft_type_enums: [
       'MechanicalNoncondensing',
       'Condensing',
       'Natural'
     ],
-    pumps_operation_control_enums:[
+    pumps_operation_control_enums: [
       'OnDemand',
       'StandBy',
       'Scheduled'

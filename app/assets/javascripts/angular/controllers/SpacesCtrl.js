@@ -7,9 +7,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     stories: stories,
     spaces: spaces,
     constructionDefaults: constructionDefaults[0] || {},
+    luminaires: luminaires,
     surfaces: [],
     subsurfaces: [],
-    luminaires: luminaires
+    lightingSystems: []
   };
 
   $scope.data.lightingInputMethods = ['LPD', 'Luminaires'];
@@ -113,6 +114,25 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       delete space[surfaceType];
     });
 
+    _.each(space.interior_lighting_systems, function (lightingSystem) {
+      lightingSystem.space = spaceIndex;
+      lightingSystem.power_regulated = (lightingSystem.power_regulated == 1);
+      var luminaire = lightingSystem.luminaire_reference[0];
+      if (luminaire) {
+        var luminaireIndex = null;
+        _.find($scope.data.luminaires, function (luminaire, index) {
+          if (lightingSystem.luminaire_reference[0] == luminaire.name) {
+            luminaireIndex = index;
+            return true;
+          }
+          return false;
+        });
+        lightingSystem.luminaire_reference[0] = luminaireIndex;
+      }
+      $scope.data.lightingSystems.push(_.merge({space: spaceIndex}, lightingSystem));
+    });
+    delete space.interior_lighting_systems;
+
     var defaults = _.find($scope.data.spaceFunctionDefaults, {
       name: space.space_function
     });
@@ -133,6 +153,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     space.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
     space.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
+    space.interior_lighting_power_density_non_regulated_default = defaults.interior_lighting_power_density_non_regulated;
   });
 
   $scope.data.storiesArr = [];
@@ -275,7 +296,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
     space.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
     space.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
-    space.interior_lighting_power_density_non_regulated = 0;
+    space.interior_lighting_power_density_non_regulated = defaults.interior_lighting_power_density_non_regulated;
+    space.interior_lighting_power_density_non_regulated_default = defaults.interior_lighting_power_density_non_regulated;
 
     $scope.data.spaces.push(space);
   };
@@ -331,7 +353,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
       interior_lighting_power_density_regulated: selectedSpace.interior_lighting_power_density_regulated,
       interior_lighting_power_density_regulated_default: selectedSpace.interior_lighting_power_density_regulated_default,
-      interior_lighting_power_density_non_regulated: selectedSpace.interior_lighting_power_density_non_regulated
+      interior_lighting_power_density_non_regulated: selectedSpace.interior_lighting_power_density_non_regulated,
+      interior_lighting_power_density_non_regulated_default: selectedSpace.interior_lighting_power_density_non_regulated_default
     });
 
     var surfaces = _.filter($scope.data.surfaces, function (surface) {
@@ -515,13 +538,16 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     _.each($scope.data.spaces, function (space) {
       if (space.lighting_input_method == 'LPD') {
         space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
+        space.interior_lighting_power_density_non_regulated = space.interior_lighting_power_density_non_regulated_default;
       }
     });
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
   $scope.data.modifiedLPDDefaults = function () {
     return !_.isEmpty(_.find($scope.data.spaces, function (space) {
-      return space.lighting_input_method == 'LPD' && space.interior_lighting_power_density_regulated != space.interior_lighting_power_density_regulated_default;
+      return space.lighting_input_method == 'LPD'
+        && (space.interior_lighting_power_density_regulated != space.interior_lighting_power_density_regulated_default
+        || space.interior_lighting_power_density_non_regulated != space.interior_lighting_power_density_non_regulated_default);
     }));
   };
 
@@ -679,13 +705,75 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       heat_gain_radiant_fraction: selectedLuminaire.heat_gain_radiant_fraction
     });
   };
-  $scope.data.deleteLuminaire = function (selected, gridApi) {
+  $scope.data.deleteLuminaire = function (selected, gridApi, luminaireGridApi) {
     var luminaireIndex = $scope.data.luminaires.indexOf(selected.luminaire);
+
     $scope.data.luminaires.splice(luminaireIndex, 1);
+
+    // Remove luminaire from lighting systems
+    _.each(_.filter($scope.data.lightingSystems, {'luminaire_reference': [luminaireIndex]}), function (lightingSystem) {
+      lightingSystem.luminaire_reference[0] = null;
+      lightingSystem.power = 0;
+    });
+
+    // Update luminaire indices
+    _.each($scope.data.lightingSystems, function (lightingSystem) {
+      if (lightingSystem.luminaire_reference[0] > luminaireIndex) {
+        lightingSystem.luminaire_reference[0]--;
+      }
+    });
+
+    // Update luminaire grid values
+    if (luminaireGridApi) {
+      luminaireGridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+
+      _.each($scope.data.spaces, function (space, spaceIndex) {
+        if (space.lighting_input_method == 'Luminaires') $scope.data.calculateLPD(spaceIndex);
+      });
+    }
+
     if (luminaireIndex > 0) {
       gridApi.selection.toggleRowSelection($scope.data.luminaires[luminaireIndex - 1]);
     } else {
       selected.luminaire = null;
+    }
+  };
+
+  $scope.data.addLightingSystem = function () {
+    var spaceIndex = null;
+    _.find($scope.data.spaces, function (space, index) {
+      if (space.lighting_input_method == 'Luminaires') {
+        spaceIndex = index;
+        return true;
+      }
+      return false;
+    });
+
+    var lightingSystem = {
+      name: "Lighting System " + ($scope.data.lightingSystems.length + 1),
+      space: spaceIndex,
+      spaceOptions: $scope.data.spacesWithLuminaires(),
+      luminaire_reference: [null],
+      luminaire_count: [0],
+      status: Enums.enums.interior_lighting_systems_status_enums[0],
+      power_regulated: true,
+      non_regulated_exclusion: null,
+      luminaire_mounting_height: $scope.data.spaces[spaceIndex].floor_to_ceiling_height,
+      power_adjustment_factor_credit_type: Enums.enums.interior_lighting_systems_power_adjustment_factor_credit_type_enums[0],
+      power: 0
+    };
+
+    $scope.data.lightingSystems.push(lightingSystem);
+  };
+  $scope.data.deleteLightingSystem = function (selected, gridApi) {
+    var lightingSystemIndex = $scope.data.lightingSystems.indexOf(selected.lightingSystem);
+    var spaceIndex = selected.lightingSystem.space;
+    $scope.data.lightingSystems.splice(lightingSystemIndex, 1);
+    $scope.data.calculateLPD(spaceIndex);
+    if (lightingSystemIndex > 0) {
+      gridApi.selection.toggleRowSelection($scope.data.lightingSystems[lightingSystemIndex - 1]);
+    } else {
+      selected.lightingSystem = null;
     }
   };
 
@@ -823,6 +911,45 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     }
   };
 
+  $scope.data.spacesWithLuminaires = function () {
+    var spaces = [];
+    _.each($scope.data.spaces, function (space, spaceIndex) {
+      if (space.lighting_input_method == 'Luminaires') {
+        spaces.push({
+          id: spaceIndex,
+          value: space.name
+        });
+      }
+    });
+    return spaces;
+  };
+
+  $scope.data.calculateLPD = function (spaceIndex) {
+    var regulated = 0;
+    var unregulated = 0;
+    _.each(_.filter($scope.data.lightingSystems, {
+      space: spaceIndex,
+      power_regulated: true
+    }), function (lightingSystem) {
+      regulated += lightingSystem.power;
+    });
+    _.each(_.filter($scope.data.lightingSystems, {
+      space: spaceIndex,
+      power_regulated: false
+    }), function (lightingSystem) {
+      unregulated += lightingSystem.power;
+    });
+
+    // Avoid divide by zero
+    if ($scope.data.spaces[spaceIndex].area) {
+      $scope.data.spaces[spaceIndex].interior_lighting_power_density_regulated = regulated / $scope.data.spaces[spaceIndex].area;
+      $scope.data.spaces[spaceIndex].interior_lighting_power_density_non_regulated = unregulated / $scope.data.spaces[spaceIndex].area;
+    } else {
+      $scope.data.spaces[spaceIndex].interior_lighting_power_density_regulated = 0;
+      $scope.data.spaces[spaceIndex].interior_lighting_power_density_non_regulated = 0;
+    }
+  };
+
   // save
   $scope.submit = function () {
     console.log("submit");
@@ -837,8 +964,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       var spaces = angular.copy($scope.data.spaces);
       var surfaces = angular.copy($scope.data.surfaces);
       var subsurfaces = angular.copy($scope.data.subsurfaces);
+      var lightingSystems = angular.copy($scope.data.lightingSystems);
       _.each(spaces, function (space) {
         space.surfaces = [];
+        space.interior_lighting_systems = [];
       });
       _.each(surfaces, function (surface, surfaceIndex) {
         if (surface.adjacent_space_reference != null) {
@@ -847,6 +976,18 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
         spaces[surface.space].surfaces.push(surface);
       });
+      _.each(lightingSystems, function (lightingSystem, lightingIndex) {
+        var spaceIndex = lightingSystem.space;
+        lightingSystem.space = $scope.data.spaces[spaceIndex].name;
+        lightingSystem.power_regulated = lightingSystem.power_regulated ? 1 : 0;
+        var luminaireIndex = lightingSystem.luminaire_reference[0];
+        if (luminaireIndex != null) {
+          lightingSystem.luminaire_reference[0] = $scope.data.luminaires[luminaireIndex].name;
+        }
+        spaces[spaceIndex].interior_lighting_systems.push(lightingSystem);
+      });
+
+      console.log(spaces);
 
       var params = Shared.defaultParams();
       params.data = spaces;
@@ -858,13 +999,13 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
       function failure(response) {
         console.log("failure", response);
-        toaster.pop('error', 'An error occurred while saving', response.statusText);
+        toaster.pop('error', 'An error occurred while saving spaces', response.statusText);
       }
     }
 
     function failure(response) {
       console.log("failure", response);
-      toaster.pop('error', 'An error occurred while saving', response.statusText);
+      toaster.pop('error', 'An error occurred while saving luminaires', response.statusText);
     }
   };
 
