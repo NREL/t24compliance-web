@@ -1315,7 +1315,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
 }]);
 
 cbecc.controller('ModalSystemCreatorCtrl', [
-  '$scope', '$modalInstance', function ($scope, $modalInstance) {
+  '$scope', '$log', '$modalInstance', function ($scope, $log, $modalInstance) {
     $scope.quantity = 1;
     $scope.type = '';
 
