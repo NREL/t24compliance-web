@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:home]
   load_and_authorize_resource
+  skip_authorize_resource only: [:home]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   respond_to :json, :html
