@@ -333,43 +333,46 @@ class Project
 
       instances.each do |instance|
         # get lib record
-        lib = Construction.find(instance.construction_library_id)
-        # TODO: check that it doesn't exist yet or skip?
-        ca = self.construct_assemblies.find_or_create_by(name: lib.name)
-        ca.compatible_surface_type = lib.compatible_surface_type
-        # save other attributes here (for floors)
-        ca.slab_type = lib.slab_type
-        ca.slab_insulation_orientation = lib.slab_insulation_orientation
-        ca.slab_insulation_thermal_resistance = lib.slab_insulation_thermal_resistance
+        unless instance.construction_library_id.nil?
+          lib = Construction.find(instance.construction_library_id)
+          # TODO: check that it doesn't exist yet or skip?
+          ca = self.construct_assemblies.find_or_create_by(name: lib.name)
+          ca.compatible_surface_type = lib.compatible_surface_type
+          # save other attributes here (for floors)
+          ca.slab_type = lib.slab_type
+          ca.slab_insulation_orientation = lib.slab_insulation_orientation
+          ca.slab_insulation_thermal_resistance = lib.slab_insulation_thermal_resistance
 
-        material_refs = []
-        # material references
-        logger.info("!!!!! LAYERS: #{lib['layers']}")
-        unless lib['layers'].nil?
-          lib.layers.each do |layer|
-            mat = self.materials.find_or_create_by(name: layer['name'])
-            mat.code_category = layer['code_category']
-            mat.code_item = layer['code_identifier']
-            mat.save
-            material_refs << mat.name
-            # only save unique records to project
-            match = project_mats.find { |m| m['name'] === mat.name}
-            logger.info("MATCH: #{match}, for material #{mat.name}")
-            project_mats << mat if match.nil?
+          material_refs = []
+          # material references
+          logger.info("!!!!! LAYERS: #{lib['layers']}")
+          unless lib['layers'].nil?
+            lib.layers.each do |layer|
+              mat = self.materials.find_or_create_by(name: layer['name'])
+              mat.code_category = layer['code_category']
+              mat.code_item = layer['code_identifier']
+              mat.save
+              material_refs << mat.name
+              # only save unique records to project
+              match = project_mats.find { |m| m['name'] === mat.name}
+              logger.info("MATCH: #{match}, for material #{mat.name}")
+              project_mats << mat if match.nil?
 
+            end
           end
-        end
-        # save material references to construction assembly
-        ca.material_reference = material_refs
-        ca.save
-        # only save unique records to project
-        match = project_cas.find { |m| m['name'] === ca.name}
-        logger.info("MATCH: #{match} for ca #{ca.name}")
-        project_cas << ca if match.nil?
 
-        # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
-        instance.construct_assembly_reference = ca.name
-        instance.save
+          # save material references to construction assembly
+          ca.material_reference = material_refs
+          ca.save
+          # only save unique records to project
+          match = project_cas.find { |m| m['name'] === ca.name}
+          logger.info("MATCH: #{match} for ca #{ca.name}")
+          project_cas << ca if match.nil?
+
+          # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
+          instance.construct_assembly_reference = ca.name
+          instance.save
+        end
       end
     end
 
@@ -382,24 +385,26 @@ class Project
     logger.info("Door instances: #{door_instances.size}")
     door_instances.each do |instance|
       # get lib record
-      lib = DoorLookup.find(instance.construction_library_id)
-      dc = self.door_constructions.find_or_create_by(name: lib.name)
-      # add other lib fields
-      lib.attributes.each_pair do |key, value|
-        unless %(created_at updated_at id _id).include? key
-          dc[key] = value
+      unless instance.construction_library_id.nil?
+        lib = DoorLookup.find(instance.construction_library_id)
+        dc = self.door_constructions.find_or_create_by(name: lib.name)
+        # add other lib fields
+        lib.attributes.each_pair do |key, value|
+          unless %(created_at updated_at id _id).include? key
+            dc[key] = value
+          end
         end
+        dc.save
+
+        # only save unique records to project
+        match = project_doors.find { |m| m['name'] === dc.name}
+        logger.info("MATCH: #{match} for door construction #{dc.name}")
+        project_doors << dc if match.nil?
+
+        # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
+        instance.door_construction_reference = dc.name
+        instance.save
       end
-      dc.save
-
-      # only save unique records to project
-      match = project_doors.find { |m| m['name'] === dc.name}
-      logger.info("MATCH: #{match} for door construction #{dc.name}")
-      project_doors << dc if match.nil?
-
-      # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
-      instance.door_construction_reference = dc.name
-      instance.save
     end
 
     # assign fenestrations
@@ -415,25 +420,27 @@ class Project
 
       instances.each do |instance|
         # get lib record
-        lib = Fenestration.find(instance.construction_library_id)
-        # TODO: check that it doesn't exist yet or skip?
-        fc = self.fenestration_constructions.find_or_create_by(name: lib.name)
-        # save all lib attributes to construction instance
-        lib.attributes.each_pair do |key, value|
-          unless %(created_at updated_at id _id).include? key
-            fc[key] = value
+        unless instance.construction_library_id.nil?
+          lib = Fenestration.find(instance.construction_library_id)
+          # TODO: check that it doesn't exist yet or skip?
+          fc = self.fenestration_constructions.find_or_create_by(name: lib.name)
+          # save all lib attributes to construction instance
+          lib.attributes.each_pair do |key, value|
+            unless %(created_at updated_at id _id).include? key
+              fc[key] = value
+            end
           end
-        end
           fc.save
 
-        # only save unique records to project
-        match = project_fens.find { |m| m['name'] === fc.name}
-        logger.info("MATCH: #{match} for fen construction #{fc.name}")
-        project_fens << fc if match.nil?
+          # only save unique records to project
+          match = project_fens.find { |m| m['name'] === fc.name}
+          logger.info("MATCH: #{match} for fen construction #{fc.name}")
+          project_fens << fc if match.nil?
 
-        # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
-        instance.fenestration_construction_reference = fc.name
-        instance.save
+          # save construction assembly reference on original instance (in construct_assembly_reference field, use name)
+          instance.fenestration_construction_reference = fc.name
+          instance.save
+        end
       end
     end
 
