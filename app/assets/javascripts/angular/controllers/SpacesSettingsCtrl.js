@@ -136,6 +136,16 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
           rowEntity.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
           rowEntity.interior_lighting_power_density_non_regulated_default = defaults.interior_lighting_power_density_non_regulated;
 
+          if (_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], newValue)) {
+            if (rowEntity.lighting_input_method == 'Luminaires') {
+              var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+              rowEntity.lighting_input_method = 'LPD';
+              rowEntity.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
+              rowEntity.interior_lighting_power_density_non_regulated = defaults.interior_lighting_power_density_non_regulated;
+              _.remove($scope.data.lightingSystems, {space: spaceIndex});
+            }
+          }
+
           gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         }
       });
@@ -186,7 +196,7 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       }
       // Update refrigeration defaults
       row.commercial_refrigeration_epd_default = $scope.selected.space.commercial_refrigeration_epd_default;
-      
+
       // Update unmodified gas values
       if (row.gas_equipment_power_density == row.gas_equipment_power_density_default) {
         row.gas_equipment_power_density = $scope.selected.space.gas_equipment_power_density_default;

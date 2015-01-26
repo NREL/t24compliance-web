@@ -21,11 +21,6 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     $scope.spacesHash[index] = space.name;
   });
 
-  $scope.lumHash = {};
-  _.each($scope.data.luminaires, function (luminaire, luminaireIndex) {
-    $scope.lumHash[luminaireIndex] = luminaire.name;
-  });
-
   // LPD UI Grid
   $scope.lpdGridOptions = {
     columnDefs: [{
@@ -144,7 +139,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     }, {
       field: 'luminaire_reference[0]',
       displayName: 'Luminaire',
-      cellFilter: 'mapHash:grid.appScope.lumHash',
+      cellFilter: 'mapHash:grid.appScope.data.lumHash',
       cellTemplate: 'ui-grid/cbeccLuminaireCell',
       enableCellEdit: false,
       enableHiding: false,
@@ -153,9 +148,9 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
           return 'required-cell msg-select-a-luminaire';
         }
       },
-      filter: Shared.enumFilter($scope.lumHash),
+      filter: Shared.enumFilter($scope.data.lumHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-      sortingAlgorithm: Shared.sort($scope.lumHash)
+      sortingAlgorithm: Shared.sort($scope.data.lumHash)
     }, {
       field: 'luminaire_count[0]',
       displayName: 'Quantity',
@@ -282,22 +277,10 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       }
     });
 
-    var onClose = function () {
-      if (luminaireIndex === undefined) {
-        // Update luminaire hash
-        $scope.lumHash = {};
-        _.each($scope.data.luminaires, function (luminaire, luminaireIndex) {
-          $scope.lumHash[luminaireIndex] = luminaire.name;
-        });
-      }
-    };
-
     modalInstance.result.then(function (row) {
-      onClose();
       deferred.resolve(row);
     }, function () {
       // Modal canceled
-      onClose();
       deferred.reject();
     });
     return deferred.promise;

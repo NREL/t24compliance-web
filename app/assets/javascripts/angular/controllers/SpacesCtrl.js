@@ -180,6 +180,14 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
   });
   $scope.data.subsurfaceConstHash = _.merge($scope.data.doorHash, $scope.data.fenHash);
 
+  $scope.data.lumHash = {};
+  $scope.data.updateLumHash = function() {
+    _.each($scope.data.luminaires, function (luminaire, luminaireIndex) {
+      $scope.data.lumHash[luminaireIndex] = luminaire.name;
+    });
+  };
+  $scope.data.updateLumHash();
+
   $scope.tabs = [{
     heading: 'Spaces',
     path: '/spaces',
@@ -380,7 +388,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
       if (surface.space == spaceIndex) {
         // Delete subsurfaces
-        $scope.data.subsurfaces = _.difference($scope.data.subsurfaces, _.where($scope.data.subsurfaces, {'surface': surfaceIndex}));
+        _.remove($scope.data.subsurfaces, {'surface': surfaceIndex});
 
         // Update subsurface surface parent
         _.each($scope.data.subsurfaces, function (subsurface) {
@@ -392,7 +400,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     });
 
     // Delete surfaces
-    $scope.data.surfaces = _.difference($scope.data.surfaces, _.where($scope.data.surfaces, {'space': spaceIndex}));
+    _.remove($scope.data.surfaces, {space: spaceIndex});
 
     // Update subsurface/surface parents
     _.each($scope.data.subsurfaces, function (subsurface) {
@@ -403,6 +411,16 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     _.each($scope.data.surfaces, function (surface) {
       if (surface.space > spaceIndex) {
         surface.space--;
+      }
+    });
+
+    // Delete lighting systems
+    _.remove($scope.data.lightingSystems, {space: spaceIndex});
+
+    // Updating lighting system parents
+    _.each($scope.data.lightingSystems, function (lightingSystem) {
+      if (lightingSystem.space > spaceIndex) {
+        lightingSystem.space--;
       }
     });
 
@@ -592,7 +610,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     var surfaceIndex = $scope.data.surfaces.indexOf(selected.surface);
 
     // Delete subsurfaces
-    $scope.data.subsurfaces = _.difference($scope.data.subsurfaces, _.where($scope.data.subsurfaces, {'surface': surfaceIndex}));
+    _.remove($scope.data.subsurfaces, {surface: surfaceIndex});
 
     // Update subsurface parents
     _.each($scope.data.subsurfaces, function (subsurface) {
@@ -692,6 +710,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     _.merge(luminaire, $scope.data.luminaireHeatGain(luminaire.fixture_type));
 
     $scope.data.luminaires.push(luminaire);
+    $scope.data.updateLumHash();
   };
   $scope.data.duplicateLuminaire = function (selected) {
     var selectedLuminaire = selected.luminaire;
@@ -704,6 +723,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       heat_gain_space_fraction: selectedLuminaire.heat_gain_space_fraction,
       heat_gain_radiant_fraction: selectedLuminaire.heat_gain_radiant_fraction
     });
+    $scope.data.updateLumHash();
   };
   $scope.data.deleteLuminaire = function (selected, gridApi, luminaireGridApi) {
     var luminaireIndex = $scope.data.luminaires.indexOf(selected.luminaire);
@@ -722,6 +742,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         lightingSystem.luminaire_reference[0]--;
       }
     });
+    $scope.data.updateLumHash();
 
     // Update luminaire grid values
     if (luminaireGridApi) {

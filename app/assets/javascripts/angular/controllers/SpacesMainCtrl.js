@@ -97,8 +97,17 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
         if ((colDef.name == 'floor_to_ceiling_height' || colDef.name == 'area') && newValue != oldValue) {
           $scope.data.updateTotalExhaust(rowEntity);
+          if (colDef.name == 'floor_to_ceiling_height') {
+            // Update default lighting system mounting height
+            _.each($scope.data.lightingSystems, function(lightingSystem) {
+              if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == oldValue) {
+                lightingSystem.luminaire_mounting_height = newValue;
+              }
+            });
+          }
         } else if (colDef.name == 'building_story_id' && newValue != oldValue) {
           // Update floor_to_ceiling_height if it is unchanged
           var oldStoryIndex = null;
@@ -109,11 +118,16 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
           });
           if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
             rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+            // Update default lighting system mounting height
+            _.each($scope.data.lightingSystems, function(lightingSystem) {
+              if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
+                lightingSystem.luminaire_mounting_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+              }
+            });
           }
           gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
 
           // Remove adjacent spaces
-          var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
           _.each($scope.data.surfaces, function (surface) {
             if (surface.boundary == 'Interior' && surface.space == spaceIndex) {
               surface.adjacent_space_reference = null;

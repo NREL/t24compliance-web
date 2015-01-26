@@ -62,6 +62,9 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
               }
             });
           }
+          _.each($scope.data.spaces, function (space, spaceIndex) {
+            if (space.lighting_input_method == 'Luminaires') $scope.data.calculateLPD(spaceIndex);
+          });
         });
       } else {
         $interval(function () {
