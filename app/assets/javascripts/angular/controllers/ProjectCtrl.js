@@ -43,6 +43,8 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
 
     function success(response) {
       toaster.pop('success', 'Project successfully saved');
+      if (!Shared.getBuildingId()) toaster.pop('note', 'You can move on to the next tab by selecting \'Building\' from the top navigation menu.');
+
       var the_id = response.hasOwnProperty('id') ? response.id : response._id;
 
       // go back to form with id of what was just saved
