@@ -139,6 +139,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     }, {
       field: 'luminaire_reference[0]',
       displayName: 'Luminaire',
+      allowLuminaireEdit: true,
       cellFilter: 'mapHash:grid.appScope.data.lumHash',
       cellTemplate: 'ui-grid/cbeccLuminaireCell',
       enableCellEdit: false,
