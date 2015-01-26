@@ -115,6 +115,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
     });
 
     _.each(space.interior_lighting_systems, function (lightingSystem) {
+      console.log(lightingSystem);
       lightingSystem.space = spaceIndex;
       lightingSystem.power_regulated = (lightingSystem.power_regulated == 1);
       var luminaire = lightingSystem.luminaire_reference[0];
