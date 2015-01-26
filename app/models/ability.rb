@@ -23,6 +23,7 @@ class Ability
       Rails.logger.info("USER IS AUTHENTICATED: #{user.inspect}")
     # unauthenticated
     else
+      can :home, User
       can [:read, :dashboard], Input
       Rails.logger.info("USER IS NOT AUTH: #{user.inspect}")
     end

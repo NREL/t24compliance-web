@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
-  resources :users
-  get '/admin' => 'users#admin'
-  get '/home'  =>  'users#home'
-
+  resources :users do
+    get 'admin', on: :collection
+    get 'home', on: :collection
+  end
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'

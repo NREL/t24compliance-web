@@ -6,7 +6,11 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-1">
         <div class="row pad-bot-10">
-          <%= link_to "Open an Existing Project", user_path(current_user), class: "btn btn-success col-md-10" %>
+          <% if can? :create, Project %>
+            <%= link_to "Open an Existing Project", user_path(current_user), class: "btn btn-success col-md-10" %>
+          <% else %>
+            <%= link_to "Open an Existing Project", new_user_session_path, class: "btn btn-success col-md-10"%>
+          <% end %>
         </div>
         <div class="row">
           <%= link_to "Start a New Project", wizard_path, class: "btn btn-success col-md-10" %>

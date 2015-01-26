@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-  load_and_authorize_resource param_method: :user_params
+  before_action :authenticate_user!, except: [:home]
+  load_and_authorize_resource
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   respond_to :json, :html
