@@ -291,7 +291,6 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
   $scope.applySettings = function () {
     // TODO
     $scope.applySettingsActive = true;
-    console.log('Apply clicked');
   };
 
   $scope.confirmApplySettings = function () {

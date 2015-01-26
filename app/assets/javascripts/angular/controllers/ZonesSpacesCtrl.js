@@ -1,4 +1,4 @@
-cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Shared) {
+cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scope, $log, Shared) {
   $scope.selected = {
     space: null
   };
@@ -16,8 +16,8 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', 'Shared', function ($scope, Share
     });
     $scope.zonesHash[index] = zone.name;
   });
-  console.log('ZONES Arr');
-  console.log($scope.zonesArr);
+  $log.debug('ZONES Arr');
+  $log.debug($scope.zonesArr);
 
   // Spaces UI Grid
   $scope.spacesGridOptions = {

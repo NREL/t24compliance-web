@@ -1,4 +1,4 @@
-cbecc.controller('ProjectCtrl', ['$scope', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', function ($scope, $stateParams, $location, toaster, Project, Shared, Enums) {
+cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', function ($scope, $log, $stateParams, $location, toaster, Project, Shared, Enums) {
   Shared.setIds($stateParams);
 
   // pull in global enum definitions
@@ -38,7 +38,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$stateParams', '$location', 'toaster
 
   // save
   $scope.submit = function () {
-    console.log("submit");
+    $log.debug('Submitting project');
     $scope.errors = {}; //clean up server errors
 
     function success(response) {
@@ -47,13 +47,11 @@ cbecc.controller('ProjectCtrl', ['$scope', '$stateParams', '$location', 'toaster
 
       // go back to form with id of what was just saved
       Shared.setProjectId(the_id);
-      console.log("redirecting to " + Shared.projectPath());
       $location.path(Shared.projectPath());
-
     }
 
     function failure(response) {
-      console.log("failure", response);
+      $log.error('Failure submitting project', response);
       if (response.status == 422) {
         var len = Object.keys(response.data.errors).length;
         toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));

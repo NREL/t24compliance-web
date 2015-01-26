@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($q, $templateCache, $sce, DSCacheFactory, usSpinnerService, uiGridConstants) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($log, $q, $templateCache, $sce, DSCacheFactory, usSpinnerService, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -171,7 +171,7 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
     //var start = new Date().getTime();
     var decompressed = LZString.decompressFromUTF16(cache.get(key));
     //var end = new Date().getTime();
-    //console.log('Decompressed ' + key + ' in ' + (end - start) + ' ms');
+    //$log.debug('Decompressed ' + key + ' in ' + (end - start) + ' ms');
     return JSON.parse(decompressed);
   };
 
@@ -179,24 +179,24 @@ cbecc.factory('Shared', ['$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSp
     // Test compression algorithms
     /*var start = new Date().getTime();
      var str = JSON.stringify(value);
-     console.log(key + ' stringify.length: ' + str.length);
+     $log.debug(key + ' stringify.length: ' + str.length);
      var end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');
+     $log.debug('    Execution time: ' + (end-start) + ' ms');
 
      start = new Date().getTime();
-     console.log(key + ' compress.length: ' + LZString.compress(str).length);
+     $log.debug(key + ' compress.length: ' + LZString.compress(str).length);
      end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');
+     $log.debug('    Execution time: ' + (end-start) + ' ms');
 
      start = new Date().getTime();
-     console.log(key + ' compressToUTF16.length: ' + LZString.compressToUTF16(str).length);
+     $log.debug(key + ' compressToUTF16.length: ' + LZString.compressToUTF16(str).length);
      end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');
+     $log.debug('    Execution time: ' + (end-start) + ' ms');
 
      start = new Date().getTime();
-     console.log(key + ' compressToUint8Array.length: ' + LZString.compressToUint8Array(str).length);
+     $log.debug(key + ' compressToUint8Array.length: ' + LZString.compressToUint8Array(str).length);
      end = new Date().getTime();
-     console.log('    Execution time: ' + (end-start) + ' ms');*/
+     $log.debug('    Execution time: ' + (end-start) + ' ms');*/
 
     var compressed = LZString.compressToUTF16(JSON.stringify(value));
     cache.put(key, compressed);

@@ -1,4 +1,4 @@
-cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', function ($scope, $stateParams, $resource, $location, toaster, data, Shared, stories) {
+cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, stories) {
   Shared.setIds($stateParams);
 
   $scope.stories = stories;
@@ -100,7 +100,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
 
   // save
   $scope.submit = function () {
-    console.log("submit");
+    $log.debug('Submitting building');
     $scope.errors = {}; //clean up server errors
 
     function success(response) {
@@ -125,7 +125,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$stateParams', '$resource', '$locat
     }
 
     function failure(response) {
-      console.log("failure", response);
+      $log.error('Failure submitting building', response);
       if (response.status == 422) {
         var len = Object.keys(response.data.errors).length;
         toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));

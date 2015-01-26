@@ -1,4 +1,4 @@
-cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructionDefaults', 'luminaires', function ($scope, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructionDefaults, luminaires) {
+cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructionDefaults', 'luminaires', function ($scope, $log, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructionDefaults, luminaires) {
   $scope.data = {
     constData: constData,
     doorData: doorData,
@@ -977,7 +977,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
 
   // save
   $scope.submit = function () {
-    console.log("submit");
+    $log.debug('Submitting luminaires');
 
     var params = Shared.defaultParams();
     params.data = $scope.data.luminaires;
@@ -1012,8 +1012,6 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
         spaces[spaceIndex].interior_lighting_systems.push(lightingSystem);
       });
 
-      console.log(spaces);
-
       var params = Shared.defaultParams();
       params.data = spaces;
       data.bulkSync('spaces', params).then(success).catch(failure);
@@ -1023,13 +1021,13 @@ cbecc.controller('SpacesCtrl', ['$scope', '$location', 'uiGridConstants', 'toast
       }
 
       function failure(response) {
-        console.log("failure", response);
+        $log.error('Failure submitting spaces', response);
         toaster.pop('error', 'An error occurred while saving spaces', response.statusText);
       }
     }
 
     function failure(response) {
-      console.log("failure", response);
+      $log.error('Failure submitting luminaires', response);
       toaster.pop('error', 'An error occurred while saving luminaires', response.statusText);
     }
   };

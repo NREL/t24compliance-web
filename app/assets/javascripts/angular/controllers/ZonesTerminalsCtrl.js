@@ -1,4 +1,4 @@
-cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($scope, Shared, Enums) {
+cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', function ($scope, $log, Shared, Enums) {
   $scope.selected = {
     zone: null
   };
@@ -12,7 +12,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
     var system = _.find($scope.data.systems, {name: zone.primary_air_conditioning_system_reference});
 
     if (system != null) {
-      console.log('SYSTEM:' + system);
+      $log.debug('SYSTEM:' + system);
       if (_.contains(['SZAC', 'VAV', 'PVAV'], system.type)) {
         terminalZonesArr.push({
           id: zone.id,
@@ -30,7 +30,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'Shared', 'Enums', function ($
       zone_served_reference: zone.name
     });
     if (!match) {
-      console.log("NO MATCH FOR zone name: ", zone.name);
+      $log.debug("NO MATCH FOR zone name: ", zone.name);
       // determine defaults based on system type
       var terminal_type = "";
       if (zone.system_type === 'SZAC') {
