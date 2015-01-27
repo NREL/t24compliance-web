@@ -148,12 +148,18 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }, {
     name: 'boiler_capacity_rated',
     displayName: 'Rated Capacity',
-    field: 'boilers[0].capacity_rated'
+    field: 'boilers[0].capacity_rated',
+    enableHiding: false,
+    secondLine: Shared.html('Btu/hr'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+
   }, {
     name: 'boiler_thermal_efficiency',
     displayName: 'Thermal Efficiency',
     field: 'boilers[0].thermal_efficiency',
-    enableHiding: false
+    enableHiding: false,
+    secondLine: Shared.html('frac.'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }];
   $scope.gridPlantCols.hot_water.pump = [{
     name: "pump_name",
@@ -176,7 +182,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'pump_flow_capacity',
     displayName: 'Design Flow Rate',
     field: 'boilers[0].pump.flow_capacity',
-    enableHiding: false
+    enableHiding: false,
+    secondLine: Shared.html('gpm'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'pump_total_head',
     displayName: 'Pump Head',
@@ -272,7 +280,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'capacity_rated',
     field: 'chillers[0].capacity_rated',
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
-    enableHiding: false
+    enableHiding: false,
+    secondLine: Shared.html('Btu/hr'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
   }, {
     name: 'kw_per_ton',
@@ -286,7 +296,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'IPLV per ton',
     field: 'chillers[0].iplv_kw_per_ton',
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
-    enableHiding: false
+    enableHiding: false,
+    secondLine: Shared.html('Btuh/W'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
   }];
   $scope.gridPlantCols.chilled_water.pump = [{
@@ -313,6 +325,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }, {
     name: 'pump_flow_capacity',
     displayName: 'Design Flow Rate',
+    secondLine: Shared.html('gpm'),
     field: 'chillers[0].pump.flow_capacity',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -371,8 +384,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: "heat_rejection_capacity_rated",
     displayName: 'Capacity Rated',
     field: 'heat_rejections[0].capacity_rated',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-    enableHiding: false
+    enableHiding: false,
+    secondLine: Shared.html('Btu/hr'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: "heat_rejection_total_fan_hp",
     displayName: 'Total Fan HP',
@@ -413,6 +427,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }, {
     name: 'pump_flow_capacity',
     displayName: 'Design Flow Rate',
+    secondLine: Shared.html('gpm'),
     field: 'heat_rejections[0].pump.flow_capacity',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -520,6 +535,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Total Static Pressure',
     field: 'fan.total_static_pressure',
     enableHiding: false,
+    secondLine: Shared.html('in. H<sub>2</sub>O'),
     minWidth: min_width + 20,
     filter: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
