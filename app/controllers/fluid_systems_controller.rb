@@ -45,6 +45,7 @@ class FluidSystemsController < ApplicationController
         boilers = []
         chillers = []
         heat_rejections = []
+        water_heater = {}
 
         # extract fluid segments from params hash
         fluid_segs = rec.extract!('fluid_segments')['fluid_segments']
@@ -61,13 +62,15 @@ class FluidSystemsController < ApplicationController
           fluid_segments << @seg
         end
 
-        # extract boilers/chillers/heat_rejections from params hash
+        # extract boilers/chillers/heat_rejections/water_heater from params hash
         blrs = rec.extract!('boilers')['boilers']
         logger.info("BOILERS: #{blrs.inspect}")
         chls = rec.extract!('chillers')['chillers']
         logger.info("CHILLERS: #{chls.inspect}")
         rejs = rec.extract!('heat_rejections')['heat_rejections']
         logger.info("HEAT REJECTIONS: #{rejs.inspect}")
+        water_heater = rec.extract!('water_heater')['water_heater']
+        logger.info("Water Heater: #{water_heater.inspect}")
 
         unless blrs.nil?
           blrs.each do |b|
@@ -153,6 +156,18 @@ class FluidSystemsController < ApplicationController
           end
         end
 
+        unless water_heater.nil?
+          heaters = []
+          if water_heater.has_key?('id') and !water_heater['id'].nil?
+            @water_heater = WaterHeater.find(water_heater['id'])
+            @water_heater.update(water_heater)
+          else
+            @water_heater = WaterHeater.new(water_heater)
+            @water_heater.save
+          end
+          heaters << @water_heater
+        end
+
         # now save actual fluid_system
         if rec.has_key?('id') and !rec['id'].nil?
           @sys = FluidSystem.find(rec['id'])
@@ -165,6 +180,7 @@ class FluidSystemsController < ApplicationController
         logger.info("SYSTEM BOILERS:  #{@sys.boilers.inspect}")
         @sys.chillers = chillers
         @sys.heat_rejections = heat_rejections
+        @sys.water_heaters = heaters
         @sys.save
         systems << @sys
       end
@@ -206,7 +222,7 @@ class FluidSystemsController < ApplicationController
     end
 
     def fluid_systems_params
-      params.permit(:project_id, :building_id, data: [:id, :name, :status, :type, :description, :design_supply_water_temperature, :heating_design_supply_water_temperature, :design_supply_water_temperature_delta_t, :control_type, :temperature_control, :fixed_supply_temperature, :temperature_setpoint_schedule_reference, :heating_fixed_supply_temperature, :heating_temperature_setpoint_schedule_reference, :reset_supply_high, :reset_supply_low, :reset_outdoor_high, :reset_outdoor_low, :wet_bulb_approach, :cooling_supply_temperature, :heating_supply_temperature, :evaporator_fluid_segment_in_reference, :shw_system_count, :annual_solar_fraction, fluid_segments: [:id, :name, :type], boilers: [:id, :name, :type, :fuel_source, :draft_type, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :afue, :thermal_efficiency, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], chillers: [:id, :name, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :capacity_rated, :kw_per_ton, :iplv_kw_per_ton, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], heat_rejections: [:id, :name, :type, :modulation_control, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :total_fan_hp, :fan_type, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]]])
+      params.permit(:project_id, :building_id, data: [:id, :name, :status, :type, :description, :design_supply_water_temperature, :heating_design_supply_water_temperature, :design_supply_water_temperature_delta_t, :control_type, :temperature_control, :fixed_supply_temperature, :temperature_setpoint_schedule_reference, :heating_fixed_supply_temperature, :heating_temperature_setpoint_schedule_reference, :reset_supply_high, :reset_supply_low, :reset_outdoor_high, :reset_outdoor_low, :wet_bulb_approach, :cooling_supply_temperature, :heating_supply_temperature, :evaporator_fluid_segment_in_reference, :shw_system_count, :annual_solar_fraction, fluid_segments: [:id, :name, :type], boilers: [:id, :name, :type, :fuel_source, :draft_type, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :afue, :thermal_efficiency, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], chillers: [:id, :name, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :capacity_rated, :kw_per_ton, :iplv_kw_per_ton, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], water_heater: [:id, :name, :status, :type, :count, :fluid_segment_out_reference, :fluid_segment_makeup_reference, :storage_capacity, :ef, :recovery_efficiency, :thermal_efficiency, :hir_f_plr_curve_reference, :fuel_source, :off_cycle_fuel_source, :off_cycle_parasitic_losses, :on_cycle_fuel_source, :on_cycle_parasitic_losses, :tank_off_cycle_loss_coef, :capacity_rated, :minimum_capacity, :standby_loss_fraction, :electrical_ignition, :draft_fan_power], heat_rejections: [:id, :name, :type, :modulation_control, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :total_fan_hp, :fan_type, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]]])
     end
 
     # this is called from bulk_sync above

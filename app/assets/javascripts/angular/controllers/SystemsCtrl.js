@@ -70,6 +70,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     }
   });
 
+  $log.debug("Saved SHW:");
+  $log.debug($scope.plants.shw);
+
   // add SHW if project exceptional_condition_water_heater is 'No'
   if ($scope.plants.shw.length == 0) {
     Project.show({id: Shared.getProjectId()}).$promise.then(function (response) {
@@ -481,6 +484,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   },{
     name: 'draft_fan_power',
     displayName: 'Draft Fan Power',
+    field: 'water_heater.draft_fan_power',
     secondLine: Shared.html('W'),
     field: 'water_heater.draft_fan_power',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
