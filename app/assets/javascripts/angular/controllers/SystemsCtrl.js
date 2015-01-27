@@ -536,6 +536,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'fan.flow_efficiency',
     enableHiding: false,
     minWidth: min_width,
+    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+      if (row.entity.fan.modeling_method != 'StaticPressure') {
+        return 'disabled-cell';
+      }
+    },
+    cellEditableCondition: function ($scope) {
+      return ($scope.row.entity.fan.modeling_method == 'StaticPressure');
+    },
     filter: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -545,6 +553,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     secondLine: Shared.html('in. H<sub>2</sub>O'),
     minWidth: min_width + 20,
+    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+      if (row.entity.fan.modeling_method != 'StaticPressure') {
+        return 'disabled-cell';
+      }
+    },
+    cellEditableCondition: function ($scope) {
+      return ($scope.row.entity.fan.modeling_method == 'StaticPressure');
+    },
     filter: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -554,6 +570,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'fan.motor_bhp',
     enableHiding: false,
     minWidth: min_width,
+    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+      if (row.entity.fan.modeling_method != 'BrakeHorsePower') {
+        return 'disabled-cell';
+      }
+    },
+    cellEditableCondition: function ($scope) {
+      return ($scope.row.entity.fan.modeling_method == 'BrakeHorsePower');
+    },
     filter: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -793,9 +817,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
                 if (colDef.name == 'fan_classification') {
                   rowEntity.fan.centrifugal_type = null;
                   gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-
                 }
 
+                if (colDef.name == 'fan_modeling_method') {
+                  rowEntity.fan.motor_bhp = null;
+                  rowEntity.fan.flow_efficiency = null;
+                  rowEntity.fan.total_static_pressure = null;
+                  gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+                }
               }
             });
           }
@@ -874,10 +903,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
       });
     }
   });
-  console.log('HOT WATER GRID:');
-  console.log($scope.gridPlantOptions['hot_water']['pump']);
-  console.log('PTAC GRID:');
-  console.log($scope.gridOptions['ptac']['fan']);
 
   //**** VIEW HELPERS: TABS & CLASSES ****
   $scope.tabClasses = {};
