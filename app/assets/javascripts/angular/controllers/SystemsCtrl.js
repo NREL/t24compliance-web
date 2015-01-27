@@ -88,41 +88,41 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   $scope.systemPanels = [{
     title: 'PTAC Zone Systems',
     name: 'ptac',
-    open: true
+    open: false
   }, {
     title: 'FPFC Zone Systems',
     name: 'fpfc',
-    open: true
+    open: false
   }, {
     title: 'PSZ Systems',
     name: 'szac',
-    open: true
+    open: false
   }, {
     title: 'PVAV Air Systems',
     name: 'pvav',
-    open: true
+    open: false
   }, {
     title: 'VAV Air Systems',
     name: 'vav',
-    open: true
+    open: false
   }];
 
   $scope.plantPanels = [{
     title: 'Service Hot Water',
     name: 'shw',
-    open: true
+    open: false
   }, {
     title: 'Hot Water Plant',
     name: 'hot_water',
-    open: true
+    open: false
   }, {
     title: 'Chilled Water Plant',
     name: 'chilled_water',
-    open: true
+    open: false
   }, {
     title: 'Condenser Plant',
     name: 'condenser',
-    open: true
+    open: false
   }];
 
 
