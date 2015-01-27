@@ -78,9 +78,9 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   };
 
   service.projectPath = function () {
-    var path = "/projects";
+    var path = "/";
     if (projectId) {
-      path += "/" + projectId;
+      path += "projects/" + projectId;
     }
     return path;
   };
