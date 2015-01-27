@@ -110,7 +110,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }];
 
 
-  // initalize for grid
+  // initialize for grid
   $scope.selected = {
     ptac: null,
     fpfc: null,
@@ -855,18 +855,12 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   _.each($scope.plantTabs, function (tabs, type) {
     if (type == 'hot_water' || type == 'chilled_water' || type == 'condenser') {
       _.each(tabs, function (tab) {
-        var editVal = true;
-        if (tab == 'coil_heating' || tab == 'coil_cooling') {
-          editVal = false;
-        }
         $scope.gridPlantOptions[type][tab] = {
           columnDefs: $scope.gridPlantCols[type][tab],
-          enableCellEditOnFocus: editVal,
-          enableRowHeaderSelection: true,
+          enableCellEditOnFocus: true,
           enableSorting: false,
           enableColumnMenus: false,
           enableFiltering: false,
-          multiSelect: false,
           onRegisterApi: function (gridApi) {
             $scope.gridPlantApi[type][tab] = gridApi;
 
@@ -886,7 +880,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
             });
 
             gridApi.edit.on.beginCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-             $log.debug(rowEntity);
+              $log.debug(rowEntity);
             });
 
           }

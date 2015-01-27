@@ -13,8 +13,8 @@
     <div class="row pad-top-20">
       <div class="col-md-12">
         <div class="tab-content">
-          <div ng-repeat="tab in plantTabs.condenser" ng-show="isActiveTab('condenser', tab)">
-            <div ui-grid="gridPlantOptions.condenser[tab]" ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection class="system-grid" ></div>
+          <div ng-repeat="tab in plantTabs.condenser" ng-if="isActiveTab('condenser', tab)">
+            <div ui-grid="gridPlantOptions.condenser[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
           </div>
         </div>
       </div>
