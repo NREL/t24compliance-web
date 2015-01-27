@@ -91,6 +91,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.flow_capacity',
       enableHiding: false,
       minWidth: minWidth,
+      secondLine: Shared.html('cfm'),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_flow_minimum',
@@ -98,6 +99,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.flow_minimum',
       enableHiding: false,
       minWidth: minWidth,
+      secondLine: Shared.html('cfm'),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_modeling_method',
@@ -114,6 +116,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.total_static_pressure',
       enableHiding: false,
       minWidth: minWidth + 20,
+      secondLine: Shared.html('ft H<sub>2</sub>O'),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_flow_efficiency',
