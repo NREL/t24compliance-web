@@ -11,7 +11,6 @@
     <div class="collapse navbar-collapse" id="wizard-nav" ng-controller="NavCtrl">
         <ul class="nav nav-pills">
           <!-- These comments prevent gaps between items -->
-          <!--<li class="app-nav-item" ng-class="{ active: isActive('/$')}"><a href="#/">Introduction</a></li>-->
           <li class="app-nav-item" ng-class="{ active: isActive('/(projects(/[0-9a-f]{24}))?$')}"><a href="#{{projectPath()}}"><img src="/assets/icon_project.png" alt="Project"><br/>Project</a></li><!--
        --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings(/[0-9a-f]{24})?$')}"><a href="#{{buildingPath()}}"><img src="/assets/icon_building.png" alt="Building"><br/>Building</a></li><!--
        --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/constructions')}"><a href="#{{constructionsPath()}}"><img src="/assets/icon_constructions.png" alt="Constructions"><br/>Constructions</a></li><!--

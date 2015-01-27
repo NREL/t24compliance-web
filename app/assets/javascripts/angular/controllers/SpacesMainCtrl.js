@@ -20,12 +20,11 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         var storyIndex = null;
-        _.find($scope.data.storiesArr, function (story, index) {
+        _.each($scope.data.storiesArr, function (story, index) {
           if (story.id == row.entity.building_story_id) {
             storyIndex = index;
-            return true;
+            return false;
           }
-          return false;
         });
         if (row.entity.floor_to_ceiling_height != $scope.data.stories[storyIndex].floor_to_ceiling_height) {
           return 'modified-cell';

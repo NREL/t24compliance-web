@@ -23,6 +23,7 @@ cbecc.config([
       speed: 2.2,
       trail: 60,
       shadow: false,
+      hwaccel: true,
       top: '450px'
     });
 
@@ -56,11 +57,6 @@ cbecc.config([
           }]
         }
       })
-      // .state({
-      //   name: 'introduction',
-      //   url: '/',
-      //   templateUrl: 'introduction/introduction.html'
-      //  })
       .state({
         name: 'project',
         url: '/',
