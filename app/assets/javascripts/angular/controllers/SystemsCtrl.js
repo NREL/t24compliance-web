@@ -136,13 +136,15 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   $scope.gridPlantCols.hot_water.boiler = [{
     name: 'boiler_name',
     displayName: 'Name',
-    field: 'boilers[0].name'
+    field: 'boilers[0].name',
+    enableHiding: false
   }, {
     name: 'boiler_draft_type',
     displayName: 'Draft Type',
     field: 'boilers[0].draft_type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.boilers_draft_type_enums
+    editDropdownOptionsArray: Enums.enumsArr.boilers_draft_type_enums,
+    enableHiding: false
   }, {
     name: 'boiler_capacity_rated',
     displayName: 'Rated Capacity',
@@ -150,7 +152,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }, {
     name: 'boiler_thermal_efficiency',
     displayName: 'Thermal Efficiency',
-    field: 'boilers[0].thermal_efficiency'
+    field: 'boilers[0].thermal_efficiency',
+    enableHiding: false
   }];
   $scope.gridPlantCols.hot_water.pump = [{
     name: "pump_name",
@@ -160,154 +163,185 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Operation',
     field: 'boilers[0].pump.operation_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums
+    editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums,
+    enableHiding: false
   }, {
     name: 'pump_speed_control',
     displayName: 'Speed Control',
     field: 'boilers[0].pump.speed_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
-    editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums
+    editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums,
+    enableHiding: false
   }, {
     name: 'pump_flow_capacity',
     displayName: 'Design Flow Rate',
-    field: 'boilers[0].pump.flow_capacity'
+    field: 'boilers[0].pump.flow_capacity',
+    enableHiding: false
   }, {
     name: 'pump_total_head',
     displayName: 'Pump Head',
     secondLine: Shared.html('ft H<sub>2</sub>O'),
     field: 'boilers[0].pump.total_head',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
-    field: 'boilers[0].pump.motor_efficiency'
+    field: 'boilers[0].pump.motor_efficiency',
+    enableHiding: false
   }, {
     name: 'pump_impeller_efficiency',
     displayName: 'Impeller Efficiency',
-    field: 'boilers[0].pump.impeller_efficiency'
+    field: 'boilers[0].pump.impeller_efficiency',
+    enableHiding: false
   }, {
     name: 'pump_motor_hp',
     displayName: 'Motor HP',
     secondLine: Shared.html('hp'),
-    field: 'boilers[0].pump.motor_HP'
+    field: 'boilers[0].pump.motor_hp',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }];
   $scope.gridPlantCols.hot_water.coil_heating = [{
     name: 'name',
     enableCellEdit: false,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
   }, {
     name: 'system_name',
     enableCellEdit: false,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
   }, {
     name: 'system_type',
     enableCellEdit: false,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
   }];
   $scope.gridPlantCols.chilled_water.general = [{
     name: 'name',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'temperature_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fluid_systems_temperature_control_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'reset_supply_high',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'reset_supply_low',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'reset_outdoor_high',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'reset_outdoor_low',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }];
   $scope.gridPlantCols.chilled_water.chiller = [{
     name: 'chiller_name',
     displayName: 'Name',
     field: 'chillers[0].name',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
   }, {
     name: 'chiller_type',
     displayName: 'Type',
     field: 'chillers[0].type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.chillers_type_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
   }, {
     name: 'chiller_condenser_type',
     displayName: 'Condenser Type',
     field: 'chillers[0].condenser_type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.chillers_condenser_type_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
 
   }, {
     name: 'capacity_rated',
     field: 'chillers[0].capacity_rated',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
 
   }, {
     name: 'kw_per_ton',
     displayName: 'kW per ton',
     field: 'chillers[0].kw_per_ton',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
 
   }, {
     name: 'iplv_kw_per_ton',
     displayName: 'IPLV per ton',
     field: 'chillers[0].iplv_kw_per_ton',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
 
   }];
   $scope.gridPlantCols.chilled_water.pump = [{
     name: "pump_name",
     field: 'chillers[0].pump.name',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_operation_control',
     displayName: 'Operation',
     field: 'chillers[0].pump.operation_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_speed_control',
     displayName: 'Speed Control',
     field: 'chillers[0].pump.speed_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_flow_capacity',
     displayName: 'Design Flow Rate',
     field: 'chillers[0].pump.flow_capacity',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_total_head',
     displayName: 'Pump Head',
     secondLine: Shared.html('ft H<sub>2</sub>O'),
     field: 'chillers[0].pump.total_head',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
     field: 'chillers[0].pump.motor_efficiency',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_impeller_efficiency',
     displayName: 'Impeller Efficiency',
     field: 'chillers[0].pump.impeller_efficiency',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_motor_hp',
     displayName: 'Motor HP',
     secondLine: Shared.html('hp'),
     field: 'chillers[0].pump.motor_HP',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }];
   $scope.gridPlantCols.chilled_water.coil_cooling = angular.copy($scope.gridPlantCols.hot_water.coil_heating);
 
@@ -315,85 +349,99 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: "heat_rejection_name",
     displayName: 'Name',
     field: 'heat_rejections[0].name',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: "heat_rejection_type",
     displayName: 'Type',
     field: 'heat_rejections[0].type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.heat_rejections_type_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: "heat_rejection_modulation_control",
     displayName: 'Modulation Control',
     field: 'heat_rejections[0].modulation_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.heat_rejections_modulation_control_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: "heat_rejection_capacity_rated",
     displayName: 'Capacity Rated',
     field: 'heat_rejections[0].capacity_rated',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: "heat_rejection_total_fan_hp",
     displayName: 'Total Fan HP',
     secondLine: Shared.html('hp'),
     field: 'heat_rejections[0].total_fan_hp',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: "heat_rejection_fan_type",
     displayName: 'Fan Type',
     field: 'heat_rejections[0].fan_type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.heat_rejections_fan_type_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }];
   $scope.gridPlantCols.condenser.pump = [{
     name: "pump_name",
     field: 'heat_rejections[0].pump.name',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_operation_control',
     displayName: 'Operation',
     field: 'heat_rejections[0].pump.operation_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.pumps_operation_control_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_speed_control',
     displayName: 'Speed Control',
     field: 'heat_rejections[0].pump.speed_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.pumps_speed_control_enums,
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_flow_capacity',
     displayName: 'Design Flow Rate',
     field: 'heat_rejections[0].pump.flow_capacity',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_total_head',
     displayName: 'Pump Head',
     secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
     field: 'heat_rejections[0].pump.total_head',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
     field: 'heat_rejections[0].pump.motor_efficiency',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_impeller_efficiency',
     displayName: 'Impeller Efficiency',
     field: 'heat_rejections[0].pump.impeller_efficiency',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }, {
     name: 'pump_motor_hp',
     displayName: 'Motor HP',
     secondLine: Shared.html('hp'),
     field: 'heat_rejections[0].pump.motor_HP',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
   }];
 
   $scope.gridCols = {
@@ -410,6 +458,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
+    minWidth: min_width,
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -690,7 +739,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],
           enableCellEditOnFocus: true,
-           enableRowHeaderSelection: true,
+          enableRowHeaderSelection: true,
           enableRowSelection: true,
           enableSorting: true,
           enableFiltering: true,
@@ -749,9 +798,12 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         $scope.gridPlantOptions[type][tab] = {
           columnDefs: $scope.gridPlantCols[type][tab],
           enableCellEditOnFocus: editVal,
-          enableRowHeaderSelection: false,
-          enableRowSelection: false,
+          enableRowHeaderSelection: true,
+          enableSorting: false,
           enableColumnMenus: false,
+          enableFiltering: false,
+          multiSelect: false,
+          data:$scope.plants[type],
           onRegisterApi: function (gridApi) {
             $scope.gridPlantApi[type][tab] = gridApi;
 
@@ -767,6 +819,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
               }
             });
 
+            gridApi.edit.on.beginCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+             $log.debug(rowEntity);
+            });
+
           }
         };
         if (tab == 'coil_heating') {
@@ -775,25 +831,19 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         else if (tab == 'coil_cooling') {
           $scope.gridPlantOptions[type][tab].data = 'display_coils_cooling';
          }
-        else {
-          $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
-        }
+        //else {
+        //  $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
+        //}
       });
     }
   });
+  console.log('HOT WATER GRID:');
+  console.log($scope.gridPlantOptions['hot_water']['pump']);
+  console.log('PTAC GRID:');
+  console.log($scope.gridOptions['ptac']['fan']);
 
   //**** VIEW HELPERS: TABS & CLASSES ****
   $scope.tabClasses = {};
-  $scope.gridClasses = {
-    hot_water: {
-      pump: 'plant-grid',
-      boiler: 'plant-grid',
-      coil_heating: 'plant-large-grid'
-    },
-    chilled_water: {},
-    shw: {},
-    condenser: {}
-  };
 
   function initTabs(name) {
     switch (name) {
