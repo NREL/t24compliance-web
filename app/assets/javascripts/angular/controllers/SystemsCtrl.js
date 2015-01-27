@@ -510,6 +510,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
     enableHiding: false,
     minWidth: min_width,
+    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+      if (row.entity.fan.classification != 'Centrifugal') {
+        return 'disabled-cell';
+      }
+    },
+    cellEditableCondition: function ($scope) {
+      return ($scope.row.entity.fan.classification == 'Centrifugal');
+    },
     filter: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -781,6 +789,13 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
                   $scope.display_coils_heating = calculateCoilsHeating();
                   $scope.display_coils_cooling = calculateCoilsCooling();
                 }
+
+                if (colDef.name == 'fan_classification') {
+                  rowEntity.fan.centrifugal_type = null;
+                  gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+
+                }
+
               }
             });
           }
