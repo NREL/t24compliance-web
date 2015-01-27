@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($log, $q, $templateCache, $sce, $window, DSCacheFactory, usSpinnerService, uiGridConstants) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -181,7 +181,12 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', 'DSC
   };
 
   service.showModifiedDialog = function () {
-    return confirm('You have unsaved changes.  Are you sure you want to navigate away?');
+    var modalInstance = $modal.open({
+      templateUrl: 'project/modified.html',
+      controller: 'ModalModifiedCtrl'
+    });
+
+    return modalInstance.result;
   };
 
   service.existsInCache = function (key) {

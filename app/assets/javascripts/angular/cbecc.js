@@ -355,10 +355,10 @@ cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'da
     if (Shared.isModified() && !ignoreModified) {
       event.preventDefault();
 
-      if (Shared.showModifiedDialog()) {
+      Shared.showModifiedDialog().then(function () {
         Shared.resetModified();
         $state.go(toState, toParams);
-      }
+      });
     } else {
       Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
       Shared.startSpinner();
