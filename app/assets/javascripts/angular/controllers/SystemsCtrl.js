@@ -149,6 +149,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     condenser: {},
     shw: {}
   };
+  min_width = 150;
   $scope.gridPlantCols.hot_water.boiler = [{
     name: 'boiler_name',
     displayName: 'Name',
@@ -479,6 +480,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Rated Capacity',
     field: 'water_heater.capacity_rated',
     secondLine: Shared.html('Btu/hr'),
+    minWidth: min_width,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding:false
   },{
@@ -487,6 +489,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.draft_fan_power',
     secondLine: Shared.html('W'),
     field: 'water_heater.draft_fan_power',
+    minWidth: min_width,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   },{
@@ -504,12 +507,15 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
     enableHiding: false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
+    minWidth: min_width + 50,
     editDropdownOptionsArray: Enums.enumsArr.water_heaters_off_cycle_fuel_source_enums
   },{
     name: 'off_cycle_parasitic_losses',
     displayName: 'Off Cycle Parasitic Losses',
     field: 'water_heater.off_cycle_parasitic_losses',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    secondLine: Shared.html('W'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    minWidth: min_width + 50,
     enableHiding: false
   },{
     name: 'on_cycle_fuel_source',
@@ -518,12 +524,15 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
     enableHiding: false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
+    minWidth: min_width + 50,
     editDropdownOptionsArray: Enums.enumsArr.water_heaters_on_cycle_fuel_source_enums
   },{
     name: 'storage_capacity',
     displayName: 'Storage Capacity',
     field: 'water_heater.storage_capacity',
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    secondLine: Shared.html('gal'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    minWidth: min_width,
     enableHiding: false
   },{
     name: 'thermal_efficiency',
@@ -531,12 +540,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.thermal_efficiency',
     secondLine: Shared.html('frac.'),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    minWidth: min_width,
     enableHiding: false
   },{
     name: 'standby_loss_fraction',
     displayName: 'Standby Loss Fraction',
     field: 'water_heater.standby_loss_fraction',
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    minWidth: min_width + 50,
     enableHiding: false
   }];
 
@@ -547,8 +558,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     vav: {},
     pvav: {}
   };
-
-  min_width = 150;
 
   $scope.gridCols.ptac.general = [{
     name: 'name',
