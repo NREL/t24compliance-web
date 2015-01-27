@@ -1,10 +1,10 @@
-cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster', 'uiGridConstants', 'ConstructionDefaults', 'Shared', 'ConstructionLibrary', 'constData', 'doorData', 'fenData', 'defaults', function ($scope, $log, $location, toaster, uiGridConstants, ConstructionDefaults, Shared, ConstructionLibrary, constData, doorData, fenData, defaults) {
-  Shared.stopSpinner();
-
+cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster', 'uiGridConstants', 'ConstructionDefaults', 'Shared', 'data', 'ConstructionLibrary', 'constData', 'doorData', 'fenData', 'defaults', 'spaces', function ($scope, $log, $location, toaster, uiGridConstants, ConstructionDefaults, Shared, data, ConstructionLibrary, constData, doorData, fenData, defaults, spaces) {
   // construction data
   $scope.constData = constData;
   $scope.doorData = doorData;
   $scope.fenData = fenData;
+  $scope.spaces = spaces;
+  $scope.spacesModified = false;
 
   // retrieve saved defaults (if any)
   $scope.defaults = defaults[0] || {};
@@ -39,6 +39,46 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
     title: 'Underground Floor Construction',
     name: 'underground_floor'
   }];
+
+  // Load saved spaces
+  _.each($scope.spaces, function (space, spaceIndex) {
+    space.surfaces = [];
+    _.each(['interior_walls', 'exterior_walls', 'underground_walls', 'interior_floors', 'exterior_floors', 'underground_floors', 'roofs'], function (surfaceType) {
+      _.each(space[surfaceType], function (surface) {
+        surface.subsurfaces = [];
+        _.each(['doors', 'skylights', 'windows'], function (subsurfaceType) {
+          _.each(surface[subsurfaceType], function (subsurface) {
+            surface.subsurfaces.push(subsurface);
+          });
+          delete surface[subsurfaceType];
+        });
+        if (surfaceType == 'interior_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Interior';
+        } else if (surfaceType == 'exterior_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Exterior';
+        } else if (surfaceType == 'underground_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Underground';
+        } else if (surfaceType == 'interior_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Interior';
+        } else if (surfaceType == 'exterior_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Exterior';
+        } else if (surfaceType == 'underground_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Underground';
+        } else if (surfaceType == 'roofs') {
+          surface.type = 'Roof';
+          surface.boundary = null;
+        }
+        space.surfaces.push(surface);
+      });
+      delete space[surfaceType];
+    });
+  });
 
   _.each($scope.panels, function (panel) {
     panel.constructionGridOptions = {
@@ -200,28 +240,71 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
 
   // Modals
   $scope.openConstructionLibraryModal = function (index, rowEntity) {
-    ConstructionLibrary.openConstructionLibraryModal($scope.panels[index].title, rowEntity).then(function (selectedConstruction) {
-      $scope.panels[index].selected = selectedConstruction;
-      $scope.panels[index].constructionGridOptions.data = [selectedConstruction];
-      $scope.panels[index].gridOptions.data = selectedConstruction.layers;
+    var panel = $scope.panels[index];
+    var oldValue = panel.selected ? panel.selected.id : null;
+    ConstructionLibrary.openConstructionLibraryModal(panel.title, rowEntity).then(function (selectedConstruction) {
+      if (selectedConstruction.id != oldValue) {
+        Shared.setModified();
 
-      Shared.setModified();
+        panel.selected = selectedConstruction;
+        panel.constructionGridOptions.data = [selectedConstruction];
+        panel.gridOptions.data = selectedConstruction.layers;
+
+        _.each($scope.spaces, function (space) {
+          _.each(space.surfaces, function (surface) {
+            if (surface.construction_library_id == oldValue) {
+              $scope.spacesModified = true;
+              surface.construction_library_id = selectedConstruction.id;
+            }
+          });
+        });
+      }
     });
   };
   $scope.openDoorLibraryModal = function (index, rowEntity) {
-    ConstructionLibrary.openDoorLibraryModal($scope.doorPanels[index].title, rowEntity).then(function (selectedDoor) {
-      $scope.doorPanels[index].selected = selectedDoor;
-      $scope.doorPanels[index].doorGridOptions.data = [selectedDoor];
+    var panel = $scope.doorPanels[index];
+    var oldValue = panel.selected ? panel.selected.id : null;
+    ConstructionLibrary.openDoorLibraryModal(panel.title, rowEntity).then(function (selectedDoor) {
+      if (selectedDoor.id != oldValue) {
+        Shared.setModified();
 
-      Shared.setModified();
+        panel.selected = selectedDoor;
+        panel.doorGridOptions.data = [selectedDoor];
+
+        _.each($scope.spaces, function (space) {
+          _.each(space.surfaces, function (surface) {
+            _.each(surface.subsurfaces, function(subsurface) {
+              if (subsurface.construction_library_id == oldValue) {
+                $scope.spacesModified = true;
+                subsurface.construction_library_id = selectedDoor.id;
+              }
+            });
+          });
+        });
+      }
     });
   };
   $scope.openFenLibraryModal = function (index, rowEntity) {
-    ConstructionLibrary.openFenLibraryModal($scope.fenPanels[index].title, rowEntity).then(function (selectedFen) {
-      $scope.fenPanels[index].selected = selectedFen;
-      $scope.fenPanels[index].fenGridOptions.data = [selectedFen];
+    var panel = $scope.fenPanels[index];
+    var oldValue = panel.selected ? panel.selected.id : null;
+    ConstructionLibrary.openFenLibraryModal(panel.title, rowEntity).then(function (selectedFen) {
+      if (selectedFen.id != oldValue) {
+        Shared.setModified();
 
-      Shared.setModified();
+        panel.selected = selectedFen;
+        panel.fenGridOptions.data = [selectedFen];
+
+        _.each($scope.spaces, function (space) {
+          _.each(space.surfaces, function (surface) {
+            _.each(surface.subsurfaces, function(subsurface) {
+              if (subsurface.construction_library_id == oldValue) {
+                $scope.spacesModified = true;
+                subsurface.construction_library_id = selectedFen.id;
+              }
+            });
+          });
+        });
+      }
     });
   };
 
@@ -232,6 +315,24 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
     function success(response) {
       Shared.resetModified();
       toaster.pop('success', 'Construction defaults successfully saved');
+
+      if ($scope.spacesModified) {
+        $log.debug('Submitting spaces');
+
+        var params = Shared.defaultParams();
+        params.data = $scope.spaces;
+        data.bulkSync('spaces', params).then(success).catch(failure);
+
+        function success(response) {
+          $scope.spacesModified = false;
+          toaster.pop('success', 'Space construction defaults successfully updated');
+        }
+
+        function failure(response) {
+          $log.error('Failure submitting spaces', response);
+          toaster.pop('error', 'An error occurred while updating space construction defaults', response.statusText);
+        }
+      }
     }
 
     function failure(response) {
