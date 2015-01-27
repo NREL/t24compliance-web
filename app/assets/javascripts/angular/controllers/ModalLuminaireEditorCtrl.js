@@ -52,21 +52,25 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
       });
       if ($scope.editable) {
         gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-          if (colDef.name == 'name' && newValue != oldValue) {
-            $scope.data.updateLumHash();
-          } else if (colDef.name == 'fixture_type' && newValue != oldValue) {
-            _.merge(rowEntity, $scope.data.luminaireHeatGain(rowEntity.fixture_type));
-          } else if (colDef.name == 'power' && newValue != oldValue) {
-            _.each($scope.data.lightingSystems, function (lightingSystem) {
-              var luminaire = lightingSystem.luminaire_reference[0];
-              if (luminaire) {
-                lightingSystem.power = $scope.data.luminaires[luminaire].power * lightingSystem.luminaire_count[0];
-              }
+          if (newValue != oldValue) {
+            Shared.setModified();
+
+            if (colDef.name == 'name') {
+              $scope.data.updateLumHash();
+            } else if (colDef.name == 'fixture_type') {
+              _.merge(rowEntity, $scope.data.luminaireHeatGain(rowEntity.fixture_type));
+            } else if (colDef.name == 'power') {
+              _.each($scope.data.lightingSystems, function (lightingSystem) {
+                var luminaire = lightingSystem.luminaire_reference[0];
+                if (luminaire) {
+                  lightingSystem.power = $scope.data.luminaires[luminaire].power * lightingSystem.luminaire_count[0];
+                }
+              });
+            }
+            _.each($scope.data.spaces, function (space, spaceIndex) {
+              if (space.lighting_input_method == 'Luminaires') $scope.data.calculateLPD(spaceIndex);
             });
           }
-          _.each($scope.data.spaces, function (space, spaceIndex) {
-            if (space.lighting_input_method == 'Luminaires') $scope.data.calculateLPD(spaceIndex);
-          });
         });
       } else {
         $interval(function () {

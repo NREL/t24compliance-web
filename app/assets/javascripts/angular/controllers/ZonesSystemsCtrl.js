@@ -87,6 +87,11 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
           $scope.selected.zone = null;
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (newValue != oldValue) {
+          Shared.setModified();
+        }
+      });
     }
   };
 

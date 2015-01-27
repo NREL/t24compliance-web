@@ -1,7 +1,8 @@
-cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($log, $q, $templateCache, $sce, DSCacheFactory, usSpinnerService, uiGridConstants) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService) {
   var service = {};
   var projectId = null;
   var buildingId = null;
+  var modified = false;
   var cache = DSCacheFactory('libraries', {
     storageMode: 'localStorage',
     maxAge: 604800000 // 1 week
@@ -159,6 +160,35 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', 'DSCacheFactory
     usSpinnerService.stop('spinner');
   };
 
+  service.setModified = function () {
+    if (!modified) {
+      $window.onbeforeunload = function () {
+        return 'You have unsaved changes.';
+      };
+      modified = true;
+    }
+  };
+
+  service.resetModified = function () {
+    if (modified) {
+      $window.onbeforeunload = null;
+      modified = false;
+    }
+  };
+
+  service.isModified = function () {
+    return modified;
+  };
+
+  service.showModifiedDialog = function () {
+    var modalInstance = $modal.open({
+      templateUrl: 'project/modified.html',
+      controller: 'ModalModifiedCtrl'
+    });
+
+    return modalInstance.result;
+  };
+
   service.existsInCache = function (key) {
     var info = cache.info(key);
     return info !== undefined && !info.isExpired;
@@ -206,6 +236,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', 'DSCacheFactory
   service.textFilter = function () {
     return {
       condition: function (searchTerm, cellValue) {
+        if (searchTerm == 'null') return _.isEmpty(cellValue);
         if (cellValue == null) return false;
         var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
         var value = cellValue.toLowerCase();

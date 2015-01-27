@@ -1,5 +1,8 @@
 cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, stories) {
   Shared.setIds($stateParams);
+  $scope.setModified = function () {
+    Shared.setModified();
+  };
 
   $scope.stories = stories;
 
@@ -46,11 +49,15 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if ((colDef.name == 'z' || colDef.name == 'floor_to_floor_height') && newValue != oldValue) {
-          if ($scope.autoElevation) {
-            $scope.calculateElevation();
+        if (newValue != oldValue) {
+          Shared.setModified();
+
+          if (colDef.name == 'z' || colDef.name == 'floor_to_floor_height') {
+            if ($scope.autoElevation) {
+              $scope.calculateElevation();
+            }
+            $scope.updateStoryCount();
           }
-          $scope.updateStoryCount();
         }
       });
     }
@@ -97,74 +104,6 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
   $scope.$watch('autoElevation', function () {
     if ($scope.autoElevation) $scope.calculateElevation();
   });
-
-  // save
-  $scope.submit = function () {
-    $log.debug('Submitting building');
-    $scope.errors = {}; //clean up server errors
-
-    function success(response) {
-      toaster.pop('success', 'Building successfully saved');
-      var the_id = response.hasOwnProperty('id') ? response.id : response._id;
-      $log.debug("Building ID: ", the_id );
-      Shared.setBuildingId(the_id);
-      // UPDATE STORIES
-      $scope.stories.forEach(function (s) {
-        // ensure each story has a building_id defined
-        if (s.building_id != the_id) {
-          s.building_id = the_id;
-        }
-      });
-
-      // Story.createUpdate({building_id: Shared.getBuildingId()}, $scope.stories);
-      var params = Shared.defaultParams();
-      params['data'] = $scope.stories;
-      data.bulkSync('building_stories', params);
-      Shared.setBuildingId(the_id);
-      $location.path(Shared.buildingPath());
-
-    }
-
-    function failure(response) {
-      $log.error('Failure submitting building', response);
-      if (response.status == 422) {
-        var len = Object.keys(response.data.errors).length;
-        toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));
-      } else {
-        toaster.pop('error', 'An error occurred while saving');
-      }
-
-      _.each(response.data.errors, function (errors, field) {
-        if (field !== 'total_story_count') {
-          $scope.form[field].$setValidity('server', false);
-          $scope.form[field].$dirty = true;
-        }
-        $scope.errors[field] = errors.join(', ');
-      });
-
-    }
-
-    // set project ID
-    $scope.building.project_id = Shared.getProjectId();
-    if ($scope.building.relocatable_public_school_building) {
-      $scope.building.relocatable_public_school_building = 1;
-    } else {
-      $scope.building.relocatable_public_school_building = 0;
-    }
-
-    // update STORIES
-    $scope.building.above_grade_story_count = $scope.above;
-    $scope.building.total_story_count = $scope.stories.length;
-
-
-    // create vs update
-    if (Shared.getBuildingId()) {
-      data.update('buildings', $scope.building).then(success).catch(failure);
-    } else {
-      data.create('buildings', $scope.building).then(success).catch(failure);
-    }
-
-  };
 
   // Buttons
   $scope.addStory = function () {
@@ -228,6 +167,81 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
 
   $scope.storyError = function () {
     return !$scope.stories.length ? "has-error" : "";
+  };
+
+  // save
+  $scope.submit = function () {
+    $log.debug('Submitting building');
+    $scope.errors = {}; //clean up server errors
+
+    function success(response) {
+      toaster.pop('success', 'Building successfully saved');
+      var the_id = response.hasOwnProperty('id') ? response.id : response._id;
+      Shared.setBuildingId(the_id);
+      // UPDATE STORIES
+      $scope.stories.forEach(function (s) {
+        // ensure each story has a building_id defined
+        if (s.building_id != the_id) {
+          s.building_id = the_id;
+        }
+      });
+      Shared.setBuildingId(the_id);
+
+      var params = Shared.defaultParams();
+      params['data'] = $scope.stories;
+      data.bulkSync('building_stories', params).then(success).catch(failure);
+
+      function success(response) {
+        Shared.resetModified();
+        toaster.pop('success', 'Building stories successfully saved');
+        $location.path(Shared.buildingPath());
+      }
+
+      function failure(response) {
+        $log.error('Failure submitting building stories', response);
+        toaster.pop('error', 'An error occurred while saving building stories', response.statusText);
+      }
+    }
+
+    function failure(response) {
+      $log.error('Failure submitting building', response);
+      if (response.status == 422) {
+        var len = Object.keys(response.data.errors).length;
+        toaster.pop('error', 'An error occurred while saving', len + ' invalid field' + (len == 1 ? '' : 's'));
+      } else {
+        toaster.pop('error', 'An error occurred while saving');
+      }
+
+      _.each(response.data.errors, function (errors, field) {
+        if (field !== 'total_story_count') {
+          $scope.form[field].$setValidity('server', false);
+          $scope.form[field].$dirty = true;
+        }
+        $scope.errors[field] = errors.join(', ');
+      });
+
+    }
+
+    // set project ID
+    $scope.building.project_id = Shared.getProjectId();
+    if ($scope.building.relocatable_public_school_building) {
+      $scope.building.relocatable_public_school_building = 1;
+    } else {
+      $scope.building.relocatable_public_school_building = 0;
+    }
+
+    // update STORIES
+    $scope.building.above_grade_story_count = $scope.above;
+    $scope.building.total_story_count = $scope.stories.length;
+
+
+    // create vs update
+    if (Shared.getBuildingId()) {
+      data.update('buildings', $scope.building).then(success).catch(failure);
+    } else {
+      data.create('buildings', $scope.building).then(success).catch(failure);
+    }
+
   };
 }
 ]);

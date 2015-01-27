@@ -81,7 +81,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     title: 'PSZ Systems',
     name: 'szac',
     open: true
-  },{
+  }, {
     title: 'PVAV Air Systems',
     name: 'pvav',
     open: true
@@ -695,18 +695,18 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_cooling_control_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-/*   }, {
-    name: 'cool_reset_supply_high',
-    displayName: 'Cool Reset Supply High',
-    enableHiding: false,
-    filter: Shared.textFilter(),
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-  }, {
-    name: 'cool_reset_supply_low',
-    displayName: 'Cool Reset Supply Low',
-    enableHiding: false,
-    filter: Shared.textFilter(),
-    headerCellTemplate: 'ui-grid/cbeccHeaderCell'  */
+    /*   }, {
+     name: 'cool_reset_supply_high',
+     displayName: 'Cool Reset Supply High',
+     enableHiding: false,
+     filter: Shared.textFilter(),
+     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
+     }, {
+     name: 'cool_reset_supply_low',
+     displayName: 'Cool Reset Supply Low',
+     enableHiding: false,
+     filter: Shared.textFilter(),
+     headerCellTemplate: 'ui-grid/cbeccHeaderCell'  */
   }];
   $scope.gridCols.pvav.fan = angular.copy($scope.gridCols.ptac.fan);
   $scope.gridCols.pvav.coil_heating = angular.copy($scope.gridCols.ptac.coil_heating);
@@ -746,21 +746,25 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           multiSelect: false,
           data: $scope.systems[type],
           onRegisterApi: function (gridApi) {
-             $scope.gridSystemApi[type] = gridApi;
-             gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-             if (row.isSelected) {
-             $scope.selected[type] = row.entity;
-             } else {
-             // No rows selected
-             $scope.selected[type] = null;
-             }
-             });
+            $scope.gridSystemApi[type] = gridApi;
+            gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+              if (row.isSelected) {
+                $scope.selected[type] = row.entity;
+              } else {
+                // No rows selected
+                $scope.selected[type] = null;
+              }
+            });
 
             gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-              if ((colDef.name == 'name' || colDef.name == 'coil_heating_name' || colDef.name == 'coil_cooling_name') && newValue != oldValue) {
-                // update connected coils
-                $scope.display_coils_heating = calculateCoilsHeating();
-                $scope.display_coils_cooling = calculateCoilsCooling();
+              if (newValue != oldValue) {
+                Shared.setModified();
+
+                if (_.contains(['name', 'coil_heating_name', 'coil_cooling_name'], colDef.name)) {
+                  // update connected coils
+                  $scope.display_coils_heating = calculateCoilsHeating();
+                  $scope.display_coils_cooling = calculateCoilsCooling();
+                }
               }
             });
           }
@@ -803,18 +807,20 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           enableColumnMenus: false,
           enableFiltering: false,
           multiSelect: false,
-          data:$scope.plants[type],
           onRegisterApi: function (gridApi) {
             $scope.gridPlantApi[type][tab] = gridApi;
 
             gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-              if ((colDef.name == 'chiller_condenser_type') && newValue != oldValue) {
-                // add / remove condenser
-               if (newValue == 'Fluid') {
-                 addPlant('condenser');
-               }
-                else if (newValue == 'Air') {
-                 $scope.plants.condenser = [];
+              if (newValue != oldValue) {
+                Shared.setModified();
+
+                if (colDef.name == 'chiller_condenser_type') {
+                  // add / remove condenser
+                  if (newValue == 'Fluid') {
+                    addPlant('condenser');
+                  } else if (newValue == 'Air') {
+                    $scope.plants.condenser = [];
+                  }
                 }
               }
             });
@@ -830,10 +836,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         }
         else if (tab == 'coil_cooling') {
           $scope.gridPlantOptions[type][tab].data = 'display_coils_cooling';
-         }
-        //else {
-        //  $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
-        //}
+        }
+        else {
+          $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
+        }
       });
     }
   });
@@ -1080,7 +1086,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     if ($scope.plants.hot_water.length) {
       _.each($scope.systems, function (systems, type) {
         _.each($scope.systems[type], function (item) {
-          if (item['coil_heating']['type'] === 'HotWater'){
+          if (item['coil_heating']['type'] === 'HotWater') {
             hcoils.push({
               name: item['coil_heating']['name'],
               system_name: item['name'],
@@ -1251,11 +1257,11 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     $scope.display_coils_cooling = calculateCoilsCooling();
 
     // remove plants if necessary (use coil information to remove)
-    if (!$scope.display_coils_heating.length){
+    if (!$scope.display_coils_heating.length) {
       // remove hot_water plant
       $scope.plants.hot_water = [];
     }
-    if (!$scope.display_coils_cooling.length){
+    if (!$scope.display_coils_cooling.length) {
       // remove chilled_water plant (and condenser)
       $scope.plants.chilled_water = [];
       $scope.plants.condenser = [];
@@ -1286,6 +1292,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
       data.bulkSync('fluid_systems', params).then(success).catch(failure);
 
       function success(response) {
+        Shared.resetModified();
         toaster.pop('success', 'Systems and Plants successfully saved');
       }
 
@@ -1325,6 +1332,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     });
 
     modalInstance.result.then(function (system) {
+      Shared.setModified();
+
       for (var i = 0; i < system.quantity; ++i) {
         // explicitly set type and subtype if needed here.
         var sys_type = '';
@@ -1363,48 +1372,3 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   };
 
 }]);
-
-cbecc.controller('ModalSystemCreatorCtrl', [
-  '$scope', '$log', '$modalInstance', function ($scope, $log, $modalInstance) {
-    $scope.quantity = 1;
-    $scope.type = '';
-
-    $scope.systemTypes = [{
-      id: 'ptac',
-      name: 'PTAC: Packaged Terminal Air Conditioner'
-    }, {
-      id: 'fpfc',
-      name: 'FPFC: Four-Pipe Fan Coil'
-    }, {
-      id: 'szac',
-      name: 'PSZ: Packaged Single Zone Air Conditioner'
-    }, {
-      id: 'vav',
-      name: 'VAV: Variable Air Volume'
-    }, {
-      id: 'pvav',
-      name: 'PVAV: Packaged Variable Air Volume'
-    }];
-
-    $scope.systemDescriptions = {
-      ptac: 'Packaged terminal air conditioner: Ductless single-zone DX unit with hot water natural gas boiler.',
-      fpfc: 'Four-pipe fan coil: Ductless single-zone unit with hot water and chilled water coils.',
-      szac: 'Packaged single zone: This system can only serve one zone and includes a DX cooling coil and a gas heating coil.',
-      vav: 'Variable volume system: packaged variable volume DX unit with gas heating and with hot water reheat terminal units.',
-      pvav: 'Packaged variable volume system: VAV reheat system with packaged VAV DX unit with bass heating and hot water reheat terminal units.'
-    };
-
-
-    $scope.add = function () {
-      var data = {
-        quantity: $scope.quantity,
-        type: $scope.type
-      };
-      $log.debug(data);
-      $modalInstance.close(data);
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
-  }]);

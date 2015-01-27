@@ -112,6 +112,11 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
           }
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (newValue != oldValue) {
+          Shared.setModified();
+        }
+      });
     }
   };
 
@@ -123,6 +128,8 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
   };
 
   $scope.confirmApplySettings = function () {
+    Shared.setModified();
+
     var replacement = {
       process_electric: $scope.selectedSpace.process_electric,
       refrigeration: $scope.selectedSpace.refrigeration,

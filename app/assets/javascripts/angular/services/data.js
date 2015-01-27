@@ -1,5 +1,5 @@
 cbecc.provider('data', {
-  $get: ['$q', 'api', 'Shared', function ($q, api, Shared) {
+  $get: ['$q', 'toaster', 'api', 'Shared', function ($q, toaster, api, Shared) {
 
     var data = {
       // new: function(resource, params) {
@@ -15,8 +15,13 @@ cbecc.provider('data', {
           }
         }
 
+        if (resource == 'constructions') {
+          toaster.pop('note', 'Downloading constructions library', 'Please wait...', 60000);
+        }
+
         var promise = api[resource].query(query).$promise;
         promise.then(function (response) {
+          if (resource == 'constructions') toaster.clear();
           if (_.contains(caches, resource)) {
             Shared.saveToCache(resource, response);
           }

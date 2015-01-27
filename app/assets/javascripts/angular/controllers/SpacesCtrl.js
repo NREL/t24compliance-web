@@ -201,7 +201,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   $scope.data.subsurfaceConstHash = _.merge($scope.data.doorHash, $scope.data.fenHash);
 
   $scope.data.lumHash = {};
-  $scope.data.updateLumHash = function() {
+  $scope.data.updateLumHash = function () {
     _.each($scope.data.luminaires, function (luminaire, luminaireIndex) {
       $scope.data.lumHash[luminaireIndex] = luminaire.name;
     });
@@ -265,6 +265,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
 
   $scope.data.addSpace = function (input) {
+    Shared.setModified();
+
     var space = {
       name: "Space " + ($scope.data.spaces.length + 1),
       floor_to_ceiling_height: $scope.data.stories[0].floor_to_ceiling_height,
@@ -330,6 +332,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     $scope.data.spaces.push(space);
   };
   $scope.data.duplicateSpace = function (selected) {
+    Shared.setModified();
+
     var selectedSpace = selected.space;
     var spaceIndex = $scope.data.spaces.indexOf(selectedSpace);
 
@@ -393,6 +397,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
   };
   $scope.data.deleteSpace = function (selected, gridApi) {
+    Shared.setModified();
+
     var spaceIndex = $scope.data.spaces.indexOf(selected.space);
 
     // Delete subsurfaces
@@ -453,6 +459,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
 
   $scope.data.addSurface = function (type, boundary, spaceIndex) {
+    Shared.setModified();
+
     if (spaceIndex === undefined) {
       spaceIndex = 0;
     }
@@ -495,6 +503,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }
   };
   $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.spaces, function (space) {
       space.occupant_density = space.occupant_density_default;
       space.hot_water_heating_rate = space.hot_water_heating_rate_default;
@@ -510,6 +520,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }));
   };
   $scope.data.restoreSurfaceConstructionDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.surfaces, function (surface) {
       if (surface.constructionDefault) {
         surface.construction_library_id = surface.constructionDefault;
@@ -524,6 +536,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }));
   };
   $scope.data.restoreSubsurfaceConstructionDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.subsurfaces, function (subsurface) {
       if (subsurface.constructionDefault) {
         subsurface.construction_library_id = subsurface.constructionDefault;
@@ -538,6 +552,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }));
   };
   $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.spaces, function (space) {
       space.exhaust_per_area = space.exhaust_per_area_default;
       space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
@@ -551,6 +567,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }));
   };
   $scope.data.restoreRefrigerationDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.spaces, function (space) {
       space.commercial_refrigeration_epd = space.commercial_refrigeration_epd_default;
     });
@@ -562,6 +580,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }));
   };
   $scope.data.restoreGasDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.spaces, function (space) {
       space.gas_equipment_power_density = space.gas_equipment_power_density_default;
     });
@@ -573,6 +593,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     }));
   };
   $scope.data.restoreLPDDefaults = function (gridApi) {
+    Shared.setModified();
+
     _.each($scope.data.spaces, function (space) {
       if (space.lighting_input_method == 'LPD') {
         space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
@@ -590,6 +612,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
 
   $scope.data.duplicateSurface = function (selected, newParent) {
+    Shared.setModified();
+
     var selectedSurface = selected.surface;
     var spaceIndex = newParent === undefined ? selectedSurface.space : newParent;
     var surfaceIndex = $scope.data.surfaces.indexOf(selectedSurface);
@@ -627,6 +651,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
   };
   $scope.data.deleteSurface = function (selected, gridApi) {
+    Shared.setModified();
+
     var surfaceIndex = $scope.data.surfaces.indexOf(selected.surface);
 
     // Delete subsurfaces
@@ -648,6 +674,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
 
   $scope.data.addSubsurface = function (type, surfaceIndex) {
+    Shared.setModified();
+
     if (surfaceIndex === undefined) {
       var surface = _.find($scope.data.surfaces, function (surface) {
         if (type == 'Door') {
@@ -694,6 +722,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
   };
   $scope.data.duplicateSubsurface = function (selected, newParent) {
+    Shared.setModified();
+
     var selectedSubsurface = selected.subsurface;
 
     var surface = newParent === undefined ? selectedSubsurface.surface : newParent;
@@ -711,6 +741,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
   };
   $scope.data.deleteSubsurface = function (selected, gridApi) {
+    Shared.setModified();
+
     var subsurfaceIndex = $scope.data.subsurfaces.indexOf(selected.subsurface);
     $scope.data.subsurfaces.splice(subsurfaceIndex, 1);
     if (subsurfaceIndex > 0) {
@@ -721,6 +753,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
 
   $scope.data.addLuminaire = function () {
+    Shared.setModified();
+
     var luminaire = {
       name: "Luminaire " + ($scope.data.luminaires.length + 1),
       fixture_type: Enums.enums.luminaires_fixture_type_enums[1],
@@ -733,6 +767,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     $scope.data.updateLumHash();
   };
   $scope.data.duplicateLuminaire = function (selected) {
+    Shared.setModified();
+
     var selectedLuminaire = selected.luminaire;
 
     $scope.data.luminaires.push({
@@ -746,6 +782,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     $scope.data.updateLumHash();
   };
   $scope.data.deleteLuminaire = function (selected, gridApi, luminaireGridApi) {
+    Shared.setModified();
+
     var luminaireIndex = $scope.data.luminaires.indexOf(selected.luminaire);
 
     $scope.data.luminaires.splice(luminaireIndex, 1);
@@ -778,6 +816,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
 
   $scope.data.addLightingSystem = function () {
+    Shared.setModified();
+
     var spaceIndex = null;
     _.find($scope.data.spaces, function (space, index) {
       if (space.lighting_input_method == 'Luminaires') {
@@ -804,6 +844,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     $scope.data.lightingSystems.push(lightingSystem);
   };
   $scope.data.deleteLightingSystem = function (selected, gridApi) {
+    Shared.setModified();
+
     var lightingSystemIndex = $scope.data.lightingSystems.indexOf(selected.lightingSystem);
     var spaceIndex = selected.lightingSystem.space;
     $scope.data.lightingSystems.splice(lightingSystemIndex, 1);
@@ -1017,6 +1059,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       data.bulkSync('spaces', params).then(success).catch(failure);
 
       function success(response) {
+        Shared.resetModified();
         toaster.pop('success', 'Spaces successfully saved');
       }
 

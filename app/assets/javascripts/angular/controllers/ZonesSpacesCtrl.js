@@ -62,6 +62,11 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
           $scope.selected.space = null;
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (newValue != oldValue) {
+          Shared.setModified();
+        }
+      });
     }
   };
 

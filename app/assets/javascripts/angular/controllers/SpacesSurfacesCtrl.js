@@ -205,33 +205,37 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if (colDef.name == 'space' && newValue != oldValue) {
-          // Update story
-          rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
+        if (newValue != oldValue) {
+          Shared.setModified();
 
-          // Update name
-          var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
-          if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
-            regex += ' [0-9]+';
-          }
-          regex += '$';
-          if (new RegExp(regex).test(rowEntity.name)) {
-            var name = $scope.spacesHash[newValue] + ' ' + rowEntity.type;
+          if (colDef.name == 'space') {
+            // Update story
+            rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
+
+            // Update name
+            var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
             if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
-              var len = _.filter($scope.data.surfaces, function (surface) {
-                return surface.space == newValue && surface.type == rowEntity.type;
-              }).length;
-              name += ' ' + len;
+              regex += ' [0-9]+';
             }
-            rowEntity.name = name;
-          }
+            regex += '$';
+            if (new RegExp(regex).test(rowEntity.name)) {
+              var name = $scope.spacesHash[newValue] + ' ' + rowEntity.type;
+              if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
+                var len = _.filter($scope.data.surfaces, function (surface) {
+                  return surface.space == newValue && surface.type == rowEntity.type;
+                }).length;
+                name += ' ' + len;
+              }
+              rowEntity.name = name;
+            }
 
-          // Update adjacent space
-          if (rowEntity.boundary == 'Interior') {
-            var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
-            rowEntity.adjacent_space_reference = null;
-            rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
-            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+            // Update adjacent space
+            if (rowEntity.boundary == 'Interior') {
+              var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
+              rowEntity.adjacent_space_reference = null;
+              rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
+              gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+            }
           }
         }
       });
@@ -252,6 +256,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
   };
 
   $scope.confirmApplySettings = function () {
+    Shared.setModified();
+
     var replacement = {
       area: $scope.selected.surface.area,
       azimuth: $scope.selected.surface.azimuth,
@@ -288,6 +294,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       id: selectedSurface.construction_library_id
     });
     ConstructionLibrary.openConstructionLibraryModal(type, rowEntity).then(function (selectedConstruction) {
+      Shared.setModified();
+
       selectedSurface.construction_library_id = selectedConstruction.id;
       $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     });

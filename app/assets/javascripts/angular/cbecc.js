@@ -336,12 +336,33 @@ cbecc.config([
   }]);
 
 
-cbecc.run(['$rootScope', '$state', '$log', '$q', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $state, $log, $q, toaster, Shared, api, data) {
+cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $log, $q, $state, toaster, Shared, api, data) {
   api.add(['spaces', 'buildings', 'building_stories', 'constructions', 'fenestrations', 'door_lookups', 'construction_defaults', 'zone_systems', 'fluid_systems', 'spaces', 'simulations', 'space_function_defaults', 'thermal_zones', 'terminal_units', 'luminaires']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
-    Shared.startSpinner();
+    // Don't prompt to save on subtab changes
+    var to = toState.hasOwnProperty('parent') ? (toState.parent.hasOwnProperty('name') ? toState.parent.name : toState.name) : null;
+    var from = fromState.hasOwnProperty('parent') ? (fromState.parent.hasOwnProperty('name') ? fromState.parent.name : fromState.name) : null;
+    var ignoreModified = _.contains(['requirebuilding.spaces', 'requirebuilding.zones'], to) && to == from;
+
+    // Don't prompt when on project with no building
+    if (fromState.name == 'project') ignoreModified = true;
+
+    // Don't prompt when on building with no building and clicking a non-project tab
+    if (fromState.name == 'lookupbuilding.building' && toState.name != 'lookupbuilding.projectDetails') ignoreModified = true;
+
+    // Check for unsaved data first
+    if (Shared.isModified() && !ignoreModified) {
+      event.preventDefault();
+
+      Shared.showModifiedDialog().then(function () {
+        Shared.resetModified();
+        $state.go(toState, toParams);
+      });
+    } else {
+      Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
+      Shared.startSpinner();
+    }
   });
   $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
     Shared.stopSpinner();

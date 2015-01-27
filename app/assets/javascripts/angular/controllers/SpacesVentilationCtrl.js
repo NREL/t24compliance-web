@@ -88,7 +88,11 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        $scope.data.updateTotalExhaust(rowEntity);
+        if (newValue != oldValue) {
+          Shared.setModified();
+
+          $scope.data.updateTotalExhaust(rowEntity);
+        }
       });
     }
   };
@@ -101,6 +105,8 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   };
 
   $scope.confirmApplySettings = function () {
+    Shared.setModified();
+
     var replacement = {
       exhaust_per_area: $scope.selected.space.exhaust_per_area,
       exhaust_air_changes_per_hour: $scope.selected.space.exhaust_air_changes_per_hour

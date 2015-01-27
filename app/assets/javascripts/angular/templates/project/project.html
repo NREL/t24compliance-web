@@ -14,7 +14,7 @@
       <div class="form-group" ng-class="errorClass('name')">
         <label for="project-name" class="col-md-3 control-label">Project Name</label>
         <div class="col-md-5">
-          <input type="text" id="project-name" name="name" class="form-control" ng-model="project.name" server-error>
+          <input type="text" id="project-name" name="name" class="form-control" ng-model="project.name" server-error ng-change="setModified()">
           <p ng-show="form.name.$error.server" class="help-block">
             <span class="has-error">{{ errors.name }}</span>
           </p>
@@ -40,7 +40,7 @@
       <div class="form-group" ng-class="errorClass('run_title')">
         <label for="project-run-title" class="col-md-3 control-label">Run Title</label>
         <div class="col-md-5">
-          <input type="text" id="project-run-title" name="run_title" class="form-control" ng-model="project.run_title">
+          <input type="text" id="project-run-title" name="run_title" class="form-control" ng-model="project.run_title" ng-change="setModified()">
           <p ng-show="form.run_title.$error.server" class="help-block">
             <span class="has-error">{{ errors.run_title }}</span>
           </p>
@@ -52,7 +52,7 @@
       <div class="form-group" ng-class="errorClass('address')">
         <label for="project-address" class="col-md-3 control-label">Address</label>
         <div class="col-md-5">
-          <input type="text" id="project-address" name="address" class="form-control" ng-model="project.address">
+          <input type="text" id="project-address" name="address" class="form-control" ng-model="project.address" ng-change="setModified()">
           <p ng-show="form.address.$error.server" class="help-block">
             <span class="has-error">{{ errors.address }}</span>
           </p>
@@ -61,7 +61,7 @@
       <div class="form-group" ng-class="errorClass('city')">
         <label for="project-city" class="col-md-3 control-label">City</label>
         <div class="col-md-5">
-          <input type="text" id="project-city" name="city" class="form-control" ng-model="project.city">
+          <input type="text" id="project-city" name="city" class="form-control" ng-model="project.city" ng-change="setModified()">
           <p ng-show="form.city.$error.server" class="help-block">
             <span class="has-error">{{ errors.city }}</span>
           </p>
@@ -70,7 +70,7 @@
       <div class="form-group" ng-class="errorClass('state')">
         <label for="project-state" class="col-md-3 control-label">State</label>
         <div class="col-md-5">
-          <input type="text" id="project-state" name="state" class="form-control" ng-model="project.state">
+          <input type="text" id="project-state" name="state" class="form-control" ng-model="project.state" ng-change="setModified()">
           <p ng-show="form.state.$error.server" class="help-block">
             <span class="has-error">{{ errors.state }}</span>
           </p>
@@ -79,7 +79,7 @@
       <div class="form-group" ng-class="errorClass('zip_code')">
         <label for="project-zip-code" class="col-md-3 control-label">Zip Code</label>
         <div class="col-md-5">
-          <input type="text" id="project-zip-code" name="zip_code" class="form-control" ng-model="project.zip_code" pattern="\d{5,5}" server-error>
+          <input type="text" id="project-zip-code" name="zip_code" class="form-control" ng-model="project.zip_code" pattern="\d{5,5}" server-error ng-change="setModified()">
           <p ng-show="form.zip_code.$error.server" class="help-block">
             <span class="has-error">{{ errors.zip_code }}</span>
           </p>
@@ -101,7 +101,7 @@
           <div class="form-group" ng-class="errorClass('owner_organization')">
             <label for="project-owner-organization" class="col-md-3 control-label">Organization</label>
             <div class="col-md-5">
-              <input type="text" id="project-owner-organization" name="owner_organization" class="form-control" ng-model="project.owner_organization">
+              <input type="text" id="project-owner-organization" name="owner_organization" class="form-control" ng-model="project.owner_organization" ng-change="setModified()">
               <p ng-show="form.owner_organization.$error.server" class="help-block">
                 <span class="has-error">{{ errors.owner_organization }}</span>
               </p>
@@ -110,7 +110,7 @@
           <div class="form-group" ng-class="errorClass('owner_name')">
             <label for="project-owner-name" class="col-md-3 control-label">Contact Name</label>
             <div class="col-md-5">
-              <input type="text" id="project-owner-name" name="owner_name" class="form-control" ng-model="project.owner_name">
+              <input type="text" id="project-owner-name" name="owner_name" class="form-control" ng-model="project.owner_name" ng-change="setModified()">
               <p ng-show="form.owner_name.$error.server" class="help-block">
                 <span class="has-error">{{ errors.owner_name }}</span>
               </p>
@@ -119,7 +119,7 @@
           <div class="form-group" ng-class="errorClass('owner_title')">
             <label for="project-owner-title" class="col-md-3 control-label">Title</label>
             <div class="col-md-5">
-              <input type="text" id="project-owner-title" name="owner_title" class="form-control" ng-model="project.owner_title">
+              <input type="text" id="project-owner-title" name="owner_title" class="form-control" ng-model="project.owner_title" ng-change="setModified()">
               <p ng-show="form.owner_title.$error.server" class="help-block">
                 <span class="has-error">{{ errors.owner_title }}</span>
               </p>
@@ -128,7 +128,7 @@
           <div class="form-group" ng-class="errorClass('owner_email')">
             <label for="project-owner-email" class="col-md-3 control-label">Email</label>
             <div class="col-md-5">
-              <input type="email" id="project-owner-email" name="owner_email" class="form-control" ng-model="project.owner_email">
+              <input type="email" id="project-owner-email" name="owner_email" class="form-control" ng-model="project.owner_email" ng-change="setModified()">
               <p ng-show="form.owner_email.$error.server" class="help-block">
                 <span class="has-error">{{ errors.owner_email }}</span>
               </p>
@@ -137,7 +137,7 @@
           <div class="form-group" ng-class="errorClass('owner_phone')">
             <label for="project-owner-phone" class="col-md-3 control-label">Phone</label>
             <div class="col-md-5">
-              <input type="tel" id="project-owner-phone" name="owner_phone" class="form-control" ng-model="project.owner_phone">
+              <input type="tel" id="project-owner-phone" name="owner_phone" class="form-control" ng-model="project.owner_phone" ng-change="setModified()">
               <p ng-show="form.owner_phone.$error.server" class="help-block">
                 <span class="has-error">{{ errors.owner_phone }}</span>
               </p>
@@ -148,7 +148,7 @@
           <div class="form-group" ng-class="errorClass('hvac_engineer_organization')">
             <label for="project-hvac-engineer-organization" class="col-md-3 control-label">Organization</label>
             <div class="col-md-5">
-              <input type="text" id="project-hvac-engineer-organization" name="hvac_engineer_organization" class="form-control" ng-model="project.hvac_engineer_organization">
+              <input type="text" id="project-hvac-engineer-organization" name="hvac_engineer_organization" class="form-control" ng-model="project.hvac_engineer_organization" ng-change="setModified()">
               <p ng-show="form.hvac_engineer_organization.$error.server" class="help-block">
                 <span class="has-error">{{ errors.hvac_engineer_organization }}</span>
               </p>
@@ -157,7 +157,7 @@
           <div class="form-group" ng-class="errorClass('hvac_engineer_name')">
             <label for="project-hvac-engineer-name" class="col-md-3 control-label">Contact Name</label>
             <div class="col-md-5">
-              <input type="text" id="project-hvac-engineer-name" name="hvac_engineer_name" class="form-control" ng-model="project.hvac_engineer_name">
+              <input type="text" id="project-hvac-engineer-name" name="hvac_engineer_name" class="form-control" ng-model="project.hvac_engineer_name" ng-change="setModified()">
               <p ng-show="form.hvac_engineer_name.$error.server" class="help-block">
                 <span class="has-error">{{ errors.hvac_engineer_name }}</span>
               </p>
@@ -166,7 +166,7 @@
           <div class="form-group" ng-class="errorClass('hvac_engineer_title')">
             <label for="project-hvac-engineer-title" class="col-md-3 control-label">Title</label>
             <div class="col-md-5">
-              <input type="text" id="project-hvac-engineer-title" name="hvac_engineer_title" class="form-control" ng-model="project.hvac_engineer_title">
+              <input type="text" id="project-hvac-engineer-title" name="hvac_engineer_title" class="form-control" ng-model="project.hvac_engineer_title" ng-change="setModified()">
               <p ng-show="form.hvac_engineer_title.$error.server" class="help-block">
                 <span class="has-error">{{ errors.hvac_engineer_title }}</span>
               </p>
@@ -175,7 +175,7 @@
           <div class="form-group" ng-class="errorClass('hvac_engineer_email')">
             <label for="project-hvac-engineer-email" class="col-md-3 control-label">Email</label>
             <div class="col-md-5">
-              <input type="email" id="project-hvac-engineer-email" name="hvac_engineer_email" class="form-control" ng-model="project.hvac_engineer_email">
+              <input type="email" id="project-hvac-engineer-email" name="hvac_engineer_email" class="form-control" ng-model="project.hvac_engineer_email" ng-change="setModified()">
               <p ng-show="form.hvac_engineer_email.$error.server" class="help-block">
                 <span class="has-error">{{ errors.hvac_engineer_email }}</span>
               </p>
@@ -184,7 +184,7 @@
           <div class="form-group" ng-class="errorClass('hvac_engineer_phone')">
             <label for="project-hvac-engineer-phone" class="col-md-3 control-label">Phone</label>
             <div class="col-md-5">
-              <input type="tel" id="project-hvac-engineer-phone" name="hvac_engineer_phone" class="form-control" ng-model="project.hvac_engineer_phone">
+              <input type="tel" id="project-hvac-engineer-phone" name="hvac_engineer_phone" class="form-control" ng-model="project.hvac_engineer_phone" ng-change="setModified()">
               <p ng-show="form.hvac_engineer_phone.$error.server" class="help-block">
                 <span class="has-error">{{ errors.hvac_engineer_phone }}</span>
               </p>
@@ -195,7 +195,7 @@
           <div class="form-group" ng-class="errorClass('energy_modeler_organization')">
             <label for="project-energy-modeler-organization" class="col-md-3 control-label">Organization</label>
             <div class="col-md-5">
-              <input type="text" id="project-energy-modeler-organization" name="energy_modeler_organization" class="form-control" ng-model="project.energy_modeler_organization">
+              <input type="text" id="project-energy-modeler-organization" name="energy_modeler_organization" class="form-control" ng-model="project.energy_modeler_organization" ng-change="setModified()">
               <p ng-show="form.energy_modeler_organization.$error.server" class="help-block">
                 <span class="has-error">{{ errors.energy_modeler_organization }}</span>
               </p>
@@ -204,7 +204,7 @@
           <div class="form-group" ng-class="errorClass('energy_modeler_name')">
             <label for="project-energy-modeler-name" class="col-md-3 control-label">Contact Name</label>
             <div class="col-md-5">
-              <input type="text" id="project-energy-modeler-name" name="energy_modeler_name" class="form-control" ng-model="project.energy_modeler_name">
+              <input type="text" id="project-energy-modeler-name" name="energy_modeler_name" class="form-control" ng-model="project.energy_modeler_name" ng-change="setModified()">
               <p ng-show="form.energy_modeler_name.$error.server" class="help-block">
                 <span class="has-error">{{ errors.energy_modeler_name }}</span>
               </p>
@@ -213,7 +213,7 @@
           <div class="form-group" ng-class="errorClass('energy_modeler_title')">
             <label for="project-energy-modeler-title" class="col-md-3 control-label">Title</label>
             <div class="col-md-5">
-              <input type="text" id="project-energy-modeler-title" name="energy_modeler_title" class="form-control" ng-model="project.energy_modeler_title">
+              <input type="text" id="project-energy-modeler-title" name="energy_modeler_title" class="form-control" ng-model="project.energy_modeler_title" ng-change="setModified()">
               <p ng-show="form.energy_modeler_title.$error.server" class="help-block">
                 <span class="has-error">{{ errors.energy_modeler_title }}</span>
               </p>
@@ -222,7 +222,7 @@
           <div class="form-group" ng-class="errorClass('energy_modeler_email')">
             <label for="project-energy-modeler-email" class="col-md-3 control-label">Email</label>
             <div class="col-md-5">
-              <input type="email" id="project-energy-modeler-email" name="energy_modeler_email" class="form-control" ng-model="project.energy_modeler_email">
+              <input type="email" id="project-energy-modeler-email" name="energy_modeler_email" class="form-control" ng-model="project.energy_modeler_email" ng-change="setModified()">
               <p ng-show="form.energy_modeler_email.$error.server" class="help-block">
                 <span class="has-error">{{ errors.energy_modeler_email }}</span>
               </p>
@@ -231,7 +231,7 @@
           <div class="form-group" ng-class="errorClass('energy_modeler_phone')">
             <label for="project-energy-modeler-phone" class="col-md-3 control-label">Phone</label>
             <div class="col-md-5">
-              <input type="tel" id="project-energy-modeler-phone" name="energy_modeler_phone" class="form-control" ng-model="project.energy_modeler_phone">
+              <input type="tel" id="project-energy-modeler-phone" name="energy_modeler_phone" class="form-control" ng-model="project.energy_modeler_phone" ng-change="setModified()">
               <p ng-show="form.energy_modeler_phone.$error.server" class="help-block">
                 <span class="has-error">{{ errors.energy_modeler_phone }}</span>
               </p>
@@ -244,7 +244,7 @@
           <div class="form-group" ng-class="errorClass('architect_organization')">
             <label for="project-architect-organization" class="col-md-3 control-label">Organization</label>
             <div class="col-md-5">
-              <input type="text" id="project-architect-organization" name="architect_organization" class="form-control" ng-model="project.architect_organization">
+              <input type="text" id="project-architect-organization" name="architect_organization" class="form-control" ng-model="project.architect_organization" ng-change="setModified()">
               <p ng-show="form.architect_organization.$error.server" class="help-block">
                 <span class="has-error">{{ errors.architect_organization }}</span>
               </p>
@@ -253,7 +253,7 @@
           <div class="form-group" ng-class="errorClass('architect_name')">
             <label for="project-architect-name" class="col-md-3 control-label">Contact Name</label>
             <div class="col-md-5">
-              <input type="text" id="project-architect-name" name="architect_name" class="form-control" ng-model="project.architect_name">
+              <input type="text" id="project-architect-name" name="architect_name" class="form-control" ng-model="project.architect_name" ng-change="setModified()">
               <p ng-show="form.architect_name.$error.server" class="help-block">
                 <span class="has-error">{{ errors.architect_name }}</span>
               </p>
@@ -262,7 +262,7 @@
           <div class="form-group" ng-class="errorClass('architect_title')">
             <label for="project-architect-title" class="col-md-3 control-label">Title</label>
             <div class="col-md-5">
-              <input type="text" id="project-architect-title" name="architect_title" class="form-control" ng-model="project.architect_title">
+              <input type="text" id="project-architect-title" name="architect_title" class="form-control" ng-model="project.architect_title" ng-change="setModified()">
               <p ng-show="form.architect_title.$error.server" class="help-block">
                 <span class="has-error">{{ errors.architect_title }}</span>
               </p>
@@ -271,7 +271,7 @@
           <div class="form-group" ng-class="errorClass('architect_email')">
             <label for="project-architect-email" class="col-md-3 control-label">Email</label>
             <div class="col-md-5">
-              <input type="email" id="project-architect-email" name="architect_email" class="form-control" ng-model="project.architect_email">
+              <input type="email" id="project-architect-email" name="architect_email" class="form-control" ng-model="project.architect_email" ng-change="setModified()">
               <p ng-show="form.architect_email.$error.server" class="help-block">
                 <span class="has-error">{{ errors.architect_email }}</span>
               </p>
@@ -280,7 +280,7 @@
           <div class="form-group" ng-class="errorClass('architect_phone')">
             <label for="project-architect-phone" class="col-md-3 control-label">Phone</label>
             <div class="col-md-5">
-              <input type="tel" id="project-architect-phone" name="architect_phone" class="form-control" ng-model="project.architect_phone">
+              <input type="tel" id="project-architect-phone" name="architect_phone" class="form-control" ng-model="project.architect_phone" ng-change="setModified()">
               <p ng-show="form.architect_phone.$error.server" class="help-block">
                 <span class="has-error">{{ errors.architect_phone }}</span>
               </p>
@@ -290,7 +290,7 @@
           <div class="form-group" ng-class="errorClass('lighting_designer_organization')">
             <label for="project-lighting-designer-organization" class="col-md-3 control-label">Organization</label>
             <div class="col-md-5">
-              <input type="text" id="project-lighting-designer-organization" name="lighting_designer_organization" class="form-control" ng-model="project.lighting_designer_organization">
+              <input type="text" id="project-lighting-designer-organization" name="lighting_designer_organization" class="form-control" ng-model="project.lighting_designer_organization" ng-change="setModified()">
               <p ng-show="form.lighting_designer_organization.$error.server" class="help-block">
                 <span class="has-error">{{ errors.lighting_designer_organization }}</span>
               </p>
@@ -299,7 +299,7 @@
           <div class="form-group" ng-class="errorClass('lighting_designer_name')">
             <label for="project-lighting-designer-name" class="col-md-3 control-label">Contact Name</label>
             <div class="col-md-5">
-              <input type="text" id="project-lighting-designer-name" name="lighting_designer_name" class="form-control" ng-model="project.lighting_designer_name">
+              <input type="text" id="project-lighting-designer-name" name="lighting_designer_name" class="form-control" ng-model="project.lighting_designer_name" ng-change="setModified()">
               <p ng-show="form.lighting_designer_name.$error.server" class="help-block">
                 <span class="has-error">{{ errors.lighting_designer_name }}</span>
               </p>
@@ -308,7 +308,7 @@
           <div class="form-group" ng-class="errorClass('lighting_designer_title')">
             <label for="project-lighting-designer-title" class="col-md-3 control-label">Title</label>
             <div class="col-md-5">
-              <input type="text" id="project-lighting-designer-title" name="lighting_designer_title" class="form-control" ng-model="project.lighting_designer_title">
+              <input type="text" id="project-lighting-designer-title" name="lighting_designer_title" class="form-control" ng-model="project.lighting_designer_title" ng-change="setModified()">
               <p ng-show="form.lighting_designer_title.$error.server" class="help-block">
                 <span class="has-error">{{ errors.lighting_designer_title }}</span>
               </p>
@@ -317,7 +317,7 @@
           <div class="form-group" ng-class="errorClass('lighting_designer_email')">
             <label for="project-lighting-designer-email" class="col-md-3 control-label">Email</label>
             <div class="col-md-5">
-              <input type="email" id="project-lighting-designer-email" name="lighting_designer_email" class="form-control" ng-model="project.lighting_designer_email">
+              <input type="email" id="project-lighting-designer-email" name="lighting_designer_email" class="form-control" ng-model="project.lighting_designer_email" ng-change="setModified()">
               <p ng-show="form.lighting_designer_email.$error.server" class="help-block">
                 <span class="has-error">{{ errors.lighting_designer_email }}</span>
               </p>
@@ -326,7 +326,7 @@
           <div class="form-group" ng-class="errorClass('lighting_designer_phone')">
             <label for="project-lighting-designer-phone" class="col-md-3 control-label">Phone</label>
             <div class="col-md-5">
-              <input type="tel" id="project-lighting-designer-phone" name="lighting_designer_phone" class="form-control" ng-model="project.lighting_designer_phone">
+              <input type="tel" id="project-lighting-designer-phone" name="lighting_designer_phone" class="form-control" ng-model="project.lighting_designer_phone" ng-change="setModified()">
               <p ng-show="form.lighting_designer_phone.$error.server" class="help-block">
                 <span class="has-error">{{ errors.lighting_designer_phone }}</span>
               </p>
@@ -355,7 +355,8 @@
                   switch-on-text="Yes"
                   switch-off-text="No"
                   ng-true-value="'Yes'"
-                  ng-false-value="'No'">
+                  ng-false-value="'No'"
+                  ng-change="setModified()">
               <p ng-show="form.exceptional_condition_no_cooling_system.$error.server" class="help-block">
                 <span class="has-error">{{ errors.exceptional_condition_no_cooling_system }}</span>
               </p>
@@ -378,7 +379,8 @@
                   switch-on-text="Yes"
                   switch-off-text="No"
                   ng-true-value="'Yes'"
-                  ng-false-value="'No'">
+                  ng-false-value="'No'"
+                  ng-change="setModified()">
               <p ng-show="form.exceptional_condition_rated_capacity.$error.server" class="help-block">
                 <span class="has-error">{{ errors.exceptional_condition_rated_capacity }}</span>
               </p>
@@ -398,7 +400,8 @@
                   switch-on-text="Yes"
                   switch-off-text="No"
                   ng-true-value="'Yes'"
-                  ng-false-value="'No'">
+                  ng-false-value="'No'"
+                  ng-change="setModified()">
               <p ng-show="form.exceptional_condition_water_heater.$error.server" class="help-block">
                 <span class="has-error">{{ errors.exceptional_condition_water_heater }}</span>
               </p>
@@ -418,7 +421,8 @@
                   switch-on-text="Yes"
                   switch-off-text="No"
                   ng-true-value="'Yes'"
-                  ng-false-value="'No'">
+                  ng-false-value="'No'"
+                  ng-change="setModified()">
               <p ng-show="form.exceptional_condition_narrative.$error.server" class="help-block">
                 <span class="has-error">{{ errors.exceptional_condition_narrative }}</span>
               </p>

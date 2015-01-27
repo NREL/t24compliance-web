@@ -1,5 +1,8 @@
 cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', function ($scope, $log, $stateParams, $location, toaster, Project, Shared, Enums) {
   Shared.setIds($stateParams);
+  $scope.setModified = function () {
+    Shared.setModified();
+  };
 
   // pull in global enum definitions
   $scope.project_compliance_type_enums = Enums.enums.project_compliance_type_enums;
@@ -42,6 +45,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
     $scope.errors = {}; //clean up server errors
 
     function success(response) {
+      Shared.resetModified();
       toaster.pop('success', 'Project successfully saved');
       if (!Shared.getBuildingId()) toaster.pop('note', 'You can move on to the next tab by selecting \'Building\' from the top navigation menu.');
 
