@@ -1,4 +1,4 @@
-cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'saved_systems', 'saved_plants', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, saved_systems, saved_plants) {
+cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'Project', 'saved_systems', 'saved_plants', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, Project, saved_systems, saved_plants) {
 
   // put all systems DATA in array for panels (even exhaust)
   $scope.systems = {
@@ -64,8 +64,21 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
       case 'CondenserWater':
         $scope.plants.condenser.push(plant);
         break;
+      case 'ServiceHotWater':
+        $scope.plants.shw.push(plant);
+        break;
     }
   });
+
+  // add SHW if project exceptional_condition_water_heater is 'No'
+  if ($scope.plants.shw.length == 0) {
+    Project.show({id: Shared.getProjectId()}).$promise.then(function (response) {
+      $scope.project = response;
+      if ($scope.project.exceptional_condition_water_heater == 'No') {
+        addPlant('shw');
+      }
+    });
+  }
 
   //**** INITIALIZE ****
   //collapsible panels
@@ -942,11 +955,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
                 }
               }
             });
-
-            gridApi.edit.on.beginCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-              $log.debug(rowEntity);
-            });
-
           }
         };
         if (tab == 'coil_heating') {

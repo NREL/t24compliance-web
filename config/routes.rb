@@ -95,6 +95,7 @@ Rails.application.routes.draw do
   # resources :exterior_walls
   # resources :interior_lighting_systems
   # resources :outside_air_controls
+  # resources :water_heaters
 
   # non-revised below
 =begin
@@ -115,8 +116,6 @@ Rails.application.routes.draw do
   resources :curve_linears
 
   resources :schedules
-
-  resources :water_heaters
 
   resources :curve_cubics
 
