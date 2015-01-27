@@ -78,12 +78,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
         if (surfaceType == 'interior_floors') {
           surface.type = 'Floor';
           surface.boundary = 'Interior';
-          _.find($scope.data.spaces, function (space, spaceIndex) {
+          _.each($scope.data.spaces, function (space, spaceIndex) {
             if (surface.adjacent_space_reference == space.name) {
               surface.adjacent_space_reference = spaceIndex;
-              return true;
+              return false;
             }
-            return false;
           });
         } else if (surfaceType == 'exterior_floors') {
           surface.type = 'Floor';
@@ -94,12 +93,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
         } else if (surfaceType == 'interior_walls') {
           surface.type = 'Wall';
           surface.boundary = 'Interior';
-          _.find($scope.data.spaces, function (space, spaceIndex) {
+          _.each($scope.data.spaces, function (space, spaceIndex) {
             if (surface.adjacent_space_reference == space.name) {
               surface.adjacent_space_reference = spaceIndex;
-              return true;
+              return false;
             }
-            return false;
           });
         } else if (surfaceType == 'exterior_walls') {
           surface.type = 'Wall';
@@ -133,12 +131,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       var luminaire = lightingSystem.luminaire_reference[0];
       if (luminaire) {
         var luminaireIndex = null;
-        _.find($scope.data.luminaires, function (luminaire, index) {
+        _.each($scope.data.luminaires, function (luminaire, index) {
           if (lightingSystem.luminaire_reference[0] == luminaire.name) {
             luminaireIndex = index;
-            return true;
+            return false;
           }
-          return false;
         });
         lightingSystem.luminaire_reference[0] = luminaireIndex;
         lightingSystem.power = $scope.data.luminaires[luminaireIndex].power * lightingSystem.luminaire_count[0];
@@ -819,12 +816,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var spaceIndex = null;
-    _.find($scope.data.spaces, function (space, index) {
+    _.each($scope.data.spaces, function (space, index) {
       if (space.lighting_input_method == 'Luminaires') {
         spaceIndex = index;
-        return true;
+        return false;
       }
-      return false;
     });
 
     var lightingSystem = {
@@ -874,12 +870,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
         });
       } else if (surface.type == 'Floor') {
         var storyIndex = null;
-        _.find($scope.data.storiesArr, function (story, key) {
+        _.each($scope.data.storiesArr, function (story, key) {
           if (story.id == storyId) {
             storyIndex = key;
-            return true;
+            return false;
           }
-          return false;
         });
         if (storyIndex) {
           var storyBelow = $scope.data.storiesArr[storyIndex - 1].id;

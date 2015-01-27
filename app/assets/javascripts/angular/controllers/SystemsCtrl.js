@@ -878,11 +878,6 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
                 }
               }
             });
-
-            gridApi.edit.on.beginCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-              $log.debug(rowEntity);
-            });
-
           }
         };
         if (tab == 'coil_heating') {
