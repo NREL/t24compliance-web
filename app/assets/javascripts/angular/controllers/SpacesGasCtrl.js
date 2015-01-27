@@ -78,6 +78,11 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
           }
         }
       });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (newValue != oldValue) {
+          Shared.setModified();
+        }
+      });
     }
   };
 
@@ -89,6 +94,8 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
   };
 
   $scope.confirmApplySettings = function () {
+    Shared.setModified();
+
     var replacement = {
       gas_equipment: $scope.selectedSpace.gas_equipment,
       process_gas: $scope.selectedSpace.process_gas,

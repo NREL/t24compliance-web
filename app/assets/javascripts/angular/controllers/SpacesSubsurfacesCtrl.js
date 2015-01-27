@@ -139,16 +139,20 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if (colDef.name == 'space' && newValue != oldValue) {
-          if (rowEntity.type == 'Door') {
-            rowEntity.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: newValue}).surfaces;
-          } else if (rowEntity.type == 'Window') {
-            rowEntity.surfaceOptions = _.find($scope.windowCompatibleSpaces, {id: newValue}).surfaces;
-          } else if (rowEntity.type == 'Skylight') {
-            rowEntity.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: newValue}).surfaces;
+        if (newValue != oldValue) {
+          Shared.setModified();
+
+          if (colDef.name == 'space') {
+            if (rowEntity.type == 'Door') {
+              rowEntity.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: newValue}).surfaces;
+            } else if (rowEntity.type == 'Window') {
+              rowEntity.surfaceOptions = _.find($scope.windowCompatibleSpaces, {id: newValue}).surfaces;
+            } else if (rowEntity.type == 'Skylight') {
+              rowEntity.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: newValue}).surfaces;
+            }
+            rowEntity.surface = rowEntity.surfaceOptions[0].id;
+            rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
           }
-          rowEntity.surface = rowEntity.surfaceOptions[0].id;
-          rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
         }
       });
     }
@@ -167,6 +171,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   };
 
   $scope.confirmApplySettings = function () {
+    Shared.setModified();
+
     var replacement = {
       area: $scope.selected.subsurface.area,
       construction_library_id: $scope.selected.subsurface.construction_library_id
@@ -196,12 +202,16 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     if (selectedSubsurface.type == 'Door') {
       var rowEntity = _.find($scope.data.doorData, {id: selectedSubsurface.construction_library_id});
       ConstructionLibrary.openDoorLibraryModal(type, rowEntity).then(function (selectedConstruction) {
+        Shared.setModified();
+
         selectedSubsurface.construction_library_id = selectedConstruction.id;
         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
       });
     } else {
       var rowEntity = _.find($scope.data.fenData, {id: selectedSubsurface.construction_library_id});
       ConstructionLibrary.openFenLibraryModal(type, rowEntity).then(function (selectedConstruction) {
+        Shared.setModified();
+
         selectedSubsurface.construction_library_id = selectedConstruction.id;
         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
       });

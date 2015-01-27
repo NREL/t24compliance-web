@@ -105,6 +105,8 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
   };
 
   $scope.data.addZone = function () {
+    Shared.setModified();
+
     var zone = {
       name: "Zone " + ($scope.data.zones.length + 1),
       story: $scope.data.stories[0].id,
@@ -114,6 +116,8 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     $scope.data.zones.push(zone);
   };
   $scope.data.deleteZone = function (selected, gridApi) {
+    Shared.setModified();
+
     var zone_name = selected.zone.name;
     $log.debug('Deleting zone: ', zone_name);
     var index = $scope.data.zones.indexOf(selected.zone);
@@ -200,6 +204,8 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
           data.bulkSync('terminal_units', params).then(success).catch(failure);
 
           function success(response) {
+            Shared.resetModified();
+
             toaster.pop('success', 'Terminal units successfully saved');
           }
 

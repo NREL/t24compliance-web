@@ -176,6 +176,8 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     }],
     data: 'layerData',
     enableColumnMenus: false,
+    enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
+    enableVerticalScrollbar: uiGridConstants.scrollbars.NEVER,
     enableSorting: false
   };
 

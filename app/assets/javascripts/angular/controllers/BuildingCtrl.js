@@ -1,5 +1,8 @@
 cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, stories) {
   Shared.setIds($stateParams);
+  $scope.setModified = function () {
+    Shared.setModified();
+  };
 
   $scope.stories = stories;
 
@@ -46,11 +49,15 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if ((colDef.name == 'z' || colDef.name == 'floor_to_floor_height') && newValue != oldValue) {
-          if ($scope.autoElevation) {
-            $scope.calculateElevation();
+        if (newValue != oldValue) {
+          Shared.setModified();
+
+          if (colDef.name == 'z' || colDef.name == 'floor_to_floor_height') {
+            if ($scope.autoElevation) {
+              $scope.calculateElevation();
+            }
+            $scope.updateStoryCount();
           }
-          $scope.updateStoryCount();
         }
       });
     }
@@ -185,6 +192,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
       data.bulkSync('building_stories', params).then(success).catch(failure);
 
       function success(response) {
+        Shared.resetModified();
         toaster.pop('success', 'Building stories successfully saved');
         $location.path(Shared.buildingPath());
       }

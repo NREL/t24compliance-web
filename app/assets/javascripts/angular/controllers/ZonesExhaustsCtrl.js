@@ -1,5 +1,4 @@
 cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Shared', 'Enums', function ($scope, $log, uiGridConstants, Shared, Enums) {
-
   $scope.selected = {
     exhaust: null
   };
@@ -186,6 +185,11 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
         } else {
           // No rows selected
           $scope.selected.exhaust = null;
+        }
+      });
+      gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+        if (newValue != oldValue) {
+          Shared.setModified();
         }
       });
     }

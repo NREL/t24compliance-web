@@ -79,18 +79,20 @@ cbecc.controller('ModalSpaceCreatorCtrl', ['$scope', '$modalInstance', 'uiGridCo
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-        if (colDef.name == 'building_story_id' && newValue != oldValue) {
-          // Update floor_to_ceiling_height if it is unchanged
-          var oldStoryIndex = null;
-          var newStoryIndex = null;
-          _.each($scope.data.storiesArr, function (story, index) {
-            if (story.id == oldValue) oldStoryIndex = index;
-            if (story.id == newValue) newStoryIndex = index;
-          });
-          if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
-            rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+        if (newValue != oldValue) {
+          if (colDef.name == 'building_story_id') {
+            // Update floor_to_ceiling_height if it is unchanged
+            var oldStoryIndex = null;
+            var newStoryIndex = null;
+            _.each($scope.data.storiesArr, function (story, index) {
+              if (story.id == oldValue) oldStoryIndex = index;
+              if (story.id == newValue) newStoryIndex = index;
+            });
+            if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
+              rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+            }
+            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
           }
-          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         }
       });
     }

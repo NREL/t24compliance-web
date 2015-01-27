@@ -10,7 +10,7 @@
       <div class="form-group" ng-class="errorClass('name')">
         <label class="col-md-3 control-label" for="building-name">Building Name</label>
         <div class="col-md-5">
-          <input id="building-name" name="name" type="text" class="form-control" ng-model="building.name" server-error>
+          <input id="building-name" name="name" type="text" class="form-control" ng-model="building.name" server-error ng-change="setModified()">
           <p ng-show="form.name.$error.server" class="help-block">
             <span class="has-error">{{ errors.name }}</span>
           </p>
@@ -22,7 +22,7 @@
         <label class="col-md-3 control-label" for="building-building-azimuth">Azimuth</label>
         <div class="col-md-5">
           <div class="input-group">
-            <input id="building-building-azimuth" name="building_azimuth" type="number" class="form-control" ng-model="building.building_azimuth" server-error>
+            <input id="building-building-azimuth" name="building_azimuth" type="number" class="form-control" ng-model="building.building_azimuth" server-error ng-change="setModified()">
             <span class="input-group-addon">&deg;</span>
           </div>
           <p ng-show="form.building_azimuth.$error.server" class="help-block">
@@ -38,7 +38,7 @@
         <label class="col-md-3 control-label" for="building-total-floor-area">Floor Area</label>
         <div class="col-md-5">
           <div class="input-group">
-            <input id="building-total-floor-area" name="total_floor_area" type="number" class="form-control" ng-model="building.total_floor_area" server-error>
+            <input id="building-total-floor-area" name="total_floor_area" type="number" class="form-control" ng-model="building.total_floor_area" server-error ng-change="setModified()">
             <span class="input-group-addon">ft<sup>2</sup></span>
           </div>
           <p ng-show="form.total_floor_area.$error.server" class="help-block">
@@ -51,7 +51,7 @@
       <div class="form-group" ng-class="errorClass('living_unit_count')">
         <label class="col-md-3 control-label" for="building-living-unit-count">Conditioned Space Living Units</label>
         <div class="col-md-5">
-          <input id="building-living-unit-count" name="living_unit_count" type="number" class="form-control" ng-model="building.living_unit_count" server-error>
+          <input id="building-living-unit-count" name="living_unit_count" type="number" class="form-control" ng-model="building.living_unit_count" server-error ng-change="setModified()">
           <p ng-show="form.living_unit_count.$error.server" class="help-block">
             <span class="has-error">{{ errors.living_unit_count }}</span>
           </p>
@@ -64,7 +64,7 @@
       <div class="form-group" ng-class="errorClass('relocatable_public_school_building')">
         <div class="col-md-offset-3 col-md-5">
           <div class="checkbox">
-            <label><input name="relocatable_public_school_building" type="checkbox" ng-model="building.relocatable_public_school_building" server-error> Relocatable Public School Building</label>
+            <label><input name="relocatable_public_school_building" type="checkbox" ng-model="building.relocatable_public_school_building" server-error ng-change="setModified()"> Relocatable Public School Building</label>
           </div>
           <p ng-show="form.relocatable_public_school_building.$error.server" class="help-block">
             <span class="has-error">{{ errors.name }}</span>
@@ -98,7 +98,8 @@
           </p>
         </div>
         <div class="col-md-5">
-          <p class="special-output"><span class="label label-info" ng-class="{'label-danger': !stories.length}">{{stories.length}}</span></p>
+          <p class="special-output">
+            <span class="label label-info" ng-class="{'label-danger': !stories.length}">{{stories.length}}</span></p>
         </div>
       </div>
     </div>
@@ -114,7 +115,8 @@
           type="checkbox"
           switch-label="Autocalculate Height"
           switch-label-width="140"
-          switch-on-color="info">
+          switch-on-color="info"
+          ng-change="setModified()">
       <div class="pull-right">
         <button type="button" ng-click="duplicateStory()" class="btn btn-info" ng-disabled="!selected">Duplicate</button>
         <button type="button" ng-click="deleteStory()" class="btn btn-danger" ng-disabled="!selected">Delete</button>
