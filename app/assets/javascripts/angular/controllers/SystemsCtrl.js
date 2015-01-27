@@ -31,7 +31,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     hot_water: ['pump', 'boiler', 'coil_heating'],
     chilled_water: ['general', 'pump', 'chiller', 'coil_cooling'],
     condenser: ['pump', 'heat_rejection'],
-    shw: []
+    shw: ['water_heater']
   };
 
   // initialize all sub-system hashes
@@ -458,6 +458,70 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }];
+  $scope.gridPlantCols.shw.water_heater = [{
+    name: 'capacity_rated',
+    displayName: 'Rated Capacity',
+    field: 'water_heater.capacity_rated',
+    secondLine: Shared.html('Btu/hr'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding:false
+  },{
+    name: 'draft_fan_power',
+    displayName: 'Draft Fan Power',
+    secondLine: Shared.html('W'),
+    field: 'water_heater.draft_fan_power',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
+  },{
+    name: 'fuel_source',
+    displayName: 'Fuel Source',
+    field: 'water_heater.fuel_source',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false,
+    editableCellTemplate: 'ui-grid/dropdownEditor',
+    editDropdownOptionsArray: Enums.enumsArr.water_heaters_fuel_source_enums
+  },{
+    name: 'off_cycle_fuel_source',
+    displayName: 'Off Cycle Fuel Source',
+    field: 'water_heater.off_cycle_fuel_source',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false,
+    editableCellTemplate: 'ui-grid/dropdownEditor',
+    editDropdownOptionsArray: Enums.enumsArr.water_heaters_off_cycle_fuel_source_enums
+  },{
+    name: 'off_cycle_parasitic_losses',
+    displayName: 'Off Cycle Parasitic Losses',
+    field: 'water_heater.off_cycle_parasitic_losses',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
+  },{
+    name: 'on_cycle_fuel_source',
+    displayName: 'On Cycle Fuel Source',
+    field: 'water_heater.on_cycle_fuel_source',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false,
+    editableCellTemplate: 'ui-grid/dropdownEditor',
+    editDropdownOptionsArray: Enums.enumsArr.water_heaters_on_cycle_fuel_source_enums
+  },{
+    name: 'storage_capacity',
+    displayName: 'Storage Capacity',
+    field: 'water_heater.storage_capacity',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
+  },{
+    name: 'thermal_efficiency',
+    displayName: 'Thermal Efficiency',
+    field: 'water_heater.thermal_efficiency',
+    secondLine: Shared.html('frac.'),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
+    enableHiding: false
+  },{
+    name: 'standby_loss_fraction',
+    displayName: 'Standby Loss Fraction',
+    field: 'water_heater.standby_loss_fraction',
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell',
+    enableHiding: false
+  }];
 
   $scope.gridCols = {
     ptac: {},
@@ -853,7 +917,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   };
 
   _.each($scope.plantTabs, function (tabs, type) {
-    if (type == 'hot_water' || type == 'chilled_water' || type == 'condenser') {
+    //if (type == 'hot_water' || type == 'chilled_water' || type == 'condenser') {
       _.each(tabs, function (tab) {
         $scope.gridPlantOptions[type][tab] = {
           columnDefs: $scope.gridPlantCols[type][tab],
@@ -895,7 +959,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
         }
       });
-    }
+   // }
   });
 
   //**** VIEW HELPERS: TABS & CLASSES ****
@@ -964,6 +1028,11 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           heat_rejection: 'default'
         };
         break;
+      case 'shw':
+        $scope.tabClasses.shw = {
+          water_heater: 'default'
+        };
+        break;
     }
   }
 
@@ -985,7 +1054,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   };
 
   $scope.hasPlant = function (panelName) {
+    // always show shw
+    if (panelName == 'shw') return 1;
     return $scope.plants[panelName].length;
+  };
+
+  $scope.hasSHW = function () {
+    // see if shw is added (set in project tab)
+    return $scope.plants['shw'].length;
   };
 
   $scope.noSystems = function () {
@@ -1014,6 +1090,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   $scope.setActiveTab('hot_water', 'pump');
   $scope.setActiveTab('chilled_water', 'general');
   $scope.setActiveTab('condenser', 'pump');
+  $scope.setActiveTab('shw', 'water_heater');
 
   //**** ADD ****
   // add functions
@@ -1277,6 +1354,27 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           });
         }
         break;
+      case 'shw':
+        if (!$scope.plants.shw.length) {
+          $log.debug('adding SHW');
+          $scope.plants.shw.push({
+             name: 'SHWFluidSys',
+             type: 'ServiceHotWater',
+             fluid_segments: [{
+               name: "SHWSupply",
+               type: "PrimarySupply"
+             },{
+               name: "SHWMakeup",
+               type: "MakeupFluid",
+               source: "MunicipalWater"
+             }],
+            water_heater: {
+              name: 'WaterHeater',
+              fluid_segment_out_reference: 'SHWSupply',
+              fluid_segment_makeup_reference: 'SHWMakeup'
+            }
+          });
+        }
     }
   }
 

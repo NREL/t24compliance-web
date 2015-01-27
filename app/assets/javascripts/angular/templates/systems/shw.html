@@ -1,0 +1,26 @@
+<div class="row">
+  <div ng-if="hasSHW()">
+    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="shw_navigation">
+      <button type="button" ng-click="setActiveTab('shw', 'water_heater')" ng-class="getTabClass('hot_water', 'water_heater')">Water Heater</button>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="bold-text">A service hot water system will be automatically created to match the needs of the spaces in your building unless you selected to not include service hot water in the Exceptions section of the Project.</p>
+        <div ng-if="hasSHW()"><p>Select the overall system or the components to edit the settings of each system.</p></div>
+      </div>
+    </div>
+    <div ng-if="hasSHW()">
+      <div class="row pad-top-20">
+        <div class="col-md-12">
+          <div class="tab-content">
+            <div ng-repeat="tab in plantTabs.shw" ng-if="isActiveTab('shw', tab)">
+              <div ui-grid="gridPlantOptions.shw[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

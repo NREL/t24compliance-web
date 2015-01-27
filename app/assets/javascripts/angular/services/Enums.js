@@ -406,6 +406,24 @@ cbecc.factory('Enums', function () {
     terminal_units_reheat_control_method_enums: [
       'SingleMaximum',
       'DualMaximum'
+    ],
+    water_heaters_fuel_source_enums: [
+      'Electricity',
+      'FuelOil#1',
+      'NaturalGas',
+      'PropaneGas'
+    ],
+    water_heaters_off_cycle_fuel_source_enums: [
+      'Electricity',
+      'FuelOil#1',
+      'NaturalGas',
+      'PropaneGas'
+    ],
+    water_heaters_on_cycle_fuel_source_enums: [
+      'Electricity',
+      'FuelOil#1',
+      'NaturalGas',
+      'PropaneGas'
     ]
   };
 
