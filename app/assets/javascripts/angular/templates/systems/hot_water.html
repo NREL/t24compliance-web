@@ -14,10 +14,8 @@
     </div>
     <div class="row pad-top-20">
       <div class="col-md-12">
-        <div class="tab-content">
-          <div ng-repeat="tab in plantTabs.hot_water" ng-show="isActiveTab('hot_water', tab)">
-            <div ui-grid="gridPlantOptions.hot_water[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns></div>
-          </div>
+        <div ng-repeat="tab in plantTabs.hot_water" ng-show="isActiveTab('hot_water', tab)">
+          <div ui-grid="gridPlantOptions.hot_water[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ng-class="{'grid-100': tab!='coil_heating'}"></div>
         </div>
       </div>
     </div>
