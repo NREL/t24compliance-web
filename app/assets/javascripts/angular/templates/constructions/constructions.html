@@ -26,7 +26,7 @@
         <button type="button" class="btn btn-info" ng-click="openConstructionLibraryModal($index)">Select a Construction</button>
       </div>
       <div ng-show="panel.selected">
-        <div ui-grid="panel.constructionGridOptions" class="long-grid mar-bot-20" ui-grid-resize-columns></div>
+        <div ui-grid="panel.constructionGridOptions" class="grid-80 mar-bot-20" ui-grid-resize-columns></div>
         <div ng-if="panel.name != 'underground_floor'">
           <div ui-grid="panel.gridOptions" class="layers-grid mar-bot-20" ui-grid-resize-columns></div>
         </div>
@@ -43,7 +43,7 @@
         <button type="button" class="btn btn-info" ng-click="openDoorLibraryModal($index)">Select a Door</button>
       </div>
       <div ng-show="panel.selected">
-        <div ui-grid="panel.doorGridOptions" class="long-grid" ui-grid-resize-columns></div>
+        <div ui-grid="panel.doorGridOptions" class="grid-80" ui-grid-resize-columns></div>
         <br>
         <button type="button" class="btn btn-info" ng-click="openDoorLibraryModal($index, panel.selected)">Change Door</button>
         <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeDoor($index)">Remove Door</button>
@@ -58,7 +58,7 @@
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index)">Select a Fenestration</button>
       </div>
       <div ng-show="panel.selected">
-        <div ui-grid="panel.fenGridOptions" class="long-grid" ui-grid-resize-columns></div>
+        <div ui-grid="panel.fenGridOptions" class="grid-80" ui-grid-resize-columns></div>
         <br>
         <button type="button" class="btn btn-info" ng-click="openFenLibraryModal($index, panel.selected)">Change Fenestration</button>
         <button type="button" class="btn btn-danger" ng-show="panel.selected" ng-click="removeFenestration($index)">Remove Fenestration</button>
