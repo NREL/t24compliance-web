@@ -1038,7 +1038,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
         surface.subsurfaces = _.where(subsurfaces, {'surface': surfaceIndex});
         spaces[surface.space].surfaces.push(surface);
       });
-      _.each(lightingSystems, function (lightingSystem, lightingIndex) {
+      _.each(lightingSystems, function (lightingSystem) {
         var spaceIndex = lightingSystem.space;
         lightingSystem.space = $scope.data.spaces[spaceIndex].name;
         lightingSystem.power_regulated = lightingSystem.power_regulated ? 1 : 0;
@@ -1048,6 +1048,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
         }
         spaces[spaceIndex].interior_lighting_systems.push(lightingSystem);
       });
+
+      $log.debug('Submitting spaces');
 
       var params = Shared.defaultParams();
       params.data = spaces;

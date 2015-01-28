@@ -145,11 +145,11 @@ body > .container-fluid > .header-row.wizard {
   text-decoration: none;
 }
 
-// Fix for UI grid shifting in Chrome on Windows
-/*.ui-grid-render-container-body {
+// Fix for UI grid shifting in Chrome/Firefox on Windows/Mac
+.ui-grid-render-container-body {
   float: none;
   overflow: hidden;
-}*/
+}
 
 // Increase modal size
 .wide-modal .modal-dialog {
@@ -199,7 +199,7 @@ body > .container-fluid > .header-row.wizard {
   color: #ac3933;
   font-weight: bold;
   .glyphicon {
-    color: #000;
+    color: #333;
   }
 }
 

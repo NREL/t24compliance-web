@@ -237,6 +237,33 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
     });
   };
 
+  $scope.changeMatchingSurfaces = function (type, oldValue, newValue) {
+    _.each($scope.spaces, function (space) {
+      _.each(space.surfaces, function (surface) {
+        if (type == surface.surface_type) {
+          if (surface.construction_library_id == oldValue || surface.construction_library_id == null) {
+            $scope.spacesModified = true;
+            surface.construction_library_id = newValue;
+          }
+        }
+      });
+    });
+  };
+
+  $scope.changeMatchingSubsurfaces = function (type, oldValue, newValue) {
+    _.each($scope.spaces, function (space) {
+      _.each(space.surfaces, function (surface) {
+        _.each(surface.subsurfaces, function (subsurface) {
+          if (type == subsurface.type) {
+            if (subsurface.construction_library_id == oldValue || subsurface.construction_library_id == null) {
+              $scope.spacesModified = true;
+              subsurface.construction_library_id = newValue;
+            }
+          }
+        });
+      });
+    });
+  };
 
   // Modals
   $scope.openConstructionLibraryModal = function (index, rowEntity) {
@@ -250,14 +277,7 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
         panel.constructionGridOptions.data = [selectedConstruction];
         panel.gridOptions.data = selectedConstruction.layers;
 
-        _.each($scope.spaces, function (space) {
-          _.each(space.surfaces, function (surface) {
-            if (surface.construction_library_id == oldValue) {
-              $scope.spacesModified = true;
-              surface.construction_library_id = selectedConstruction.id;
-            }
-          });
-        });
+        $scope.changeMatchingSurfaces(panel.title.substring(0, panel.title.length - 13), oldValue, selectedConstruction.id);
       }
     });
   };
@@ -271,16 +291,7 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
         panel.selected = selectedDoor;
         panel.doorGridOptions.data = [selectedDoor];
 
-        _.each($scope.spaces, function (space) {
-          _.each(space.surfaces, function (surface) {
-            _.each(surface.subsurfaces, function(subsurface) {
-              if (subsurface.construction_library_id == oldValue) {
-                $scope.spacesModified = true;
-                subsurface.construction_library_id = selectedDoor.id;
-              }
-            });
-          });
-        });
+        $scope.changeMatchingSubsurfaces(panel.title.substring(0, panel.title.length - 13), oldValue, selectedDoor.id);
       }
     });
   };
@@ -294,18 +305,34 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
         panel.selected = selectedFen;
         panel.fenGridOptions.data = [selectedFen];
 
-        _.each($scope.spaces, function (space) {
-          _.each(space.surfaces, function (surface) {
-            _.each(surface.subsurfaces, function(subsurface) {
-              if (subsurface.construction_library_id == oldValue) {
-                $scope.spacesModified = true;
-                subsurface.construction_library_id = selectedFen.id;
-              }
-            });
-          });
-        });
+        $scope.changeMatchingSubsurfaces(panel.title.substring(0, panel.title.length - 13), oldValue, selectedFen.id);
       }
     });
+  };
+
+  // Remove Buttons
+  $scope.removeConstruction = function (index) {
+    var panel = $scope.panels[index];
+    var oldValue = panel.selected.id;
+    $scope.panels[index].selected = null;
+    $scope.panels[index].gridOptions.data = [];
+    $scope.changeMatchingSurfaces(panel.title.substring(0, panel.title.length - 13), oldValue, null);
+  };
+
+  $scope.removeDoor = function (index) {
+    var panel = $scope.doorPanels[index];
+    var oldValue = panel.selected.id;
+    $scope.doorPanels[index].selected = null;
+    $scope.doorPanels[index].doorGridOptions.data = [];
+    $scope.changeMatchingSubsurfaces(panel.title.substring(0, panel.title.length - 13), oldValue, null);
+  };
+
+  $scope.removeFenestration = function (index) {
+    var panel = $scope.fenPanels[index];
+    var oldValue = panel.selected.id;
+    $scope.fenPanels[index].selected = null;
+    $scope.fenPanels[index].fenGridOptions.data = [];
+    $scope.changeMatchingSubsurfaces(panel.title.substring(0, panel.title.length - 13), oldValue, null);
   };
 
   // save (constructions, doors, and fenestrations saved in same record)
@@ -356,21 +383,5 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
     }, construction_defaults, success, failure);
 
 
-  };
-
-  // Remove Buttons
-  $scope.removeConstruction = function (index) {
-    $scope.panels[index].selected = null;
-    $scope.panels[index].gridOptions.data = [];
-  };
-
-  $scope.removeDoor = function (index) {
-    $scope.doorPanels[index].selected = null;
-    $scope.doorPanels[index].doorGridOptions.data = [];
-  };
-
-  $scope.removeFenestration = function (index) {
-    $scope.fenPanels[index].selected = null;
-    $scope.fenPanels[index].fenGridOptions.data = [];
   };
 }]);
