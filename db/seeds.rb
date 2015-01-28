@@ -10,6 +10,7 @@ SKIP_CONSTRUCTIONS = false
 SKIP_FENESTRATION = false
 SKIP_DOORS = false
 SKIP_SPACES = false
+SKIP_ZIP_CODES = false
 
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
@@ -94,6 +95,24 @@ unless SKIP_SPACES
       c = sf.as_json.merge(c)
       sf.update(c)
       sf.save!
+    end
+  end
+end
+
+unless SKIP_ZIP_CODES
+  file = File.read(File.join(Rails.root, "lib/assets/zip_codes.json"))
+  data = JSON.parse(file)
+
+  data['zip_codes'].each_with_index do |c, index|
+    zips = ZipCodes.find_or_create_by(state: c['state'])
+    if zips
+      puts "Adding/Updating Zip Codes: #{zips.state}"
+
+      # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
+      # need to be removed
+      c = zips.as_json.merge(c)
+      zips.update(c)
+      zips.save!
     end
   end
 end

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :fenestrations, only: [:show, :index]
   resources :door_lookups, only: [:show, :index]
   resources :space_function_defaults, only: [:show, :index]
+  resources :zip_codes, only: [:show, :index]
 
   # depend on project
   resources :construction_defaults     # only index, create for angular

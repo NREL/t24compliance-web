@@ -8,7 +8,7 @@ cbecc.provider('data', {
 
       list: function (resource, query) {
         // Check cache for construction libraries
-        var caches = ['constructions', 'door_lookups', 'fenestrations', 'space_function_defaults'];
+        var caches = ['constructions', 'door_lookups', 'fenestrations', 'space_function_defaults', 'zip_codes'];
         if (_.contains(caches, resource)) {
           if (Shared.existsInCache(resource)) {
             return $q.when(Shared.loadFromCache(resource));
