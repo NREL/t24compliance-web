@@ -628,6 +628,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.fan = [{
@@ -636,6 +637,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     filter: Shared.textFilter(),
+    pinnedLeft:true,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_name',
@@ -644,6 +646,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     filter: Shared.textFilter(),
+    pinnedLeft:true,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_classification',
@@ -787,13 +790,18 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }];
   $scope.gridCols.ptac.coil_cooling = [{
     name: 'name',
-    displayName: 'System Name'
+    displayName: 'System Name',
+    enablePinning:false,
+    enableHiding: false,
+    filter: Shared.textFilter(),
+    headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_name',
     displayName: 'Coil Name',
     field: 'coil_cooling.name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.coil_heating = [{
@@ -801,14 +809,15 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
-
   }, {
     name: 'coil_heating_name',
     displayName: 'Coil Name',
     field: 'coil_heating.name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.fpfc.general = [{
@@ -816,6 +825,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.fpfc.general = angular.copy($scope.gridCols.ptac.general);
@@ -827,6 +837,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'sub_type',
@@ -835,6 +846,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editDropdownOptionsArray: Enums.enumsArr.air_systems_sub_type_enums,
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.szac.fan = angular.copy($scope.gridCols.ptac.fan);
@@ -843,6 +855,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_name',
@@ -850,6 +863,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_cooling.name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_dxeer',
@@ -858,6 +872,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     filter: Shared.numberFilter(),
     type: 'number',
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.szac.coil_heating = [{
@@ -865,6 +880,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_heating_name',
@@ -872,6 +888,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_heating.name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_heating_furnace_afue',
@@ -879,6 +896,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_heating.furnace_afue',
     enableHiding: false,
     type: 'number',
+    enablePinning:false,
     filter: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -887,12 +905,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'reheat_control_method',
     displayName: 'Reheat Control',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_reheat_control_method_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -901,6 +921,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Cooling Control',
     enableHiding: false,
     filter: Shared.textFilter(),
+    enablePinning:false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_cooling_control_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
