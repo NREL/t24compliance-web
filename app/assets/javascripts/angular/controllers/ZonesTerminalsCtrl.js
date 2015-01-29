@@ -92,14 +92,30 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       filter: Shared.numberFilter(),
       minWidth: min_width,
       secondLine: Shared.html('cfm'),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type == 'Uncontrolled') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type != 'Uncontrolled');
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
-    }, {
+      }, {
       name: 'heating_air_flow_maximum',
       displayName: 'Max. Heating Flow',
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width,
       secondLine: Shared.html('cfm'),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type != 'VAVReheatBox') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'VAVReheatBox');
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'reheat_control_method',
@@ -109,6 +125,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       editableCellTemplate: 'ui-grid/dropdownEditor',
       minWidth: min_width,
       editDropdownOptionsArray: Enums.enumsArr.terminal_units_reheat_control_method_enums,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type != 'VAVReheatBox') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type == 'VAVReheatBox');
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'induced_air_zone_reference',
@@ -116,6 +140,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.textFilter(),
       minWidth: min_width,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type.indexOf('Fan') == -1) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type.indexOf('Fan') > -1 );
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'induction_ratio',
@@ -123,6 +155,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type.indexOf('Fan') == -1) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type.indexOf('Fan') > -1 );
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_power_per_flow',
@@ -131,6 +171,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       filter: Shared.numberFilter(),
       minWidth: min_width + 20,
       secondLine: Shared.html('W/cfm'),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type.indexOf('Fan') == -1) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type.indexOf('Fan') > -1 );
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'parallel_box_fan_flow_fraction',
@@ -138,6 +186,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width + 20,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.type.indexOf('Fan') == -1) {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.type.indexOf('Fan') > -1 );
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.terminals,
@@ -160,6 +216,12 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
         if (newValue != oldValue) {
           Shared.setModified();
         }
+
+        if (colDef.name == 'type') {
+          // todo: see if we need to null any fields (the ones that now become N/A)
+          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+        }
+
       });
     }
   };
