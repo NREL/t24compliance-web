@@ -29,7 +29,7 @@ cbecc.config([
 
     $urlRouterProvider.when('', '/').otherwise('404');
 
-    $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = $("meta[name=\"csrf-token\"]").attr("content");
+    $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 
     stateHelperProvider
       //states that require building should have requirebuilding as parent.
@@ -89,9 +89,12 @@ cbecc.config([
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             //does this set stories correctly for new building?
             return data.list('building_stories', Shared.defaultParams());
+          }],
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
           }]
         },
-        parent: "lookupbuilding"
+        parent: 'lookupbuilding'
       })
       .state({ //shouldn't be clickable without project id
         name: 'buildingPlaceholder',
@@ -101,9 +104,12 @@ cbecc.config([
         resolve: {
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
+          }],
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
           }]
         },
-        parent: "lookupbuilding"
+        parent: 'lookupbuilding'
       })
       .state({
         name: 'buildingDetails',
@@ -113,9 +119,12 @@ cbecc.config([
         resolve: {
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
+          }],
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
           }]
         },
-        parent: "requirebuilding"
+        parent: 'requirebuilding'
       })
       .state({
         name: 'constructions',
@@ -379,7 +388,7 @@ cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'da
   $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
     Shared.stopSpinner();
     if (error == 'No project ID' || error == 'Invalid project ID') {
-      toaster.pop('error', error, "Please create or open a project.");
+      toaster.pop('error', error, 'Please create or open a project.');
       $state.go('project');
     } else if (error == 'No building ID' || error == 'Invalid building ID') {
       toaster.pop('error', error, 'Please create a building.');

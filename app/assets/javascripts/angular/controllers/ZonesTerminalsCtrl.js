@@ -30,14 +30,14 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       zone_served_reference: zone.name
     });
     if (!match) {
-      $log.debug("NO MATCH FOR zone name: ", zone.name);
+      $log.debug('NO MATCH FOR zone name: ', zone.name);
       // determine defaults based on system type
-      var terminal_type = "";
+      var terminal_type = '';
       if (zone.system_type === 'SZAC') {
-        terminal_type = "Uncontrolled";
+        terminal_type = 'Uncontrolled';
       }
       else if (zone.system_type === 'PVAV') {
-        terminal_type = "VAVReheatBox";
+        terminal_type = 'VAVReheatBox';
       }
       // add to array
       $scope.data.terminals.push({

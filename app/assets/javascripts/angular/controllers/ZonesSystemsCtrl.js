@@ -5,8 +5,8 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
 
   // array of plenum zones for dropdown
   $scope.plenumZonesArr = [{
-    id: "",
-    value: ""
+    id: '',
+    value: ''
   }];
   $scope.plenumZonesHash = {};
   _.each($scope.data.zones, function (zone, index) {

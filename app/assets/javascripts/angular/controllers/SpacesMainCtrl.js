@@ -100,16 +100,17 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
           Shared.setModified();
 
           var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
-          if (colDef.name == 'floor_to_ceiling_height' || colDef.name == 'area') {
+          if (colDef.name == 'floor_to_ceiling_height') {
             $scope.data.updateTotalExhaust(rowEntity);
-            if (colDef.name == 'floor_to_ceiling_height') {
-              // Update default lighting system mounting height
-              _.each($scope.data.lightingSystems, function(lightingSystem) {
-                if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == oldValue) {
-                  lightingSystem.luminaire_mounting_height = newValue;
-                }
-              });
-            }
+            // Update default lighting system mounting height
+            _.each($scope.data.lightingSystems, function (lightingSystem) {
+              if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == oldValue) {
+                lightingSystem.luminaire_mounting_height = newValue;
+              }
+            });
+          } else if (colDef.name == 'area') {
+            $scope.data.updateTotalExhaust(rowEntity);
+            $scope.data.calculateLPD($scope.data.spaces.indexOf(rowEntity));
           } else if (colDef.name == 'building_story_id') {
             // Update floor_to_ceiling_height if it is unchanged
             var oldStoryIndex = null;
@@ -121,7 +122,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
             if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
               rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
               // Update default lighting system mounting height
-              _.each($scope.data.lightingSystems, function(lightingSystem) {
+              _.each($scope.data.lightingSystems, function (lightingSystem) {
                 if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
                   lightingSystem.luminaire_mounting_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
                 }

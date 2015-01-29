@@ -12,7 +12,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       thermal_zone_reference: zone.name
     }), function (space) {
       if (Shared.calculateTotalExhaust(space) > 0) {
-        //$log.debug("TOTAL EXHAUST FOR ", space.name, ": ", Shared.calculateTotalExhaust(space) );
+        //$log.debug('TOTAL EXHAUST FOR ', space.name, ': ', Shared.calculateTotalExhaust(space) );
         exhaustZonesArr.push({
           id: zone.id,
           value: zone.name
@@ -23,7 +23,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
     });
   });
 
-  $log.debug("exhaustZonesArray");
+  $log.debug('exhaustZonesArray');
   $log.debug(exhaustZonesArr);
 
   // compare exhaustZonesArr with $scope.data.exhausts to see if rows need to be added (for zones that have new spaces with exhaust)
@@ -32,7 +32,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       zone_id: zone.id
     });
     if (!match) {
-      $log.debug("NO MATCH FOR zone id: ", zone.id);
+      $log.debug('NO MATCH FOR zone id: ', zone.id);
       // add to array
       $scope.data.exhausts.push({
         zone_id: zone.id,
@@ -42,7 +42,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       });
     }
   });
-  $log.debug("data.exhausts");
+  $log.debug('data.exhausts');
   $log.debug($scope.data.exhausts);
 
 

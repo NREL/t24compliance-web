@@ -54,20 +54,20 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           function (response) {
             if (response.length > 0 && response[0].hasOwnProperty('id')) {
               scope.setBuildingId(response[0].id);
-              deferred.resolve("success");
+              deferred.resolve('success');
             } else {
               if (requireBuilding) {
-                deferred.reject("No building ID");
+                deferred.reject('No building ID');
               } else {
-                deferred.resolve("Unable to look up building but building not required.");
+                deferred.resolve('Unable to look up building but building not required.');
               }
             }
           },
           function (response) {
             if (requireBuilding) {
-              deferred.reject("No building ID");
+              deferred.reject('No building ID');
             } else {
-              deferred.resolve("Error looking up building but building not required.");
+              deferred.resolve('Error looking up building but building not required.');
             }
           });
       } else {
@@ -78,77 +78,77 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   };
 
   service.projectPath = function () {
-    var path = "/";
+    var path = '/';
     if (projectId) {
-      path += "projects/" + projectId;
+      path += 'projects/' + projectId;
     }
     return path;
   };
 
   service.buildingPath = function () {
-    var path = "";
+    var path = '';
     if (projectId) {
-      path = "/projects/" + projectId + "/buildings";
+      path = '/projects/' + projectId + '/buildings';
       if (buildingId) {
-        path += "/" + buildingId;
+        path += '/' + buildingId;
       }
     } else {
-      path = "/buildings"; //can't actually navigate here without project id...
+      path = '/buildings'; //can't actually navigate here without project id...
     }
     return path;
   };
 
   service.constructionsPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/constructions";
+      return '/projects/' + projectId + '/buildings/' + buildingId + '/constructions';
     } else {
       //shouldn't be able to get to this
-      return "/constructions";
+      return '/constructions';
     }
   };
 
   service.spacesPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/spaces";
+      return '/projects/' + projectId + '/buildings/' + buildingId + '/spaces';
     } else {
       //shouldn't be able to get to this
-      return "/spaces";
+      return '/spaces';
     }
   };
 
   service.systemsPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/systems";
+      return '/projects/' + projectId + '/buildings/' + buildingId + '/systems';
     } else {
       //shouldn't be able to get to this
-      return "/systems";
+      return '/systems';
     }
   };
 
   service.zonesPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/zones";
+      return '/projects/' + projectId + '/buildings/' + buildingId + '/zones';
     } else {
       //shouldn't be able to get to this
-      return "/zones";
+      return '/zones';
     }
   };
 
   service.reviewPath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/review";
+      return '/projects/' + projectId + '/buildings/' + buildingId + '/review';
     } else {
       //shouldn't be able to get to this
-      return "/review";
+      return '/review';
     }
   };
 
   service.compliancePath = function () {
     if (projectId && buildingId) {
-      return "/projects/" + projectId + "/buildings/" + buildingId + "/compliance";
+      return '/projects/' + projectId + '/buildings/' + buildingId + '/compliance';
     } else {
       //shouldn't be able to get to this
-      return "/compliance";
+      return '/compliance';
     }
   };
 
