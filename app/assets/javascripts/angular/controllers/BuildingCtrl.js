@@ -1,10 +1,52 @@
-cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, stories) {
+cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', 'spaces', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, stories, spaces) {
   Shared.setIds($stateParams);
+  $scope.stories = stories;
+  $scope.spaces = spaces;
+  $scope.spacesModified = false;
+
   $scope.setModified = function () {
     Shared.setModified();
   };
 
-  $scope.stories = stories;
+  // Load saved spaces
+  _.each($scope.spaces, function (space, spaceIndex) {
+    space.surfaces = [];
+    _.each(['interior_walls', 'exterior_walls', 'underground_walls', 'interior_floors', 'exterior_floors', 'underground_floors', 'roofs'], function (surfaceType) {
+      _.each(space[surfaceType], function (surface) {
+        surface.subsurfaces = [];
+        _.each(['doors', 'skylights', 'windows'], function (subsurfaceType) {
+          _.each(surface[subsurfaceType], function (subsurface) {
+            surface.subsurfaces.push(subsurface);
+          });
+          delete surface[subsurfaceType];
+        });
+        if (surfaceType == 'interior_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Interior';
+        } else if (surfaceType == 'exterior_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Exterior';
+        } else if (surfaceType == 'underground_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Underground';
+        } else if (surfaceType == 'interior_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Interior';
+        } else if (surfaceType == 'exterior_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Exterior';
+        } else if (surfaceType == 'underground_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Underground';
+        } else if (surfaceType == 'roofs') {
+          surface.type = 'Roof';
+          surface.boundary = null;
+        }
+        space.surfaces.push(surface);
+      });
+      delete space[surfaceType];
+    });
+  });
 
   $scope.updateStoryCount = function () {
     $scope.above = _.filter($scope.stories, function (story) {
@@ -57,6 +99,18 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
               $scope.calculateElevation();
             }
             $scope.updateStoryCount();
+          } else if (colDef.name == 'floor_to_ceiling_height') {
+            if (rowEntity.hasOwnProperty('id')) {
+              _.each($scope.spaces, function (space) {
+                if (space.building_story_id == rowEntity.id && space.floor_to_ceiling_height == oldValue) {
+                  $scope.spacesModified = true;
+                  space.floor_to_ceiling_height = newValue;
+                  _.each(space.interior_lighting_systems, function (lightingSystem) {
+                    if (lightingSystem.luminaire_mounting_height == oldValue) lightingSystem.luminaire_mounting_height = newValue;
+                  });
+                }
+              });
+            }
           }
         }
       });
@@ -144,6 +198,11 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     $scope.updateStoryCount();
   };
   $scope.deleteStory = function () {
+    // Delete matching spaces
+    if ($scope.selected.hasOwnProperty('id')) {
+      _.remove($scope.spaces, {building_story_id: $scope.selected.id});
+    }
+
     var index = $scope.stories.indexOf($scope.selected);
     $scope.stories.splice(index, 1);
     if (index > 0) {
@@ -186,6 +245,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
         }
       });
       Shared.setBuildingId(the_id);
+      $log.debug('Submitting stories');
 
       var params = Shared.defaultParams();
       params['data'] = $scope.stories;
@@ -195,6 +255,24 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
         Shared.resetModified();
         toaster.pop('success', 'Building stories successfully saved');
         $location.path(Shared.buildingPath());
+
+        if ($scope.spacesModified) {
+          $log.debug('Submitting spaces');
+
+          var params = Shared.defaultParams();
+          params.data = $scope.spaces;
+          data.bulkSync('spaces', params).then(success).catch(failure);
+
+          function success(response) {
+            $scope.spacesModified = false;
+            toaster.pop('success', 'Space heights successfully updated');
+          }
+
+          function failure(response) {
+            $log.error('Failure submitting spaces', response);
+            toaster.pop('error', 'An error occurred while updating space heights', response.statusText);
+          }
+        }
       }
 
       function failure(response) {
