@@ -1,4 +1,4 @@
-cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', 'data', 'project','zipCodes', function ($scope, $log, $stateParams, $location, toaster, Project, Shared, Enums, data, project, zipCodes) {
+cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Shared', 'Enums', 'data', 'project','zipCodes', function ($scope, $log, $stateParams, $location, toaster, Shared, Enums, data, project, zipCodes) {
 
   Shared.setIds($stateParams);
   $scope.project = project;
