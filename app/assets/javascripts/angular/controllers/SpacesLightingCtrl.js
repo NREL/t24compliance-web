@@ -90,7 +90,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       $scope.lpdGridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (!$scope.applySettingsActive) {
-          if (row.isSelected) {
+          if (row.isSelected && !_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], row.entity.space_function)) {
             $scope.selected.space = row.entity;
           } else {
             // No rows selected
@@ -104,18 +104,9 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
 
           if (colDef.name == 'lighting_input_method') {
             if (newValue == 'Luminaires') {
-              rowEntity.interior_lighting_power_density_regulated = 0;
-              rowEntity.interior_lighting_power_density_non_regulated = 0;
-              $scope.showLightingSystems = true;
+              $scope.switchToLuminaires(rowEntity);
             } else if (newValue == 'LPD') {
-              rowEntity.interior_lighting_power_density_regulated = rowEntity.interior_lighting_power_density_regulated_default;
-              rowEntity.interior_lighting_power_density_non_regulated = rowEntity.interior_lighting_power_density_non_regulated_default;
-              _.remove($scope.data.lightingSystems, {space: $scope.data.spaces.indexOf(rowEntity)});
-              $scope.lpdGridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-
-              $scope.showLightingSystems = !_.isEmpty(_.find($scope.data.spaces, function (space) {
-                return space.lighting_input_method == 'Luminaires';
-              }));
+              $scope.switchToLPD(rowEntity);
             }
 
             var spaceOptions = $scope.data.spacesWithLuminaires();
@@ -134,6 +125,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       name: 'space',
       displayName: 'Space Name',
       enableHiding: false,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       cellFilter: 'mapHash:grid.appScope.spacesHash',
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownRowEntityOptionsArrayPath: 'spaceOptions',
@@ -160,12 +152,14 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       field: 'luminaire_count[0]',
       displayName: 'Quantity',
       enableHiding: false,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'number'
     }, {
       name: 'status',
       enableHiding: false,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.interior_lighting_systems_status_enums,
       filter: Shared.textFilter(),
@@ -174,6 +168,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       name: 'power_regulated',
       displayName: 'Regulated',
       enableHiding: false,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       type: 'boolean'
     }, {
@@ -203,12 +198,14 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
           return 'modified-cell';
         }
       },
+      cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'power_adjustment_factor_credit_type',
       displayName: 'Lighting Controls',
       enableHiding: false,
+      cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.interior_lighting_systems_power_adjustment_factor_credit_type_enums,
       filter: Shared.textFilter(),
@@ -266,6 +263,23 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     }
   };
 
+  $scope.switchToLuminaires = function (rowEntity) {
+    rowEntity.interior_lighting_power_density_regulated = 0;
+    rowEntity.interior_lighting_power_density_non_regulated = 0;
+    $scope.showLightingSystems = true;
+  };
+
+  $scope.switchToLPD = function (rowEntity) {
+    rowEntity.interior_lighting_power_density_regulated = rowEntity.interior_lighting_power_density_regulated_default;
+    rowEntity.interior_lighting_power_density_non_regulated = rowEntity.interior_lighting_power_density_non_regulated_default;
+    _.remove($scope.data.lightingSystems, {space: $scope.data.spaces.indexOf(rowEntity)});
+    $scope.lpdGridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+
+    $scope.showLightingSystems = !_.isEmpty(_.find($scope.data.spaces, function (space) {
+      return space.lighting_input_method == 'Luminaires';
+    }));
+  };
+
   // Modal Settings
   $scope.openLuminaireEditorModal = function (luminaireIndex) {
     var deferred = $q.defer();
@@ -297,26 +311,84 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
 
   // Buttons
   $scope.applySettings = function () {
-    // TODO
     $scope.applySettingsActive = true;
+    $scope.data.clearAll($scope.lpdGridApi);
+    $scope.lpdGridOptions.multiSelect = true;
+
+    $scope.luminaireGridOptions.columnDefs[1].allowLuminaireEdit = false;
+
+    $scope.selected.lightingSystem = null;
+    $scope.data.clearAll($scope.luminaireGridApi);
+    $scope.luminaireGridOptions.enableRowHeaderSelection = false;
+    $scope.luminaireGridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
   };
 
   $scope.confirmApplySettings = function () {
     Shared.setModified();
 
-    // TODO
+    var rowEntity = $scope.selected.space;
+    var rows = $scope.lpdGridApi.selection.getSelectedRows();
+    _.each(rows, function (row) {
+      if (!_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], row.space_function)) {
+        if (rowEntity.lighting_input_method == 'Luminaires') {
+          var spaceIndex = $scope.data.spaces.indexOf(row);
+          var lightingSystems = angular.copy(_.filter($scope.data.lightingSystems, {space: $scope.data.spaces.indexOf(rowEntity)}));
+          if (row.lighting_input_method == 'Luminaires') {
+            _.remove($scope.data.lightingSystems, {space: spaceIndex});
+            _.each(lightingSystems, function(lightingSystem) {
+              lightingSystem.space = spaceIndex;
+              $scope.data.lightingSystems.push(lightingSystem);
+            });
+          } else if (row.lighting_input_method == 'LPD') {
+            row.lighting_input_method = 'Luminaires';
+            $scope.switchToLuminaires(row);
+            _.each(lightingSystems, function(lightingSystem) {
+              lightingSystem.space = spaceIndex;
+              $scope.data.lightingSystems.push(lightingSystem);
+            });
+          }
+          $scope.data.calculateLPD(spaceIndex);
+        } else if (rowEntity.lighting_input_method == 'LPD') {
+          if (row.lighting_input_method == 'Luminaires') {
+            row.lighting_input_method = 'LPD';
+            $scope.switchToLPD(row);
+            row.interior_lighting_power_density_regulated = rowEntity.interior_lighting_power_density_regulated;
+            row.interior_lighting_power_density_non_regulated = rowEntity.interior_lighting_power_density_non_regulated;
+          } else if (row.lighting_input_method == 'LPD') {
+            row.interior_lighting_power_density_regulated = rowEntity.interior_lighting_power_density_regulated;
+            row.interior_lighting_power_density_non_regulated = rowEntity.interior_lighting_power_density_non_regulated;
+          }
+        }
+      }
+    });
+
+    var spaceOptions = $scope.data.spacesWithLuminaires();
+    _.each($scope.data.lightingSystems, function (lightingSystem) {
+      lightingSystem.spaceOptions = spaceOptions;
+    });
+
+    $scope.lpdGridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+    $scope.luminaireGridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+    $scope.resetApplySettings();
   };
 
   $scope.resetApplySettings = function () {
-    // TODO
+    $scope.selected.space = null;
     $scope.applySettingsActive = false;
+    $scope.data.clearAll($scope.lpdGridApi);
+    $scope.lpdGridOptions.multiSelect = false;
+
+    $scope.luminaireGridOptions.columnDefs[1].allowLuminaireEdit = true;
+
+    $scope.luminaireGridOptions.enableRowHeaderSelection = true;
+    $scope.luminaireGridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
   };
 
   $scope.changeLuminaire = function (selectedLightingSystem) {
     var luminaireIndex = selectedLightingSystem.luminaire_reference[0] || null;
     $scope.openLuminaireEditorModal(luminaireIndex).then(function (row) {
       Shared.setModified();
-      
+
       selectedLightingSystem.luminaire_reference[0] = row;
       selectedLightingSystem.power = $scope.data.luminaires[row].power * selectedLightingSystem.luminaire_count[0];
       $scope.data.calculateLPD(selectedLightingSystem.space);
