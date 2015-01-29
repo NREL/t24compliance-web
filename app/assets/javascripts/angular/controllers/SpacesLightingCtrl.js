@@ -336,6 +336,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
           if (row.lighting_input_method == 'Luminaires') {
             _.remove($scope.data.lightingSystems, {space: spaceIndex});
             _.each(lightingSystems, function(lightingSystem) {
+              delete lightingSystem.id;
               lightingSystem.space = spaceIndex;
               $scope.data.lightingSystems.push(lightingSystem);
             });
@@ -343,6 +344,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
             row.lighting_input_method = 'Luminaires';
             $scope.switchToLuminaires(row);
             _.each(lightingSystems, function(lightingSystem) {
+              delete lightingSystem.id;
               lightingSystem.space = spaceIndex;
               $scope.data.lightingSystems.push(lightingSystem);
             });
