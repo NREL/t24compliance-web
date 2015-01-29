@@ -1,8 +1,21 @@
-cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'stories', 'spaces', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, stories, spaces) {
+cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'building', 'stories', 'spaces', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, building, stories, spaces) {
   Shared.setIds($stateParams);
   $scope.stories = stories;
   $scope.spaces = spaces;
+  $scope.building = building;
   $scope.spacesModified = false;
+
+ // initialize building
+  if (_.isEmpty($scope.building)) {
+    $scope.building = {
+      building_azimuth: 0,
+      living_unit_count: 0,
+      total_floor_area: 0,
+      total_story_count: 0,
+      above_grade_story_count: 0
+    };
+  }
+  $scope.building.below_grade_story_count = $scope.building.total_story_count - $scope.building.above_grade_story_count;
 
   $scope.setModified = function () {
     Shared.setModified();
@@ -117,27 +130,6 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     }
   };
 
-  if (Shared.getBuildingId() === null) {
-    // new building
-    $scope.building = {
-      building_azimuth: 0,
-      living_unit_count: 0,
-      total_floor_area: 0
-    };
-  } else {
-    data.show('buildings', {project_id: Shared.getProjectId(), id: Shared.getBuildingId()}).then(function (response) {
-      $scope.building = response;
-      $scope.building.below_grade_story_count = $scope.building.total_story_count - $scope.building.above_grade_story_count;
-    }, function (response) {
-      if (response.status == 404) {
-        Shared.setBuildingId(null);
-        toaster.pop('error', 'Invalid building ID');
-        $location.path(Shared.buildingPath());
-      } else {
-        toaster.pop('error', 'Unable to retrieve building');
-      }
-    });
-  }
 
   $scope.autoElevation = _.every($scope.stories, function (story, index) {
     if (index === 0) return true;

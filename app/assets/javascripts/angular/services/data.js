@@ -30,7 +30,15 @@ cbecc.provider('data', {
       },
 
       show: function (resource, query) {
-        return api[resource].get(query).$promise;
+        var promise = api[resource].get(query).$promise;
+       console.debug('IN show function');
+
+        promise.catch(function (response) {
+          console.debug('in show catch');
+          return $q.reject('Invalid ID.');
+
+        });
+        return promise;
       },
 
       create: function (resource, model) {

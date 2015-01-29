@@ -67,8 +67,8 @@ cbecc.config([
             return data.list('zip_codes');
           }],
           project: ['$q', 'data', 'Shared', function ($1, data, Shared){
-            if (_.isNull(Shared.getProjectId())) return {};
-            else return data.show('projects', {id: Shared.getProjectId()});
+           if (_.isNull(Shared.getProjectId())) return {};
+           else return data.show('projects', {id: Shared.getProjectId()});
           }]
         }
       })
@@ -82,8 +82,9 @@ cbecc.config([
           zipCodes: ['$q', 'data', 'Shared', function ($q, data, Shared) {
             return data.list('zip_codes');
           }],
-          project: ['$q', 'data', 'Shared', function ($1, data, Shared){
+          project: ['$q', 'data', 'Shared', function ($q, data, Shared){
             return data.show('projects', {id: Shared.getProjectId()});
+
           }]
         }
       })
@@ -93,6 +94,10 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
+          building: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
+            if (_.isNull(Shared.getBuildingId())) return {};
+            else return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
+          }],
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -108,6 +113,10 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
+          building: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
+            if (_.isNull(Shared.getBuildingId())) return {};
+            else return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
+          }],
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             //does this set stories correctly for new building?
             return data.list('building_stories', Shared.defaultParams());
@@ -124,6 +133,10 @@ cbecc.config([
         controller: 'BuildingCtrl',
         templateUrl: 'building/building.html',
         resolve: {
+          building: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
+            if (_.isNull(Shared.getBuildingId())) return {};
+            else return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
+          }],
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
@@ -362,7 +375,7 @@ cbecc.config([
 
 
 cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $log, $q, $state, toaster, Shared, api, data) {
-  api.add(['projects', 'buildings','building_stories', 'buildings', 'construction_defaults', 'constructions', 'door_lookups', 'fenestrations', 'fluid_systems', 'luminaires', 'simulations', 'space_function_defaults', 'spaces', 'terminal_units', 'thermal_zones', 'zip_codes', 'zone_systems']);
+  api.add(['projects', 'buildings','building_stories', 'construction_defaults', 'constructions', 'door_lookups', 'fenestrations', 'fluid_systems', 'luminaires', 'simulations', 'space_function_defaults', 'spaces', 'terminal_units', 'thermal_zones', 'zip_codes', 'zone_systems']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     // Don't prompt to save on subtab changes
@@ -404,6 +417,12 @@ cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'da
       });
     } else {
       $log.error('Unhandled state change error:', error);
+      $log.debug('from state:', fromState);
+      $log.debug('fromParams:' , fromParams);
+      $log.debug('to state: ', toState);
+      $log.debug('to params: ', toParams);
+      Shared.setProjectId(null);
+      Shared.setBuildingId(null);
       $state.go('project');
     }
   });

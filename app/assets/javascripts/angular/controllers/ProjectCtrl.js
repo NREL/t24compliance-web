@@ -17,7 +17,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
     exceptional_condition: true
   };
 
-  // initialize defaults if no project was retrieved
+  // initialize defaults if new project
   if (_.isEmpty($scope.project)) {
     $scope.project.geometry_input_type = 'Simplified';
     $scope.project.state = 'CA';
