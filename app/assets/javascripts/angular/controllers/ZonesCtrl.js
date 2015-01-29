@@ -1,4 +1,4 @@
-cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'uiGridConstants', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', 'systems', 'terminals', function ($scope, $log, $location, toaster, uiGridConstants, Shared, Enums, data, stories, spaces, zones, systems, terminals) {
+cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared', 'Enums', 'data', 'stories', 'spaces', 'zones', 'systems', 'terminals', function ($scope, $log, $location, toaster, Shared, Enums, data, stories, spaces, zones, systems, terminals) {
   $scope.data = {
     stories: stories,
     spaces: spaces,

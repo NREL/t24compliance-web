@@ -1,4 +1,4 @@
-cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', function ($scope, $log, Shared, Enums) {
+cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Shared', 'Enums', function ($scope, uiGridConstants, $log, Shared, Enums) {
   $scope.selected = {
     zone: null
   };
@@ -21,6 +21,20 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
           air_system_id: system.id
         });
       }
+    }
+  });
+
+  // plenum zones
+  $scope.plenumZonesArr = [{
+    id: '',
+    value: ''
+  }];
+  _.each($scope.data.zones, function (zone, index) {
+    if (zone.type === 'Plenum') {
+      $scope.plenumZonesArr.push({
+        id: zone.name,
+        value: zone.name
+      });
     }
   });
 
@@ -145,6 +159,8 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       displayName: 'Induced Air Zone',
       enableHiding: false,
       filter: Shared.textFilter(),
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: $scope.plenumZonesArr,
       minWidth: min_width,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type.indexOf('Fan') == -1) {

@@ -8,14 +8,14 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
     id: '',
     value: ''
   }];
-  $scope.plenumZonesHash = {};
+ // $scope.plenumZonesHash = {};
   _.each($scope.data.zones, function (zone, index) {
     if (zone.type === 'Plenum') {
       $scope.plenumZonesArr.push({
         id: zone.name,
         value: zone.name
       });
-      $scope.plenumZonesHash[index] = zone.name;
+      //$scope.plenumZonesHash[index] = zone.name;
     }
   });
 
