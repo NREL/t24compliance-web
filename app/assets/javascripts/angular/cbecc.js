@@ -3,7 +3,7 @@ var cbecc = angular.module('cbecc', [
   'ngAnimate', 'ngResource', 'ngRoute',
   'toaster',
   'angular-data.DSCacheFactory',
-  'ui.grid', 'ui.grid.autoResize', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.selection',
+  'ui.grid', 'ui.grid.autoResize', 'ui.grid.cellNav', 'ui.grid.edit', 'ui.grid.resizeColumns', 'ui.grid.selection', 'ui.grid.pinning',
   'ui.router', 'ui.router.stateHelper',
   'ui.bootstrap',
   'frapontillo.bootstrap-switch',

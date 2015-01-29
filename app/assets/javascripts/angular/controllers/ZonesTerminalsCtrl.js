@@ -60,6 +60,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableCellEdit: false,
       minWidth: min_width,
       filter: Shared.textFilter(),
+      pinnedLeft:true,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'name',
@@ -67,6 +68,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.textFilter(),
       minWidth: min_width,
+      pinnedLeft:true,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'type',
@@ -76,6 +78,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       editDropdownOptionsArray: Enums.enumsArr.terminal_units_type_enums,
       filter: Shared.textFilter(),
       minWidth: min_width,
+      pinnedLeft:true,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'primary_air_flow_maximum',
@@ -83,6 +86,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width,
+      type: 'number',
       secondLine: Shared.html('cfm'),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -91,6 +95,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width,
+      type: 'number',
       secondLine: Shared.html('cfm'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type == 'Uncontrolled') {
@@ -107,6 +112,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width,
+      type: 'number',
       secondLine: Shared.html('cfm'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type != 'VAVReheatBox') {
@@ -155,6 +161,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       enableHiding: false,
       filter: Shared.numberFilter(),
       minWidth: min_width,
+      type: 'number',
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type.indexOf('Fan') == -1) {
           return 'disabled-cell';
@@ -169,6 +176,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       displayName: 'Terminal Fan Power',
       enableHiding: false,
       filter: Shared.numberFilter(),
+      type: 'number',
       minWidth: min_width + 20,
       secondLine: Shared.html('W/cfm'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
@@ -185,6 +193,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
       displayName: 'Parallel Box Flow Frac.',
       enableHiding: false,
       filter: Shared.numberFilter(),
+      type: 'number',
       minWidth: min_width + 20,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type.indexOf('Fan') == -1) {
