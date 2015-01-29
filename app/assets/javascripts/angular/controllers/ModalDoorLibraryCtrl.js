@@ -1,5 +1,5 @@
 cbecc.controller('ModalDoorLibraryCtrl', ['$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
-  params.data.then(function(data) {
+  params.data.then(function (data) {
     $scope.data = data;
   });
   $scope.title = params.type;
@@ -51,11 +51,7 @@ cbecc.controller('ModalDoorLibraryCtrl', ['$scope', '$modalInstance', '$interval
       });
       if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
         $interval(function () {
-          if (params.rowEntity.hasOwnProperty('$$hashKey')) {
-            $scope.gridApi.selection.selectRow(params.rowEntity);
-          } else {
-            $scope.gridApi.selection.selectRow(_.find($scope.data, {id: params.rowEntity.id}));
-          }
+          $scope.gridApi.selection.selectRow(_.find($scope.data, {id: params.rowEntity.id}));
         }, 0, 1);
       }
     }

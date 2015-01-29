@@ -1,6 +1,6 @@
 cbecc.controller('ModalSystemCreatorCtrl', ['$scope', '$log', '$modalInstance', function ($scope, $log, $modalInstance) {
   $scope.quantity = 1;
-  $scope.type = '';
+  $scope.type = 'ptac';
 
   $scope.systemTypes = [{
     id: 'ptac',

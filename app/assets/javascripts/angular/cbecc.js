@@ -61,14 +61,24 @@ cbecc.config([
         name: 'project',
         url: '/',
         controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html'
+        templateUrl: 'project/project.html',
+        resolve: {
+          zipCodes: ['$q', 'data', 'Shared', function ($q, data, Shared) {
+            return data.list('zip_codes');
+          }]
+        }
       })
       .state({
         name: 'projectDetails',
         url: '/projects/{project_id:[0-9a-f]{24}}',
         controller: 'ProjectCtrl',
         templateUrl: 'project/project.html',
-        parent: 'lookupbuilding'
+        parent: 'lookupbuilding',
+        resolve: {
+          zipCodes: ['$q', 'data', 'Shared', function ($q, data, Shared) {
+            return data.list('zip_codes');
+          }]
+        }
       })
       .state({
         name: 'building',
@@ -83,7 +93,7 @@ cbecc.config([
         },
         parent: "lookupbuilding"
       })
-      .state({ //shouldn't be clickable without projectid
+      .state({ //shouldn't be clickable without project id
         name: 'buildingPlaceholder',
         url: '/buildings',
         controller: 'BuildingCtrl',
@@ -124,6 +134,9 @@ cbecc.config([
           }],
           defaults: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
             return data.list('construction_defaults', Shared.defaultParams());
+          }],
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding'
@@ -333,7 +346,7 @@ cbecc.config([
 
 
 cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $log, $q, $state, toaster, Shared, api, data) {
-  api.add(['spaces', 'buildings', 'building_stories', 'constructions', 'fenestrations', 'door_lookups', 'construction_defaults', 'zone_systems', 'fluid_systems', 'spaces', 'simulations', 'space_function_defaults', 'thermal_zones', 'terminal_units', 'luminaires']);
+  api.add(['building_stories', 'buildings', 'construction_defaults', 'constructions', 'door_lookups', 'fenestrations', 'fluid_systems', 'luminaires', 'simulations', 'space_function_defaults', 'spaces', 'terminal_units', 'thermal_zones', 'zip_codes', 'zone_systems']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     // Don't prompt to save on subtab changes

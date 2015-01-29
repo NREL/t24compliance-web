@@ -3,7 +3,7 @@
   <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="ptac_navigation">
     <button class="btn-wrap" type="button" ng-click="setActiveTab('ptac', 'general')" ng-class="getTabClass('ptac', 'general')">PTAC General System Settings</button>
     <button type="button" ng-click="setActiveTab('ptac', 'fan')" ng-class="getTabClass('ptac', 'fan')">Fan</button>
-   <!-- <button type="button" ng-click="setActiveTab('ptac', 'fan_motor')" ng-class="getTabClass('ptac', 'fan_motor')">Fan Motor</button>-->
+    <!-- <button type="button" ng-click="setActiveTab('ptac', 'fan_motor')" ng-class="getTabClass('ptac', 'fan_motor')">Fan Motor</button>-->
     <button type="button" ng-click="setActiveTab('ptac', 'coil_cooling')" ng-class="getTabClass('ptac', 'coil_cooling')">DX Cooling Coil</button>
     <button type="button" ng-click="setActiveTab('ptac', 'coil_heating')" ng-class="getTabClass('ptac', 'coil_heating')">Hot Water Coil</button>
   </div>
@@ -24,10 +24,8 @@
     </div>
     <div class="row pad-top-20">
       <div class="col-md-12">
-        <div class="tab-content">
-          <div ng-repeat="tab in systemTabs.ptac" ng-if="isActiveTab('ptac', tab)">
-            <div ui-grid="gridOptions.ptac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-          </div>
+        <div ng-repeat="tab in systemTabs.ptac" ng-if="isActiveTab('ptac', tab)">
+          <div ui-grid="gridOptions.ptac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
         </div>
       </div>
     </div>

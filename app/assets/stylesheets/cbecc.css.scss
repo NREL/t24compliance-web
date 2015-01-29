@@ -145,7 +145,7 @@ body > .container-fluid > .header-row.wizard {
   text-decoration: none;
 }
 
-// Fix for UI grid shifting in Chrome on Windows
+// Fix for UI grid shifting in Chrome/Firefox on Windows/Mac
 .ui-grid-render-container-body {
   float: none;
   overflow: hidden;
@@ -163,28 +163,12 @@ body > .container-fluid > .header-row.wizard {
   height: 212px;
 }
 
-.long-grid {
+.grid-80 {
   height: 80px;
 }
 
-.short-grid {
-  height: 100px;
-}
-
-.space-creator-grid-1 {
-  height: 100px;
-}
-
-.space-creator-grid-2 {
-  height: 80px;
-}
-
-.plant-grid {
-  height: 80px;
-}
-
-.plant-large-grid {
-  height: 220px;
+.grid-100 {
+  height: 100px !important;
 }
 
 // Hide selected cell
@@ -215,7 +199,7 @@ body > .container-fluid > .header-row.wizard {
   color: #ac3933;
   font-weight: bold;
   .glyphicon {
-    color: #000;
+    color: #333;
   }
 }
 

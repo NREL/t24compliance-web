@@ -24,10 +24,8 @@
     </div>
     <div class="row pad-top-20">
       <div class="col-md-12">
-        <div class="tab-content">
-          <div ng-repeat="tab in systemTabs.szac" ng-if="isActiveTab('szac', tab)">
-            <div ui-grid="gridOptions.szac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-          </div>
+        <div ng-repeat="tab in systemTabs.szac" ng-if="isActiveTab('szac', tab)">
+          <div ui-grid="gridOptions.szac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
         </div>
       </div>
     </div>
