@@ -219,6 +219,35 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', '$log', 'Shared', 'Enums', fun
 
         if (colDef.name == 'type') {
           // todo: see if we need to null any fields (the ones that now become N/A)
+          if (newValue == 'Uncontrolled') {
+            rowEntity.parallel_box_fan_flow_fraction = null;
+            rowEntity.fan_power_per_flow = null;
+            rowEntity.induction_ratio = null;
+            rowEntity.induced_air_zone_reference = null;
+            rowEntity.reheat_control_method = null;
+            rowEntity.heating_air_flow_maximum = null;
+            rowEntity.primary_air_flow_minimum = null;
+          }
+          else if (newValue == 'VAVNoReheatBox') {
+            rowEntity.parallel_box_fan_flow_fraction = null;
+            rowEntity.fan_power_per_flow = null;
+            rowEntity.induction_ratio = null;
+            rowEntity.induced_air_zone_reference = null;
+            rowEntity.reheat_control_method = null;
+            rowEntity.heating_air_flow_maximum = null;
+          }
+          else if (newValue == 'VAVReheatBox') {
+            rowEntity.parallel_box_fan_flow_fraction = null;
+            rowEntity.fan_power_per_flow = null;
+            rowEntity.induction_ratio = null;
+            rowEntity.induced_air_zone_reference = null;
+          }
+          else if (newValue == 'ParallelFanBox' || newValue == 'SeriesFanBox'){
+            rowEntity.reheat_control_method = null;
+            rowEntity.heating_air_flow_maximum = null;
+          }
+
+
           gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
         }
 
