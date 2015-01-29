@@ -5,8 +5,8 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
 
   // thermal zone references array for ZoneSpaces tab
   $scope.zonesArr = [{
-    id: "",
-    value: ""
+    id: '',
+    value: ''
   }];
   $scope.zonesHash = {};
   _.each($scope.data.zones, function (zone, index) {

@@ -265,7 +265,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var space = {
-      name: "Space " + ($scope.data.spaces.length + 1),
+      name: 'Space ' + ($scope.data.spaces.length + 1),
       floor_to_ceiling_height: $scope.data.stories[0].floor_to_ceiling_height,
       building_story_id: $scope.data.stories[0].id,
       area: null,
@@ -335,7 +335,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var spaceIndex = $scope.data.spaces.indexOf(selectedSpace);
 
     $scope.data.spaces.push({
-      name: "Space " + ($scope.data.spaces.length + 1),
+      name: 'Space ' + ($scope.data.spaces.length + 1),
       floor_to_ceiling_height: selectedSpace.floor_to_ceiling_height,
       building_story_id: selectedSpace.building_story_id,
       area: selectedSpace.area,
@@ -753,7 +753,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var luminaire = {
-      name: "Luminaire " + ($scope.data.luminaires.length + 1),
+      name: 'Luminaire ' + ($scope.data.luminaires.length + 1),
       fixture_type: Enums.enums.luminaires_fixture_type_enums[1],
       lamp_type: Enums.enums.luminaires_lamp_type_enums[0],
       power: 0
@@ -769,7 +769,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var selectedLuminaire = selected.luminaire;
 
     $scope.data.luminaires.push({
-      name: "Luminaire " + ($scope.data.luminaires.length + 1),
+      name: 'Luminaire ' + ($scope.data.luminaires.length + 1),
       fixture_type: selectedLuminaire.fixture_type,
       lamp_type: selectedLuminaire.lamp_type,
       power: selectedLuminaire.power,
@@ -824,7 +824,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
 
     var lightingSystem = {
-      name: "Lighting System " + ($scope.data.lightingSystems.length + 1),
+      name: 'Lighting System ' + ($scope.data.lightingSystems.length + 1),
       space: spaceIndex,
       spaceOptions: $scope.data.spacesWithLuminaires(),
       luminaire_reference: [null],

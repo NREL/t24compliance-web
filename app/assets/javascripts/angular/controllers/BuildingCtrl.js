@@ -173,7 +173,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     }
 
     $scope.stories.push({
-      name: "Story " + ($scope.stories.length + 1),
+      name: 'Story ' + ($scope.stories.length + 1),
       z: z,
       floor_to_floor_height: floor_to_floor_height,
       floor_to_ceiling_height: floor_to_ceiling_height
@@ -189,7 +189,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     var z = lowerStory.z + lowerStory.floor_to_floor_height;
 
     $scope.stories.push({
-      name: "Story " + ($scope.stories.length + 1),
+      name: 'Story ' + ($scope.stories.length + 1),
       z: z,
       floor_to_floor_height: $scope.selected.floor_to_floor_height,
       floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height
@@ -221,11 +221,11 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
   // Form Errors
   $scope.errorClass = function (name) {
     var s = $scope.form[name];
-    return s.$invalid && s.$dirty ? "has-error" : "";
+    return s.$invalid && s.$dirty ? 'has-error' : '';
   };
 
   $scope.storyError = function () {
-    return !$scope.stories.length ? "has-error" : "";
+    return !$scope.stories.length ? 'has-error' : '';
   };
 
   // save

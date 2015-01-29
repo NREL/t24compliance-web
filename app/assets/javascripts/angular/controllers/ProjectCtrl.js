@@ -84,7 +84,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
   // Form Errors
   $scope.errorClass = function (name) {
     var s = $scope.form[name];
-    return s.$invalid && s.$dirty ? "has-error" : "";
+    return s.$invalid && s.$dirty ? 'has-error' : '';
   };
 
 }]);
