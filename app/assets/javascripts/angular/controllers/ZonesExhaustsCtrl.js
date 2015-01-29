@@ -38,7 +38,10 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
         zone_id: zone.id,
         zone_name: zone.value,
         name: zone.value + ' Exhaust System',
-        type: 'Exhaust'
+        type: 'Exhaust',
+        fan: {
+          name: zone.value + ' Exhaust Fan'
+        }
       });
     }
   });
@@ -46,7 +49,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
   $log.debug($scope.data.exhausts);
 
 
-  var minWidth = 150;
+  var min_width = 150;
 
   // Exhausts UI Grid
   $scope.exhaustsGridOptions = {
@@ -55,7 +58,8 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       displayName: 'Thermal Zone',
       enableCellEdit: false,
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
+      pinnedLeft:true,
       filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -63,79 +67,83 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       displayName: 'Classification',
       field: 'fan.classification',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       filter: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'fan_control_method',
-      displayName: 'Control Method',
-      field: 'fan.control_method',
-      enableHiding: false,
-      minWidth: minWidth,
-      filter: Shared.textFilter(),
-      editableCellTemplate: 'ui-grid/dropdownEditor',
-      editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
-    }, {
-      name: 'type',
-      displayName: 'Fan Type',
+      name: 'fan_centrifugal_type',
+      displayName: 'Fan Centrifugal Type',
       field: 'fan.centrifugal_type',
-      enableHiding: false,
-      minWidth: minWidth,
-      filter: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_centrifugal_type_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
-    }, {
-      name: 'fan_flow_capacity',
-      displayName: 'Flow Capacity',
-      field: 'fan.flow_capacity',
       enableHiding: false,
-      minWidth: minWidth,
-      type: 'number',
-      filter: Shared.numberFilter(),
-      secondLine: Shared.html('cfm'),
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
-    }, {
-      name: 'fan_flow_minimum',
-      displayName: 'Flow Minimum',
-      field: 'fan.flow_minimum',
-      enableHiding: false,
-      minWidth: minWidth,
-      type: 'number',
-      filter: Shared.numberFilter(),
-      secondLine: Shared.html('cfm'),
+      minWidth: min_width + 20,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.fan.classification != 'Centrifugal') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.fan.classification == 'Centrifugal');
+      },
+      filter: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_modeling_method',
       displayName: 'Modeling Method',
       field: 'fan.modeling_method',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       filter: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'fan_total_static_pressure',
-      displayName: 'Total Static Pressure',
-      field: 'fan.total_static_pressure',
+      name: 'fan_control_method',
+      displayName: 'Control Method',
+      field: 'fan.control_method',
       enableHiding: false,
-      minWidth: minWidth + 20,
-      type: 'number',
-      filter: Shared.numberFilter(),
-      secondLine: Shared.html('ft H<sub>2</sub>O'),
+      minWidth: min_width,
+      filter: Shared.textFilter(),
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_flow_efficiency',
       displayName: 'Fan Minimum',
       field: 'fan.flow_efficiency',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       type: 'number',
       filter: Shared.numberFilter(),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.fan.modeling_method != 'StaticPressure') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.fan.modeling_method == 'StaticPressure');
+      },
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    }, {
+      name: 'fan_total_static_pressure',
+      displayName: 'Total Static Pressure',
+      field: 'fan.total_static_pressure',
+      enableHiding: false,
+      minWidth: min_width + 20,
+      type: 'number',
+      filter: Shared.numberFilter(),
+      secondLine: Shared.html('ft H<sub>2</sub>O'),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.fan.modeling_method != 'StaticPressure') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.fan.modeling_method == 'StaticPressure');
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_bhp',
@@ -143,16 +151,24 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       secondLine: Shared.html('hp'),
       field: 'fan.motor_bhp',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       type: 'number',
       filter: Shared.numberFilter(),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.fan.modeling_method != 'BrakeHorsePower') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.fan.modeling_method == 'BrakeHorsePower');
+      },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_position',
       displayName: 'Motor Position',
       field: 'fan.motor_position',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       filter: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
@@ -163,7 +179,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       secondLine: Shared.html('hp'),
       field: 'fan.motor_hp',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       type: 'number',
       filter: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -172,7 +188,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       displayName: 'Motor Type',
       field: 'fan.motor_type',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       filter: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
@@ -182,7 +198,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       displayName: 'Pole Count',
       field: 'fan.pole_count',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       type: 'number',
       filter: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -191,7 +207,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       displayName: 'Motor Efficiency',
       field: 'fan.motor_efficiency',
       enableHiding: false,
-      minWidth: minWidth,
+      minWidth: min_width,
       type: 'number',
       filter: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -216,6 +232,19 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
         if (newValue != oldValue) {
           Shared.setModified();
         }
+
+        if (colDef.name == 'fan_classification') {
+          rowEntity.fan.centrifugal_type = null;
+          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+        }
+
+        if (colDef.name == 'fan_modeling_method') {
+          rowEntity.fan.motor_bhp = null;
+          rowEntity.fan.flow_efficiency = null;
+          rowEntity.fan.total_static_pressure = null;
+          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+        }
+
       });
     }
   };

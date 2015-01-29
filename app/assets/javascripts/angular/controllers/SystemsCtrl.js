@@ -149,7 +149,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     condenser: {},
     shw: {}
   };
-  min_width = 150;
+  var min_width = 150;
   $scope.gridPlantCols.hot_water.boiler = [{
     name: 'boiler_name',
     displayName: 'Name',
