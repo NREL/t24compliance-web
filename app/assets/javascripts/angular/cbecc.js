@@ -65,6 +65,10 @@ cbecc.config([
         resolve: {
           zipCodes: ['$q', 'data', 'Shared', function ($q, data, Shared) {
             return data.list('zip_codes');
+          }],
+          project: ['$q', 'data', 'Shared', function ($1, data, Shared){
+            if (_.isNull(Shared.getProjectId())) return {};
+            else return data.show('projects', {id: Shared.getProjectId()});
           }]
         }
       })
@@ -77,8 +81,26 @@ cbecc.config([
         resolve: {
           zipCodes: ['$q', 'data', 'Shared', function ($q, data, Shared) {
             return data.list('zip_codes');
+          }],
+          project: ['$q', 'data', 'Shared', function ($1, data, Shared){
+            return data.show('projects', {id: Shared.getProjectId()});
           }]
         }
+      })
+      .state({ //shouldn't be clickable without project id
+        name: 'buildingPlaceholder',
+        url: '/buildings',
+        controller: 'BuildingCtrl',
+        templateUrl: 'building/building.html',
+        resolve: {
+          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
+            return data.list('building_stories', Shared.defaultParams());
+          }],
+          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
+            return data.list('spaces', Shared.defaultParams());
+          }]
+        },
+        parent: 'lookupbuilding'
       })
       .state({
         name: 'building',
@@ -88,21 +110,6 @@ cbecc.config([
         resolve: {
           stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             //does this set stories correctly for new building?
-            return data.list('building_stories', Shared.defaultParams());
-          }],
-          spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }]
-        },
-        parent: 'lookupbuilding'
-      })
-      .state({ //shouldn't be clickable without project id
-        name: 'buildingPlaceholder',
-        url: '/buildings',
-        controller: 'BuildingCtrl',
-        templateUrl: 'building/building.html',
-        resolve: {
-          stories: ['$q', 'Shared', 'data', 'lookupbuilding', function ($q, Shared, data, lookupbuilding) {
             return data.list('building_stories', Shared.defaultParams());
           }],
           spaces: ['$q', 'data', 'Shared', 'lookupbuilding', function ($q, data, Shared, lookupbuilding) {
@@ -355,7 +362,7 @@ cbecc.config([
 
 
 cbecc.run(['$rootScope', '$log', '$q', '$state', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $log, $q, $state, toaster, Shared, api, data) {
-  api.add(['building_stories', 'buildings', 'construction_defaults', 'constructions', 'door_lookups', 'fenestrations', 'fluid_systems', 'luminaires', 'simulations', 'space_function_defaults', 'spaces', 'terminal_units', 'thermal_zones', 'zip_codes', 'zone_systems']);
+  api.add(['projects', 'buildings','building_stories', 'buildings', 'construction_defaults', 'constructions', 'door_lookups', 'fenestrations', 'fluid_systems', 'luminaires', 'simulations', 'space_function_defaults', 'spaces', 'terminal_units', 'thermal_zones', 'zip_codes', 'zone_systems']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
     // Don't prompt to save on subtab changes

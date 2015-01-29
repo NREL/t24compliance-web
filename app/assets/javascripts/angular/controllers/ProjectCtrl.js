@@ -1,6 +1,9 @@
-cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', 'zipCodes', function ($scope, $log, $stateParams, $location, toaster, Project, Shared, Enums, zipCodes) {
+cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Project', 'Shared', 'Enums', 'data', 'project','zipCodes', function ($scope, $log, $stateParams, $location, toaster, Project, Shared, Enums, data, project, zipCodes) {
+
   Shared.setIds($stateParams);
+  $scope.project = project;
   $scope.zipCodes = zipCodes[0].zips;
+
   $scope.setModified = function () {
     Shared.setModified();
   };
@@ -14,24 +17,8 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
     exceptional_condition: true
   };
 
-  // new vs edit
-  var proj_id = Shared.getProjectId();
-  if (proj_id) {
-    Project.show({id: proj_id}).$promise.then(function (response) {
-      $scope.project = response;
-      $scope.project.geometry_input_type = 'Simplified';
-    }, function (response) {
-      if (response.status == 404) {
-        Shared.setProjectId(null);
-        toaster.pop('error', 'Invalid project ID', 'Please create or open a project.');
-        $location.path(Shared.projectPath());
-      } else {
-        toaster.pop('error', 'Unable to retrieve project');
-      }
-    });
-  } else {
-    $scope.project = new Project();
-    // Initialize defaults
+  // initialize defaults if no project was retrieved
+  if (_.isEmpty($scope.project)) {
     $scope.project.geometry_input_type = 'Simplified';
     $scope.project.state = 'CA';
     $scope.project.exceptional_condition_no_cooling_system = 'No';
@@ -74,9 +61,9 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
     }
 
     if (Shared.getProjectId()) {
-      Project.update($scope.project, success, failure);
+      data.update('projects',$scope.project).then(success).catch(failure);
     } else {
-      Project.create($scope.project, success, failure);
+      data.create('projects',$scope.project).then(success).catch(failure);
     }
 
   };
