@@ -256,11 +256,14 @@ cbecc.config([
           project: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
             return data.show('projects', {id: Shared.getProjectId()});
           }],
-          saved_systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
             return data.list('zone_systems', Shared.defaultParams());
           }],
-          saved_plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
             return data.list('fluid_systems', Shared.defaultParams());
+          }],
+          zones: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+            return data.list('thermal_zones', Shared.defaultParams());
           }]
         },
         parent: 'requirebuilding'

@@ -1,4 +1,8 @@
-cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'project', 'saved_systems', 'saved_plants', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, project, saved_systems, saved_plants) {
+cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'project', 'systems', 'plants', 'zones', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, project, systems, plants, zones) {
+
+  // if system names change, must resave zones
+  $scope.zones = zones;
+  var update_zones = 0;
 
   // put all systems DATA in array for panels (even exhaust)
   $scope.systems = {
@@ -48,12 +52,12 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
 
   // retrieve systems and process into view format
   // process exhaust system types here too (or they will get wiped out)
-  _.each(saved_systems, function (system) {
+  _.each(systems, function (system) {
     var type = system.type.toLowerCase();
     $scope.systems[type].push(system);
   });
 
-  _.each(saved_plants, function (plant) {
+  _.each(plants, function (plant) {
     switch (plant.type) {
       case 'HotWater':
         $scope.plants.hot_water.push(plant);
@@ -1003,6 +1007,17 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
                   rowEntity.fan.total_static_pressure = null;
                   gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
                 }
+                if (colDef.name == 'name') {
+                  // go through primary_air_conditioning_system_reference on zones and update if needed
+                  $log.debug('System name changed from ', oldValue, ' to ', newValue);
+                  _.each($scope.zones, function(zone) {
+                     if (zone.primary_air_conditioning_system_reference == oldValue) {
+                       $log.debug('Updating zone: ', zone.name);
+                       zone.primary_air_conditioning_system_reference = newValue;
+                       update_zones = 1;
+                     }
+                  });
+                }
               }
             });
           }
@@ -1031,44 +1046,42 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   };
 
   _.each($scope.plantTabs, function (tabs, type) {
-    //if (type == 'hot_water' || type == 'chilled_water' || type == 'condenser') {
-      _.each(tabs, function (tab) {
-        $scope.gridPlantOptions[type][tab] = {
-          columnDefs: $scope.gridPlantCols[type][tab],
-          enableCellEditOnFocus: true,
-          enableSorting: false,
-          enableColumnMenus: false,
-          enableFiltering: false,
-          onRegisterApi: function (gridApi) {
-            $scope.gridPlantApi[type][tab] = gridApi;
+    _.each(tabs, function (tab) {
+      $scope.gridPlantOptions[type][tab] = {
+        columnDefs: $scope.gridPlantCols[type][tab],
+        enableCellEditOnFocus: true,
+        enableSorting: false,
+        enableColumnMenus: false,
+        enableFiltering: false,
+        onRegisterApi: function (gridApi) {
+          $scope.gridPlantApi[type][tab] = gridApi;
 
-            gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
-              if (newValue != oldValue) {
-                Shared.setModified();
+          gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
+            if (newValue != oldValue) {
+              Shared.setModified();
 
-                if (colDef.name == 'chiller_condenser_type') {
-                  // add / remove condenser
-                  if (newValue == 'Fluid') {
-                    addPlant('condenser');
-                  } else if (newValue == 'Air') {
-                    $scope.plants.condenser = [];
-                  }
+              if (colDef.name == 'chiller_condenser_type') {
+                // add / remove condenser
+                if (newValue == 'Fluid') {
+                  addPlant('condenser');
+                } else if (newValue == 'Air') {
+                  $scope.plants.condenser = [];
                 }
               }
-            });
-          }
-        };
-        if (tab == 'coil_heating') {
-          $scope.gridPlantOptions[type][tab].data = 'display_coils_heating';
+            }
+          });
         }
-        else if (tab == 'coil_cooling') {
-          $scope.gridPlantOptions[type][tab].data = 'display_coils_cooling';
-        }
-        else {
-          $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
-        }
-      });
-   // }
+      };
+      if (tab == 'coil_heating') {
+        $scope.gridPlantOptions[type][tab].data = 'display_coils_heating';
+      }
+      else if (tab == 'coil_cooling') {
+        $scope.gridPlantOptions[type][tab].data = 'display_coils_cooling';
+      }
+      else {
+        $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
+      }
+    });
   });
 
   //**** VIEW HELPERS: TABS & CLASSES ****
@@ -1549,16 +1562,35 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
       data.bulkSync('fluid_systems', params).then(success).catch(failure);
 
       function success(response) {
-        Shared.resetModified();
         toaster.pop('success', 'Systems and Plants successfully saved');
-      }
+        // update zones?
+        if (update_zones) {
+          params = Shared.defaultParams();
+          params.data = $scope.zones;
+          data.bulkSync('thermal_zones', params).then(success).catch(failure);
+        }
+        else {
+          Shared.resetModified();
+        }
 
+        function success(response) {
+          Shared.resetModified();
+          toaster.pop('success', 'Zones HVAC system references successfully updated.');
+        }
+        // zones update failure
+        function failure(response) {
+          $log.error('Failure updating zones from systems tab', response);
+          toaster.pop('error', 'An error occurred while updating zones');
+        }
+
+      }
+      // plants update failure
       function failure(response) {
         $log.error('Failure submitting plants', response);
         toaster.pop('error', 'An error occurred while saving plants');
       }
     }
-
+    // systems update failure
     function failure(response) {
       $log.error('Failure submitting systems', response);
       toaster.pop('error', 'An error occurred while saving systems');
