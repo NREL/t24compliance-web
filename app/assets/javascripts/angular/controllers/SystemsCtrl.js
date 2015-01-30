@@ -168,7 +168,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'boilers[0].capacity_rated',
     enableHiding: false,
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     secondLine: Shared.html('Btu/hr'),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
@@ -179,7 +179,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     secondLine: Shared.html('frac.'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }];
   $scope.gridPlantCols.hot_water.pump = [{
@@ -206,7 +206,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     secondLine: Shared.html('gpm'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'pump_total_head',
@@ -214,7 +214,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     secondLine: Shared.html('ft H<sub>2</sub>O'),
     field: 'boilers[0].pump.total_head',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
@@ -222,14 +222,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Motor Efficiency',
     field: 'boilers[0].pump.motor_efficiency',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     enableHiding: false
   }, {
     name: 'pump_impeller_efficiency',
     displayName: 'Impeller Efficiency',
     field: 'boilers[0].pump.impeller_efficiency',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     enableHiding: false
   }, {
     name: 'pump_motor_hp',
@@ -237,7 +237,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     secondLine: Shared.html('hp'),
     field: 'boilers[0].pump.motor_hp',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }];
@@ -270,25 +270,25 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }, {
     name: 'reset_supply_high',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
     name: 'reset_supply_low',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
     name: 'reset_outdoor_high',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
     name: 'reset_outdoor_low',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }];
@@ -322,7 +322,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     secondLine: Shared.html('Btu/hr'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
   }, {
@@ -330,7 +330,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'kW per ton',
     field: 'chillers[0].kw_per_ton',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
     enableHiding: false
 
@@ -342,7 +342,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     secondLine: Shared.html('Btuh/W'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
   }];
@@ -372,7 +372,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Design Flow Rate',
     secondLine: Shared.html('gpm'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     field: 'chillers[0].pump.flow_capacity',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -382,7 +382,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     secondLine: Shared.html('ft H<sub>2</sub>O'),
     field: 'chillers[0].pump.total_head',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
@@ -390,7 +390,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Motor Efficiency',
     field: 'chillers[0].pump.motor_efficiency',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
@@ -398,7 +398,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Impeller Efficiency',
     field: 'chillers[0].pump.impeller_efficiency',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
@@ -407,7 +407,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     secondLine: Shared.html('hp'),
     field: 'chillers[0].pump.motor_HP',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }];
@@ -441,7 +441,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'heat_rejections[0].capacity_rated',
     enableHiding: false,
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     secondLine: Shared.html('Btu/hr'),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -450,7 +450,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     secondLine: Shared.html('hp'),
     field: 'heat_rejections[0].total_fan_hp',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
@@ -488,7 +488,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Design Flow Rate',
     secondLine: Shared.html('gpm'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     field: 'heat_rejections[0].pump.flow_capacity',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -498,14 +498,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     secondLine: Shared.html('ft<sup>2</sup> H<sub>2</sub>O'),
     field: 'heat_rejections[0].pump.total_head',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
     name: 'pump_motor_efficiency',
     displayName: 'Motor Efficiency',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     field: 'heat_rejections[0].pump.motor_efficiency',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -513,7 +513,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'pump_impeller_efficiency',
     displayName: 'Impeller Efficiency',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     field: 'heat_rejections[0].pump.impeller_efficiency',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -522,7 +522,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Motor HP',
     secondLine: Shared.html('hp'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     field: 'heat_rejections[0].pump.motor_HP',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -533,7 +533,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.capacity_rated',
     secondLine: Shared.html('Btu/hr'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     minWidth: min_width,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding:false
@@ -543,7 +543,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.draft_fan_power',
     secondLine: Shared.html('W'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     minWidth: min_width,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -570,7 +570,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.off_cycle_parasitic_losses',
     secondLine: Shared.html('W'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     minWidth: min_width + 50,
     enableHiding: false
@@ -589,7 +589,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.storage_capacity',
     secondLine: Shared.html('gal'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     minWidth: min_width,
     enableHiding: false
@@ -599,7 +599,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.thermal_efficiency',
     secondLine: Shared.html('frac.'),
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     minWidth: min_width,
     enableHiding: false
@@ -609,7 +609,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'water_heater.standby_loss_fraction',
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     minWidth: min_width + 50,
     enableHiding: false
   }];
@@ -627,7 +627,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -636,7 +636,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     pinnedLeft:true,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -645,7 +645,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'fan.name',
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     pinnedLeft:true,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -656,7 +656,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_centrifugal_type',
@@ -674,7 +674,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     cellEditableCondition: function ($scope) {
       return ($scope.row.entity.fan.classification == 'Centrifugal');
     },
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_modeling_method',
@@ -684,7 +684,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_flow_efficiency',
@@ -701,7 +701,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     cellEditableCondition: function ($scope) {
       return ($scope.row.entity.fan.modeling_method == 'StaticPressure');
     },
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_total_static_pressure',
@@ -719,7 +719,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     cellEditableCondition: function ($scope) {
       return ($scope.row.entity.fan.modeling_method == 'StaticPressure');
     },
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_motor_bhp',
@@ -737,7 +737,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     cellEditableCondition: function ($scope) {
       return ($scope.row.entity.fan.modeling_method == 'BrakeHorsePower');
     },
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_motor_position',
@@ -747,7 +747,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_motor_hp',
@@ -757,7 +757,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_motor_type',
@@ -767,7 +767,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_motor_pole_count',
@@ -775,7 +775,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'fan.motor_pole_count',
     enableHiding: false,
     minWidth: min_width,
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     type: 'number',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
@@ -785,7 +785,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     type: 'number',
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }];
   $scope.gridCols.ptac.coil_cooling = [{
@@ -793,14 +793,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enablePinning:false,
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_name',
     displayName: 'Coil Name',
     field: 'coil_cooling.name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -808,7 +808,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -816,7 +816,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Coil Name',
     field: 'coil_heating.name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -824,7 +824,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -836,7 +836,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -845,7 +845,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_sub_type_enums,
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -854,7 +854,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -862,7 +862,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Coil Name',
     field: 'coil_cooling.name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -870,7 +870,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'DXEER',
     field: 'coil_cooling.dxeer',
     enableHiding: false,
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     type: 'number',
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -879,7 +879,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -887,7 +887,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Coil Name',
     field: 'coil_heating.name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
@@ -897,21 +897,21 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     type: 'number',
     enablePinning:false,
-    filter: Shared.numberFilter(),
+    filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.pvav.general = [{
     name: 'name',
     displayName: 'System Name',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'reheat_control_method',
     displayName: 'Reheat Control',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_reheat_control_method_enums,
@@ -920,7 +920,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'cooling_control',
     displayName: 'Cooling Control',
     enableHiding: false,
-    filter: Shared.textFilter(),
+    filters: Shared.textFilter(),
     enablePinning:false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_cooling_control_enums,
@@ -929,13 +929,13 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
      name: 'cool_reset_supply_high',
      displayName: 'Cool Reset Supply High',
      enableHiding: false,
-     filter: Shared.textFilter(),
+     filters: Shared.textFilter(),
      headerCellTemplate: 'ui-grid/cbeccHeaderCell'
      }, {
      name: 'cool_reset_supply_low',
      displayName: 'Cool Reset Supply Low',
      enableHiding: false,
-     filter: Shared.textFilter(),
+     filters: Shared.textFilter(),
      headerCellTemplate: 'ui-grid/cbeccHeaderCell'  */
   }];
   $scope.gridCols.pvav.fan = angular.copy($scope.gridCols.ptac.fan);

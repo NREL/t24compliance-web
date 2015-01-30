@@ -26,7 +26,7 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     columnDefs: [{
       name: 'name',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 400
     }, {
@@ -41,19 +41,19 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'type',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'framing_configuration',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       maxWidth: 218,
       visible: $scope.type != 'UndergroundFloor'
     }, {
       name: 'framing_size',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       maxWidth: 159,
       visible: $scope.type != 'UndergroundFloor'
@@ -74,20 +74,20 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'continuous_insulation_material_name',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 300,
       visible: $scope.type != 'UndergroundFloor'
     }, {
       name: 'slab_type',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'UndergroundFloor'
     }, {
       name: 'slab_insulation_orientation',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'UndergroundFloor'
     }, {

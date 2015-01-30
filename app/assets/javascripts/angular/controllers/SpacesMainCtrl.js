@@ -12,7 +12,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       displayName: 'Space Name',
       enableHiding: false,
       cellEditableCondition: $scope.data.applySettingsCondition,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'floor_to_ceiling_height',
@@ -41,7 +41,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       editableCellTemplate: 'ui-grid/dropdownEditor',
       cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       editDropdownOptionsArray: $scope.data.storiesArr,
-      filter: Shared.enumFilter($scope.data.storiesHash),
+      filters: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
@@ -57,7 +57,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_conditioning_type_enums,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'envelope_status',
@@ -65,7 +65,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_envelope_status_enums,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'lighting_status',
@@ -73,7 +73,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_lighting_status_enums,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
     }],

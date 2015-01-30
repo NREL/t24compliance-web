@@ -15,7 +15,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
     columnDefs: [{
       name: 'name',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 400
     }, {
@@ -31,25 +31,25 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
       name: 'fenestration_framing',
       displayName: 'Frame Type',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fenestration_panes',
       displayName: 'Panes',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fenestration_product_type',
       displayName: 'Product Type',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'VerticalFenestration'
     }, {
       name: 'glazing_tint',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'VerticalFenestration'
     }, {
@@ -69,7 +69,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'skylight_curb',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'Skylight'
     }],

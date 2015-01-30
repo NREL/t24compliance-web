@@ -9,18 +9,18 @@ cbecc.controller('ModalDoorLibraryCtrl', ['$scope', '$modalInstance', '$interval
     columnDefs: [{
       name: 'name',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 400
     }, {
       name: 'type',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'certification_method',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'u_factor',
@@ -31,7 +31,7 @@ cbecc.controller('ModalDoorLibraryCtrl', ['$scope', '$modalInstance', '$interval
     }, {
       name: 'open',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: 'data',

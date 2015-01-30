@@ -29,7 +29,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       enableCellEdit: false,
       enableHiding: false,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-      filter: Shared.textFilter()
+      filters: Shared.textFilter()
     }, {
       name: 'lighting_input_method',
       enableHiding: false,
@@ -40,7 +40,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: $scope.data.lightingInputMethodsArr,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-      filter: Shared.textFilter()
+      filters: Shared.textFilter()
     }, {
       name: 'interior_lighting_power_density_regulated',
       displayName: 'Regulated LPD',
@@ -129,7 +129,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       cellFilter: 'mapHash:grid.appScope.spacesHash',
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownRowEntityOptionsArrayPath: 'spaceOptions',
-      filter: Shared.enumFilter($scope.spacesHash),
+      filters: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
@@ -145,7 +145,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
           return 'required-cell msg-select-a-luminaire';
         }
       },
-      filter: Shared.enumFilter($scope.data.lumHash),
+      filters: Shared.enumFilter($scope.data.lumHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.data.lumHash)
     }, {
@@ -162,7 +162,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.interior_lighting_systems_status_enums,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'power_regulated',
@@ -186,7 +186,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       },
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.interior_lighting_systems_non_regulated_exclusion_enums,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'luminaire_mounting_height',
@@ -208,7 +208,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       cellEditableCondition: $scope.data.applySettingsCondition,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.interior_lighting_systems_power_adjustment_factor_credit_type_enums,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'power',

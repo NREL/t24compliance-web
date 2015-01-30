@@ -14,7 +14,7 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
       name: 'name',
       displayName: 'Luminaire Name',
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-      filter: Shared.textFilter()
+      filters: Shared.textFilter()
     }, {
       name: 'power',
       type: 'number',
@@ -26,13 +26,13 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.luminaires_fixture_type_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-      filter: Shared.textFilter()
+      filters: Shared.textFilter()
     }, {
       name: 'lamp_type',
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.luminaires_lamp_type_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-      filter: Shared.textFilter()
+      filters: Shared.textFilter()
     }],
     data: $scope.data.luminaires,
     enableCellEditOnFocus: $scope.editable,

@@ -12,14 +12,14 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Space Name',
       enableCellEdit: false,
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space_function',
       enableCellEdit: false,
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'exhaust_per_area',

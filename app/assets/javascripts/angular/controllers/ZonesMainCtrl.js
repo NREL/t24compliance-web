@@ -12,7 +12,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
       displayName: 'Thermal Zone Name',
       enableHiding: false,
       cellEditableCondition: $scope.data.applySettingsCondition,
-      filter: Shared.textFilter()
+      filters: Shared.textFilter()
       // }, {
       //   name: 'building_story_id',
       //   displayName: 'Story',
@@ -21,7 +21,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
       //   editableCellTemplate: 'ui-grid/dropdownEditor',
       //   cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       //   editDropdownOptionsArray: $scope.data.storiesArr,
-      //   filter: Shared.enumFilter($scope.data.storiesHash),
+      //   filters: Shared.enumFilter($scope.data.storiesHash),
       //   sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'type',

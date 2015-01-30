@@ -60,7 +60,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width,
       pinnedLeft:true,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_classification',
@@ -68,7 +68,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.classification',
       enableHiding: false,
       minWidth: min_width,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_classification_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -88,7 +88,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       cellEditableCondition: function ($scope) {
         return ($scope.row.entity.fan.classification == 'Centrifugal');
       },
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_modeling_method',
@@ -96,7 +96,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.modeling_method',
       enableHiding: false,
       minWidth: min_width,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -106,7 +106,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.control_method',
       enableHiding: false,
       minWidth: min_width,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -117,7 +117,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.fan.modeling_method != 'StaticPressure') {
           return 'disabled-cell';
@@ -134,7 +134,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width + 20,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       secondLine: Shared.html('ft H<sub>2</sub>O'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.fan.modeling_method != 'StaticPressure') {
@@ -153,7 +153,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.fan.modeling_method != 'BrakeHorsePower') {
           return 'disabled-cell';
@@ -169,7 +169,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.motor_position',
       enableHiding: false,
       minWidth: min_width,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_position_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -181,7 +181,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_type',
@@ -189,7 +189,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       field: 'fan.motor_type',
       enableHiding: false,
       minWidth: min_width,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.fans_motor_type_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -200,7 +200,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fan_motor_efficiency',
@@ -209,7 +209,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableHiding: false,
       minWidth: min_width,
       type: 'number',
-      filter: Shared.numberFilter(),
+      filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.data.exhausts,

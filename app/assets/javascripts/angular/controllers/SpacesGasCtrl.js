@@ -10,7 +10,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       displayName: 'Space Name',
       enableCellEdit: false,
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'gas_equipment_power_density',

@@ -26,7 +26,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
       displayName: 'Space Name',
       enableHiding: false,
       enableCellEdit: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'building_story_id',
@@ -34,7 +34,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
       enableCellEdit: false,
       cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       enableHiding: false,
-      filter: Shared.enumFilter($scope.data.storiesHash),
+      filters: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell',
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
@@ -43,7 +43,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownIdLabel: 'value',
       editDropdownOptionsArray: $scope.zonesArr,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
     data: $scope.data.spaces,

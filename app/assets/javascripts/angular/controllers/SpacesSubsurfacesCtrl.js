@@ -53,7 +53,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Subsurface Name',
       enableHiding: false,
       cellEditableCondition: $scope.data.applySettingsCondition,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'space',
@@ -63,7 +63,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       cellEditableCondition: $scope.data.applySettingsCondition,
       cellFilter: 'mapHash:grid.appScope.spacesHash',
       editDropdownRowEntityOptionsArrayPath: 'spaceOptions',
-      filter: Shared.enumFilter($scope.spacesHash),
+      filters: Shared.enumFilter($scope.spacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.spacesArr)
     }, {
@@ -74,7 +74,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       cellEditableCondition: $scope.data.applySettingsCondition,
       cellFilter: 'mapHash:grid.appScope.surfacesHash',
       editDropdownRowEntityOptionsArrayPath: 'surfaceOptions',
-      filter: Shared.enumFilter($scope.surfacesHash),
+      filters: Shared.enumFilter($scope.surfacesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.surfacesArr)
     }, {
@@ -82,7 +82,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       displayName: 'Subsurface Type',
       enableCellEdit: false,
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'building_story_id',
@@ -90,7 +90,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
       enableCellEdit: false,
       cellFilter: 'mapHash:grid.appScope.data.storiesHash',
       enableHiding: false,
-      filter: Shared.enumFilter($scope.data.storiesHash),
+      filters: Shared.enumFilter($scope.data.storiesHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'area',
@@ -116,7 +116,7 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
         }
       },
       cellTemplate: 'ui-grid/cbeccConstructionCell',
-      filter: Shared.enumFilter($scope.data.subsurfaceConstHash),
+      filters: Shared.enumFilter($scope.data.subsurfaceConstHash),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       sortingAlgorithm: Shared.sort($scope.data.subsurfaceConstHash)
     }],

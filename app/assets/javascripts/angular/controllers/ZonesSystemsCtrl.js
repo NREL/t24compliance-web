@@ -35,7 +35,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       displayName: 'Thermal Zone',
       enableHiding: false,
       enableCellEdit: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'type',
@@ -51,7 +51,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       displayName: 'Primary HVAC System',
       editableCellTemplate: 'ui-grid/dropdownEditor',
       enableHiding: false,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       editDropdownOptionsArray: $scope.systemsArr,
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
@@ -60,7 +60,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: $scope.plenumZonesArr,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }, {
       name: 'return_plenum_zone_reference',
@@ -68,7 +68,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: $scope.plenumZonesArr,
-      filter: Shared.textFilter(),
+      filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
     data: $scope.data.zones,

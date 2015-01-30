@@ -238,7 +238,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
 
   // Contains All condition, split by spaces
   service.textFilter = function () {
-    return {
+    return [{
       condition: function (searchTerm, cellValue) {
         if (searchTerm == 'null') return _.isEmpty(cellValue);
         if (cellValue == null) return false;
@@ -249,11 +249,11 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           return regex.test(value);
         });
       }
-    };
+    }];
   };
 
   service.enumFilter = function (input) {
-    return {
+    return [{
       condition: function (searchTerm, cellValue) {
         if (cellValue == null) return false;
         var terms = _.uniq(searchTerm.toLowerCase().split(/ +/));
@@ -267,7 +267,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           return regex.test(value);
         });
       }
-    };
+    }];
   };
 
   service.numberFilter = function () {
