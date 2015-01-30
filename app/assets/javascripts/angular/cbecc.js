@@ -65,7 +65,7 @@ cbecc.config([
             if (!Shared.getProjectId()) return {};
             return data.show('projects', {id: Shared.getProjectId()});
           }],
-          systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          plants: ['data', 'Shared', function (data, Shared) {
             if (!Shared.getBuildingId()) return [];
             return data.list('fluid_systems', Shared.defaultParams());
           }]
@@ -81,7 +81,7 @@ cbecc.config([
           project: ['data', 'Shared', function (data, Shared) {
             return data.show('projects', {id: Shared.getProjectId()});
           }],
-        systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+        plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
           if (!Shared.getBuildingId())  return [];
           return data.list('fluid_systems', Shared.defaultParams());
         }]

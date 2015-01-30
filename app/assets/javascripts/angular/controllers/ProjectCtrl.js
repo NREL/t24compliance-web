@@ -1,12 +1,11 @@
-cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$location', 'toaster', 'Shared', 'Enums', 'data', 'project', 'systems', function ($scope, $log, $stateParams, $modal, $location, toaster, Shared, Enums, data, project, systems) {
+cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$location', 'toaster', 'Shared', 'Enums', 'data', 'project', 'plants', function ($scope, $log, $stateParams, $modal, $location, toaster, Shared, Enums, data, project, plants) {
 
   Shared.setIds($stateParams);
   $scope.project = project;
-  $scope.systems = systems;
+  $scope.plants = plants;
   $scope.has_shw = 0;
-  _.each($scope.systems, function (system) {
-    $log.debug(system);
-    if (system.type == 'ServiceHotWater') $scope.has_shw = 1;
+  _.each($scope.plants, function (plant) {
+    if (plant.type == 'ServiceHotWater') $scope.has_shw = 1;
   });
   $log.debug('has_shw is: ', $scope.has_shw);
 
@@ -28,8 +27,6 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
       }
     }
   };
-
-
 
   // pull in global enum definitions
   $scope.project_compliance_type_enums = Enums.enums.project_compliance_type_enums;
@@ -61,13 +58,39 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
       if (!Shared.getBuildingId()) toaster.pop('note', 'You can move on to the next tab by selecting \'Building\' from the top navigation menu.');
 
       var the_id = response.hasOwnProperty('id') ? response.id : response._id;
-
-      // TODO: remove shw based on exceptional_condition_water_heater
-
-
-      // go back to form with id of what was just saved
       Shared.setProjectId(the_id);
-      $location.path(Shared.projectPath());
+
+      // remove shw based on exceptional_condition_water_heater
+      if (($scope.has_shw) && ($scope.project.exceptional_condition_water_heater == 'Yes')) {
+        _.each($scope.plants, function (plant, index) {
+          if (plant.type == 'ServiceHotWater') {
+            $scope.plants.splice(index, 1);
+          }
+        });
+
+        var params = Shared.defaultParams();
+        params.data = $scope.plants;
+        data.bulkSync('fluid_systems', params).then(success).catch(failure);
+
+        function success (response) {
+          toaster.pop('success', 'Service Hot Water successfully removed.');
+          $location.path(Shared.projectPath());
+        }
+
+        function failure(response) {
+
+          $log.error('Failure removing SHW from Projects tab', response);
+          toaster.pop('error', 'An error occurred while removing Service Hot Water from the project');
+
+        }
+
+      }
+
+      else {
+        // go back to form with id of what was just saved
+        $location.path(Shared.projectPath());
+      }
+
     }
 
     function failure(response) {
