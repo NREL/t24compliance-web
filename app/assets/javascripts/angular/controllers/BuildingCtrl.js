@@ -5,7 +5,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
   $scope.building = building;
   $scope.spacesModified = false;
 
- // initialize building
+  // initialize building
   if (_.isEmpty($scope.building)) {
     $scope.building = {
       building_azimuth: 0,
@@ -78,8 +78,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
       name: 'z',
       displayName: 'Height Above Ground',
       cellEditableCondition: function ($scope) {
-        if ($scope.grid.appScope.autoElevation && $scope.rowRenderIndex) return false;
-        return true;
+        return !($scope.grid.appScope.autoElevation && $scope.rowRenderIndex);
       }
     }, {
       name: 'floor_to_floor_height'

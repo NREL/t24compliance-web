@@ -10,17 +10,17 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
 
   service.defaultParams = function () {
     return {
-      project_id: this.getProjectId(),
-      building_id: this.getBuildingId()
+      project_id: service.getProjectId(),
+      building_id: service.getBuildingId()
     };
   };
 
   service.setIds = function ($stateParams) {
     if ($stateParams.project_id) {
-      this.setProjectId($stateParams.project_id);
+      service.setProjectId($stateParams.project_id);
     }
     if ($stateParams.building_id) {
-      this.setBuildingId($stateParams.building_id);
+      service.setBuildingId($stateParams.building_id);
     }
   };
   service.setProjectId = function (value) {
@@ -43,17 +43,16 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     return buildingId;
   };
 
-  service.lookupBuilding = function ($q, data, requireBuilding) {
+  service.lookupBuilding = function (data, requireBuilding) {
     var deferred = $q.defer();
-    var scope = this;
-    if (!this.getProjectId()) {
+    if (!service.getProjectId()) {
       deferred.reject('No project ID');
     } else {
-      if (!this.getBuildingId()) {
-        data.list('buildings', this.defaultParams()).then(
+      if (!service.getBuildingId()) {
+        data.list('buildings', service.defaultParams()).then(
           function (response) {
-            if (response.length > 0 && response[0].hasOwnProperty('id')) {
-              scope.setBuildingId(response[0].id);
+            if (response.length && response[0].hasOwnProperty('id')) {
+              service.setBuildingId(response[0].id);
               deferred.resolve('success');
             } else {
               if (requireBuilding) {
@@ -67,7 +66,12 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
             if (requireBuilding) {
               deferred.reject('No building ID');
             } else {
-              deferred.resolve('Error looking up building but building not required.');
+              // Verify that project id is valid
+              data.show('projects', {id: service.getProjectId()}).then(function (response) {
+                deferred.resolve('Error looking up building but building not required.');
+              }, function (response) {
+                deferred.reject('Invalid project ID');
+              });
             }
           });
       } else {

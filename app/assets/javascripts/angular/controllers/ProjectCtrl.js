@@ -1,8 +1,7 @@
-cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Shared', 'Enums', 'data', 'project','zipCodes', function ($scope, $log, $stateParams, $location, toaster, Shared, Enums, data, project, zipCodes) {
+cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 'toaster', 'Shared', 'Enums', 'data', 'project', function ($scope, $log, $stateParams, $location, toaster, Shared, Enums, data, project) {
 
   Shared.setIds($stateParams);
   $scope.project = project;
-  $scope.zipCodes = zipCodes[0].zips;
 
   $scope.setModified = function () {
     Shared.setModified();
@@ -61,9 +60,9 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$location', 
     }
 
     if (Shared.getProjectId()) {
-      data.update('projects',$scope.project).then(success).catch(failure);
+      data.update('projects', $scope.project).then(success).catch(failure);
     } else {
-      data.create('projects',$scope.project).then(success).catch(failure);
+      data.create('projects', $scope.project).then(success).catch(failure);
     }
 
   };

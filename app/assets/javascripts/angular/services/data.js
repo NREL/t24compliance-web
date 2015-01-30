@@ -2,13 +2,9 @@ cbecc.provider('data', {
   $get: ['$q', 'toaster', 'api', 'Shared', function ($q, toaster, api, Shared) {
 
     var data = {
-      // new: function(resource, params) {
-      //   return new api[resource](params);
-      // },
-
       list: function (resource, query) {
         // Check cache for construction libraries
-        var caches = ['constructions', 'door_lookups', 'fenestrations', 'space_function_defaults', 'zip_codes'];
+        var caches = ['constructions', 'door_lookups', 'fenestrations', 'space_function_defaults'];
         if (_.contains(caches, resource)) {
           if (Shared.existsInCache(resource)) {
             return $q.when(Shared.loadFromCache(resource));
@@ -19,26 +15,30 @@ cbecc.provider('data', {
           toaster.pop('note', 'Downloading constructions library', 'Please wait...', 60000);
         }
 
-        var promise = api[resource].query(query).$promise;
-        promise.then(function (response) {
+        return api[resource].query(query).$promise.then(function (response) {
           if (resource == 'constructions') toaster.clear();
           if (_.contains(caches, resource)) {
             Shared.saveToCache(resource, response);
           }
+          return response;
+        }, function (response) {
+          // Determine which ID is invalid
+          return data.show('projects', {id: Shared.getProjectId()}).then(function (response) {
+            return $q.reject('Invalid building ID');
+          }, function (response) {
+            return $q.reject('Invalid project ID');
+          });
         });
-        return promise;
       },
 
       show: function (resource, query) {
-        var promise = api[resource].get(query).$promise;
-       console.debug('IN show function');
-
-        promise.catch(function (response) {
-          console.debug('in show catch');
-          return $q.reject('Invalid ID.');
-
+        return api[resource].get(query).$promise.catch(function (response) {
+          if (response.status == 404) {
+            if (resource == 'projects') return $q.reject('Invalid project ID');
+            if (resource == 'buildings') return $q.reject('Invalid building ID');
+          }
+          return $q.reject(response);
         });
-        return promise;
       },
 
       create: function (resource, model) {
