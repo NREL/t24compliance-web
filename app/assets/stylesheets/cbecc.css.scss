@@ -60,6 +60,13 @@
   }
 }
 
+.project-link {
+  font-size: 1.4em;
+  font-weight: bold;
+  height: 100%;
+  width: 100%;
+}
+
 // Hide flash messages in wizard
 body > .container-fluid > .header-row.wizard {
   display: none;
