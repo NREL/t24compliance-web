@@ -3,7 +3,7 @@
 <%= link_to "[ edit account ]", edit_user_registration_path(@user), class: "edit-link" %>
 <% if current_user.has_role? :admin %><%= link_to "[ edit roles ]", edit_user_path(@user), class: "edit-link" %><% end %></h3>
 
-<% if current_user.has_role? :admin %><%= link_to 'Admin Tasks', admin_users_path, class: 'btn btn-success' %></li><% end %>
+<% if current_user.has_role? :admin %><%= link_to 'Admin Tasks', admin_users_path, class: 'btn btn-success' %><% end %>
 
 <h2>Projects</h2>
 
@@ -19,8 +19,8 @@
     </tr>
     <% @projects.each do |p| %>
       <tr>
-        <th> <%= p.name %></th>
-        <th> <a href="/wizard#/projects/<%= p.id %>">Open in Wizard</a> | <%= link_to 'Download XML', download_project_path(p) %> | <%= link_to 'Delete', p, method: :delete, data: { confirm: 'Are you sure?' } %></th>
+        <td><a href="/wizard#/projects/<%= p.id %>"><div class="project-link"><%= p.name %></div></a></td>
+        <td><a class="btn btn-info" type="button" href="<%= download_project_path(p) %>"><i class="fa fa-arrow-circle-o-down fa-lg"></i> Download XML</a> <a class="btn btn-danger" type="button" data-confirm="Are you sure?" data-method="delete" href="/projects/<%= p.id %>" rel="nofollow">Delete</a></td>
       </tr>
     <% end %>
   </table>

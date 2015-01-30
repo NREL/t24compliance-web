@@ -1,4 +1,4 @@
-cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$interval', 'uiGridConstants', 'Shared', 'params', function ($scope, $modalInstance, $interval, uiGridConstants, Shared, params) {
+cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$interval', 'Shared', 'params', function ($scope, $modalInstance, $interval, Shared, params) {
   params.data.then(function(data) {
     $scope.data = data;
   });
@@ -21,11 +21,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'fenestration_type',
       enableFiltering: false,
-      filter: {
-        condition: uiGridConstants.filter.EXACT,
-        noTerm: true,
-        term: $scope.type
-      },
+      filters: Shared.exactFilter($scope.type),
       visible: false
     }, {
       name: 'fenestration_framing',

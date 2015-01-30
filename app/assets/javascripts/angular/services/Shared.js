@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -267,6 +267,14 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           return regex.test(value);
         });
       }
+    }];
+  };
+
+  service.exactFilter = function (input) {
+    return [{
+      condition: uiGridConstants.filter.EXACT,
+      noTerm: true,
+      term: input
     }];
   };
 

@@ -32,11 +32,7 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'compatible_surface_type',
       enableFiltering: false,
-      filter: {
-        condition: uiGridConstants.filter.EXACT,
-        noTerm: true,
-        term: $scope.type
-      },
+      filters: Shared.exactFilter($scope.type),
       visible: false
     }, {
       name: 'type',
