@@ -1,4 +1,4 @@
-cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
+cbecc.controller('ZonesSystemsCtrl', ['$scope', 'Shared', function ($scope, Shared) {
   $scope.selected = {
     zone: null
   };
@@ -40,11 +40,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'uiGridConstants', 'Shared', fun
     }, {
       name: 'type',
       enableFiltering: false,
-      filter: {
-        condition: uiGridConstants.filter.EXACT,
-        noTerm: true,
-        term: 'Conditioned'
-      },
+      filters: Shared.exactFilter('Conditioned'),
       visible: false
     }, {
       name: 'primary_air_conditioning_system_reference',
