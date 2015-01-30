@@ -154,9 +154,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     // add/update/delete exhaust system references and add to zone records (exhaust tab is not connected to zones data)
     _.each($scope.data.zones, function (zone) {
       var ref = _.find($scope.data.exhausts, {zone_name: zone.name});
-      $log.debug('REF: ', ref);
       if (ref) {
-        $log.debug('HI!');
         zone.exhaust_system_reference = ref.name;
       }
     });
