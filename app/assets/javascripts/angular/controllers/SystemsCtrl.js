@@ -1,4 +1,4 @@
-cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'Project', 'saved_systems', 'saved_plants', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, Project, saved_systems, saved_plants) {
+cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridConstants', 'data', 'Shared', 'Enums', 'project', 'saved_systems', 'saved_plants', function ($scope, $log, $modal, toaster, uiGridConstants, data, Shared, Enums, project, saved_systems, saved_plants) {
 
   // put all systems DATA in array for panels (even exhaust)
   $scope.systems = {
@@ -73,14 +73,10 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   $log.debug("Saved SHW:");
   $log.debug($scope.plants.shw);
 
-  // add SHW if project exceptional_condition_water_heater is 'No'
-  if ($scope.plants.shw.length == 0) {
-    Project.show({id: Shared.getProjectId()}).$promise.then(function (response) {
-      $scope.project = response;
-      if ($scope.project.exceptional_condition_water_heater == 'No') {
-        addPlant('shw');
-      }
-    });
+  // add shw based on project settings
+  $scope.project = project;
+  if ($scope.project.exceptional_condition_water_heater == 'No') {
+    addPlant('shw');
   }
 
   //**** INITIALIZE ****
