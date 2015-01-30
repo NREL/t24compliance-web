@@ -62,11 +62,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
 
       // remove shw based on exceptional_condition_water_heater
       if (($scope.has_shw) && ($scope.project.exceptional_condition_water_heater == 'Yes')) {
-        _.each($scope.plants, function (plant, index) {
-          if (plant.type == 'ServiceHotWater') {
-            $scope.plants.splice(index, 1);
-          }
-        });
+        _.remove($scope.plants, {type: 'ServiceHotWater'});
 
         var params = Shared.defaultParams();
         params.data = $scope.plants;
