@@ -47,6 +47,7 @@
   background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
   background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
   background: -o-linear-gradient(#ffffff, #eeeeee);
+  background: linear-gradient(to top, #eeeeee 0%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
 }
 .ui-grid-header {
@@ -62,6 +63,7 @@
   background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
   background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
   background: -o-linear-gradient(#ffffff, #eeeeee);
+  background: linear-gradient(to top, #eeeeee 0%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
   -webkit-border-top-right-radius: -1px;
   -webkit-border-bottom-right-radius: 0;
@@ -279,6 +281,7 @@ input[type="text"].ui-grid-filter-input:hover {
   background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
   background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
   background: -o-linear-gradient(#ffffff, #eeeeee);
+  background: linear-gradient(to top, #eeeeee 0%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
   -webkit-border-top-right-radius: 0px;
   -webkit-border-bottom-right-radius: 0;
@@ -364,6 +367,7 @@ input[type="text"].ui-grid-filter-input:hover {
   background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
   background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
   background: -o-linear-gradient(#ffffff, #eeeeee);
+  background: linear-gradient(to top, #eeeeee 0%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
 }
 .ui-grid-footer-panel {
@@ -377,6 +381,7 @@ input[type="text"].ui-grid-filter-input:hover {
   background: -ms-linear-gradient(bottom, #eeeeee, #ffffff);
   background: -moz-linear-gradient(center bottom, #eeeeee 0%, #ffffff 100%);
   background: -o-linear-gradient(#ffffff, #eeeeee);
+  background: linear-gradient(to top, #eeeeee 0%, #ffffff 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
   -webkit-border-top-right-radius: -1px;
   -webkit-border-bottom-right-radius: 0;
