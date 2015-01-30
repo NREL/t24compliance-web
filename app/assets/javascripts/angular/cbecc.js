@@ -81,10 +81,10 @@ cbecc.config([
           project: ['data', 'Shared', function (data, Shared) {
             return data.show('projects', {id: Shared.getProjectId()});
           }],
-        plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-          if (!Shared.getBuildingId())  return [];
-          return data.list('fluid_systems', Shared.defaultParams());
-        }]
+          plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+            if (!Shared.getBuildingId())  return [];
+            return data.list('fluid_systems', Shared.defaultParams());
+          }]
         }
       })
       .state({
