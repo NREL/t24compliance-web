@@ -1,5 +1,7 @@
 cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
-  $scope.selectedSpace = null;
+  $scope.selected = {
+    space: null
+  };
 
   $scope.applySettingsActive = false;
 
@@ -71,10 +73,10 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (!$scope.applySettingsActive) {
           if (row.isSelected) {
-            $scope.selectedSpace = row.entity;
+            $scope.selected.space = row.entity;
           } else {
             // No rows selected
-            $scope.selectedSpace = null;
+            $scope.selected.space = null;
           }
         }
       });
@@ -97,11 +99,11 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
     Shared.setModified();
 
     var replacement = {
-      gas_equipment: $scope.selectedSpace.gas_equipment,
-      process_gas: $scope.selectedSpace.process_gas,
-      gas_radiant_fraction: $scope.selectedSpace.gas_radiant_fraction,
-      gas_latent_fraction: $scope.selectedSpace.gas_latent_fraction,
-      gas_lost_fraction: $scope.selectedSpace.gas_lost_fraction
+      gas_equipment: $scope.selected.space.gas_equipment,
+      process_gas: $scope.selected.space.process_gas,
+      gas_radiant_fraction: $scope.selected.space.gas_radiant_fraction,
+      gas_latent_fraction: $scope.selected.space.gas_latent_fraction,
+      gas_lost_fraction: $scope.selected.space.gas_lost_fraction
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {
@@ -112,7 +114,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
   };
 
   $scope.resetApplySettings = function () {
-    $scope.selectedSpace = null;
+    $scope.selected.space = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
     $scope.gasGridOptions.multiSelect = false;
