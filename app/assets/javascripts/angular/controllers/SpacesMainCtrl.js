@@ -203,7 +203,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
         var walls = spaceGroup.walls;
         for (var i = 0; i < config.quantity; ++i) {
           $scope.data.addSpace({
-            name: config.name + ' ' + (i + 1),
+            name: Shared.uniqueName($scope.data.spaces, _.template(config.name + ' <%= num %>'), i + 1),
             space_function: config.space_function,
             floor_to_ceiling_height: config.floor_to_ceiling_height,
             building_story_id: config.building_story_id,
