@@ -484,113 +484,219 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       $scope.data.surfaces[surfaceIndex].adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
     }
   };
-  $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi) {
+  $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.occupant_density = space.occupant_density_default;
       space.hot_water_heating_rate = space.hot_water_heating_rate_default;
       space.receptacle_power_density = space.receptacle_power_density_default;
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSpaceTypeSettingsValues = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedSpaceTypeSettingsValues = function (space) {
+    var modified = function (space) {
       return (space.occupant_density !== space.occupant_density_default ||
       space.hot_water_heating_rate !== space.hot_water_heating_rate_default ||
       space.receptacle_power_density !== space.receptacle_power_density_default);
-    }));
+    };
+
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreSurfaceConstructionDefaults = function (gridApi) {
+  $scope.data.restoreSurfaceConstructionDefaults = function (gridApi, surface) {
     Shared.setModified();
 
-    _.each($scope.data.surfaces, function (surface) {
+    var restore = function (surface) {
       if (surface.constructionDefault) {
         surface.construction_library_id = surface.constructionDefault;
       }
-    });
+    };
+
+    if (surface) {
+      restore(surface);
+    } else {
+      _.each($scope.data.surfaces, function (surface) {
+        restore(surface);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSurfaceConstructionDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.surfaces, function (surface) {
+  $scope.data.modifiedSurfaceConstructionDefaults = function (surface) {
+    var modified = function (surface) {
       if (!surface.constructionDefault) return false;
       return (surface.construction_library_id !== surface.constructionDefault);
-    }));
+    };
+    if (surface) {
+      return modified(surface);
+    } else {
+      return !_.isEmpty(_.find($scope.data.surfaces, function (surface) {
+        return modified(surface);
+      }));
+    }
   };
-  $scope.data.restoreSubsurfaceConstructionDefaults = function (gridApi) {
+  $scope.data.restoreSubsurfaceConstructionDefaults = function (gridApi, subsurface) {
     Shared.setModified();
 
-    _.each($scope.data.subsurfaces, function (subsurface) {
+    var restore = function (subsurface) {
       if (subsurface.constructionDefault) {
         subsurface.construction_library_id = subsurface.constructionDefault;
       }
-    });
+    };
+
+    if (subsurface) {
+      restore(subsurface);
+    } else {
+      _.each($scope.data.subsurfaces, function (subsurface) {
+        restore(subsurface);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSubsurfaceConstructionDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.subsurfaces, function (subsurface) {
+  $scope.data.modifiedSubsurfaceConstructionDefaults = function (subsurface) {
+    var modified = function (subsurface) {
       if (!subsurface.constructionDefault) return false;
       return (subsurface.construction_library_id !== subsurface.constructionDefault);
-    }));
+    };
+    if (subsurface) {
+      return modified(subsurface);
+    } else {
+      return !_.isEmpty(_.find($scope.data.subsurfaces, function (subsurface) {
+        return modified(subsurface);
+      }));
+    }
   };
-  $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi) {
+  $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.exhaust_per_area = space.exhaust_per_area_default;
       space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
       $scope.data.updateTotalExhaust(space);
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSpaceTypeExhaustDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedSpaceTypeExhaustDefaults = function (space) {
+    var modified = function (space) {
       return (space.exhaust_per_area !== space.exhaust_per_area_default || space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreRefrigerationDefaults = function (gridApi) {
+  $scope.data.restoreRefrigerationDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.commercial_refrigeration_epd = space.commercial_refrigeration_epd_default;
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedRefrigerationDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedRefrigerationDefaults = function (space) {
+    var modified = function (space) {
       return (space.commercial_refrigeration_epd !== space.commercial_refrigeration_epd_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreGasDefaults = function (gridApi) {
+  $scope.data.restoreGasDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.gas_equipment_power_density = space.gas_equipment_power_density_default;
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedGasDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedGasDefaults = function (space) {
+    var modified = function (space) {
       return (space.gas_equipment_power_density !== space.gas_equipment_power_density_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreLPDDefaults = function (gridApi) {
+  $scope.data.restoreLPDDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
-      if (space.lighting_input_method == 'LPD') {
-        space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
-        space.interior_lighting_power_density_non_regulated = space.interior_lighting_power_density_non_regulated_default;
-      }
-    });
+    var restore = function (space) {
+      space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
+      space.interior_lighting_power_density_non_regulated = space.interior_lighting_power_density_non_regulated_default;
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        if (space.lighting_input_method == 'LPD') {
+          restore(space);
+        }
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedLPDDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedLPDDefaults = function (space) {
+    var modified = function (space) {
       return space.lighting_input_method == 'LPD'
         && (space.interior_lighting_power_density_regulated != space.interior_lighting_power_density_regulated_default
         || space.interior_lighting_power_density_non_regulated != space.interior_lighting_power_density_non_regulated_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
 
   $scope.data.duplicateSurface = function (selected, newParent) {

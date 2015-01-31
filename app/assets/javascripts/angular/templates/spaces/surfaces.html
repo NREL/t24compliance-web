@@ -28,7 +28,8 @@
     <button type="button" ng-show="applySettingsActive" ng-click="data.selectAll(gridApi)" class="btn btn-info">Select All</button>
     <button type="button" ng-show="applySettingsActive" ng-click="data.clearAll(gridApi)" class="btn btn-info">Clear All</button>
     <div class="pull-right">
-      <button type="button" ng-hide="applySettingsActive" ng-click="data.restoreSurfaceConstructionDefaults(gridApi)" class="btn btn-info" ng-disabled="!data.modifiedSurfaceConstructionDefaults()">Restore Construction Defaults</button>
+      <button type="button" ng-hide="applySettingsActive || selected.surface" ng-click="data.restoreSurfaceConstructionDefaults(gridApi)" class="btn btn-info" ng-disabled="!data.modifiedSurfaceConstructionDefaults()">Restore All Construction Defaults</button>
+      <button type="button" ng-hide="applySettingsActive || !selected.surface" ng-click="data.restoreSurfaceConstructionDefaults(gridApi, selected.surface)" class="btn btn-info" ng-disabled="!data.modifiedSurfaceConstructionDefaults(selected.surface)">Restore Construction Default</button>
       <button type="button" ng-hide="applySettingsActive" ng-click="applySettings()" class="btn btn-info" ng-disabled="!selected.surface">Apply Settings</button>
       <div class="btn-group" dropdown ng-show="applySettingsActive">
         <button type="button" class="btn btn-info" ng-click="confirmApplySettings()">Select Rows to Update...</button>
