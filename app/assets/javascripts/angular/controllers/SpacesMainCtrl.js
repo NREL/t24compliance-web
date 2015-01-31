@@ -100,7 +100,10 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
           Shared.setModified();
 
           var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
-          if (colDef.name == 'floor_to_ceiling_height') {
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.data.spaces, newValue, spaceIndex);
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'floor_to_ceiling_height') {
             $scope.data.updateTotalExhaust(rowEntity);
             // Update default lighting system mounting height
             _.each($scope.data.lightingSystems, function (lightingSystem) {

@@ -10,9 +10,6 @@ cbecc.factory('api', ['$resource', 'Shared', function ($resource, Shared) {
       'bulkSync': {
         method: 'POST'
       }
-      // 'bulkUpdate': {
-      //   method: 'POST'
-      // }
     },
 
     add: function (configs) {

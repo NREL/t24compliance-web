@@ -265,7 +265,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var space = {
-      name: 'Space ' + ($scope.data.spaces.length + 1),
+      name: Shared.uniqueName($scope.data.spaces, _.template('Space <%= num %>')),
       floor_to_ceiling_height: $scope.data.stories[0].floor_to_ceiling_height,
       building_story_id: $scope.data.stories[0].id,
       area: null,
@@ -335,7 +335,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var spaceIndex = $scope.data.spaces.indexOf(selectedSpace);
 
     $scope.data.spaces.push({
-      name: 'Space ' + ($scope.data.spaces.length + 1),
+      name: Shared.uniqueName($scope.data.spaces, _.template('Space <%= num %>')),
       floor_to_ceiling_height: selectedSpace.floor_to_ceiling_height,
       building_story_id: selectedSpace.building_story_id,
       area: selectedSpace.area,
@@ -458,28 +458,13 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   $scope.data.addSurface = function (type, boundary, spaceIndex) {
     Shared.setModified();
 
-    if (spaceIndex === undefined) {
-      spaceIndex = 0;
-    }
-
-    var name = $scope.data.spaces[spaceIndex].name + ' ' + type;
-    var surfaceType = type;
-
-    if (type == 'Wall' || type == 'Floor') {
-      var len = _.filter($scope.data.surfaces, function (surface) {
-        return surface.space == spaceIndex && surface.type == type;
-      }).length;
-      name += ' ' + (len + 1);
-      surfaceType = boundary + ' ' + surfaceType;
-    }
-    var constructionDefault = $scope.data.constructionDefaults[surfaceType.toLowerCase().replace(' ', '_')];
-    if (constructionDefault) {
-      constructionDefault = constructionDefault.id;
-    } else {
-      constructionDefault = null;
-    }
+    spaceIndex = spaceIndex || 0;
+    var num = _.filter($scope.data.surfaces, {space: spaceIndex, type: type}).length + 1;
+    var surfaceType = boundary ? boundary + ' ' + type : type;
+    var constructionDefault = $scope.data.constructionDefaults[_.snakeCase(surfaceType)];
+    constructionDefault = constructionDefault ? constructionDefault.id : null;
     $scope.data.surfaces.push({
-      name: name,
+      name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + type + ' <%= num %>'), num),
       space: spaceIndex,
       type: type,
       boundary: boundary,
@@ -616,15 +601,10 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var surfaceIndex = $scope.data.surfaces.indexOf(selectedSurface);
 
     var name = $scope.data.spaces[spaceIndex].name + ' ' + selectedSurface.type;
-    if (selectedSurface.type == 'Wall' || selectedSurface.type == 'Floor') {
-      var len = _.filter($scope.data.surfaces, function (surface) {
-        return surface.space == spaceIndex && surface.type == selectedSurface.type;
-      }).length;
-      name += ' ' + (len + 1);
-    }
+    var num = _.filter($scope.data.surfaces, {space: spaceIndex, type: selectedSurface.type}).length + 1;
 
     $scope.data.surfaces.push({
-      name: name,
+      name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + type + ' <%= num %>'), num),
       space: selectedSurface.space,
       type: selectedSurface.type,
       boundary: selectedSurface.boundary,
@@ -699,14 +679,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
     }
 
+    var num = _.filter($scope.data.subsurfaces, {surface: surfaceIndex, type: type}).length + 1;
     var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
-    if (constructionDefault) {
-      constructionDefault = constructionDefault.id;
-    } else {
-      constructionDefault = null;
-    }
+    constructionDefault = constructionDefault ? constructionDefault.id : null;
     $scope.data.subsurfaces.push({
-      name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
+      name: Shared.uniqueName($scope.data.subsurfaces, _.template($scope.data.surfaces[surfaceIndex].name + ' ' + type + ' <%= num %>'), num),
       space: $scope.data.surfaces[surfaceIndex].space,
       spaceOptions: spaceOptions,
       surface: surfaceIndex,
@@ -723,13 +700,14 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
     var selectedSubsurface = selected.subsurface;
 
-    var surface = newParent === undefined ? selectedSubsurface.surface : newParent;
-    var space = $scope.data.surfaces[surface].space;
+    var surfaceIndex = newParent === undefined ? selectedSubsurface.surface : newParent;
+    var spaceIndex = $scope.data.surfaces[surfaceIndex].space;
 
+    var num = _.filter($scope.data.subsurfaces, {surface: surfaceIndex, type: selectedSubsurface.type}).length + 1;
     $scope.data.subsurfaces.push({
-      name: selectedSubsurface.name,
-      space: space,
-      surface: surface,
+      name: Shared.uniqueName($scope.data.subsurfaces, _.template($scope.data.surfaces[surfaceIndex].name + ' ' + selectedSubsurface.type + ' <%= num %>'), num),
+      space: spaceIndex,
+      surface: surfaceIndex,
       type: selectedSubsurface.type,
       building_story_id: selectedSubsurface.building_story_id,
       area: selectedSubsurface.area,
@@ -753,7 +731,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var luminaire = {
-      name: 'Luminaire ' + ($scope.data.luminaires.length + 1),
+      name: Shared.uniqueName($scope.data.luminaires, _.template('Luminaire <%= num %>')),
       fixture_type: Enums.enums.luminaires_fixture_type_enums[1],
       lamp_type: Enums.enums.luminaires_lamp_type_enums[0],
       power: 0
@@ -769,7 +747,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var selectedLuminaire = selected.luminaire;
 
     $scope.data.luminaires.push({
-      name: 'Luminaire ' + ($scope.data.luminaires.length + 1),
+      name: Shared.uniqueName($scope.data.luminaires, _.template('Luminaire <%= num %>')),
       fixture_type: selectedLuminaire.fixture_type,
       lamp_type: selectedLuminaire.lamp_type,
       power: selectedLuminaire.power,
@@ -824,7 +802,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
 
     var lightingSystem = {
-      name: 'Lighting System ' + ($scope.data.lightingSystems.length + 1),
+      name: Shared.uniqueName($scope.data.lightingSystems, _.template('Lighting System <%= num %>')),
       space: spaceIndex,
       spaceOptions: $scope.data.spacesWithLuminaires(),
       luminaire_reference: [null],

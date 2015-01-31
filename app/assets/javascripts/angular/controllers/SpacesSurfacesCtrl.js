@@ -208,7 +208,11 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         if (newValue != oldValue) {
           Shared.setModified();
 
-          if (colDef.name == 'space') {
+          var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.data.surfaces, newValue, surfaceIndex);
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'space') {
             // Update story
             rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
 
@@ -231,7 +235,6 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
 
             // Update adjacent space
             if (rowEntity.boundary == 'Interior') {
-              var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
               rowEntity.adjacent_space_reference = null;
               rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
               gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
