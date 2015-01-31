@@ -710,8 +710,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var num = _.filter($scope.data.surfaces, {space: spaceIndex, type: selectedSurface.type}).length + 1;
 
     $scope.data.surfaces.push({
-      name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + type + ' <%= num %>'), num),
-      space: selectedSurface.space,
+      name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + selectedSurface.type + ' <%= num %>'), num),
+      space: spaceIndex,
       type: selectedSurface.type,
       boundary: selectedSurface.boundary,
       surface_type: selectedSurface.surface_type,
@@ -726,9 +726,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       perimeter_exposed: selectedSurface.perimeter_exposed
     });
 
-    var subsurfaces = _.filter($scope.data.subsurfaces, function (subsurface) {
-      return subsurface.surface == surfaceIndex;
-    });
+    var subsurfaces = _.filter($scope.data.subsurfaces, {surface: surfaceIndex});
     _.each(subsurfaces, function (subsurface) {
       $scope.data.duplicateSubsurface({subsurface: subsurface}, $scope.data.surfaces.length - 1);
     });
