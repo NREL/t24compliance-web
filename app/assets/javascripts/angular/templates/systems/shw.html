@@ -1,25 +1,13 @@
 <div class="row">
-  <div ng-if="hasSHW()">
-    <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="shw_navigation">
-      <button type="button" ng-click="setActiveTab('shw', 'water_heater')" ng-class="getTabClass('shw', 'water_heater')">Water Heater</button>
-    </div>
+  <div class="btn-group-vertical btn-group-lg col-md-2" role="group" aria-label="shw_navigation" ng-if="hasSHW()">
+    <button type="button" ng-click="setActiveTab('shw', 'water_heater')" ng-class="getTabClass('shw', 'water_heater')">Water Heater</button>
   </div>
   <div class="col-md-10">
-    <div class="row">
-      <div class="col-md-12">
-        <p class="bold-text">A service hot water system is automatically created to match the needs of the spaces in your building unless you selected to not include service hot water in the Exceptions section of the Project tab.</p>
-        <div ng-if="hasSHW()"><p>You can edit the system settings below.</p></div>
-      </div>
-    </div>
+    <p class="bold-text">A service hot water system is automatically created to match the needs of the spaces in your building unless you selected to not include service hot water in the Exceptions section of the Project tab.</p>
     <div ng-if="hasSHW()">
-      <div class="row pad-top-20">
-        <div class="col-md-12">
-          <div class="tab-content">
-            <div ng-repeat="tab in plantTabs.shw" ng-if="isActiveTab('shw', tab)">
-              <div ng-if="panel.open" ui-grid="gridPlantOptions.shw[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-pinning class="grid-100"></div>
-            </div>
-          </div>
-        </div>
+      <div><p>You can edit the system settings below.</p></div>
+      <div class="grid-100" ng-repeat="tab in plantTabs.shw" ng-if="isActiveTab('shw', tab)">
+        <div ng-if="panel.open" class="grid-100" ui-grid="gridPlantOptions.shw[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-pinning></div>
       </div>
     </div>
   </div>

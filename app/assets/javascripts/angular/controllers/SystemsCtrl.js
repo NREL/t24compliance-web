@@ -74,7 +74,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     }
   });
 
-  $log.debug("Saved SHW:");
+  $log.debug('Saved SHW:');
   $log.debug($scope.plants.shw);
 
   // add shw based on project settings
@@ -169,7 +169,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     type: 'number',
     filters: Shared.numberFilter(),
-    secondLine: Shared.html('Btu/hr'),
+    secondLine: Shared.html('Btu / hr'),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
   }, {
@@ -183,7 +183,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }];
   $scope.gridPlantCols.hot_water.pump = [{
-    name: "pump_name",
+    name: 'pump_name',
     field: 'boilers[0].pump.name'
   }, {
     name: 'pump_operation_control',
@@ -320,7 +320,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'chillers[0].capacity_rated',
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
     enableHiding: false,
-    secondLine: Shared.html('Btu/hr'),
+    secondLine: Shared.html('Btu / hr'),
     type: 'number',
     filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
@@ -340,14 +340,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'chillers[0].iplv_kw_per_ton',
     headerCellTemplate: 'ui-grid/cbeccHeaderCell',
     enableHiding: false,
-    secondLine: Shared.html('Btuh/W'),
+    secondLine: Shared.html('Btu hr / W'),
     type: 'number',
     filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
 
   }];
   $scope.gridPlantCols.chilled_water.pump = [{
-    name: "pump_name",
+    name: 'pump_name',
     field: 'chillers[0].pump.name',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -414,13 +414,13 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   $scope.gridPlantCols.chilled_water.coil_cooling = angular.copy($scope.gridPlantCols.hot_water.coil_heating);
 
   $scope.gridPlantCols.condenser.heat_rejection = [{
-    name: "heat_rejection_name",
+    name: 'heat_rejection_name',
     displayName: 'Name',
     field: 'heat_rejections[0].name',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
-    name: "heat_rejection_type",
+    name: 'heat_rejection_type',
     displayName: 'Type',
     field: 'heat_rejections[0].type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -428,7 +428,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
-    name: "heat_rejection_modulation_control",
+    name: 'heat_rejection_modulation_control',
     displayName: 'Modulation Control',
     field: 'heat_rejections[0].modulation_control',
     editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -436,16 +436,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
-    name: "heat_rejection_capacity_rated",
+    name: 'heat_rejection_capacity_rated',
     displayName: 'Capacity Rated',
     field: 'heat_rejections[0].capacity_rated',
     enableHiding: false,
     type: 'number',
     filters: Shared.numberFilter(),
-    secondLine: Shared.html('Btu/hr'),
+    secondLine: Shared.html('Btu / hr'),
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
-    name: "heat_rejection_total_fan_hp",
+    name: 'heat_rejection_total_fan_hp',
     displayName: 'Total Fan HP',
     secondLine: Shared.html('hp'),
     field: 'heat_rejections[0].total_fan_hp',
@@ -454,7 +454,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
   }, {
-    name: "heat_rejection_fan_type",
+    name: 'heat_rejection_fan_type',
     displayName: 'Fan Type',
     field: 'heat_rejections[0].fan_type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
@@ -463,7 +463,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false
   }];
   $scope.gridPlantCols.condenser.pump = [{
-    name: "pump_name",
+    name: 'pump_name',
     field: 'heat_rejections[0].pump.name',
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
@@ -531,7 +531,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     name: 'capacity_rated',
     displayName: 'Rated Capacity',
     field: 'water_heater.capacity_rated',
-    secondLine: Shared.html('Btu/hr'),
+    secondLine: Shared.html('Btu / hr'),
     type: 'number',
     filters: Shared.numberFilter(),
     minWidth: min_width,
@@ -964,7 +964,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   };
 
   _.each($scope.systemTabs, function (tabs, type) {
-    if (type == 'ptac' || type == 'fpfc' || type == 'szac' || type == 'pvav' || type == 'vav') {
+    if (_.contains(['ptac', 'fpfc', 'szac', 'pvav', 'vav'], type)) {
       _.each(tabs, function (tab) {
         $scope.gridOptions[type][tab] = {
           columnDefs: $scope.gridCols[type][tab],
@@ -1159,16 +1159,19 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }
 
   $scope.getTabClass = function (panelName, tabName) {
-    return "btn btn-" + $scope.tabClasses[panelName][tabName];
+    return 'btn btn-' + $scope.tabClasses[panelName][tabName];
   };
 
   $scope.setActiveTab = function (panelName, tabName) {
-    initTabs(panelName);
-    $scope.tabClasses[panelName][tabName] = "primary";
+    if (!$scope.isActiveTab(panelName, tabName)) {
+      $scope.selected[panelName] = null;
+      initTabs(panelName);
+      $scope.tabClasses[panelName][tabName] = 'primary';
+    }
   };
 
   $scope.isActiveTab = function (panelName, tabName) {
-    return $scope.tabClasses[panelName][tabName] == 'primary';
+    return $scope.tabClasses.hasOwnProperty(panelName) ? $scope.tabClasses[panelName][tabName] == 'primary' : false;
   };
 
   $scope.hasSystems = function (panelName) {
@@ -1224,83 +1227,83 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
       case 'ptac':
         index = $scope.systems.ptac.length + 1;
         $scope.systems.ptac.push({
-          name: "PTAC " + index,
+          name: 'PTAC ' + index,
           type: 'PTAC',
           fan: {
-            name: "PTAC " + index + " Fan",
+            name: 'PTAC ' + index + ' Fan',
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: "PTAC " + index + " Cooling Coil",
-            type: "DirectExpansion",
-            condenser_type: "Air"
+            name: 'PTAC ' + index + ' Cooling Coil',
+            type: 'DirectExpansion',
+            condenser_type: 'Air'
           },
           coil_heating: {
-            name: "PTAC " + index + " Heating Coil",
-            type: "HotWater"
+            name: 'PTAC ' + index + ' Heating Coil',
+            type: 'HotWater'
           }
         });
         break;
       case 'fpfc':
         index = $scope.systems.fpfc.length + 1;
         $scope.systems.fpfc.push({
-          name: "FPFC " + index,
+          name: 'FPFC ' + index,
           type: 'FPFC',
           fan: {
-            name: "FPFC " + index + " Fan",
+            name: 'FPFC ' + index + ' Fan',
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: "FPFC " + index + " Cooling Coil",
-            type: "ChilledWater"
+            name: 'FPFC ' + index + ' Cooling Coil',
+            type: 'ChilledWater'
           },
           coil_heating: {
-            name: "FPFC " + index + " Heating Coil",
-            type: "HotWater"
+            name: 'FPFC ' + index + ' Heating Coil',
+            type: 'HotWater'
           }
         });
         break;
       case 'szac':
         index = $scope.systems.szac.length + 1;
         $scope.systems.szac.push({
-          name: "PSZ" + index,
+          name: 'PSZ' + index,
           type: 'SZAC',
           sub_type: 'SinglePackage',
           fan: {
-            name: "PSZ" + index + " Fan",
+            name: 'PSZ' + index + ' Fan',
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: "PSZ" + index + "Cooling Coil",
-            type: "DirectExpansion"
+            name: 'PSZ' + index + 'Cooling Coil',
+            type: 'DirectExpansion'
 
           },
           coil_heating: {
-            name: "PSZ" + index + " Heating Coil",
-            type: "Furnace",
-            fuel_source: "NaturalGas"
+            name: 'PSZ' + index + ' Heating Coil',
+            type: 'Furnace',
+            fuel_source: 'NaturalGas'
           }
         });
         break;
       case 'pvav':
         index = $scope.systems.pvav.length + 1;
         $scope.systems.pvav.push({
-          name: "PVAV" + index,
+          name: 'PVAV' + index,
           type: 'PVAV',
           cooling_control: 'WarmestResetFlowFirst',
           fan: {
-            name: "PVAV " + index + " Fan",
+            name: 'PVAV ' + index + ' Fan',
             control_method: 'VariableSpeedDrive'
           },
           coil_cooling: {
-            name: "PVAV " + index + " Cooling Coil",
-            type: "DirectExpansion",
+            name: 'PVAV ' + index + ' Cooling Coil',
+            type: 'DirectExpansion',
             fuel_source: 'Electric',
             number_cooling_stages: 2
           },
           coil_heating: {
-            name: "PVAV " + index + " Heating Coil",
-            type: "HotWater"
+            name: 'PVAV ' + index + ' Heating Coil',
+            type: 'HotWater'
           }
         });
         break;
@@ -1310,16 +1313,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           name: 'VAV' + index,
           type: 'VAV',
           fan: {
-            name: "VAV " + index + " Fan",
+            name: 'VAV ' + index + ' Fan',
             control_method: 'VariableSpeedDrive'
           },
           coil_cooling: {
-            name: "VAV " + index + " Cooling Coil",
-            type: "ChilledWater"
+            name: 'VAV ' + index + ' Cooling Coil',
+            type: 'ChilledWater'
           },
           coil_heating: {
-            name: "VAV " + index + " Heating Coil",
-            type: "HotWater"
+            name: 'VAV ' + index + ' Heating Coil',
+            type: 'HotWater'
           }
         });
         break;
@@ -1402,23 +1405,23 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         if (!$scope.plants.hot_water.length) {
           $log.debug('adding hot_water plant');
           $scope.plants.hot_water.push({
-            name: "BaseHWSystem",
-            type: "HotWater",
+            name: 'BaseHWSystem',
+            type: 'HotWater',
             fluid_segments: [{
-              name: "BaseHWPrimSupSeg",
-              type: "PrimarySupply"
+              name: 'BaseHWPrimSupSeg',
+              type: 'PrimarySupply'
             }, {
-              name: "BaseHWPrimRetSeg",
-              type: "PrimaryReturn"
+              name: 'BaseHWPrimRetSeg',
+              type: 'PrimaryReturn'
             }],
             boilers: [{
-              name: "Base Blr",
-              type: "HotWater",
-              fuel_source: "Gas",
-              fluid_segment_in_reference: "BaseHWPrimRetSeg",
-              fluid_segment_out_reference: "BaseHWPrimSupSeg",
+              name: 'Base Blr',
+              type: 'HotWater',
+              fuel_source: 'Gas',
+              fluid_segment_in_reference: 'BaseHWPrimRetSeg',
+              fluid_segment_out_reference: 'BaseHWPrimSupSeg',
               pump: {
-                name: "Base HW Pump"
+                name: 'Base HW Pump'
               }
             }]
           });
@@ -1428,25 +1431,25 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         if (!$scope.plants.chilled_water.length) {
           $log.debug('adding chilled_water plant');
           $scope.plants.chilled_water.push({
-            name: "BaseChWSystem",
-            type: "ChilledWater",
-            temperature_control: "OutsideAirReset",
+            name: 'BaseChWSystem',
+            type: 'ChilledWater',
+            temperature_control: 'OutsideAirReset',
             fluid_segments: [{
-              name: "BaseChWPrimSupSeg",
-              type: "PrimarySupply"
+              name: 'BaseChWPrimSupSeg',
+              type: 'PrimarySupply'
             }, {
-              name: "BaseChWPrimRetSeg",
-              type: "PrimaryReturn"
+              name: 'BaseChWPrimRetSeg',
+              type: 'PrimaryReturn'
             }],
             chillers: [{
-              name: "Base Chlr",
-              type: "Centrifugal",
-              fuel_source: "Electric",
-              condenser_type: "Air",
-              evaporator_fluid_segment_in_reference: "BaseChWPrimRetSeg",
-              evaporator_fluid_segment_out_reference: "BaseChWPrimSupSeg",
+              name: 'Base Chlr',
+              type: 'Centrifugal',
+              fuel_source: 'Electric',
+              condenser_type: 'Air',
+              evaporator_fluid_segment_in_reference: 'BaseChWPrimRetSeg',
+              evaporator_fluid_segment_out_reference: 'BaseChWPrimSupSeg',
               pump: {
-                name: "Base ChW Pump"
+                name: 'Base ChW Pump'
               }
             }]
           });
@@ -1456,21 +1459,21 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         if (!$scope.plants.condenser.length) {
           $log.debug('adding condenser');
           $scope.plants.condenser.push({
-            name: "BaseCWSystem",
-            type: "CondenserWater",
+            name: 'BaseCWSystem',
+            type: 'CondenserWater',
             fluid_segments: [{
-              name: "BaseCWPrimSupSeg",
-              type: "PrimarySupply"
+              name: 'BaseCWPrimSupSeg',
+              type: 'PrimarySupply'
             }, {
-              name: "BaseCWPrimRetSeg",
-              type: "PrimaryReturn"
+              name: 'BaseCWPrimRetSeg',
+              type: 'PrimaryReturn'
             }],
             heat_rejections: [{
-              name: "Base Tower",
-              fluid_segment_in_reference: "BaseCWPrimRetSeg",
-              fluid_segment_out_reference: "BaseCWPrimSupSeg",
+              name: 'Base Tower',
+              fluid_segment_in_reference: 'BaseCWPrimRetSeg',
+              fluid_segment_out_reference: 'BaseCWPrimSupSeg',
               pump: {
-                name: "Base CW Pump"
+                name: 'Base CW Pump'
               }
             }]
           });
@@ -1483,12 +1486,12 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
              name: 'SHWFluidSys',
              type: 'ServiceHotWater',
              fluid_segments: [{
-               name: "SHWSupply",
-               type: "PrimarySupply"
+               name: 'SHWSupply',
+               type: 'PrimarySupply'
              },{
-               name: "SHWMakeup",
-               type: "MakeupFluid",
-               source: "MunicipalWater"
+               name: 'SHWMakeup',
+               type: 'MakeupFluid',
+               source: 'MunicipalWater'
              }],
             water_heater: {
               name: 'WaterHeater',
@@ -1503,11 +1506,11 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
 
   $scope.duplicateSystem = function (name) {
     var new_item = angular.copy($scope.selected[name]);
-    $log.debug("name:");
+    $log.debug('name:');
     $log.debug(name);
     $log.debug($scope.selected);
     delete new_item.$$hashKey;
-    new_item.name += " duplicate";
+    new_item.name += ' duplicate';
     $scope.systems[name].push(new_item);
     // recalculate coils
     $scope.display_coils_heating = calculateCoilsHeating();
@@ -1627,16 +1630,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         // explicitly set type and subtype if needed here.
         var sys_type = '';
         var subtype = '';
-        if (system.type.indexOf("pvav_") > -1) {
+        if (system.type.indexOf('pvav_') > -1) {
           sys_type = 'pvav';
           subtype = system.type.split('_')[1];
-        } else if (system.type.indexOf("vav_") > -1) {
+        } else if (system.type.indexOf('vav_') > -1) {
           sys_type = 'vav';
           subtype = system.type.split('_')[1];
         } else {
           sys_type = system.type;
         }
-        $log.debug("SYSTEM TYPE: ", sys_type);
+        $log.debug('SYSTEM TYPE: ', sys_type);
 
         $scope.addSystem(sys_type);
       }
