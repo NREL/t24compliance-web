@@ -59,7 +59,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       enableCellEdit: false,
       enableHiding: false,
       minWidth: min_width,
-      pinnedLeft:true,
+      pinnedLeft: true,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -215,11 +215,16 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
     data: $scope.data.exhausts,
     enableCellEditOnFocus: true,
     enableFiltering: true,
+    enablePinning: false,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
+
+      // For some reason this is necessary with pinned columns to get the header row height correct
+      gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (row.isSelected) {
           $scope.selected.exhaust = row.entity;
@@ -231,20 +236,17 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();
-        }
 
-        if (colDef.name == 'fan_classification') {
-          rowEntity.fan.centrifugal_type = null;
-          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+          if (colDef.name == 'fan_classification') {
+            rowEntity.fan.centrifugal_type = null;
+            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+          } else if (colDef.name == 'fan_modeling_method') {
+            rowEntity.fan.motor_bhp = null;
+            rowEntity.fan.flow_efficiency = null;
+            rowEntity.fan.total_static_pressure = null;
+            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+          }
         }
-
-        if (colDef.name == 'fan_modeling_method') {
-          rowEntity.fan.motor_bhp = null;
-          rowEntity.fan.flow_efficiency = null;
-          rowEntity.fan.total_static_pressure = null;
-          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-        }
-
       });
     }
   };

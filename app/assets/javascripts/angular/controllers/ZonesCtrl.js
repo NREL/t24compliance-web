@@ -108,7 +108,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     Shared.setModified();
 
     var zone = {
-      name: 'Zone ' + ($scope.data.zones.length + 1),
+      name: Shared.uniqueName($scope.data.zones, _.template('Zone <%= num %>')),
       story: $scope.data.stories[0].id,
       type: Enums.enums.zones_type_enums[0]
     };
