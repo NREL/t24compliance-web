@@ -321,6 +321,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     space.gas_equipment_power_density = defaults.gas_equipment_power_density;
     space.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
 
+    space.lighting_input_method = 'LPD';
     space.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
     space.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
     space.interior_lighting_power_density_non_regulated = defaults.interior_lighting_power_density_non_regulated;
@@ -380,18 +381,24 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       process_gas_latent_fraction: selectedSpace.process_gas_latent_fraction,
       process_gas_lost_fraction: selectedSpace.process_gas_lost_fraction,
 
+      lighting_input_method: selectedSpace.lighting_input_method,
       interior_lighting_power_density_regulated: selectedSpace.interior_lighting_power_density_regulated,
       interior_lighting_power_density_regulated_default: selectedSpace.interior_lighting_power_density_regulated_default,
       interior_lighting_power_density_non_regulated: selectedSpace.interior_lighting_power_density_non_regulated,
       interior_lighting_power_density_non_regulated_default: selectedSpace.interior_lighting_power_density_non_regulated_default
     });
 
-    var surfaces = _.filter($scope.data.surfaces, function (surface) {
-      return surface.space == spaceIndex;
-    });
+    var surfaces = _.filter($scope.data.surfaces, {space: spaceIndex});
     _.each(surfaces, function (surface) {
       $scope.data.duplicateSurface({surface: surface}, $scope.data.spaces.length - 1);
     });
+
+    if (selectedSpace.lighting_input_method == 'Luminaires') {
+      var lightingSystems = _.filter($scope.data.lightingSystems, {space: spaceIndex});
+      _.each(lightingSystems, function (lightingSystem) {
+        $scope.data.duplicateLightingSystem({lightingSystem: lightingSystem}, $scope.data.spaces.length - 1);
+      });
+    }
   };
   $scope.data.deleteSpace = function (selected, gridApi) {
     Shared.setModified();
@@ -920,6 +927,27 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     };
 
     $scope.data.lightingSystems.push(lightingSystem);
+  };
+  $scope.data.duplicateLightingSystem = function (selected, newParent) {
+    Shared.setModified();
+
+    var selectedLightingSystem = selected.lightingSystem;
+
+    var spaceIndex = newParent === undefined ? selectedLightingSystem.space : newParent;
+
+    $scope.data.lightingSystems.push({
+      name: Shared.uniqueName($scope.data.lightingSystems, _.template('Lighting System <%= num %>')),
+      space: spaceIndex,
+      spaceOptions: selectedLightingSystem.spaceOptions,
+      luminaire_reference: selectedLightingSystem.luminaire_reference,
+      luminaire_count: selectedLightingSystem.luminaire_count,
+      status: selectedLightingSystem.status,
+      power_regulated: selectedLightingSystem.power_regulated,
+      non_regulated_exclusion: selectedLightingSystem.non_regulated_exclusion,
+      luminaire_mounting_height: selectedLightingSystem.luminaire_mounting_height,
+      power_adjustment_factor_credit_type: selectedLightingSystem.power_adjustment_factor_credit_type,
+      power: selectedLightingSystem.power
+    });
   };
   $scope.data.deleteLightingSystem = function (selected, gridApi) {
     Shared.setModified();
