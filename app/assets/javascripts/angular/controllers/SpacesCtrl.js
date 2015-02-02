@@ -727,11 +727,16 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       azimuth: selectedSurface.azimuth,
       construction_library_id: selectedSurface.construction_library_id,
       constructionDefault: selectedSurface.constructionDefault,
-      adjacent_space_reference: selectedSurface.adjacent_space_reference,
+      adjacent_space_reference: null,
       tilt: selectedSurface.tilt,
       height: selectedSurface.height,
       perimeter_exposed: selectedSurface.perimeter_exposed
     });
+
+    if (selectedSurface.boundary == 'Interior') {
+      var newSurfaceIndex = $scope.data.surfaces.length - 1;
+      $scope.data.surfaces[newSurfaceIndex].adjacencyOptions = $scope.data.compatibleAdjacentSpaces(newSurfaceIndex);
+    }
 
     var subsurfaces = _.filter($scope.data.subsurfaces, {surface: surfaceIndex});
     _.each(subsurfaces, function (subsurface) {
