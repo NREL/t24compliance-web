@@ -252,8 +252,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     $scope.surfacesGridOptions.multiSelect = true;
 
     $scope.surfacesGridOptions.columnDefs[2].enableFiltering = false;
-    $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = true;
-    $scope.surfacesGridOptions.columnDefs[2].filter.term = $scope.selected.surface.surface_type;
+    $scope.surfacesGridOptions.columnDefs[2].filters[0].noTerm = true;
+    $scope.surfacesGridOptions.columnDefs[2].filters[0].term = $scope.selected.surface.surface_type;
     $scope.surfacesGridOptions.columnDefs[6].allowConstructionEdit = false;
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
@@ -265,7 +265,6 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
       area: $scope.selected.surface.area,
       azimuth: $scope.selected.surface.azimuth,
       construction_library_id: $scope.selected.surface.construction_library_id,
-      adjacent_space_reference: $scope.selected.surface.adjacent_space_reference,
       tilt: $scope.selected.surface.tilt,
       height: $scope.selected.surface.height,
       perimeter_exposed: $scope.selected.surface.perimeter_exposed
@@ -285,8 +284,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     $scope.surfacesGridOptions.multiSelect = false;
 
     $scope.surfacesGridOptions.columnDefs[2].enableFiltering = true;
-    $scope.surfacesGridOptions.columnDefs[2].filter.noTerm = false;
-    $scope.surfacesGridOptions.columnDefs[2].filter.term = '';
+    $scope.surfacesGridOptions.columnDefs[2].filters[0].noTerm = false;
+    $scope.surfacesGridOptions.columnDefs[2].filters[0].term = '';
     $scope.surfacesGridOptions.columnDefs[6].allowConstructionEdit = true;
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };

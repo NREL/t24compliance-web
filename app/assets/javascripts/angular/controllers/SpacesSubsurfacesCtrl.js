@@ -169,8 +169,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.subsurfacesGridOptions.multiSelect = true;
 
     $scope.subsurfacesGridOptions.columnDefs[3].enableFiltering = false;
-    $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = true;
-    $scope.subsurfacesGridOptions.columnDefs[3].filter.term = $scope.selected.subsurface.type;
+    $scope.subsurfacesGridOptions.columnDefs[3].filters[0].noTerm = true;
+    $scope.subsurfacesGridOptions.columnDefs[3].filters[0].term = $scope.selected.subsurface.type;
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
 
@@ -196,8 +196,8 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.subsurfacesGridOptions.multiSelect = false;
 
     $scope.subsurfacesGridOptions.columnDefs[3].enableFiltering = true;
-    $scope.subsurfacesGridOptions.columnDefs[3].filter.noTerm = false;
-    $scope.subsurfacesGridOptions.columnDefs[3].filter.term = '';
+    $scope.subsurfacesGridOptions.columnDefs[3].filters[0].noTerm = false;
+    $scope.subsurfacesGridOptions.columnDefs[3].filters[0].term = '';
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
   };
 
