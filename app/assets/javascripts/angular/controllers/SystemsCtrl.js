@@ -1223,6 +1223,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   // NOTE:  this also adds fields that are defaulted.
   // They won't be shown to users, but will be passed to rails
   $scope.addSystem = function (type) {
+    Shared.setModified();
+
     var name;
     switch (type) {
       case 'ptac':
@@ -1505,9 +1507,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
 
 
   $scope.duplicateSystem = function (type) {
+    Shared.setModified();
+
     var new_item = angular.copy($scope.selected[type]);
-    $log.debug('type:', type);
-    $log.debug($scope.selected);
     delete new_item.$$hashKey;
     var prefix = (type == 'szac') ? 'PSZ' : type.toUpperCase();
     new_item.name = Shared.uniqueName($scope.systems[type], _.template(prefix + ' <%= num %>'));
@@ -1518,6 +1520,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   };
 
   $scope.deleteSystem = function (type) {
+    Shared.setModified();
+
     var index = $scope.systems[type].indexOf($scope.selected[type]);
     $scope.systems[type].splice(index, 1);
     if (index > 0) {
@@ -1571,8 +1575,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           params = Shared.defaultParams();
           params.data = $scope.zones;
           data.bulkSync('thermal_zones', params).then(success).catch(failure);
-        }
-        else {
+        } else {
           Shared.resetModified();
         }
 
