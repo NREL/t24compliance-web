@@ -74,7 +74,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
       enableCellEdit: false,
       minWidth: min_width,
       filters: Shared.textFilter(),
-      pinnedLeft:true,
+      pinnedLeft: true,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'name',
@@ -82,7 +82,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
       enableHiding: false,
       filters: Shared.textFilter(),
       minWidth: min_width,
-      pinnedLeft:true,
+      pinnedLeft: true,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'type',
@@ -92,7 +92,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
       editDropdownOptionsArray: Enums.enumsArr.terminal_units_type_enums,
       filters: Shared.textFilter(),
       minWidth: min_width,
-      pinnedLeft:true,
+      pinnedLeft: true,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'primary_air_flow_maximum',
@@ -120,7 +120,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
         return ($scope.row.entity.type != 'Uncontrolled');
       },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
-      }, {
+    }, {
       name: 'heating_air_flow_maximum',
       displayName: 'Max. Heating Flow',
       enableHiding: false,
@@ -267,7 +267,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
             rowEntity.induction_ratio = null;
             rowEntity.induced_air_zone_reference = null;
           }
-          else if (newValue == 'ParallelFanBox' || newValue == 'SeriesFanBox'){
+          else if (newValue == 'ParallelFanBox' || newValue == 'SeriesFanBox') {
             rowEntity.reheat_control_method = null;
             rowEntity.heating_air_flow_maximum = null;
           }

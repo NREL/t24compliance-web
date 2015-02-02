@@ -1,4 +1,4 @@
-cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', 'uiGridConstants', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService, uiGridConstants) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', 'toaster', 'uiGridConstants', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService, toaster, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
@@ -234,6 +234,20 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
 
     var compressed = LZString.compressToUTF16(JSON.stringify(value));
     cache.put(key, compressed);
+  };
+
+  service.checkUnique = function (data, name, rowIndex) {
+    var unique = _.isEmpty(_.filter(data, function (row, index) {
+      return rowIndex != index && row.name == name;
+    }));
+    if (!unique && rowIndex != null) toaster.warning('Name must be unique', '"' + name + '" already exists.');
+    return unique;
+  };
+
+  service.uniqueName = function (data, template, num) {
+    if (num === undefined) num = data.length + 1;
+    while (!service.checkUnique(data, template({num: num}))) num++;
+    return template({num: num});
   };
 
   // Contains All condition, split by spaces

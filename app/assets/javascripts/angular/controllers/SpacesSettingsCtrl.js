@@ -84,8 +84,12 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         if (newValue != oldValue) {
           Shared.setModified();
 
-          // Update unmodified defaults
-          if (colDef.name == 'space_function') {
+          var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.data.spaces, newValue, spaceIndex);
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'space_function') {
+            // Update unmodified defaults
             var defaults = _.find($scope.data.spaceFunctionDefaults, {
               name: newValue
             });
@@ -141,7 +145,6 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
 
             if (_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], newValue)) {
               if (rowEntity.lighting_input_method == 'Luminaires') {
-                var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
                 rowEntity.lighting_input_method = 'LPD';
                 rowEntity.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
                 rowEntity.interior_lighting_power_density_non_regulated = defaults.interior_lighting_power_density_non_regulated;

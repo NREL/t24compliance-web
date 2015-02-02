@@ -1,5 +1,7 @@
 cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', function ($scope, uiGridConstants, Shared) {
-  $scope.selectedSpace = null;
+  $scope.selected = {
+    space: null
+  };
 
   $scope.applySettingsActive = false;
 
@@ -105,10 +107,10 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       gridApi.selection.on.rowSelectionChanged($scope, function (row) {
         if (!$scope.applySettingsActive) {
           if (row.isSelected) {
-            $scope.selectedSpace = row.entity;
+            $scope.selected.space = row.entity;
           } else {
             // No rows selected
-            $scope.selectedSpace = null;
+            $scope.selected.space = null;
           }
         }
       });
@@ -131,15 +133,15 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
     Shared.setModified();
 
     var replacement = {
-      process_electric: $scope.selectedSpace.process_electric,
-      refrigeration: $scope.selectedSpace.refrigeration,
-      elevator_count: $scope.selectedSpace.elevator_count,
-      escalator_count: $scope.selectedSpace.escalator_count,
-      loads_radiant_fraction: $scope.selectedSpace.loads_radiant_fraction,
-      loads_latent_fraction: $scope.selectedSpace.loads_latent_fraction,
-      loads_lost_fraction: $scope.selectedSpace.loads_lost_fraction,
-      elevator_lost_fraction: $scope.selectedSpace.elevator_lost_fraction,
-      escalator_lost_fraction: $scope.selectedSpace.escalator_lost_fraction
+      process_electric: $scope.selected.space.process_electric,
+      refrigeration: $scope.selected.space.refrigeration,
+      elevator_count: $scope.selected.space.elevator_count,
+      escalator_count: $scope.selected.space.escalator_count,
+      loads_radiant_fraction: $scope.selected.space.loads_radiant_fraction,
+      loads_latent_fraction: $scope.selected.space.loads_latent_fraction,
+      loads_lost_fraction: $scope.selected.space.loads_lost_fraction,
+      elevator_lost_fraction: $scope.selected.space.elevator_lost_fraction,
+      escalator_lost_fraction: $scope.selected.space.escalator_lost_fraction
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {
@@ -150,7 +152,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
   };
 
   $scope.resetApplySettings = function () {
-    $scope.selectedSpace = null;
+    $scope.selected.space = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
     $scope.loadsGridOptions.multiSelect = false;

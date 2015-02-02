@@ -142,7 +142,11 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
         if (newValue != oldValue) {
           Shared.setModified();
 
-          if (colDef.name == 'space') {
+          var subsurfaceIndex = $scope.data.subsurfaces.indexOf(rowEntity);
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.data.subsurfaces, newValue, subsurfaceIndex);
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'space') {
             if (rowEntity.type == 'Door') {
               rowEntity.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: newValue}).surfaces;
             } else if (rowEntity.type == 'Window') {

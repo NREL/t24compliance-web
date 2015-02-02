@@ -24,8 +24,8 @@
     </div>
     <div class="row pad-top-20">
       <div class="col-md-12">
-        <div ng-repeat="tab in systemTabs.ptac" ng-if="isActiveTab('ptac', tab)">
-          <div ui-grid="gridOptions.ptac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection ui-grid-pinning></div>
+        <div class="grid-407" ng-repeat="tab in systemTabs.ptac" ng-if="isActiveTab('ptac', tab)">
+          <div ng-if="panel.open" class="grid-407" ui-grid="gridOptions.ptac[tab]" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection ui-grid-pinning></div>
         </div>
       </div>
     </div>

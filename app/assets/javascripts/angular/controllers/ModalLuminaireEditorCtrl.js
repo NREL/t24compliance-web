@@ -55,8 +55,14 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
           if (newValue != oldValue) {
             Shared.setModified();
 
+            var luminaireIndex = $scope.data.luminaires.indexOf(rowEntity);
             if (colDef.name == 'name') {
-              $scope.data.updateLumHash();
+              var unique = Shared.checkUnique($scope.data.luminaires, newValue, luminaireIndex);
+              if (!unique) {
+                rowEntity.name = oldValue;
+              } else {
+                $scope.data.updateLumHash();
+              }
             } else if (colDef.name == 'fixture_type') {
               _.merge(rowEntity, $scope.data.luminaireHeatGain(rowEntity.fixture_type));
             } else if (colDef.name == 'power') {

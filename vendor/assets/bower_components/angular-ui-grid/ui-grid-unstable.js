@@ -1,5 +1,8 @@
-/*! ui-grid - v3.0.0-RC.18-e4b2293 - 2015-01-29
-* Copyright (c) 2015 ; License: MIT */
+/*!
+ * ui-grid - v3.0.0-RC.18-f8414e0 - 2015-01-30
+ * Copyright (c) 2015 ; License: MIT 
+ */
+
 (function () {
   'use strict';
   angular.module('ui.grid.i18n', []);
@@ -150,7 +153,8 @@ angular.module('ui.grid').directive('uiGridCell', ['$compile', '$parse', 'gridUt
           }
         },
         post: function($scope, $elm, $attrs, uiGridCtrl) {
-          $elm.addClass($scope.col.getColClass(false));
+          var initColClass = $scope.col.getColClass(false);
+          $elm.addClass(initColClass);
 
           var classAdded;
           var updateClass = function( grid ){
@@ -182,6 +186,14 @@ angular.module('ui.grid').directive('uiGridCell', ['$compile', '$parse', 'gridUt
             if ( n !== o ) {
               if ( classAdded || $scope.col.cellClass ){
                 updateClass();
+              }
+
+              // See if the column's internal class has changed
+              var newColClass = $scope.col.getColClass(false);
+              if (newColClass !== initColClass) {
+                $elm.removeClass(initColClass);
+                $elm.addClass(newColClass);
+                initColClass = newColClass;
               }
             }
           };
@@ -909,7 +921,8 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
 
             $scope.renderContainer = uiGridCtrl.grid.renderContainers[renderContainerCtrl.containerId];
             
-            $elm.addClass($scope.col.getColClass(false));
+            var initColClass = $scope.col.getColClass(false);
+            $elm.addClass(initColClass);
     
             // Hide the menu by default
             $scope.menuShown = false;
@@ -944,6 +957,18 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
               var rightMostContainer = $scope.grid.renderContainers['right'] ? $scope.grid.renderContainers['right'] : $scope.grid.renderContainers['body'];
               $scope.isLastCol = ( $scope.col === rightMostContainer.visibleColumnCache[ rightMostContainer.visibleColumnCache.length - 1 ] );
             };
+
+            $scope.$watch('col', function (n, o) {
+              if (n !== o) {
+                // See if the column's internal class has changed
+                var newColClass = $scope.col.getColClass(false);
+                if (newColClass !== initColClass) {
+                  $elm.removeClass(initColClass);
+                  $elm.addClass(newColClass);
+                  initColClass = newColClass;
+                }
+              }
+            });
   
             updateClass();
             
@@ -2689,7 +2714,7 @@ angular.module('ui.grid')
       function columnDefsWatchFunction(n, o) {
         if (n && n !== o) {
           self.grid.options.columnDefs = n;
-          self.grid.buildColumns()
+          self.grid.buildColumns({ orderByColumnDefs: true })
             .then(function(){
 
               self.grid.preCompileCellTemplates();
@@ -3564,9 +3589,19 @@ angular.module('ui.grid')
    * @methodOf ui.grid.class:Grid
    * @description creates GridColumn objects from the columnDefinition.  Calls each registered
    * columnBuilder to further process the column
+   * @param {object} options  An object contains options to use when building columns
+   *
+   * * **orderByColumnDefs**: defaults to **false**. When true, `buildColumns` will reorder existing columns according to the order within the column definitions.
+   *
    * @returns {Promise} a promise to load any needed column resources
    */
-  Grid.prototype.buildColumns = function buildColumns() {
+  Grid.prototype.buildColumns = function buildColumns(opts) {
+    var options = {
+      orderByColumnDefs: false
+    };
+
+    angular.extend(options, opts);
+
     // gridUtil.logDebug('buildColumns');
     var self = this;
     var builderPromises = [];
@@ -3608,7 +3643,35 @@ angular.module('ui.grid')
         builderPromises.push(builder.call(self, colDef, col, self.options));
       });
     });
-    
+
+    /*** Reorder columns if necessary ***/
+    if (!!options.orderByColumnDefs) {
+      // Create a shallow copy of the columns as a cache
+      var columnCache = self.columns.slice(0);
+
+      // We need to allow for the "row headers" when mapping from the column defs array to the columns array
+      //   If we have a row header in columns[0] and don't account for it   we'll overwrite it with the column in columnDefs[0]
+
+      // Go through all the column defs
+      for (i = 0; i < self.options.columnDefs.length; i++) {
+        // If the column at this index has a different name than the column at the same index in the column defs...
+        if (self.columns[i + headerOffset].name !== self.options.columnDefs[i].name) {
+          // Replace the one in the cache with the appropriate column
+          columnCache[i + headerOffset] = self.getColumn(self.options.columnDefs[i].name);
+        }
+        else {
+          // Otherwise just copy over the one from the initial columns
+          columnCache[i + headerOffset] = self.columns[i + headerOffset];
+        }
+      }
+
+      // Empty out the columns array, non-destructively
+      self.columns.length = 0;
+
+      // And splice in the updated, ordered columns from the cache
+      Array.prototype.splice.apply(self.columns, [0, 0].concat(columnCache));
+    }
+
     return $q.all(builderPromises).then(function(){
       if (self.rows.length > 0){
         self.assignTypes();
@@ -3702,6 +3765,8 @@ angular.module('ui.grid')
    * validates that name or field is present
    */
   Grid.prototype.preprocessColDef = function preprocessColDef(colDef) {
+    var self = this;
+
     if (!colDef.field && !colDef.name) {
       throw new Error('colDef.name or colDef.field property is required');
     }
@@ -3709,7 +3774,50 @@ angular.module('ui.grid')
     //maintain backwards compatibility with 2.x
     //field was required in 2.x.  now name is required
     if (colDef.name === undefined && colDef.field !== undefined) {
-      colDef.name = colDef.field;
+      // See if the column name already exists:
+      var foundName = self.getColumn(colDef.field);
+
+      // If a column with this name already  exists, we will add an incrementing number to the end of the new column name
+      if (foundName) {
+        // Search through the columns for names in the format: <name><1, 2 ... N>, i.e. 'Age1, Age2, Age3',
+        var nameRE = new RegExp('^' + colDef.field + '(\\d+)$', 'i');
+
+        var foundColumns = self.columns.filter(function (column) {
+          // Test against the displayName, as that's what'll have the incremented number
+          return nameRE.test(column.displayName);
+        })
+        // Sort the found columns by the end-number
+        .sort(function (a, b) {
+          if (a === b) {
+            return 0;
+          }
+          else {
+            var numA = a.match(nameRE)[1];
+            var numB = b.match(nameRE)[1];
+
+            return parseInt(numA, 10) > parseInt(numB, 10) ? 1 : -1;
+          }
+        });
+
+        // Not columns found, so start with number "2"
+        if (foundColumns.length === 0) {
+          colDef.name = colDef.field + '2';
+        }
+        else {
+          // Get the number from the final column
+          var lastNum = foundColumns[foundColumns.length-1].displayName.match(nameRE)[1];
+
+          // Make sure to parse to an int
+          lastNum = parseInt(lastNum, 10);
+
+          // Add 1 to the number from the last column and tack it on to the field to be the name for this new column 
+          colDef.name = colDef.field + (lastNum + 1);
+        }
+      }
+      // ... otherwise just use the field as the column name
+      else {
+        colDef.name = colDef.field;
+      }
     }
 
   };
@@ -5405,7 +5513,7 @@ angular.module('ui.grid')
     self.grid = grid;
     self.uid = uid;
 
-    self.updateColumnDef(colDef, true );
+    self.updateColumnDef(colDef, true);
   }
 
 
@@ -11981,12 +12089,10 @@ module.filter('px', function() {
           return {
             post: function ($scope, $elm, $attrs, controllers) {
               var uiGridCtrl = controllers[0],
-                 renderContainerCtrl = controllers[1],
-                 cellNavController = controllers[2];
+                 renderContainerCtrl = controllers[1];
 
               // Skip attaching cell-nav specific logic if the directive is not attached above us
-              if (!cellNavController) { return; }
-
+              if (!uiGridCtrl.grid.api.cellNav) { return; }
 
               var containerId = renderContainerCtrl.containerId;
 
@@ -12004,6 +12110,8 @@ module.filter('px', function() {
                 return uiGridCtrl.cellNav.handleKeyDown(evt);
               });
 
+              var needFocus = false;
+              
               // When there's a scroll event we need to make sure to re-focus the right row, because the cell contents may have changed
               grid.api.core.on.scrollEvent($scope, function (args) {
                 // Skip if not this grid that the event was broadcast for
@@ -12016,28 +12124,82 @@ module.filter('px', function() {
                   return;
                 }
                 
+                /*
+                 * If we have scrolled due to cellNav, we want to set the focus to the new cell after the 
+                 * virtualisation has run, and after scroll.  If we scrolled through the browser scroll
+                 * bar or other user action, we're going to discard the focus, because it will no longer 
+                 * be valid (and, noting #2423, trying to keep it causes problems)
+                 * 
+                 * If cellNav triggers the scroll, we get a scrollToIfNecessary, then a viewport scroll. We
+                 * want to wait for the viewport scroll to finish, then do a refocus.  
+                 * 
+                 * If someone manually scrolls we get just the viewport scroll, no scrollToIfNecessary.  We
+                 * want to just clear the focus
+                 * 
+                 * Logic is:
+                 *  - if cellNav scroll, set a flag that will be resolved in the native scroll
+                 *  - if native scroll, look for the cellNav promise and resolve it
+                 *    - if not present, then use a timeout to clear focus
+                 *    - if it is present, then instead use a timeout to set focus
+                 */ 
+                
                 // We have to wrap in TWO timeouts so that we run AFTER the scroll event is resolved.
-                $timeout(function () {
-                  $timeout(function () {
-
-/* No longer trying to retain focus when scroll - too many side effects, particularly with editOnFocus
-                    // Get the last row+col combo
-                    var lastRowCol = uiGridCtrl.grid.api.cellNav.getFocusedCell();
-
-                    // If the body element becomes active, re-focus on the render container so we can capture cellNav events again.
-                    //   NOTE: this happens when we navigate LET from the left-most cell (RIGHT from the right-most) and have to re-render a new
-                    //   set of cells. The cell element we are navigating to doesn't exist and focus gets lost. This will re-capture it, imperfectly...
-                    if ($document.activeElement === $document.body) {
-                      $elm[0].focus();
+                if ( args.source === 'uiGridCellNavService.scrollToIfNecessary'){
+                  needFocus = true;
+/*
+                  focusTimeout = $timeout(function () {
+                    if ( clearFocusTimeout ){
+                      $timeout.cancel(clearFocusTimeout);
                     }
-*/
-                    // make a dummy roCol
-                    var rowCol = { col: { uid: null }, row: { uid: null } };
-
-                    // broadcast a cellNav event so we clear the focus on all cells
-                    uiGridCtrl.cellNav.broadcastCellNav(rowCol);
+                    focusTimeout = $timeout(function () {
+                      if ( clearFocusTimeout ){
+                        $timeout.cancel(clearFocusTimeout);
+                      }
+                      // Get the last row+col combo
+                      var lastRowCol = uiGridCtrl.grid.api.cellNav.getFocusedCell();
+  
+                      // If the body element becomes active, re-focus on the render container so we can capture cellNav events again.
+                      //   NOTE: this happens when we navigate LET from the left-most cell (RIGHT from the right-most) and have to re-render a new
+                      //   set of cells. The cell element we are navigating to doesn't exist and focus gets lost. This will re-capture it, imperfectly...
+                      if ($document.activeElement === $document.body) {
+                        $elm[0].focus();
+                      }
+  
+                      // broadcast a cellNav event so we clear the focus on all cells
+                      uiGridCtrl.cellNav.broadcastCellNav(lastRowCol);
+                    });
                   });
-                });
+                  */
+                } else {
+                  if ( needFocus ){
+                    $timeout(function () {
+                      $timeout(function () {
+                        // Get the last row+col combo
+                        var lastRowCol = uiGridCtrl.grid.api.cellNav.getFocusedCell();
+    
+                        // If the body element becomes active, re-focus on the render container so we can capture cellNav events again.
+                        //   NOTE: this happens when we navigate LET from the left-most cell (RIGHT from the right-most) and have to re-render a new
+                        //   set of cells. The cell element we are navigating to doesn't exist and focus gets lost. This will re-capture it, imperfectly...
+                        if ($document.activeElement === $document.body) {
+                          $elm[0].focus();
+                        }
+    
+                        // broadcast a cellNav event so we clear the focus on all cells
+                        uiGridCtrl.cellNav.broadcastCellNav(lastRowCol);
+                        
+                        needFocus = false;
+                      });
+                    });
+                  } else {
+                    $timeout(function() {
+                      // make a dummy roCol
+                      var rowCol = { col: { uid: null }, row: { uid: null } };
+    
+                      // broadcast a cellNav event so we clear the focus on all cells
+                      uiGridCtrl.cellNav.broadcastCellNav(rowCol);
+                    });
+                  }
+                }
               });  
              
             }
@@ -12058,14 +12220,11 @@ module.filter('px', function() {
       return {
         priority: -150, // run after default uiGridCell directive and ui.grid.edit uiGridCell
         restrict: 'A',
-        require: ['^uiGrid', '?^uiGridCellnav'],
+        require: '^uiGrid',
         scope: false,
-        link: function ($scope, $elm, $attrs, controllers) {
-          var uiGridCtrl = controllers[0],
-              cellNavController = controllers[1];
-
+        link: function ($scope, $elm, $attrs, uiGridCtrl) {
           // Skip attaching cell-nav specific logic if the directive is not attached above us
-          if (!cellNavController) { return; }
+          if (!uiGridCtrl.grid.api.cellNav) { return; }
 
           if (!$scope.col.colDef.allowCellFocus) {
             return;

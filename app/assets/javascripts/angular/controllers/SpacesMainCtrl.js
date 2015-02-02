@@ -100,7 +100,10 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
           Shared.setModified();
 
           var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
-          if (colDef.name == 'floor_to_ceiling_height') {
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.data.spaces, newValue, spaceIndex);
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'floor_to_ceiling_height') {
             $scope.data.updateTotalExhaust(rowEntity);
             // Update default lighting system mounting height
             _.each($scope.data.lightingSystems, function (lightingSystem) {
@@ -200,7 +203,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
         var walls = spaceGroup.walls;
         for (var i = 0; i < config.quantity; ++i) {
           $scope.data.addSpace({
-            name: config.name + ' ' + (i + 1),
+            name: Shared.uniqueName($scope.data.spaces, _.template(config.name + ' <%= num %>'), i + 1),
             space_function: config.space_function,
             floor_to_ceiling_height: config.floor_to_ceiling_height,
             building_story_id: config.building_story_id,

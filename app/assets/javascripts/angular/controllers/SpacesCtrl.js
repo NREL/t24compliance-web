@@ -265,7 +265,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var space = {
-      name: 'Space ' + ($scope.data.spaces.length + 1),
+      name: Shared.uniqueName($scope.data.spaces, _.template('Space <%= num %>')),
       floor_to_ceiling_height: $scope.data.stories[0].floor_to_ceiling_height,
       building_story_id: $scope.data.stories[0].id,
       area: null,
@@ -335,7 +335,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var spaceIndex = $scope.data.spaces.indexOf(selectedSpace);
 
     $scope.data.spaces.push({
-      name: 'Space ' + ($scope.data.spaces.length + 1),
+      name: Shared.uniqueName($scope.data.spaces, _.template('Space <%= num %>')),
       floor_to_ceiling_height: selectedSpace.floor_to_ceiling_height,
       building_story_id: selectedSpace.building_story_id,
       area: selectedSpace.area,
@@ -458,28 +458,13 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   $scope.data.addSurface = function (type, boundary, spaceIndex) {
     Shared.setModified();
 
-    if (spaceIndex === undefined) {
-      spaceIndex = 0;
-    }
-
-    var name = $scope.data.spaces[spaceIndex].name + ' ' + type;
-    var surfaceType = type;
-
-    if (type == 'Wall' || type == 'Floor') {
-      var len = _.filter($scope.data.surfaces, function (surface) {
-        return surface.space == spaceIndex && surface.type == type;
-      }).length;
-      name += ' ' + (len + 1);
-      surfaceType = boundary + ' ' + surfaceType;
-    }
-    var constructionDefault = $scope.data.constructionDefaults[surfaceType.toLowerCase().replace(' ', '_')];
-    if (constructionDefault) {
-      constructionDefault = constructionDefault.id;
-    } else {
-      constructionDefault = null;
-    }
+    spaceIndex = spaceIndex || 0;
+    var num = _.filter($scope.data.surfaces, {space: spaceIndex, type: type}).length + 1;
+    var surfaceType = boundary ? boundary + ' ' + type : type;
+    var constructionDefault = $scope.data.constructionDefaults[_.snakeCase(surfaceType)];
+    constructionDefault = constructionDefault ? constructionDefault.id : null;
     $scope.data.surfaces.push({
-      name: name,
+      name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + type + ' <%= num %>'), num),
       space: spaceIndex,
       type: type,
       boundary: boundary,
@@ -499,113 +484,219 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       $scope.data.surfaces[surfaceIndex].adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
     }
   };
-  $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi) {
+  $scope.data.restoreSpaceTypeSettingsDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.occupant_density = space.occupant_density_default;
       space.hot_water_heating_rate = space.hot_water_heating_rate_default;
       space.receptacle_power_density = space.receptacle_power_density_default;
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSpaceTypeSettingsValues = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedSpaceTypeSettingsValues = function (space) {
+    var modified = function (space) {
       return (space.occupant_density !== space.occupant_density_default ||
       space.hot_water_heating_rate !== space.hot_water_heating_rate_default ||
       space.receptacle_power_density !== space.receptacle_power_density_default);
-    }));
+    };
+
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreSurfaceConstructionDefaults = function (gridApi) {
+  $scope.data.restoreSurfaceConstructionDefaults = function (gridApi, surface) {
     Shared.setModified();
 
-    _.each($scope.data.surfaces, function (surface) {
+    var restore = function (surface) {
       if (surface.constructionDefault) {
         surface.construction_library_id = surface.constructionDefault;
       }
-    });
+    };
+
+    if (surface) {
+      restore(surface);
+    } else {
+      _.each($scope.data.surfaces, function (surface) {
+        restore(surface);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSurfaceConstructionDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.surfaces, function (surface) {
+  $scope.data.modifiedSurfaceConstructionDefaults = function (surface) {
+    var modified = function (surface) {
       if (!surface.constructionDefault) return false;
       return (surface.construction_library_id !== surface.constructionDefault);
-    }));
+    };
+    if (surface) {
+      return modified(surface);
+    } else {
+      return !_.isEmpty(_.find($scope.data.surfaces, function (surface) {
+        return modified(surface);
+      }));
+    }
   };
-  $scope.data.restoreSubsurfaceConstructionDefaults = function (gridApi) {
+  $scope.data.restoreSubsurfaceConstructionDefaults = function (gridApi, subsurface) {
     Shared.setModified();
 
-    _.each($scope.data.subsurfaces, function (subsurface) {
+    var restore = function (subsurface) {
       if (subsurface.constructionDefault) {
         subsurface.construction_library_id = subsurface.constructionDefault;
       }
-    });
+    };
+
+    if (subsurface) {
+      restore(subsurface);
+    } else {
+      _.each($scope.data.subsurfaces, function (subsurface) {
+        restore(subsurface);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSubsurfaceConstructionDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.subsurfaces, function (subsurface) {
+  $scope.data.modifiedSubsurfaceConstructionDefaults = function (subsurface) {
+    var modified = function (subsurface) {
       if (!subsurface.constructionDefault) return false;
       return (subsurface.construction_library_id !== subsurface.constructionDefault);
-    }));
+    };
+    if (subsurface) {
+      return modified(subsurface);
+    } else {
+      return !_.isEmpty(_.find($scope.data.subsurfaces, function (subsurface) {
+        return modified(subsurface);
+      }));
+    }
   };
-  $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi) {
+  $scope.data.restoreSpaceTypeExhaustDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.exhaust_per_area = space.exhaust_per_area_default;
       space.exhaust_air_changes_per_hour = space.exhaust_air_changes_per_hour_default;
       $scope.data.updateTotalExhaust(space);
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedSpaceTypeExhaustDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedSpaceTypeExhaustDefaults = function (space) {
+    var modified = function (space) {
       return (space.exhaust_per_area !== space.exhaust_per_area_default || space.exhaust_air_changes_per_hour !== space.exhaust_air_changes_per_hour_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreRefrigerationDefaults = function (gridApi) {
+  $scope.data.restoreRefrigerationDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.commercial_refrigeration_epd = space.commercial_refrigeration_epd_default;
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedRefrigerationDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedRefrigerationDefaults = function (space) {
+    var modified = function (space) {
       return (space.commercial_refrigeration_epd !== space.commercial_refrigeration_epd_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreGasDefaults = function (gridApi) {
+  $scope.data.restoreGasDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
+    var restore = function (space) {
       space.gas_equipment_power_density = space.gas_equipment_power_density_default;
-    });
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        restore(space);
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedGasDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedGasDefaults = function (space) {
+    var modified = function (space) {
       return (space.gas_equipment_power_density !== space.gas_equipment_power_density_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
-  $scope.data.restoreLPDDefaults = function (gridApi) {
+  $scope.data.restoreLPDDefaults = function (gridApi, space) {
     Shared.setModified();
 
-    _.each($scope.data.spaces, function (space) {
-      if (space.lighting_input_method == 'LPD') {
-        space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
-        space.interior_lighting_power_density_non_regulated = space.interior_lighting_power_density_non_regulated_default;
-      }
-    });
+    var restore = function (space) {
+      space.interior_lighting_power_density_regulated = space.interior_lighting_power_density_regulated_default;
+      space.interior_lighting_power_density_non_regulated = space.interior_lighting_power_density_non_regulated_default;
+    };
+
+    if (space) {
+      restore(space);
+    } else {
+      _.each($scope.data.spaces, function (space) {
+        if (space.lighting_input_method == 'LPD') {
+          restore(space);
+        }
+      });
+    }
     gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   };
-  $scope.data.modifiedLPDDefaults = function () {
-    return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+  $scope.data.modifiedLPDDefaults = function (space) {
+    var modified = function (space) {
       return space.lighting_input_method == 'LPD'
         && (space.interior_lighting_power_density_regulated != space.interior_lighting_power_density_regulated_default
         || space.interior_lighting_power_density_non_regulated != space.interior_lighting_power_density_non_regulated_default);
-    }));
+    };
+    if (space) {
+      return modified(space);
+    } else {
+      return !_.isEmpty(_.find($scope.data.spaces, function (space) {
+        return modified(space);
+      }));
+    }
   };
 
   $scope.data.duplicateSurface = function (selected, newParent) {
@@ -616,16 +707,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var surfaceIndex = $scope.data.surfaces.indexOf(selectedSurface);
 
     var name = $scope.data.spaces[spaceIndex].name + ' ' + selectedSurface.type;
-    if (selectedSurface.type == 'Wall' || selectedSurface.type == 'Floor') {
-      var len = _.filter($scope.data.surfaces, function (surface) {
-        return surface.space == spaceIndex && surface.type == selectedSurface.type;
-      }).length;
-      name += ' ' + (len + 1);
-    }
+    var num = _.filter($scope.data.surfaces, {space: spaceIndex, type: selectedSurface.type}).length + 1;
 
     $scope.data.surfaces.push({
-      name: name,
-      space: selectedSurface.space,
+      name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + selectedSurface.type + ' <%= num %>'), num),
+      space: spaceIndex,
       type: selectedSurface.type,
       boundary: selectedSurface.boundary,
       surface_type: selectedSurface.surface_type,
@@ -640,9 +726,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       perimeter_exposed: selectedSurface.perimeter_exposed
     });
 
-    var subsurfaces = _.filter($scope.data.subsurfaces, function (subsurface) {
-      return subsurface.surface == surfaceIndex;
-    });
+    var subsurfaces = _.filter($scope.data.subsurfaces, {surface: surfaceIndex});
     _.each(subsurfaces, function (subsurface) {
       $scope.data.duplicateSubsurface({subsurface: subsurface}, $scope.data.surfaces.length - 1);
     });
@@ -699,14 +783,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
     }
 
+    var num = _.filter($scope.data.subsurfaces, {surface: surfaceIndex, type: type}).length + 1;
     var constructionDefault = $scope.data.constructionDefaults[type.toLowerCase()];
-    if (constructionDefault) {
-      constructionDefault = constructionDefault.id;
-    } else {
-      constructionDefault = null;
-    }
+    constructionDefault = constructionDefault ? constructionDefault.id : null;
     $scope.data.subsurfaces.push({
-      name: $scope.data.surfaces[surfaceIndex].name + ' ' + type,
+      name: Shared.uniqueName($scope.data.subsurfaces, _.template($scope.data.surfaces[surfaceIndex].name + ' ' + type + ' <%= num %>'), num),
       space: $scope.data.surfaces[surfaceIndex].space,
       spaceOptions: spaceOptions,
       surface: surfaceIndex,
@@ -723,13 +804,14 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
     var selectedSubsurface = selected.subsurface;
 
-    var surface = newParent === undefined ? selectedSubsurface.surface : newParent;
-    var space = $scope.data.surfaces[surface].space;
+    var surfaceIndex = newParent === undefined ? selectedSubsurface.surface : newParent;
+    var spaceIndex = $scope.data.surfaces[surfaceIndex].space;
 
+    var num = _.filter($scope.data.subsurfaces, {surface: surfaceIndex, type: selectedSubsurface.type}).length + 1;
     $scope.data.subsurfaces.push({
-      name: selectedSubsurface.name,
-      space: space,
-      surface: surface,
+      name: Shared.uniqueName($scope.data.subsurfaces, _.template($scope.data.surfaces[surfaceIndex].name + ' ' + selectedSubsurface.type + ' <%= num %>'), num),
+      space: spaceIndex,
+      surface: surfaceIndex,
       type: selectedSubsurface.type,
       building_story_id: selectedSubsurface.building_story_id,
       area: selectedSubsurface.area,
@@ -753,7 +835,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     Shared.setModified();
 
     var luminaire = {
-      name: 'Luminaire ' + ($scope.data.luminaires.length + 1),
+      name: Shared.uniqueName($scope.data.luminaires, _.template('Luminaire <%= num %>')),
       fixture_type: Enums.enums.luminaires_fixture_type_enums[1],
       lamp_type: Enums.enums.luminaires_lamp_type_enums[0],
       power: 0
@@ -769,7 +851,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var selectedLuminaire = selected.luminaire;
 
     $scope.data.luminaires.push({
-      name: 'Luminaire ' + ($scope.data.luminaires.length + 1),
+      name: Shared.uniqueName($scope.data.luminaires, _.template('Luminaire <%= num %>')),
       fixture_type: selectedLuminaire.fixture_type,
       lamp_type: selectedLuminaire.lamp_type,
       power: selectedLuminaire.power,
@@ -824,7 +906,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
 
     var lightingSystem = {
-      name: 'Lighting System ' + ($scope.data.lightingSystems.length + 1),
+      name: Shared.uniqueName($scope.data.lightingSystems, _.template('Lighting System <%= num %>')),
       space: spaceIndex,
       spaceOptions: $scope.data.spacesWithLuminaires(),
       luminaire_reference: [null],

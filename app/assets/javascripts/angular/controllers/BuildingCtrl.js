@@ -106,7 +106,10 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
         if (newValue != oldValue) {
           Shared.setModified();
 
-          if (colDef.name == 'z' || colDef.name == 'floor_to_floor_height') {
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.stories, newValue, $scope.stories.indexOf(rowEntity));
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'z' || colDef.name == 'floor_to_floor_height') {
             if ($scope.autoElevation) {
               $scope.calculateElevation();
             }
@@ -151,24 +154,28 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
   });
 
   // Buttons
-  $scope.addStory = function () {
-    var z = 0;
-    var floor_to_floor_height = 14;
-    var floor_to_ceiling_height = 10;
+  $scope.addStory = function (input) {
+    Shared.setModified();
+
+    var story = {
+      name: Shared.uniqueName($scope.stories, _.template('Story <%= num %>')),
+      z: 0,
+      floor_to_floor_height: 14,
+      floor_to_ceiling_height: 10
+    };
 
     if ($scope.stories.length) {
       var lowerStory = $scope.stories[$scope.stories.length - 1];
-      z = lowerStory.z + lowerStory.floor_to_floor_height;
-      floor_to_floor_height = lowerStory.floor_to_floor_height;
-      floor_to_ceiling_height = lowerStory.floor_to_ceiling_height;
+      story.z = lowerStory.z + lowerStory.floor_to_floor_height;
+      story.floor_to_floor_height = lowerStory.floor_to_floor_height;
+      story.floor_to_ceiling_height = lowerStory.floor_to_ceiling_height;
     }
 
-    $scope.stories.push({
-      name: 'Story ' + ($scope.stories.length + 1),
-      z: z,
-      floor_to_floor_height: floor_to_floor_height,
-      floor_to_ceiling_height: floor_to_ceiling_height
-    });
+    if (!_.isEmpty(input)) {
+      _.merge(story, input);
+    }
+
+    $scope.stories.push(story);
 
     $scope.updateStoryCount();
 
@@ -176,19 +183,14 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     if ($scope.hasOwnProperty('errors')) delete $scope.errors.total_story_count;
   };
   $scope.duplicateStory = function () {
-    var lowerStory = $scope.stories[$scope.stories.length - 1];
-    var z = lowerStory.z + lowerStory.floor_to_floor_height;
-
-    $scope.stories.push({
-      name: 'Story ' + ($scope.stories.length + 1),
-      z: z,
+    $scope.addStory({
       floor_to_floor_height: $scope.selected.floor_to_floor_height,
       floor_to_ceiling_height: $scope.selected.floor_to_ceiling_height
     });
-
-    $scope.updateStoryCount();
   };
   $scope.deleteStory = function () {
+    Shared.setModified();
+
     // Delete matching spaces
     if ($scope.selected.hasOwnProperty('id')) {
       _.remove($scope.spaces, {building_story_id: $scope.selected.id});
@@ -226,20 +228,17 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
 
     function success(response) {
       toaster.pop('success', 'Building successfully saved');
-      var the_id = response.hasOwnProperty('id') ? response.id : response._id;
-      Shared.setBuildingId(the_id);
+      var id = response.hasOwnProperty('id') ? response.id : response._id;
+      Shared.setBuildingId(id);
       // UPDATE STORIES
-      $scope.stories.forEach(function (s) {
+      _.each($scope.stories, function (story) {
         // ensure each story has a building_id defined
-        if (s.building_id != the_id) {
-          s.building_id = the_id;
-        }
+        if (story.building_id != id) story.building_id = id;
       });
-      Shared.setBuildingId(the_id);
       $log.debug('Submitting stories');
 
       var params = Shared.defaultParams();
-      params['data'] = $scope.stories;
+      params.data = $scope.stories;
       data.bulkSync('building_stories', params).then(success).catch(failure);
 
       function success(response) {
@@ -312,5 +311,4 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     }
 
   };
-}
-]);
+}]);

@@ -1,12 +1,10 @@
 <div class="row pad-top-20 pad-bot-20">
   <div class="col-md-12">
-    <button type="button" ng-hide="applySettingsActive" ng-click="openLuminaireEditorModal()" class="btn btn-info">
-      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Luminaires
-    </button>
     <button type="button" ng-show="applySettingsActive" ng-click="data.selectAll(lpdGridApi)" class="btn btn-info">Select All</button>
     <button type="button" ng-show="applySettingsActive" ng-click="data.clearAll(lpdGridApi)" class="btn btn-info">Clear All</button>
     <div class="pull-right">
-      <button type="button" ng-hide="applySettingsActive" ng-click="data.restoreLPDDefaults(lpdGridApi)" class="btn btn-info" ng-disabled="!data.modifiedLPDDefaults()">Restore LPD Defaults</button>
+      <button type="button" ng-hide="applySettingsActive || selected.space" ng-click="data.restoreLPDDefaults(lpdGridApi)" class="btn btn-info" ng-disabled="!data.modifiedLPDDefaults()">Restore All LPD Defaults</button>
+      <button type="button" ng-hide="applySettingsActive || !selected.space" ng-click="data.restoreLPDDefaults(lpdGridApi, selected.space)" class="btn btn-info" ng-disabled="!data.modifiedLPDDefaults(selected.space)">Restore LPD Defaults</button>
       <button type="button" ng-hide="applySettingsActive" ng-click="applySettings()" class="btn btn-info" ng-disabled="!selected.space">Apply Settings</button>
       <div class="btn-group" dropdown ng-show="applySettingsActive">
         <button type="button" class="btn btn-info" ng-click="confirmApplySettings()">Select Rows to Update...</button>
@@ -27,6 +25,9 @@
     <div class="col-md-12">
       <button type="button" ng-hide="applySettingsActive" ng-click="data.addLightingSystem()" class="btn btn-info">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lighting System
+      </button>
+      <button type="button" ng-hide="applySettingsActive" ng-click="openLuminaireEditorModal()" class="btn btn-info">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Luminaires
       </button>
       <div class="pull-right">
         <button type="button" ng-hide="applySettingsActive" ng-click="data.deleteLightingSystem(selected, luminaireGridApi)" class="btn btn-danger" ng-disabled="!selected.lightingSystem">Delete</button>

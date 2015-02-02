@@ -3,28 +3,24 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
   Shared.setIds($stateParams);
   $scope.project = project;
   $scope.plants = plants;
-  $scope.has_shw = 0;
   _.each($scope.plants, function (plant) {
-    if (plant.type == 'ServiceHotWater') $scope.has_shw = 1;
+    if (plant.type == 'ServiceHotWater') {
+      $scope.has_shw = true;
+      return false;
+    }
   });
-  $log.debug('has_shw is: ', $scope.has_shw);
 
   $scope.setModified = function (btn) {
     Shared.setModified();
-    $log.debug('In setModified');
     // warn user that this will delete shw plant if one is present
     // only warn when there is a shw plant added
-    if (btn) {
-      if ((btn == 'shw') && ($scope.has_shw) && ($scope.project.exceptional_condition_water_heater == 'Yes')) {
-        $log.debug('Modal should open here');
-        var modalInstance = $modal.open({
-          templateUrl: 'project/shw.html',
-          controller: 'ModalSHWModifiedCtrl'
-        });
-        modalInstance.result.catch(function (response) {
+    if (btn == 'shw' && $scope.has_shw && $scope.project.exceptional_condition_water_heater == 'Yes') {
+      $modal.open({
+        templateUrl: 'project/shw.html',
+        controller: 'ModalSHWModifiedCtrl'
+      }).result.catch(function () {
           $scope.project.exceptional_condition_water_heater = 'No';
         });
-      }
     }
   };
 
@@ -68,16 +64,14 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
         params.data = $scope.plants;
         data.bulkSync('fluid_systems', params).then(success).catch(failure);
 
-        function success (response) {
+        function success(response) {
           toaster.pop('success', 'Service Hot Water successfully removed.');
           $location.path(Shared.projectPath());
         }
 
         function failure(response) {
-
           $log.error('Failure removing SHW from Projects tab', response);
           toaster.pop('error', 'An error occurred while removing Service Hot Water from the project');
-
         }
 
       }

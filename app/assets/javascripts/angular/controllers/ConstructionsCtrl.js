@@ -368,13 +368,13 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
     }
 
     var construction_defaults = {};
-    $scope.panels.forEach(function (panel) {
+    _.each($scope.panels, function (panel) {
       construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
     });
-    $scope.doorPanels.forEach(function (panel) {
+    _.each($scope.doorPanels, function (panel) {
       construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
     });
-    $scope.fenPanels.forEach(function (panel) {
+    _.each($scope.fenPanels, function (panel) {
       construction_defaults[panel.name] = panel.selected ? panel.selected.id : null;
     });
 
