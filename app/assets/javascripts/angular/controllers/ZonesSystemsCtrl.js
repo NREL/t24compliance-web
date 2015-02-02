@@ -8,7 +8,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'Shared', function ($scope, Shar
     id: '',
     value: ''
   }];
- // $scope.plenumZonesHash = {};
+  // $scope.plenumZonesHash = {};
   _.each($scope.data.zones, function (zone, index) {
     if (zone.type === 'Plenum') {
       $scope.plenumZonesArr.push({

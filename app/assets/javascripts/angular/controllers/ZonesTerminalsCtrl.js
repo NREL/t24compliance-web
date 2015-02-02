@@ -194,7 +194,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
       filters: Shared.numberFilter(),
       type: 'number',
       minWidth: min_width + 20,
-      secondLine: Shared.html('W/cfm'),
+      secondLine: Shared.html('W / cfm'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.type.indexOf('Fan') == -1) {
           return 'disabled-cell';
@@ -224,6 +224,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
     data: $scope.data.terminals,
     enableCellEditOnFocus: true,
     enableFiltering: true,
+    enablePinning: false,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
     multiSelect: false,
@@ -240,42 +241,41 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();
+
+          var zoneIndex = $scope.data.zones.indexOf(rowEntity);
+          if (colDef.name == 'name') {
+            var unique = Shared.checkUnique($scope.data.zones, newValue, zoneIndex);
+            if (!unique) rowEntity.name = oldValue;
+          } else if (colDef.name == 'type') {
+            // todo: see if we need to null any fields (the ones that now become N/A)
+            if (newValue == 'Uncontrolled') {
+              rowEntity.parallel_box_fan_flow_fraction = null;
+              rowEntity.fan_power_per_flow = null;
+              rowEntity.induction_ratio = null;
+              rowEntity.induced_air_zone_reference = null;
+              rowEntity.reheat_control_method = null;
+              rowEntity.heating_air_flow_maximum = null;
+              rowEntity.primary_air_flow_minimum = null;
+            } else if (newValue == 'VAVNoReheatBox') {
+              rowEntity.parallel_box_fan_flow_fraction = null;
+              rowEntity.fan_power_per_flow = null;
+              rowEntity.induction_ratio = null;
+              rowEntity.induced_air_zone_reference = null;
+              rowEntity.reheat_control_method = null;
+              rowEntity.heating_air_flow_maximum = null;
+            } else if (newValue == 'VAVReheatBox') {
+              rowEntity.parallel_box_fan_flow_fraction = null;
+              rowEntity.fan_power_per_flow = null;
+              rowEntity.induction_ratio = null;
+              rowEntity.induced_air_zone_reference = null;
+            } else if (newValue == 'ParallelFanBox' || newValue == 'SeriesFanBox') {
+              rowEntity.reheat_control_method = null;
+              rowEntity.heating_air_flow_maximum = null;
+            }
+
+            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+          }
         }
-
-        if (colDef.name == 'type') {
-          // todo: see if we need to null any fields (the ones that now become N/A)
-          if (newValue == 'Uncontrolled') {
-            rowEntity.parallel_box_fan_flow_fraction = null;
-            rowEntity.fan_power_per_flow = null;
-            rowEntity.induction_ratio = null;
-            rowEntity.induced_air_zone_reference = null;
-            rowEntity.reheat_control_method = null;
-            rowEntity.heating_air_flow_maximum = null;
-            rowEntity.primary_air_flow_minimum = null;
-          }
-          else if (newValue == 'VAVNoReheatBox') {
-            rowEntity.parallel_box_fan_flow_fraction = null;
-            rowEntity.fan_power_per_flow = null;
-            rowEntity.induction_ratio = null;
-            rowEntity.induced_air_zone_reference = null;
-            rowEntity.reheat_control_method = null;
-            rowEntity.heating_air_flow_maximum = null;
-          }
-          else if (newValue == 'VAVReheatBox') {
-            rowEntity.parallel_box_fan_flow_fraction = null;
-            rowEntity.fan_power_per_flow = null;
-            rowEntity.induction_ratio = null;
-            rowEntity.induced_air_zone_reference = null;
-          }
-          else if (newValue == 'ParallelFanBox' || newValue == 'SeriesFanBox') {
-            rowEntity.reheat_control_method = null;
-            rowEntity.heating_air_flow_maximum = null;
-          }
-
-
-          gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-        }
-
       });
     }
   };
