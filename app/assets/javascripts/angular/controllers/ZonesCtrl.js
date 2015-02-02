@@ -8,6 +8,46 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     terminals: terminals
   };
 
+  // Load saved spaces
+  _.each($scope.data.spaces, function (space, spaceIndex) {
+    space.surfaces = [];
+    _.each(['interior_walls', 'exterior_walls', 'underground_walls', 'interior_floors', 'exterior_floors', 'underground_floors', 'roofs'], function (surfaceType) {
+      _.each(space[surfaceType], function (surface) {
+        surface.subsurfaces = [];
+        _.each(['doors', 'skylights', 'windows'], function (subsurfaceType) {
+          _.each(surface[subsurfaceType], function (subsurface) {
+            surface.subsurfaces.push(subsurface);
+          });
+          delete surface[subsurfaceType];
+        });
+        if (surfaceType == 'interior_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Interior';
+        } else if (surfaceType == 'exterior_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Exterior';
+        } else if (surfaceType == 'underground_floors') {
+          surface.type = 'Floor';
+          surface.boundary = 'Underground';
+        } else if (surfaceType == 'interior_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Interior';
+        } else if (surfaceType == 'exterior_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Exterior';
+        } else if (surfaceType == 'underground_walls') {
+          surface.type = 'Wall';
+          surface.boundary = 'Underground';
+        } else if (surfaceType == 'roofs') {
+          surface.type = 'Roof';
+          surface.boundary = null;
+        }
+        space.surfaces.push(surface);
+      });
+      delete space[surfaceType];
+    });
+  });
+
   // pull exhaust systems out of systems (will be pushed back together before saving)
   $scope.data.exhausts = _.filter($scope.data.systems, {
     type: 'Exhaust'
