@@ -536,8 +536,8 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     filters: Shared.numberFilter(),
     minWidth: min_width,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
-    enableHiding:false
-  },{
+    enableHiding: false
+  }, {
     name: 'draft_fan_power',
     displayName: 'Draft Fan Power',
     field: 'water_heater.draft_fan_power',
@@ -547,7 +547,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     minWidth: min_width,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     enableHiding: false
-  },{
+  }, {
     name: 'fuel_source',
     displayName: 'Fuel Source',
     field: 'water_heater.fuel_source',
@@ -555,7 +555,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.water_heaters_fuel_source_enums
-  },{
+  }, {
     name: 'off_cycle_fuel_source',
     displayName: 'Off Cycle Fuel Source',
     field: 'water_heater.off_cycle_fuel_source',
@@ -564,7 +564,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editableCellTemplate: 'ui-grid/dropdownEditor',
     minWidth: min_width + 50,
     editDropdownOptionsArray: Enums.enumsArr.water_heaters_off_cycle_fuel_source_enums
-  },{
+  }, {
     name: 'off_cycle_parasitic_losses',
     displayName: 'Off Cycle Parasitic Losses',
     field: 'water_heater.off_cycle_parasitic_losses',
@@ -574,7 +574,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     minWidth: min_width + 50,
     enableHiding: false
-  },{
+  }, {
     name: 'on_cycle_fuel_source',
     displayName: 'On Cycle Fuel Source',
     field: 'water_heater.on_cycle_fuel_source',
@@ -583,7 +583,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editableCellTemplate: 'ui-grid/dropdownEditor',
     minWidth: min_width + 50,
     editDropdownOptionsArray: Enums.enumsArr.water_heaters_on_cycle_fuel_source_enums
-  },{
+  }, {
     name: 'storage_capacity',
     displayName: 'Storage Capacity',
     field: 'water_heater.storage_capacity',
@@ -593,7 +593,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     minWidth: min_width,
     enableHiding: false
-  },{
+  }, {
     name: 'thermal_efficiency',
     displayName: 'Thermal Efficiency',
     field: 'water_heater.thermal_efficiency',
@@ -603,7 +603,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
     minWidth: min_width,
     enableHiding: false
-  },{
+  }, {
     name: 'standby_loss_fraction',
     displayName: 'Standby Loss Fraction',
     field: 'water_heater.standby_loss_fraction',
@@ -628,7 +628,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.fan = [{
@@ -637,7 +637,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     filters: Shared.textFilter(),
-    pinnedLeft:true,
+    pinnedLeft: true,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_name',
@@ -646,7 +646,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     minWidth: min_width,
     filters: Shared.textFilter(),
-    pinnedLeft:true,
+    pinnedLeft: true,
     headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
   }, {
     name: 'fan_classification',
@@ -791,7 +791,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   $scope.gridCols.ptac.coil_cooling = [{
     name: 'name',
     displayName: 'System Name',
-    enablePinning:false,
+    enablePinning: false,
     enableHiding: false,
     filters: Shared.textFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -801,7 +801,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_cooling.name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.ptac.coil_heating = [{
@@ -809,7 +809,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_heating_name',
@@ -817,7 +817,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_heating.name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.fpfc.general = [{
@@ -825,7 +825,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.fpfc.general = angular.copy($scope.gridCols.ptac.general);
@@ -837,7 +837,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'sub_type',
@@ -846,7 +846,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     editDropdownOptionsArray: Enums.enumsArr.air_systems_sub_type_enums,
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.szac.fan = angular.copy($scope.gridCols.ptac.fan);
@@ -855,7 +855,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_name',
@@ -863,7 +863,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_cooling.name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_dxeer',
@@ -872,7 +872,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     enableHiding: false,
     filters: Shared.numberFilter(),
     type: 'number',
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
   $scope.gridCols.szac.coil_heating = [{
@@ -880,7 +880,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_heating_name',
@@ -888,7 +888,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_heating.name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_heating_furnace_afue',
@@ -896,7 +896,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     field: 'coil_heating.furnace_afue',
     enableHiding: false,
     type: 'number',
-    enablePinning:false,
+    enablePinning: false,
     filters: Shared.numberFilter(),
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }];
@@ -905,14 +905,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'System Name',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'reheat_control_method',
     displayName: 'Reheat Control',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_reheat_control_method_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -921,7 +921,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     displayName: 'Cooling Control',
     enableHiding: false,
     filters: Shared.textFilter(),
-    enablePinning:false,
+    enablePinning: false,
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_cooling_control_enums,
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
@@ -996,27 +996,30 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
                   $scope.display_coils_cooling = calculateCoilsCooling();
                 }
 
-                if (colDef.name == 'fan_classification') {
+                var systemIndex = $scope.systems[type].indexOf(rowEntity);
+                if (colDef.name == 'name') {
+                  var unique = Shared.checkUnique($scope.systems[type], newValue, systemIndex);
+                  if (!unique) {
+                    rowEntity.name = oldValue;
+                  } else {
+                    // go through primary_air_conditioning_system_reference on zones and update if needed
+                    $log.debug('System name changed from', oldValue, 'to', newValue);
+                    _.each($scope.zones, function (zone) {
+                      if (zone.primary_air_conditioning_system_reference == oldValue) {
+                        $log.debug('Updating zone:', zone.name);
+                        zone.primary_air_conditioning_system_reference = newValue;
+                        update_zones = 1;
+                      }
+                    });
+                  }
+                } else if (colDef.name == 'fan_classification') {
                   rowEntity.fan.centrifugal_type = null;
                   gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-                }
-
-                if (colDef.name == 'fan_modeling_method') {
+                } else if (colDef.name == 'fan_modeling_method') {
                   rowEntity.fan.motor_bhp = null;
                   rowEntity.fan.flow_efficiency = null;
                   rowEntity.fan.total_static_pressure = null;
                   gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-                }
-                if (colDef.name == 'name') {
-                  // go through primary_air_conditioning_system_reference on zones and update if needed
-                  $log.debug('System name changed from ', oldValue, ' to ', newValue);
-                  _.each($scope.zones, function(zone) {
-                     if (zone.primary_air_conditioning_system_reference == oldValue) {
-                       $log.debug('Updating zone: ', zone.name);
-                       zone.primary_air_conditioning_system_reference = newValue;
-                       update_zones = 1;
-                     }
-                  });
                 }
               }
             });
@@ -1074,11 +1077,9 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
       };
       if (tab == 'coil_heating') {
         $scope.gridPlantOptions[type][tab].data = 'display_coils_heating';
-      }
-      else if (tab == 'coil_cooling') {
+      } else if (tab == 'coil_cooling') {
         $scope.gridPlantOptions[type][tab].data = 'display_coils_cooling';
-      }
-      else {
+      } else {
         $scope.gridPlantOptions[type][tab].data = $scope.plants[type];
       }
     });
@@ -1221,113 +1222,112 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   // add functions
   // NOTE:  this also adds fields that are defaulted.
   // They won't be shown to users, but will be passed to rails
-  $scope.addSystem = function (name) {
-    var index;
-    switch (name) {
+  $scope.addSystem = function (type) {
+    var name;
+    switch (type) {
       case 'ptac':
-        index = $scope.systems.ptac.length + 1;
+        name = Shared.uniqueName($scope.systems.ptac, _.template('PTAC <%= num %>'));
         $scope.systems.ptac.push({
-          name: 'PTAC ' + index,
+          name: name,
           type: 'PTAC',
           fan: {
-            name: 'PTAC ' + index + ' Fan',
+            name: name + ' Fan',
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: 'PTAC ' + index + ' Cooling Coil',
+            name: name + ' Cooling Coil',
             type: 'DirectExpansion',
             condenser_type: 'Air'
           },
           coil_heating: {
-            name: 'PTAC ' + index + ' Heating Coil',
+            name: name + ' Heating Coil',
             type: 'HotWater'
           }
         });
         break;
       case 'fpfc':
-        index = $scope.systems.fpfc.length + 1;
+        name = Shared.uniqueName($scope.systems.fpfc, _.template('FPFC <%= num %>'));
         $scope.systems.fpfc.push({
-          name: 'FPFC ' + index,
+          name: name,
           type: 'FPFC',
           fan: {
-            name: 'FPFC ' + index + ' Fan',
+            name: name + ' Fan',
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: 'FPFC ' + index + ' Cooling Coil',
+            name: name + ' Cooling Coil',
             type: 'ChilledWater'
           },
           coil_heating: {
-            name: 'FPFC ' + index + ' Heating Coil',
+            name: name + ' Heating Coil',
             type: 'HotWater'
           }
         });
         break;
       case 'szac':
-        index = $scope.systems.szac.length + 1;
+        name = Shared.uniqueName($scope.systems.szac, _.template('PSZ <%= num %>'));
         $scope.systems.szac.push({
-          name: 'PSZ' + index,
+          name: name,
           type: 'SZAC',
           sub_type: 'SinglePackage',
           fan: {
-            name: 'PSZ' + index + ' Fan',
+            name: name + ' Fan',
             control_method: 'ConstantVolume'
           },
           coil_cooling: {
-            name: 'PSZ' + index + 'Cooling Coil',
+            name: name + ' Cooling Coil',
             type: 'DirectExpansion'
-
           },
           coil_heating: {
-            name: 'PSZ' + index + ' Heating Coil',
+            name: name + ' Heating Coil',
             type: 'Furnace',
             fuel_source: 'NaturalGas'
           }
         });
         break;
       case 'pvav':
-        index = $scope.systems.pvav.length + 1;
+        name = Shared.uniqueName($scope.systems.pvav, _.template('PVAV <%= num %>'));
         $scope.systems.pvav.push({
-          name: 'PVAV' + index,
+          name: name,
           type: 'PVAV',
           cooling_control: 'WarmestResetFlowFirst',
           fan: {
-            name: 'PVAV ' + index + ' Fan',
+            name: name + ' Fan',
             control_method: 'VariableSpeedDrive'
           },
           coil_cooling: {
-            name: 'PVAV ' + index + ' Cooling Coil',
+            name: name + ' Cooling Coil',
             type: 'DirectExpansion',
             fuel_source: 'Electric',
             number_cooling_stages: 2
           },
           coil_heating: {
-            name: 'PVAV ' + index + ' Heating Coil',
+            name: name + ' Heating Coil',
             type: 'HotWater'
           }
         });
         break;
       case 'vav':
-        index = $scope.systems.vav.length + 1;
+        name = Shared.uniqueName($scope.systems.vav, _.template('VAV <%= num %>'));
         $scope.systems.vav.push({
-          name: 'VAV' + index,
+          name: name,
           type: 'VAV',
           fan: {
-            name: 'VAV ' + index + ' Fan',
+            name: name + ' Fan',
             control_method: 'VariableSpeedDrive'
           },
           coil_cooling: {
-            name: 'VAV ' + index + ' Cooling Coil',
+            name: name + ' Cooling Coil',
             type: 'ChilledWater'
           },
           coil_heating: {
-            name: 'VAV ' + index + ' Heating Coil',
+            name: name + ' Heating Coil',
             type: 'HotWater'
           }
         });
         break;
     }
-    addDependentPlants(name);
+    addDependentPlants(type);
     $scope.display_coils_heating = calculateCoilsHeating();
     $scope.display_coils_cooling = calculateCoilsCooling();
   };
@@ -1483,16 +1483,16 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         if (!$scope.plants.shw.length) {
           $log.debug('adding SHW');
           $scope.plants.shw.push({
-             name: 'SHWFluidSys',
-             type: 'ServiceHotWater',
-             fluid_segments: [{
-               name: 'SHWSupply',
-               type: 'PrimarySupply'
-             },{
-               name: 'SHWMakeup',
-               type: 'MakeupFluid',
-               source: 'MunicipalWater'
-             }],
+            name: 'SHWFluidSys',
+            type: 'ServiceHotWater',
+            fluid_segments: [{
+              name: 'SHWSupply',
+              type: 'PrimarySupply'
+            }, {
+              name: 'SHWMakeup',
+              type: 'MakeupFluid',
+              source: 'MunicipalWater'
+            }],
             water_heater: {
               name: 'WaterHeater',
               fluid_segment_out_reference: 'SHWSupply',
@@ -1504,26 +1504,26 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
   }
 
 
-  $scope.duplicateSystem = function (name) {
-    var new_item = angular.copy($scope.selected[name]);
-    $log.debug('name:');
-    $log.debug(name);
+  $scope.duplicateSystem = function (type) {
+    var new_item = angular.copy($scope.selected[type]);
+    $log.debug('type:', type);
     $log.debug($scope.selected);
     delete new_item.$$hashKey;
-    new_item.name += ' duplicate';
-    $scope.systems[name].push(new_item);
+    var prefix = (type == 'szac') ? 'PSZ' : type.toUpperCase();
+    new_item.name = Shared.uniqueName($scope.systems[type], _.template(prefix + ' <%= num %>'));
+    $scope.systems[type].push(new_item);
     // recalculate coils
     $scope.display_coils_heating = calculateCoilsHeating();
     $scope.display_coils_cooling = calculateCoilsCooling();
   };
 
-  $scope.deleteSystem = function (name) {
-    var index = $scope.systems[name].indexOf($scope.selected[name]);
-    $scope.systems[name].splice(index, 1);
+  $scope.deleteSystem = function (type) {
+    var index = $scope.systems[type].indexOf($scope.selected[type]);
+    $scope.systems[type].splice(index, 1);
     if (index > 0) {
-      $scope.gridApi[name].selection.toggleRowSelection($scope.systems[name][index - 1]);
+      $scope.gridSystemApi[type].selection.toggleRowSelection($scope.systems[type][index - 1]);
     } else {
-      $scope.selected[name] = null;
+      $scope.selected[type] = null;
     }
     //recalculate coils
     $scope.display_coils_heating = calculateCoilsHeating();
@@ -1580,6 +1580,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           Shared.resetModified();
           toaster.pop('success', 'Zones HVAC system references successfully updated.');
         }
+
         // zones update failure
         function failure(response) {
           $log.error('Failure updating zones from systems tab', response);
@@ -1587,12 +1588,14 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
         }
 
       }
+
       // plants update failure
       function failure(response) {
         $log.error('Failure submitting plants', response);
         toaster.pop('error', 'An error occurred while saving plants');
       }
     }
+
     // systems update failure
     function failure(response) {
       $log.error('Failure submitting systems', response);
