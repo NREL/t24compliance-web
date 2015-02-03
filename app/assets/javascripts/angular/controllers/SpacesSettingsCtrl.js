@@ -17,7 +17,15 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     }, {
       name: 'space_function',
       enableHiding: false,
-      cellEditableCondition: $scope.data.applySettingsCondition,
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.conditioning_type == 'Plenum') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return $scope.row.entity.conditioning_type != 'Plenum';
+      },
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownOptionsArray: Enums.enumsArr.spaces_space_function_enums,
       filters: Shared.textFilter(),
@@ -31,8 +39,14 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         if (row.entity.occupant_density != row.entity.occupant_density_default) {
           return 'modified-cell';
         }
+        if (row.entity.conditioning_type == 'Plenum') {
+          return 'disabled-cell';
+        }
       },
-      cellEditableCondition: $scope.data.applySettingsCondition,
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return $scope.row.entity.conditioning_type != 'Plenum';
+      },
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -44,8 +58,14 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         if (row.entity.hot_water_heating_rate != row.entity.hot_water_heating_rate_default) {
           return 'modified-cell';
         }
+        if (row.entity.conditioning_type == 'Plenum') {
+          return 'disabled-cell';
+        }
       },
-      cellEditableCondition: $scope.data.applySettingsCondition,
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return $scope.row.entity.conditioning_type != 'Plenum';
+      },
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -57,8 +77,14 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
         if (row.entity.receptacle_power_density != row.entity.receptacle_power_density_default) {
           return 'modified-cell';
         }
+        if (row.entity.conditioning_type == 'Plenum') {
+          return 'disabled-cell';
+        }
       },
-      cellEditableCondition: $scope.data.applySettingsCondition,
+      cellEditableCondition: function ($scope) {
+        if ($scope.grid.appScope.applySettingsActive) return false;
+        return $scope.row.entity.conditioning_type != 'Plenum';
+      },
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],

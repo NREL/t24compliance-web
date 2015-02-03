@@ -291,6 +291,14 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
       term: input
     }];
   };
+  
+  service.notFilter = function (input) {
+    return [{
+      condition: uiGridConstants.filter.NOT_EQUAL,
+      noTerm: true,
+      term: input
+    }];
+  };
 
   service.numberFilter = function () {
     return [{

@@ -15,6 +15,11 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       filters: Shared.textFilter()
     }, {
+      name: 'conditioning_type',
+      enableFiltering: false,
+      filters: Shared.notFilter('Plenum'),
+      visible: false
+    }, {
       name: 'process_electrical_power_density',
       displayName: 'Process Electric',
       secondLine: Shared.html('W / ft<sup>2</sup>'),

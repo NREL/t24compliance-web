@@ -15,6 +15,11 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
+      name: 'conditioning_type',
+      enableFiltering: false,
+      filters: Shared.notFilter('Plenum'),
+      visible: false
+    }, {
       name: 'gas_equipment_power_density',
       displayName: 'Gas Equipment',
       secondLine: Shared.html('Btu / (hr ft<sup>2</sup>)'),

@@ -20,14 +20,15 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
       enableHiding: false,
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         var storyIndex = null;
-        _.each($scope.data.storiesArr, function (story, index) {
-          if (story.id == row.entity.building_story_id) {
-            storyIndex = index;
-            return false;
+        var story = _.find($scope.data.stories, {id: row.entity.building_story_id});
+        if (row.entity.conditioning_type == 'Plenum') {
+          if (row.entity.floor_to_ceiling_height != (story.floor_to_floor_height - story.floor_to_ceiling_height)) {
+            return 'modified-cell';
           }
-        });
-        if (row.entity.floor_to_ceiling_height != $scope.data.stories[storyIndex].floor_to_ceiling_height) {
-          return 'modified-cell';
+        } else {
+          if (row.entity.floor_to_ceiling_height != story.floor_to_ceiling_height) {
+            return 'modified-cell';
+          }
         }
       },
       cellEditableCondition: $scope.data.applySettingsCondition,
@@ -116,14 +117,10 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
             $scope.data.calculateLPD($scope.data.spaces.indexOf(rowEntity));
           } else if (colDef.name == 'building_story_id') {
             // Update floor_to_ceiling_height if it is unchanged
-            var oldStoryIndex = null;
-            var newStoryIndex = null;
-            _.each($scope.data.storiesArr, function (story, index) {
-              if (story.id == oldValue) oldStoryIndex = index;
-              if (story.id == newValue) newStoryIndex = index;
-            });
-            if (rowEntity.floor_to_ceiling_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
-              rowEntity.floor_to_ceiling_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+            var oldStory = _.find($scope.data.stories, {id: oldValue});
+            var newStory = _.find($scope.data.stories, {id: newValue});
+            if (rowEntity.floor_to_ceiling_height == oldStory.floor_to_ceiling_height) {
+              rowEntity.floor_to_ceiling_height = newStory.floor_to_ceiling_height;
               // Update default lighting system mounting height
               _.each($scope.data.lightingSystems, function (lightingSystem) {
                 if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
@@ -139,6 +136,75 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
                 surface.adjacent_space_reference = null;
               }
             });
+          } else if (colDef.name == 'conditioning_type') {
+            if (newValue == 'Plenum') {
+              var story = _.find($scope.data.stories, {id: rowEntity.building_story_id});
+              if (rowEntity.floor_to_ceiling_height == story.floor_to_ceiling_height) {
+                rowEntity.floor_to_ceiling_height = Math.max(story.floor_to_floor_height - story.floor_to_ceiling_height, 0);
+              }
+
+              rowEntity.space_function = 'Unoccupied-Exclude from Gross Floor Area';
+
+              // Reset defaults
+              var defaults = _.find($scope.data.spaceFunctionDefaults, {
+                name: rowEntity.space_function
+              });
+              rowEntity.occupant_density = defaults.occupant_density;
+              rowEntity.occupant_density_default = defaults.occupant_density;
+              rowEntity.hot_water_heating_rate = defaults.hot_water_heating_rate;
+              rowEntity.hot_water_heating_rate_default = defaults.hot_water_heating_rate;
+              rowEntity.receptacle_power_density = defaults.receptacle_power_density;
+              rowEntity.receptacle_power_density_default = defaults.receptacle_power_density;
+              rowEntity.exhaust_per_area = defaults.exhaust_per_area;
+              rowEntity.exhaust_per_area_default = defaults.exhaust_per_area;
+              rowEntity.exhaust_air_changes_per_hour = defaults.exhaust_air_changes_per_hour;
+              rowEntity.exhaust_air_changes_per_hour_default = defaults.exhaust_air_changes_per_hour;
+
+              rowEntity.function_schedule_group = defaults.function_schedule_group == '- specify -' ? null : defaults.function_schedule_group;
+              rowEntity.ventilation_per_person = defaults.ventilation_per_person;
+              rowEntity.ventilation_per_area = defaults.ventilation_per_area;
+              rowEntity.ventilation_air_changes_per_hour = defaults.ventilation_air_changes_per_hour;
+
+              rowEntity.commercial_refrigeration_epd = defaults.commercial_refrigeration_epd;
+              rowEntity.commercial_refrigeration_epd_default = defaults.commercial_refrigeration_epd;
+
+              rowEntity.gas_equipment_power_density = defaults.gas_equipment_power_density;
+              rowEntity.gas_equipment_power_density_default = defaults.gas_equipment_power_density;
+
+              rowEntity.lighting_input_method = 'LPD';
+              rowEntity.interior_lighting_power_density_regulated = defaults.interior_lighting_power_density_regulated;
+              rowEntity.interior_lighting_power_density_regulated_default = defaults.interior_lighting_power_density_regulated;
+              rowEntity.interior_lighting_power_density_non_regulated = defaults.interior_lighting_power_density_non_regulated;
+              rowEntity.interior_lighting_power_density_non_regulated_default = defaults.interior_lighting_power_density_non_regulated;
+
+              // Reset values
+              rowEntity.exhaust_per_space = null;
+              rowEntity.total_exhaust = Shared.calculateTotalExhaust(rowEntity);
+
+              rowEntity.process_electrical_power_density = null;
+              rowEntity.elevator_count = null;
+              rowEntity.escalator_count = null;
+              rowEntity.process_electrical_radiation_fraction = null;
+              rowEntity.process_electrical_latent_fraction = null;
+              rowEntity.process_electrical_lost_fraction = null;
+              rowEntity.elevator_lost_fraction = null;
+              rowEntity.escalator_lost_fraction = null;
+
+              rowEntity.process_gas_power_density = null;
+              rowEntity.process_gas_radiation_fraction = null;
+              rowEntity.process_gas_latent_fraction = null;
+              rowEntity.process_gas_lost_fraction = null;
+
+              _.remove($scope.data.lightingSystems, {space: $scope.data.spaces.indexOf(rowEntity)});
+
+              gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+            } else if (oldValue == 'Plenum') {
+              var story = _.find($scope.data.stories, {id: rowEntity.building_story_id});
+              if (rowEntity.floor_to_ceiling_height == story.floor_to_floor_height - story.floor_to_ceiling_height) {
+                rowEntity.floor_to_ceiling_height = story.floor_to_ceiling_height;
+              }
+              gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+            }
           }
         }
       });

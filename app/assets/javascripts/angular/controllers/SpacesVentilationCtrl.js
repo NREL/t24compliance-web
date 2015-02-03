@@ -15,6 +15,11 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
+      name: 'conditioning_type',
+      enableFiltering: false,
+      filters: Shared.notFilter('Plenum'),
+      visible: false
+    }, {
       name: 'space_function',
       enableCellEdit: false,
       enableHiding: false,

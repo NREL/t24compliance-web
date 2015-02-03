@@ -31,6 +31,11 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       filters: Shared.textFilter()
     }, {
+      name: 'conditioning_type',
+      enableFiltering: false,
+      filters: Shared.notFilter('Plenum'),
+      visible: false
+    }, {
       name: 'lighting_input_method',
       enableHiding: false,
       cellEditableCondition: function ($scope) {
