@@ -99,11 +99,11 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
     Shared.setModified();
 
     var replacement = {
-      gas_equipment: $scope.selected.space.gas_equipment,
-      process_gas: $scope.selected.space.process_gas,
-      gas_radiant_fraction: $scope.selected.space.gas_radiant_fraction,
-      gas_latent_fraction: $scope.selected.space.gas_latent_fraction,
-      gas_lost_fraction: $scope.selected.space.gas_lost_fraction
+      gas_equipment_power_density: $scope.selected.space.gas_equipment_power_density,
+      process_gas_power_density: $scope.selected.space.process_gas_power_density,
+      process_gas_radiation_fraction: $scope.selected.space.process_gas_radiation_fraction,
+      process_gas_latent_fraction: $scope.selected.space.process_gas_latent_fraction,
+      process_gas_lost_fraction: $scope.selected.space.process_gas_lost_fraction
     };
     var rows = $scope.gridApi.selection.getSelectedRows();
     _.each(rows, function (row) {
