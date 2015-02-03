@@ -112,21 +112,24 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
                 lightingSystem.luminaire_mounting_height = newValue;
               }
             });
-          } else if (colDef.name == 'area') {
-            $scope.data.updateTotalExhaust(rowEntity);
-            $scope.data.calculateLPD($scope.data.spaces.indexOf(rowEntity));
           } else if (colDef.name == 'building_story_id') {
             // Update floor_to_ceiling_height if it is unchanged
             var oldStory = _.find($scope.data.stories, {id: oldValue});
             var newStory = _.find($scope.data.stories, {id: newValue});
-            if (rowEntity.floor_to_ceiling_height == oldStory.floor_to_ceiling_height) {
-              rowEntity.floor_to_ceiling_height = newStory.floor_to_ceiling_height;
-              // Update default lighting system mounting height
-              _.each($scope.data.lightingSystems, function (lightingSystem) {
-                if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
-                  lightingSystem.luminaire_mounting_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
-                }
-              });
+            if (rowEntity.conditioning_type == 'Plenum') {
+              if (rowEntity.floor_to_ceiling_height == (oldStory.floor_to_floor_height - oldStory.floor_to_ceiling_height)) {
+                rowEntity.floor_to_ceiling_height = newStory.floor_to_floor_height - newStory.floor_to_ceiling_height;
+              }
+            } else {
+              if (rowEntity.floor_to_ceiling_height == oldStory.floor_to_ceiling_height) {
+                rowEntity.floor_to_ceiling_height = newStory.floor_to_ceiling_height;
+                // Update default lighting system mounting height
+                _.each($scope.data.lightingSystems, function (lightingSystem) {
+                  if (lightingSystem.space == spaceIndex && lightingSystem.luminaire_mounting_height == $scope.data.stories[oldStoryIndex].floor_to_ceiling_height) {
+                    lightingSystem.luminaire_mounting_height = $scope.data.stories[newStoryIndex].floor_to_ceiling_height;
+                  }
+                });
+              }
             }
             gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
 
@@ -136,6 +139,9 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
                 surface.adjacent_space_reference = null;
               }
             });
+          } else if (colDef.name == 'area') {
+            $scope.data.updateTotalExhaust(rowEntity);
+            $scope.data.calculateLPD($scope.data.spaces.indexOf(rowEntity));
           } else if (colDef.name == 'conditioning_type') {
             if (newValue == 'Plenum') {
               var story = _.find($scope.data.stories, {id: rowEntity.building_story_id});
