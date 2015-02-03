@@ -8,6 +8,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     spaces: spaces,
     constructionDefaults: constructionDefaults[0] || {},
     luminaires: luminaires,
+    luminairesModified: false,
     surfaces: [],
     subsurfaces: [],
     lightingSystems: []
@@ -845,6 +846,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
   $scope.data.addLuminaire = function () {
     Shared.setModified();
+    $scope.data.luminairesModified = true;
 
     var luminaire = {
       name: Shared.uniqueName($scope.data.luminaires, _.template('Luminaire <%= num %>')),
@@ -859,6 +861,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
   $scope.data.duplicateLuminaire = function (selected) {
     Shared.setModified();
+    $scope.data.luminairesModified = true;
 
     var selectedLuminaire = selected.luminaire;
 
@@ -874,6 +877,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
   };
   $scope.data.deleteLuminaire = function (selected, gridApi, luminaireGridApi) {
     Shared.setModified();
+    $scope.data.luminairesModified = true;
 
     var luminaireIndex = $scope.data.luminaires.indexOf(selected.luminaire);
 
@@ -1129,14 +1133,21 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
   // save
   $scope.submit = function () {
-    $log.debug('Submitting luminaires');
+    if ($scope.data.luminairesModified) {
+      $log.debug('Submitting luminaires');
 
-    var params = Shared.defaultParams();
-    params.data = $scope.data.luminaires;
-    data.bulkSync('luminaires', params).then(success).catch(failure);
+      var params = Shared.defaultParams();
+      params.data = $scope.data.luminaires;
+      data.bulkSync('luminaires', params).then(success).catch(failure);
+    } else {
+      success('Luminaires were not modified');
+    }
 
     function success(response) {
-      toaster.pop('success', 'Luminaires successfully saved');
+      if ($scope.data.luminairesModified) {
+        toaster.pop('success', 'Luminaires successfully saved');
+        $scope.data.luminairesModified = false;
+      }
 
       var spaces = angular.copy($scope.data.spaces);
       var surfaces = angular.copy($scope.data.surfaces);

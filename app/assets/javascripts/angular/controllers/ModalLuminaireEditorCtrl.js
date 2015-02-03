@@ -54,6 +54,7 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
         gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
           if (newValue != oldValue) {
             Shared.setModified();
+            $scope.data.luminairesModified = true;
 
             var luminaireIndex = $scope.data.luminaires.indexOf(rowEntity);
             if (colDef.name == 'name') {
