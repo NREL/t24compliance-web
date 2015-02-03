@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/jmdobry/angular-cache.git"
   },
-  "main": "./dist/angular-cache.min.js",
+  "main": "./dist/angular-cache.js",
   "ignore": [
     ".idea/",
     ".*",
@@ -25,22 +25,18 @@
     "libpeerconnection.log"
   ],
   "devDependencies": {
-    "angular-1.1.5": "angular-unstable#1.1.5",
-    "angular-1.2.16": "angular#1.2.16",
     "angular-1.2.25": "angular#1.2.25",
-    "angular-mocks-1.1.5": "angular-mocks-unstable#1.1.5",
-    "angular-mocks-1.2.16": "angular-mocks#1.2.16",
     "angular-mocks-1.2.25": "angular-mocks#1.2.25"
   },
-  "resolutions": {
-    "angular": "1.2.25"
+  "dependencies": {
+    "angular": ">=1.x"
   },
-  "version": "3.2.4",
-  "_release": "3.2.4",
+  "version": "3.2.5",
+  "_release": "3.2.5",
   "_resolution": {
     "type": "version",
-    "tag": "3.2.4",
-    "commit": "04597d0050eb156418d1ee2a5a4284697a1402eb"
+    "tag": "3.2.5",
+    "commit": "048e7a7c3e98e174992b365542b47a1a82ffe1a2"
   },
   "_source": "git://github.com/jmdobry/angular-cache.git",
   "_target": "*",

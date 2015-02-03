@@ -1,3 +1,7 @@
+/*!
+ * ui-grid - v3.0.0-RC.18-8fe4e49 - 2015-02-03
+ * Copyright (c) 2015 ; License: MIT 
+ */
 .ui-grid {
   border: 1px solid #d4d4d4;
   box-sizing: content-box;
@@ -98,6 +102,7 @@
 }
 .ui-grid-header-cell {
   position: relative;
+  box-sizing: border-box;
   float: left;
   top: 0;
   bottom: 0;

@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.0.0-RC.18-f8414e0 - 2015-01-30
+ * ui-grid - v3.0.0-RC.18-8fe4e49 - 2015-02-03
  * Copyright (c) 2015 ; License: MIT 
  */
 
@@ -2172,8 +2172,6 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
               if (event.originalEvent) {
                 event = event.originalEvent;
               }
-
-              event.preventDefault();
 
               var deltaX, deltaY, newX, newY;
               newX = event.targetTouches[0].screenX;
@@ -8071,13 +8069,15 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
     if (filter.exactRE) {
       return filter.exactRE.test(value);
     }
-    
+
     if (filter.condition === uiGridConstants.filter.NOT_EQUAL) {
-      return !angular.equals(value, term);
+      var regex = new RegExp('^' + term + '$');
+      return !regex.exec(value);
     }
 
     if (typeof(value) === 'number'){
-      var tempFloat = parseFloat(term);
+      // if the term has a decimal in it, it comes through as '9\.4', we need to take out the \
+      var tempFloat = parseFloat(term.replace(/\\./,'.'));
       if (!isNaN(tempFloat)) {
         term = tempFloat;
       }
@@ -19018,6 +19018,15 @@ module.filter('px', function() {
            *  <br/>GridOptions.showFooter must also be set to true.
            */
           gridOptions.enableFooterTotalSelected = gridOptions.enableFooterTotalSelected !== false;
+
+          /**
+           *  @ngdoc object
+           *  @name isRowSelectable
+           *  @propertyOf  ui.grid.selection.api:GridOptions
+           *  @description Makes it possible to specify a method that evaluates for each and sets its "enableSelection" property.
+           */
+
+          gridOptions.isRowSelectable = angular.isDefined(gridOptions.isRowSelectable) ? gridOptions.isRowSelectable : angular.noop;
         },
 
         /**
@@ -19224,6 +19233,12 @@ module.filter('px', function() {
                 };
 
                 uiGridCtrl.grid.addRowHeaderColumn(selectionRowHeaderDef);
+              }
+              
+              if (uiGridCtrl.grid.options.isRowSelectable !== angular.noop) {
+                uiGridCtrl.grid.registerRowBuilder(function(row, options) {
+                  row.enableSelection = uiGridCtrl.grid.options.isRowSelectable(row);
+                });
               }
             },
             post: function ($scope, $elm, $attrs, uiGridCtrl) {
