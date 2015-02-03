@@ -63,6 +63,16 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
+      name: 'fan_control_method',
+      displayName: 'Control Method',
+      field: 'fan.control_method',
+      enableHiding: false,
+      minWidth: min_width,
+      filters: Shared.textFilter(),
+      editableCellTemplate: 'ui-grid/dropdownEditor',
+      editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    }, {
       name: 'fan_classification',
       displayName: 'Classification',
       field: 'fan.classification',
@@ -91,6 +101,24 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
+      name: 'fan_flow_capacity',
+      displayName: 'Flow Capacity',
+      field: 'fan.flow_capacity',
+      secondLine: Shared.html('cfm'),
+      enableHiding: false,
+      minWidth: min_width,
+      filters: Shared.numberFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    }, {
+      name: 'fan_flow_minimum',
+      displayName: 'Flow Minimum',
+      field: 'fan.flow_minimum',
+      secondLine: Shared.html('cfm'),
+      enableHiding: false,
+      minWidth: min_width,
+      filters: Shared.numberFilter(),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
+    }, {
       name: 'fan_modeling_method',
       displayName: 'Modeling Method',
       field: 'fan.modeling_method',
@@ -101,23 +129,14 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       editDropdownOptionsArray: Enums.enumsArr.fans_modeling_method_enums,
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'fan_control_method',
-      displayName: 'Control Method',
-      field: 'fan.control_method',
+      name: 'fan_total_static_pressure',
+      displayName: 'Total Static Pressure',
+      field: 'fan.total_static_pressure',
       enableHiding: false,
-      minWidth: min_width,
-      filters: Shared.textFilter(),
-      editableCellTemplate: 'ui-grid/dropdownEditor',
-      editDropdownOptionsArray: Enums.enumsArr.fans_control_method_enums,
-      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
-    }, {
-      name: 'fan_flow_efficiency',
-      displayName: 'Fan Minimum',
-      field: 'fan.flow_efficiency',
-      enableHiding: false,
-      minWidth: min_width,
+      minWidth: min_width + 20,
       type: 'number',
       filters: Shared.numberFilter(),
+      secondLine: Shared.html('in. H<sub>2</sub>O'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.fan.modeling_method != 'StaticPressure') {
           return 'disabled-cell';
@@ -128,14 +147,13 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       },
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'fan_total_static_pressure',
-      displayName: 'Total Static Pressure',
-      field: 'fan.total_static_pressure',
+      name: 'fan_flow_efficiency',
+      displayName: 'Fan Efficiency',
+      field: 'fan.flow_efficiency',
       enableHiding: false,
-      minWidth: min_width + 20,
+      minWidth: min_width,
       type: 'number',
       filters: Shared.numberFilter(),
-      secondLine: Shared.html('ft H<sub>2</sub>O'),
       cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
         if (row.entity.fan.modeling_method != 'StaticPressure') {
           return 'disabled-cell';
