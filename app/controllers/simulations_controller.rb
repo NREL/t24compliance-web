@@ -1,6 +1,6 @@
 class SimulationsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource #param_method: :simulation_params
+  load_and_authorize_resource :project #the resource is project
   before_action :set_simulation, only: [:show, :edit, :update, :destroy]
   before_action :set_project, only: [:bulk_sync]
 
