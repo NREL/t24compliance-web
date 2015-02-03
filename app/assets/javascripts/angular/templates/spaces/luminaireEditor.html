@@ -14,7 +14,10 @@
     </div>
   </div>
   <div ng-if="editable" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
-  <div ng-if="!editable" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-resize-columns ui-grid-selection></div>
+  <div ng-if="!editable">
+    <h4 class="text-center" ng-if="!data.luminaires.length">You haven't created any luminaires. Luminaires can be created with the <em>Edit Luminaires</em> button.</h4>
+    <div ng-if="data.luminaires.length" ui-grid="gridOptions" ui-grid-auto-resize ui-grid-resize-columns ui-grid-selection></div>
+  </div>
 </div>
 <div ng-show="editable" class="modal-footer">
   <button type="button" class="btn btn-warning" ng-click="close()">Close</button>
