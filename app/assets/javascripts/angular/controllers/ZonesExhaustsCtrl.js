@@ -114,6 +114,14 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
       displayName: 'Flow Minimum',
       field: 'fan.flow_minimum',
       secondLine: Shared.html('cfm'),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (row.entity.fan.control_method == 'ConstantVolume') {
+          return 'disabled-cell';
+        }
+      },
+      cellEditableCondition: function ($scope) {
+        return ($scope.row.entity.fan.control_method != 'ConstantVolume');
+      },
       enableHiding: false,
       minWidth: min_width,
       filters: Shared.numberFilter(),
@@ -255,7 +263,10 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
         if (newValue != oldValue) {
           Shared.setModified();
 
-          if (colDef.name == 'fan_classification') {
+          if (colDef.name == 'fan_control_method') {
+            if (newValue == 'ConstantVolume') rowEntity.fan.flow_minimum = null;
+            gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+          } else if (colDef.name == 'fan_classification') {
             rowEntity.fan.centrifugal_type = null;
             gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
           } else if (colDef.name == 'fan_modeling_method') {

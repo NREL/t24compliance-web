@@ -396,6 +396,10 @@ cbecc.factory('Enums', function () {
       'WarmestResetTemperatureFirst',
       'WarmestReset'
     ],
+    terminal_units_status_enums: [
+      'New',
+      'Existing'
+    ],
     terminal_units_type_enums: [
       'Uncontrolled',
       'VAVReheatBox',
