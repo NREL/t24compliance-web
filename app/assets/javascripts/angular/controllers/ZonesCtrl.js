@@ -185,6 +185,38 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
 
   };
 
+  $scope.data.plenumCompatibleZones = function () {
+    var plenumCompatibleZones = [
+      {id: '',
+        value: ''}];
+
+    _.each($scope.data.zones, function (zone, index) {
+      if (zone.type == 'Plenum') {
+        plenumCompatibleZones.push({
+          id: zone.name,
+          value: zone.name
+        });
+      }
+    });
+    return plenumCompatibleZones;
+  };
+
+  $scope.data.nonPlenumCompatibleZones = function () {
+    var nonPlenumCompatibleZones = [
+      {id: '',
+        value: ''}];
+
+    _.each($scope.data.zones, function (zone, index) {
+      if (zone.type != 'Plenum') {
+        nonPlenumCompatibleZones.push({
+          id: zone.id,
+          value: zone.name
+        });
+      }
+    });
+    return nonPlenumCompatibleZones;
+  };
+
   // save
   $scope.submit = function () {
     $log.debug('Submitting zones');

@@ -3,39 +3,6 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
     space: null
   };
 
-  $scope.data.plenumCompatibleZones = function () {
-    var plenumCompatibleZones = [
-      {id: '',
-      value: ''}];
-
-    _.each($scope.data.zones, function (zone, index) {
-      if (zone.type == 'Plenum') {
-        plenumCompatibleZones.push({
-          id: zone.id,
-          value: zone.name
-        });
-      }
-    });
-    return plenumCompatibleZones;
-  };
-
-  $scope.data.nonPlenumCompatibleZones = function () {
-    var nonPlenumCompatibleZones = [
-      {id: '',
-        value: ''}];
-
-    _.each($scope.data.zones, function (zone, index) {
-      if (zone.type != 'Plenum') {
-        nonPlenumCompatibleZones.push({
-          id: zone.id,
-          value: zone.name
-        });
-      }
-    });
-    return nonPlenumCompatibleZones;
-  };
-
-
   // plenum & non-plenum thermal zone references array for ZoneSpaces tab
   $scope.plenumZonesArr = $scope.data.plenumCompatibleZones();
   $scope.nonPlenumZonesArr = $scope.data.nonPlenumCompatibleZones();
