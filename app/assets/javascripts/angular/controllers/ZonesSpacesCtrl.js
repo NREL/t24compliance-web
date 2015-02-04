@@ -3,21 +3,51 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
     space: null
   };
 
-  // thermal zone references array for ZoneSpaces tab
-  $scope.zonesArr = [{
-    id: '',
-    value: ''
-  }];
-  $scope.zonesHash = {};
-  _.each($scope.data.zones, function (zone, index) {
-    $scope.zonesArr.push({
-      id: zone.id,
-      value: zone.name
+  $scope.data.plenumCompatibleZones = function () {
+    var plenumCompatibleZones = [
+      {id: '',
+      value: ''}];
+
+    _.each($scope.data.zones, function (zone, index) {
+      if (zone.type == 'Plenum') {
+        plenumCompatibleZones.push({
+          id: zone.id,
+          value: zone.name
+        });
+      }
     });
-    $scope.zonesHash[index] = zone.name;
+    return plenumCompatibleZones;
+  };
+
+  $scope.data.nonPlenumCompatibleZones = function () {
+    var nonPlenumCompatibleZones = [
+      {id: '',
+        value: ''}];
+
+    _.each($scope.data.zones, function (zone, index) {
+      if (zone.type != 'Plenum') {
+        nonPlenumCompatibleZones.push({
+          id: zone.id,
+          value: zone.name
+        });
+      }
+    });
+    return nonPlenumCompatibleZones;
+  };
+
+
+  // plenum & non-plenum thermal zone references array for ZoneSpaces tab
+  $scope.plenumZonesArr = $scope.data.plenumCompatibleZones();
+  $scope.nonPlenumZonesArr = $scope.data.nonPlenumCompatibleZones();
+
+  _.each($scope.data.spaces, function (space) {
+    if (space.conditioning_type == 'Plenum'){
+      space.zoneOptions = $scope.plenumZonesArr;
+    }
+    else {
+      space.zoneOptions = $scope.nonPlenumZonesArr;
+    }
   });
-  $log.debug('ZONES Arr');
-  $log.debug($scope.zonesArr);
 
   // Spaces UI Grid
   $scope.spacesGridOptions = {
@@ -39,10 +69,11 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
       sortingAlgorithm: Shared.sort($scope.data.storiesHash)
     }, {
       name: 'thermal_zone_reference',
+      display_name: 'Thermal Zone',
       enableHiding: false,
       editableCellTemplate: 'ui-grid/dropdownEditor',
       editDropdownIdLabel: 'value',
-      editDropdownOptionsArray: $scope.zonesArr,
+      editDropdownRowEntityOptionsArrayPath: 'zoneOptions',
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCell'
     }],
