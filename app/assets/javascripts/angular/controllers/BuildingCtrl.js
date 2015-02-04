@@ -77,13 +77,19 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     }, {
       name: 'z',
       displayName: 'Height Above Ground',
+      secondLine: Shared.html('ft'),
       cellEditableCondition: function ($scope) {
         return !($scope.grid.appScope.autoElevation && $scope.rowRenderIndex);
-      }
+      },
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'floor_to_floor_height'
+      name: 'floor_to_floor_height',
+      secondLine: Shared.html('ft'),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
-      name: 'floor_to_ceiling_height'
+      name: 'floor_to_ceiling_height',
+      secondLine: Shared.html('ft'),
+      headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
     data: $scope.stories,
     enableCellEditOnFocus: true,
