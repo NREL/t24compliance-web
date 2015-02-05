@@ -213,35 +213,39 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
             var unique = Shared.checkUnique($scope.data.surfaces, newValue, surfaceIndex);
             if (!unique) rowEntity.name = oldValue;
           } else if (colDef.name == 'space') {
-            // Update story
-            rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
-
-            // Update name
-            var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
-            if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
-              regex += ' [0-9]+';
-            }
-            regex += '$';
-            if (new RegExp(regex).test(rowEntity.name)) {
-              var name = $scope.spacesHash[newValue] + ' ' + rowEntity.type;
-              if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
-                var len = _.filter($scope.data.surfaces, function (surface) {
-                  return surface.space == newValue && surface.type == rowEntity.type;
-                }).length;
-                name += ' ' + len;
-              }
-              rowEntity.name = name;
-            }
-
-            // Update adjacent space
-            if (rowEntity.boundary == 'Interior') {
-              rowEntity.adjacent_space_reference = null;
-              rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
-              gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-            }
+            $scope.updateSpace(rowEntity, surfaceIndex, newValue, oldValue);
           }
         }
       });
+    }
+  };
+
+  $scope.updateSpace = function (rowEntity, surfaceIndex, newValue, oldValue) {
+    // Update story
+    rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
+
+    // Update name
+    var regex = '^' + $scope.spacesHash[oldValue] + ' ' + rowEntity.type;
+    if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
+      regex += ' [0-9]+';
+    }
+    regex += '$';
+    if (new RegExp(regex).test(rowEntity.name)) {
+      var name = $scope.spacesHash[newValue] + ' ' + rowEntity.type;
+      if (rowEntity.type == 'Wall' || rowEntity.type == 'Floor') {
+        var len = _.filter($scope.data.surfaces, function (surface) {
+          return surface.space == newValue && surface.type == rowEntity.type;
+        }).length;
+        name += ' ' + len;
+      }
+      rowEntity.name = name;
+    }
+
+    // Update adjacent space
+    if (rowEntity.boundary == 'Interior') {
+      rowEntity.adjacent_space_reference = null;
+      rowEntity.adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
+      $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     }
   };
 
@@ -259,19 +263,22 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    var selectedRowEntity = angular.copy($scope.selected.surface);
+    var selectedSurfaceIndex = $scope.data.surfaces.indexOf($scope.selected.surface);
 
-    var replacement = {
-      area: $scope.selected.surface.area,
-      azimuth: $scope.selected.surface.azimuth,
-      construction_library_id: $scope.selected.surface.construction_library_id,
-      tilt: $scope.selected.surface.tilt,
-      height: $scope.selected.surface.height,
-      perimeter_exposed: $scope.selected.surface.perimeter_exposed
-    };
-    var rows = $scope.gridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      _.merge(row, replacement);
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
+
+      if (surfaceIndex != selectedSurfaceIndex) {
+        Shared.setModified();
+
+        rowEntity.area = $scope.selected.surface.area;
+        rowEntity.azimuth = $scope.selected.surface.azimuth;
+        rowEntity.construction_library_id = $scope.selected.surface.construction_library_id;
+        rowEntity.tilt = $scope.selected.surface.tilt;
+        rowEntity.height = $scope.selected.surface.height;
+        rowEntity.perimeter_exposed = $scope.selected.surface.perimeter_exposed;
+      }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

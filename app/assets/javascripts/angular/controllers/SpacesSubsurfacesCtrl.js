@@ -147,19 +147,23 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
             var unique = Shared.checkUnique($scope.data.subsurfaces, newValue, subsurfaceIndex);
             if (!unique) rowEntity.name = oldValue;
           } else if (colDef.name == 'space') {
-            if (rowEntity.type == 'Door') {
-              rowEntity.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: newValue}).surfaces;
-            } else if (rowEntity.type == 'Window') {
-              rowEntity.surfaceOptions = _.find($scope.windowCompatibleSpaces, {id: newValue}).surfaces;
-            } else if (rowEntity.type == 'Skylight') {
-              rowEntity.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: newValue}).surfaces;
-            }
-            rowEntity.surface = rowEntity.surfaceOptions[0].id;
-            rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
+            $scope.updateSpace(rowEntity, subsurfaceIndex, newValue, oldValue);
           }
         }
       });
     }
+  };
+
+  $scope.updateSpace = function (rowEntity, subsurfaceIndex, newValue, oldValue) {
+    if (rowEntity.type == 'Door') {
+      rowEntity.surfaceOptions = _.find($scope.doorCompatibleSpaces, {id: newValue}).surfaces;
+    } else if (rowEntity.type == 'Window') {
+      rowEntity.surfaceOptions = _.find($scope.windowCompatibleSpaces, {id: newValue}).surfaces;
+    } else if (rowEntity.type == 'Skylight') {
+      rowEntity.surfaceOptions = _.find($scope.skylightCompatibleSpaces, {id: newValue}).surfaces;
+    }
+    rowEntity.surface = rowEntity.surfaceOptions[0].id;
+    rowEntity.building_story_id = $scope.data.spaces[newValue].building_story_id;
   };
 
   // Buttons
@@ -175,15 +179,18 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    var selectedRowEntity = angular.copy($scope.selected.subsurface);
+    var selectedSubsurfaceIndex = $scope.data.subsurfaces.indexOf($scope.selected.subsurface);
 
-    var replacement = {
-      area: $scope.selected.subsurface.area,
-      construction_library_id: $scope.selected.subsurface.construction_library_id
-    };
-    var rows = $scope.gridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      _.merge(row, replacement);
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      var subsurfaceIndex = $scope.data.subsurfaces.indexOf(rowEntity);
+
+      if (subsurfaceIndex != selectedSubsurfaceIndex) {
+        Shared.setModified();
+
+        rowEntity.area = $scope.selected.subsurface.area;
+        rowEntity.construction_library_id = $scope.selected.subsurface.construction_library_id;
+      }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

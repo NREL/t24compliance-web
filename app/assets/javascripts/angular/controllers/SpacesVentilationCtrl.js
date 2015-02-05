@@ -110,16 +110,19 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    var replacement = {
-      exhaust_per_area: $scope.selected.space.exhaust_per_area,
-      exhaust_air_changes_per_hour: $scope.selected.space.exhaust_air_changes_per_hour
-    };
-    var rows = $scope.gridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      _.merge(row, replacement);
-      $scope.data.updateTotalExhaust(row);
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+
+      if (spaceIndex != selectedSpaceIndex) {
+        Shared.setModified();
+
+        rowEntity.exhaust_per_area = $scope.selected.space.exhaust_per_area;
+        rowEntity.exhaust_air_changes_per_hour = $scope.selected.space.exhaust_air_changes_per_hour;
+        rowEntity.exhaust_per_space = $scope.selected.space.exhaust_per_space;
+        $scope.data.updateTotalExhaust(rowEntity);
+      }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();
