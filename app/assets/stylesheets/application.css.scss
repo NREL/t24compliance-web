@@ -599,44 +599,44 @@ h2.header-large {
 
 @font-face {
   font-family: 'Droid Sans';
-  src: url('DroidSans-webfont.eot');
-  src: url('DroidSans-webfont.eot?#iefix') format('embedded-opentype'),
-  url('DroidSans-webfont.woff') format('woff'),
-  url('DroidSans-webfont.ttf') format('truetype'),
-  url('DroidSans-webfont.svg#droid_sansregular') format('svg');
+  src: url(font-path('DroidSans-webfont.eot'));
+  src: url(font-path('DroidSans-webfont.eot') + '?#iefix') format('embedded-opentype'),
+  url(font-path('DroidSans-webfont.woff')) format('woff'),
+  url(font-path('DroidSans-webfont.ttf')) format('truetype'),
+  url(font-path('DroidSans-webfont.svg') + '#droid_sansregular') format('svg');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Droid Sans';
-  src: url('DroidSans-Bold-webfont.eot');
-  src: url('DroidSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-  url('DroidSans-Bold-webfont.woff') format('woff'),
-  url('DroidSans-Bold-webfont.ttf') format('truetype'),
-  url('DroidSans-Bold-webfont.svg#droid_sansbold') format('svg');
+  src: url(font-path('DroidSans-Bold-webfont.eot'));
+  src: url(font-path('DroidSans-Bold-webfont.eot') + '?#iefix') format('embedded-opentype'),
+  url(font-path('DroidSans-Bold-webfont.woff')) format('woff'),
+  url(font-path('DroidSans-Bold-webfont.ttf')) format('truetype'),
+  url(font-path('DroidSans-Bold-webfont.svg') + '#droid_sansbold') format('svg');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans Condensed';
-  src: url('OpenSans-CondLight-webfont.eot');
-  src: url('OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
-  url('OpenSans-CondLight-webfont.woff') format('woff'),
-  url('OpenSans-CondLight-webfont.ttf') format('truetype'),
-  url('OpenSans-CondLight-webfont.svg#open_sanscondensed_light') format('svg');
+  src: url(font-path('OpenSans-CondLight-webfont.eot'));
+  src: url(font-path('OpenSans-CondLight-webfont.eot') + '?#iefix') format('embedded-opentype'),
+  url(font-path('OpenSans-CondLight-webfont.woff')) format('woff'),
+  url(font-path('OpenSans-CondLight-webfont.ttf')) format('truetype'),
+  url(font-path('OpenSans-CondLight-webfont.svg') + '#open_sanscondensed_light') format('svg');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Open Sans Condensed';
-  src: url('OpenSans-CondBold-webfont.eot');
-  src: url('OpenSans-CondBold-webfont.eot?#iefix') format('embedded-opentype'),
-  url('OpenSans-CondBold-webfont.woff') format('woff'),
-  url('OpenSans-CondBold-webfont.ttf') format('truetype'),
-  url('OpenSans-CondBold-webfont.svg#open_sans_condensedbold') format('svg');
+  src: url(font-path('OpenSans-CondBold-webfont.eot'));
+  src: url(font-path('OpenSans-CondBold-webfont.eot') + '?#iefix') format('embedded-opentype'),
+  url(font-path('OpenSans-CondBold-webfont.woff')) format('woff'),
+  url(font-path('OpenSans-CondBold-webfont.ttf')) format('truetype'),
+  url(font-path('OpenSans-CondBold-webfont.svg') + '#open_sans_condensedbold') format('svg');
   font-weight: 700;
   font-style: normal;
 
