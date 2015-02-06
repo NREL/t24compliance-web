@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.0.0-RC.18-8fe4e49 - 2015-02-03
+ * ui-grid - v3.0.0-RC.18-0fa8c48 - 2015-02-06
  * Copyright (c) 2015 ; License: MIT 
  */
 
@@ -669,6 +669,7 @@ function ($timeout, gridUtil, uiGridConstants, uiGridColumnMenuService) {
         $scope.grid.refresh();
         $scope.hideMenu();
         $scope.grid.api.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+        $scope.grid.api.core.raise.columnVisibilityChanged( $scope.col );        
       };
     },
     
@@ -1697,6 +1698,7 @@ angular.module('ui.grid')
       
       gridCol.grid.refresh();
       gridCol.grid.api.core.notifyDataChange( uiGridConstants.dataChange.COLUMN );
+      gridCol.grid.api.core.raise.columnVisibilityChanged( gridCol );
     }
   };
   
@@ -2204,6 +2206,11 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
                 scrollEvent.x = { percentage: scrollXPercentage, pixels: deltaX };
               }
 
+              // Let the parent container scroll if the grid is already at the top/bottom
+              if ((scrollEvent.y && scrollEvent.y.percentage !== 0 && scrollEvent.y.percentage !== 1) ||
+                  (scrollEvent.x && scrollEvent.x.percentage !== 0 && scrollEvent.x.percentage !== 1)) {
+                event.preventDefault();
+              }
               scrollEvent.fireScrollingEvent();
             }
             
@@ -2276,10 +2283,10 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
                   event = event.originalEvent;
                 }
 
-                uiGridCtrl.scrollbars.forEach(function (sbar) {
-                  sbar.addClass('ui-grid-scrollbar-visible');
-                  sbar.addClass('ui-grid-scrolling');
-                });
+                //uiGridCtrl.scrollbars.forEach(function (sbar) {
+                //  sbar.addClass('ui-grid-scrollbar-visible');
+                //  sbar.addClass('ui-grid-scrolling');
+                //});
 
                 moveStart = new Date();
                 startY = event.targetTouches[0].screenY;
@@ -3258,6 +3265,24 @@ angular.module('ui.grid')
      * </pre>
      */
     self.api.registerEvent( 'core', 'sortChanged' );
+  
+      /**
+     * @ngdoc function
+     * @name columnVisibilityChanged
+     * @methodOf  ui.grid.core.api:PublicApi
+     * @description The visibility of a column has changed,
+     * the column itself is passed out as a parameter of the event. 
+     * 
+     * @param {GridCol} column the column that changed
+     * 
+     * @example
+     * <pre>
+     *      gridApi.core.on.columnVisibilityChanged( $scope, function (column) {
+     *        // do something
+     *      } );
+     * </pre>
+     */
+    self.api.registerEvent( 'core', 'columnVisibilityChanged' );
   
     /**
      * @ngdoc method
@@ -8173,7 +8198,7 @@ module.service('rowSearcher', ['gridUtil', 'uiGridConstants', function (gridUtil
     for (var i = 0; i < colsLength; i++) {
       var col = columns[i];
       
-      if (typeof(col.filters) !== 'undefined' && ( col.filters.length > 1 || col.filters.length === 1 && col.filters[0].term ) ) {
+      if (typeof(col.filters) !== 'undefined' && ( col.filters.length > 1 || col.filters.length === 1 && ( typeof(col.filters[0].term) !== 'undefined' && col.filters[0].term || col.filters[0].noTerm ) ) ) {
         filterData.push( { col: col, filters: rowSearcher.setupFilters(col.filters) } );
       }
       else if (typeof(col.filter) !== 'undefined' && col.filter && ( typeof(col.filter.term) !== 'undefined' && col.filter.term || col.filter.noTerm ) ) {
@@ -10223,6 +10248,10 @@ module.filter('px', function() {
           invalidCsv: 'Le fichier n\'a pas pu être traité, le CSV est-il valide ?',
           invalidJson: 'Le fichier n\'a pas pu être traité, le JSON est-il valide ?',
           jsonNotArray: 'Le fichier JSON importé doit contenir un tableau. Abandon.'
+        },
+        pagination: {
+          sizes: 'articles par page',
+          totalItems: 'articles'
         }
       });
       return $delegate;
@@ -10356,6 +10385,77 @@ module.filter('px', function() {
     }]);
   }]);
 })();
+(function() {
+  angular.module('ui.grid').config(['$provide', function($provide) {
+    $provide.decorator('i18nService', ['$delegate', function($delegate) {
+      $delegate.add('ja', {
+        aggregate: {
+          label: '件'
+        },
+        groupPanel: {
+          description: '列名部分をここにドラッグアンドドロップすることで列ごとにグループ分けを行うことができます。'
+        },
+        search: {
+          placeholder: '検索...',
+          showingItems: '絞込み件数:',
+          selectedItems: '選択件数:',
+          totalItems: '全件数:',
+          size: 'ページサイズ: ',
+          first: '最初のページ',
+          next: '次のページ',
+          previous: '前のページ',
+          last: '最後のページ'
+        },
+        menu: {
+          text: '列選択:'
+        },
+        sort: {
+          ascending: '昇順ソート',
+          descending: '降順ソート',
+          remove: 'ソート取消'
+        },
+        column: {
+          hide: '列を隠す'
+        },
+        aggregation: {
+          count: '合計件数: ',
+          sum: '合計: ',
+          avg: '平均: ',
+          min: '最小値: ',
+          max: '最大値: '
+        },
+        pinning: {
+          pinLeft: '左にピン留め',
+          pinRight: '右にピン留め',
+          unpin: 'ピン留め取消'
+        },
+        gridMenu: {
+          columns: '列:',
+          importerTitle: 'インポートファイル',
+          exporterAllAsCsv: '全てのデータをCSV形式でエクスポート',
+          exporterVisibleAsCsv: '絞込み済みデータをCSV形式でエクスポート',
+          exporterSelectedAsCsv: '選択しているデータをCSV形式でエクスポート',
+          exporterAllAsPdf: '全てのデータをPDFでエクスポート',
+          exporterVisibleAsPdf: '絞込み済みデータをPDFでエクスポート',
+          exporterSelectedAsPdf: '選択しているデータをPDFでエクスポート'
+        },
+        importer: {
+          noHeaders: '列名が抽出できません。ヘッダーは設定されていますか？',
+          noObjects: 'データが抽出できません。ファイルにデータは含まれていますか？',
+          invalidCsv: '処理を行うことができません。ファイルは有効なCSVファイルですか？',
+          invalidJson: '処理を行うことができません。ファイルは有効なJSONファイルですか？',
+          jsonNotArray: 'JSONファイルは配列を含んでいる必要があります。処理を中断します。'
+        },
+        pagination: {
+          sizes: '件 / ページ',
+          totalItems: '件'
+        }
+      });
+      return $delegate;
+    }]);
+  }]);
+})();
+
 (function () {
   angular.module('ui.grid').config(['$provide', function($provide) {
     $provide.decorator('i18nService', ['$delegate', function($delegate) {
@@ -11037,6 +11137,10 @@ module.filter('px', function() {
           invalidCsv: '无法处理文件，确定是合法的CSV文件？',
           invalidJson: '无法处理文件，确定是合法的JSON文件？',
           jsonNotArray: '导入的文件不是JSON数组！'
+        },
+        pagination: {
+          sizes: '行每页',
+          totalItems: '行'
         }
       });
       return $delegate;
@@ -11104,6 +11208,10 @@ module.filter('px', function() {
           invalidCsv: '無法處理文件，確定是合法的CSV文件？',
           invalidJson: '無法處理文件，確定是合法的JSON文件？',
           jsonNotArray: '導入的文件不是JSON數組！'
+        },
+        pagination: {
+          sizes: '行每頁',
+          totalItems: '行'
         }
       });
       return $delegate;
@@ -18413,12 +18521,26 @@ module.filter('px', function() {
             if ( currentCol.length > 0 ){
               var currentIndex = grid.columns.indexOf( currentCol[0] );
               
-              grid.columns[currentIndex].visible = columnState.visible;
-              grid.columns[currentIndex].colDef.visible = columnState.visible;
+              if ( grid.columns[currentIndex].visible !== columnState.visible ||
+                   grid.columns[currentIndex].colDef.visible !== columnState.visible ){
+                grid.columns[currentIndex].visible = columnState.visible;
+                grid.columns[currentIndex].colDef.visible = columnState.visible;
+                grid.api.core.raise.columnVisibilityChanged( grid.columns[currentIndex]);
+              }
+              
               grid.columns[currentIndex].width = columnState.width;
-              grid.columns[currentIndex].sort = angular.copy( columnState.sort );
-              grid.columns[currentIndex].filters = angular.copy( columnState.filters );
 
+              if ( !angular.equals(grid.columns[currentIndex].sort, columnState.sort && 
+                   !( grid.columns[currentIndex].sort === undefined && angular.isEmpty(columnState.sort) ) ) ){
+                grid.columns[currentIndex].sort = angular.copy( columnState.sort );
+                grid.api.core.raise.sortChanged();
+              }
+
+              if ( !angular.equals(grid.columns[currentIndex].filters, columnState.filters ) ){
+                grid.columns[currentIndex].filters = angular.copy( columnState.filters );
+                grid.api.core.raise.filterChanged();
+              }
+              
               if ( currentIndex !== index ){
                 var column = grid.columns.splice( currentIndex, 1 )[0];
                 grid.columns.splice( index, 0, column );
@@ -19572,7 +19694,7 @@ angular.module('ui.grid').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('ui-grid/uiGridRenderContainer',
-    "<div class=\"ui-grid-render-container\"><div ui-grid-header></div><div ui-grid-viewport></div><div ui-grid-footer ng-if=\"grid.options.showColumnFooter\"></div><!-- native scrolling --><!--<div ui-grid-native-scrollbar ng-if=\"enableVerticalScrollbar\" type=\"vertical\"></div>--><!--<div ui-grid-native-scrollbar ng-if=\"enableHorizontalScrollbar\" type=\"horizontal\"></div>--></div>"
+    "<div class=\"ui-grid-render-container\"><div ui-grid-header></div><div ui-grid-viewport></div><div ui-grid-footer ng-if=\"grid.options.showColumnFooter\"></div></div>"
   );
 
 

@@ -158,6 +158,11 @@ body > .container-fluid > .header-row.wizard {
   overflow: hidden;
 }
 
+// Fix for UI grid gradients on non-webkit
+.ui-grid-top-panel-background, .ui-grid-top-panel, .ui-grid-no-row-overlay, .ui-grid-footer-panel-background, .ui-grid-footer-panel {
+  background: linear-gradient(to top, #eeeeee 0%, #ffffff 100%);
+}
+
 // Increase modal size
 .wide-modal .modal-dialog {
   min-width: 700px;
