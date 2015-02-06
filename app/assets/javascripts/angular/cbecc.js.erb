@@ -10,7 +10,7 @@ var cbecc = angular.module('cbecc', [
   'angularSpinner']);
 
 cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', function ($logProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider) {
-  $logProvider.debugEnabled(true);
+  $logProvider.debugEnabled(<%= !Rails.env.production? %>);
 
   usSpinnerConfigProvider.setDefaults({
     color: '#70be44',
@@ -435,7 +435,7 @@ cbecc.run(['$rootScope', '$log', '$state', '$modal', 'toaster', 'Shared', 'api',
   });
 
   $rootScope.konami = function () {
-    var tmpl = _.template('<div class="modal-header"><h3 class="modal-title"><%= title %></h3></div><div class="modal-body"><form class="form-horizontal"><%= form %></form></div><div class="modal-footer"><button type="button" class="btn btn-primary" ng-click="$close()">OK</button><button type="button" class="btn btn-warning" ng-click="$close()">Cancel</button></div>');
+    var tmpl = _.template('<div class="modal-header"><h3 class="modal-title"><%%= title %></h3></div><div class="modal-body"><form class="form-horizontal"><%%= form %></form></div><div class="modal-footer"><button type="button" class="btn btn-primary" ng-click="$close()">OK</button><button type="button" class="btn btn-warning" ng-click="$close()">Cancel</button></div>');
     $modal.open({
       backdrop: 'static',
       template: tmpl({
