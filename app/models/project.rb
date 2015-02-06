@@ -119,7 +119,10 @@ class Project
   #validates_presence_of :exceptional_condition_narrative
   validates_presence_of :zip_code
   validates_numericality_of :zip_code
-  zip_codes = ZipCodes.where(state: 'ca').first.zips
+
+  # this needs to be a better scope.
+  zip_codes = ZipCodes.where(state: 'ca').first ? ZipCodes.where(state: 'ca').first.zips : []
+
   validates_inclusion_of :zip_code, in: zip_codes, message: 'is not a valid California zip code'
 
   # callbacks

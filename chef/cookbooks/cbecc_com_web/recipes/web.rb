@@ -54,6 +54,13 @@ bash "set_selinux_to_permissive" do
   only_if { ::File.exists?("/usr/sbin/setenforce") }
 end
 
+# set the memory higher in jruby
+template '/etc/sudoers.d/jruby.sh' do
+  source "jruby.sh.erb"
+  mode '0775'
+  owner 'root'
+  group 'root'
+end
 
 # set iptables
 include_recipe "iptables"
