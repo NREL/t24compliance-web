@@ -50,6 +50,8 @@ bash "set_selinux_to_permissive" do
   code <<-EOH
     setenforce 0
   EOH
+
+  only_if { ::File.exists?("/usr/sbin/setenforce") }
 end
 
 
