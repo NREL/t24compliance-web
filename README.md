@@ -135,3 +135,26 @@ sudo chef-client
   bundle exec cap production nginx:reload
   bundle exec cap production nginx:restart
   ```
+
+### Asset Pipeline Hints
+
+* In your Sass file, use 'font-path' to include font libraries.  This may be a problem when importing 3rd-party css into your project (ex: ui-grid)
+
+  ```
+  @font-face {
+      font-family: 'MyFont';
+      src: url(font-path('myfont-webfont.eot') + "?#iefix") format('embedded-opentype'),
+           url(font-path('myfont-webfont.woff')) format('woff'),
+           url(font-path('myfont-webfont.ttf'))  format('truetype'),
+           url(font-path('myfont-webfont.svg') + "#MyFont") format('svg');
+  }
+  ```
+
+* If you include asset images in the angular .html files, use <image_tag> to include them and add '.erb' to the end of the .html file.
+
+* In config/environments/production.rb, the serve_static_asset config should be set to false:
+
+ ```
+  config.serve_static_assets = true
+  ```
+
