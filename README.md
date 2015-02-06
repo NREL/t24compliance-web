@@ -155,6 +155,6 @@ sudo chef-client
 * In config/environments/production.rb, the serve_static_asset config should be set to false:
 
  ```
-  config.serve_static_assets = true
+  config.serve_static_assets = false
   ```
 
