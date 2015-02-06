@@ -9,371 +9,369 @@ var cbecc = angular.module('cbecc', [
   'frapontillo.bootstrap-switch',
   'angularSpinner']);
 
-cbecc.config([
-  '$logProvider', '$stateProvider', '$provide', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', 'dataProvider', function ($logProvider, $stateProvider, $provide, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider, dataProvider) {
+cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', function ($logProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider) {
+  $logProvider.debugEnabled(true);
 
-    $logProvider.debugEnabled(true);
+  usSpinnerConfigProvider.setDefaults({
+    color: '#70be44',
+    lines: 13,
+    length: 0,
+    width: 22,
+    radius: 60,
+    speed: 2.2,
+    trail: 60,
+    shadow: false,
+    hwaccel: true,
+    top: '450px'
+  });
 
-    usSpinnerConfigProvider.setDefaults({
-      color: '#70be44',
-      lines: 13,
-      length: 0,
-      width: 22,
-      radius: 60,
-      speed: 2.2,
-      trail: 60,
-      shadow: false,
-      hwaccel: true,
-      top: '450px'
-    });
+  $urlRouterProvider.when('', '/').otherwise('404');
 
-    $urlRouterProvider.when('', '/').otherwise('404');
+  $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
 
-    $httpProvider.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
-
-    stateHelperProvider
-      //states that require building should have requirebuilding as parent.
-      .state({
-        abstract: true,
-        name: 'requirebuilding',
-        template: '<ui-view>',
-        resolve: {
-          lookupbuilding: ['data', 'Shared', function (data, Shared) {
-            return Shared.lookupBuilding(data, true);
-          }]
-        }
-      })
-      // states that have lookupbuilding as parent will throw error if there is no project id
-      // and will try to set building id but not error out if it is unavailable.
-      .state({
-        abstract: true,
-        name: 'lookupbuilding',
-        template: '<ui-view>',
-        resolve: {
-          lookupbuilding: ['data', 'Shared', function (data, Shared) {
-            return Shared.lookupBuilding(data);
-          }]
-        }
-      })
-      .state({
-        name: 'project',
-        url: '/',
-        controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html',
-        resolve: {
-          project: ['data', 'Shared', function (data, Shared) {
-            if (!Shared.getProjectId()) return {};
-            return data.show('projects', {id: Shared.getProjectId()});
-          }],
-          plants: ['data', 'Shared', function (data, Shared) {
-            if (!Shared.getBuildingId()) return [];
-            return data.list('fluid_systems', Shared.defaultParams());
-          }]
-        }
-      })
-      .state({
-        name: 'projectDetails',
-        url: '/projects/{project_id:[0-9a-f]{24}}',
-        controller: 'ProjectCtrl',
-        templateUrl: 'project/project.html',
-        parent: 'lookupbuilding',
-        resolve: {
-          project: ['data', 'Shared', function (data, Shared) {
-            return data.show('projects', {id: Shared.getProjectId()});
-          }],
-          plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            if (!Shared.getBuildingId())  return [];
-            return data.list('fluid_systems', Shared.defaultParams());
-          }]
-        }
-      })
-      .state({
-        name: 'buildingPlaceholder',
-        url: '/buildings',
-        controller: 'BuildingCtrl',
-        templateUrl: 'building/building.html',
-        resolve: {
-          building: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            if (!Shared.getBuildingId()) return {};
-            return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
-          }],
-          stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('building_stories', Shared.defaultParams());
-          }],
-          spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }]
-        },
-        parent: 'lookupbuilding'
-      })
-      .state({
-        name: 'building',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings',
-        controller: 'BuildingCtrl',
-        templateUrl: 'building/building.html',
-        resolve: {
-          building: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            if (!Shared.getBuildingId()) return {};
-            return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
-          }],
-          stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('building_stories', Shared.defaultParams());
-          }],
-          spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }]
-        },
-        parent: 'lookupbuilding'
-      })
-      .state({
-        name: 'buildingDetails',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}',
-        controller: 'BuildingCtrl',
-        templateUrl: 'building/building.html',
-        resolve: {
-          building: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
-          }],
-          stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('building_stories', Shared.defaultParams());
-          }],
-          spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }]
-        },
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'constructions',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/constructions',
-        controller: 'ConstructionsCtrl',
-        templateUrl: 'constructions/constructions.html',
-        resolve: {
-          constData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
-            return data.list('constructions');
-          }],
-          doorData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
-            return data.list('door_lookups');
-          }],
-          fenData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
-            return data.list('fenestrations');
-          }],
-          defaults: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('construction_defaults', Shared.defaultParams());
-          }],
-          spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }]
-        },
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'constructions_placeholder',
-        url: '/constructions',
-        controller: 'ConstructionsCtrl',
-        templateUrl: 'constructions/constructions.html',
-        parent: 'requirebuilding'
-      })
-      .state({
+  stateHelperProvider
+    //states that require building should have requirebuilding as parent.
+    .state({
+      abstract: true,
+      name: 'requirebuilding',
+      template: '<ui-view>',
+      resolve: {
+        lookupbuilding: ['data', 'Shared', function (data, Shared) {
+          return Shared.lookupBuilding(data, true);
+        }]
+      }
+    })
+    // states that have lookupbuilding as parent will throw error if there is no project id
+    // and will try to set building id but not error out if it is unavailable.
+    .state({
+      abstract: true,
+      name: 'lookupbuilding',
+      template: '<ui-view>',
+      resolve: {
+        lookupbuilding: ['data', 'Shared', function (data, Shared) {
+          return Shared.lookupBuilding(data);
+        }]
+      }
+    })
+    .state({
+      name: 'project',
+      url: '/',
+      controller: 'ProjectCtrl',
+      templateUrl: 'project/project.html',
+      resolve: {
+        project: ['data', 'Shared', function (data, Shared) {
+          if (!Shared.getProjectId()) return {};
+          return data.show('projects', {id: Shared.getProjectId()});
+        }],
+        plants: ['data', 'Shared', function (data, Shared) {
+          if (!Shared.getBuildingId()) return [];
+          return data.list('fluid_systems', Shared.defaultParams());
+        }]
+      }
+    })
+    .state({
+      name: 'projectDetails',
+      url: '/projects/{project_id:[0-9a-f]{24}}',
+      controller: 'ProjectCtrl',
+      templateUrl: 'project/project.html',
+      parent: 'lookupbuilding',
+      resolve: {
+        project: ['data', 'Shared', function (data, Shared) {
+          return data.show('projects', {id: Shared.getProjectId()});
+        }],
+        plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          if (!Shared.getBuildingId())  return [];
+          return data.list('fluid_systems', Shared.defaultParams());
+        }]
+      }
+    })
+    .state({
+      name: 'buildingPlaceholder',
+      url: '/buildings',
+      controller: 'BuildingCtrl',
+      templateUrl: 'building/building.html',
+      resolve: {
+        building: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          if (!Shared.getBuildingId()) return {};
+          return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
+        }],
+        stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('building_stories', Shared.defaultParams());
+        }],
+        spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('spaces', Shared.defaultParams());
+        }]
+      },
+      parent: 'lookupbuilding'
+    })
+    .state({
+      name: 'building',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings',
+      controller: 'BuildingCtrl',
+      templateUrl: 'building/building.html',
+      resolve: {
+        building: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          if (!Shared.getBuildingId()) return {};
+          return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
+        }],
+        stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('building_stories', Shared.defaultParams());
+        }],
+        spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('spaces', Shared.defaultParams());
+        }]
+      },
+      parent: 'lookupbuilding'
+    })
+    .state({
+      name: 'buildingDetails',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}',
+      controller: 'BuildingCtrl',
+      templateUrl: 'building/building.html',
+      resolve: {
+        building: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.show('buildings', {id: Shared.getBuildingId(), project_id: Shared.getProjectId()});
+        }],
+        stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('building_stories', Shared.defaultParams());
+        }],
+        spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('spaces', Shared.defaultParams());
+        }]
+      },
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'constructions',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/constructions',
+      controller: 'ConstructionsCtrl',
+      templateUrl: 'constructions/constructions.html',
+      resolve: {
+        constData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
+          return data.list('constructions');
+        }],
+        doorData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
+          return data.list('door_lookups');
+        }],
+        fenData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
+          return data.list('fenestrations');
+        }],
+        defaults: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('construction_defaults', Shared.defaultParams());
+        }],
+        spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('spaces', Shared.defaultParams());
+        }]
+      },
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'constructions_placeholder',
+      url: '/constructions',
+      controller: 'ConstructionsCtrl',
+      templateUrl: 'constructions/constructions.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'spaces',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/spaces',
+      controller: 'SpacesCtrl',
+      templateUrl: 'spaces/spaces.html',
+      resolve: {
+        constData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
+          return data.list('constructions');
+        }],
+        doorData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
+          return data.list('door_lookups');
+        }],
+        fenData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
+          return data.list('fenestrations');
+        }],
+        spaceFunctionDefaults: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('space_function_defaults', Shared.defaultParams());
+        }],
+        stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('building_stories', Shared.defaultParams());
+        }],
+        spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('spaces', Shared.defaultParams());
+        }],
+        constructionDefaults: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('construction_defaults', Shared.defaultParams());
+        }],
+        luminaires: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('luminaires', Shared.defaultParams());
+        }]
+      },
+      parent: 'requirebuilding',
+      children: [{
+        // No controller here because the file is ng-included
+        name: 'main',
+        url: '',
+        templateUrl: 'spaces/main.html'
+      }, {
+        name: 'settings',
+        url: '/settings',
+        controller: 'SpacesSettingsCtrl',
+        templateUrl: 'spaces/settings.html'
+      }, {
+        name: 'surfaces',
+        url: '/surfaces',
+        controller: 'SpacesSurfacesCtrl',
+        templateUrl: 'spaces/surfaces.html'
+      }, {
+        name: 'subsurfaces',
+        url: '/subsurfaces',
+        controller: 'SpacesSubsurfacesCtrl',
+        templateUrl: 'spaces/subsurfaces.html'
+      }, {
+        name: 'ventilation',
+        url: '/ventilation',
+        controller: 'SpacesVentilationCtrl',
+        templateUrl: 'spaces/ventilation.html'
+      }, {
+        name: 'loads',
+        url: '/loads',
+        controller: 'SpacesLoadsCtrl',
+        templateUrl: 'spaces/loads.html'
+      }, {
+        name: 'gas',
+        url: '/gas',
+        controller: 'SpacesGasCtrl',
+        templateUrl: 'spaces/gas.html'
+      }, {
+        name: 'lighting',
+        url: '/lighting',
+        controller: 'SpacesLightingCtrl',
+        templateUrl: 'spaces/lighting.html'
+      }]
+    })
+    .state({
+      name: 'spaces_placeholder',
+      url: '/spaces',
+      controller: 'SpacesCtrl',
+      templateUrl: 'spaces/spaces.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'systems',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/systems',
+      controller: 'SystemsCtrl',
+      templateUrl: 'systems/systems.html',
+      resolve: {
+        project: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.show('projects', {id: Shared.getProjectId()});
+        }],
+        systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('zone_systems', Shared.defaultParams());
+        }],
+        plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('fluid_systems', Shared.defaultParams());
+        }],
+        zones: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('thermal_zones', Shared.defaultParams());
+        }]
+      },
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'systems_placeholder',
+      url: '/systems',
+      controller: 'SystemsCtrl',
+      templateUrl: 'systems/systems.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'zones',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/zones',
+      controller: 'ZonesCtrl',
+      templateUrl: 'zones/zones.html',
+      resolve: {
+        stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('building_stories', Shared.defaultParams());
+        }],
+        spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('spaces', Shared.defaultParams());
+        }],
+        zones: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('thermal_zones', Shared.defaultParams());
+        }],
+        systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('zone_systems', Shared.defaultParams());
+        }],
+        terminals: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('terminal_units', Shared.defaultParams());
+        }]
+      },
+      parent: 'requirebuilding',
+      children: [{
+        // No controller here because the file is ng-included
+        name: 'main',
+        url: '',
+        templateUrl: 'zones/main.html'
+      }, {
         name: 'spaces',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/spaces',
-        controller: 'SpacesCtrl',
-        templateUrl: 'spaces/spaces.html',
-        resolve: {
-          constData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
-            return data.list('constructions');
-          }],
-          doorData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
-            return data.list('door_lookups');
-          }],
-          fenData: ['data', 'lookupbuilding', function (data, lookupbuilding) {
-            return data.list('fenestrations');
-          }],
-          spaceFunctionDefaults: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('space_function_defaults', Shared.defaultParams());
-          }],
-          stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('building_stories', Shared.defaultParams());
-          }],
-          spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }],
-          constructionDefaults: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('construction_defaults', Shared.defaultParams());
-          }],
-          luminaires: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('luminaires', Shared.defaultParams());
-          }]
-        },
-        parent: 'requirebuilding',
-        children: [{
-          // No controller here because the file is ng-included
-          name: 'main',
-          url: '',
-          templateUrl: 'spaces/main.html'
-        }, {
-          name: 'settings',
-          url: '/settings',
-          controller: 'SpacesSettingsCtrl',
-          templateUrl: 'spaces/settings.html'
-        }, {
-          name: 'surfaces',
-          url: '/surfaces',
-          controller: 'SpacesSurfacesCtrl',
-          templateUrl: 'spaces/surfaces.html'
-        }, {
-          name: 'subsurfaces',
-          url: '/subsurfaces',
-          controller: 'SpacesSubsurfacesCtrl',
-          templateUrl: 'spaces/subsurfaces.html'
-        }, {
-          name: 'ventilation',
-          url: '/ventilation',
-          controller: 'SpacesVentilationCtrl',
-          templateUrl: 'spaces/ventilation.html'
-        }, {
-          name: 'loads',
-          url: '/loads',
-          controller: 'SpacesLoadsCtrl',
-          templateUrl: 'spaces/loads.html'
-        }, {
-          name: 'gas',
-          url: '/gas',
-          controller: 'SpacesGasCtrl',
-          templateUrl: 'spaces/gas.html'
-        }, {
-          name: 'lighting',
-          url: '/lighting',
-          controller: 'SpacesLightingCtrl',
-          templateUrl: 'spaces/lighting.html'
-        }]
-      })
-      .state({
-        name: 'spaces_placeholder',
         url: '/spaces',
-        controller: 'SpacesCtrl',
-        templateUrl: 'spaces/spaces.html',
-        parent: 'requirebuilding'
-      })
-      .state({
+        controller: 'ZonesSpacesCtrl',
+        templateUrl: 'zones/spaces.html'
+      }, {
         name: 'systems',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/systems',
-        controller: 'SystemsCtrl',
-        templateUrl: 'systems/systems.html',
-        resolve: {
-          project: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.show('projects', {id: Shared.getProjectId()});
-          }],
-          systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('zone_systems', Shared.defaultParams());
-          }],
-          plants: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('fluid_systems', Shared.defaultParams());
-          }],
-          zones: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('thermal_zones', Shared.defaultParams());
-          }]
-        },
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'systems_placeholder',
         url: '/systems',
-        controller: 'SystemsCtrl',
-        templateUrl: 'systems/systems.html',
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'zones',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/zones',
-        controller: 'ZonesCtrl',
-        templateUrl: 'zones/zones.html',
-        resolve: {
-          stories: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('building_stories', Shared.defaultParams());
-          }],
-          spaces: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('spaces', Shared.defaultParams());
-          }],
-          zones: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('thermal_zones', Shared.defaultParams());
-          }],
-          systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('zone_systems', Shared.defaultParams());
-          }],
-          terminals: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-            return data.list('terminal_units', Shared.defaultParams());
-          }]
-        },
-        parent: 'requirebuilding',
-        children: [{
-          // No controller here because the file is ng-included
-          name: 'main',
-          url: '',
-          templateUrl: 'zones/main.html'
-        }, {
-          name: 'spaces',
-          url: '/spaces',
-          controller: 'ZonesSpacesCtrl',
-          templateUrl: 'zones/spaces.html'
-        }, {
-          name: 'systems',
-          url: '/systems',
-          controller: 'ZonesSystemsCtrl',
-          templateUrl: 'zones/systems.html'
-        }, {
-          name: 'exhausts',
-          url: '/exhausts',
-          controller: 'ZonesExhaustsCtrl',
-          templateUrl: 'zones/exhausts.html'
-        }, {
-          name: 'terminals',
-          url: '/terminals',
-          controller: 'ZonesTerminalsCtrl',
-          templateUrl: 'zones/terminals.html'
-        }]
-      })
-      .state({
-        name: 'zones_placeholder',
-        url: '/zones',
-        controller: 'ZonesCtrl',
-        templateUrl: 'zones/zones.html',
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'review',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/review',
-        controller: 'ReviewCtrl',
-        templateUrl: 'review/review.html',
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'review_placeholder',
-        url: '/review',
-        controller: 'ReviewCtrl',
-        templateUrl: 'review/review.html',
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'compliance',
-        url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/compliance',
-        controller: 'ComplianceCtrl',
-        templateUrl: 'compliance/compliance.html',
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: 'compliance_placeholder',
-        url: '/compliance',
-        controller: 'ComplianceCtrl',
-        templateUrl: 'compliance/compliance.html',
-        parent: 'requirebuilding'
-      })
-      .state({
-        name: '404',
-        url: '/404',
-        templateUrl: '404/404.html'
-      });
-  }]);
+        controller: 'ZonesSystemsCtrl',
+        templateUrl: 'zones/systems.html'
+      }, {
+        name: 'exhausts',
+        url: '/exhausts',
+        controller: 'ZonesExhaustsCtrl',
+        templateUrl: 'zones/exhausts.html'
+      }, {
+        name: 'terminals',
+        url: '/terminals',
+        controller: 'ZonesTerminalsCtrl',
+        templateUrl: 'zones/terminals.html'
+      }]
+    })
+    .state({
+      name: 'zones_placeholder',
+      url: '/zones',
+      controller: 'ZonesCtrl',
+      templateUrl: 'zones/zones.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'review',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/review',
+      controller: 'ReviewCtrl',
+      templateUrl: 'review/review.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'review_placeholder',
+      url: '/review',
+      controller: 'ReviewCtrl',
+      templateUrl: 'review/review.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'compliance',
+      url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/compliance',
+      controller: 'ComplianceCtrl',
+      templateUrl: 'compliance/compliance.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: 'compliance_placeholder',
+      url: '/compliance',
+      controller: 'ComplianceCtrl',
+      templateUrl: 'compliance/compliance.html',
+      parent: 'requirebuilding'
+    })
+    .state({
+      name: '404',
+      url: '/404',
+      templateUrl: '404/404.html'
+    });
+}]);
 
 
 cbecc.run(['$rootScope', '$log', '$state', '$modal', 'toaster', 'Shared', 'api', function ($rootScope, $log, $state, $modal, toaster, Shared, api) {
