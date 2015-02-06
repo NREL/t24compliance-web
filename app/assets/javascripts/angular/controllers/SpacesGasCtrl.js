@@ -101,18 +101,20 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    var replacement = {
-      gas_equipment_power_density: $scope.selected.space.gas_equipment_power_density,
-      process_gas_power_density: $scope.selected.space.process_gas_power_density,
-      process_gas_radiation_fraction: $scope.selected.space.process_gas_radiation_fraction,
-      process_gas_latent_fraction: $scope.selected.space.process_gas_latent_fraction,
-      process_gas_lost_fraction: $scope.selected.space.process_gas_lost_fraction
-    };
-    var rows = $scope.gridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      _.merge(row, replacement);
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+
+      if (spaceIndex != selectedSpaceIndex) {
+        Shared.setModified();
+
+        rowEntity.gas_equipment_power_density = $scope.selected.space.gas_equipment_power_density;
+        rowEntity.process_gas_power_density = $scope.selected.space.process_gas_power_density;
+        rowEntity.process_gas_radiation_fraction = $scope.selected.space.process_gas_radiation_fraction;
+        rowEntity.process_gas_latent_fraction = $scope.selected.space.process_gas_latent_fraction;
+        rowEntity.process_gas_lost_fraction = $scope.selected.space.process_gas_lost_fraction;
+      }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

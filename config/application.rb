@@ -29,7 +29,7 @@ module CbeccComWeb
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","angular-ui-grid")
     config.assets.paths << Rails.root.join("vendor","assets","bower_components","bootstrap-sass-official","assets","fonts")
 
-    config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff|woff2)$)
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf|woff2)$/
 
     # for angular-rails-templates
     config.angular_templates.ignore_prefix  = %w(angular/templates/)

@@ -105,3 +105,33 @@ To run the CBECC-Com simulations, then start the following:
 
   `bundle exec cap vagrant nginx:site:add && bundle exec cap vagrant nginx:site:enable && bundle exec cap vagrant nginx:reload && bundle exec cap vagrant nginx:restart`
   
+
+### AWS Production via Chef / Knife / Capistrano
+   
+* Cut the server. Make sure to specify your own *security group*
+
+```
+knife ec2 server create -f m3.xlarge --ebs-size 100 -g sg-7f23ed12 -x ec2-user --node-name cbecc_com_web_single -I ami-b66ed3de -Z us-east-1b --ssh-key $AWS_SSH_KEY_ID -A $AWS_ACCESS_KEY -K $AWS_SECRET_KEY
+```
+
+* Log into the Chef Server (https://manage.chef.io)
+* Add cbecc-com-web-single role to node
+* Log into the new server and call chef-client
+
+```
+ssh ec2-user@<IP_ADDRESS>
+sudo chef-client
+```
+
+* You may have to call `chef-client` multiple times until it converges. *MongoDB does not converge until the third call*
+* Update the config/deploy/production.rb to include the IP/DNS of the new AWS server
+* From local machine, deploy the application
+
+  ```
+  bundle exec cap production deploy
+  bundle exec cap production deploy:seed
+  bundle exec cap production nginx:site:add
+  bundle exec cap production nginx:site:enable
+  bundle exec cap production nginx:reload
+  bundle exec cap production nginx:restart
+  ```

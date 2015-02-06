@@ -329,41 +329,38 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    var selectedRowEntity = angular.copy($scope.selected.space);
+    var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
+    _.each($scope.lpdGridApi.selection.getSelectedRows(), function (rowEntity) {
+      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
 
-    var rowEntity = $scope.selected.space;
-    var rows = $scope.lpdGridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      if (!_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], row.space_function)) {
-        if (rowEntity.lighting_input_method == 'Luminaires') {
-          var spaceIndex = $scope.data.spaces.indexOf(row);
-          var lightingSystems = angular.copy(_.filter($scope.data.lightingSystems, {space: $scope.data.spaces.indexOf(rowEntity)}));
-          if (row.lighting_input_method == 'Luminaires') {
+      if (spaceIndex != selectedSpaceIndex && !_.contains(['High-Rise Residential Living Spaces', 'Hotel/Motel Guest Room'], rowEntity.space_function)) {
+        Shared.setModified();
+
+        if (selectedRowEntity.lighting_input_method == 'Luminaires') {
+          var lightingSystems = _.filter($scope.data.lightingSystems, {space: selectedSpaceIndex});
+          if (rowEntity.lighting_input_method == 'Luminaires') {
             _.remove($scope.data.lightingSystems, {space: spaceIndex});
-            _.each(lightingSystems, function(lightingSystem) {
-              delete lightingSystem.id;
-              lightingSystem.space = spaceIndex;
-              $scope.data.lightingSystems.push(lightingSystem);
+            _.each(lightingSystems, function (lightingSystem) {
+              $scope.data.duplicateLightingSystem({lightingSystem: lightingSystem}, spaceIndex);
             });
-          } else if (row.lighting_input_method == 'LPD') {
-            row.lighting_input_method = 'Luminaires';
-            $scope.switchToLuminaires(row);
-            _.each(lightingSystems, function(lightingSystem) {
-              delete lightingSystem.id;
-              lightingSystem.space = spaceIndex;
-              $scope.data.lightingSystems.push(lightingSystem);
+          } else if (rowEntity.lighting_input_method == 'LPD') {
+            rowEntity.lighting_input_method = 'Luminaires';
+            $scope.switchToLuminaires(rowEntity);
+            _.each(lightingSystems, function (lightingSystem) {
+              $scope.data.duplicateLightingSystem({lightingSystem: lightingSystem}, spaceIndex);
             });
           }
           $scope.data.calculateLPD(spaceIndex);
-        } else if (rowEntity.lighting_input_method == 'LPD') {
-          if (row.lighting_input_method == 'Luminaires') {
-            row.lighting_input_method = 'LPD';
-            $scope.switchToLPD(row);
-            row.interior_lighting_power_density_regulated = rowEntity.interior_lighting_power_density_regulated;
-            row.interior_lighting_power_density_non_regulated = rowEntity.interior_lighting_power_density_non_regulated;
-          } else if (row.lighting_input_method == 'LPD') {
-            row.interior_lighting_power_density_regulated = rowEntity.interior_lighting_power_density_regulated;
-            row.interior_lighting_power_density_non_regulated = rowEntity.interior_lighting_power_density_non_regulated;
+        } else if (selectedRowEntity.lighting_input_method == 'LPD') {
+          if (rowEntity.lighting_input_method == 'Luminaires') {
+            rowEntity.lighting_input_method = 'LPD';
+            $scope.switchToLPD(rowEntity);
+            rowEntity.interior_lighting_power_density_regulated = selectedRowEntity.interior_lighting_power_density_regulated;
+            rowEntity.interior_lighting_power_density_non_regulated = selectedRowEntity.interior_lighting_power_density_non_regulated;
+          } else if (rowEntity.lighting_input_method == 'LPD') {
+            rowEntity.interior_lighting_power_density_regulated = selectedRowEntity.interior_lighting_power_density_regulated;
+            rowEntity.interior_lighting_power_density_non_regulated = selectedRowEntity.interior_lighting_power_density_non_regulated;
           }
         }
       }

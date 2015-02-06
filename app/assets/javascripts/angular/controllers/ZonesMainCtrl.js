@@ -64,10 +64,10 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
               });
               // plenum zones must also update supply / return plenum array and zone references on systems tab
               if (rowEntity.type == 'Plenum') {
-                _.each($scope.plenumZonesArr, function (zone, index) {
-                  if (zone['id'] == oldValue) {
-                    zone['id'] = newValue;
-                    zone['value'] = newValue;
+                _.each($scope.plenumZonesArr, function (zone) {
+                  if (zone.id == oldValue) {
+                    zone.id = newValue;
+                    zone.value = newValue;
                   }
                 });
                 _.each($scope.data.zones, function (zone) {
@@ -84,14 +84,20 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
                 if (terminal.zone_served_reference == oldValue) terminal.zone_served_reference = newValue;
               });
             }
-          } else if (colDef.name == 'type' && oldValue == 'Plenum') {
-            // clear out plenum references if zone type is no longer 'Plenum'
-            _.each($scope.data.zones, function (zone) {
-              if (zone.supply_plenum_zone_reference == rowEntity.name) zone.supply_plenum_zone_reference = '';
-              if (zone.return_plenum_zone_reference == rowEntity.name) zone.return_plenum_zone_reference = '';
-            });
+          } else if (colDef.name == 'type') {
+            $scope.updateType(rowEntity, zoneIndex, newValue, oldValue);
           }
         }
+      });
+    }
+  };
+
+  $scope.updateType = function (rowEntity, zoneIndex, newValue, oldValue) {
+    if (oldValue == 'Plenum') {
+      // clear out plenum references if zone type is no longer 'Plenum'
+      _.each($scope.data.zones, function (zone) {
+        if (zone.supply_plenum_zone_reference == rowEntity.name) zone.supply_plenum_zone_reference = '';
+        if (zone.return_plenum_zone_reference == rowEntity.name) zone.return_plenum_zone_reference = '';
       });
     }
   };
@@ -104,14 +110,27 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      rowEntity.type = $scope.selected.zone.type;
+      $scope.updateType(rowEntity);
+    });
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
+    $scope.resetApplySettings();
+  };
 
-    var replacement = {
-      type: $scope.selected.zone.type
-    };
-    var rows = $scope.gridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      _.merge(row, replacement);
+  $scope.confirmApplySettings = function () {
+    var selectedRowEntity = angular.copy($scope.selected.zone);
+    var selectedZoneIndex = $scope.data.zones.indexOf($scope.selected.zone);
+
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      var zoneIndex = $scope.data.zones.indexOf(rowEntity);
+
+      if (zoneIndex != selectedZoneIndex) {
+        Shared.setModified();
+
+        rowEntity.type = $scope.selected.zone.type;
+        $scope.updateType(rowEntity, zoneIndex, $scope.selected.zone.type, selectedRowEntity.zone);
+      }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

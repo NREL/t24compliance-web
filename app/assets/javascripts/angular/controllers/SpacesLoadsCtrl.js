@@ -135,22 +135,24 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
   };
 
   $scope.confirmApplySettings = function () {
-    Shared.setModified();
+    var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    var replacement = {
-      process_electrical_power_density: $scope.selected.space.process_electrical_power_density,
-      commercial_refrigeration_epd: $scope.selected.space.commercial_refrigeration_epd,
-      elevator_count: $scope.selected.space.elevator_count,
-      escalator_count: $scope.selected.space.escalator_count,
-      process_electrical_radiation_fraction: $scope.selected.space.process_electrical_radiation_fraction,
-      process_electrical_latent_fraction: $scope.selected.space.process_electrical_latent_fraction,
-      process_electrical_lost_fraction: $scope.selected.space.process_electrical_lost_fraction,
-      elevator_lost_fraction: $scope.selected.space.elevator_lost_fraction,
-      escalator_lost_fraction: $scope.selected.space.escalator_lost_fraction
-    };
-    var rows = $scope.gridApi.selection.getSelectedRows();
-    _.each(rows, function (row) {
-      _.merge(row, replacement);
+    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
+      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+
+      if (spaceIndex != selectedSpaceIndex) {
+        Shared.setModified();
+
+        rowEntity.process_electrical_power_density = $scope.selected.space.process_electrical_power_density;
+        rowEntity.commercial_refrigeration_epd = $scope.selected.space.commercial_refrigeration_epd;
+        rowEntity.elevator_count = $scope.selected.space.elevator_count;
+        rowEntity.escalator_count = $scope.selected.space.escalator_count;
+        rowEntity.process_electrical_radiation_fraction = $scope.selected.space.process_electrical_radiation_fraction;
+        rowEntity.process_electrical_latent_fraction = $scope.selected.space.process_electrical_latent_fraction;
+        rowEntity.process_electrical_lost_fraction = $scope.selected.space.process_electrical_lost_fraction;
+        rowEntity.elevator_lost_fraction = $scope.selected.space.elevator_lost_fraction;
+        rowEntity.escalator_lost_fraction = $scope.selected.space.escalator_lost_fraction;
+      }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
     $scope.resetApplySettings();

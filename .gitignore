@@ -27,9 +27,6 @@ Gemfile.lock
 /data/simulations/*
 dump.rdb
 
-# ignore bootstrap from angular-strap
-vendor/assets/bower_components/bootstrap
-
 .capistrano
 
 # ignore public assets
