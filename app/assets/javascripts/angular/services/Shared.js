@@ -359,6 +359,58 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     return Math.round(perArea + perVolume + perSpace);
   };
 
+  service.updateExhaustSystems = function (zones, spaces, exhausts) {
+    // go through all zones and see if they are attached to a space with exhaust
+    var exhaustZonesArr = [];
+    _.each(_.filter(zones, {
+      type: 'Conditioned'
+    }), function (zone) {
+      _.each(_.filter(spaces, {
+        thermal_zone_reference: zone.name
+      }), function (space) {
+        if (service.calculateTotalExhaust(space) > 0) {
+          //$log.debug('TOTAL EXHAUST FOR ', space.name, ': ', Shared.calculateTotalExhaust(space) );
+          exhaustZonesArr.push({
+            id: zone.id,
+            value: zone.name
+          });
+          // break when 1 space is found
+          return false;
+        }
+      });
+    });
+    var match;
+    // delete old exhaust systems
+    _.eachRight(exhausts, function (exhaust, index) {
+      match = _.find(exhaustZonesArr, {id: exhaust.zone_id});
+      if (!match) {
+        // delete if saved zone doesn't match current exhaust zones
+        exhausts.splice(index, 1);
+      }
+    });
+
+    // add missing new exhaust systems
+    _.each(exhaustZonesArr, function (zone) {
+      match = _.find(exhausts, {
+        zone_id: zone.id
+      });
+      if (!match) {
+        $log.debug('NO MATCH FOR zone id: ', zone.id);
+        // add to array
+        exhausts.push({
+          zone_id: zone.id,
+          zone_name: zone.value,
+          name: zone.value + ' Exhaust System',
+          type: 'Exhaust',
+          fan: {
+            name: zone.value + ' Exhaust Fan'
+          }
+        });
+      }
+    });
+  };
+
+
   $templateCache.put('ui-grid/cbeccHeaderCell', '<div ng-class="{ \'sortable\': sortable }"><div class="ui-grid-vertical-bar">&nbsp;</div><div class="ui-grid-cell-contents" col-index="renderIndex"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible="!col.colDef.enableCellEdit && col.colDef.displayName != \'Construction\' && col.colDef.displayName != \'Luminaire\'" class="fa fa-lock"></span> <span ui-grid-visible="col.sort.direction" ng-class="{ \'ui-grid-icon-up-dir\': col.sort.direction == asc, \'ui-grid-icon-down-dir\': col.sort.direction == desc, \'ui-grid-icon-blank\': !col.sort.direction }">&nbsp;</span></div><div class="ui-grid-column-menu-button" ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false" class="ui-grid-column-menu-button" ng-click="toggleMenu($event)"><i class="ui-grid-icon-angle-down">&nbsp;</i></div><div ng-if="grid.options.enableFiltering && col.enableFiltering" class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><input type="text" class="ui-grid-filter-input" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || \'\'}}"><div class="ui-grid-filter-button" ng-click="colFilter.term = null"><i class="ui-grid-icon-cancel" ng-show="!!colFilter.term">&nbsp;</i><!-- use !! because angular interprets \'f\' as false --></div></div></div>');
   $templateCache.put('ui-grid/cbeccHeaderCellWithUnits', '<div ng-class="{ \'sortable\': sortable }"><div class="ui-grid-vertical-bar">&nbsp;</div><div class="ui-grid-cell-contents" col-index="renderIndex"><span>{{ col.displayName CUSTOM_FILTERS }}</span> <span ui-grid-visible="!col.colDef.enableCellEdit && col.colDef.displayName != \'Construction\' && col.colDef.displayName != \'Luminaire\'" class="fa fa-lock"></span> <span ui-grid-visible="col.sort.direction" ng-class="{ \'ui-grid-icon-up-dir\': col.sort.direction == asc, \'ui-grid-icon-down-dir\': col.sort.direction == desc, \'ui-grid-icon-blank\': !col.sort.direction }">&nbsp;</span><br><small ng-bind-html="col.colDef.secondLine"></small></div><div class="ui-grid-column-menu-button" ng-if="grid.options.enableColumnMenus && !col.isRowHeader  && col.colDef.enableColumnMenu !== false" class="ui-grid-column-menu-button" ng-click="toggleMenu($event)"><i class="ui-grid-icon-angle-down">&nbsp;</i></div><div ng-if="grid.options.enableFiltering && col.enableFiltering" class="ui-grid-filter-container" ng-repeat="colFilter in col.filters"><input type="text" class="ui-grid-filter-input" ng-model="colFilter.term" ng-attr-placeholder="{{colFilter.placeholder || \'\'}}"><div class="ui-grid-filter-button" ng-click="colFilter.term = null"><i class="ui-grid-icon-cancel" ng-show="!!colFilter.term">&nbsp;</i><!-- use !! because angular interprets \'f\' as false --></div></div></div>');
   $templateCache.put('ui-grid/cbeccConstructionCell', '<div class="ui-grid-cell-contents"><span class="glyphicon glyphicon-edit pull-right edit" ui-grid-visible=\"col.colDef.allowConstructionEdit\" aria-hidden="true" ng-click="grid.appScope.changeConstruction(row.entity)"></span><span>{{COL_FIELD CUSTOM_FILTERS}}</span></div>');

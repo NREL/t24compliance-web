@@ -63,7 +63,11 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();
+
+          // update exhaust systems
+          Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
         }
+
       });
     }
   };

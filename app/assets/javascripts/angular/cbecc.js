@@ -201,6 +201,12 @@ cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$htt
         }],
         luminaires: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
           return data.list('luminaires', Shared.defaultParams());
+        }],
+        systems: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('zone_systems', Shared.defaultParams());
+        }],
+        zones: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('thermal_zones', Shared.defaultParams());
         }]
       },
       parent: 'requirebuilding',

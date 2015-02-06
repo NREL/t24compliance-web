@@ -185,6 +185,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
 
   };
 
+  // group plenum zones
   $scope.data.plenumCompatibleZones = function () {
     var plenumCompatibleZones = [
       {id: '',
@@ -201,6 +202,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     return plenumCompatibleZones;
   };
 
+  // group non-plenum zones
   $scope.data.nonPlenumCompatibleZones = function () {
     var nonPlenumCompatibleZones = [
       {id: '',
@@ -209,7 +211,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     _.each($scope.data.zones, function (zone, index) {
       if (zone.type != 'Plenum') {
         nonPlenumCompatibleZones.push({
-          id: zone.id,
+          id: zone.name,
           value: zone.name
         });
       }

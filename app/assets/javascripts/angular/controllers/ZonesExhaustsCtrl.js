@@ -3,51 +3,10 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
     exhaust: null
   };
 
-  // find all zones that contain a space that has exhaust
-  var exhaustZonesArr = [];
-  _.each(_.filter($scope.data.zones, {
-    type: 'Conditioned'
-  }), function (zone) {
-    _.each(_.filter($scope.data.spaces, {
-      thermal_zone_reference: zone.name
-    }), function (space) {
-      if (Shared.calculateTotalExhaust(space) > 0) {
-        //$log.debug('TOTAL EXHAUST FOR ', space.name, ': ', Shared.calculateTotalExhaust(space) );
-        exhaustZonesArr.push({
-          id: zone.id,
-          value: zone.name
-        });
-        // break when 1 space is found
-        return false;
-      }
-    });
-  });
+  // number of exhaust systems should already be created when getting to this tab.  only need to update them in the grid.
 
-  $log.debug('exhaustZonesArray');
-  $log.debug(exhaustZonesArr);
-
-  // compare exhaustZonesArr with $scope.data.exhausts to see if rows need to be added (for zones that have new spaces with exhaust)
-  _.each(exhaustZonesArr, function (zone) {
-    var match = _.find($scope.data.exhausts, {
-      zone_id: zone.id
-    });
-    if (!match) {
-      $log.debug('NO MATCH FOR zone id: ', zone.id);
-      // add to array
-      $scope.data.exhausts.push({
-        zone_id: zone.id,
-        zone_name: zone.value,
-        name: zone.value + ' Exhaust System',
-        type: 'Exhaust',
-        fan: {
-          name: zone.value + ' Exhaust Fan'
-        }
-      });
-    }
-  });
   $log.debug('data.exhausts');
   $log.debug($scope.data.exhausts);
-
 
   var min_width = 150;
 

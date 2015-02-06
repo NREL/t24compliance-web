@@ -3,21 +3,21 @@ staging:
     default:
       database: cbecc_com_web_staging
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
 vagrant:
   sessions:
     default:
       database: cbecc_com_web_vagrant
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
 production:
   sessions:
     default:
       database: cbecc_com_web_prod
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
 development:
   sessions:
@@ -31,7 +31,7 @@ test:
     default:
       database: cbecc_com_web_test
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
         read: primary
         max_retries: 1
