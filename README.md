@@ -106,8 +106,8 @@ To run the CBECC-Com simulations, then start the following:
   `bundle exec cap vagrant nginx:site:add && bundle exec cap vagrant nginx:site:enable && bundle exec cap vagrant nginx:reload && bundle exec cap vagrant nginx:restart`
   
 
-## AWS via Knife
-
+### AWS Production via Chef / Knife / Capistrano
+   
 * Cut the server. Make sure to specify your own *security group*
 
 ```
@@ -124,3 +124,14 @@ sudo chef-client
 ```
 
 * You may have to call `chef-client` multiple times until it converges. *MongoDB does not converge until the third call*
+* Update the config/deploy/production.rb to include the IP/DNS of the new AWS server
+* From local machine, deploy the application
+
+  ```
+  bundle exec cap production deploy
+  bundle exec cap production deploy:seed
+  bundle exec cap production nginx:site:add
+  bundle exec cap production nginx:site:enable
+  bundle exec cap production nginx:reload
+  bundle exec cap production nginx:restart
+  ```
