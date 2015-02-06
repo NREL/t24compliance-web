@@ -1,4 +1,4 @@
-cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructionDefaults', 'luminaires', function ($scope, $log, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructionDefaults, luminaires) {
+cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants', 'toaster', 'Shared', 'Enums', 'data', 'constData', 'doorData', 'fenData', 'spaceFunctionDefaults', 'stories', 'spaces', 'constructionDefaults', 'luminaires', 'systems', 'zones', function ($scope, $log, $location, uiGridConstants, toaster, Shared, Enums, data, constData, doorData, fenData, spaceFunctionDefaults, stories, spaces, constructionDefaults, luminaires, systems, zones) {
   $scope.data = {
     constData: constData,
     doorData: doorData,
@@ -6,6 +6,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     spaceFunctionDefaults: spaceFunctionDefaults,
     stories: stories,
     spaces: spaces,
+    systems: systems,
+    zones: zones,
     constructionDefaults: constructionDefaults[0] || {},
     luminaires: luminaires,
     luminairesModified: false,
@@ -13,6 +15,11 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     subsurfaces: [],
     lightingSystems: []
   };
+
+  // pull out exhaust systems from systems
+  $scope.data.exhausts = _.remove($scope.data.systems, {
+    type: 'Exhaust'
+  });
 
   $scope.data.lightingInputMethods = ['LPD', 'Luminaires'];
   $scope.data.lightingInputMethodsArr = [];
@@ -1184,6 +1191,30 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       function success(response) {
         Shared.resetModified();
         toaster.pop('success', 'Spaces successfully saved');
+
+        // if some spaces are already assigned to zones, recalculate exhaust systems
+        if (!_.isEmpty($scope.data.zones)){
+
+          Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
+          // put exhaust systems back in systems hash
+          _.each($scope.data.exhausts, function(exhaust) {
+             $scope.data.systems.push(exhaust);
+          });
+
+          var params = Shared.defaultParams();
+          params.data = $scope.data.systems;
+          data.bulkSync('zone_systems', params).then(success).catch(failure);
+        }
+
+        function success(response) {
+          toaster.pop('success', 'Exhaust systems updated');
+        }
+
+        function failure(response) {
+          $log.error('Failure updating exhaust systems', response);
+          toaster.pop('error', 'An error occurred while saving exhaust systems', response.statusText);
+        }
+
       }
 
       function failure(response) {
