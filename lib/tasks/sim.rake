@@ -1,6 +1,6 @@
 namespace :sim do
 
-  desc "import input fields"
+  desc "test docker"
   task :docker_test => :environment do
     if ENV['DOCKER_HOST']
       puts "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
@@ -54,8 +54,27 @@ namespace :sim do
     ensure
       Dir.chdir(current_dir)
     end
+  end
 
+  desc "import test project"
+  task :import_test_project => :environment do
+    # import some cbecc com models
+    u = User.find_or_create_by(email: 'test@nrel.gov')
+    u.roles = [:admin]
+    # Remove this if we share the code. This is very dangerous giving the admin a simple password for testing sake!
+    u.password = 'password'
+    u.save!
 
+    u.projects.destroy_all
+
+    f = File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
+    p = Project.from_sdd_xml(f)
+    p.user_id = u.id
+    p.save!
+    puts p
+
+    #h = Hash.from_xml(file)
+    #File.open('spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.json','w') {|f| f << MultiJson.dump(h, :pretty => true)}
   end
 
 end
