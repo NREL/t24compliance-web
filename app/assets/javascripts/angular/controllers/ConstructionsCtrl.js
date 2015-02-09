@@ -41,7 +41,7 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
   }];
 
   // Load saved spaces
-  _.each($scope.spaces, function (space, spaceIndex) {
+  _.each($scope.spaces, function (space) {
     space.surfaces = [];
     _.each(['interior_walls', 'exterior_walls', 'underground_walls', 'interior_floors', 'exterior_floors', 'underground_floors', 'roofs'], function (surfaceType) {
       _.each(space[surfaceType], function (surface) {
@@ -312,6 +312,7 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
 
   // Remove Buttons
   $scope.removeConstruction = function (index) {
+    Shared.setModified();
     var panel = $scope.panels[index];
     var oldValue = panel.selected.id;
     $scope.panels[index].selected = null;
@@ -320,6 +321,7 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
   };
 
   $scope.removeDoor = function (index) {
+    Shared.setModified();
     var panel = $scope.doorPanels[index];
     var oldValue = panel.selected.id;
     $scope.doorPanels[index].selected = null;
@@ -328,6 +330,7 @@ cbecc.controller('ConstructionsCtrl', ['$scope', '$log', '$location', 'toaster',
   };
 
   $scope.removeFenestration = function (index) {
+    Shared.setModified();
     var panel = $scope.fenPanels[index];
     var oldValue = panel.selected.id;
     $scope.fenPanels[index].selected = null;
