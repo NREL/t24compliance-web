@@ -789,18 +789,19 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       });
       surfaceIndex = $scope.data.surfaces.indexOf(surface);
     }
+    var spaceIndex = $scope.data.surfaces[surfaceIndex].space;
 
     var spaceOptions = [];
     var surfaceOptions = [];
     if (type == 'Door') {
       spaceOptions = $scope.data.doorCompatibleSpaces();
-      surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
+      surfaceOptions = _.find(spaceOptions, {id: spaceIndex}).surfaces;
     } else if (type == 'Window') {
       spaceOptions = $scope.data.windowCompatibleSpaces();
-      surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
+      surfaceOptions = _.find(spaceOptions, {id: spaceIndex}).surfaces;
     } else if (type == 'Skylight') {
       spaceOptions = $scope.data.skylightCompatibleSpaces();
-      surfaceOptions = _.find(spaceOptions, {id: $scope.data.surfaces[surfaceIndex].space}).surfaces;
+      surfaceOptions = _.find(spaceOptions, {id: spaceIndex}).surfaces;
     }
 
     var num = _.filter($scope.data.subsurfaces, {surface: surfaceIndex, type: type}).length + 1;
@@ -808,12 +809,12 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     constructionDefault = constructionDefault ? constructionDefault.id : null;
     $scope.data.subsurfaces.push({
       name: Shared.uniqueName($scope.data.subsurfaces, _.template($scope.data.surfaces[surfaceIndex].name + ' ' + type + ' <%= num %>'), num),
-      space: $scope.data.surfaces[surfaceIndex].space,
+      space: spaceIndex,
       spaceOptions: spaceOptions,
       surface: surfaceIndex,
       surfaceOptions: surfaceOptions,
       type: type,
-      building_story_id: $scope.data.spaces[$scope.data.surfaces[surfaceIndex].space].building_story_id,
+      building_story_id: $scope.data.spaces[spaceIndex].building_story_id,
       area: null,
       construction_library_id: constructionDefault,
       constructionDefault: constructionDefault
@@ -827,13 +828,28 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var surfaceIndex = newParent === undefined ? selectedSubsurface.surface : newParent;
     var spaceIndex = $scope.data.surfaces[surfaceIndex].space;
 
+    var spaceOptions = [];
+    var surfaceOptions = [];
+    if (selectedSubsurface.type == 'Door') {
+      spaceOptions = $scope.data.doorCompatibleSpaces();
+      surfaceOptions = _.find(spaceOptions, {id: spaceIndex}).surfaces;
+    } else if (selectedSubsurface.type == 'Window') {
+      spaceOptions = $scope.data.windowCompatibleSpaces();
+      surfaceOptions = _.find(spaceOptions, {id: spaceIndex}).surfaces;
+    } else if (selectedSubsurface.type == 'Skylight') {
+      spaceOptions = $scope.data.skylightCompatibleSpaces();
+      surfaceOptions = _.find(spaceOptions, {id: spaceIndex}).surfaces;
+    }
+
     var num = _.filter($scope.data.subsurfaces, {surface: surfaceIndex, type: selectedSubsurface.type}).length + 1;
     $scope.data.subsurfaces.push({
       name: Shared.uniqueName($scope.data.subsurfaces, _.template($scope.data.surfaces[surfaceIndex].name + ' ' + selectedSubsurface.type + ' <%= num %>'), num),
       space: spaceIndex,
+      spaceOptions: spaceOptions,
       surface: surfaceIndex,
+      surfaceOptions: surfaceOptions,
       type: selectedSubsurface.type,
-      building_story_id: selectedSubsurface.building_story_id,
+      building_story_id: $scope.data.spaces[spaceIndex].building_story_id,
       area: selectedSubsurface.area,
       construction_library_id: selectedSubsurface.construction_library_id,
       constructionDefault: selectedSubsurface.constructionDefault
