@@ -360,6 +360,24 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   };
 
   service.updateExhaustSystems = function (zones, spaces, exhausts) {
+    $log.debug("UPDATE EXHAUST SYSTEMS");
+    // first add/update zone_id, zone_name to exhaust systems object (if not there already)
+    _.each(zones, function (zone) {
+      $log.debug('zone: ', zone);
+      if (zone.exhaust_system_reference) {
+        $log.debug('Exhaust system reference is: ', '');
+        _.each(exhausts, function (system) {
+          if (system.name === zone.exhaust_system_reference) {
+            system.zone_id = zone.id;
+            system.zone_name = zone.name;
+            return false;
+          }
+        });
+      }
+    });
+    $log.debug('data.exhausts');
+    $log.debug(exhausts);
+
     // go through all zones and see if they are attached to a space with exhaust
     var exhaustZonesArr = [];
     _.each(_.filter(zones, {
@@ -372,42 +390,49 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           //$log.debug('TOTAL EXHAUST FOR ', space.name, ': ', Shared.calculateTotalExhaust(space) );
           exhaustZonesArr.push({
             id: zone.id,
-            value: zone.name
+            name: zone.name
           });
           // break when 1 space is found
           return false;
         }
       });
     });
+    $log.debug("Exhaust zones array");
+    $log.debug(exhaustZonesArr);
     var match;
     // delete old exhaust systems
     _.eachRight(exhausts, function (exhaust, index) {
-      match = _.find(exhaustZonesArr, {id: exhaust.zone_id});
+      match = _.find(exhaustZonesArr, {name: exhaust.zone_name});
       if (!match) {
         // delete if saved zone doesn't match current exhaust zones
+        $log.debug('Deleting exhaust at index = ', index);
         exhausts.splice(index, 1);
       }
+
     });
 
     // add missing new exhaust systems
     _.each(exhaustZonesArr, function (zone) {
       match = _.find(exhausts, {
-        zone_id: zone.id
+        zone_name: zone.name
       });
       if (!match) {
         $log.debug('NO MATCH FOR zone id: ', zone.id);
         // add to array
         exhausts.push({
           zone_id: zone.id,
-          zone_name: zone.value,
-          name: zone.value + ' Exhaust System',
+          zone_name: zone.name,
+          name: zone.name + ' Exhaust System',
           type: 'Exhaust',
           fan: {
-            name: zone.value + ' Exhaust Fan'
+            name: zone.name + ' Exhaust Fan'
           }
         });
       }
     });
+
+    $log.debug('final exhausts:');
+    $log.debug(exhausts);
   };
 
 

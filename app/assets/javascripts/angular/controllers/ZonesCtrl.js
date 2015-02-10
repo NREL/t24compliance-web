@@ -52,6 +52,10 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
   $scope.data.exhausts = _.filter($scope.data.systems, {
     type: 'Exhaust'
   });
+  $log.debug('exhaust systems:');
+  $log.debug($scope.data.exhausts);
+
+
   $scope.data.non_exhaust_systems = _.filter($scope.data.systems, function (system) {
     return system.type !== 'Exhaust';
   });
@@ -61,6 +65,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
 
   // add zone_id, zone_name to exhaust systems object
   _.each($scope.data.zones, function (zone) {
+    $log.debug('zone: ', zone);
     if (zone.exhaust_system_reference) {
       $log.debug('Exhaust system reference is: ', '');
       _.each($scope.data.exhausts, function (system) {

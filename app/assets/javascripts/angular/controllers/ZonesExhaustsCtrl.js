@@ -3,7 +3,8 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
     exhaust: null
   };
 
-  // number of exhaust systems should already be created when getting to this tab.  only need to update them in the grid.
+  // update exhaust systems just to make sure here
+  Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
 
   $log.debug('data.exhausts');
   $log.debug($scope.data.exhausts);
