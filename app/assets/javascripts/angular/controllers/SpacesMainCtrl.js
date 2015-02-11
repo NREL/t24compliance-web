@@ -48,6 +48,7 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
     }, {
       name: 'area',
       secondLine: Shared.html('ft<sup>2</sup>'),
+      type: 'number',
       enableHiding: false,
       cellEditableCondition: $scope.data.applySettingsCondition,
       filters: Shared.numberFilter(),
