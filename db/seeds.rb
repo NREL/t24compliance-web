@@ -15,7 +15,9 @@ SKIP_ZIP_CODES = false
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
 # Remove this if we share the code. This is very dangerous giving the admin a simple password for testing sake!
-u.password = 'password'
+if u.password.nil?
+  u.password = 'password'
+end
 u.save!
 # moved test project creation to sim.rake
 
