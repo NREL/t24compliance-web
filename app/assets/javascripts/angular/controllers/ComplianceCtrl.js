@@ -10,4 +10,8 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', 'data', 'Shared', function
     $log.debug(params);
     data.bulkSync('simulations', params);
   };
+
+  $scope.sddXmlPath = function() {
+    return '/projects/' + Shared.defaultParams().project_id + '/download';
+  }
 }]);

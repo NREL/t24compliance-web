@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-lg-3 col-sm-4">
     <button type="button" class="btn btn-success btn-block text-left" ng-click="getXml()">
       <i class="fa fa-arrow-circle-right fa-lg"></i> Run Compliance Check
     </button>
@@ -20,9 +20,9 @@
     <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
       <i class="fa fa-arrow-circle-o-down fa-lg"></i> Full Compliance Report (XML)
     </button>
-    <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
+    <a ng-href="{{sddXmlPath()}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
       <i class="fa fa-arrow-circle-o-down fa-lg"></i> SDD Model XML File
-    </button>
+    </a>
     <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
       <i class="fa fa-arrow-circle-o-down fa-lg"></i> OpenStudio Model
     </button>
@@ -33,6 +33,5 @@
       <i class="fa fa-arrow-circle-o-down fa-lg"></i> All
     </button>
   </div>
-  <div class="col-md-9">
-  </div>
+  <div class="col-lg-9 col-md-8"></div>
 </div>
