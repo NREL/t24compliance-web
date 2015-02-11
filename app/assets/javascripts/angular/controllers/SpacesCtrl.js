@@ -463,6 +463,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
 
     $scope.data.spaces.splice(spaceIndex, 1);
+    while (spaceIndex > 0 && !gridApi.grid.rows[spaceIndex - 1].visible) spaceIndex--;
     if (spaceIndex > 0) {
       gridApi.selection.toggleRowSelection($scope.data.spaces[spaceIndex - 1]);
     } else {
@@ -773,6 +774,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     });
 
     $scope.data.surfaces.splice(surfaceIndex, 1);
+    while (surfaceIndex > 0 && !gridApi.grid.rows[surfaceIndex - 1].visible) surfaceIndex--;
     if (surfaceIndex > 0) {
       gridApi.selection.toggleRowSelection($scope.data.surfaces[surfaceIndex - 1]);
     } else {
@@ -866,6 +868,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
     var subsurfaceIndex = $scope.data.subsurfaces.indexOf(selected.subsurface);
     $scope.data.subsurfaces.splice(subsurfaceIndex, 1);
+    while (subsurfaceIndex > 0 && !gridApi.grid.rows[subsurfaceIndex - 1].visible) subsurfaceIndex--;
     if (subsurfaceIndex > 0) {
       gridApi.selection.toggleRowSelection($scope.data.subsurfaces[subsurfaceIndex - 1]);
     } else {
@@ -932,6 +935,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       if (space.lighting_input_method == 'Luminaires') $scope.data.calculateLPD(spaceIndex);
     });
 
+    while (luminaireIndex > 0 && !gridApi.grid.rows[luminaireIndex - 1].visible) luminaireIndex--;
     if (luminaireIndex > 0) {
       gridApi.selection.toggleRowSelection($scope.data.luminaires[luminaireIndex - 1]);
     } else {
@@ -994,6 +998,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var spaceIndex = selected.lightingSystem.space;
     $scope.data.lightingSystems.splice(lightingSystemIndex, 1);
     $scope.data.calculateLPD(spaceIndex);
+    while (lightingSystemIndex > 0 && !gridApi.grid.rows[lightingSystemIndex - 1].visible) lightingSystemIndex--;
     if (lightingSystemIndex > 0) {
       gridApi.selection.toggleRowSelection($scope.data.lightingSystems[lightingSystemIndex - 1]);
     } else {

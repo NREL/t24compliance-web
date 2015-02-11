@@ -841,7 +841,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'sub_type',
-    displayName: 'Sub-Type',
+    displayName: 'Sub Type',
     editableCellTemplate: 'ui-grid/dropdownEditor',
     editDropdownOptionsArray: Enums.enumsArr.air_systems_sub_type_enums,
     enableHiding: false,
@@ -867,7 +867,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
     headerCellTemplate: 'ui-grid/cbeccHeaderCell'
   }, {
     name: 'coil_cooling_dxeer',
-    displayName: 'DXEER',
+    displayName: 'EER',
     field: 'coil_cooling.dxeer',
     enableHiding: false,
     filters: Shared.numberFilter(),
@@ -1524,6 +1524,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
 
     var index = $scope.systems[type].indexOf($scope.selected[type]);
     $scope.systems[type].splice(index, 1);
+    while (index > 0 && !$scope.gridSystemApi[type].grid.rows[index - 1].visible) index--;
     if (index > 0) {
       $scope.gridSystemApi[type].selection.toggleRowSelection($scope.systems[type][index - 1]);
     } else {

@@ -210,6 +210,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
 
     var index = $scope.stories.indexOf($scope.selected);
     $scope.stories.splice(index, 1);
+    while (index > 0 && !$scope.gridApi.grid.rows[index - 1].visible) index--;
     if (index > 0) {
       $scope.gridApi.selection.toggleRowSelection($scope.stories[index - 1]);
     } else {

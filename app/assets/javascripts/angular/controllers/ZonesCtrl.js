@@ -167,6 +167,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     $log.debug('Deleting zone: ', zone_name);
     var index = $scope.data.zones.indexOf(selected.zone);
     $scope.data.zones.splice(index, 1);
+    while (index > 0 && !gridApi.grid.rows[index - 1].visible) index--;
     if (index > 0) {
       gridApi.selection.toggleRowSelection($scope.data.zones[index - 1]);
     } else {
