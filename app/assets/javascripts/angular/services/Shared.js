@@ -195,7 +195,13 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
 
   service.existsInCache = function (key) {
     var info = cache.info(key);
-    return info !== undefined && !info.isExpired;
+    if (info) {
+      // Force refresh
+      if (key == 'space_function_defaults' && info.created < 1423672200000) return false;
+
+      return !info.isExpired;
+    }
+    return false;
   };
 
   service.loadFromCache = function (key) {
