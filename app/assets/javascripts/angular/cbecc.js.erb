@@ -10,7 +10,8 @@ var cbecc = angular.module('cbecc', [
   'angularSpinner']);
 
 cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$httpProvider', 'usSpinnerConfigProvider', function ($logProvider, $urlRouterProvider, stateHelperProvider, $httpProvider, usSpinnerConfigProvider) {
-  $logProvider.debugEnabled(<%= !Rails.env.production? %>);
+  var isProd = <%= Rails.env.production? %>;
+  $logProvider.debugEnabled(!isProd || localStorage.getItem('debug') === 'true');
 
   usSpinnerConfigProvider.setDefaults({
     color: '#70be44',
