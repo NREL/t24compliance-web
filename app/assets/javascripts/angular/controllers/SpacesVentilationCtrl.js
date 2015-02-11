@@ -112,16 +112,19 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.confirmApplySettings = function () {
     var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
 
-      if (spaceIndex != selectedSpaceIndex) {
-        Shared.setModified();
+        if (spaceIndex != selectedSpaceIndex) {
+          Shared.setModified();
 
-        rowEntity.exhaust_per_area = $scope.selected.space.exhaust_per_area;
-        rowEntity.exhaust_air_changes_per_hour = $scope.selected.space.exhaust_air_changes_per_hour;
-        rowEntity.exhaust_per_space = $scope.selected.space.exhaust_per_space;
-        $scope.data.updateTotalExhaust(rowEntity);
+          rowEntity.exhaust_per_area = $scope.selected.space.exhaust_per_area;
+          rowEntity.exhaust_air_changes_per_hour = $scope.selected.space.exhaust_air_changes_per_hour;
+          rowEntity.exhaust_per_space = $scope.selected.space.exhaust_per_space;
+          $scope.data.updateTotalExhaust(rowEntity);
+        }
       }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);

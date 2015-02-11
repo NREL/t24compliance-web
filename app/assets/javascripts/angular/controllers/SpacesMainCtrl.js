@@ -241,29 +241,32 @@ cbecc.controller('SpacesMainCtrl', ['$scope', '$modal', 'uiGridConstants', 'Shar
     var selectedRowEntity = angular.copy($scope.selected.space);
     var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
 
-      if (spaceIndex != selectedSpaceIndex) {
-        Shared.setModified();
+        if (spaceIndex != selectedSpaceIndex) {
+          Shared.setModified();
 
-        rowEntity.floor_to_ceiling_height = $scope.selected.space.floor_to_ceiling_height;
-        $scope.updateFloorToCeilingHeight(rowEntity, spaceIndex, $scope.selected.space.floor_to_ceiling_height, selectedRowEntity.floor_to_ceiling_height);
+          rowEntity.floor_to_ceiling_height = $scope.selected.space.floor_to_ceiling_height;
+          $scope.updateFloorToCeilingHeight(rowEntity, spaceIndex, $scope.selected.space.floor_to_ceiling_height, selectedRowEntity.floor_to_ceiling_height);
 
-        rowEntity.building_story_id = $scope.selected.space.building_story_id;
-        $scope.updateBuildingStoryId(rowEntity, spaceIndex, $scope.selected.space.building_story_id, selectedRowEntity.building_story_id);
+          rowEntity.building_story_id = $scope.selected.space.building_story_id;
+          $scope.updateBuildingStoryId(rowEntity, spaceIndex, $scope.selected.space.building_story_id, selectedRowEntity.building_story_id);
 
-        rowEntity.area = $scope.selected.space.area;
-        $scope.updateArea(rowEntity, spaceIndex, $scope.selected.space.area, selectedRowEntity.area);
+          rowEntity.area = $scope.selected.space.area;
+          $scope.updateArea(rowEntity, spaceIndex, $scope.selected.space.area, selectedRowEntity.area);
 
-        rowEntity.conditioning_type = $scope.selected.space.conditioning_type;
-        $scope.updateConditioningType(rowEntity, spaceIndex, $scope.selected.space.conditioning_type, selectedRowEntity.conditioning_type);
+          rowEntity.conditioning_type = $scope.selected.space.conditioning_type;
+          $scope.updateConditioningType(rowEntity, spaceIndex, $scope.selected.space.conditioning_type, selectedRowEntity.conditioning_type);
 
-        rowEntity.envelope_status = $scope.selected.space.envelope_status;
+          rowEntity.envelope_status = $scope.selected.space.envelope_status;
 
-        rowEntity.lighting_status = $scope.selected.space.lighting_status;
+          rowEntity.lighting_status = $scope.selected.space.lighting_status;
 
-        $scope.data.updateTotalExhaust(rowEntity);
+          $scope.data.updateTotalExhaust(rowEntity);
+        }
       }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);

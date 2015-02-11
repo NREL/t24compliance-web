@@ -202,19 +202,22 @@ cbecc.controller('SpacesSettingsCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     var selectedRowEntity = angular.copy($scope.selected.space);
     var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
 
-      if (spaceIndex != selectedSpaceIndex) {
-        Shared.setModified();
+        if (spaceIndex != selectedSpaceIndex) {
+          Shared.setModified();
 
-        if (rowEntity.conditioning_type != 'Plenum') {
-          rowEntity.space_function = $scope.selected.space.space_function;
-          $scope.updateSpaceFunction(rowEntity, spaceIndex, $scope.selected.space.space_function, selectedRowEntity.space_function);
+          if (rowEntity.conditioning_type != 'Plenum') {
+            rowEntity.space_function = $scope.selected.space.space_function;
+            $scope.updateSpaceFunction(rowEntity, spaceIndex, $scope.selected.space.space_function, selectedRowEntity.space_function);
 
-          rowEntity.occupant_density = $scope.selected.space.occupant_density;
-          rowEntity.hot_water_heating_rate = $scope.selected.space.hot_water_heating_rate;
-          rowEntity.receptacle_power_density = $scope.selected.space.receptacle_power_density;
+            rowEntity.occupant_density = $scope.selected.space.occupant_density;
+            rowEntity.hot_water_heating_rate = $scope.selected.space.hot_water_heating_rate;
+            rowEntity.receptacle_power_density = $scope.selected.space.receptacle_power_density;
+          }
         }
       }
     });

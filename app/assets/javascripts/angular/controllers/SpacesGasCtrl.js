@@ -103,17 +103,20 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
   $scope.confirmApplySettings = function () {
     var selectedSpaceIndex = $scope.data.spaces.indexOf($scope.selected.space);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var spaceIndex = $scope.data.spaces.indexOf(rowEntity);
 
-      if (spaceIndex != selectedSpaceIndex) {
-        Shared.setModified();
+        if (spaceIndex != selectedSpaceIndex) {
+          Shared.setModified();
 
-        rowEntity.gas_equipment_power_density = $scope.selected.space.gas_equipment_power_density;
-        rowEntity.process_gas_power_density = $scope.selected.space.process_gas_power_density;
-        rowEntity.process_gas_radiation_fraction = $scope.selected.space.process_gas_radiation_fraction;
-        rowEntity.process_gas_latent_fraction = $scope.selected.space.process_gas_latent_fraction;
-        rowEntity.process_gas_lost_fraction = $scope.selected.space.process_gas_lost_fraction;
+          rowEntity.gas_equipment_power_density = $scope.selected.space.gas_equipment_power_density;
+          rowEntity.process_gas_power_density = $scope.selected.space.process_gas_power_density;
+          rowEntity.process_gas_radiation_fraction = $scope.selected.space.process_gas_radiation_fraction;
+          rowEntity.process_gas_latent_fraction = $scope.selected.space.process_gas_latent_fraction;
+          rowEntity.process_gas_lost_fraction = $scope.selected.space.process_gas_lost_fraction;
+        }
       }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);

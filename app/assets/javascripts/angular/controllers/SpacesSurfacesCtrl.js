@@ -214,6 +214,8 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
             if (!unique) rowEntity.name = oldValue;
           } else if (colDef.name == 'space') {
             $scope.updateSpace(rowEntity, surfaceIndex, newValue, oldValue);
+          } else if (colDef.name == 'azimuth') {
+            rowEntity.azimuth = Shared.fixPrecision(((newValue % 360) + 360) % 360);
           }
         }
       });
@@ -266,18 +268,21 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     var selectedRowEntity = angular.copy($scope.selected.surface);
     var selectedSurfaceIndex = $scope.data.surfaces.indexOf($scope.selected.surface);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var surfaceIndex = $scope.data.surfaces.indexOf(rowEntity);
 
-      if (surfaceIndex != selectedSurfaceIndex) {
-        Shared.setModified();
+        if (surfaceIndex != selectedSurfaceIndex) {
+          Shared.setModified();
 
-        rowEntity.area = $scope.selected.surface.area;
-        rowEntity.azimuth = $scope.selected.surface.azimuth;
-        rowEntity.construction_library_id = $scope.selected.surface.construction_library_id;
-        rowEntity.tilt = $scope.selected.surface.tilt;
-        rowEntity.height = $scope.selected.surface.height;
-        rowEntity.perimeter_exposed = $scope.selected.surface.perimeter_exposed;
+          rowEntity.area = $scope.selected.surface.area;
+          rowEntity.azimuth = $scope.selected.surface.azimuth;
+          rowEntity.construction_library_id = $scope.selected.surface.construction_library_id;
+          rowEntity.tilt = $scope.selected.surface.tilt;
+          rowEntity.height = $scope.selected.surface.height;
+          rowEntity.perimeter_exposed = $scope.selected.surface.perimeter_exposed;
+        }
       }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);

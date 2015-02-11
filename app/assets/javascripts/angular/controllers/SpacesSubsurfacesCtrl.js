@@ -182,14 +182,17 @@ cbecc.controller('SpacesSubsurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared'
     var selectedRowEntity = angular.copy($scope.selected.subsurface);
     var selectedSubsurfaceIndex = $scope.data.subsurfaces.indexOf($scope.selected.subsurface);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var subsurfaceIndex = $scope.data.subsurfaces.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var subsurfaceIndex = $scope.data.subsurfaces.indexOf(rowEntity);
 
-      if (subsurfaceIndex != selectedSubsurfaceIndex) {
-        Shared.setModified();
+        if (subsurfaceIndex != selectedSubsurfaceIndex) {
+          Shared.setModified();
 
-        rowEntity.area = $scope.selected.subsurface.area;
-        rowEntity.construction_library_id = $scope.selected.subsurface.construction_library_id;
+          rowEntity.area = $scope.selected.subsurface.area;
+          rowEntity.construction_library_id = $scope.selected.subsurface.construction_library_id;
+        }
       }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);

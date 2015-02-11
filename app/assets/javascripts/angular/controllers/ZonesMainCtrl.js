@@ -110,26 +110,20 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
   };
 
   $scope.confirmApplySettings = function () {
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      rowEntity.type = $scope.selected.zone.type;
-      $scope.updateType(rowEntity);
-    });
-    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
-    $scope.resetApplySettings();
-  };
-
-  $scope.confirmApplySettings = function () {
     var selectedRowEntity = angular.copy($scope.selected.zone);
     var selectedZoneIndex = $scope.data.zones.indexOf($scope.selected.zone);
 
-    _.each($scope.gridApi.selection.getSelectedRows(), function (rowEntity) {
-      var zoneIndex = $scope.data.zones.indexOf(rowEntity);
+    _.each($scope.gridApi.selection.getSelectedGridRows(), function (row) {
+      if (row.visible) {
+        var rowEntity = row.entity;
+        var zoneIndex = $scope.data.zones.indexOf(rowEntity);
 
-      if (zoneIndex != selectedZoneIndex) {
-        Shared.setModified();
+        if (zoneIndex != selectedZoneIndex) {
+          Shared.setModified();
 
-        rowEntity.type = $scope.selected.zone.type;
-        $scope.updateType(rowEntity, zoneIndex, $scope.selected.zone.type, selectedRowEntity.zone);
+          rowEntity.type = $scope.selected.zone.type;
+          $scope.updateType(rowEntity, zoneIndex, $scope.selected.zone.type, selectedRowEntity.zone);
+        }
       }
     });
     $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
