@@ -478,7 +478,8 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     var surfaceType = boundary ? boundary + ' ' + type : type;
     var constructionDefault = $scope.data.constructionDefaults[_.snakeCase(surfaceType)];
     constructionDefault = constructionDefault ? constructionDefault.id : null;
-    $scope.data.surfaces.push({
+
+    var surface = {
       name: Shared.uniqueName($scope.data.surfaces, _.template($scope.data.spaces[spaceIndex].name + ' ' + type + ' <%= num %>'), num),
       space: spaceIndex,
       type: type,
@@ -493,7 +494,12 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
       tilt: null,
       height: null,
       perimeter_exposed: null
-    });
+    };
+
+    if ((boundary == 'Exterior' && type == 'Wall') || type == 'Roof') surface.azimuth = 0;
+    if (boundary == 'Underground' && type == 'Floor') surface.perimeter_exposed = 0;
+
+    $scope.data.surfaces.push(surface);
     if (boundary == 'Interior') {
       var surfaceIndex = $scope.data.surfaces.length - 1;
       $scope.data.surfaces[surfaceIndex].adjacencyOptions = $scope.data.compatibleAdjacentSpaces(surfaceIndex);
@@ -1216,12 +1222,12 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
         toaster.pop('success', 'Spaces successfully saved');
 
         // if some spaces are already assigned to zones, recalculate exhaust systems
-        if (!_.isEmpty($scope.data.zones)){
+        if (!_.isEmpty($scope.data.zones)) {
 
           Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
           // put exhaust systems back in systems hash
-          _.each($scope.data.exhausts, function(exhaust) {
-             $scope.data.systems.push(exhaust);
+          _.each($scope.data.exhausts, function (exhaust) {
+            $scope.data.systems.push(exhaust);
           });
 
           var params = Shared.defaultParams();
