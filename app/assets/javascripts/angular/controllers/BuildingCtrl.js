@@ -1,4 +1,4 @@
-cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'toaster', 'data', 'Shared', 'building', 'stories', 'spaces', function ($scope, $log, $stateParams, $resource, $location, toaster, data, Shared, building, stories, spaces) {
+cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource', '$location', 'uiGridConstants', 'toaster', 'data', 'Shared', 'building', 'stories', 'spaces', function ($scope, $log, $stateParams, $resource, $location, uiGridConstants, toaster, data, Shared, building, stories, spaces) {
   Shared.setIds($stateParams);
   $scope.stories = stories;
   $scope.spaces = spaces;
@@ -78,6 +78,11 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
       name: 'z',
       displayName: 'Height Above Ground',
       secondLine: Shared.html('ft'),
+      cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+        if (grid.appScope.autoElevation && rowRenderIndex) {
+          return 'disabled-cell';
+        }
+      },
       cellEditableCondition: function ($scope) {
         return !($scope.grid.appScope.autoElevation && $scope.rowRenderIndex);
       },
@@ -157,6 +162,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
 
   $scope.$watch('autoElevation', function () {
     if ($scope.autoElevation) $scope.calculateElevation();
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.EDIT);
   });
 
   // Buttons
