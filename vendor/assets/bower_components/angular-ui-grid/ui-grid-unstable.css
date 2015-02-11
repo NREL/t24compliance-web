@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.0.0-RC.18-0fa8c48 - 2015-02-06
+ * ui-grid - v3.0.0-RC.18-1938669 - 2015-02-11
  * Copyright (c) 2015 ; License: MIT 
  */
 .ui-grid {
@@ -254,6 +254,8 @@ input[type="text"].ui-grid-filter-input:hover {
 .ui-grid-viewport {
   min-height: 20px;
   position: relative;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .ui-grid-viewport :focus {
   outline: none;

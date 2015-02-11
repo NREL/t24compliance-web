@@ -1,5 +1,5 @@
 /*!
- * ui-grid - v3.0.0-RC.18-0fa8c48 - 2015-02-06
+ * ui-grid - v3.0.0-RC.18-1938669 - 2015-02-11
  * Copyright (c) 2015 ; License: MIT 
  */
 
@@ -94,7 +94,16 @@
 
     // TODO(c0bra): Create full list of these somehow. NOTE: do any allow a space before or after them?
     CURRENCY_SYMBOLS: ['ƒ', '$', '£', '$', '¤', '¥', '៛', '₩', '₱', '฿', '₫'],
-    
+
+    scrollDirection: {
+      UP: 'up',
+      DOWN: 'down',
+      LEFT: 'left',
+      RIGHT: 'right',
+      NONE: 'none'
+
+    },
+
     dataChange: {
       ALL: 'all',
       EDIT: 'edit',
@@ -2569,8 +2578,8 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
 (function(){
   'use strict';
 
-  angular.module('ui.grid').directive('uiGridViewport', ['gridUtil','ScrollEvent',
-    function(gridUtil, ScrollEvent) {
+  angular.module('ui.grid').directive('uiGridViewport', ['gridUtil','ScrollEvent','uiGridConstants',
+    function(gridUtil, ScrollEvent, uiGridConstants) {
       return {
         replace: true,
         scope: {},
@@ -2611,6 +2620,9 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
               grid.flagScrollingHorizontally();
               var xDiff = newScrollLeft - colContainer.prevScrollLeft;
 
+              if (xDiff > 0) { grid.scrollDirection = uiGridConstants.scrollDirection.RIGHT; }
+              if (xDiff < 0) { grid.scrollDirection = uiGridConstants.scrollDirection.LEFT; }
+
               var horizScrollLength = (colContainer.getCanvasWidth() - colContainer.getViewportWidth());
               if (horizScrollLength !== 0) {
                 horizScrollPercentage = newScrollLeft / horizScrollLength;
@@ -2626,6 +2638,8 @@ function ($compile, $timeout, $window, $document, gridUtil, uiGridConstants) {
               grid.flagScrollingVertically();
               var yDiff = newScrollTop - rowContainer.prevScrollTop;
 
+              if (yDiff > 0 ) { grid.scrollDirection = uiGridConstants.scrollDirection.DOWN; }
+              if (yDiff < 0 ) { grid.scrollDirection = uiGridConstants.scrollDirection.UP; }
 
               var vertScrollLength = rowContainer.getVerticalScrollLength();
 
@@ -2672,9 +2686,9 @@ angular.module('ui.grid')
   'use strict';
 
   angular.module('ui.grid').controller('uiGridController', ['$scope', '$element', '$attrs', 'gridUtil', '$q', 'uiGridConstants',
-                    '$templateCache', 'gridClassFactory', '$timeout', '$parse', '$compile',
+                    '$templateCache', 'gridClassFactory', '$timeout', '$parse', '$compile', 'ScrollEvent',
     function ($scope, $elm, $attrs, gridUtil, $q, uiGridConstants,
-              $templateCache, gridClassFactory, $timeout, $parse, $compile) {
+              $templateCache, gridClassFactory, $timeout, $parse, $compile, ScrollEvent) {
       // gridUtil.logDebug('ui-grid controller');
 
       var self = this;
@@ -2729,6 +2743,23 @@ angular.module('ui.grid')
         }
       }
 
+      function adjustInfiniteScrollPosition (scrollToRow) {
+
+        var scrollEvent = new ScrollEvent(self.grid, null, null, 'ui.grid.adjustInfiniteScrollPosition');
+        var totalRows = self.grid.renderContainers.body.visibleRowCache.length;
+        var percentage = ( scrollToRow + ( scrollToRow / ( totalRows - 1 ) ) ) / totalRows;
+
+        //for infinite scroll, never allow it to be at the zero position so the up button can be active
+        if ( percentage === 0 ) {
+          scrollEvent.y = {pixels: 1};
+        }
+        else {
+          scrollEvent.y = {percentage: percentage};
+        }
+        scrollEvent.fireScrollingEvent();
+
+      }
+
       function dataWatchFunction(newData) {
         // gridUtil.logDebug('dataWatch fired');
         var promises = [];
@@ -2767,6 +2798,20 @@ angular.module('ui.grid')
                 $scope.$evalAsync(function() {
                   self.grid.refreshCanvas(true);
                   self.grid.callDataChangeCallbacks(uiGridConstants.dataChange.ROW);
+
+                  $timeout(function () {
+                    //Process post load scroll events if using infinite scroll
+                    if ( self.grid.options.enableInfiniteScroll ) {
+                      //If first load, seed the scrollbar down a little to activate the button
+                      if ( self.grid.renderContainers.body.prevRowScrollIndex === 0 ) {
+                        adjustInfiniteScrollPosition(0);
+                      }
+                      //If we are scrolling up, we need to reseed the grid.
+                      if (self.grid.scrollDirection === uiGridConstants.scrollDirection.UP) {
+                        adjustInfiniteScrollPosition(self.grid.renderContainers.body.prevRowScrollIndex + 1 + self.grid.options.excessRows);
+                      }
+                    }
+                    }, 0);
                 });
               });
           });
@@ -3132,14 +3177,25 @@ angular.module('ui.grid')
      * @description set to true when Grid is scrolling horizontally. Set to false via debounced method
      */
     self.isScrollingHorizontally = false;
-  
+
+    /**
+     * @ngdoc property
+     * @name scrollDirection
+     * @propertyOf ui.grid.class:Grid
+     * @description set one of the uiGridConstants.scrollDirection values (UP, DOWN, LEFT, RIGHT, NONE), which tells
+     * us which direction we are scrolling. Set to NONE via debounced method
+     */
+    self.scrollDirection = uiGridConstants.scrollDirection.NONE;
+
     var debouncedVertical = gridUtil.debounce(function () {
       self.isScrollingVertically = false;
-    }, 300);
+      self.scrollDirection = uiGridConstants.scrollDirection.NONE;
+    }, 1000);
   
     var debouncedHorizontal = gridUtil.debounce(function () {
       self.isScrollingHorizontally = false;
-    }, 300);
+      self.scrollDirection = uiGridConstants.scrollDirection.NONE;
+    }, 1000);
   
   
     /**
@@ -4886,7 +4942,7 @@ angular.module('ui.grid')
    */
   Grid.prototype.refreshCanvas = function(buildStyles) {
     var self = this;
-    
+
     if (buildStyles) {
       self.buildStyles();
     }
@@ -5002,7 +5058,7 @@ angular.module('ui.grid')
 
       // gridUtil.logDebug('redrawing container', i);
 
-      container.adjustRows(null, container.prevScrolltopPercentage);
+      container.adjustRows(null, container.prevScrolltopPercentage, true);
       container.adjustColumns(null, container.prevScrollleftPercentage);
     }
   };
@@ -6915,7 +6971,7 @@ angular.module('ui.grid')
       scrollTop = (this.getCanvasHeight() - this.getCanvasWidth()) * scrollPercentage;
     }
 
-    this.adjustRows(scrollTop, scrollPercentage);
+    this.adjustRows(scrollTop, scrollPercentage, false);
 
     this.prevScrollTop = scrollTop;
     this.prevScrolltopPercentage = scrollPercentage;
@@ -6940,7 +6996,7 @@ angular.module('ui.grid')
     this.grid.queueRefresh();
   };
 
-  GridRenderContainer.prototype.adjustRows = function adjustRows(scrollTop, scrollPercentage) {
+  GridRenderContainer.prototype.adjustRows = function adjustRows(scrollTop, scrollPercentage, postDataLoaded) {
     var self = this;
 
     var minRows = self.minRowsToRender();
@@ -6960,22 +7016,53 @@ angular.module('ui.grid')
     if (rowIndex > maxRowIndex) {
       rowIndex = maxRowIndex;
     }
-    
+
     var newRange = [];
     if (rowCache.length > self.grid.options.virtualizationThreshold) {
       if (!(typeof(scrollTop) === 'undefined' || scrollTop === null)) {
         // Have we hit the threshold going down?
-        if (self.prevScrollTop < scrollTop && rowIndex < self.prevRowScrollIndex + self.grid.options.scrollThreshold && rowIndex < maxRowIndex) {
+        if (!self.grid.options.enableInfiniteScroll && self.prevScrollTop < scrollTop && rowIndex < self.prevRowScrollIndex + self.grid.options.scrollThreshold && rowIndex < maxRowIndex) {
           return;
         }
         //Have we hit the threshold going up?
-        if (self.prevScrollTop > scrollTop && rowIndex > self.prevRowScrollIndex - self.grid.options.scrollThreshold && rowIndex < maxRowIndex) {
+        if (!self.grid.options.enableInfiniteScroll && self.prevScrollTop > scrollTop && rowIndex > self.prevRowScrollIndex - self.grid.options.scrollThreshold && rowIndex < maxRowIndex) {
           return;
         }
       }
+      var rangeStart = {};
+      var rangeEnd = {};
 
-      var rangeStart = Math.max(0, rowIndex - self.grid.options.excessRows);
-      var rangeEnd = Math.min(rowCache.length, rowIndex + minRows + self.grid.options.excessRows);
+      //If infinite scroll is enabled, and we loaded more data coming from redrawInPlace, then recalculate the range and set rowIndex to proper place to scroll to
+      if ( self.grid.options.enableInfiniteScroll && self.grid.scrollDirection !== uiGridConstants.scrollDirection.NONE && postDataLoaded ) {
+        var findIndex = null;
+        var i = null;
+        if ( self.grid.scrollDirection === uiGridConstants.scrollDirection.UP ) {
+          findIndex = rowIndex > 0 ? self.grid.options.excessRows : 0;
+          for ( i = 0; i < rowCache.length; i++) {
+            if (rowCache[i].entity.$$hashKey === self.renderedRows[findIndex].entity.$$hashKey) {
+              rowIndex = i;
+              break;
+            }
+          }
+          rangeStart = Math.max(0, rowIndex);
+          rangeEnd = Math.min(rowCache.length, rangeStart + self.grid.options.excessRows + minRows);
+        }
+        else if ( self.grid.scrollDirection === uiGridConstants.scrollDirection.DOWN ) {
+          findIndex = minRows;
+          for ( i = 0; i < rowCache.length; i++) {
+            if (rowCache[i].entity.$$hashKey === self.renderedRows[findIndex].entity.$$hashKey) {
+              rowIndex = i;
+              break;
+            }
+          }
+          rangeStart = Math.max(0, rowIndex - self.grid.options.excessRows - minRows);
+          rangeEnd = Math.min(rowCache.length, rowIndex + minRows + self.grid.options.excessRows);
+        }
+      }
+      else {
+        rangeStart = Math.max(0, rowIndex - self.grid.options.excessRows);
+        rangeEnd = Math.min(rowCache.length, rowIndex + minRows + self.grid.options.excessRows);
+      }
 
       newRange = [rangeStart, rangeEnd];
     }
@@ -11571,12 +11658,11 @@ module.filter('px', function() {
                  * @name scrollTo
                  * @methodOf  ui.grid.cellNav.api:PublicApi
                  * @description brings the specified row and column into view
-                 * @param {object} $scope a scope we can broadcast events from
                  * @param {object} rowEntity gridOptions.data[] array instance to make visible
                  * @param {object} colDef to make visible
                  */
-                scrollTo: function ($scope, rowEntity, colDef) {
-                  service.scrollTo(grid, $scope, rowEntity, colDef);
+                scrollTo: function (rowEntity, colDef) {
+                  service.scrollTo(grid, rowEntity, colDef);
                 },
 
                 /**
@@ -11585,12 +11671,11 @@ module.filter('px', function() {
                  * @methodOf  ui.grid.cellNav.api:PublicApi
                  * @description brings the specified row and column into view, and sets focus
                  * to that cell
-                 * @param {object} $scope a scope we can broadcast events from
                  * @param {object} rowEntity gridOptions.data[] array instance to make visible and set focus
                  * @param {object} colDef to make visible and set focus
                  */
-                scrollToFocus: function ($scope, rowEntity, colDef) {
-                  service.scrollToFocus(grid, $scope, rowEntity, colDef);
+                scrollToFocus: function (rowEntity, colDef) {
+                  service.scrollToFocus(grid, rowEntity, colDef);
                 },
 
                 /**
@@ -11598,12 +11683,11 @@ module.filter('px', function() {
                  * @name scrollToFocus
                  * @methodOf  ui.grid.cellNav.api:PublicApi
                  * @description brings the specified row and column fully into view if it isn't already
-                 * @param {object} $scope a scope we can broadcast events from
                  * @param {GridRow} row grid row that we should make fully visible
                  * @param {GridCol} col grid col to make fully visible
                  */
-                scrollToIfNecessary: function ($scope, row, col) {
-                  service.scrollToIfNecessary(grid, $scope, row, col);
+                scrollToIfNecessary: function (row, col) {
+                  service.scrollToIfNecessary(grid, row, col);
                 },
 
                 /**
@@ -11775,11 +11859,10 @@ module.filter('px', function() {
          * row and column is in view
          * @param {Grid} grid the grid you'd like to act upon, usually available
          * from gridApi.grid
-         * @param {object} $scope a scope we can broadcast events from
          * @param {object} rowEntity gridOptions.data[] array instance to make visible
          * @param {object} colDef to make visible
          */
-        scrollTo: function (grid, $scope, rowEntity, colDef) {
+        scrollTo: function (grid, rowEntity, colDef) {
           var gridRow = null, gridCol = null;
 
           if (rowEntity !== null && typeof(rowEntity) !== 'undefined' ) {
@@ -11789,7 +11872,7 @@ module.filter('px', function() {
           if (colDef !== null && typeof(colDef) !== 'undefined' ) {
             gridCol = grid.getColumn(colDef.name ? colDef.name : colDef.field);
           }
-          this.scrollToInternal(grid, $scope, gridRow, gridCol);
+          this.scrollToInternal(grid, gridRow, gridCol);
         },
 
         /**
@@ -11800,11 +11883,10 @@ module.filter('px', function() {
          * row and column is in view, and set focus to the cell in that row and column
          * @param {Grid} grid the grid you'd like to act upon, usually available
          * from gridApi.grid
-         * @param {object} $scope a scope we can broadcast events from
          * @param {object} rowEntity gridOptions.data[] array instance to make visible and set focus to
          * @param {object} colDef to make visible and set focus to
          */
-        scrollToFocus: function (grid, $scope, rowEntity, colDef) {
+        scrollToFocus: function (grid, rowEntity, colDef) {
           var gridRow = null, gridCol = null;
 
           if (rowEntity !== null) {
@@ -11814,7 +11896,7 @@ module.filter('px', function() {
           if (colDef !== null) {
             gridCol = grid.getColumn(colDef.name ? colDef.name : colDef.field);
           }
-          this.scrollToInternal(grid, $scope, gridRow, gridCol);
+          this.scrollToInternal(grid, gridRow, gridCol);
 
           var rowCol = { row: gridRow, col: gridCol };
 
@@ -11850,11 +11932,10 @@ module.filter('px', function() {
          * </pre>
          * @param {Grid} grid the grid you'd like to act upon, usually available
          * from gridApi.grid
-         * @param {object} $scope a scope we can broadcast events from
          * @param {GridRow} gridRow row to make visible
          * @param {GridCol} gridCol column to make visible
          */
-        scrollToInternal: function (grid, $scope, gridRow, gridCol) {
+        scrollToInternal: function (grid, gridRow, gridCol) {
           var scrollEvent = new ScrollEvent(grid,null,null,'uiGridCellNavService.scrollToInternal');
 
           if (gridRow !== null) {
@@ -11881,12 +11962,11 @@ module.filter('px', function() {
          *   in the case that it is not completely visible on the screen already.
          * @param {Grid} grid the grid you'd like to act upon, usually available
          * from gridApi.grid
-         * @param {object} $scope a scope we can broadcast events from
          * @param {GridRow} gridRow row to make visible
          * @param {GridCol} gridCol column to make visible
          */
-        scrollToIfNecessary: function (grid, $scope, gridRow, gridCol) {
-          var scrollEvent = new ScrollEvent(grid,null,null,'uiGridCellNavService.scrollToIfNecessary');
+        scrollToIfNecessary: function (grid, gridRow, gridCol) {
+          var scrollEvent = new ScrollEvent(grid, 'uiGridCellNavService.scrollToIfNecessary');
 
           // Alias the visible row and column caches
           var visRowCache = grid.renderContainers.body.visibleRowCache;
@@ -12170,7 +12250,7 @@ module.filter('px', function() {
                   uiGridCtrl.cellNav.broadcastCellNav(rowCol);
 
                   // Scroll to the new cell, if it's not completely visible within the render container's viewport
-                  uiGridCellNavService.scrollToIfNecessary(grid, $scope, rowCol.row, rowCol.col);
+                  uiGridCellNavService.scrollToIfNecessary(grid, rowCol.row, rowCol.col);
 
                   evt.stopPropagation();
                   evt.preventDefault();
@@ -12297,14 +12377,6 @@ module.filter('px', function() {
                         
                         needFocus = false;
                       });
-                    });
-                  } else {
-                    $timeout(function() {
-                      // make a dummy roCol
-                      var rowCol = { col: { uid: null }, row: { uid: null } };
-    
-                      // broadcast a cellNav event so we clear the focus on all cells
-                      uiGridCtrl.cellNav.broadcastCellNav(rowCol);
                     });
                   }
                 }
@@ -15609,7 +15681,7 @@ module.filter('px', function() {
    *
    *  @description Service for infinite scroll features
    */
-  module.service('uiGridInfiniteScrollService', ['gridUtil', '$compile', '$timeout', function (gridUtil, $compile, $timeout) {
+  module.service('uiGridInfiniteScrollService', ['gridUtil', '$compile', '$timeout', 'uiGridConstants', function (gridUtil, $compile, $timeout, uiGridConstants) {
 
     var service = {
 
@@ -15642,6 +15714,17 @@ module.filter('px', function() {
                */
 
               needLoadMoreData: function ($scope, fn) {
+              },
+
+              /**
+               * @ngdoc event
+               * @name needLoadMoreDataTop
+               * @eventOf ui.grid.infiniteScroll.api:PublicAPI
+               * @description This event fires when scroll reached top percentage of grid
+               * and needs to load data
+               */
+
+              needLoadMoreDataTop: function ($scope, fn) {
               }
             }
           },
@@ -15691,12 +15774,16 @@ module.filter('px', function() {
        * @ngdoc function
        * @name loadData
        * @methodOf ui.grid.infiniteScroll.service:uiGridInfiniteScrollService
-       * @description This function fires 'needLoadMoreData' event
+       * @description This function fires 'needLoadMoreData' or 'needLoadMoreDataTop' event based on scrollDirection
        */
 
       loadData: function (grid) {
-		grid.options.loadTimout = true;
-        grid.api.infiniteScroll.raise.needLoadMoreData();        
+        grid.options.loadTimout = true;
+        if (grid.scrollDirection === uiGridConstants.scrollDirection.UP) {
+          grid.api.infiniteScroll.raise.needLoadMoreDataTop();
+          return;
+        }
+        grid.api.infiniteScroll.raise.needLoadMoreData();
       },
 
       /**
@@ -15788,10 +15875,14 @@ module.filter('px', function() {
           link: function ($scope, $elm, $attr){
             if ($scope.grid.options.enableInfiniteScroll) {
               $scope.grid.api.core.on.scrollEvent($scope, function (args) {
-                if (args.y) {
-                  var percentage = 100 - (args.y.percentage * 100);
-                  uiGridInfiniteScrollService.checkScroll($scope.grid, percentage);
-                }
+                  //Prevent circular scroll references, if source is coming from ui.grid.adjustInfiniteScrollPosition() function
+                  if (args.y && (args.source !== 'ui.grid.adjustInfiniteScrollPosition')) {
+                    var percentage = 100 - (args.y.percentage * 100);
+                    if ($scope.grid.scrollDirection === uiGridConstants.scrollDirection.UP) {
+                      percentage = (args.y.percentage * 100);
+                    }
+                    uiGridInfiniteScrollService.checkScroll($scope.grid, percentage);
+                  }
               });
             }
           }
