@@ -291,7 +291,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
       term: input
     }];
   };
-  
+
   service.notFilter = function (input) {
     return [{
       condition: uiGridConstants.filter.NOT_EQUAL,
@@ -346,6 +346,10 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
       }
       return strA < strB ? -1 : 1;
     };
+  };
+
+  service.fixPrecision = function (input) {
+    return parseFloat(input.toPrecision(12));
   };
 
   service.html = function (input) {

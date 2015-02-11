@@ -142,14 +142,14 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
   $scope.autoElevation = _.every($scope.stories, function (story, index) {
     if (index === 0) return true;
     var lowerStory = $scope.stories[index - 1];
-    return story.z == lowerStory.z + lowerStory.floor_to_floor_height;
+    return story.z == Shared.fixPrecision(lowerStory.z + lowerStory.floor_to_floor_height);
   });
 
   $scope.calculateElevation = function () {
     _.each($scope.stories, function (story, index) {
       if (index) {
         var lowerStory = $scope.stories[index - 1];
-        story.z = lowerStory.z + lowerStory.floor_to_floor_height;
+        story.z = Shared.fixPrecision(lowerStory.z + lowerStory.floor_to_floor_height);
       }
     });
     $scope.updateStoryCount();
@@ -172,7 +172,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
 
     if ($scope.stories.length) {
       var lowerStory = $scope.stories[$scope.stories.length - 1];
-      story.z = lowerStory.z + lowerStory.floor_to_floor_height;
+      story.z = Shared.fixPrecision(lowerStory.z + lowerStory.floor_to_floor_height);
       story.floor_to_floor_height = lowerStory.floor_to_floor_height;
       story.floor_to_ceiling_height = lowerStory.floor_to_ceiling_height;
     }
