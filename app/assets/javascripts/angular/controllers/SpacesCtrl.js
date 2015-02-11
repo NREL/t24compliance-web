@@ -1018,17 +1018,24 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
             return false;
           }
         });
-        if (storyIndex) {
-          var storyBelow = $scope.data.storiesArr[storyIndex - 1].id;
-          _.each($scope.data.spaces, function (space, spaceIndex) {
-            if (space.building_story_id == storyBelow) {
-              compatibleAdjacentSpaces.push({
-                id: spaceIndex,
-                value: space.name
-              });
-            }
-          });
-        }
+        var storyBelow = null;
+        if (storyIndex) storyBelow = $scope.data.storiesArr[storyIndex - 1].id;
+        _.each($scope.data.spaces, function (space, spaceIndex) {
+          // Spaces on lower story
+          if (storyBelow && space.building_story_id == storyBelow) {
+            compatibleAdjacentSpaces.push({
+              id: spaceIndex,
+              value: space.name
+            });
+          }
+          // Spaces on same story (for plenums/attics)
+          if (space.building_story_id == storyId && spaceIndex != surface.space) {
+            compatibleAdjacentSpaces.push({
+              id: spaceIndex,
+              value: space.name
+            });
+          }
+        });
       }
     }
     return compatibleAdjacentSpaces;
