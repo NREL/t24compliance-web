@@ -15,7 +15,8 @@ SKIP_ZIP_CODES = false
 u = User.find_or_create_by(email: 'test@nrel.gov')
 u.roles = [:admin]
 # Remove this if we share the code. This is very dangerous giving the admin a simple password for testing sake!
-if u.password.nil?
+# only set password if it doesn't already exist
+if u.encrypted_password.empty?
   u.password = 'password'
 end
 u.save!
