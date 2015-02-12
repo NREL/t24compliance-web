@@ -197,7 +197,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     var info = cache.info(key);
     if (info) {
       // Force refresh
-      if (key == 'space_function_defaults' && info.created < 1423672200000) return false;
+      if (key == 'space_function_defaults' && info.created < 1423760400000) return false;
 
       return !info.isExpired;
     }
