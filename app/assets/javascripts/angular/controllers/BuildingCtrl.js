@@ -63,7 +63,8 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
 
   $scope.updateStoryCount = function () {
     $scope.above = _.filter($scope.stories, function (story) {
-      return story.z >= 0;
+      // Story must be 50% or more above grade
+      return (story.floor_to_floor_height / 2 + story.z) >= 0;
     }).length;
     $scope.below = $scope.stories.length - $scope.above;
   };
