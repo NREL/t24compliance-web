@@ -99,7 +99,10 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
         if (zone.supply_plenum_zone_reference == rowEntity.name) zone.supply_plenum_zone_reference = '';
         if (zone.return_plenum_zone_reference == rowEntity.name) zone.return_plenum_zone_reference = '';
       });
+    } else if (oldValue == 'Conditioned') {
+      rowEntity.exhaust_system_reference = null;
     }
+    Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
   };
 
   // Buttons

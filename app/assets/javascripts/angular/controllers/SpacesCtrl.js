@@ -1231,9 +1231,7 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
           Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
           // put exhaust systems back in systems hash
-          _.each($scope.data.exhausts, function (exhaust) {
-            $scope.data.systems.push(exhaust);
-          });
+          $scope.data.systems = $scope.data.systems.concat($scope.data.exhausts);
 
           var params = Shared.defaultParams();
           params.data = $scope.data.systems;
@@ -1242,6 +1240,19 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
 
         function success(response) {
           toaster.pop('success', 'Exhaust systems updated');
+
+          var params = Shared.defaultParams();
+          params.data = $scope.data.zones;
+          data.bulkSync('thermal_zones', params).then(success).catch(failure);
+
+          function success(response) {
+            toaster.pop('success', 'Thermal zones updated');
+          }
+
+          function failure(response) {
+            $log.error('Failure updating thermal zones', response);
+            toaster.pop('error', 'An error occurred while saving thermal zones', response.statusText);
+          }
         }
 
         function failure(response) {

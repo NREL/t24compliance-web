@@ -261,13 +261,7 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
         // IF SUCCESS, SAVE SYSTEMS
         var params = Shared.defaultParams();
         // push exhaust and non-exhaust systems back together
-        systems = [];
-        _.each($scope.data.non_exhaust_systems, function (system) {
-          systems.push(system);
-        });
-        _.each($scope.data.exhausts, function (system) {
-          systems.push(system);
-        });
+        var systems = $scope.data.non_exhaust_systems.concat($scope.data.exhausts);
         $log.debug('ALL SYSTEMS BACK TOGETHER: ');
         $log.debug(systems);
         params.data = systems;
