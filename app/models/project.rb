@@ -293,10 +293,11 @@ class Project
       logger.info("CONNECTING SHW")
       shws = self.fluid_systems.where(type: 'ServiceHotWater')
       logger.info("SHWS: #{shws.inspect}")
+      logger.info("SHWS length: #{shws.length}, #{shws.size}")
       if shws.length > 0
         shw = shws.first
         spaces = self.building.building_spaces
-        logger.info("SPACES: #{spaces.inspect}")
+        #logger.info("SPACES: #{spaces.inspect}")
         spaces.each do |space|
           if space.conditioning_type == 'DirectlyConditioned'
             space.shw_fluid_segment_reference = shw.name
