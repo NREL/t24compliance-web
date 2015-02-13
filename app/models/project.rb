@@ -292,7 +292,7 @@ class Project
     if self.exceptional_condition_water_heater == 'No'
       logger.info("CONNECTING SHW")
       shws = self.fluid_systems.where(type: 'ServiceHotWater')
-      if shws
+      if shws.length > 0
         shw = shws.first
         spaces = self.building.building_spaces
         logger.info("SPACES: #{spaces.inspect}")
