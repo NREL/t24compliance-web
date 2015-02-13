@@ -290,10 +290,8 @@ class Project
   # This method generates connections to the SHW system for all spaces
   def connect_shw
     if self.exceptional_condition_water_heater == 'No'
-      logger.info("CONNECTING SHW")
+      logger.info("CONNECTING/DISCONNECTING SHW")
       shws = self.fluid_systems.where(type: 'ServiceHotWater')
-      logger.info("SHWS: #{shws.inspect}")
-      logger.info("SHWS length: #{shws.length}, #{shws.size}")
       if shws.length > 0
         shw = shws.first
         spaces = self.building.building_spaces
@@ -304,7 +302,16 @@ class Project
             space.save
           end
         end
+      else
+        # remove old references
+        spaces.each do |space|
+          if space.conditioning_type == 'DirectlyConditioned'
+            space.shw_fluid_segment_reference = nil
+            space.save
+          end
+        end
       end
+
     end
   end
 
