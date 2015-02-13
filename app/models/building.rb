@@ -224,4 +224,13 @@ class Building
       'AreaCategoryMethod'
     ]
   end
+
+  def building_spaces
+    spaces = []
+    stories = self.building_stories
+    stories.each do |story|
+      spaces = spaces + story.spaces
+    end
+    return spaces
+  end
 end
