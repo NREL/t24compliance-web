@@ -13,7 +13,9 @@ cbecc.controller('SpacesCtrl', ['$scope', '$log', '$location', 'uiGridConstants'
     luminairesModified: false,
     surfaces: [],
     subsurfaces: [],
-    lightingSystems: []
+    lightingSystems: [],
+    setFullscreen: Shared.setFullscreen,
+    isFullscreen: Shared.isFullscreen
   };
 
   // pull out exhaust systems from systems

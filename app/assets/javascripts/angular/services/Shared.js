@@ -3,6 +3,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   var projectId = null;
   var buildingId = null;
   var modified = false;
+  var fullscreen = false;
   var cache = DSCacheFactory('libraries', {
     storageMode: 'localStorage',
     maxAge: 604800000 // 1 week
@@ -191,6 +192,14 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     });
 
     return modalInstance.result;
+  };
+
+  service.setFullscreen = function (bool) {
+    if (fullscreen != bool) fullscreen = bool;
+  };
+
+  service.isFullscreen = function () {
+    return fullscreen;
   };
 
   service.existsInCache = function (key) {

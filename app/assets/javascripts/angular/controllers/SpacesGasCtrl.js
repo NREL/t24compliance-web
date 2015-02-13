@@ -72,6 +72,7 @@ cbecc.controller('SpacesGasCtrl', ['$scope', 'uiGridConstants', 'Shared', functi
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    excessRows: 10,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;

@@ -1,5 +1,5 @@
-<div ng-controller="SpacesMainCtrl">
-  <div class="row pad-top-20 pad-bot-20">
+<div ng-controller="SpacesMainCtrl" ng-class="{'full-height': data.isFullscreen()}">
+  <div class="row pad-tb-20">
     <div class="col-md-12">
       <button type="button" ng-hide="applySettingsActive" ng-click="data.addSpace()" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Space
@@ -22,8 +22,10 @@
         </div>
         <button type="button" ng-hide="applySettingsActive" ng-click="data.duplicateSpace(selected)" class="btn btn-info" ng-disabled="!selected.space">Duplicate</button>
         <button type="button" ng-hide="applySettingsActive" ng-click="data.deleteSpace(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.space">Delete</button>
+        <button type="button" ng-hide="data.isFullscreen()"  ng-click="data.setFullscreen(true)" class="btn btn-link" title="Fullscreen"><i class="fa fa-arrows-alt"></i></button>
+        <button type="button" ng-show="data.isFullscreen()"  ng-click="data.setFullscreen(false)" class="btn btn-link" title="Restore"><i class="fa fa-compress"></i></button>
       </div>
     </div>
   </div>
-  <div ui-grid="spacesGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+  <div ui-grid="spacesGridOptions" ng-class="{'full-height-grid': data.isFullscreen()}" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
 </div>

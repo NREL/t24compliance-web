@@ -166,7 +166,7 @@ body > .container-fluid > .header-row.wizard {
 // Increase modal size
 .wide-modal .modal-dialog {
   min-width: 700px;
-  width: 90%;
+  width: calc(100% - 180px);
 }
 
 // Grid Styling
@@ -322,4 +322,42 @@ a:hover {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg);
   }
+}
+
+.ui-grid-viewport {
+  background-color: #fff;
+}
+
+.fullscreen-backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  z-index: 1000;
+  width: 100%;
+}
+
+.fullscreen-container {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  height: calc(100% - 30px);
+  margin: 15px;
+  width: calc(100% - 30px);
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-height-ui-view {
+  height: calc(100% - 40px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.full-height-grid {
+  height: calc(100% - 80px) !important;
 }

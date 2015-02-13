@@ -1,4 +1,4 @@
-<div class="row pad-top-20 pad-bot-20">
+<div class="row pad-tb-20">
   <div class="col-md-12">
     <button type="button" ng-show="applySettingsActive" ng-click="data.selectAll(lpdGridApi)" class="btn btn-info">Select All</button>
     <button type="button" ng-show="applySettingsActive" ng-click="data.clearAll(lpdGridApi)" class="btn btn-info">Clear All</button>
@@ -15,6 +15,8 @@
           <li><a ng-click="resetApplySettings()">Cancel</a></li>
         </ul>
       </div>
+      <button type="button" ng-hide="data.isFullscreen()"  ng-click="data.setFullscreen(true)" class="btn btn-link" title="Fullscreen"><i class="fa fa-arrows-alt"></i></button>
+      <button type="button" ng-show="data.isFullscreen()"  ng-click="data.setFullscreen(false)" class="btn btn-link" title="Restore"><i class="fa fa-compress"></i></button>
     </div>
   </div>
 </div>

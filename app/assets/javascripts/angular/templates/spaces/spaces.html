@@ -6,11 +6,15 @@
     <div class="inline-heading">
       <h2>Building Spaces <span class="divider">|</span></h2> Edit and add spaces, walls, floors, and roofs. Move through each tab below to complete.
     </div>
-    <tabset>
-      <tab ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ui-sref="{{tab.route}}"></tab>
-    </tabset>
-    <div ui-view>
-      <div ng-include="'spaces/main.html'"></div>
+    <div ng-class="{'fullscreen-backdrop': data.isFullscreen()}">
+      <div ng-class="{'fullscreen-container': data.isFullscreen()}">
+        <tabset>
+          <tab ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ui-sref="{{tab.route}}"></tab>
+        </tabset>
+        <div ui-view ng-class="{'full-height-ui-view': data.isFullscreen()}">
+          <div ng-include="'spaces/main.html'" ng-class="{'full-height': data.isFullscreen()}"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

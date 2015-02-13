@@ -106,6 +106,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    excessRows: 10,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
