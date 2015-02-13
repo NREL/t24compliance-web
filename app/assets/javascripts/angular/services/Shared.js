@@ -5,9 +5,17 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   var modified = false;
   var fullscreen = false;
   var cache = DSCacheFactory('libraries', {
-    storageMode: 'localStorage',
-    maxAge: 604800000 // 1 week
+    storageMode: 'localStorage'
   });
+
+  // Cache update timestamps - Change this if the datasets are modified
+  var timestamps = {
+    'constructions': 0,
+    'door_lookups': 0,
+    'fenestrations': 0,
+    'space_function_defaults': 1423760400000
+  };
+
 
   service.defaultParams = function () {
     return {
@@ -205,8 +213,10 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   service.existsInCache = function (key) {
     var info = cache.info(key);
     if (info) {
-      // Force refresh
-      if (key == 'space_function_defaults' && info.created < 1423760400000) return false;
+      //$log.debug('Cache Info for ' + key, info);
+
+      // Force cache refresh
+      if (info.created < timestamps[key]) return false;
 
       return !info.isExpired;
     }
