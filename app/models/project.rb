@@ -291,11 +291,14 @@ class Project
   def connect_shw
     if self.exceptional_condition_water_heater == 'No'
       logger.info("CONNECTING/DISCONNECTING SHW")
+
+      spaces = self.building.building_spaces
+      #logger.info("SPACES: #{spaces.inspect}")
+
       shws = self.fluid_systems.where(type: 'ServiceHotWater')
       if shws.length > 0
         shw = shws.first
-        spaces = self.building.building_spaces
-        #logger.info("SPACES: #{spaces.inspect}")
+
         spaces.each do |space|
           if space.conditioning_type == 'DirectlyConditioned'
             space.shw_fluid_segment_reference = shw.name
