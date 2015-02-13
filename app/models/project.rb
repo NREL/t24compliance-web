@@ -356,6 +356,10 @@ class Project
               mat = self.materials.find_or_create_by(name: layer['name'])
               mat.code_category = layer['code_category']
               mat.code_item = layer['code_identifier']
+              # save framing_configuration and material (required)
+              mat.framing_configuration = layer['framing_configuration']
+              mat.framing_material = layer['framing_material']
+
               mat.save
               material_refs << mat.name
               # only save unique records to project
