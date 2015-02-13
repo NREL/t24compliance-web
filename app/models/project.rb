@@ -291,7 +291,7 @@ class Project
   def connect_shw
     if self.exceptional_condition_water_heater == 'No'
       logger.info("CONNECTING SHW")
-      shws = FluidSystem.where(type: 'ServiceHotWater')
+      shws = self.fluid_systems.where(type: 'ServiceHotWater')
       if shws
         shw = shws.first
         spaces = self.building.building_spaces
