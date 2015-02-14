@@ -49,6 +49,7 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;

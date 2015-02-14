@@ -191,6 +191,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     excessRows: 10,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
@@ -256,6 +257,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
     $scope.data.clearAll($scope.gridApi);
+    $scope.surfacesGridOptions.enableSelectAll = true;
     $scope.surfacesGridOptions.multiSelect = true;
 
     $scope.surfacesGridOptions.columnDefs[2].enableFiltering = false;
@@ -294,6 +296,7 @@ cbecc.controller('SpacesSurfacesCtrl', ['$scope', 'uiGridConstants', 'Shared', '
     $scope.selected.surface = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
+    $scope.surfacesGridOptions.enableSelectAll = false;
     $scope.surfacesGridOptions.multiSelect = false;
 
     $scope.surfacesGridOptions.columnDefs[2].enableFiltering = true;

@@ -90,6 +90,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.lpdGridApi = gridApi;
@@ -231,6 +232,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.luminaireGridApi = gridApi;
@@ -242,6 +244,9 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
             // No rows selected
             $scope.selected.lightingSystem = null;
           }
+        } else {
+          // When rowSelection is disabled, clicking certain pixels can still select the row
+          $scope.data.clearAll($scope.luminaireGridApi);
         }
       });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
@@ -318,9 +323,12 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
     $scope.data.clearAll($scope.lpdGridApi);
+    $scope.lpdGridOptions.enableSelectAll = true;
     $scope.lpdGridOptions.multiSelect = true;
 
     $scope.luminaireGridOptions.columnDefs[1].allowLuminaireEdit = false;
+    console.debug($scope.luminaireGridOptions);
+    console.debug($scope.luminaireGridApi);
 
     $scope.selected.lightingSystem = null;
     $scope.data.clearAll($scope.luminaireGridApi);
@@ -384,6 +392,7 @@ cbecc.controller('SpacesLightingCtrl', ['$scope', '$q', '$modal', 'uiGridConstan
     $scope.selected.space = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.lpdGridApi);
+    $scope.lpdGridOptions.enableSelectAll = false;
     $scope.lpdGridOptions.multiSelect = false;
 
     $scope.luminaireGridOptions.columnDefs[1].allowLuminaireEdit = true;

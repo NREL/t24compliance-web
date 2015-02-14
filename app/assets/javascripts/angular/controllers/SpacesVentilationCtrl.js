@@ -79,6 +79,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     excessRows: 10,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
@@ -107,6 +108,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
     $scope.data.clearAll($scope.gridApi);
+    $scope.ventilationGridOptions.enableSelectAll = true;
     $scope.ventilationGridOptions.multiSelect = true;
   };
 
@@ -136,6 +138,7 @@ cbecc.controller('SpacesVentilationCtrl', ['$scope', 'uiGridConstants', 'Shared'
     $scope.selected.space = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
+    $scope.ventilationGridOptions.enableSelectAll = false;
     $scope.ventilationGridOptions.multiSelect = false;
   };
 

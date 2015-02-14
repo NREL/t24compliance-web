@@ -35,6 +35,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
@@ -109,6 +110,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
     $scope.data.clearAll($scope.gridApi);
+    $scope.zonesGridOptions.enableSelectAll = true;
     $scope.zonesGridOptions.multiSelect = true;
   };
 
@@ -137,6 +139,7 @@ cbecc.controller('ZonesMainCtrl', ['$scope', 'uiGridConstants', 'Shared', 'Enums
     $scope.selected.zone = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
+    $scope.zonesGridOptions.enableSelectAll = false;
     $scope.zonesGridOptions.multiSelect = false;
   };
 

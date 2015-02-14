@@ -237,6 +237,7 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
     enablePinning: false,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;

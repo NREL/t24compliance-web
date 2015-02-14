@@ -39,6 +39,7 @@ cbecc.controller('ModalLuminaireEditorCtrl', ['$scope', '$interval', '$modalInst
     enableFiltering: true,
     enableRowHeaderSelection: $scope.editable,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;

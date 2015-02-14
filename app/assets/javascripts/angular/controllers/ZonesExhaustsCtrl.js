@@ -204,6 +204,7 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
     enablePinning: false,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;

@@ -973,6 +973,7 @@ cbecc.controller('SystemsCtrl', ['$scope', '$log', '$modal', 'toaster', 'uiGridC
           enableRowSelection: true,
           enableSorting: true,
           enableFiltering: true,
+          enableSelectAll: false,
           multiSelect: false,
           data: $scope.systems[type],
           onRegisterApi: function (gridApi) {

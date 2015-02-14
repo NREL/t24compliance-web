@@ -106,6 +106,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     excessRows: 10,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
@@ -132,6 +133,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
   $scope.applySettings = function () {
     $scope.applySettingsActive = true;
     $scope.data.clearAll($scope.gridApi);
+    $scope.loadsGridOptions.enableSelectAll = true;
     $scope.loadsGridOptions.multiSelect = true;
   };
 
@@ -166,6 +168,7 @@ cbecc.controller('SpacesLoadsCtrl', ['$scope', 'uiGridConstants', 'Shared', func
     $scope.selected.space = null;
     $scope.applySettingsActive = false;
     $scope.data.clearAll($scope.gridApi);
+    $scope.loadsGridOptions.enableSelectAll = false;
     $scope.loadsGridOptions.multiSelect = false;
   };
 

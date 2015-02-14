@@ -102,6 +102,7 @@ cbecc.controller('BuildingCtrl', ['$scope', '$log', '$stateParams', '$resource',
     enableColumnMenus: false,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     enableSorting: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {

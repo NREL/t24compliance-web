@@ -59,6 +59,7 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'Shared', function ($scope, Shar
     enableFiltering: true,
     enableRowHeaderSelection: true,
     enableRowSelection: true,
+    enableSelectAll: false,
     multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
