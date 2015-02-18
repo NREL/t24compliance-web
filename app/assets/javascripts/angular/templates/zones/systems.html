@@ -1,6 +1,9 @@
 <div class="row pad-tb-20">
   <div class="col-md-12">
-
+    <div class="pull-right">
+      <button type="button" ng-hide="data.isFullscreen()" ng-click="data.setFullscreen(true)" class="btn btn-link" title="Fullscreen"><i class="fa fa-arrows-alt"></i></button>
+      <button type="button" ng-show="data.isFullscreen()" ng-click="data.setFullscreen(false)" class="btn btn-link" title="Restore"><i class="fa fa-compress"></i></button>
+    </div>
   </div>
 </div>
-<div ui-grid="systemsGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>
+<div ui-grid="systemsGridOptions" ng-class="{'full-height-grid': data.isFullscreen()}" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection></div>

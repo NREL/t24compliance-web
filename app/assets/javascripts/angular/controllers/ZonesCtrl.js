@@ -5,7 +5,9 @@ cbecc.controller('ZonesCtrl', ['$scope', '$log', '$location', 'toaster', 'Shared
     zones: zones,
     systems: systems,
     exhausts: [],
-    terminals: terminals
+    terminals: terminals,
+    setFullscreen: Shared.setFullscreen,
+    isFullscreen: Shared.isFullscreen
   };
 
   // Load saved spaces

@@ -1,8 +1,12 @@
-
-  <div class="row pad-tb-20">
-    <div class="col-md-12">
+<div class="row pad-tb-20">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h5 class="pad-left-40">The thermal zones below require exhaust systems and fan settings.</h5>
+    </div>
+    <div class="pull-right">
+      <button type="button" ng-hide="data.isFullscreen()" ng-click="data.setFullscreen(true)" class="btn btn-link" title="Fullscreen"><i class="fa fa-arrows-alt"></i></button>
+      <button type="button" ng-show="data.isFullscreen()" ng-click="data.setFullscreen(false)" class="btn btn-link" title="Restore"><i class="fa fa-compress"></i></button>
     </div>
   </div>
-  <div class="row pad-left-40"><p>The thermal zones below require exhaust systems and fan settings.</p></div>
-  <div ui-grid="exhaustsGridOptions" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection ui-grid-pinning></div>
-
+</div>
+<div ui-grid="exhaustsGridOptions" ng-class="{'full-height-grid': data.isFullscreen()}" ui-grid-auto-resize ui-grid-cellnav ui-grid-edit ui-grid-resize-columns ui-grid-selection ui-grid-pinning></div>

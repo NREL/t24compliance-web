@@ -42,8 +42,8 @@
       </div>
       <button type="button" ng-hide="applySettingsActive" ng-click="data.duplicateSurface(selected)" class="btn btn-info" ng-disabled="!selected.surface">Duplicate</button>
       <button type="button" ng-hide="applySettingsActive" ng-click="data.deleteSurface(selected, gridApi)" class="btn btn-danger" ng-disabled="!selected.surface">Delete</button>
-      <button type="button" ng-hide="data.isFullscreen()"  ng-click="data.setFullscreen(true)" class="btn btn-link" title="Fullscreen"><i class="fa fa-arrows-alt"></i></button>
-      <button type="button" ng-show="data.isFullscreen()"  ng-click="data.setFullscreen(false)" class="btn btn-link" title="Restore"><i class="fa fa-compress"></i></button>
+      <button type="button" ng-hide="data.isFullscreen()" ng-click="data.setFullscreen(true)" class="btn btn-link" title="Fullscreen"><i class="fa fa-arrows-alt"></i></button>
+      <button type="button" ng-show="data.isFullscreen()" ng-click="data.setFullscreen(false)" class="btn btn-link" title="Restore"><i class="fa fa-compress"></i></button>
     </div>
   </div>
 </div>
