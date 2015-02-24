@@ -26,22 +26,26 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     columnDefs: [{
       name: 'name',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 400
     }, {
       name: 'compatible_surface_type',
+      allowCellFocus: false,
       enableFiltering: false,
       filters: Shared.exactFilter($scope.type),
       visible: false
     }, {
       name: 'type',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'framing_configuration',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       maxWidth: 218,
@@ -49,6 +53,7 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'framing_size',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       maxWidth: 159,
@@ -57,6 +62,7 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
       name: 'cavity_insulation_r_value',
       secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type != 'UndergroundFloor'
@@ -64,12 +70,14 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
       name: 'continuous_insulation_r_value',
       secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type != 'UndergroundFloor'
     }, {
       name: 'continuous_insulation_material_name',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 300,
@@ -77,18 +85,21 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
     }, {
       name: 'slab_type',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'UndergroundFloor'
     }, {
       name: 'slab_insulation_orientation',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'UndergroundFloor'
     }, {
       name: 'slab_insulation_thermal_resistance',
       secondLine: Shared.html('ft<sup>2</sup> &deg;F hr / Btu'),
+      allowCellFocus: false,
       cellFilter: 'parseRValue',
       enableHiding: false,
       filters: [{
@@ -153,7 +164,9 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
       });
       if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
         $interval(function () {
-          $scope.gridApi.selection.selectRow(_.find($scope.data, {id: params.rowEntity.id}));
+          var rowEntity = _.find($scope.data, {id: params.rowEntity.id});
+          $scope.gridApi.selection.selectRow(rowEntity);
+          $scope.gridApi.cellNav.scrollTo(rowEntity);
         }, 0, 1);
       }
     }

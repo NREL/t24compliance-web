@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
   <h4>Select a construction:</h4>
-  <div ui-grid="constructionsGridOptions" ui-grid-auto-resize ui-grid-resize-columns ui-grid-selection></div>
+  <div ui-grid="constructionsGridOptions" ui-grid-auto-resize ui-grid-cellNav ui-grid-resize-columns ui-grid-selection></div>
   <div ng-if="type != 'UndergroundFloor'">
     <h4>Layers:</h4>
     <div ui-grid="layersGridOptions" class="layers-grid" ui-grid-auto-resize ui-grid-resize-columns></div>

@@ -9,28 +9,33 @@ cbecc.controller('ModalDoorLibraryCtrl', ['$scope', '$modalInstance', '$interval
     columnDefs: [{
       name: 'name',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 400
     }, {
       name: 'type',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'certification_method',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'u_factor',
       secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'open',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }],
@@ -51,7 +56,9 @@ cbecc.controller('ModalDoorLibraryCtrl', ['$scope', '$modalInstance', '$interval
       });
       if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
         $interval(function () {
-          $scope.gridApi.selection.selectRow(_.find($scope.data, {id: params.rowEntity.id}));
+          var rowEntity = _.find($scope.data, {id: params.rowEntity.id});
+          $scope.gridApi.selection.selectRow(rowEntity);
+          $scope.gridApi.cellNav.scrollTo(rowEntity);
         }, 0, 1);
       }
     }

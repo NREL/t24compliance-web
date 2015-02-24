@@ -15,11 +15,13 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
     columnDefs: [{
       name: 'name',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       minWidth: 400
     }, {
       name: 'fenestration_type',
+      allowCellFocus: false,
       enableFiltering: false,
       filters: Shared.exactFilter($scope.type),
       visible: false
@@ -27,24 +29,28 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
       name: 'fenestration_framing',
       displayName: 'Frame Type',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fenestration_panes',
       displayName: 'Panes',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
       name: 'fenestration_product_type',
       displayName: 'Product Type',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'VerticalFenestration'
     }, {
       name: 'glazing_tint',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'VerticalFenestration'
@@ -52,6 +58,7 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
       name: 'u_factor',
       secondLine: Shared.html('Btu / (ft<sup>2</sup> &deg;F hr)'),
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits'
     }, {
@@ -59,12 +66,14 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
       displayName: 'Solar Heat Gain Coefficient',
       secondLine: Shared.html('frac.'),
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.numberFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'VerticalFenestration'
     }, {
       name: 'skylight_curb',
       enableHiding: false,
+      allowCellFocus: false,
       filters: Shared.textFilter(),
       headerCellTemplate: 'ui-grid/cbeccHeaderCellWithUnits',
       visible: $scope.type == 'Skylight'
@@ -86,7 +95,9 @@ cbecc.controller('ModalFenestrationLibraryCtrl', ['$scope', '$modalInstance', '$
       });
       if (typeof (params.rowEntity) !== 'undefined' && params.rowEntity) {
         $interval(function () {
-          $scope.gridApi.selection.selectRow(_.find($scope.data, {id: params.rowEntity.id}));
+          var rowEntity = _.find($scope.data, {id: params.rowEntity.id});
+          $scope.gridApi.selection.selectRow(rowEntity);
+          $scope.gridApi.cellNav.scrollTo(rowEntity);
         }, 0, 1);
       }
     }
