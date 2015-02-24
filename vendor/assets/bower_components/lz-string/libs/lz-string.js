@@ -6,7 +6,7 @@
 // For more information, the home page:
 // http://pieroxy.net/blog/pages/lz-string/testing.html
 //
-// LZ-based compression algorithm, version 1.3.8
+// LZ-based compression algorithm, version 1.3.9
 var LZString = {
   
   
@@ -260,7 +260,11 @@ var LZString = {
           buf[i]=compressed[i*2]*256+compressed[i*2+1];
         }
 
-        return LZString.decompress(String.fromCharCode.apply(null, buf));
+        var result = "";
+        buf.forEach(function (c) {
+	  result = result + String.fromCharCode(c);
+	});
+        return LZString.decompress(result);
 
     }
 

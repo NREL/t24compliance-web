@@ -1,6 +1,6 @@
 {
   "name": "lz-string",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "main": "libs/lz-string.min.js",
   "ignore": [
     "bin/",
@@ -13,11 +13,11 @@
     "string"
   ],
   "homepage": "https://github.com/pieroxy/lz-string",
-  "_release": "1.3.8",
+  "_release": "1.3.9",
   "_resolution": {
     "type": "version",
-    "tag": "1.3.8",
-    "commit": "345b4a7234183b8b97c5c4c8f879bc9a0fbc5b8a"
+    "tag": "1.3.9",
+    "commit": "33870b126f6318a898005a093e5aad45ed77ee42"
   },
   "_source": "git://github.com/pieroxy/lz-string.git",
   "_target": "*",
