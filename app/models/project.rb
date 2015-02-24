@@ -298,10 +298,12 @@ class Project
       shws = self.fluid_systems.where(type: 'ServiceHotWater')
       if shws.length > 0
         shw = shws.first
+        # get supply fluid segment name
+        seg = shw.fluid_segments.where(type: 'PrimarySupply').first
 
         spaces.each do |space|
           if space.conditioning_type == 'DirectlyConditioned'
-            space.shw_fluid_segment_reference = shw.name
+            space.shw_fluid_segment_reference = seg.name
             space.save
           end
         end
