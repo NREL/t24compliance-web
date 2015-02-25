@@ -1,24 +1,23 @@
 <div class="row">
-  <div class="col-md-12 navbar-default">
+  <div id="nav-container" class="col-md-12 navbar navbar-default">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#wizard-nav">
-        <span class="sr-only">Toggle navigation</span>
+      <a class="navbar-toggle" data-toggle="collapse" data-target="#wizard-nav">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
+      </a>
     </div>
     <div class="collapse navbar-collapse" id="wizard-nav" ng-controller="NavCtrl">
-        <ul class="nav nav-pills">
-          <!-- These comments prevent gaps between items -->
-          <li class="app-nav-item" ng-class="{ active: isActive('/(projects(/[0-9a-f]{24}))?$')}"><a ng-href="#{{projectPath()}}"><%= image_tag('icon_project.png', alt: 'Project') %><br>Project</a></li><!--
-       --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings(/[0-9a-f]{24})?$')}"><a ng-href="#{{buildingPath()}}"><%= image_tag('icon_building.png', alt: 'Building') %><br>Building</a></li><!--
-       --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/constructions')}"><a ng-href="#{{constructionsPath()}}"><%= image_tag('icon_constructions.png', alt: 'Constructions') %><br>Constructions</a></li><!--
-       --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/spaces')}"><a ng-href="#{{spacesPath()}}"><%= image_tag('icon_spaces.png', alt: 'Spaces') %><br>Spaces</a></li><!--
-       --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/systems')}"><a ng-href="#{{systemsPath()}}"><%= image_tag('icon_systems.png', alt: 'Systems') %><br>Systems</a></li><!--
-       --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/zones')}"><a ng-href="#{{zonesPath()}}"><%= image_tag('icon_zones.png', alt: 'Zones') %><br>Thermal Zones</a></li><!--
-       --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/compliance')}"><a ng-href="#{{compliancePath()}}"><%= image_tag('icon_check.png', alt: 'Check') %><br>Check Compliance</a></li><!--
-       --><li class="app-nav-item"><a href="http://nrel.github.io/t24_compliance_help/" target="_blank"><%= image_tag('icon_help.png', alt: 'Help') %><br>Help</a></li>
+      <ul class="nav nav-pills">
+        <!-- These comments prevent gaps between items -->
+        <li class="app-nav-item" ng-class="{ active: isActive('/(projects(/[0-9a-f]{24}))?$')}"><a ng-href="#{{projectPath()}}"><%= image_tag('icon_project.png', alt: 'Project') %><br>Project</a></li><!--
+     --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings(/[0-9a-f]{24})?$')}"><a ng-href="#{{buildingPath()}}"><%= image_tag('icon_building.png', alt: 'Building') %><br>Building</a></li><!--
+     --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/constructions')}"><a ng-href="#{{constructionsPath()}}"><%= image_tag('icon_constructions.png', alt: 'Constructions') %><br>Constructions</a></li><!--
+     --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/spaces')}"><a ng-href="#{{spacesPath()}}"><%= image_tag('icon_spaces.png', alt: 'Spaces') %><br>Spaces</a></li><!--
+     --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/systems')}"><a ng-href="#{{systemsPath()}}"><%= image_tag('icon_systems.png', alt: 'Systems') %><br>Systems</a></li><!--
+     --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/zones')}"><a ng-href="#{{zonesPath()}}"><%= image_tag('icon_zones.png', alt: 'Zones') %><br>Thermal Zones</a></li><!--
+     --><li class="app-nav-item" ng-class="{ active: isActive('/projects/[0-9a-f]{24}/buildings/[0-9a-f]{24}/compliance')}"><a ng-href="#{{compliancePath()}}"><%= image_tag('icon_check.png', alt: 'Check') %><br>Check Compliance</a></li><!--
+     --><li class="app-nav-item"><a href="http://nrel.github.io/t24_compliance_help/" target="_blank"><%= image_tag('icon_help.png', alt: 'Help') %><br>Help</a></li>
       </ul>
     </div>
   </div>

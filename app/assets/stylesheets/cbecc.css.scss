@@ -344,6 +344,8 @@ a:hover {
   border-radius: 5px;
   height: calc(100% - 30px);
   margin: 15px;
+  min-width: 475px;
+  overflow: hidden;
   width: calc(100% - 30px);
 }
 
@@ -360,4 +362,35 @@ a:hover {
 
 .full-height-grid {
   height: calc(100% - 80px) !important;
+}
+
+#subtabs {
+  padding: 0;
+}
+
+#nav-container {
+  margin: 0;
+}
+
+@media (max-width: 1065px) {
+  .inline-heading.with-subtabs {
+    padding-bottom: 42px;
+  }
+  #nav-container > .navbar-header {
+    margin-bottom: 25px;
+  }
+  .navbar-nav {
+    margin: 5px 0;
+  }
+  .fullscreen-container .navbar-toggle {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}
+
+// Fix input height on Internet Explorer
+.ui-grid {
+  input[type=text], input[type=password], input[type=email], input[type=tel] {
+    height: 22px !important;
+  }
 }

@@ -4,6 +4,10 @@
   *= require_self
   *= require_tree .
 */
+
+/* Bootstrap Variable Overrides */
+$grid-float-breakpoint: 1065px;
+
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap-sprockets";
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
@@ -39,6 +43,7 @@ $error-text: #ff0000;
 html {
   position: relative;
   min-height: 100%;
+  min-width: 505px;
 }
 
 body {

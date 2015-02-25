@@ -3,14 +3,24 @@
 </div>
 <div class="row pad-bot-20">
   <div class="col-md-12">
-    <div class="inline-heading">
+    <div class="inline-heading with-subtabs">
       <h2>Building Spaces <span class="divider">|</span></h2> Edit and add spaces, walls, floors, and roofs. Move through each tab below to complete.
     </div>
     <div ng-class="{'fullscreen-backdrop': data.isFullscreen()}">
       <div ng-class="{'fullscreen-container': data.isFullscreen()}">
-        <tabset>
-          <tab ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ui-sref="{{tab.route}}"></tab>
-        </tabset>
+        <div class="navbar-default">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subtabs">
+              <span class="sr-only">Toggle subtab navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <tabset id="subtabs" class="navbar-collapse collapse">
+            <tab ng-repeat="tab in tabs" heading="{{tab.heading}}" active="tab.active" ui-sref="{{tab.route}}"></tab>
+          </tabset>
+        </div>
         <div ui-view ng-class="{'full-height-ui-view': data.isFullscreen()}">
           <div ng-include="'spaces/main.html'" ng-class="{'full-height': data.isFullscreen()}"></div>
         </div>
