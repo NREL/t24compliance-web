@@ -1,8 +1,4 @@
 cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scope, $log, Shared) {
-  $scope.selected = {
-    space: null
-  };
-
   // plenum & non-plenum thermal zone references array for ZoneSpaces tab
   $scope.plenumZonesArr = $scope.data.plenumCompatibleZones();
   $scope.nonPlenumZonesArr = $scope.data.nonPlenumCompatibleZones();
@@ -47,20 +43,8 @@ cbecc.controller('ZonesSpacesCtrl', ['$scope', '$log', 'Shared', function ($scop
     data: $scope.data.spaces,
     enableCellEditOnFocus: true,
     enableFiltering: true,
-    enableRowHeaderSelection: true,
-    enableRowSelection: true,
-    enableSelectAll: false,
-    multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.space = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.space = null;
-        }
-      });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();

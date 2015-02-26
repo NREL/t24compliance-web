@@ -1,8 +1,4 @@
 cbecc.controller('ZonesSystemsCtrl', ['$scope', 'Shared', function ($scope, Shared) {
-  $scope.selected = {
-    zone: null
-  };
-
   // array of plenum zones for dropdown
   $scope.plenumZonesArr = $scope.data.plenumCompatibleZones();
 
@@ -57,20 +53,8 @@ cbecc.controller('ZonesSystemsCtrl', ['$scope', 'Shared', function ($scope, Shar
     data: $scope.data.zones,
     enableCellEditOnFocus: true,
     enableFiltering: true,
-    enableRowHeaderSelection: true,
-    enableRowSelection: true,
-    enableSelectAll: false,
-    multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.zone = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.zone = null;
-        }
-      });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();

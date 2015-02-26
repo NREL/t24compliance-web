@@ -1,8 +1,4 @@
 cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Shared', 'Enums', function ($scope, uiGridConstants, $log, Shared, Enums) {
-  $scope.selected = {
-    zone: null
-  };
-
   // find all zones with an HVAC reference that requires a terminal  (SZAC, PVAV, VAV)
   var terminalZonesArr = [];
   _.each(_.filter($scope.data.zones, {
@@ -235,20 +231,8 @@ cbecc.controller('ZonesTerminalsCtrl', ['$scope', 'uiGridConstants', '$log', 'Sh
     enableCellEditOnFocus: true,
     enableFiltering: true,
     enablePinning: false,
-    enableRowHeaderSelection: true,
-    enableRowSelection: true,
-    enableSelectAll: false,
-    multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.terminal = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.terminal = null;
-        }
-      });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();

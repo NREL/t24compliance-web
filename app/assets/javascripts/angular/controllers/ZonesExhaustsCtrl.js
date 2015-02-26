@@ -1,8 +1,4 @@
 cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Shared', 'Enums', function ($scope, $log, uiGridConstants, Shared, Enums) {
-  $scope.selected = {
-    exhaust: null
-  };
-
   // update exhaust systems just to make sure here
   Shared.updateExhaustSystems($scope.data.zones, $scope.data.spaces, $scope.data.exhausts);
 
@@ -202,24 +198,8 @@ cbecc.controller('ZonesExhaustsCtrl', ['$scope', '$log', 'uiGridConstants', 'Sha
     enableCellEditOnFocus: true,
     enableFiltering: true,
     enablePinning: false,
-    enableRowHeaderSelection: true,
-    enableRowSelection: true,
-    enableSelectAll: false,
-    multiSelect: false,
     onRegisterApi: function (gridApi) {
       $scope.gridApi = gridApi;
-
-      // For some reason this is necessary with pinned columns to get the header row height correct
-      gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-
-      gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-        if (row.isSelected) {
-          $scope.selected.exhaust = row.entity;
-        } else {
-          // No rows selected
-          $scope.selected.exhaust = null;
-        }
-      });
       gridApi.edit.on.afterCellEdit($scope, function (rowEntity, colDef, newValue, oldValue) {
         if (newValue != oldValue) {
           Shared.setModified();
