@@ -80,7 +80,6 @@ To run the CBECC-Com simulations, then start the following:
 
 * Map t24compliance.net to your vagrant IP in your hosts file
 
-
 * Start the vagrant machine and make sure provision runs
 
 * Deploy the application

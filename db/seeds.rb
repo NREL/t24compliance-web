@@ -27,7 +27,8 @@ unless SKIP_CONSTRUCTIONS
   file = File.read(File.join(Rails.root, "lib/assets/construction_library.json"))
   data = JSON.parse(file)
 
-  data['constructions'].each_with_index do |c, index|
+  data['constructions'].each_with_index
+  do |c, index|
     cons = Construction.find_or_create_by(name: c['name'])
     if cons
       puts "Adding/Updating Construction: #{cons.name}"

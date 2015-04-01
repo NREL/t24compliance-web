@@ -52,8 +52,8 @@ class RunSimulation
 
       run_command = %W[/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename}]
       c = Docker::Container.create('Cmd' => run_command,
-                                   'Image' => 'nllong/cbecc-com:daemon',
-                                   'AttachStdout' => true,
+                                   'Image' => 'nllong/cbecc-com',
+                                   'AttachStdout' => true
       )
       c.start('Binds' => ["#{simulation.run_path}:/var/cbecc-com-files/run/"])
 

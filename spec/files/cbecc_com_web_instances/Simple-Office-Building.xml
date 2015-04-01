@@ -1,0 +1,901 @@
+<?xml version="1.0"?>
+<SDDXML>
+  <Proj>
+    <Name>Simple Office Building</Name>
+    <GeometryInpType>Simplified</GeometryInpType>
+    <State>CA</State>
+    <ZipCode>90505</ZipCode>
+    <ExcptCondNoClgSys>No</ExcptCondNoClgSys>
+    <ExcptCondRtdCap>No</ExcptCondRtdCap>
+    <ExcptCondWtrHtr>No</ExcptCondWtrHtr>
+    <ExcptCondNarrative>No</ExcptCondNarrative>
+    <CompType>NewComplete</CompType>
+    <CreateDate>1423524538</CreateDate>
+    <ExcptCondFanPress>No</ExcptCondFanPress>
+    <ExcptCondWCC>No</ExcptCondWCC>
+    <AutoHardSize>1</AutoHardSize>
+    <AutoEffInput>1</AutoEffInput>
+    <ConsAssm>
+      <Name>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</Name>
+      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
+      <SlabType>UnheatedSlabOnGrade</SlabType>
+      <SlabInsOrientation>12inHorizontal</SlabInsOrientation>
+      <SlabInsThrmlR>R5</SlabInsThrmlR>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Default Interior Wall</Name>
+      <CompatibleSurfType>InteriorWall</CompatibleSurfType>
+      <MatRef index="0">Gypsum plaster - 80 lb/ft3 - 5/8 in.</MatRef>
+      <MatRef index="1">Air - Wall - 3 1/2 in.</MatRef>
+      <MatRef index="2">Gypsum plaster - 80 lb/ft3 - 5/8 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Default Interior Floor</Name>
+      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Concrete - 80 lb/ft3 - 4 in.</MatRef>
+      <MatRef index="1">Air - Floor - 1/2 in.</MatRef>
+      <MatRef index="2">Acoustic Tile - 3/4 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</Name>
+      <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
+      <MatRef index="0">Stucco - 3/8 in.</MatRef>
+      <MatRef index="1">Building Paper - 1/16 in.</MatRef>
+      <MatRef index="2">Expanded Polystyrene - EPS - 4 7/10 in.</MatRef>
+      <MatRef index="3">Metal Framed Wall - 16inOC - 2x6 - R19 ins.</MatRef>
+      <MatRef index="4">Gypsum plaster - 80 lb/ft3 - 1/2 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</Name>
+      <CompatibleSurfType>ExteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Expanded Polystyrene - EPS - 3 2/5 in.</MatRef>
+      <MatRef index="1">Wood Framed Floor - 16inOC - 2x6 - R11 ins.</MatRef>
+      <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
+      <MatRef index="3">Carpet - 3/4 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</Name>
+      <CompatibleSurfType>ExteriorRoof</CompatibleSurfType>
+      <MatRef index="0">Asphalt shingles - 1/4 in.</MatRef>
+      <MatRef index="1">Building Paper - 1/16 in.</MatRef>
+      <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
+      <MatRef index="3">Expanded Polystyrene - EPS - 6 1/10 in.</MatRef>
+      <MatRef index="4">Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</MatRef>
+      <MatRef index="5">Gypsum plaster - 80 lb/ft3 - 1/2 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Gypsum plaster - 80 lb/ft3 - 5/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Gypsum plaster - 80 lb/ft3 - 5/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Wall - 3 1/2 in.</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Wall - 3 1/2 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Concrete - 80 lb/ft3 - 4 in.</Name>
+      <CodeCat>Concrete</CodeCat>
+      <CodeItem>Concrete - 80 lb/ft3 - 4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Floor - 1/2 in.</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Floor - 1/2 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Acoustic Tile - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Stucco - 3/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Building Paper - 1/16 in.</Name>
+      <CodeCat>Building Membrane</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Expanded Polystyrene - EPS - 4 7/10 in.</Name>
+      <CodeCat>Insulation Board</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Metal Framed Wall - 16inOC - 2x6 - R19 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Metal</FrmMat>
+      <FrmConfig>Wall16inOC</FrmConfig>
+    </Mat>
+    <Mat>
+      <Name>Gypsum plaster - 80 lb/ft3 - 1/2 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Expanded Polystyrene - EPS - 3 2/5 in.</Name>
+      <CodeCat>Insulation Board</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Wood Framed Floor - 16inOC - 2x6 - R11 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Wood</FrmMat>
+      <FrmConfig>Floor16inOC</FrmConfig>
+    </Mat>
+    <Mat>
+      <Name>Fiberboard sheathing - 1/2 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Carpet - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Asphalt shingles - 1/4 in.</Name>
+      <CodeCat>Roofing</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Expanded Polystyrene - EPS - 6 1/10 in.</Name>
+      <CodeCat>Insulation Board</CodeCat>
+    </Mat>
+    <Mat>
+      <Name>Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Wood</FrmMat>
+      <FrmConfig>Roof16inOC</FrmConfig>
+    </Mat>
+    <FenCons>
+      <Name>OperableWindow DoublePane NonMetalFraming TintedGlazing</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>OperableWindow</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>DefaultPerformance</CertificationMthd>
+      <OperableWinConfiguration>Sliding</OperableWinConfiguration>
+      <GreenhouseGardenWin>0</GreenhouseGardenWin>
+      <FenFrm>NonMetalFraming</FenFrm>
+      <FenPanes>DoublePane</FenPanes>
+      <GlzTint>TintedGlazing</GlzTint>
+      <SHGC>0.53</SHGC>
+      <UFactor>0.58</UFactor>
+    </FenCons>
+    <Lum>
+      <Name>4x2 T-8 Recessed</Name>
+      <FxtrType>RecessedOrDownlight</FxtrType>
+      <LampType>LinearFluorescent</LampType>
+      <Pwr>64.0</Pwr>
+      <HtGnSpcFrac>0.69</HtGnSpcFrac>
+      <HtGnRadFrac>0.58</HtGnRadFrac>
+    </Lum>
+    <Bldg>
+      <Name>Small Office</Name>
+      <RelocPubSchoolBldg>0</RelocPubSchoolBldg>
+      <BldgAz>0.0</BldgAz>
+      <TotStoryCnt>1</TotStoryCnt>
+      <AboveGrdStoryCnt>1</AboveGrdStoryCnt>
+      <LivingUnitCnt>0</LivingUnitCnt>
+      <TotFlrArea>5502.0</TotFlrArea>
+      <Story>
+        <Name>Story 1</Name>
+        <Z>0.0</Z>
+        <FlrToFlrHgt>10.7</FlrToFlrHgt>
+        <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+        <Spc>
+          <Name>Core</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Core Zone</ThrmlZnRef>
+          <Area>1610.9</Area>
+          <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <FuncSchGrp>Office</FuncSchGrp>
+          <OccDens>10.0</OccDens>
+          <EnvStatus>New</EnvStatus>
+          <LtgStatus>New</LtgStatus>
+          <IntLPDReg>0.75</IntLPDReg>
+          <IntLPDNonReg>0.0</IntLPDNonReg>
+          <RecptPwrDens>1.5</RecptPwrDens>
+          <GasEqpPwrDens>0.0</GasEqpPwrDens>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply</SHWFluidSegRef>
+          <HotWtrHtgRt>0.18</HotWtrHtgRt>
+          <VentPerPerson>15.0</VentPerPerson>
+          <VentPerArea>0.15</VentPerArea>
+          <VentACH>0.0</VentACH>
+          <ExhPerArea>0.0</ExhPerArea>
+          <ExhACH>0.0</ExhACH>
+          <ExhPerSpc>0.0</ExhPerSpc>
+          <IntWall>
+            <Name>Core Wall East</Name>
+            <AdjacentSpcRef>Perimeter 2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>277.742</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Core Floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1610.9</Area>
+            <PerimExposed>0.0</PerimExposed>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Perimeter 1</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Perimeter 1 Zone</ThrmlZnRef>
+          <Area>1221.2</Area>
+          <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <FuncSchGrp>Office</FuncSchGrp>
+          <OccDens>10.0</OccDens>
+          <EnvStatus>New</EnvStatus>
+          <LtgStatus>New</LtgStatus>
+          <IntLPDReg>0.75</IntLPDReg>
+          <IntLPDNonReg>0.0</IntLPDNonReg>
+          <RecptPwrDens>1.5</RecptPwrDens>
+          <GasEqpPwrDens>0.0</GasEqpPwrDens>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply</SHWFluidSegRef>
+          <HotWtrHtgRt>0.18</HotWtrHtgRt>
+          <VentPerPerson>15.0</VentPerPerson>
+          <VentPerArea>0.15</VentPerArea>
+          <VentACH>0.0</VentACH>
+          <ExhPerArea>0.0</ExhPerArea>
+          <ExhACH>0.0</ExhACH>
+          <ExhPerSpc>0.0</ExhPerSpc>
+          <ExtWall>
+            <Name>Perimeter 1 Wall South</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>909.0</Area>
+            <Az>180.0</Az>
+            <Win>
+              <Name>Perimeter 1 Wall South Window 1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 1 Wall South Window 2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 1 Wall South Window 3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 1 Wall South Window 4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 1 Wall South Window 5</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 1 Wall South Window 6</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Dr>
+              <Name>Perimeter 1 Wall South Door 1</Name>
+              <Area>42.0</Area>
+            </Dr>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter 1 Wall East</Name>
+            <AdjacentSpcRef>Perimeter 2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter 1 Wall North</Name>
+            <AdjacentSpcRef>Core</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>580.764</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Perimeter 1 Floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1221.17</Area>
+            <PerimExposed>90.0</PerimExposed>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Perimeter 2</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Perimeter 2 Zone</ThrmlZnRef>
+          <Area>724.4</Area>
+          <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <FuncSchGrp>Office</FuncSchGrp>
+          <OccDens>10.0</OccDens>
+          <EnvStatus>New</EnvStatus>
+          <LtgStatus>New</LtgStatus>
+          <IntLPDReg>0.75</IntLPDReg>
+          <IntLPDNonReg>0.0</IntLPDNonReg>
+          <RecptPwrDens>1.5</RecptPwrDens>
+          <GasEqpPwrDens>0.0</GasEqpPwrDens>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply</SHWFluidSegRef>
+          <HotWtrHtgRt>0.18</HotWtrHtgRt>
+          <VentPerPerson>15.0</VentPerPerson>
+          <VentPerArea>0.15</VentPerArea>
+          <VentACH>0.0</VentACH>
+          <ExhPerArea>0.0</ExhPerArea>
+          <ExhACH>0.0</ExhACH>
+          <ExhPerSpc>0.0</ExhPerSpc>
+          <ExtWall>
+            <Name>Perimeter 2 Wall East</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>606.0</Area>
+            <Az>90.0</Az>
+            <Win>
+              <Name>Perimeter 2 Wall East Window 1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 2 Wall East Window 2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 2 Wall East Window 3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 2 Wall East Window 4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+          </ExtWall>
+          <UndgrFlr>
+            <Name>Perimeter 2 Floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>724.411</Area>
+            <PerimExposed>60.0</PerimExposed>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Perimeter 3</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Perimeter 3 Zone</ThrmlZnRef>
+          <Area>1221.2</Area>
+          <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <FuncSchGrp>Office</FuncSchGrp>
+          <OccDens>10.0</OccDens>
+          <EnvStatus>New</EnvStatus>
+          <LtgStatus>New</LtgStatus>
+          <IntLPDReg>0.75</IntLPDReg>
+          <IntLPDNonReg>0.0</IntLPDNonReg>
+          <RecptPwrDens>1.5</RecptPwrDens>
+          <GasEqpPwrDens>0.0</GasEqpPwrDens>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply</SHWFluidSegRef>
+          <HotWtrHtgRt>0.18</HotWtrHtgRt>
+          <VentPerPerson>15.0</VentPerPerson>
+          <VentPerArea>0.15</VentPerArea>
+          <VentACH>0.0</VentACH>
+          <ExhPerArea>0.0</ExhPerArea>
+          <ExhACH>0.0</ExhACH>
+          <ExhPerSpc>0.0</ExhPerSpc>
+          <ExtWall>
+            <Name>Perimeter 3 Wall North</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>909.0</Area>
+            <Az>0.0</Az>
+            <Win>
+              <Name>Perimeter 3 Wall North Window 1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 3 Wall North Window 2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 3 Wall North Window 3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 3 Wall North Window 4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 3 Wall North Window 5</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 3 Wall North Window 6</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter 3 Wall East</Name>
+            <AdjacentSpcRef>Perimeter 2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter 3 Wall South</Name>
+            <AdjacentSpcRef>Core</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>580.764</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Perimeter 3 Floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1221.17</Area>
+            <PerimExposed>90.0</PerimExposed>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Perimeter 4</Name>
+          <CondgType>DirectlyConditioned</CondgType>
+          <ThrmlZnRef>Perimeter 4 Zone</ThrmlZnRef>
+          <Area>724.4</Area>
+          <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <FuncSchGrp>Office</FuncSchGrp>
+          <OccDens>10.0</OccDens>
+          <EnvStatus>New</EnvStatus>
+          <LtgStatus>New</LtgStatus>
+          <IntLPDReg>0.75</IntLPDReg>
+          <IntLPDNonReg>0.0</IntLPDNonReg>
+          <RecptPwrDens>1.5</RecptPwrDens>
+          <GasEqpPwrDens>0.0</GasEqpPwrDens>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply</SHWFluidSegRef>
+          <HotWtrHtgRt>0.18</HotWtrHtgRt>
+          <VentPerPerson>15.0</VentPerPerson>
+          <VentPerArea>0.15</VentPerArea>
+          <VentACH>0.0</VentACH>
+          <ExhPerArea>0.0</ExhPerArea>
+          <ExhACH>0.0</ExhACH>
+          <ExhPerSpc>0.0</ExhPerSpc>
+          <ExtWall>
+            <Name>Perimeter 4 Wall West</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>606.0</Area>
+            <Az>270.0</Az>
+            <Win>
+              <Name>Perimeter 4 Wall West Window 1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 4 Wall West Window 2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 4 Wall West Window 3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter 4 Wall West Window 4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter 4 Wall South</Name>
+            <AdjacentSpcRef>Perimeter 1</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter 4 Wall East</Name>
+            <AdjacentSpcRef>Core</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>277.742</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter 4 Wall North</Name>
+            <AdjacentSpcRef>Perimeter 3</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Perimeter 4 Floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>724.411</Area>
+            <PerimExposed>60.0</PerimExposed>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Attic</Name>
+          <CondgType>IndirectlyConditioned</CondgType>
+          <ThrmlZnRef>Attic Zone</ThrmlZnRef>
+          <Area>428.9</Area>
+          <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+          <SpcFunc>Unoccupied-Exclude from Gross Floor Area</SpcFunc>
+          <OccDens>0.0</OccDens>
+          <EnvStatus>New</EnvStatus>
+          <LtgStatus>New</LtgStatus>
+          <IntLPDReg>0.0</IntLPDReg>
+          <IntLPDNonReg>0.0</IntLPDNonReg>
+          <RecptPwrDens>0.0</RecptPwrDens>
+          <GasEqpPwrDens>0.0</GasEqpPwrDens>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <HotWtrHtgRt>0.0</HotWtrHtgRt>
+          <VentPerPerson>0.0</VentPerPerson>
+          <VentPerArea>0.0</VentPerArea>
+          <VentACH>0.0</VentACH>
+          <ExhPerArea>0.0</ExhPerArea>
+          <ExhACH>0.0</ExhACH>
+          <ExhPerSpc>0.0</ExhPerSpc>
+          <ExtFlr>
+            <Name>Attic Soffit North</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>182.706</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic Soffit East</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>123.096</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic Soffit West</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>123.096</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic Soffit South</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>182.706</Area>
+          </ExtFlr>
+          <IntFlr>
+            <Name>Attic Floor Core</Name>
+            <AdjacentSpcRef>Core</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1610.9</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic Floor Perimeter East</Name>
+            <AdjacentSpcRef>Perimeter 2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>724.411</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic Floor Perimeter West</Name>
+            <AdjacentSpcRef>Perimeter 4</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>724.411</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic Floor Perimeter South</Name>
+            <AdjacentSpcRef>Perimeter 1</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1221.17</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic Floor Perimeter North</Name>
+            <AdjacentSpcRef>Perimeter 3</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1221.17</Area>
+          </IntFlr>
+          <Roof>
+            <Name>Attic Roof North</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>2126.03</Area>
+            <Az>0.0</Az>
+            <Tilt>18.0</Tilt>
+          </Roof>
+          <Roof>
+            <Name>Attic Roof West</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>1096.48</Area>
+            <Az>270.0</Az>
+            <Tilt>18.0</Tilt>
+          </Roof>
+          <Roof>
+            <Name>Attic Roof East</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>1096.48</Area>
+            <Az>90.0</Az>
+            <Tilt>18.0</Tilt>
+          </Roof>
+          <Roof>
+            <Name>Attic Roof South</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>2126.03</Area>
+            <Az>180.0</Az>
+            <Tilt>18.0</Tilt>
+          </Roof>
+        </Spc>
+      </Story>
+      <ThrmlZn>
+        <Name>Core Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Core PSZ AirSys</PriAirCondgSysRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter 2 Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perimeter 2 PSZ AirSys</PriAirCondgSysRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter 3 Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perimeter 3 PSZ AirSys</PriAirCondgSysRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter 4 Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perimeter 4 PSZ AirSys</PriAirCondgSysRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter 1 Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perimeter 1 PSZ AirSys</PriAirCondgSysRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Attic Zone</Name>
+        <Type>Unconditioned</Type>
+      </ThrmlZn>
+      <AirSys>
+        <Name>Core PSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <SubType>SinglePackage</SubType>
+        <AirSeg>
+          <Name>Core PSZ AirSys SupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>PSZ 1 Cooling Coil</Name>
+            <Type>DirectExpansion</Type>
+            <DXEER>10.8</DXEER>
+          </CoilClg>
+          <CoilHtg>
+            <Name>PSZ 1 Heating Coil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>PSZ 1 Fan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <Class>Centrifugal</Class>
+            <CentType>AirFoil</CentType>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowEff>0.55</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrHP>1.5</MtrHP>
+            <MtrType>Open</MtrType>
+            <MtrPoleCnt>4</MtrPoleCnt>
+            <MtrEff>0.855</MtrEff>
+            <MtrPos>InAirStream</MtrPos>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Core PSZ AirSys ReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Ducted</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Core Terminal</Name>
+          <Status>New</Status>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Core Zone</ZnServedRef>
+          <PriAirFlowMax>1611.0</PriAirFlowMax>
+        </TrmlUnit>
+      </AirSys>
+      <AirSys>
+        <Name>Perimeter 1 PSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <SubType>SinglePackage</SubType>
+        <AirSeg>
+          <Name>Perimeter 1 PSZ AirSys SupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>PSZ 2 Cooling Coil</Name>
+            <Type>DirectExpansion</Type>
+            <DXEER>10.8</DXEER>
+          </CoilClg>
+          <CoilHtg>
+            <Name>PSZ 2 Heating Coil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>PSZ 2 Fan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <Class>Centrifugal</Class>
+            <CentType>AirFoil</CentType>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowEff>0.55</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrHP>1.0</MtrHP>
+            <MtrType>Open</MtrType>
+            <MtrPoleCnt>4</MtrPoleCnt>
+            <MtrEff>0.855</MtrEff>
+            <MtrPos>InAirStream</MtrPos>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perimeter 1 PSZ AirSys ReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Ducted</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perimeter 1 Terminal</Name>
+          <Status>New</Status>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter 1 Zone</ZnServedRef>
+          <PriAirFlowMax>1211.0</PriAirFlowMax>
+        </TrmlUnit>
+      </AirSys>
+      <AirSys>
+        <Name>Perimeter 2 PSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <SubType>SinglePackage</SubType>
+        <AirSeg>
+          <Name>Perimeter 2 PSZ AirSys SupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>PSZ 3 Cooling Coil</Name>
+            <Type>DirectExpansion</Type>
+            <DXEER>10.8</DXEER>
+          </CoilClg>
+          <CoilHtg>
+            <Name>PSZ 3 Heating Coil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>PSZ 3 Fan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <Class>Centrifugal</Class>
+            <CentType>AirFoil</CentType>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowEff>0.55</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrHP>0.75</MtrHP>
+            <MtrType>Open</MtrType>
+            <MtrPoleCnt>4</MtrPoleCnt>
+            <MtrEff>0.855</MtrEff>
+            <MtrPos>InAirStream</MtrPos>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perimeter 2 PSZ AirSys ReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Ducted</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perimeter 2 Terminal</Name>
+          <Status>New</Status>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter 2 Zone</ZnServedRef>
+          <PriAirFlowMax>724.0</PriAirFlowMax>
+        </TrmlUnit>
+      </AirSys>
+      <AirSys>
+        <Name>Perimeter 3 PSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <SubType>SinglePackage</SubType>
+        <AirSeg>
+          <Name>Perimeter 3 PSZ AirSys SupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>PSZ 4 Cooling Coil</Name>
+            <Type>DirectExpansion</Type>
+            <DXEER>10.8</DXEER>
+          </CoilClg>
+          <CoilHtg>
+            <Name>PSZ 4 Heating Coil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>PSZ 4 Fan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <Class>Centrifugal</Class>
+            <CentType>AirFoil</CentType>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowEff>0.55</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrHP>1.0</MtrHP>
+            <MtrType>Open</MtrType>
+            <MtrPoleCnt>4</MtrPoleCnt>
+            <MtrEff>0.855</MtrEff>
+            <MtrPos>InAirStream</MtrPos>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perimeter 3 PSZ AirSys ReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Ducted</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perimeter 3 Terminal</Name>
+          <Status>New</Status>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter 3 Zone</ZnServedRef>
+          <PriAirFlowMax>1211.0</PriAirFlowMax>
+        </TrmlUnit>
+      </AirSys>
+      <AirSys>
+        <Name>Perimeter 4 PSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <SubType>SinglePackage</SubType>
+        <AirSeg>
+          <Name>Perimeter 4 PSZ AirSys SupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>PSZ 5 Cooling Coil</Name>
+            <Type>DirectExpansion</Type>
+            <DXEER>10.8</DXEER>
+          </CoilClg>
+          <CoilHtg>
+            <Name>PSZ 5 Heating Coil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>PSZ 5 Fan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <Class>Centrifugal</Class>
+            <CentType>AirFoil</CentType>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowEff>0.55</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrHP>0.75</MtrHP>
+            <MtrType>Open</MtrType>
+            <MtrPoleCnt>4</MtrPoleCnt>
+            <MtrEff>0.855</MtrEff>
+            <MtrPos>InAirStream</MtrPos>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perimeter 4 PSZ AirSys ReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Ducted</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perimeter 4 Terminal</Name>
+          <Status>New</Status>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter 4 Zone</ZnServedRef>
+          <PriAirFlowMax>724.0</PriAirFlowMax>
+        </TrmlUnit>
+      </AirSys>
+    </Bldg>
+    <FluidSys>
+      <Name>SHWFluidSys</Name>
+      <Type>ServiceHotWater</Type>
+      <FluidSeg>
+        <Name>SHWSupply</Name>
+        <Type>PrimarySupply</Type>
+      </FluidSeg>
+      <FluidSeg>
+        <Name>SHWMakeup</Name>
+        <Type>MakeupFluid</Type>
+      </FluidSeg>
+      <WtrHtr>
+        <Name>WaterHeater</Name>
+        <FluidSegOutRef>SHWSupply</FluidSegOutRef>
+        <FluidSegMakeupRef>SHWMakeup</FluidSegMakeupRef>
+        <StorCap>14.0</StorCap>
+        <ThrmlEff>0.8</ThrmlEff>
+        <FuelSrc>NaturalGas</FuelSrc>
+        <CapRtd>6655.0</CapRtd>
+        <DraftFanPwr>0.0</DraftFanPwr>
+      </WtrHtr>
+    </FluidSys>
+  </Proj>
+</SDDXML>

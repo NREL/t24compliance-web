@@ -38,7 +38,7 @@ namespace :sim do
       run_command = %W[/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{File.basename(sim_path)}]
       #run_command = %w[find . -name *]
       c = Docker::Container.create('Cmd' => run_command,
-                                   'Image' => 'nllong/cbecc-com:daemon',
+                                   'Image' => 'nllong/cbecc-com',
                                    'AttachStdout' => true,
                                    #'Volumes' => {"/var/cbecc-com-files/run" => {}}
       )
@@ -59,22 +59,19 @@ namespace :sim do
   desc "import test project"
   task :import_test_project => :environment do
     # import some cbecc com models
-    u = User.find_or_create_by(email: 'test@nrel.gov')
-    u.roles = [:admin]
-    # Remove this if we share the code. This is very dangerous giving the admin a simple password for testing sake!
-    u.password = 'password'
-    u.save!
+    u = User.find_by(email: 'test@nrel.gov')
 
+    # are we sure that we want to destroy all the users projects?
     u.projects.destroy_all
 
-    f = File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
-    p = Project.from_sdd_xml(f)
-    p.user_id = u.id
-    p.save!
-    puts p
-
-    #h = Hash.from_xml(file)
-    #File.open('spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.json','w') {|f| f << MultiJson.dump(h, :pretty => true)}
+    files = [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
+    files += Dir["spec/files/cbecc_com_web_instances/*.xml"]
+    files.each do |f|
+      p = Project.from_sdd_xml(f)
+      p.user_id = u.id
+      p.save!
+      puts "Imported #{p.name}"
+    end
   end
 
 end

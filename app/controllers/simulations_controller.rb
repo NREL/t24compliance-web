@@ -71,11 +71,12 @@ class SimulationsController < ApplicationController
     clean_params = simulation_params
     logger.info "CLEAN PARAMS: #{clean_params.inspect}"
 
-    p = Project.where(clean_params[:project_id]).first
-    if p
-      p.simulation.run
+    if @project
+      @project.simulation.run
 
-      respond_with p.simulation
+      logger.info "Simulation ID is #{@project.simulation.id}"
+
+      respond_with @project.simulation
     else
       fail "Could not find project to run"
     end
@@ -106,6 +107,7 @@ class SimulationsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
+    logger.info "Set project to #{@project}"
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
