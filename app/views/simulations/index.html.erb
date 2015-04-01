@@ -1,27 +1,28 @@
 <h1>Listing simulations</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>ID</th>
+    <th>Status</th>
+    <th>CBECC Return Code</th>
+    <th>CBECC Return Description</th>
+    <th>Action</th>
+  </tr>
   </thead>
 
-  <tbody>
-    <% @simulations.each do |simulation| %>
+  <% @simulations.each do |simulation| %>
       <tr>
-        <td><%= simulation.filename %></td>
-        <td><%= link_to 'Show', simulation %></td>
-        <td><%= link_to 'Edit', edit_simulation_path(simulation) %></td>
-        <td><%= link_to 'Destroy', simulation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to simulation.id, simulation %></td>
+        <td><%= simulation.status %></td>
+        <td><%= simulation.cbecc_code %></td>
+        <td><%= simulation.cbecc_code_description %></td>
+        <td><%= link_to 'Delete', simulation, method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
-    <% end %>
-  </tbody>
+  <% end %>
 </table>
 
 <br>
-
-<%= link_to 'New Simulation', new_simulation_path %>
 
 
 <div ng-app="queue">
