@@ -157,6 +157,18 @@ class UndergroundWall
     end
   end
 
+  # Set the construction id by doing a look up on the construction
+  def set_construction_id
+    fail "No construction assembly reference specified for #{name}" unless construct_assembly_reference
+
+    cons = Construction.where(name: construct_assembly_reference).first
+    fail "Could not find construction '#{construct_assembly_reference}' in construction library" unless cons
+
+    self.construction_library_id = cons.id
+
+    save!
+  end
+
   def status_enums
     %w(New Existing Altered)
   end

@@ -151,6 +151,18 @@ class Door
     end
   end
 
+  # Set the construction id by doing a look up on the construction
+  def set_construction_id
+    fail "No construction assembly reference specified for #{name}" unless door_construction_reference
+
+    cons = DoorLookup.where(name: door_construction_reference).first
+    fail "Could not find construction '#{door_construction_reference}' in construction library" unless cons
+
+    self.construction_library_id = cons.id
+
+    save!
+  end
+
   def status_enums
     %w(New Existing Altered)
   end

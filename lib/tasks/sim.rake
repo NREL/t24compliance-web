@@ -57,8 +57,6 @@ namespace :sim do
 
   desc 'import test project'
   task import_test_project: :environment do
-    Rails.logger = Logger.new(STDOUT)
-
     # import some cbecc com models
     u = User.find_by(email: 'test@nrel.gov')
 

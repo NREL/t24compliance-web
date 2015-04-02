@@ -273,10 +273,6 @@
               <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
               <Area>30.0</Area>
             </Win>
-            <Dr>
-              <Name>Perimeter 1 Wall South Door 1</Name>
-              <Area>42.0</Area>
-            </Dr>
           </ExtWall>
           <IntWall>
             <Name>Perimeter 1 Wall East</Name>

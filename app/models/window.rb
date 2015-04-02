@@ -148,6 +148,18 @@ class Window
     end
   end
 
+  # Set the construction id by doing a look up on the construction
+  def set_construction_id
+    fail "No construction assembly reference specified for #{name}" unless fenestration_construction_reference
+
+    cons = Fenestration.where(name: fenestration_construction_reference).first
+    fail "Could not find construction '#{fenestration_construction_reference}' in construction library" unless cons
+
+    self.construction_library_id = cons.id
+
+    save!
+  end
+
   def status_enums
     %w(New Altered Existing)
   end

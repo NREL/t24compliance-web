@@ -20,5 +20,6 @@ class Construction
   field :slab_insulation_orientation, type: String
   field :slab_insulation_thermal_resistance, type: String
 
+  index({name: 1}, {unique: true})
   index(compatible_surface_type: 1)
 end
