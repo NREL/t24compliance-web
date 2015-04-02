@@ -39,11 +39,12 @@ class ConstructAssembliesController < ApplicationController
   end
 
   private
-    def set_construct_assembly
-      @construct_assembly = ConstructAssembly.find(params[:id])
-    end
 
-    def construct_assembly_params
-      params.require(:construct_assembly).permit(:name, :compatible_surface_type, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance, :slab_type, :slab_insulation_orientation, :slab_insulation_thermal_resistance, :field_applied_coating, :crrc_initial_reflectance, :crrc_aged_reflectance, :crrc_initial_emittance, :crrc_aged_emittance, :crrc_initial_sri, :crrc_aged_sri, :crrc_product_id, :material_reference)
-    end
+  def set_construct_assembly
+    @construct_assembly = ConstructAssembly.find(params[:id])
+  end
+
+  def construct_assembly_params
+    params.require(:construct_assembly).permit(:name, :compatible_surface_type, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance, :slab_type, :slab_insulation_orientation, :slab_insulation_thermal_resistance, :field_applied_coating, :crrc_initial_reflectance, :crrc_aged_reflectance, :crrc_initial_emittance, :crrc_aged_emittance, :crrc_initial_sri, :crrc_aged_sri, :crrc_product_id, :material_reference)
+  end
 end

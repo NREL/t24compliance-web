@@ -39,11 +39,12 @@ class ScheduleDaysController < ApplicationController
   end
 
   private
-    def set_schedule_day
-      @schedule_day = ScheduleDay.find(params[:id])
-    end
 
-    def schedule_day_params
-      params.require(:schedule_day).permit(:name, :type, :hour)
-    end
+  def set_schedule_day
+    @schedule_day = ScheduleDay.find(params[:id])
+  end
+
+  def schedule_day_params
+    params.require(:schedule_day).permit(:name, :type, :hour)
+  end
 end

@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
@@ -17,12 +16,12 @@ class Ability
     # authenticated user
     elsif !user.current_sign_in_at.nil?
       can [:read, :dashboard], Input
-      can [:show, :update], User, :id => user.id
+      can [:show, :update], User, id: user.id
       can :home, User
       can [:create, :wizard], Project
-      can [:show, :delete, :update, :download], Project, :user_id => user.id
+      can [:show, :delete, :update, :download], Project, user_id: user.id
       can [:create], Building
-      can [:show, :bulk_sync, :index, :update], Building, :user_id => user.id
+      can [:show, :bulk_sync, :index, :update], Building, user_id: user.id
       Rails.logger.info("USER IS AUTHENTICATED: #{user.inspect}")
     # unauthenticated
     else
@@ -30,6 +29,5 @@ class Ability
       can [:read, :dashboard], Input
       Rails.logger.info("USER IS NOT AUTH: #{user.inspect}")
     end
-
   end
 end

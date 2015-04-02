@@ -39,11 +39,12 @@ class DoorsController < ApplicationController
   end
 
   private
-    def set_door
-      @door = Door.find(params[:id])
-    end
 
-    def door_params
-      params.require(:door).permit(:name, :status, :operation, :door_construction_reference, :area)
-    end
+  def set_door
+    @door = Door.find(params[:id])
+  end
+
+  def door_params
+    params.require(:door).permit(:name, :status, :operation, :door_construction_reference, :area)
+  end
 end

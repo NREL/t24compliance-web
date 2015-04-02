@@ -1,13 +1,11 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.10'
 # Use jdbcsqlite3 as the database for Active Record
 # gem 'activerecord-jdbcsqlite3-adapter'
 # MongoDB Adapter ( ~> 4.0)
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
-
 
 # JSON parsing and conversion
 gem 'multi_json'
@@ -47,7 +45,7 @@ gem 'font-awesome-rails'
 # For simulation of CBECC-Com Files
 gem 'docker-api', require: 'docker'
 gem 'sidekiq'
-gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sinatra', '>= 1.3.0', require: nil
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,7 +55,6 @@ gem 'puma'
 
 # for windows
 gem 'tzinfo-data'
-
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -80,7 +77,7 @@ gem 'faker'
 group :test, :development do
   gem 'rspec', '~> 3.1.0'
   gem 'rspec-rails', '~> 3.1.0'
-  #gem 'factory_girl_rails', '~> 4.5'
+  # gem 'factory_girl_rails', '~> 4.5'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
@@ -89,4 +86,3 @@ group :test, :development do
   gem 'rubocop', require: false
   gem 'rubocop-checkstyle_formatter', require: false
 end
-

@@ -1,6 +1,6 @@
 class DoorLookupsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :project #the resource is project
+  load_and_authorize_resource :project # the resource is project
   before_action :set_door, only: [:show]
 
   respond_to :json, :html
@@ -15,8 +15,8 @@ class DoorLookupsController < ApplicationController
   end
 
   private
+
   def set_door
     @door = DoorLookup.find(params[:id])
   end
-
 end

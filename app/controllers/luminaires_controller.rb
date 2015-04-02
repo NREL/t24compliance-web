@@ -31,29 +31,29 @@ class LuminairesController < ApplicationController
 
   # receives hash with form {project_id: ..., data: [array of luminaires]}
   def bulk_sync
-      luminaires = []
+    luminaires = []
 
-      clean_params = luminaires_params
-      logger.info("CLEAN PARAMS: #{clean_params.inspect}")
+    clean_params = luminaires_params
+    logger.info("CLEAN PARAMS: #{clean_params.inspect}")
 
-      # add / update
-      if clean_params.has_key?('data')
-        clean_params[:data].each do |rec|
-          logger.info("RECORD of type #{rec['type']}:  #{rec.inspect}")
-          if rec.has_key?('id') and !rec['id'].nil?
-            @lum = Luminaire.find(rec['id'])
-            @lum.update(rec)
-          else
-            @lum = Luminaire.new(rec)
-            @lum.save
-          end
-          luminaires << @lum
+    # add / update
+    if clean_params.key?('data')
+      clean_params[:data].each do |rec|
+        logger.info("RECORD of type #{rec['type']}:  #{rec.inspect}")
+        if rec.key?('id') && !rec['id'].nil?
+          @lum = Luminaire.find(rec['id'])
+          @lum.update(rec)
+        else
+          @lum = Luminaire.new(rec)
+          @lum.save
         end
-
+        luminaires << @lum
       end
 
-      @project.luminaires = luminaires
-      @project.save
+    end
+
+    @project.luminaires = luminaires
+    @project.save
 
     # TODO: add error handling?!
     respond_with luminaires.first || Luminaire.new
@@ -70,15 +70,16 @@ class LuminairesController < ApplicationController
   end
 
   private
-    def set_luminaire
-      @luminaire = Luminaire.find(params[:id])
-    end
 
-    def get_project
-      @project = Project.where(:id => params[:project_id]).first
-    end
+  def set_luminaire
+    @luminaire = Luminaire.find(params[:id])
+  end
 
-    def luminaires_params
-      params.permit(:project_id, :building_id, data: [:id, :name, :fixture_type, :lamp_type, :power, :heat_gain_space_fraction, :heat_gain_radiant_fraction])
-    end
+  def get_project
+    @project = Project.where(id: params[:project_id]).first
+  end
+
+  def luminaires_params
+    params.permit(:project_id, :building_id, data: [:id, :name, :fixture_type, :lamp_type, :power, :heat_gain_space_fraction, :heat_gain_radiant_fraction])
+  end
 end

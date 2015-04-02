@@ -3,18 +3,17 @@
 # Recipe:: run_simulations
 #
 
-
 # install redis
-include_recipe "redis2"
+include_recipe 'redis2'
 
-redis_instance "cbecc_com_queue"
+redis_instance 'cbecc_com_queue'
 
 # docker
-include_recipe "docker"
+include_recipe 'docker'
 
 # add users in a deploy group
 node[:cbecc_com_web][:deploy_users].each do |u|
-  group "docker" do
+  group 'docker' do
     members u
     append true
 

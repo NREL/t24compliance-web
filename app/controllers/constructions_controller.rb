@@ -1,6 +1,6 @@
 class ConstructionsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :project #the resource is project
+  load_and_authorize_resource :project # the resource is project
   before_action :set_construction, only: [:show]
 
   respond_to :json, :html
@@ -15,8 +15,8 @@ class ConstructionsController < ApplicationController
   end
 
   private
+
   def set_construction
     @construction = Construction.find(params[:id])
   end
-
 end

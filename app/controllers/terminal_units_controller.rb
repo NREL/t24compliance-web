@@ -36,12 +36,11 @@ class TerminalUnitsController < ApplicationController
   # receives hash with form {project_id: ..., data: [array of terminal_units]}
   # updates terminal_units and related components
   def bulk_sync
-
     clean_params = terminal_units_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
 
     terminal_units = {}
-    if clean_params.has_key?('data')
+    if clean_params.key?('data')
       clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
 
@@ -50,7 +49,7 @@ class TerminalUnitsController < ApplicationController
         cool = rec.extract!('coil_heating')['coil_heating']
 
         # add/update
-        if rec.has_key?('id') and !rec['id'].nil?
+        if rec.key?('id') && !rec['id'].nil?
           @unit = TerminalUnit.find(rec['id'])
           @unit.update(rec)
         else
@@ -74,14 +73,14 @@ class TerminalUnitsController < ApplicationController
                 out_ref = seg.name
               end
             end
-            coil = CoilHeating.new({name: "#{rec['name'] + 'ReheatCoil'}", type: 'HotWater', fluid_segment_in_reference: in_ref, fluid_segment_out_reference: out_ref })
+            coil = CoilHeating.new(name: "#{rec['name'] + 'ReheatCoil'}", type: 'HotWater', fluid_segment_in_reference: in_ref, fluid_segment_out_reference: out_ref)
             coil.save
             coil_heatings << coil
             @unit.coil_heatings = coil_heatings
           end
 
         elsif rec['type'] === 'VAVNoReheatBox'
-        elsif rec['type'] === 'ParallelFanBox' or rec['type'] === 'SeriesFanBox'
+        elsif rec['type'] === 'ParallelFanBox' || rec['type'] === 'SeriesFanBox'
           # save a fan
           fans = []
         else
@@ -131,63 +130,63 @@ class TerminalUnitsController < ApplicationController
   end
 
   private
-    def set_terminal_unit
-      @terminal_unit = TerminalUnit.find(params[:id])
-    end
 
-    def get_building
-      @building = Building.where(:id => params[:building_id]).first
-    end
+  def set_terminal_unit
+    @terminal_unit = TerminalUnit.find(params[:id])
+  end
 
-    def get_project
-      @project = Project.where(:id => params[:project_id]).first
-    end
+  def get_building
+    @building = Building.where(id: params[:building_id]).first
+  end
 
-    def save_air_system_paths
+  def get_project
+    @project = Project.where(id: params[:project_id]).first
+  end
 
-      systems = AirSystem.where(building_id: @building.id)
-      systems.each do |sys|
-        zone = ThermalZone.where(primary_air_conditioning_system_reference: sys.name).first
-        unless zone.nil?
-          logger.info("ZONE: #{zone.inspect}")
-          # supply
-          segment = sys.air_segments.where(type: 'Supply').first
-          if zone.supply_plenum_zone_reference.blank?
-            segment.path = 'Ducted'
-          else
-            segment.path = 'PlenumZones'
-          end
-          segment.save
-
-          # return
-          segment = sys.air_segments.where(type: 'Return').first
-          if zone.return_plenum_zone_reference.blank?
-            segment.path = 'Ducted'
-          else
-            segment.path = 'PlenumZones'
-          end
-          segment.save
+  def save_air_system_paths
+    systems = AirSystem.where(building_id: @building.id)
+    systems.each do |sys|
+      zone = ThermalZone.where(primary_air_conditioning_system_reference: sys.name).first
+      unless zone.nil?
+        logger.info("ZONE: #{zone.inspect}")
+        # supply
+        segment = sys.air_segments.where(type: 'Supply').first
+        if zone.supply_plenum_zone_reference.blank?
+          segment.path = 'Ducted'
+        else
+          segment.path = 'PlenumZones'
         end
+        segment.save
+
+        # return
+        segment = sys.air_segments.where(type: 'Return').first
+        if zone.return_plenum_zone_reference.blank?
+          segment.path = 'Ducted'
+        else
+          segment.path = 'PlenumZones'
+        end
+        segment.save
       end
     end
+  end
 
-    def delete_orphan_terminal_units
-      # delete all terminal units with a 'zone_served_reference' that doesn't match one of the existing zones
-      # units belong to air systems (not zones, to complicate things)
-      air_systems = @building.air_systems
-      system_ids = air_systems.collect {|i| i.id }
-      units = TerminalUnit.any_in(air_system_id: system_ids)
-      # retrieve zone names
-      zone_names = @building.thermal_zones.collect {|i| i.name}
-      units.each do |unit|
-        if ! zone_names.include? unit.zone_served_reference
-          logger.info("!!!! DESTROY UNIT: #{unit.name} . NO MATCHING ZONE")
-          unit.destroy
-        end
+  def delete_orphan_terminal_units
+    # delete all terminal units with a 'zone_served_reference' that doesn't match one of the existing zones
+    # units belong to air systems (not zones, to complicate things)
+    air_systems = @building.air_systems
+    system_ids = air_systems.collect(&:id)
+    units = TerminalUnit.any_in(air_system_id: system_ids)
+    # retrieve zone names
+    zone_names = @building.thermal_zones.collect(&:name)
+    units.each do |unit|
+      unless zone_names.include? unit.zone_served_reference
+        logger.info("!!!! DESTROY UNIT: #{unit.name} . NO MATCHING ZONE")
+        unit.destroy
       end
     end
+  end
 
-    def terminal_units_params
-      params.permit(:project_id, :building_id, data: [:id, :name, :air_system_id, :status, :type, :zone_served_reference, :count, :minimum_air_fraction_schedule_reference, :primary_air_segment_reference, :primary_air_flow_maximum, :primary_air_flow_minimum, :heating_air_flow_maximum, :reheat_control_method, :induced_air_zone_reference, :induction_ratio, :fan_power_per_flow, :parallel_box_fan_flow_fraction])
-    end
+  def terminal_units_params
+    params.permit(:project_id, :building_id, data: [:id, :name, :air_system_id, :status, :type, :zone_served_reference, :count, :minimum_air_fraction_schedule_reference, :primary_air_segment_reference, :primary_air_flow_maximum, :primary_air_flow_minimum, :heating_air_flow_maximum, :reheat_control_method, :induced_air_zone_reference, :induction_ratio, :fan_power_per_flow, :parallel_box_fan_flow_fraction])
+  end
 end

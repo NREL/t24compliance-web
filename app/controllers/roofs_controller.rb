@@ -39,11 +39,12 @@ class RoofsController < ApplicationController
   end
 
   private
-    def set_roof
-      @roof = Roof.find(params[:id])
-    end
 
-    def roof_params
-      params.require(:roof).permit(:name, :status, :construct_assembly_reference, :area, :azimuth, :tilt, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance, :field_applied_coating, :crrc_initial_reflectance, :crrc_aged_reflectance, :crrc_initial_emittance, :crrc_aged_emittance, :crrc_initial_sri, :crrc_aged_sri, :crrc_product_id)
-    end
+  def set_roof
+    @roof = Roof.find(params[:id])
+  end
+
+  def roof_params
+    params.require(:roof).permit(:name, :status, :construct_assembly_reference, :area, :azimuth, :tilt, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance, :field_applied_coating, :crrc_initial_reflectance, :crrc_aged_reflectance, :crrc_initial_emittance, :crrc_aged_emittance, :crrc_initial_sri, :crrc_aged_sri, :crrc_product_id)
+  end
 end

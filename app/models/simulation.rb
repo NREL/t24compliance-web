@@ -10,7 +10,7 @@ class Simulation
   # compliance report
   field :compliance_report_pdf_path, type: String
 
-  #embeds_many :simulation_results
+  # embeds_many :simulation_results
   belongs_to :project
 
   before_destroy :remove_files
@@ -24,7 +24,7 @@ class Simulation
     # For now just copy in the example model that we are running into the folder under the new filename
     ## End Temp Code
 
-    RunSimulation.perform_async(self.id)
+    RunSimulation.perform_async(id)
   end
 
   # This only runs on the server, so if we federate the systems, then this will not always work.
@@ -36,6 +36,6 @@ class Simulation
   end
 
   def run_path
-    File.join(Rails.root, 'data', 'simulations', Rails.env, self._id)
+    File.join(Rails.root, 'data', 'simulations', Rails.env, _id)
   end
 end

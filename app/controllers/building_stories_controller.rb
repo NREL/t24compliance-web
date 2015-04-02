@@ -2,7 +2,7 @@ class BuildingStoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_building_story, only: [:show, :edit, :update, :destroy]
   before_action :get_building, only: [:index, :update, :create, :bulk_sync]
-  load_and_authorize_resource :building #the resource is building
+  load_and_authorize_resource :building # the resource is building
   respond_to :json, :html
 
   def index
@@ -28,21 +28,20 @@ class BuildingStoriesController < ApplicationController
   end
 
   def create
-    
   end
 
   # receives hash with form {building_id: ..., data: [array of building_stories]}
   def bulk_sync
-    logger.info("in bulk sync")
+    logger.info('in bulk sync')
     clean_params = building_stories_params
     logger.info("CLEAN in bulk PARAMS: #{clean_params.inspect}")
 
     # add / update
     stories = []
-    if clean_params.has_key?('data')
+    if clean_params.key?('data')
       clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
-        if rec.has_key?('id') and !rec['id'].nil?
+        if rec.key?('id') && !rec['id'].nil?
 
           @story = BuildingStory.find(rec['id'])
           @story.update(rec)
@@ -62,7 +61,6 @@ class BuildingStoriesController < ApplicationController
     # TODO: add error handling?
     # TODO: couldn't get this to respond with index action...
     respond_with stories.first || BuildingStory.new
-
   end
 
   def destroy
@@ -71,20 +69,21 @@ class BuildingStoriesController < ApplicationController
   end
 
   private
-    def set_building_story
-      @building_story = BuildingStory.find(params[:id])
-    end
 
-    def get_building
-      @building = Building.where(:id => params[:building_id]).first
-    end
+  def set_building_story
+    @building_story = BuildingStory.find(params[:id])
+  end
 
-    # def building_story_params
-    #   params.require(:building_story).permit(:name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id)
-    # end
+  def get_building
+    @building = Building.where(id: params[:building_id]).first
+  end
 
-    #for update_all
-    def building_stories_params
-      params.permit(:building_id, data: [:id, :name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id])
-    end
+  # def building_story_params
+  #   params.require(:building_story).permit(:name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id)
+  # end
+
+  # for update_all
+  def building_stories_params
+    params.permit(:building_id, data: [:id, :name, :multiplier, :z, :floor_to_floor_height, :floor_to_ceiling_height, :building_id])
+  end
 end

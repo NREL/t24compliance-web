@@ -39,11 +39,12 @@ class CeilingsController < ApplicationController
   end
 
   private
-    def set_ceiling
-      @ceiling = Ceiling.find(params[:id])
-    end
 
-    def ceiling_params
-      params.require(:ceiling).permit(:name, :area, :adjacent_space_reference, :construct_assembly_reference, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
-    end
+  def set_ceiling
+    @ceiling = Ceiling.find(params[:id])
+  end
+
+  def ceiling_params
+    params.require(:ceiling).permit(:name, :area, :adjacent_space_reference, :construct_assembly_reference, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
+  end
 end

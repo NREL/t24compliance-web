@@ -39,11 +39,12 @@ class InteriorWallsController < ApplicationController
   end
 
   private
-    def set_interior_wall
-      @interior_wall = InteriorWall.find(params[:id])
-    end
 
-    def interior_wall_params
-      params.require(:interior_wall).permit(:name, :status, :adjacent_space_reference, :construct_assembly_reference, :area, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
-    end
+  def set_interior_wall
+    @interior_wall = InteriorWall.find(params[:id])
+  end
+
+  def interior_wall_params
+    params.require(:interior_wall).permit(:name, :status, :adjacent_space_reference, :construct_assembly_reference, :area, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
+  end
 end

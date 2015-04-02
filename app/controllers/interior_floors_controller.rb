@@ -39,11 +39,12 @@ class InteriorFloorsController < ApplicationController
   end
 
   private
-    def set_interior_floor
-      @interior_floor = InteriorFloor.find(params[:id])
-    end
 
-    def interior_floor_params
-      params.require(:interior_floor).permit(:name, :adjacent_space_reference, :construct_assembly_reference, :area, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
-    end
+  def set_interior_floor
+    @interior_floor = InteriorFloor.find(params[:id])
+  end
+
+  def interior_floor_params
+    params.require(:interior_floor).permit(:name, :adjacent_space_reference, :construct_assembly_reference, :area, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
+  end
 end

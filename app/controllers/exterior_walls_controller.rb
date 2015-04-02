@@ -39,11 +39,12 @@ class ExteriorWallsController < ApplicationController
   end
 
   private
-    def set_exterior_wall
-      @exterior_wall = ExteriorWall.find(params[:id])
-    end
 
-    def exterior_wall_params
-      params.require(:exterior_wall).permit(:name, :status, :construct_assembly_reference, :area, :display_perimeter, :azimuth, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
-    end
+  def set_exterior_wall
+    @exterior_wall = ExteriorWall.find(params[:id])
+  end
+
+  def exterior_wall_params
+    params.require(:exterior_wall).permit(:name, :status, :construct_assembly_reference, :area, :display_perimeter, :azimuth, :exterior_solar_absorptance, :exterior_thermal_absorptance, :exterior_visible_absorptance, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
+  end
 end

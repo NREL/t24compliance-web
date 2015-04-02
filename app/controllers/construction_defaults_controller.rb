@@ -2,7 +2,7 @@ class ConstructionDefaultsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_construction_default, only: [:show, :edit, :update, :destroy]
   before_action :get_project
-  load_and_authorize_resource :project #the resource is project
+  load_and_authorize_resource :project # the resource is project
 
   respond_to :json, :html
 
@@ -18,8 +18,6 @@ class ConstructionDefaultsController < ApplicationController
     @project.construction_default.save
     respond_with(@project.construction_default)
   end
-
-
 
   def show
     @project.construction_default
@@ -45,15 +43,16 @@ class ConstructionDefaultsController < ApplicationController
   end
 
   private
-    def set_construction_default
-      @construction_default = ConstructionDefault.find(params[:id])
-    end
+
+  def set_construction_default
+    @construction_default = ConstructionDefault.find(params[:id])
+  end
 
   def get_project
     @project = Project.find(params[:project_id])
   end
 
-    def construction_default_params
-      params.require(:construction_default).permit(:exterior_wall, :interior_wall, :underground_wall, :roof, :door, :window, :skylight, :exterior_floor, :interior_floor, :underground_floor, :project_id)
-    end
+  def construction_default_params
+    params.require(:construction_default).permit(:exterior_wall, :interior_wall, :underground_wall, :roof, :door, :window, :skylight, :exterior_floor, :interior_floor, :underground_floor, :project_id)
+  end
 end

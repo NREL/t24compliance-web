@@ -9,13 +9,13 @@
 # node.default['authorization']['sudo']['users'] = ["nlong", "kflemin"]
 
 # Add in NREL's UnixISO and rsa groups
-node.default['authorization']['sudo']['groups'] = ["wheel", "UnixISOServerAdmins", "rsa"]
+node.default['authorization']['sudo']['groups'] = %w(wheel UnixISOServerAdmins rsa)
 
 # set the sudoers files so that it has access to rbenv
 if node[:rbenv]
   secure_path = "#{node[:rbenv][:root_path]}/shims:#{node[:rbenv][:root_path]}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 else
-  secure_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  secure_path = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 end
 
 node.default['authorization']['sudo']['sudoers_defaults'] = [
@@ -45,7 +45,7 @@ end
 if node[:nginx]
   sudo 'deploy' do
     group 'deploy'
-    commands [ "#{node[:nginx][:binary]}", "/sbin/service nginx start", "/sbin/service nginx stop", "/sbin/service nginx restart", "/sbin/service nginx configtest", "/sbin/service nginx status"]
+    commands ["#{node[:nginx][:binary]}", '/sbin/service nginx start', '/sbin/service nginx stop', '/sbin/service nginx restart', '/sbin/service nginx configtest', '/sbin/service nginx status']
     nopasswd true
   end
 end

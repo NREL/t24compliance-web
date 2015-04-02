@@ -39,11 +39,12 @@ class SkylightsController < ApplicationController
   end
 
   private
-    def set_skylight
-      @skylight = Skylight.find(params[:id])
-    end
 
-    def skylight_params
-      params.require(:skylight).permit(:name, :status, :fenestration_construction_reference, :area)
-    end
+  def set_skylight
+    @skylight = Skylight.find(params[:id])
+  end
+
+  def skylight_params
+    params.require(:skylight).permit(:name, :status, :fenestration_construction_reference, :area)
+  end
 end

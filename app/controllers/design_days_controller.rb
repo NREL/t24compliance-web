@@ -39,11 +39,12 @@ class DesignDaysController < ApplicationController
   end
 
   private
-    def set_design_day
-      @design_day = DesignDay.find(params[:id])
-    end
 
-    def design_day_params
-      params.require(:design_day).permit(:name, :type, :design_dry_bulb, :design_dry_bulb_range, :coincident_wet_bulb, :wind_speed, :wind_direction, :sky_clearness, :month, :month_day)
-    end
+  def set_design_day
+    @design_day = DesignDay.find(params[:id])
+  end
+
+  def design_day_params
+    params.require(:design_day).permit(:name, :type, :design_dry_bulb, :design_dry_bulb_range, :coincident_wet_bulb, :wind_speed, :wind_direction, :sky_clearness, :month, :month_day)
+  end
 end

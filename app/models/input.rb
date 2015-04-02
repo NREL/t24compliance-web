@@ -1,7 +1,7 @@
 class Input
   include Mongoid::Document
 
-  field :name, type: String  #abbreviation
+  field :name, type: String  # abbreviation
   field :display_name, type: String
   field :parents, type: Array
   field :children, type: Array
@@ -9,7 +9,7 @@ class Input
   field :data_fields, type: Array
 
   def self.import_from_json(filename)
-    if File.exists?(filename)
+    if File.exist?(filename)
       json = MultiJson.load(File.read(filename), symbolize_keys: true)
 
       json.each do |input|

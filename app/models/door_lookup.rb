@@ -8,5 +8,4 @@ class DoorLookup
   field :certification_method, type: String
   field :u_factor, type: Float
   field :open, type: String
-
 end

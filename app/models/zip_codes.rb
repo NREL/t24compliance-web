@@ -5,5 +5,4 @@ class ZipCodes
 
   field :state, type: String
   field :zips, type: Array
-
 end

@@ -4,16 +4,16 @@ describe Project do
   before :all do
     Project.destroy_all
 
-    f = File.join(Rails.root,"spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
+    f = File.join(Rails.root, 'spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml')
     p = Project.from_sdd_xml(f)
   end
 
   it 'should load all test instances' do
-    d = File.join(Rails.root,"spec/files/cbecc_com_instances")
+    d = File.join(Rails.root, 'spec/files/cbecc_com_instances')
     Dir["#{d}/*.xml"].each do |f|
       puts f
       h = Hash.from_xml(File.read(f))
-      File.open("#{d}/#{File.basename(f,".*")}.json",'w') { |f| f << JSON.pretty_generate(h)}
+      File.open("#{d}/#{File.basename(f, '.*')}.json", 'w') { |f| f << JSON.pretty_generate(h) }
 
       p = Project.from_sdd_xml(f)
       expect(p).to_not be nil
@@ -26,7 +26,7 @@ describe Project do
 
     puts p.building.building_stories.inspect
 
-    expect(p.building.building_stories.first.name).to eq "Building Story 1"
+    expect(p.building.building_stories.first.name).to eq 'Building Story 1'
   end
 
   it 'should queue the model to run' do
@@ -34,7 +34,7 @@ describe Project do
     expect(p).not_to be nil
     expect(p.simulation).not_to be nil
     p.save!
-    
+
     p.simulation.run
   end
 

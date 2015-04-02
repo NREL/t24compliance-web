@@ -39,11 +39,12 @@ class DoorConstructionsController < ApplicationController
   end
 
   private
-    def set_door_construction
-      @door_construction = DoorConstruction.find(params[:id])
-    end
 
-    def door_construction_params
-      params.require(:door_construction).permit(:name, :type, :certification_method, :u_factor, :open)
-    end
+  def set_door_construction
+    @door_construction = DoorConstruction.find(params[:id])
+  end
+
+  def door_construction_params
+    params.require(:door_construction).permit(:name, :type, :certification_method, :u_factor, :open)
+  end
 end

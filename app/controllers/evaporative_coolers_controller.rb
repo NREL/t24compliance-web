@@ -39,11 +39,12 @@ class EvaporativeCoolersController < ApplicationController
   end
 
   private
-    def set_evaporative_cooler
-      @evaporative_cooler = EvaporativeCooler.find(params[:id])
-    end
 
-    def evaporative_cooler_params
-      params.require(:evaporative_cooler).permit(:name, :type, :effectiveness, :pump_power, :indirect_dew_point_effectiveness, :secondary_fan_flow_capacity, :secondary_fan_total_efficiency, :secondary_fan_total_static_pressure, :secondary_air_source)
-    end
+  def set_evaporative_cooler
+    @evaporative_cooler = EvaporativeCooler.find(params[:id])
+  end
+
+  def evaporative_cooler_params
+    params.require(:evaporative_cooler).permit(:name, :type, :effectiveness, :pump_power, :indirect_dew_point_effectiveness, :secondary_fan_flow_capacity, :secondary_fan_total_efficiency, :secondary_fan_total_static_pressure, :secondary_air_source)
+  end
 end

@@ -4,10 +4,10 @@
 # Recipe:: ruby
 #
 # Installs Ruby
-include_recipe "java"
+include_recipe 'java'
 
-include_recipe "rbenv"
-include_recipe "rbenv::ruby_build"
+include_recipe 'rbenv'
+include_recipe 'rbenv::ruby_build'
 
 # Set env variables as they are needed for openstudio linking to ruby
 ENV['RUBY_CONFIGURE_OPTS'] = '--enable-shared'

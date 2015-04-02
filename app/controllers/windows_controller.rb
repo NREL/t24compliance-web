@@ -39,11 +39,12 @@ class WindowsController < ApplicationController
   end
 
   private
-    def set_window
-      @window = Window.find(params[:id])
-    end
 
-    def window_params
-      params.require(:window).permit(:name, :status, :fenestration_construction_reference, :area)
-    end
+  def set_window
+    @window = Window.find(params[:id])
+  end
+
+  def window_params
+    params.require(:window).permit(:name, :status, :fenestration_construction_reference, :area)
+  end
 end

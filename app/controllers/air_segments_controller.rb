@@ -39,11 +39,12 @@ class AirSegmentsController < ApplicationController
   end
 
   private
-    def set_air_segment
-      @air_segment = AirSegment.find(params[:id])
-    end
 
-    def air_segment_params
-      params.require(:air_segment).permit(:name, :type, :path)
-    end
+  def set_air_segment
+    @air_segment = AirSegment.find(params[:id])
+  end
+
+  def air_segment_params
+    params.require(:air_segment).permit(:name, :type, :path)
+  end
 end

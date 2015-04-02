@@ -39,11 +39,12 @@ class CurveCubicsController < ApplicationController
   end
 
   private
-    def set_curve_cubic
-      @curve_cubic = CurveCubic.find(params[:id])
-    end
 
-    def curve_cubic_params
-      params.require(:curve_cubic).permit(:name, :curve_coefficient1, :curve_coefficient2, :curve_coefficient3, :curve_coefficient4, :curve_maximum_out, :curve_maximum_var1, :curve_minimum_out, :curve_minimum_var1)
-    end
+  def set_curve_cubic
+    @curve_cubic = CurveCubic.find(params[:id])
+  end
+
+  def curve_cubic_params
+    params.require(:curve_cubic).permit(:name, :curve_coefficient1, :curve_coefficient2, :curve_coefficient3, :curve_coefficient4, :curve_maximum_out, :curve_maximum_var1, :curve_minimum_out, :curve_minimum_var1)
+  end
 end

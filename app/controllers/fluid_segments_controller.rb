@@ -39,11 +39,12 @@ class FluidSegmentsController < ApplicationController
   end
 
   private
-    def set_fluid_segment
-      @fluid_segment = FluidSegment.find(params[:id])
-    end
 
-    def fluid_segment_params
-      params.require(:fluid_segment).permit(:name, :type, :source, :primary_segment_reference)
-    end
+  def set_fluid_segment
+    @fluid_segment = FluidSegment.find(params[:id])
+  end
+
+  def fluid_segment_params
+    params.require(:fluid_segment).permit(:name, :type, :source, :primary_segment_reference)
+  end
 end

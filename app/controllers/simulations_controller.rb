@@ -1,6 +1,6 @@
 class SimulationsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :project #the resource is project
+  load_and_authorize_resource :project # the resource is project
   before_action :set_simulation, only: [:show, :edit, :update, :destroy]
   before_action :set_project, only: [:bulk_sync]
 
@@ -78,7 +78,7 @@ class SimulationsController < ApplicationController
 
       respond_with @project.simulation
     else
-      fail "Could not find project to run"
+      fail 'Could not find project to run'
     end
 
     case clean_params[:data][:action]
@@ -112,7 +112,7 @@ class SimulationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def simulation_params
-    logger.info "validating parameters"
+    logger.info 'validating parameters'
     # params.require(:simulation).permit(:filename)
     params.permit(:building_id, :project_id, :id, data: [:action])
   end

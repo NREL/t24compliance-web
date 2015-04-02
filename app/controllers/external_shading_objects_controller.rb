@@ -39,11 +39,12 @@ class ExternalShadingObjectsController < ApplicationController
   end
 
   private
-    def set_external_shading_object
-      @external_shading_object = ExternalShadingObject.find(params[:id])
-    end
 
-    def external_shading_object_params
-      params.require(:external_shading_object).permit(:name, :status, :transmittance_schedule_reference, :solar_reflectance, :visible_reflectance)
-    end
+  def set_external_shading_object
+    @external_shading_object = ExternalShadingObject.find(params[:id])
+  end
+
+  def external_shading_object_params
+    params.require(:external_shading_object).permit(:name, :status, :transmittance_schedule_reference, :solar_reflectance, :visible_reflectance)
+  end
 end

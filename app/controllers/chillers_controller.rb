@@ -39,11 +39,12 @@ class ChillersController < ApplicationController
   end
 
   private
-    def set_chiller
-      @chiller = Chiller.find(params[:id])
-    end
 
-    def chiller_params
-      params.require(:chiller).permit(:name, :status, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :evaporator_has_bypass, :entering_temperature_design, :entering_temperature_rated, :leaving_temperature_design, :leaving_temperature_rated, :capacity_rated, :condenser_power_rated, :kw_per_ton, :eer, :cop, :iplv_kw_per_ton, :iplveer, :iplvcop, :unload_ratio_minimum, :part_load_ratio_minimum, :water_flow_capacity)
-    end
+  def set_chiller
+    @chiller = Chiller.find(params[:id])
+  end
+
+  def chiller_params
+    params.require(:chiller).permit(:name, :status, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :evaporator_has_bypass, :entering_temperature_design, :entering_temperature_rated, :leaving_temperature_design, :leaving_temperature_rated, :capacity_rated, :condenser_power_rated, :kw_per_ton, :eer, :cop, :iplv_kw_per_ton, :iplveer, :iplvcop, :unload_ratio_minimum, :part_load_ratio_minimum, :water_flow_capacity)
+  end
 end

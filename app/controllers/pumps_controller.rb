@@ -39,11 +39,12 @@ class PumpsController < ApplicationController
   end
 
   private
-    def set_pump
-      @pump = Pump.find(params[:id])
-    end
 
-    def pump_params
-      params.require(:pump).permit(:name, :status, :operation_control, :speed_control, :modeling_method, :count, :flow_capacity, :total_head, :flow_minimum, :minimum_speed_ratio, :motor_efficiency, :impeller_efficiency, :motor_hp)
-    end
+  def set_pump
+    @pump = Pump.find(params[:id])
+  end
+
+  def pump_params
+    params.require(:pump).permit(:name, :status, :operation_control, :speed_control, :modeling_method, :count, :flow_capacity, :total_head, :flow_minimum, :minimum_speed_ratio, :motor_efficiency, :impeller_efficiency, :motor_hp)
+  end
 end

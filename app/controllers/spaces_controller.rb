@@ -32,15 +32,14 @@ class SpacesController < ApplicationController
   # receives hash with form {project_id: ..., data: [array of spaces]}
   # updates spaces and related components
   def bulk_sync
-
     clean_params = spaces_params
     logger.info("CLEAN PARAMS: #{clean_params.inspect}")
     spaces_by_story = {}
 
     # add / update
-    if clean_params.has_key?('data')
+    if clean_params.key?('data')
       # process spaces grouped by story
-      spaces_by_story = clean_params['data'].group_by{|d| d['building_story_id']}
+      spaces_by_story = clean_params['data'].group_by { |d| d['building_story_id'] }
       logger.info("SPACES BY STORY: #{spaces_by_story}")
       spaces_by_story.each do |story, spaces|
         logger.info("PROCESSING STORY: #{story}")
@@ -52,7 +51,7 @@ class SpacesController < ApplicationController
           # extract interior_lighting_systems
           lighting_systems = space.extract!('interior_lighting_systems')['interior_lighting_systems'] || []
           lighting_systems.each do |sys|
-            if sys.has_key?('id') and !sys['id'].nil?
+            if sys.key?('id') && !sys['id'].nil?
               # update
               @sys = InteriorLightingSystem.find(sys['id'])
               @sys.update(sys)
@@ -62,25 +61,23 @@ class SpacesController < ApplicationController
               @sys.save
             end
 
-            #add to lighting systems for this space
+            # add to lighting systems for this space
             space_light_systems << @sys
-
           end
 
           # extract surfaces
           surfaces = space.extract!('surfaces')['surfaces'] || []
 
-          surfs = {interior_walls: [], exterior_walls: [], underground_walls: [], roofs: [], interior_floors: [], exterior_floors: [], underground_floors: []}
+          surfs = { interior_walls: [], exterior_walls: [], underground_walls: [], roofs: [], interior_floors: [], exterior_floors: [], underground_floors: [] }
           logger.info("#{surfaces.size} surfaces")
           surfaces.each do |surface|
             logger.info("Processing surface: #{surface.inspect}")
-            subs = {doors: [], windows: [], skylights: []}
+            subs = { doors: [], windows: [], skylights: [] }
             sub_surfaces = surface.extract!('subsurfaces')['subsurfaces'] || []
             logger.info("subsurfaces for #{surface['name']} are: #{sub_surfaces.inspect}")
 
             sub_surfaces.each do |sub|
-
-              sub_klass = Object::const_get(sub['type'])
+              sub_klass = Object.const_get(sub['type'])
               sub_type = sub['type']
 
               # TODO: handle construction
@@ -90,10 +87,10 @@ class SpacesController < ApplicationController
               # remove invalid attributes
               sub.extract!('type')
               # delete nil keys in case they are invalid for this subsurface type
-              sub.delete_if {|k, v| v.nil?}
+              sub.delete_if { |k, v| v.nil? }
               logger.info("CLEAN subsurface: #{sub.inspect}")
 
-              if sub.has_key?('id') and !sub['id'].nil?
+              if sub.key?('id') && !sub['id'].nil?
                 # update
                 @sub = sub_klass.find(sub['id'])
                 @sub.update(sub)
@@ -103,7 +100,7 @@ class SpacesController < ApplicationController
                 @sub.save
               end
               # add to subsurfaces for this surface
-              subs[sub_type.gsub(' ','_').downcase.pluralize.to_sym] << @sub
+              subs[sub_type.gsub(' ', '_').downcase.pluralize.to_sym] << @sub
             end
 
             surface_type = surface['surface_type']
@@ -118,12 +115,11 @@ class SpacesController < ApplicationController
             surface.extract!('boundary')
             surface.extract!('type')
             # delete all nil values to remove values that are invalid for certain surfaces
-            surface.delete_if {|k, v| v.nil? }
+            surface.delete_if { |k, v| v.nil? }
             logger.info("CLEAN surface: #{surface.inspect}")
 
-
-            klass = Object::const_get(surface_type.gsub(' ', ''))
-            if surface.has_key?('id') and !surface['id'].nil?
+            klass = Object.const_get(surface_type.gsub(' ', ''))
+            if surface.key?('id') && !surface['id'].nil?
               # update
               @surf = klass.find(surface['id'])
               @surf.update(surface)
@@ -145,9 +141,9 @@ class SpacesController < ApplicationController
               @surf.doors = subs[:doors]
             end
 
-            #subs.each do |sub_name, sub_array|
+            # subs.each do |sub_name, sub_array|
             #  @surf[sub_name.to_sym] = sub_array unless sub_array.empty?
-            #end
+            # end
 
             @surf.save
             # add to surfaces for this space
@@ -155,7 +151,7 @@ class SpacesController < ApplicationController
           end
 
           # save the space with related surfaces
-          if space.has_key?('id') and !space['id'].nil?
+          if space.key?('id') && !space['id'].nil?
             # update
             @space = Space.find(space['id'])
             @space.update(space)
@@ -166,9 +162,9 @@ class SpacesController < ApplicationController
           end
 
           # can't get loop to work, so explicitly setting them
-          #surfs.each do |surf_name, surf_array|
+          # surfs.each do |surf_name, surf_array|
           #  @space[surf_name.to_sym] = surf_array
-          #end
+          # end
           @space.interior_walls = surfs[:interior_walls]
           @space.exterior_walls = surfs[:exterior_walls]
           @space.underground_walls = surfs[:underground_walls]
@@ -186,7 +182,6 @@ class SpacesController < ApplicationController
         @story = BuildingStory.find(story)
         @story.spaces = story_spaces
         @story.save
-
       end
 
     end
@@ -194,7 +189,7 @@ class SpacesController < ApplicationController
     # iterate through stories to catch special case where all spaces should be deleted
     @building.building_stories.each do |story|
       # look for key matching building_story_id
-      if !spaces_by_story.has_key?("#{story.id}") or !clean_params.has_key?('data')
+      if !spaces_by_story.key?("#{story.id}") || !clean_params.key?('data')
         story.spaces = []
         story.save
       end
@@ -202,7 +197,6 @@ class SpacesController < ApplicationController
 
     # TODO: add error handling?!
     respond_with Space.new
-
   end
 
   def update
@@ -217,15 +211,15 @@ class SpacesController < ApplicationController
 
   private
 
-    def set_building
-      @building = (params[:building_id].present?) ? Building.find(params[:building_id]) : nil
-    end
+  def set_building
+    @building = (params[:building_id].present?) ? Building.find(params[:building_id]) : nil
+  end
 
-    def set_space
-      @space = Space.find(params[:id])
-    end
+  def set_space
+    @space = Space.find(params[:id])
+  end
 
-    def spaces_params
-      params.permit(:project_id, :building_id, data: [:id, :building_story_id, :name, :status, :conditioning_type, :supply_plenum_space_reference, :return_plenum_space_reference, :thermal_zone_reference, :area, :floor_area, :floor_z, :floor_to_ceiling_height, :volume, :space_function_defaults_reference, :space_function, :function_schedule_group, :occupant_density, :occupant_sensible_heat_rate, :occupant_latent_heat_rate, :occupant_schedule_reference, :infiltration_method, :design_infiltration_rate, :infiltration_schedule_reference, :infiltration_model_coefficient_a, :infiltration_model_coefficient_b, :infiltration_model_coefficient_c, :infiltration_model_coefficient_d, :envelope_status, :lighting_status, :interior_lighting_specification_method, :interior_lighting_power_density_regulated, :interior_lighting_regulated_schedule_reference, :interior_lighting_regulated_heat_gain_space_fraction, :interior_lighting_regulated_heat_gain_radiant_fraction, :interior_lighting_power_density_non_regulated, :interior_lighting_non_regulated_schedule_reference, :interior_lighting_non_regulated_heat_gain_space_fraction, :interior_lighting_non_regulated_heat_gain_radiant_fraction, :skylit_daylighting_installed_lighting_power, :primary_side_daylighting_installed_lighting_power, :secondary_side_daylighting_installed_lighting_power, :skylit100_percent_controlled, :primary_sidelit100_percent_controlled, :secondary_sidelit100_percent_controlled, :skylit_daylighting_reference_point_coordinate, :skylit_daylighting_controlled_lighting_power, :skylit_daylighting_control_lighting_fraction, :skylit_daylighting_illuminance_set_point, :primary_side_daylighting_reference_point_coordinate, :primary_side_daylighting_controlled_lighting_power, :primary_side_daylighting_control_lighting_fraction, :primary_side_daylighting_illuminance_set_point, :secondary_side_daylighting_reference_point_coordinate, :secondary_side_daylighting_controlled_lighting_power, :secondary_side_daylighting_control_lighting_fraction, :secondary_side_daylighting_illuminance_set_point, :daylighting_control_type, :minimum_dimming_light_fraction, :minimum_dimming_power_fraction, :number_of_control_steps, :glare_azimuth, :maximum_glare_index, :skylight_requirement_exception, :skylight_requirement_exception_area, :skylight_requirement_exception_fraction, :receptacle_power_density, :receptacle_schedule_reference, :receptacle_radiation_fraction, :receptacle_latent_fraction, :receptacle_lost_fraction, :gas_equipment_power_density, :gas_equipment_schedule_reference, :gas_equipment_radiation_fraction, :gas_equipment_latent_fraction, :gas_equipment_lost_fraction, :process_electrical_power_density, :process_electrical_schedule_reference, :process_electrical_radiation_fraction, :process_electrical_latent_fraction, :process_electrical_lost_fraction, :process_gas_power_density, :process_gas_schedule_reference, :process_gas_radiation_fraction, :process_gas_latent_fraction, :process_gas_lost_fraction, :commercial_refrigeration_epd, :commercial_refrigeration_equipment_schedule_reference, :commercial_refrigeration_radiation_fraction, :commercial_refrigeration_latent_fraction, :commercial_refrigeration_lost_fraction, :elevator_count, :elevator_power, :elevator_schedule_reference, :elevator_radiation_fraction, :elevator_latent_fraction, :elevator_lost_fraction, :escalator_count, :escalator_power, :escalator_schedule_reference, :escalator_radiation_fraction, :escalator_latent_fraction, :escalator_lost_fraction, :shw_fluid_segment_reference, :recirculation_dhw_system_reference, :hot_water_heating_rate, :recirculation_hot_water_heating_rate, :hot_water_heating_schedule_reference, :ventilation_per_person, :ventilation_per_area, :ventilation_air_changes_per_hour, :ventilation_per_space, :exhaust_per_area, :exhaust_air_changes_per_hour, :exhaust_per_space, :kitchen_exhaust_hood_length, :kitchen_exhaust_hood_style, :kitchen_exhaust_hood_duty, :kitchen_exhaust_hood_flow, :lab_exhaust_rate_type, :interior_lighting_power_density_prescriptive, :is_plenum_return, :high_rise_residential_integer, :high_rise_residential_conditioned_floor_area, :baseline_receptacle_power_density, :baseline_receptacle_schedule_reference, :receptacle_power_exceptional_condition, :baseline_gas_equipment_power_density, :baseline_gas_equipment_schedule_reference, :gas_equipment_power_density_exceptional_condition, :baseline_commercial_refrigeration_epd, :baseline_commercial_refrigeration_equipment_schedule_reference, :commercial_refrigeration_epd_exceptional_condition, interior_lighting_systems: [:id, :name, :status, :parent_space_function, :power_regulated, :non_regulated_exclusion, { :luminaire_reference => []}, {:luminaire_count => []}, :area_category_allowance_type, :allowance_length, :allowance_area, :tailored_method_allowance_type, :power_adjustment_factor_credit_type, :luminaire_mounting_height, :work_plane_height, :daylit_area_type], surfaces: [:id, :name, :construction_library_id, :adjacent_space_reference, :surface_type, :area, :azimuth, :boundary, :construction, :perimeter_exposed, :tilt, :type, :height, subsurfaces: [:id, :name, :construction_library_id, :area, :construction, :type]]])
-    end
+  def spaces_params
+    params.permit(:project_id, :building_id, data: [:id, :building_story_id, :name, :status, :conditioning_type, :supply_plenum_space_reference, :return_plenum_space_reference, :thermal_zone_reference, :area, :floor_area, :floor_z, :floor_to_ceiling_height, :volume, :space_function_defaults_reference, :space_function, :function_schedule_group, :occupant_density, :occupant_sensible_heat_rate, :occupant_latent_heat_rate, :occupant_schedule_reference, :infiltration_method, :design_infiltration_rate, :infiltration_schedule_reference, :infiltration_model_coefficient_a, :infiltration_model_coefficient_b, :infiltration_model_coefficient_c, :infiltration_model_coefficient_d, :envelope_status, :lighting_status, :interior_lighting_specification_method, :interior_lighting_power_density_regulated, :interior_lighting_regulated_schedule_reference, :interior_lighting_regulated_heat_gain_space_fraction, :interior_lighting_regulated_heat_gain_radiant_fraction, :interior_lighting_power_density_non_regulated, :interior_lighting_non_regulated_schedule_reference, :interior_lighting_non_regulated_heat_gain_space_fraction, :interior_lighting_non_regulated_heat_gain_radiant_fraction, :skylit_daylighting_installed_lighting_power, :primary_side_daylighting_installed_lighting_power, :secondary_side_daylighting_installed_lighting_power, :skylit100_percent_controlled, :primary_sidelit100_percent_controlled, :secondary_sidelit100_percent_controlled, :skylit_daylighting_reference_point_coordinate, :skylit_daylighting_controlled_lighting_power, :skylit_daylighting_control_lighting_fraction, :skylit_daylighting_illuminance_set_point, :primary_side_daylighting_reference_point_coordinate, :primary_side_daylighting_controlled_lighting_power, :primary_side_daylighting_control_lighting_fraction, :primary_side_daylighting_illuminance_set_point, :secondary_side_daylighting_reference_point_coordinate, :secondary_side_daylighting_controlled_lighting_power, :secondary_side_daylighting_control_lighting_fraction, :secondary_side_daylighting_illuminance_set_point, :daylighting_control_type, :minimum_dimming_light_fraction, :minimum_dimming_power_fraction, :number_of_control_steps, :glare_azimuth, :maximum_glare_index, :skylight_requirement_exception, :skylight_requirement_exception_area, :skylight_requirement_exception_fraction, :receptacle_power_density, :receptacle_schedule_reference, :receptacle_radiation_fraction, :receptacle_latent_fraction, :receptacle_lost_fraction, :gas_equipment_power_density, :gas_equipment_schedule_reference, :gas_equipment_radiation_fraction, :gas_equipment_latent_fraction, :gas_equipment_lost_fraction, :process_electrical_power_density, :process_electrical_schedule_reference, :process_electrical_radiation_fraction, :process_electrical_latent_fraction, :process_electrical_lost_fraction, :process_gas_power_density, :process_gas_schedule_reference, :process_gas_radiation_fraction, :process_gas_latent_fraction, :process_gas_lost_fraction, :commercial_refrigeration_epd, :commercial_refrigeration_equipment_schedule_reference, :commercial_refrigeration_radiation_fraction, :commercial_refrigeration_latent_fraction, :commercial_refrigeration_lost_fraction, :elevator_count, :elevator_power, :elevator_schedule_reference, :elevator_radiation_fraction, :elevator_latent_fraction, :elevator_lost_fraction, :escalator_count, :escalator_power, :escalator_schedule_reference, :escalator_radiation_fraction, :escalator_latent_fraction, :escalator_lost_fraction, :shw_fluid_segment_reference, :recirculation_dhw_system_reference, :hot_water_heating_rate, :recirculation_hot_water_heating_rate, :hot_water_heating_schedule_reference, :ventilation_per_person, :ventilation_per_area, :ventilation_air_changes_per_hour, :ventilation_per_space, :exhaust_per_area, :exhaust_air_changes_per_hour, :exhaust_per_space, :kitchen_exhaust_hood_length, :kitchen_exhaust_hood_style, :kitchen_exhaust_hood_duty, :kitchen_exhaust_hood_flow, :lab_exhaust_rate_type, :interior_lighting_power_density_prescriptive, :is_plenum_return, :high_rise_residential_integer, :high_rise_residential_conditioned_floor_area, :baseline_receptacle_power_density, :baseline_receptacle_schedule_reference, :receptacle_power_exceptional_condition, :baseline_gas_equipment_power_density, :baseline_gas_equipment_schedule_reference, :gas_equipment_power_density_exceptional_condition, :baseline_commercial_refrigeration_epd, :baseline_commercial_refrigeration_equipment_schedule_reference, :commercial_refrigeration_epd_exceptional_condition, interior_lighting_systems: [:id, :name, :status, :parent_space_function, :power_regulated, :non_regulated_exclusion, { luminaire_reference: [] }, { luminaire_count: [] }, :area_category_allowance_type, :allowance_length, :allowance_area, :tailored_method_allowance_type, :power_adjustment_factor_credit_type, :luminaire_mounting_height, :work_plane_height, :daylit_area_type], surfaces: [:id, :name, :construction_library_id, :adjacent_space_reference, :surface_type, :area, :azimuth, :boundary, :construction, :perimeter_exposed, :tilt, :type, :height, subsurfaces: [:id, :name, :construction_library_id, :area, :construction, :type]]])
+  end
 end

@@ -39,11 +39,12 @@ class CurveDoubleQuadraticsController < ApplicationController
   end
 
   private
-    def set_curve_double_quadratic
-      @curve_double_quadratic = CurveDoubleQuadratic.find(params[:id])
-    end
 
-    def curve_double_quadratic_params
-      params.require(:curve_double_quadratic).permit(:name, :curve_coefficient1, :curve_coefficient2, :curve_coefficient3, :curve_coefficient4, :curve_coefficient5, :curve_coefficient6, :curve_maximum_out, :curve_maximum_var1, :curve_maximum_var2, :curve_minimum_out, :curve_minimum_var1, :curve_minimum_var2)
-    end
+  def set_curve_double_quadratic
+    @curve_double_quadratic = CurveDoubleQuadratic.find(params[:id])
+  end
+
+  def curve_double_quadratic_params
+    params.require(:curve_double_quadratic).permit(:name, :curve_coefficient1, :curve_coefficient2, :curve_coefficient3, :curve_coefficient4, :curve_coefficient5, :curve_coefficient6, :curve_maximum_out, :curve_maximum_var1, :curve_maximum_var2, :curve_minimum_out, :curve_minimum_var1, :curve_minimum_var2)
+  end
 end

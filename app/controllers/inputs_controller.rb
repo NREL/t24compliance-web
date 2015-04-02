@@ -2,7 +2,6 @@ class InputsController < ApplicationController
   load_and_authorize_resource
 
   def dashboard
-
   end
 
   def index
@@ -10,7 +9,7 @@ class InputsController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render :json => @inputs.as_json
+        render json: @inputs.as_json
       end
       format.html
     end
@@ -20,14 +19,13 @@ class InputsController < ApplicationController
     @input = Input.find(params[:id])
     respond_to do |format|
       format.json do
-        render :json => @input.as_json
+        render json: @input.as_json
       end
       format.html
     end
   end
 
   def datafields
-  
     @input = Input.find(params[:input_id])
 
     # save changes
@@ -35,13 +33,13 @@ class InputsController < ApplicationController
 
       @input.data_fields.each do |df|
         # save added fields
-        if params[:remove_fields] and params[:remove_fields].include? df['name']
+        if params[:remove_fields] && params[:remove_fields].include?(df['name'])
           df['remove'] = true
         else
-          df['remove'] = false 
+          df['remove'] = false
         end
 
-        if params[:set_as_constant_fields] and params[:set_as_constant_fields].include? df['name']
+        if params[:set_as_constant_fields] && params[:set_as_constant_fields].include?(df['name'])
           df['set_as_constant'] = true
         else
           df['set_as_constant'] = false
@@ -50,7 +48,6 @@ class InputsController < ApplicationController
         df['constant_value'] = params[df['name'] + '_constant']
         df['comments'] = params[df['name'] + '_comments']
         df['conditional_control_field'] = params[df['name'] + '_cond_control']
-
       end
       @input.save!
     end
@@ -58,6 +55,5 @@ class InputsController < ApplicationController
     respond_to do |format|
       format.html
     end
-
   end
 end

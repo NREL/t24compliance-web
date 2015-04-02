@@ -1,11 +1,11 @@
 namespace :code_gen do
-  desc "test code generation"
-  task :test_run => :environment do
+  desc 'test code generation'
+  task test_run: :environment do
     `rails g scaffold ExampleModel --no-helper --no-assets --no-test-framework`
   end
 
-  desc "generate scaffold from inputs"
-  task :generate_scaffolds => :environment do
+  desc 'generate scaffold from inputs'
+  task generate_scaffolds: :environment do
     scaffolds = inputs_to_scaffold
 
     # for each scaffold do:
@@ -20,7 +20,6 @@ namespace :code_gen do
       num = 0
       # get fields (in a string name: type)
       input.data_fields.each do |df|
-
         # only create fields not marked as 'remove'
         unless df['remove']
           num += 1
@@ -32,14 +31,14 @@ namespace :code_gen do
             data_type = df['data_type'].downcase
           end
 
-          fields_str = fields_str + ", #{df[:db_field_name]}:#{data_type}"
+          fields_str += ", #{df[:db_field_name]}:#{data_type}"
         end
       end
 
       puts "Generating scaffold for #{controller_name} with #{num} fields"
 
       # call generate scaffold  (use -f to force/overwrite)
-      #output = `rails g scaffold #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
+      # output = `rails g scaffold #{controller_name} #{fields_str} --force --no-helper --no-assets --no-test-framework`
 
       # only generate models now
       method = "rails g model #{controller_name.singularize} #{fields_str} --force --no-helper --no-assets --no-test-framework"
@@ -51,8 +50,8 @@ namespace :code_gen do
     end
   end
 
-  desc "add enums, timestamps, and relationships to model.rb"
-  task :add_model_extras => :environment do
+  desc 'add enums, timestamps, and relationships to model.rb'
+  task add_model_extras: :environment do
     scaffolds = inputs_to_scaffold
     scaffolds.each do |s|
       input = Input.find_by(name: s)
@@ -61,9 +60,9 @@ namespace :code_gen do
       singularized_filename = input.display_name.singularize.underscore
 
       # catch unique cases where it is okay
-      #unless input.display_name == 'space_function_defaults'
+      # unless input.display_name == 'space_function_defaults'
       #  singularized_filename = singularized_filename.singularize.underscore
-      #end
+      # end
 
       File.open("#{Rails.root}/app/models/#{singularized_filename}-tmp.rb", 'w') do |out| # 'w' for a new file, 'a' append to existing
         File.open("#{Rails.root}/app/models/#{singularized_filename}.rb", 'r') do |f|
@@ -113,7 +112,6 @@ namespace :code_gen do
         # add call backs
         out.write(generate_call_backs(input))
 
-
         # write enums
         enums = generate_enumerations(input)
         enums.each do |e|
@@ -130,32 +128,32 @@ namespace :code_gen do
     end
   end
 
-  desc "save a test project"
-  task :test => :environment do
-    f = File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")
+  desc 'save a test project'
+  task test: :environment do
+    f = File.join(Rails.root, 'spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml')
     p = Project.from_sdd_xml(f)
     puts p.to_sdd_xml
   end
 
-  desc "run scaffold and model extras"
-  task :generate => [:generate_scaffolds, :add_model_extras]
+  desc 'run scaffold and model extras'
+  task generate: [:generate_scaffolds, :add_model_extras]
 
   # HELPER METHODS
 
   # list of inputs to scaffold. Select one of the other.
   def inputs_to_scaffold
-    #['Proj', 'FluidSys', 'Story', 'Spc']
-    Input.all.map { |i| i.name }
+    # ['Proj', 'FluidSys', 'Story', 'Spc']
+    Input.all.map(&:name)
   end
 
   def mongoid_timestamps
-    "#{' '*2}include Mongoid::Timestamps\n\n"
+    "#{' ' * 2}include Mongoid::Timestamps\n\n"
   end
 
   # used by generate_xml_fields_list and generate_sdd_xml
   def xml_fields(input)
     xml_fields = []
-    xml_fields << {db_field_name: 'name', xml_field_name: 'Name'}
+    xml_fields << { db_field_name: 'name', xml_field_name: 'Name' }
 
     input.data_fields.each do |df|
       f_hash = {}
@@ -191,28 +189,28 @@ namespace :code_gen do
   end
 
   def generate_xml_fields_list(input)
-    xml_str = "\n#{' '*2}def self.xml_fields\n"
-    xml_str = xml_str + "#{' '*4}xml_fields = [\n"
+    xml_str = "\n#{' ' * 2}def self.xml_fields\n"
+    xml_str += "#{' ' * 4}xml_fields = [\n"
 
     xml_fields = xml_fields(input)
     unless xml_fields.nil? || xml_fields.empty?
-      xml_str = xml_str + "#{' '*6}" + xml_fields.join(",\n#{' '*6}")
+      xml_str = xml_str + "#{' ' * 6}" + xml_fields.join(",\n#{' ' * 6}")
     end
-    xml_str = xml_str + "\n#{' '*4}]\n"
-    xml_str = xml_str + "#{' '*2}end\n\n"
+    xml_str += "\n#{' ' * 4}]\n"
+    xml_str += "#{' ' * 2}end\n\n"
   end
 
   def generate_children(input)
-    kids_str = "\n#{' '*2}def self.children_models\n"
-    kids_str = kids_str + "#{' '*4}children = [\n"
+    kids_str = "\n#{' ' * 2}def self.children_models\n"
+    kids_str += "#{' ' * 4}children = [\n"
     kids = children(input)
     unless kids.nil? || kids.empty?
       kids.each do |k|
-        kids_str = kids_str + "#{' '*6} { model_name: '#{k['model_name']}', xml_name: '#{k['xml_name']}' },\n"
+        kids_str += "#{' ' * 6} { model_name: '#{k['model_name']}', xml_name: '#{k['xml_name']}' },\n"
       end
       kids_str = kids_str.chop.chop
     end
-    kids_str = kids_str + "\n#{' '*4}]\n#{' '*2}end\n"
+    kids_str += "\n#{' ' * 4}]\n#{' ' * 2}end\n"
   end
 
   def generate_sdd_xml(input)
@@ -445,7 +443,7 @@ namespace :code_gen do
 
   def generate_call_backs(input)
     if input.name == 'Proj'
-      %{
+      %(
   protected
 
   def build_model
@@ -456,7 +454,7 @@ namespace :code_gen do
 
     true
   end
-      }
+            )
     end
   end
 
@@ -466,7 +464,7 @@ namespace :code_gen do
     unless input.parents.nil?
       input.parents.each do |p|
         model = Input.find_by(name: p)
-        relations_str = relations_str + "  belongs_to :#{model.display_name.singularize.underscore}\n"
+        relations_str += "  belongs_to :#{model.display_name.singularize.underscore}\n"
       end
     end
 
@@ -485,11 +483,11 @@ namespace :code_gen do
     relationships = add_missing_relationships
     relationships.each do |r|
       if r['name'] == input.display_name.singularize.underscore
-        relations_str = relations_str + "  " + r['relation'] + "\n"
+        relations_str = relations_str + '  ' + r['relation'] + "\n"
       end
     end
 
-    relations_str = relations_str + "\n"
+    relations_str += "\n"
   end
 
   def generate_indexes(input)
@@ -508,34 +506,34 @@ namespace :code_gen do
 
   def generate_call_back_defs(input)
     if input.name == 'Proj'
-      %{
+      %(
   # callbacks
   before_create :build_model
-      }
+            )
     end
   end
 
   def add_missing_relationships
     # model to apply to => relationship to add
     [
-        {'name' => 'building', 'relation' => "belongs_to :project"},
-        {'name' => 'schedule_day', 'relation' => "belongs_to :project"},
-        {'name' => 'schedule_week', 'relation' => "belongs_to :project"},
-        {'name' => 'schedule', 'relation' => "belongs_to :project"},
-        {'name' => 'construct_assembly', 'relation' => "belongs_to :project"},
-        {'name' => 'material', 'relation' => "belongs_to :project"},
-        {'name' => 'fenestration_construction', 'relation' => "belongs_to :project"},
-        {'name' => 'door_construction', 'relation' => "belongs_to :project"},
-        {'name' => 'space_function_default', 'relation' => "belongs_to :project"},
-        {'name' => 'luminaire', 'relation' => "belongs_to :project"},
-        {'name' => 'curve_linear', 'relation' => "belongs_to :project"},
-        {'name' => 'curve_quadratic', 'relation' => "belongs_to :project"},
-        {'name' => 'curve_cubic', 'relation' => "belongs_to :project"},
-        {'name' => 'curve_double_quadratic', 'relation' => "belongs_to :project"},
-        {'name' => 'external_shading_object', 'relation' => "belongs_to :project"},
-        {'name' => 'fluid_system', 'relation' => "belongs_to :project"},
-        {'name' => 'project', 'relation' => "has_one :simulation, dependent: :destroy"},
-        {'name' => 'project', 'relation' => "belongs_to :user"}
+      { 'name' => 'building', 'relation' => 'belongs_to :project' },
+      { 'name' => 'schedule_day', 'relation' => 'belongs_to :project' },
+      { 'name' => 'schedule_week', 'relation' => 'belongs_to :project' },
+      { 'name' => 'schedule', 'relation' => 'belongs_to :project' },
+      { 'name' => 'construct_assembly', 'relation' => 'belongs_to :project' },
+      { 'name' => 'material', 'relation' => 'belongs_to :project' },
+      { 'name' => 'fenestration_construction', 'relation' => 'belongs_to :project' },
+      { 'name' => 'door_construction', 'relation' => 'belongs_to :project' },
+      { 'name' => 'space_function_default', 'relation' => 'belongs_to :project' },
+      { 'name' => 'luminaire', 'relation' => 'belongs_to :project' },
+      { 'name' => 'curve_linear', 'relation' => 'belongs_to :project' },
+      { 'name' => 'curve_quadratic', 'relation' => 'belongs_to :project' },
+      { 'name' => 'curve_cubic', 'relation' => 'belongs_to :project' },
+      { 'name' => 'curve_double_quadratic', 'relation' => 'belongs_to :project' },
+      { 'name' => 'external_shading_object', 'relation' => 'belongs_to :project' },
+      { 'name' => 'fluid_system', 'relation' => 'belongs_to :project' },
+      { 'name' => 'project', 'relation' => 'has_one :simulation, dependent: :destroy' },
+      { 'name' => 'project', 'relation' => 'belongs_to :user' }
 
     ]
   end
@@ -546,18 +544,17 @@ namespace :code_gen do
 
     # find enums
     input.data_fields.each do |df|
-
       # find enumerations
       if df['data_type'] == 'Enumeration'
-        if !df['remove'] and !df['set_as_constant']
+        if !df['remove'] && !df['set_as_constant']
           unless df['enumerations'].nil?
-            method_str = "\n#{' '*2}def #{df[:db_field_name]}_enums\n#{' '*4}[\n"
+            method_str = "\n#{' ' * 2}def #{df[:db_field_name]}_enums\n#{' ' * 4}[\n"
 
             df['enumerations'].each do |e|
-              method_str = method_str + "#{' '*6}'#{e['name']}',\n"
+              method_str += "#{' ' * 6}'#{e['name']}',\n"
             end
             method_str = method_str.chop.chop
-            method_str = method_str + "\n#{' '*4}]\n#{' '*2}end\n"
+            method_str += "\n#{' ' * 4}]\n#{' ' * 2}end\n"
             enums << method_str
           end
         end

@@ -39,11 +39,12 @@ class UndergroundFloorsController < ApplicationController
   end
 
   private
-    def set_underground_floor
-      @underground_floor = UndergroundFloor.find(params[:id])
-    end
 
-    def underground_floor_params
-      params.require(:underground_floor).permit(:name, :status, :construct_assembly_reference, :area, :perimeter_exposed, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
-    end
+  def set_underground_floor
+    @underground_floor = UndergroundFloor.find(params[:id])
+  end
+
+  def underground_floor_params
+    params.require(:underground_floor).permit(:name, :status, :construct_assembly_reference, :area, :perimeter_exposed, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
+  end
 end

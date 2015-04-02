@@ -39,11 +39,12 @@ class OutsideAirControlsController < ApplicationController
   end
 
   private
-    def set_outside_air_control
-      @outside_air_control = OutsideAirControl.find(params[:id])
-    end
 
-    def outside_air_control_params
-      params.require(:outside_air_control).permit(:name, :economizer_control_method, :economizer_integration, :economizer_high_temperature_lockout, :economizer_low_temperature_lockout, :air_segment_supply_reference, :air_segment_return_reference)
-    end
+  def set_outside_air_control
+    @outside_air_control = OutsideAirControl.find(params[:id])
+  end
+
+  def outside_air_control_params
+    params.require(:outside_air_control).permit(:name, :economizer_control_method, :economizer_integration, :economizer_high_temperature_lockout, :economizer_low_temperature_lockout, :air_segment_supply_reference, :air_segment_return_reference)
+  end
 end

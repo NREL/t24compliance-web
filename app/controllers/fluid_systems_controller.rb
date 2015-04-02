@@ -1,6 +1,6 @@
 class FluidSystemsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource :project #the resource is project
+  load_and_authorize_resource :project # the resource is project
   before_action :set_fluid_system, only: [:show, :edit, :update, :destroy]
   before_action :get_project, only: [:index, :update, :create, :bulk_sync]
   before_action :get_building, only: [:bulk_sync]
@@ -38,7 +38,7 @@ class FluidSystemsController < ApplicationController
 
     # add / update
     systems = []
-    if clean_params.has_key?('data')
+    if clean_params.key?('data')
       clean_params[:data].each do |rec|
         logger.info("REC: #{rec.inspect}")
         fluid_segments = []
@@ -52,7 +52,7 @@ class FluidSystemsController < ApplicationController
         logger.info("FLUID SEGMENTS: #{fluid_segs.inspect}")
         fluid_segs.each do |seg|
           logger.info("SEG: #{seg}")
-          if seg.has_key?('id') and !seg['id'].nil?
+          if seg.key?('id') && !seg['id'].nil?
             @seg = FluidSegment.find(seg['id'])
             @seg.update(seg)
           else
@@ -77,7 +77,7 @@ class FluidSystemsController < ApplicationController
             pumps = []
             # get associated pump first
             pump = b.extract!('pump')['pump']
-            if pump.has_key?('id') and !pump['id'].nil?
+            if pump.key?('id') && !pump['id'].nil?
               @pump = Pump.find(pump['id'])
               @pump.update(pump)
             else
@@ -86,7 +86,7 @@ class FluidSystemsController < ApplicationController
             end
             pumps << @pump
             # then process boiler
-            if b.has_key?('id') and !b['id'].nil?
+            if b.key?('id') && !b['id'].nil?
               @b = Boiler.find(b['id'])
               @b.update(b)
             else
@@ -105,7 +105,7 @@ class FluidSystemsController < ApplicationController
             pumps = []
             # get associated pump first
             pump = c.extract!('pump')['pump']
-            if pump.has_key?('id') and !pump['id'].nil?
+            if pump.key?('id') && !pump['id'].nil?
               @pump = Pump.find(pump['id'])
               @pump.update(pump)
             else
@@ -114,7 +114,7 @@ class FluidSystemsController < ApplicationController
             end
             pumps << @pump
             # then process boiler
-            if c.has_key?('id') and !c['id'].nil?
+            if c.key?('id') && !c['id'].nil?
               @c = Chiller.find(c['id'])
               @c.update(c)
             else
@@ -133,7 +133,7 @@ class FluidSystemsController < ApplicationController
             pumps = []
             # get associated pump first
             pump = r.extract!('pump')['pump']
-            if pump.has_key?('id') and !pump['id'].nil?
+            if pump.key?('id') && !pump['id'].nil?
               @pump = Pump.find(pump['id'])
               @pump.update(pump)
             else
@@ -142,7 +142,7 @@ class FluidSystemsController < ApplicationController
             end
             pumps << @pump
             # then process boiler
-            if r.has_key?('id') and !r['id'].nil?
+            if r.key?('id') && !r['id'].nil?
               @r = HeatRejection.find(r['id'])
               @r.update(r)
             else
@@ -158,7 +158,7 @@ class FluidSystemsController < ApplicationController
 
         unless water_heater.nil?
           heaters = []
-          if water_heater.has_key?('id') and !water_heater['id'].nil?
+          if water_heater.key?('id') && !water_heater['id'].nil?
             @water_heater = WaterHeater.find(water_heater['id'])
             @water_heater.update(water_heater)
           else
@@ -169,7 +169,7 @@ class FluidSystemsController < ApplicationController
         end
 
         # now save actual fluid_system
-        if rec.has_key?('id') and !rec['id'].nil?
+        if rec.key?('id') && !rec['id'].nil?
           @sys = FluidSystem.find(rec['id'])
           @sys.update(rec)
         else
@@ -209,48 +209,49 @@ class FluidSystemsController < ApplicationController
   end
 
   private
-    def set_fluid_system
-      @fluid_system = FluidSystem.find(params[:id])
-    end
 
-    def get_building
-      @building = Building.where(:id => params[:building_id]).first
-    end
+  def set_fluid_system
+    @fluid_system = FluidSystem.find(params[:id])
+  end
 
-    def get_project
-      @project = Project.find(params[:project_id])
-    end
+  def get_building
+    @building = Building.where(id: params[:building_id]).first
+  end
 
-    def fluid_systems_params
-      params.permit(:project_id, :building_id, data: [:id, :name, :status, :type, :description, :design_supply_water_temperature, :heating_design_supply_water_temperature, :design_supply_water_temperature_delta_t, :control_type, :temperature_control, :fixed_supply_temperature, :temperature_setpoint_schedule_reference, :heating_fixed_supply_temperature, :heating_temperature_setpoint_schedule_reference, :reset_supply_high, :reset_supply_low, :reset_outdoor_high, :reset_outdoor_low, :wet_bulb_approach, :cooling_supply_temperature, :heating_supply_temperature, :evaporator_fluid_segment_in_reference, :shw_system_count, :annual_solar_fraction, fluid_segments: [:id, :name, :type], boilers: [:id, :name, :type, :fuel_source, :draft_type, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :afue, :thermal_efficiency, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], chillers: [:id, :name, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :capacity_rated, :kw_per_ton, :iplv_kw_per_ton, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], water_heater: [:id, :name, :status, :type, :count, :fluid_segment_out_reference, :fluid_segment_makeup_reference, :storage_capacity, :ef, :recovery_efficiency, :thermal_efficiency, :hir_f_plr_curve_reference, :fuel_source, :off_cycle_fuel_source, :off_cycle_parasitic_losses, :on_cycle_fuel_source, :on_cycle_parasitic_losses, :tank_off_cycle_loss_coef, :capacity_rated, :minimum_capacity, :standby_loss_fraction, :electrical_ignition, :draft_fan_power], heat_rejections: [:id, :name, :type, :modulation_control, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :total_fan_hp, :fan_type, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]]])
-    end
+  def get_project
+    @project = Project.find(params[:project_id])
+  end
 
-    # this is called from bulk_sync above
-    def save_fluid_segment_references
-      logger.info("SAVE FLUID SEGMENT REFERENCES")
-      @project.fluid_systems.each do |sys|
-        # logger.info("FLUID SYSTEM: #{sys.name}, type: #{sys.type}")
-        in_segment = sys.fluid_segments.where(type: 'PrimarySupply').first
-        out_segment = sys.fluid_segments.where(type: 'PrimaryReturn').first
-        # connect to all HotWater heating coils and ChilledWater cooling coils saved to the building
-        # TODO: find airsystems too in the future
-        @building.zone_systems.each do |zone_sys|
-          coils = []
-          if sys.type == 'HotWater'
-            coils = zone_sys.coil_heatings.where(type: sys.type)
-          elsif sys.type == 'ChilledWater'
-            coils = zone_sys.coil_coolings.where(type: sys.type)
-          end
-         # logger.info("#{sys.type} COILS FOR: #{zone_sys.name} are:")
-          coils.each do |coil|
+  def fluid_systems_params
+    params.permit(:project_id, :building_id, data: [:id, :name, :status, :type, :description, :design_supply_water_temperature, :heating_design_supply_water_temperature, :design_supply_water_temperature_delta_t, :control_type, :temperature_control, :fixed_supply_temperature, :temperature_setpoint_schedule_reference, :heating_fixed_supply_temperature, :heating_temperature_setpoint_schedule_reference, :reset_supply_high, :reset_supply_low, :reset_outdoor_high, :reset_outdoor_low, :wet_bulb_approach, :cooling_supply_temperature, :heating_supply_temperature, :evaporator_fluid_segment_in_reference, :shw_system_count, :annual_solar_fraction, fluid_segments: [:id, :name, :type], boilers: [:id, :name, :type, :fuel_source, :draft_type, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :afue, :thermal_efficiency, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], chillers: [:id, :name, :type, :fuel_source, :condenser_type, :condenser_fluid_segment_in_reference, :condenser_fluid_segment_out_reference, :evaporator_fluid_segment_in_reference, :evaporator_fluid_segment_out_reference, :capacity_rated, :kw_per_ton, :iplv_kw_per_ton, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]], water_heater: [:id, :name, :status, :type, :count, :fluid_segment_out_reference, :fluid_segment_makeup_reference, :storage_capacity, :ef, :recovery_efficiency, :thermal_efficiency, :hir_f_plr_curve_reference, :fuel_source, :off_cycle_fuel_source, :off_cycle_parasitic_losses, :on_cycle_fuel_source, :on_cycle_parasitic_losses, :tank_off_cycle_loss_coef, :capacity_rated, :minimum_capacity, :standby_loss_fraction, :electrical_ignition, :draft_fan_power], heat_rejections: [:id, :name, :type, :modulation_control, :fluid_segment_in_reference, :fluid_segment_out_reference, :capacity_rated, :total_fan_hp, :fan_type, pump: [:id, :name, :operation_control, :speed_control, :flow_capacity, :total_head, :motor_efficiency, :impeller_efficiency, :motor_hp]]])
+  end
+
+  # this is called from bulk_sync above
+  def save_fluid_segment_references
+    logger.info('SAVE FLUID SEGMENT REFERENCES')
+    @project.fluid_systems.each do |sys|
+      # logger.info("FLUID SYSTEM: #{sys.name}, type: #{sys.type}")
+      in_segment = sys.fluid_segments.where(type: 'PrimarySupply').first
+      out_segment = sys.fluid_segments.where(type: 'PrimaryReturn').first
+      # connect to all HotWater heating coils and ChilledWater cooling coils saved to the building
+      # TODO: find airsystems too in the future
+      @building.zone_systems.each do |zone_sys|
+        coils = []
+        if sys.type == 'HotWater'
+          coils = zone_sys.coil_heatings.where(type: sys.type)
+        elsif sys.type == 'ChilledWater'
+          coils = zone_sys.coil_coolings.where(type: sys.type)
+        end
+        # logger.info("#{sys.type} COILS FOR: #{zone_sys.name} are:")
+        coils.each do |coil|
           # logger.info("#{coil.name} (#{coil.id})")
-            # supply
-            coil.fluid_segment_in_reference = in_segment.name
-            # demand
-            coil.fluid_segment_out_reference = out_segment.name
-            coil.save
-          end
+          # supply
+          coil.fluid_segment_in_reference = in_segment.name
+          # demand
+          coil.fluid_segment_out_reference = out_segment.name
+          coil.save
         end
       end
     end
+  end
 end

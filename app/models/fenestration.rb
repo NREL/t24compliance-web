@@ -23,5 +23,4 @@ class Fenestration
   field :u_factor_center_of_glass, type: Float
   field :visible_transmittance, type: Float
   field :visible_transmittance_center_of_glass, type: Float
-
 end

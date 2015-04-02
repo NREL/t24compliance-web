@@ -39,11 +39,12 @@ class SchedulesController < ApplicationController
   end
 
   private
-    def set_schedule
-      @schedule = Schedule.find(params[:id])
-    end
 
-    def schedule_params
-      params.require(:schedule).permit(:name, :type, :end_month, :end_day, :schedule_week_reference)
-    end
+  def set_schedule
+    @schedule = Schedule.find(params[:id])
+  end
+
+  def schedule_params
+    params.require(:schedule).permit(:name, :type, :end_month, :end_day, :schedule_week_reference)
+  end
 end

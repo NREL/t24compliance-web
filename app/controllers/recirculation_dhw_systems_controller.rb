@@ -39,11 +39,12 @@ class RecirculationDhwSystemsController < ApplicationController
   end
 
   private
-    def set_recirculation_dhw_system
-      @recirculation_dhw_system = RecirculationDhwSystem.find(params[:id])
-    end
 
-    def recirculation_dhw_system_params
-      params.require(:recirculation_dhw_system).permit(:name, :status, :type, :multiplier, :central_system, :distribution_type, :pump_power, :pump_efficiency, :system_story_count, :living_unit_count, :water_heater_count, :total_input_rating, :total_tank_volume, :baseline_recirculation_water_heater_reference, :use_default_loops, :pipe_length, :pipe_diameter, :pipe_location, :loop_count, :pipe_extra_insulation, :annual_solar_fraction)
-    end
+  def set_recirculation_dhw_system
+    @recirculation_dhw_system = RecirculationDhwSystem.find(params[:id])
+  end
+
+  def recirculation_dhw_system_params
+    params.require(:recirculation_dhw_system).permit(:name, :status, :type, :multiplier, :central_system, :distribution_type, :pump_power, :pump_efficiency, :system_story_count, :living_unit_count, :water_heater_count, :total_input_rating, :total_tank_volume, :baseline_recirculation_water_heater_reference, :use_default_loops, :pipe_length, :pipe_diameter, :pipe_location, :loop_count, :pipe_extra_insulation, :annual_solar_fraction)
+  end
 end

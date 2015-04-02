@@ -39,11 +39,12 @@ class PolyLoopsController < ApplicationController
   end
 
   private
-    def set_poly_loop
-      @poly_loop = PolyLoop.find(params[:id])
-    end
 
-    def poly_loop_params
-      params.require(:poly_loop).permit(:name)
-    end
+  def set_poly_loop
+    @poly_loop = PolyLoop.find(params[:id])
+  end
+
+  def poly_loop_params
+    params.require(:poly_loop).permit(:name)
+  end
 end

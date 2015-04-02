@@ -39,11 +39,12 @@ class CartesianPointsController < ApplicationController
   end
 
   private
-    def set_cartesian_point
-      @cartesian_point = CartesianPoint.find(params[:id])
-    end
 
-    def cartesian_point_params
-      params.require(:cartesian_point).permit(:name, :coordinate)
-    end
+  def set_cartesian_point
+    @cartesian_point = CartesianPoint.find(params[:id])
+  end
+
+  def cartesian_point_params
+    params.require(:cartesian_point).permit(:name, :coordinate)
+  end
 end

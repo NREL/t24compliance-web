@@ -39,11 +39,12 @@ class UndergroundWallsController < ApplicationController
   end
 
   private
-    def set_underground_wall
-      @underground_wall = UndergroundWall.find(params[:id])
-    end
 
-    def underground_wall_params
-      params.require(:underground_wall).permit(:name, :status, :construct_assembly_reference, :area, :height, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
-    end
+  def set_underground_wall
+    @underground_wall = UndergroundWall.find(params[:id])
+  end
+
+  def underground_wall_params
+    params.require(:underground_wall).permit(:name, :status, :construct_assembly_reference, :area, :height, :interior_solar_absorptance, :interior_thermal_absorptance, :interior_visible_absorptance)
+  end
 end

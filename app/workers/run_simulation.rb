@@ -4,11 +4,10 @@
 
 class RunSimulation
   include Sidekiq::Worker
-  sidekiq_options :retry => false, :backtrace => true
+  sidekiq_options retry: false, backtrace: true
 
   def perform(simulation_id)
     simulation = Simulation.find(simulation_id)
-
 
     if Dir.exist? simulation.run_path
       logger.warn "Run for '#{simulation.project.name}' in directory '#{simulation.run_path}' already exists. Deleting simulation results..."
@@ -26,15 +25,15 @@ class RunSimulation
     if ENV['DOCKER_HOST']
       logger.info "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
     else
-      fail "No Docker IP found. Set DOCKER_HOST ENV variable to the Docker socket"
+      fail 'No Docker IP found. Set DOCKER_HOST ENV variable to the Docker socket'
     end
 
     cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
     Docker.options = {
-        client_cert: File.join(cert_path, 'cert.pem'),
-        client_key: File.join(cert_path, 'key.pem'),
-        ssl_ca_file: File.join(cert_path, 'ca.pem'),
-        scheme: 'https' # This is important when the URL starts with tcp://
+      client_cert: File.join(cert_path, 'cert.pem'),
+      client_key: File.join(cert_path, 'key.pem'),
+      ssl_ca_file: File.join(cert_path, 'ca.pem'),
+      scheme: 'https' # This is important when the URL starts with tcp://
     }
     Docker.url = ENV['DOCKER_HOST']
 
@@ -50,7 +49,7 @@ class RunSimulation
       Dir.chdir(simulation.run_path)
       puts "Current working directory is: #{Dir.getwd}"
 
-      run_command = %W[/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename}]
+      run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename})
       c = Docker::Container.create('Cmd' => run_command,
                                    'Image' => 'nllong/cbecc-com',
                                    'AttachStdout' => true
@@ -58,27 +57,27 @@ class RunSimulation
       c.start('Binds' => ["#{simulation.run_path}:/var/cbecc-com-files/run/"])
 
       # Per NEM: Check for tail gem. Most likely will have to be a separate thread.
-      #t = Thread.new {
+      # t = Thread.new {
       # Look at File::Tail (http://flori.github.io/file-tail/doc/index.html)
       #  # parse the log file
-      #while
+      # while
       #  simulation.status = 'running'
       #  simulation.save!
-      #end
+      # end
 
-      #}
+      # }
 
       # this command is kind of weird. From what I understand, this is the container timeout (defaults to 60 seconds)
       # This may be of interest: http://kimh.github.io/blog/en/docker/running-docker-containers-asynchronously-with-celluloid/
       c.wait(docker_container_timeout)
 
       # Kill the monitoring thread
-      #t.kill
+      # t.kill
 
-      stdout, stderr = c.attach(:stream => false, :stdout => true, :stderr => true, :logs => true)
+      stdout, stderr = c.attach(stream: false, stdout: true, stderr: true, logs: true)
 
       logger.debug stdout
-      logger.info "Finished running simulation"
+      logger.info 'Finished running simulation'
     ensure
       Dir.chdir current_dir
     end
@@ -91,7 +90,7 @@ class RunSimulation
 
     Dir["#{simulation.run_path}/*"].each do |f|
       if f =~ /AnalysisResults-BEES.pdf/
-        logger.info "saving the compliance report path to model"
+        logger.info 'saving the compliance report path to model'
         simulation.compliance_report_pdf_path = f
       elsif f =~ /.*\s-\sAnalysisResults-BEES.xml/
         logger.info "BEES XML #{f}"

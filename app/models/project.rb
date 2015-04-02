@@ -112,11 +112,11 @@ class Project
 
   # Validations
   validates_presence_of :name
-  #validates_presence_of :exceptional_condition_no_cooling_system
-  #validates_presence_of :exceptional_condition_rated_capacity
-  #validates_presence_of :exceptional_condition_water_heater
+  # validates_presence_of :exceptional_condition_no_cooling_system
+  # validates_presence_of :exceptional_condition_rated_capacity
+  # validates_presence_of :exceptional_condition_water_heater
 
-  #validates_presence_of :exceptional_condition_narrative
+  # validates_presence_of :exceptional_condition_narrative
   validates_presence_of :zip_code
   validates_numericality_of :zip_code
 
@@ -127,127 +127,126 @@ class Project
 
   # callbacks
   before_create :build_model
-      
+
   def self.children_models
     children = [
-       { model_name: 'schedule_day', xml_name: 'SchDay' },
-       { model_name: 'schedule_week', xml_name: 'SchWeek' },
-       { model_name: 'schedule', xml_name: 'Sch' },
-       { model_name: 'construct_assembly', xml_name: 'ConsAssm' },
-       { model_name: 'material', xml_name: 'Mat' },
-       { model_name: 'fenestration_construction', xml_name: 'FenCons' },
-       { model_name: 'door_construction', xml_name: 'DrCons' },
-       { model_name: 'space_function_default', xml_name: 'SpcFuncDefaults' },
-       { model_name: 'luminaire', xml_name: 'Lum' },
-       { model_name: 'curve_linear', xml_name: 'CrvLin' },
-       { model_name: 'curve_quadratic', xml_name: 'CrvQuad' },
-       { model_name: 'curve_cubic', xml_name: 'CrvCubic' },
-       { model_name: 'curve_double_quadratic', xml_name: 'CrvDblQuad' },
-       { model_name: 'building', xml_name: 'Bldg' },
-       { model_name: 'external_shading_object', xml_name: 'ExtShdgObj' },
-       { model_name: 'fluid_system', xml_name: 'FluidSys' }
+      { model_name: 'schedule_day', xml_name: 'SchDay' },
+      { model_name: 'schedule_week', xml_name: 'SchWeek' },
+      { model_name: 'schedule', xml_name: 'Sch' },
+      { model_name: 'construct_assembly', xml_name: 'ConsAssm' },
+      { model_name: 'material', xml_name: 'Mat' },
+      { model_name: 'fenestration_construction', xml_name: 'FenCons' },
+      { model_name: 'door_construction', xml_name: 'DrCons' },
+      { model_name: 'space_function_default', xml_name: 'SpcFuncDefaults' },
+      { model_name: 'luminaire', xml_name: 'Lum' },
+      { model_name: 'curve_linear', xml_name: 'CrvLin' },
+      { model_name: 'curve_quadratic', xml_name: 'CrvQuad' },
+      { model_name: 'curve_cubic', xml_name: 'CrvCubic' },
+      { model_name: 'curve_double_quadratic', xml_name: 'CrvDblQuad' },
+      { model_name: 'building', xml_name: 'Bldg' },
+      { model_name: 'external_shading_object', xml_name: 'ExtShdgObj' },
+      { model_name: 'fluid_system', xml_name: 'FluidSys' }
     ]
   end
 
   def self.xml_fields
     xml_fields = [
-      {:db_field_name=>"name", :xml_field_name=>"Name"},
-      {:db_field_name=>"building_energy_model_version", :xml_field_name=>"BldgEngyModelVersion"},
-      {:db_field_name=>"geometry_input_type", :xml_field_name=>"GeometryInpType"},
-      {:db_field_name=>"number_time_steps_per_hour", :xml_field_name=>"NumTimeStepsPerHr"},
-      {:db_field_name=>"permit_scope", :xml_field_name=>"PermitScope"},
-      {:db_field_name=>"permit_month", :xml_field_name=>"PermitMonth"},
-      {:db_field_name=>"permit_day", :xml_field_name=>"PermitDay"},
-      {:db_field_name=>"permit_year", :xml_field_name=>"PermitYear"},
-      {:db_field_name=>"climate_zone_county", :xml_field_name=>"CliZnCounty"},
-      {:db_field_name=>"climate_zone_number", :xml_field_name=>"CliZnNum"},
-      {:db_field_name=>"climate_zone", :xml_field_name=>"CliZn"},
-      {:db_field_name=>"latitude", :xml_field_name=>"Lat"},
-      {:db_field_name=>"longitude", :xml_field_name=>"Long"},
-      {:db_field_name=>"elevation", :xml_field_name=>"Elevation"},
-      {:db_field_name=>"time_zone", :xml_field_name=>"TimeZn"},
-      {:db_field_name=>"building_terrain", :xml_field_name=>"BldgTerrain"},
-      {:db_field_name=>"street_address", :xml_field_name=>"StAddress"},
-      {:db_field_name=>"city", :xml_field_name=>"City"},
-      {:db_field_name=>"state", :xml_field_name=>"State"},
-      {:db_field_name=>"zip_code", :xml_field_name=>"ZipCode"},
-      {:db_field_name=>"owner_name", :xml_field_name=>"OwnerName"},
-      {:db_field_name=>"owner_title", :xml_field_name=>"OwnerTitle"},
-      {:db_field_name=>"owner_organization", :xml_field_name=>"OwnerOrg"},
-      {:db_field_name=>"owner_email", :xml_field_name=>"OwnerEmail"},
-      {:db_field_name=>"owner_phone", :xml_field_name=>"OwnerPhone"},
-      {:db_field_name=>"architect_name", :xml_field_name=>"ArchName"},
-      {:db_field_name=>"architect_title", :xml_field_name=>"ArchTitle"},
-      {:db_field_name=>"architect_organization", :xml_field_name=>"ArchOrg"},
-      {:db_field_name=>"architect_email", :xml_field_name=>"ArchEmail"},
-      {:db_field_name=>"architect_phone", :xml_field_name=>"ArchPhone"},
-      {:db_field_name=>"hvac_engineer_name", :xml_field_name=>"HVACEngrName"},
-      {:db_field_name=>"hvac_engineer_title", :xml_field_name=>"HVACEngrTitle"},
-      {:db_field_name=>"hvac_engineer_organization", :xml_field_name=>"HVACEngrOrg"},
-      {:db_field_name=>"hvac_engineer_email", :xml_field_name=>"HVACEngrEmail"},
-      {:db_field_name=>"hvac_engineer_phone", :xml_field_name=>"HVACEngrPhone"},
-      {:db_field_name=>"lighting_designer_name", :xml_field_name=>"LtgDsgnrName"},
-      {:db_field_name=>"lighting_designer_title", :xml_field_name=>"LtgDsgnrTitle"},
-      {:db_field_name=>"lighting_designer_organization", :xml_field_name=>"LtgDsgnrOrg"},
-      {:db_field_name=>"lighting_designer_email", :xml_field_name=>"LtgDsgnrEmail"},
-      {:db_field_name=>"lighting_designer_phone", :xml_field_name=>"LtgDsgnrPhone"},
-      {:db_field_name=>"energy_modeler_name", :xml_field_name=>"EnergyMdlrName"},
-      {:db_field_name=>"energy_modeler_title", :xml_field_name=>"EnergyMdlrTitle"},
-      {:db_field_name=>"energy_modeler_organization", :xml_field_name=>"EnergyMdlrOrg"},
-      {:db_field_name=>"energy_modeler_email", :xml_field_name=>"EnergyMdlrEmail"},
-      {:db_field_name=>"energy_modeler_phone", :xml_field_name=>"EnergyMdlrPhone"},
-      {:db_field_name=>"weather_station_number", :xml_field_name=>"WeatherStationNum"},
-      {:db_field_name=>"weather_station", :xml_field_name=>"WeatherStation"},
-      {:db_field_name=>"design_day_weather_file", :xml_field_name=>"DDWeatherFile"},
-      {:db_field_name=>"annual_weather_file", :xml_field_name=>"AnnualWeatherFile"},
-      {:db_field_name=>"site_fuel_type", :xml_field_name=>"SiteFuelType"},
-      {:db_field_name=>"hvac_auto_sizing", :xml_field_name=>"HVACAutoSizing"},
-      {:db_field_name=>"simulate_design_days", :xml_field_name=>"SimDsgnDays"},
-      {:db_field_name=>"run_period_begin_month", :xml_field_name=>"RunPeriodBeginMonth"},
-      {:db_field_name=>"run_period_begin_day", :xml_field_name=>"RunPeriodBeginDay"},
-      {:db_field_name=>"run_period_end_month", :xml_field_name=>"RunPeriodEndMonth"},
-      {:db_field_name=>"run_period_end_day", :xml_field_name=>"RunPeriodEndDay"},
-      {:db_field_name=>"run_period_year", :xml_field_name=>"RunPeriodYear"},
-      {:db_field_name=>"quick_analysis", :xml_field_name=>"QuickAnalysis"},
-      {:db_field_name=>"number_of_quick_analysis_periods", :xml_field_name=>"NumOfQuickAnalysisPeriods"},
-      {:db_field_name=>"number_of_days_per_quick_analysis_period", :xml_field_name=>"NumOfDaysPerQuickAnalysisPeriod"},
-      {:db_field_name=>"quick_analysis_week_numbers", :xml_field_name=>"QuickAnalysisWeekNumbers"},
-      {:db_field_name=>"exceptional_condition_complete_building", :xml_field_name=>"ExcptCondCompleteBldg"},
-      {:db_field_name=>"exceptional_condition_exterior_lighting", :xml_field_name=>"ExcptCondExtLtg"},
-      {:db_field_name=>"exceptional_condition_no_cooling_system", :xml_field_name=>"ExcptCondNoClgSys"},
-      {:db_field_name=>"exceptional_condition_rated_capacity", :xml_field_name=>"ExcptCondRtdCap"},
-      {:db_field_name=>"exceptional_condition_water_heater", :xml_field_name=>"ExcptCondWtrHtr"},
-      {:db_field_name=>"exceptional_condition_narrative", :xml_field_name=>"ExcptCondNarrative"},
-      {:db_field_name=>"disable_daylighting_controls", :xml_field_name=>"DisableDayltgCtrls"},
-      {:db_field_name=>"default_daylighting_controls", :xml_field_name=>"DefaultDayltgCtrls"},
-      {:db_field_name=>"simulation_variables_site", :xml_field_name=>"SimVarsSite"},
-      {:db_field_name=>"simulation_variables_thermal_zone", :xml_field_name=>"SimVarsThrmlZn"},
-      {:db_field_name=>"simulation_variables_daylighting", :xml_field_name=>"SimVarsDayltg"},
-      {:db_field_name=>"simulation_variables_hvac_secondary", :xml_field_name=>"SimVarsHVACSec"},
-      {:db_field_name=>"simulation_variables_hvac_primary", :xml_field_name=>"SimVarsHVACPri"},
-      {:db_field_name=>"simulation_variables_hvac_zone", :xml_field_name=>"SimVarsHVACZn"},
-      {:db_field_name=>"average_dry_bulb_temperature", :xml_field_name=>"AvgDBTemp"},
-      {:db_field_name=>"monthly_average_temperature_maximum_difference", :xml_field_name=>"MoAvgTempMaxDiff"},
-      {:db_field_name=>"holiday_reference", :xml_field_name=>"HolRef"},
-      {:db_field_name=>"run_title", :xml_field_name=>"RunTitle"},
-      {:db_field_name=>"analysis_type", :xml_field_name=>"AnalysisType"},
-      {:db_field_name=>"compliance_type", :xml_field_name=>"CompType"},
-      {:db_field_name=>"rule_report_type", :xml_field_name=>"RuleReportType"},
-      {:db_field_name=>"rule_report_file_append", :xml_field_name=>"RuleReportFileAppend"},
-      {:db_field_name=>"software_version", :xml_field_name=>"SoftwareVersion"},
-      {:db_field_name=>"compliance_report_pdf", :xml_field_name=>"CompReportPDF"},
-      {:db_field_name=>"compliance_report_xml", :xml_field_name=>"CompReportXML"}
+      { db_field_name: 'name', xml_field_name: 'Name' },
+      { db_field_name: 'building_energy_model_version', xml_field_name: 'BldgEngyModelVersion' },
+      { db_field_name: 'geometry_input_type', xml_field_name: 'GeometryInpType' },
+      { db_field_name: 'number_time_steps_per_hour', xml_field_name: 'NumTimeStepsPerHr' },
+      { db_field_name: 'permit_scope', xml_field_name: 'PermitScope' },
+      { db_field_name: 'permit_month', xml_field_name: 'PermitMonth' },
+      { db_field_name: 'permit_day', xml_field_name: 'PermitDay' },
+      { db_field_name: 'permit_year', xml_field_name: 'PermitYear' },
+      { db_field_name: 'climate_zone_county', xml_field_name: 'CliZnCounty' },
+      { db_field_name: 'climate_zone_number', xml_field_name: 'CliZnNum' },
+      { db_field_name: 'climate_zone', xml_field_name: 'CliZn' },
+      { db_field_name: 'latitude', xml_field_name: 'Lat' },
+      { db_field_name: 'longitude', xml_field_name: 'Long' },
+      { db_field_name: 'elevation', xml_field_name: 'Elevation' },
+      { db_field_name: 'time_zone', xml_field_name: 'TimeZn' },
+      { db_field_name: 'building_terrain', xml_field_name: 'BldgTerrain' },
+      { db_field_name: 'street_address', xml_field_name: 'StAddress' },
+      { db_field_name: 'city', xml_field_name: 'City' },
+      { db_field_name: 'state', xml_field_name: 'State' },
+      { db_field_name: 'zip_code', xml_field_name: 'ZipCode' },
+      { db_field_name: 'owner_name', xml_field_name: 'OwnerName' },
+      { db_field_name: 'owner_title', xml_field_name: 'OwnerTitle' },
+      { db_field_name: 'owner_organization', xml_field_name: 'OwnerOrg' },
+      { db_field_name: 'owner_email', xml_field_name: 'OwnerEmail' },
+      { db_field_name: 'owner_phone', xml_field_name: 'OwnerPhone' },
+      { db_field_name: 'architect_name', xml_field_name: 'ArchName' },
+      { db_field_name: 'architect_title', xml_field_name: 'ArchTitle' },
+      { db_field_name: 'architect_organization', xml_field_name: 'ArchOrg' },
+      { db_field_name: 'architect_email', xml_field_name: 'ArchEmail' },
+      { db_field_name: 'architect_phone', xml_field_name: 'ArchPhone' },
+      { db_field_name: 'hvac_engineer_name', xml_field_name: 'HVACEngrName' },
+      { db_field_name: 'hvac_engineer_title', xml_field_name: 'HVACEngrTitle' },
+      { db_field_name: 'hvac_engineer_organization', xml_field_name: 'HVACEngrOrg' },
+      { db_field_name: 'hvac_engineer_email', xml_field_name: 'HVACEngrEmail' },
+      { db_field_name: 'hvac_engineer_phone', xml_field_name: 'HVACEngrPhone' },
+      { db_field_name: 'lighting_designer_name', xml_field_name: 'LtgDsgnrName' },
+      { db_field_name: 'lighting_designer_title', xml_field_name: 'LtgDsgnrTitle' },
+      { db_field_name: 'lighting_designer_organization', xml_field_name: 'LtgDsgnrOrg' },
+      { db_field_name: 'lighting_designer_email', xml_field_name: 'LtgDsgnrEmail' },
+      { db_field_name: 'lighting_designer_phone', xml_field_name: 'LtgDsgnrPhone' },
+      { db_field_name: 'energy_modeler_name', xml_field_name: 'EnergyMdlrName' },
+      { db_field_name: 'energy_modeler_title', xml_field_name: 'EnergyMdlrTitle' },
+      { db_field_name: 'energy_modeler_organization', xml_field_name: 'EnergyMdlrOrg' },
+      { db_field_name: 'energy_modeler_email', xml_field_name: 'EnergyMdlrEmail' },
+      { db_field_name: 'energy_modeler_phone', xml_field_name: 'EnergyMdlrPhone' },
+      { db_field_name: 'weather_station_number', xml_field_name: 'WeatherStationNum' },
+      { db_field_name: 'weather_station', xml_field_name: 'WeatherStation' },
+      { db_field_name: 'design_day_weather_file', xml_field_name: 'DDWeatherFile' },
+      { db_field_name: 'annual_weather_file', xml_field_name: 'AnnualWeatherFile' },
+      { db_field_name: 'site_fuel_type', xml_field_name: 'SiteFuelType' },
+      { db_field_name: 'hvac_auto_sizing', xml_field_name: 'HVACAutoSizing' },
+      { db_field_name: 'simulate_design_days', xml_field_name: 'SimDsgnDays' },
+      { db_field_name: 'run_period_begin_month', xml_field_name: 'RunPeriodBeginMonth' },
+      { db_field_name: 'run_period_begin_day', xml_field_name: 'RunPeriodBeginDay' },
+      { db_field_name: 'run_period_end_month', xml_field_name: 'RunPeriodEndMonth' },
+      { db_field_name: 'run_period_end_day', xml_field_name: 'RunPeriodEndDay' },
+      { db_field_name: 'run_period_year', xml_field_name: 'RunPeriodYear' },
+      { db_field_name: 'quick_analysis', xml_field_name: 'QuickAnalysis' },
+      { db_field_name: 'number_of_quick_analysis_periods', xml_field_name: 'NumOfQuickAnalysisPeriods' },
+      { db_field_name: 'number_of_days_per_quick_analysis_period', xml_field_name: 'NumOfDaysPerQuickAnalysisPeriod' },
+      { db_field_name: 'quick_analysis_week_numbers', xml_field_name: 'QuickAnalysisWeekNumbers' },
+      { db_field_name: 'exceptional_condition_complete_building', xml_field_name: 'ExcptCondCompleteBldg' },
+      { db_field_name: 'exceptional_condition_exterior_lighting', xml_field_name: 'ExcptCondExtLtg' },
+      { db_field_name: 'exceptional_condition_no_cooling_system', xml_field_name: 'ExcptCondNoClgSys' },
+      { db_field_name: 'exceptional_condition_rated_capacity', xml_field_name: 'ExcptCondRtdCap' },
+      { db_field_name: 'exceptional_condition_water_heater', xml_field_name: 'ExcptCondWtrHtr' },
+      { db_field_name: 'exceptional_condition_narrative', xml_field_name: 'ExcptCondNarrative' },
+      { db_field_name: 'disable_daylighting_controls', xml_field_name: 'DisableDayltgCtrls' },
+      { db_field_name: 'default_daylighting_controls', xml_field_name: 'DefaultDayltgCtrls' },
+      { db_field_name: 'simulation_variables_site', xml_field_name: 'SimVarsSite' },
+      { db_field_name: 'simulation_variables_thermal_zone', xml_field_name: 'SimVarsThrmlZn' },
+      { db_field_name: 'simulation_variables_daylighting', xml_field_name: 'SimVarsDayltg' },
+      { db_field_name: 'simulation_variables_hvac_secondary', xml_field_name: 'SimVarsHVACSec' },
+      { db_field_name: 'simulation_variables_hvac_primary', xml_field_name: 'SimVarsHVACPri' },
+      { db_field_name: 'simulation_variables_hvac_zone', xml_field_name: 'SimVarsHVACZn' },
+      { db_field_name: 'average_dry_bulb_temperature', xml_field_name: 'AvgDBTemp' },
+      { db_field_name: 'monthly_average_temperature_maximum_difference', xml_field_name: 'MoAvgTempMaxDiff' },
+      { db_field_name: 'holiday_reference', xml_field_name: 'HolRef' },
+      { db_field_name: 'run_title', xml_field_name: 'RunTitle' },
+      { db_field_name: 'analysis_type', xml_field_name: 'AnalysisType' },
+      { db_field_name: 'compliance_type', xml_field_name: 'CompType' },
+      { db_field_name: 'rule_report_type', xml_field_name: 'RuleReportType' },
+      { db_field_name: 'rule_report_file_append', xml_field_name: 'RuleReportFileAppend' },
+      { db_field_name: 'software_version', xml_field_name: 'SoftwareVersion' },
+      { db_field_name: 'compliance_report_pdf', xml_field_name: 'CompReportPDF' },
+      { db_field_name: 'compliance_report_xml', xml_field_name: 'CompReportXML' }
     ]
   end
 
   # This method is autogenerated. Do not change directly.
   def to_sdd_xml
-
     # Take care of a few global configs before generating the xml:
     # generate constructions from library ids
-    self.generate_constructions
+    generate_constructions
     # generate SHW references on spaces
-    self.connect_shw
+    connect_shw
 
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.send(:SDDXML) do
@@ -257,7 +256,7 @@ class Project
           end
 
           # set some hard coded values which are not fields
-          xml.send(:CreateDate, self.created_at.to_i)
+          xml.send(:CreateDate, created_at.to_i)
           xml.send(:ExcptCondFanPress, 'No')
           xml.send(:ExcptCondWCC, 'No')
           xml.send(:AutoHardSize, 1)
@@ -270,11 +269,11 @@ class Project
           unless kids.nil? || kids.empty?
             kids.each do |k|
               if k[:model_name] == 'building'
-                unless self.building.nil?
-                  self.building.to_sdd_xml(k, xml)
+                unless building.nil?
+                  building.to_sdd_xml(k, xml)
                 end
               else
-                models = self.send(k[:model_name].pluralize)
+                models = send(k[:model_name].pluralize)
                 models.each do |m|
                   m.to_sdd_xml(k, xml)
                 end
@@ -289,13 +288,13 @@ class Project
 
   # This method generates connections to the SHW system for all spaces
   def connect_shw
-    if self.exceptional_condition_water_heater == 'No'
-      logger.info("CONNECTING/DISCONNECTING SHW")
+    if exceptional_condition_water_heater == 'No'
+      logger.info('CONNECTING/DISCONNECTING SHW')
 
-      spaces = self.building.building_spaces
-      #logger.info("SPACES: #{spaces.inspect}")
+      spaces = building.building_spaces
+      # logger.info("SPACES: #{spaces.inspect}")
 
-      shws = self.fluid_systems.where(type: 'ServiceHotWater')
+      shws = fluid_systems.where(type: 'ServiceHotWater')
       if shws.length > 0
         shw = shws.first
         # get supply fluid segment name
@@ -322,7 +321,6 @@ class Project
 
   # This method generates the construction assemblies and materials based on library ids for the entire building
   def generate_constructions
-
     # TODO? delete and re-create or check that it exists and update?
     # self.construct_assemblies.destroy_all
     # self.materials.destroy_all
@@ -330,20 +328,20 @@ class Project
     # self.door_construction.destroy_all
 
     # model names
-    constructions = ['UndergroundWall', 'UndergroundFloor', 'InteriorWall', 'InteriorFloor', 'ExteriorWall', 'ExteriorFloor', 'Roof']
-    fenestrations = ['Window', 'Skylight']
+    constructions = %w(UndergroundWall UndergroundFloor InteriorWall InteriorFloor ExteriorWall ExteriorFloor Roof)
+    fenestrations = %w(Window Skylight)
     doors = ['Door']
     space_ids = []
 
     # get all building -> stories -> spaces (that's what constructions are attached to)
-    stories = self.building.building_stories
+    stories = building.building_stories
     spaces = []
     stories.each do |story|
       story.spaces.each do |space|
         spaces << space
       end
     end
-    space_ids = spaces.collect {|i| i.id }
+    space_ids = spaces.collect(&:id)
     logger.info("*****SPACES: #{space_ids.inspect} *****")
 
     project_cas = []
@@ -362,11 +360,11 @@ class Project
       instances = con_model.any_in(space_id: space_ids)
 
       if con === 'InteriorWall'
-         int_wall_ids = instances.collect {|i| i.id}
+        int_wall_ids = instances.collect(&:id)
       elsif con === 'ExteriorWall'
-         ext_wall_ids = instances.collect {|i| i.id}
+        ext_wall_ids = instances.collect(&:id)
       elsif con === 'Roof'
-         roof_ids = instances.collect {|i| i.id}
+        roof_ids = instances.collect(&:id)
       end
 
       logger.info("#{instances.size} instances of #{con}")
@@ -376,7 +374,7 @@ class Project
         unless instance.construction_library_id.nil?
           lib = Construction.find(instance.construction_library_id)
           # TODO: check that it doesn't exist yet or skip?
-          ca = self.construct_assemblies.find_or_create_by(name: lib.name)
+          ca = construct_assemblies.find_or_create_by(name: lib.name)
           ca.compatible_surface_type = lib.compatible_surface_type
           # save other attributes here (for floors)
           ca.slab_type = lib.slab_type
@@ -385,10 +383,10 @@ class Project
 
           material_refs = []
           # material references
-          logger.info("!!!!! LAYERS: #{lib['layers']}")
+          logger.debug("!!!!! LAYERS: #{lib['layers']}")
           unless lib['layers'].nil?
             lib.layers.each do |layer|
-              mat = self.materials.find_or_create_by(name: layer['name'])
+              mat = materials.find_or_create_by(name: layer['name'])
               mat.code_category = layer['code_category']
               mat.code_item = layer['code_identifier']
               # save framing_configuration and material (required)
@@ -398,10 +396,9 @@ class Project
               mat.save
               material_refs << mat.name
               # only save unique records to project
-              match = project_mats.find { |m| m['name'] === mat.name}
+              match = project_mats.find { |m| m['name'] === mat.name }
               logger.info("MATCH: #{match}, for material #{mat.name}")
               project_mats << mat if match.nil?
-
             end
           end
 
@@ -409,7 +406,7 @@ class Project
           ca.material_reference = material_refs
           ca.save
           # only save unique records to project
-          match = project_cas.find { |m| m['name'] === ca.name}
+          match = project_cas.find { |m| m['name'] === ca.name }
           logger.info("MATCH: #{match} for ca #{ca.name}")
           project_cas << ca if match.nil?
 
@@ -431,7 +428,7 @@ class Project
       # get lib record
       unless instance.construction_library_id.nil?
         lib = DoorLookup.find(instance.construction_library_id)
-        dc = self.door_constructions.find_or_create_by(name: lib.name)
+        dc = door_constructions.find_or_create_by(name: lib.name)
         # add other lib fields
         lib.attributes.each_pair do |key, value|
           unless %(created_at updated_at id _id).include? key
@@ -441,7 +438,7 @@ class Project
         dc.save
 
         # only save unique records to project
-        match = project_doors.find { |m| m['name'] === dc.name}
+        match = project_doors.find { |m| m['name'] === dc.name }
         logger.info("MATCH: #{match} for door construction #{dc.name}")
         project_doors << dc if match.nil?
 
@@ -457,7 +454,7 @@ class Project
       if fen === 'Window'
         instances = fen_model.any_in(exterior_wall_id: ext_wall_ids)
       else
-        #skylight
+        # skylight
         instances = fen_model.any_in(roof_id: roof_ids)
       end
       logger.info("#{instances.size} instances of #{fen}")
@@ -467,7 +464,7 @@ class Project
         unless instance.construction_library_id.nil?
           lib = Fenestration.find(instance.construction_library_id)
           # TODO: check that it doesn't exist yet or skip?
-          fc = self.fenestration_constructions.find_or_create_by(name: lib.name)
+          fc = fenestration_constructions.find_or_create_by(name: lib.name)
           # save all lib attributes to construction instance
           lib.attributes.each_pair do |key, value|
             unless %(created_at updated_at id _id).include? key
@@ -477,7 +474,7 @@ class Project
           fc.save
 
           # only save unique records to project
-          match = project_fens.find { |m| m['name'] === fc.name}
+          match = project_fens.find { |m| m['name'] === fc.name }
           logger.info("MATCH: #{match} for fen construction #{fc.name}")
           project_fens << fc if match.nil?
 
@@ -495,15 +492,15 @@ class Project
     self.materials = project_mats
     self.save!
   end
-      
+
   # This method is autogenerated. Do not change directly.
   def xml_save(filename)
     logger.warn "Overwriting XML file '#{filename}'" if File.exist? filename
 
-    xml = self.to_sdd_xml
-    File.open(filename, "w") { |f| f << self.to_sdd_xml }
+    xml = to_sdd_xml
+    File.open(filename, 'w') { |f| f << to_sdd_xml }
   end
-    
+
   # This method is autogenerated. Do not change directly.
   # Top level method takes the XML as a Hash and parses it recursively
   def self.from_sdd_xml(filename)
@@ -524,7 +521,7 @@ class Project
           p.reload
         end
       else
-        fail "Could not find the root element of the XML file"
+        fail 'Could not find the root element of the XML file'
       end
     else
       fail "Could not find SDD XML file #{filename}"
@@ -543,10 +540,10 @@ class Project
       if h[field[:xml_field_name]]
         logger.debug "Field Data Type: #{self_model.fields[field[:db_field_name]].options[:type]}"
         if self_model.fields[field[:db_field_name]].options[:type].to_s == 'Array'
-          logger.debug "Data model has an array as the field"
+          logger.debug 'Data model has an array as the field'
           # check if the hash has an array, otherwise make it an array
           if h[field[:xml_field_name]].is_a? Array
-            logger.debug "XML/JSON field is already an Array"
+            logger.debug 'XML/JSON field is already an Array'
             new_h[field[:db_field_name]] = h[field[:xml_field_name]]
           else
             new_h[field[:db_field_name]] = [h[field[:xml_field_name]]]
@@ -582,7 +579,7 @@ class Project
                 model = klass.from_sdd_json(k, h_instance)
 
                 # Assign the foreign key on the object
-                model["#{meta[:model_name]}_id"] = self.id
+                model["#{meta[:model_name]}_id"] = id
                 model.save!
               else
                 logger.warn "Class #{klass} does not have instance method 'from_sdd_json'"
@@ -595,7 +592,7 @@ class Project
               model = klass.from_sdd_json(k, h[k[:xml_name]])
 
               # Assign the foreign key on the object
-              model["#{meta[:model_name]}_id"] = self.id
+              model["#{meta[:model_name]}_id"] = id
               model.save!
             else
               logger.warn "Class #{klass} does not have instance method 'from_sdd_json'"
@@ -605,35 +602,24 @@ class Project
       end
     end
   end
-  
+
   protected
 
   def build_model
     # always make the simulation model
-    logger.info "creating dependent models"
+    logger.info 'creating dependent models'
     self.simulation = Simulation.new
-    self.simulation.save!
+    simulation.save!
 
     true
   end
-      
+
   def geometry_input_type_enums
-    [
-      'Detailed',
-      'Simplified'
-    ]
+    %w(Detailed Simplified)
   end
 
   def permit_scope_enums
-    [
-      'PermitNonresidentialAll',
-      'PermitNonresidentialEnvelope',
-      'PermitNonresidentialEnvelopeLighting',
-      'PermitNonresidentialEnvelopeMechanical',
-      'PermitNonresidentialLighting',
-      'PermitNonresidentialLightingMechanical',
-      'PermitNonresidentialMechanical'
-    ]
+    %w(PermitNonresidentialAll PermitNonresidentialEnvelope PermitNonresidentialEnvelopeLighting PermitNonresidentialEnvelopeMechanical PermitNonresidentialLighting PermitNonresidentialLightingMechanical PermitNonresidentialMechanical)
   end
 
   def climate_zone_county_enums
@@ -722,13 +708,7 @@ class Project
   end
 
   def building_terrain_enums
-    [
-      'Country',
-      'Suburbs',
-      'City',
-      'Ocean',
-      'Urban'
-    ]
+    %w(Country Suburbs City Ocean Urban)
   end
 
   def weather_station_enums
@@ -833,78 +813,39 @@ class Project
   end
 
   def exceptional_condition_complete_building_enums
-    [
-      'Yes',
-      'No'
-    ]
+    %w(Yes No)
   end
 
   def exceptional_condition_exterior_lighting_enums
-    [
-      'Yes',
-      'No'
-    ]
+    %w(Yes No)
   end
 
   def exceptional_condition_no_cooling_system_enums
-    [
-      'Yes',
-      'No'
-    ]
+    %w(Yes No)
   end
 
   def exceptional_condition_rated_capacity_enums
-    [
-      'Yes',
-      'No'
-    ]
+    %w(Yes No)
   end
 
   def exceptional_condition_water_heater_enums
-    [
-      'Yes',
-      'No'
-    ]
+    %w(Yes No)
   end
 
   def exceptional_condition_narrative_enums
-    [
-      'Yes',
-      'No'
-    ]
+    %w(Yes No)
   end
 
   def analysis_type_enums
-    [
-      'Title24Compliance',
-      'Title24ProposedOnly'
-    ]
+    %w(Title24Compliance Title24ProposedOnly)
   end
 
   def compliance_type_enums
-    [
-      'NewComplete',
-      'NewEnvelope',
-      'NewEnvelopeAndLighting',
-      'NewEnvelopeAndPartialLighting',
-      'NewMechanical',
-      'NewMechanicalAndLighting',
-      'NewMechanicalAndPartialLighting',
-      'ExistingAddition',
-      'ExistingAlteration',
-      'ExistingAdditionAndAlteration'
-    ]
+    %w(NewComplete NewEnvelope NewEnvelopeAndLighting NewEnvelopeAndPartialLighting NewMechanical NewMechanicalAndLighting NewMechanicalAndPartialLighting ExistingAddition ExistingAlteration ExistingAdditionAndAlteration)
   end
 
   def rule_report_type_enums
-    [
-      'ModelRpt_Space_InteriorLoadsElec',
-      'ModelRpt_Space_InteriorLoadsFuel',
-      'ModelRpt_HVACPrimary',
-      'ModelRpt_Envelope',
-      'ModelRpt_HVACSecondary',
-      'ModelRpt_HVACSecondarySizing'
-    ]
+    %w(ModelRpt_Space_InteriorLoadsElec ModelRpt_Space_InteriorLoadsFuel ModelRpt_HVACPrimary ModelRpt_Envelope ModelRpt_HVACSecondary ModelRpt_HVACSecondarySizing)
   end
 
   def rule_report_file_append_enums

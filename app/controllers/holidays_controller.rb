@@ -39,11 +39,12 @@ class HolidaysController < ApplicationController
   end
 
   private
-    def set_holiday
-      @holiday = Holiday.find(params[:id])
-    end
 
-    def holiday_params
-      params.require(:holiday).permit(:name, :specification_method, :day_of_week, :month, :day)
-    end
+  def set_holiday
+    @holiday = Holiday.find(params[:id])
+  end
+
+  def holiday_params
+    params.require(:holiday).permit(:name, :specification_method, :day_of_week, :month, :day)
+  end
 end

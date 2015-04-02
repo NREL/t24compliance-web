@@ -6,14 +6,14 @@
 
 # add users in a deploy group
 node[:cbecc_com_web][:deploy_users].each do |u|
-  group "deploy" do
+  group 'deploy' do
     members u
     append true
 
     only_if "getent passwd #{u}"
   end
 
-  group "rbenv" do
+  group 'rbenv' do
     members u
     append true
 
@@ -23,14 +23,14 @@ end
 
 user 'deploy' do
   gid 'deploy'
-  shell "/bin/bash"
+  shell '/bin/bash'
   system true
   action :create
 end
 
 # setup the www directory and the sticky bit
-directory "/var/www" do
-#  user 'deploy'
+directory '/var/www' do
+  #  user 'deploy'
   group 'deploy'
   mode '02775'
 end
@@ -43,28 +43,25 @@ bash 'delete_nginx_default_site' do
   EOH
 end
 
-
 # Set an selinux bool to allow socket connections (need to find the sebool to allow this)
-bash "set_selinux_to_permissive" do
+bash 'set_selinux_to_permissive' do
   user 'root'
   code <<-EOH
     setenforce 0
   EOH
 
-  only_if { ::File.exists?("/usr/sbin/setenforce") }
+  only_if { ::File.exist?('/usr/sbin/setenforce') }
 end
 
 # set the memory higher in jruby
 template '/etc/sudoers.d/jruby.sh' do
-  source "jruby.sh.erb"
+  source 'jruby.sh.erb'
   mode '0775'
   owner 'root'
   group 'root'
 end
 
 # set iptables
-include_recipe "iptables"
+include_recipe 'iptables'
 
-iptables_rule "default_ip_rules"
-
-
+iptables_rule 'default_ip_rules'
