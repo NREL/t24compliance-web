@@ -157,3 +157,10 @@ sudo chef-client
   config.serve_static_assets = false
   ```
 
+* Constructions are downloaded and stored in the browser cache. If you need to reset the cache run the following in your web browser's console
+
+
+    ```
+    localStorage.clear()
+    ```
+
