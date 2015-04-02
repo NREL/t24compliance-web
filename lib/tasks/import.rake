@@ -1,9 +1,7 @@
 namespace :import do
-
-  desc "import input fields"
-  task :input_fields => :environment do
-
-    filename = File.join(Rails.root,"lib/assets/cbecc_com13_input_data_model.txt")
+  desc 'import input fields'
+  task input_fields: :environment do
+    filename = File.join(Rails.root, 'lib/assets/cbecc_com13_input_data_model.txt')
 
     # current mongo object
     obj = nil
@@ -14,9 +12,7 @@ namespace :import do
     # ignore_enums
     ignore_enums = false
 
-
     File.open(filename, 'r:iso-8859-1').each_line.with_index do |line, index|
-
       # first line is on row 3 (using 0-index)
       # 0 spaces:  	top-level object (ex: Proj, Bldg, ConsAssm, Mat, etc).  There should be 16?
       # 0 spaces and '--------------------': close out previous top-level: new one starts on next line
@@ -32,23 +28,23 @@ namespace :import do
       # puts index
 
       if index > 2
-        next if line[0] == "#"
+        next if line[0] == '#'
 
-        #if index == 2186
+        # if index == 2186
         # puts "space at beginning: #{line[/\A */].size}"
         # puts "line: #{line}"
-        #end
+        # end
 
         num_spaces = line[/\A */].size
         # puts "Num spaces: #{num_spaces}"
 
         # count top-levels
         if num_spaces == 0 && line[0..19] != '--------------------' && !line.blank?
-          #puts "Top-Level found: #{line}"
+          # puts "Top-Level found: #{line}"
           unless obj.nil?
             # TODO: don't forget to push last field and add data_fields to obj before saving
             # save previous
-            if !field.empty?
+            unless field.empty?
               data_fields << field
               field = {}
             end
@@ -72,7 +68,7 @@ namespace :import do
             when  31
               # remove spaces & endofline characters
               if line.strip.start_with?('Parent(s)')
-                obj.parents = line.gsub('Parent(s):', '').delete(' ').gsub(/\r\n/,'').split('/')
+                obj.parents = line.gsub('Parent(s):', '').delete(' ').gsub(/\r\n/, '').split('/')
               elsif line.strip.start_with?('Children')
                 obj.children = line.gsub('Children:', '').delete(' ').gsub(/\r\n/, '').split('/')
               elsif line.strip.start_with?('When')
@@ -88,7 +84,7 @@ namespace :import do
             when 6
               # start a field associated with this top-level
               # first save previous field
-              if !field.empty?
+              unless field.empty?
                 data_fields << field
                 field = {}
               end
@@ -112,17 +108,17 @@ namespace :import do
               end
 
               # input type
-              field['input_type'] = data.find_index('input').nil? ? nil : data[data.find_index('input')-1]
+              field['input_type'] = data.find_index('input').nil? ? nil : data[data.find_index('input') - 1]
 
               # units
-              field['units'] = line[/Units:(.*)input/,1]
-              #puts " line #{index}, Units: #{field['units']}"
+              field['units'] = line[/Units:(.*)input/, 1]
+              # puts " line #{index}, Units: #{field['units']}"
               unless field['units'].nil?
                 field['units'] = field['units'].gsub(field['input_type'], '').strip
               end
 
               # validation (everything after input)
-              field['validation'] = line[/input(.*)/,1]
+              field['validation'] = line[/input(.*)/, 1]
               field['validation'].chomp!.strip! if field['validation']
 
               # add existing NREL fields
@@ -140,13 +136,13 @@ namespace :import do
             # TODO: other field before units?
             when 38
               # store default value
-              unless field.empty? and ignore_enums
-                field['default_value_id'] = line[/default:(.*)/,1].strip
+              unless field.empty? && ignore_enums
+                field['default_value_id'] = line[/default:(.*)/, 1].strip
               end
             when 42, 43, 44
               unless ignore_enums
                 # store enumerations
-                if !field['enumerations']
+                unless field['enumerations']
                   field['enumerations'] = []
                 end
                 data = line.split(':')
@@ -156,29 +152,26 @@ namespace :import do
                 field['enumerations'] << enum_hash
               end
             else
-              # skip line
+            # skip line
           end # end case
 
         end	# end if num_spaces == 0
       end # end index > 2
-
     end # end file loop
 
     # save last object
     unless obj.nil?
-      if !field.empty?
+      unless field.empty?
         data_fields << field
         field = {}
       end
       obj.data_fields = data_fields
       obj.save!
     end
-
   end
 
-  desc "fix broken enumerations"
-  task :fix_broken_enums => :environment do
-
+  desc 'fix broken enumerations'
+  task fix_broken_enums: :environment do
     # Space -> InteriorLightingSpecificationMethod
     input = Input.find_by(name: 'Spc')
     input.data_fields.each do |df|
@@ -208,8 +201,8 @@ namespace :import do
     input.save!
   end
 
-  desc "import input fields from json cache"
-  task :input_fields_json => :environment do
+  desc 'import input fields from json cache'
+  task input_fields_json: :environment do
     Input.import_from_json('lib/assets/cbecc_inputs.json')
   end
 end
