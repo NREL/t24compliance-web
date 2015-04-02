@@ -37,17 +37,20 @@ class RunSimulation
     }
     Docker.url = ENV['DOCKER_HOST']
 
-    # What is the longest timeout?
+    logger.info "Docker options are set to #{Docker.options}"
+
+    # Kill after 1 hour at the moment
     docker_container_timeout = 60 * 60 # 60 minutes  # how to catch a timeout error?  test this?
     Excon.defaults[:write_timeout] = docker_container_timeout
     Excon.defaults[:read_timeout] = docker_container_timeout
+    Excon.defaults[:ssl_verify_peer] = false
 
     current_dir = Dir.pwd
     begin
       fail "Simulation file does not exist: #{File.join(simulation.run_path, run_filename)}" unless File.exist? File.join(simulation.run_path, run_filename)
 
       Dir.chdir(simulation.run_path)
-      puts "Current working directory is: #{Dir.getwd}"
+      logger.info "Current working directory is: #{Dir.getwd}"
 
       run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename})
       c = Docker::Container.create('Cmd' => run_command,
@@ -69,6 +72,7 @@ class RunSimulation
 
       # this command is kind of weird. From what I understand, this is the container timeout (defaults to 60 seconds)
       # This may be of interest: http://kimh.github.io/blog/en/docker/running-docker-containers-asynchronously-with-celluloid/
+      logger.info "Calling wait..."
       c.wait(docker_container_timeout)
 
       # Kill the monitoring thread
