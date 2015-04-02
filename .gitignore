@@ -25,6 +25,7 @@ Gemfile.lock
 .DS_STORE
 
 /data/simulations/*
+spec/files/cbecc_com_web_instances/*.out
 dump.rdb
 
 .capistrano

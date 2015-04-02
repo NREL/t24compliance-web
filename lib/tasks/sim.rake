@@ -58,20 +58,27 @@ namespace :sim do
 
   desc "import test project"
   task :import_test_project => :environment do
+
+    Rails.logger = Logger.new(STDOUT)
+
+
     # import some cbecc com models
     u = User.find_by(email: 'test@nrel.gov')
 
     # are we sure that we want to destroy all the users projects?
     u.projects.destroy_all
 
-    files = [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
+    files = []
+    # files += [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
     files += Dir["spec/files/cbecc_com_web_instances/*.xml"]
     files.each do |f|
       p = Project.from_sdd_xml(f)
       p.user_id = u.id
       p.save!
       puts "Imported #{p.name}"
+
+      # round trip testing
+      p.xml_save("#{File.dirname(f)}/#{File.basename(f,'.*')}.out")
     end
   end
-
 end
