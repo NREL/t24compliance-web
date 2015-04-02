@@ -10,6 +10,7 @@ class UndergroundWall
   field :interior_solar_absorptance, type: Float
   field :interior_thermal_absorptance, type: Float
   field :interior_visible_absorptance, type: Float
+
   # should not go in XML:
   field :construction_library_id, type: BSON::ObjectId
 
