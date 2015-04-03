@@ -472,6 +472,7 @@ class Project
               mat.code_category = layer['code_category']
               mat.code_item = layer['code_identifier']
               # save framing_configuration and material (required)
+              mat.framing_depth = layer['framing_depth']
               mat.framing_configuration = layer['framing_configuration']
               mat.framing_material = layer['framing_material']
 

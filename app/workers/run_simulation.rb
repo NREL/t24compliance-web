@@ -53,10 +53,11 @@ class RunSimulation
       logger.info "Current working directory is: #{Dir.getwd}"
 
       run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename})
-      c = Docker::Container.create('Cmd' => run_command,
+      c = Docker::Container.create({'Cmd' => run_command,
                                    'Image' => 'nllong/cbecc-com',
-                                   'AttachStdout' => true
+                                   'AttachStdout' => true}
       )
+      logger.info "Docker container is: #{c.inspect}"
       c.start('Binds' => ["#{simulation.run_path}:/var/cbecc-com-files/run/"])
 
       # Per NEM: Check for tail gem. Most likely will have to be a separate thread.

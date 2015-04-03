@@ -55,7 +55,7 @@ namespace :sim do
     end
   end
 
-  desc 'import test project'
+  desc 'impooutrt test project'
   task import_test_project: :environment do
     # import some cbecc com models
     u = User.find_by(email: 'test@nrel.gov')
@@ -64,7 +64,8 @@ namespace :sim do
     u.projects.destroy_all
 
     files = []
-    # files += [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
+    #files += [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
+    files += [File.join(Rails.root, "spec/files/cbecc_com_instances_3b/020012S-OffSml-CECStd.xml")]
     files += Dir['spec/files/cbecc_com_web_instances/*.xml']
     files.each do |f|
       p = Project.from_sdd_xml(f)

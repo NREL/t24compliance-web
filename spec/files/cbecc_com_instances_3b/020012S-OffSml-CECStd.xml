@@ -1,0 +1,2017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SDDXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RulesetFilename file="CEC 2013 NonRes.bin"/>
+  <Proj>
+    <Name>020012S-OffSml-CECStd</Name>
+    <BldgEngyModelVersion>9</BldgEngyModelVersion>
+    <CreateDate>1428017900</CreateDate>
+    <ModDate>1428069128</ModDate>
+    <RunDate>1427151093</RunDate>
+    <GeometryInpType>Simplified</GeometryInpType>
+    <ZipCode>95814</ZipCode>
+    <DDWeatherFile>D:/AEC Ruleset/branches/CBECC-Com13-BZ/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.ddy</DDWeatherFile>
+    <AnnualWeatherFile>D:/AEC Ruleset/branches/CBECC-Com13-BZ/Data/EPW/SACRAMENTO-EXECUTIVE_724830_CZ2010.epw</AnnualWeatherFile>
+    <ExcptCondNoClgSys>No</ExcptCondNoClgSys>
+    <ExcptCondRtdCap>No</ExcptCondRtdCap>
+    <ExcptCondNarrative>No</ExcptCondNarrative>
+    <AutoHardSize>0</AutoHardSize>
+    <AutoEffInput>0</AutoEffInput>
+    <DefaultDayltgCtrls>0</DefaultDayltgCtrls>
+    <CompType>NewComplete</CompType>
+    <SoftwareVersion>CBECC-Com 2013-3b (717)</SoftwareVersion>
+    <ConsAssm>
+      <Name>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</Name>
+      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
+      <SlabType>UnheatedSlabOnGrade</SlabType>
+      <MatRef index="0">Concrete - 140 lb/ft3 - 6 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Concrete - 140 lb/ft3 - 6 in.</Name>
+      <CodeCat>Concrete</CodeCat>
+      <CodeItem>Concrete - 140 lb/ft3 - 6 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</Name>
+      <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
+      <MatRef index="0">Stucco - 7/8 in.</MatRef>
+      <MatRef index="1">Compliance Insulation R13.99</MatRef>
+      <MatRef index="2">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
+      <MatRef index="3">Gypsum Board - 1/2 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Stucco - 7/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Stucco - 7/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Compliance Insulation R13.99</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R13.99</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Metal Wall Framing - 16 or 24 in. OC</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Metal Wall Framing - 16 or 24 in. OC</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Gypsum Board - 1/2 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Gypsum Board - 1/2 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Default Interior Wall</Name>
+      <CompatibleSurfType>InteriorWall</CompatibleSurfType>
+      <MatRef index="0">Gypsum Board - 5/8 in.</MatRef>
+      <MatRef index="1">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
+      <MatRef index="2">Gypsum Board - 5/8 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Gypsum Board - 5/8 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Gypsum Board - 5/8 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</Name>
+      <CompatibleSurfType>Roof</CompatibleSurfType>
+      <CRRCInitialRefl>0.2</CRRCInitialRefl>
+      <CRRCAgedRefl>0.2</CRRCAgedRefl>
+      <CRRCInitialEmittance>0.85</CRRCInitialEmittance>
+      <CRRCAgedEmittance>0.85</CRRCAgedEmittance>
+      <CRRCProdID>XXXX-XXXX</CRRCProdID>
+      <MatRef index="0">Metal Standing Seam - 1/16 in.</MatRef>
+      <MatRef index="1">Compliance Insulation R24.86</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Metal Standing Seam - 1/16 in.</Name>
+      <CodeCat>Roofing</CodeCat>
+      <CodeItem>Metal Standing Seam - 1/16 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Compliance Insulation R24.86</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R24.86</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</Name>
+      <CompatibleSurfType>ExteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Compliance Insulation R9.83</MatRef>
+      <MatRef index="1">Plywood - 5/8 in.</MatRef>
+      <MatRef index="2">Carpet - 3/4 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Compliance Insulation R9.83</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Compliance Insulation R9.83</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Plywood - 5/8 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Plywood - 5/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Carpet - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Carpet - 3/4 in.</CodeItem>
+    </Mat>
+    <ConsAssm>
+      <Name>Default Interior Floor</Name>
+      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Acoustic Tile - 3/4 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Acoustic Tile - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
+    </Mat>
+    <FenCons>
+      <Name>OperableWindow DoublePane NonMetalFraming TintedGlazing</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>FixedWindow</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>NFRCRated</CertificationMthd>
+      <SHGC>0.25</SHGC>
+      <UFactor>0.36</UFactor>
+      <VT>0.42</VT>
+    </FenCons>
+    <FenCons>
+      <Name>GlazedDoor SinglePane MetalFraming ClearGlazing</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>GlazedDoor</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>NFRCRated</CertificationMthd>
+      <SHGC>0.25</SHGC>
+      <UFactor>0.36</UFactor>
+      <VT>0.42</VT>
+    </FenCons>
+    <Sch>
+      <Name>Office Occupancy</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeOccupancyWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeOccupancyWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeOccupancySun</SchDaySunRef>
+      <SchDayMonRef>OfficeOccupancyWD</SchDayMonRef>
+      <SchDayTueRef>OfficeOccupancyWD</SchDayTueRef>
+      <SchDayWedRef>OfficeOccupancyWD</SchDayWedRef>
+      <SchDayThuRef>OfficeOccupancyWD</SchDayThuRef>
+      <SchDayFriRef>OfficeOccupancyWD</SchDayFriRef>
+      <SchDaySatRef>OfficeOccupancySat</SchDaySatRef>
+      <SchDayHolRef>OfficeOccupancySun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeOccupancySun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancyWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.2</Hr>
+      <Hr index="8">0.95</Hr>
+      <Hr index="9">0.95</Hr>
+      <Hr index="10">0.95</Hr>
+      <Hr index="11">0.95</Hr>
+      <Hr index="12">0.5</Hr>
+      <Hr index="13">0.95</Hr>
+      <Hr index="14">0.95</Hr>
+      <Hr index="15">0.95</Hr>
+      <Hr index="16">0.95</Hr>
+      <Hr index="17">0.3</Hr>
+      <Hr index="18">0.1</Hr>
+      <Hr index="19">0.1</Hr>
+      <Hr index="20">0.1</Hr>
+      <Hr index="21">0.1</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancySat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.1</Hr>
+      <Hr index="13">0.1</Hr>
+      <Hr index="14">0.1</Hr>
+      <Hr index="15">0.1</Hr>
+      <Hr index="16">0.1</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office Receptacle</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeReceptacleWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeReceptacleWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeReceptacleSun</SchDaySunRef>
+      <SchDayMonRef>OfficeReceptacleWD</SchDayMonRef>
+      <SchDayTueRef>OfficeReceptacleWD</SchDayTueRef>
+      <SchDayWedRef>OfficeReceptacleWD</SchDayWedRef>
+      <SchDayThuRef>OfficeReceptacleWD</SchDayThuRef>
+      <SchDayFriRef>OfficeReceptacleWD</SchDayFriRef>
+      <SchDaySatRef>OfficeReceptacleSat</SchDaySatRef>
+      <SchDayHolRef>OfficeReceptacleSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeReceptacleSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.1</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.9</Hr>
+      <Hr index="9">0.9</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.5</Hr>
+      <Hr index="18">0.3</Hr>
+      <Hr index="19">0.3</Hr>
+      <Hr index="20">0.2</Hr>
+      <Hr index="21">0.2</Hr>
+      <Hr index="22">0.1</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.15</Hr>
+      <Hr index="13">0.15</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.15</Hr>
+      <Hr index="16">0.15</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office ServiceHotWater</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeServiceHotWaterWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeServiceHotWaterWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeServiceHotWaterSun</SchDaySunRef>
+      <SchDayMonRef>OfficeServiceHotWaterWD</SchDayMonRef>
+      <SchDayTueRef>OfficeServiceHotWaterWD</SchDayTueRef>
+      <SchDayWedRef>OfficeServiceHotWaterWD</SchDayWedRef>
+      <SchDayThuRef>OfficeServiceHotWaterWD</SchDayThuRef>
+      <SchDayFriRef>OfficeServiceHotWaterWD</SchDayFriRef>
+      <SchDaySatRef>OfficeServiceHotWaterSat</SchDaySatRef>
+      <SchDayHolRef>OfficeServiceHotWaterSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeServiceHotWaterSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.04</Hr>
+      <Hr index="1">0.04</Hr>
+      <Hr index="2">0.04</Hr>
+      <Hr index="3">0.04</Hr>
+      <Hr index="4">0.04</Hr>
+      <Hr index="5">0.07</Hr>
+      <Hr index="6">0.04</Hr>
+      <Hr index="7">0.04</Hr>
+      <Hr index="8">0.04</Hr>
+      <Hr index="9">0.04</Hr>
+      <Hr index="10">0.04</Hr>
+      <Hr index="11">0.06</Hr>
+      <Hr index="12">0.06</Hr>
+      <Hr index="13">0.09</Hr>
+      <Hr index="14">0.06</Hr>
+      <Hr index="15">0.04</Hr>
+      <Hr index="16">0.04</Hr>
+      <Hr index="17">0.04</Hr>
+      <Hr index="18">0.04</Hr>
+      <Hr index="19">0.04</Hr>
+      <Hr index="20">0.04</Hr>
+      <Hr index="21">0.07</Hr>
+      <Hr index="22">0.04</Hr>
+      <Hr index="23">0.04</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.08</Hr>
+      <Hr index="6">0.07</Hr>
+      <Hr index="7">0.19</Hr>
+      <Hr index="8">0.35</Hr>
+      <Hr index="9">0.38</Hr>
+      <Hr index="10">0.39</Hr>
+      <Hr index="11">0.47</Hr>
+      <Hr index="12">0.57</Hr>
+      <Hr index="13">0.54</Hr>
+      <Hr index="14">0.34</Hr>
+      <Hr index="15">0.33</Hr>
+      <Hr index="16">0.44</Hr>
+      <Hr index="17">0.26</Hr>
+      <Hr index="18">0.21</Hr>
+      <Hr index="19">0.15</Hr>
+      <Hr index="20">0.17</Hr>
+      <Hr index="21">0.08</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.08</Hr>
+      <Hr index="6">0.07</Hr>
+      <Hr index="7">0.11</Hr>
+      <Hr index="8">0.15</Hr>
+      <Hr index="9">0.21</Hr>
+      <Hr index="10">0.19</Hr>
+      <Hr index="11">0.23</Hr>
+      <Hr index="12">0.2</Hr>
+      <Hr index="13">0.19</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.12</Hr>
+      <Hr index="16">0.14</Hr>
+      <Hr index="17">0.07</Hr>
+      <Hr index="18">0.07</Hr>
+      <Hr index="19">0.07</Hr>
+      <Hr index="20">0.07</Hr>
+      <Hr index="21">0.09</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office Elevator</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">OfficeElevatorWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeElevatorWk</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>OfficeElevatorWD</SchDayWDRef>
+      <SchDaySunRef>OfficeElevatorSun</SchDaySunRef>
+      <SchDaySatRef>OfficeElevatorSat</SchDaySatRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeElevatorWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.69</Hr>
+      <Hr index="9">0.43</Hr>
+      <Hr index="10">0.37</Hr>
+      <Hr index="11">0.43</Hr>
+      <Hr index="12">0.58</Hr>
+      <Hr index="13">0.48</Hr>
+      <Hr index="14">0.37</Hr>
+      <Hr index="15">0.37</Hr>
+      <Hr index="16">0.46</Hr>
+      <Hr index="17">0.62</Hr>
+      <Hr index="18">0.2</Hr>
+      <Hr index="19">0.12</Hr>
+      <Hr index="20">0.04</Hr>
+      <Hr index="21">0.04</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.16</Hr>
+      <Hr index="8">0.14</Hr>
+      <Hr index="9">0.21</Hr>
+      <Hr index="10">0.18</Hr>
+      <Hr index="11">0.25</Hr>
+      <Hr index="12">0.21</Hr>
+      <Hr index="13">0.13</Hr>
+      <Hr index="14">0.08</Hr>
+      <Hr index="15">0.04</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.06</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office Lights</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeLightsWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeLightsWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>OfficeLightsSun</SchDaySunRef>
+      <SchDayMonRef>OfficeLightsWD</SchDayMonRef>
+      <SchDayTueRef>OfficeLightsWD</SchDayTueRef>
+      <SchDayWedRef>OfficeLightsWD</SchDayWedRef>
+      <SchDayThuRef>OfficeLightsWD</SchDayThuRef>
+      <SchDayFriRef>OfficeLightsWD</SchDayFriRef>
+      <SchDaySatRef>OfficeLightsSat</SchDaySatRef>
+      <SchDayHolRef>OfficeLightsSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeLightsSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeLightsWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.1</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.65</Hr>
+      <Hr index="9">0.65</Hr>
+      <Hr index="10">0.65</Hr>
+      <Hr index="11">0.65</Hr>
+      <Hr index="12">0.65</Hr>
+      <Hr index="13">0.65</Hr>
+      <Hr index="14">0.65</Hr>
+      <Hr index="15">0.65</Hr>
+      <Hr index="16">0.65</Hr>
+      <Hr index="17">0.35</Hr>
+      <Hr index="18">0.3</Hr>
+      <Hr index="19">0.3</Hr>
+      <Hr index="20">0.2</Hr>
+      <Hr index="21">0.2</Hr>
+      <Hr index="22">0.1</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeLightsSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.15</Hr>
+      <Hr index="13">0.15</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.15</Hr>
+      <Hr index="16">0.15</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Assembly Lights</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">AssemblyLightsWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>AssemblyLightsWk</Name>
+      <Type>Fraction</Type>
+      <SchDaySunRef>AssemblyLightsSun</SchDaySunRef>
+      <SchDayMonRef>AssemblyLightsWD</SchDayMonRef>
+      <SchDayTueRef>AssemblyLightsWD</SchDayTueRef>
+      <SchDayWedRef>AssemblyLightsWD</SchDayWedRef>
+      <SchDayThuRef>AssemblyLightsWD</SchDayThuRef>
+      <SchDayFriRef>AssemblyLightsWD</SchDayFriRef>
+      <SchDaySatRef>AssemblyLightsSat</SchDaySatRef>
+      <SchDayHolRef>AssemblyLightsSun</SchDayHolRef>
+      <SchDayClgDDRef>OnDay</SchDayClgDDRef>
+      <SchDayHtgDDRef>OffDay</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OnDay</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">1</Hr>
+      <Hr index="1">1</Hr>
+      <Hr index="2">1</Hr>
+      <Hr index="3">1</Hr>
+      <Hr index="4">1</Hr>
+      <Hr index="5">1</Hr>
+      <Hr index="6">1</Hr>
+      <Hr index="7">1</Hr>
+      <Hr index="8">1</Hr>
+      <Hr index="9">1</Hr>
+      <Hr index="10">1</Hr>
+      <Hr index="11">1</Hr>
+      <Hr index="12">1</Hr>
+      <Hr index="13">1</Hr>
+      <Hr index="14">1</Hr>
+      <Hr index="15">1</Hr>
+      <Hr index="16">1</Hr>
+      <Hr index="17">1</Hr>
+      <Hr index="18">1</Hr>
+      <Hr index="19">1</Hr>
+      <Hr index="20">1</Hr>
+      <Hr index="21">1</Hr>
+      <Hr index="22">1</Hr>
+      <Hr index="23">1</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OffDay</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLightsSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.55</Hr>
+      <Hr index="13">0.55</Hr>
+      <Hr index="14">0.55</Hr>
+      <Hr index="15">0.55</Hr>
+      <Hr index="16">0.55</Hr>
+      <Hr index="17">0.55</Hr>
+      <Hr index="18">0.55</Hr>
+      <Hr index="19">0.55</Hr>
+      <Hr index="20">0.55</Hr>
+      <Hr index="21">0.55</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLightsWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.35</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.35</Hr>
+      <Hr index="9">0.65</Hr>
+      <Hr index="10">0.65</Hr>
+      <Hr index="11">0.65</Hr>
+      <Hr index="12">0.65</Hr>
+      <Hr index="13">0.65</Hr>
+      <Hr index="14">0.65</Hr>
+      <Hr index="15">0.65</Hr>
+      <Hr index="16">0.65</Hr>
+      <Hr index="17">0.65</Hr>
+      <Hr index="18">0.65</Hr>
+      <Hr index="19">0.65</Hr>
+      <Hr index="20">0.65</Hr>
+      <Hr index="21">0.65</Hr>
+      <Hr index="22">0.25</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>AssemblyLightsSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.4</Hr>
+      <Hr index="10">0.4</Hr>
+      <Hr index="11">0.4</Hr>
+      <Hr index="12">0.4</Hr>
+      <Hr index="13">0.4</Hr>
+      <Hr index="14">0.4</Hr>
+      <Hr index="15">0.4</Hr>
+      <Hr index="16">0.4</Hr>
+      <Hr index="17">0.4</Hr>
+      <Hr index="18">0.4</Hr>
+      <Hr index="19">0.4</Hr>
+      <Hr index="20">0.4</Hr>
+      <Hr index="21">0.4</Hr>
+      <Hr index="22">0.4</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office ClgSetPt</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeClgSetPtWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeClgSetPtWk</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>OfficeClgSetPtSun</SchDaySunRef>
+      <SchDayMonRef>OfficeClgSetPtWD</SchDayMonRef>
+      <SchDayTueRef>OfficeClgSetPtWD</SchDayTueRef>
+      <SchDayWedRef>OfficeClgSetPtWD</SchDayWedRef>
+      <SchDayThuRef>OfficeClgSetPtWD</SchDayThuRef>
+      <SchDayFriRef>OfficeClgSetPtWD</SchDayFriRef>
+      <SchDaySatRef>OfficeClgSetPtSat</SchDaySatRef>
+      <SchDayHolRef>OfficeClgSetPtSun</SchDayHolRef>
+      <SchDayClgDDRef>OfficeClgSetPtWD</SchDayClgDDRef>
+      <SchDayHtgDDRef>OfficeClgSetPtWD</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeClgSetPtSun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">85</Hr>
+      <Hr index="1">85</Hr>
+      <Hr index="2">85</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">85</Hr>
+      <Hr index="6">85</Hr>
+      <Hr index="7">85</Hr>
+      <Hr index="8">85</Hr>
+      <Hr index="9">85</Hr>
+      <Hr index="10">85</Hr>
+      <Hr index="11">85</Hr>
+      <Hr index="12">85</Hr>
+      <Hr index="13">85</Hr>
+      <Hr index="14">85</Hr>
+      <Hr index="15">85</Hr>
+      <Hr index="16">85</Hr>
+      <Hr index="17">85</Hr>
+      <Hr index="18">85</Hr>
+      <Hr index="19">85</Hr>
+      <Hr index="20">85</Hr>
+      <Hr index="21">85</Hr>
+      <Hr index="22">85</Hr>
+      <Hr index="23">85</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeClgSetPtWD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">85</Hr>
+      <Hr index="1">85</Hr>
+      <Hr index="2">85</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">75</Hr>
+      <Hr index="6">75</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">75</Hr>
+      <Hr index="20">75</Hr>
+      <Hr index="21">75</Hr>
+      <Hr index="22">75</Hr>
+      <Hr index="23">75</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeClgSetPtSat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">85</Hr>
+      <Hr index="1">85</Hr>
+      <Hr index="2">85</Hr>
+      <Hr index="3">85</Hr>
+      <Hr index="4">85</Hr>
+      <Hr index="5">75</Hr>
+      <Hr index="6">75</Hr>
+      <Hr index="7">75</Hr>
+      <Hr index="8">75</Hr>
+      <Hr index="9">75</Hr>
+      <Hr index="10">75</Hr>
+      <Hr index="11">75</Hr>
+      <Hr index="12">75</Hr>
+      <Hr index="13">75</Hr>
+      <Hr index="14">75</Hr>
+      <Hr index="15">75</Hr>
+      <Hr index="16">75</Hr>
+      <Hr index="17">75</Hr>
+      <Hr index="18">75</Hr>
+      <Hr index="19">85</Hr>
+      <Hr index="20">85</Hr>
+      <Hr index="21">85</Hr>
+      <Hr index="22">85</Hr>
+      <Hr index="23">85</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office HtgSetPt</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeHtgSetPtWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeHtgSetPtWk</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>OfficeHtgSetPtSun</SchDaySunRef>
+      <SchDayMonRef>OfficeHtgSetPtWD</SchDayMonRef>
+      <SchDayTueRef>OfficeHtgSetPtWD</SchDayTueRef>
+      <SchDayWedRef>OfficeHtgSetPtWD</SchDayWedRef>
+      <SchDayThuRef>OfficeHtgSetPtWD</SchDayThuRef>
+      <SchDayFriRef>OfficeHtgSetPtWD</SchDayFriRef>
+      <SchDaySatRef>OfficeHtgSetPtSat</SchDaySatRef>
+      <SchDayHolRef>OfficeHtgSetPtSun</SchDayHolRef>
+      <SchDayClgDDRef>OfficeHtgSetPtWD</SchDayClgDDRef>
+      <SchDayHtgDDRef>OfficeHtgSetPtWD</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeHtgSetPtSun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">60</Hr>
+      <Hr index="1">60</Hr>
+      <Hr index="2">60</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">60</Hr>
+      <Hr index="6">60</Hr>
+      <Hr index="7">60</Hr>
+      <Hr index="8">60</Hr>
+      <Hr index="9">60</Hr>
+      <Hr index="10">60</Hr>
+      <Hr index="11">60</Hr>
+      <Hr index="12">60</Hr>
+      <Hr index="13">60</Hr>
+      <Hr index="14">60</Hr>
+      <Hr index="15">60</Hr>
+      <Hr index="16">60</Hr>
+      <Hr index="17">60</Hr>
+      <Hr index="18">60</Hr>
+      <Hr index="19">60</Hr>
+      <Hr index="20">60</Hr>
+      <Hr index="21">60</Hr>
+      <Hr index="22">60</Hr>
+      <Hr index="23">60</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeHtgSetPtWD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">60</Hr>
+      <Hr index="1">60</Hr>
+      <Hr index="2">60</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">70</Hr>
+      <Hr index="6">70</Hr>
+      <Hr index="7">70</Hr>
+      <Hr index="8">70</Hr>
+      <Hr index="9">70</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">70</Hr>
+      <Hr index="20">70</Hr>
+      <Hr index="21">70</Hr>
+      <Hr index="22">70</Hr>
+      <Hr index="23">70</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeHtgSetPtSat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">60</Hr>
+      <Hr index="1">60</Hr>
+      <Hr index="2">60</Hr>
+      <Hr index="3">60</Hr>
+      <Hr index="4">60</Hr>
+      <Hr index="5">70</Hr>
+      <Hr index="6">70</Hr>
+      <Hr index="7">70</Hr>
+      <Hr index="8">70</Hr>
+      <Hr index="9">70</Hr>
+      <Hr index="10">70</Hr>
+      <Hr index="11">70</Hr>
+      <Hr index="12">70</Hr>
+      <Hr index="13">70</Hr>
+      <Hr index="14">70</Hr>
+      <Hr index="15">70</Hr>
+      <Hr index="16">70</Hr>
+      <Hr index="17">70</Hr>
+      <Hr index="18">70</Hr>
+      <Hr index="19">60</Hr>
+      <Hr index="20">60</Hr>
+      <Hr index="21">60</Hr>
+      <Hr index="22">60</Hr>
+      <Hr index="23">60</Hr>
+    </SchDay>
+    <Sch>
+      <Name>OpqShdgTrans Sch</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">OpqShdgTrans Week</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OpqShdgTrans Week</Name>
+      <Type>Fraction</Type>
+      <SchDayWDRef>OpqShdgTrans ALL</SchDayWDRef>
+      <SchDaySunRef>OpqShdgTrans ALL</SchDaySunRef>
+      <SchDaySatRef>OpqShdgTrans ALL</SchDaySatRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OpqShdgTrans ALL</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <Sch>
+      <Name>Office WtrHtrSetPt</Name>
+      <Type>Temperature</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeWtrHtrSetPtWk</SchWeekRef>
+    </Sch>
+    <SchWeek>
+      <Name>OfficeWtrHtrSetPtWk</Name>
+      <Type>Temperature</Type>
+      <SchDaySunRef>OfficeWtrHtrSetPtSun</SchDaySunRef>
+      <SchDayMonRef>OfficeWtrHtrSetPtWD</SchDayMonRef>
+      <SchDayTueRef>OfficeWtrHtrSetPtWD</SchDayTueRef>
+      <SchDayWedRef>OfficeWtrHtrSetPtWD</SchDayWedRef>
+      <SchDayThuRef>OfficeWtrHtrSetPtWD</SchDayThuRef>
+      <SchDayFriRef>OfficeWtrHtrSetPtWD</SchDayFriRef>
+      <SchDaySatRef>OfficeWtrHtrSetPtSat</SchDaySatRef>
+      <SchDayHolRef>OfficeWtrHtrSetPtSun</SchDayHolRef>
+      <SchDayClgDDRef>OfficeWtrHtrSetPtWD</SchDayClgDDRef>
+      <SchDayHtgDDRef>OfficeWtrHtrSetPtWD</SchDayHtgDDRef>
+    </SchWeek>
+    <SchDay>
+      <Name>OfficeWtrHtrSetPtSun</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">135</Hr>
+      <Hr index="1">135</Hr>
+      <Hr index="2">135</Hr>
+      <Hr index="3">135</Hr>
+      <Hr index="4">135</Hr>
+      <Hr index="5">135</Hr>
+      <Hr index="6">135</Hr>
+      <Hr index="7">135</Hr>
+      <Hr index="8">135</Hr>
+      <Hr index="9">135</Hr>
+      <Hr index="10">135</Hr>
+      <Hr index="11">135</Hr>
+      <Hr index="12">135</Hr>
+      <Hr index="13">135</Hr>
+      <Hr index="14">135</Hr>
+      <Hr index="15">135</Hr>
+      <Hr index="16">135</Hr>
+      <Hr index="17">135</Hr>
+      <Hr index="18">135</Hr>
+      <Hr index="19">135</Hr>
+      <Hr index="20">135</Hr>
+      <Hr index="21">135</Hr>
+      <Hr index="22">135</Hr>
+      <Hr index="23">135</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeWtrHtrSetPtWD</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">135</Hr>
+      <Hr index="1">135</Hr>
+      <Hr index="2">135</Hr>
+      <Hr index="3">135</Hr>
+      <Hr index="4">135</Hr>
+      <Hr index="5">135</Hr>
+      <Hr index="6">135</Hr>
+      <Hr index="7">135</Hr>
+      <Hr index="8">135</Hr>
+      <Hr index="9">135</Hr>
+      <Hr index="10">135</Hr>
+      <Hr index="11">135</Hr>
+      <Hr index="12">135</Hr>
+      <Hr index="13">135</Hr>
+      <Hr index="14">135</Hr>
+      <Hr index="15">135</Hr>
+      <Hr index="16">135</Hr>
+      <Hr index="17">135</Hr>
+      <Hr index="18">135</Hr>
+      <Hr index="19">135</Hr>
+      <Hr index="20">135</Hr>
+      <Hr index="21">135</Hr>
+      <Hr index="22">135</Hr>
+      <Hr index="23">135</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeWtrHtrSetPtSat</Name>
+      <Type>Temperature</Type>
+      <Hr index="0">135</Hr>
+      <Hr index="1">135</Hr>
+      <Hr index="2">135</Hr>
+      <Hr index="3">135</Hr>
+      <Hr index="4">135</Hr>
+      <Hr index="5">135</Hr>
+      <Hr index="6">135</Hr>
+      <Hr index="7">135</Hr>
+      <Hr index="8">135</Hr>
+      <Hr index="9">135</Hr>
+      <Hr index="10">135</Hr>
+      <Hr index="11">135</Hr>
+      <Hr index="12">135</Hr>
+      <Hr index="13">135</Hr>
+      <Hr index="14">135</Hr>
+      <Hr index="15">135</Hr>
+      <Hr index="16">135</Hr>
+      <Hr index="17">135</Hr>
+      <Hr index="18">135</Hr>
+      <Hr index="19">135</Hr>
+      <Hr index="20">135</Hr>
+      <Hr index="21">135</Hr>
+      <Hr index="22">135</Hr>
+      <Hr index="23">135</Hr>
+    </SchDay>
+    <Bldg>
+      <Name>Small Office</Name>
+      <FuncClassMthd>AreaCategoryMethod</FuncClassMthd>
+      <TotStoryCnt>1</TotStoryCnt>
+      <AboveGrdStoryCnt>1</AboveGrdStoryCnt>
+      <Story>
+        <Name>Building Story 1</Name>
+        <Z>0</Z>
+        <FlrToFlrHgt>10.7</FlrToFlrHgt>
+        <FlrToCeilingHgt>10</FlrToCeilingHgt>
+        <Spc>
+          <Name>Perimeter_ZN_1</Name>
+          <ThrmlZnRef>Perimeter_ZN_1 Thermal Zone</ThrmlZnRef>
+          <Area>1221.17</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <IntWall>
+            <Name>Perimeter_ZN_1_wall_east</Name>
+            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter_ZN_1_wall_north</Name>
+            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>580.764</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Perimeter_ZN_1_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1221.17</Area>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Perimeter_ZN_1_wall_south</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>909.065</Area>
+            <Az>180</Az>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_Window_1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_door</Name>
+              <FenConsRef>GlazedDoor SinglePane MetalFraming ClearGlazing</FenConsRef>
+              <Area>42</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_Window_5</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_Window_4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_Window_6</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_Window_2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_1_wall_south_Window_3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+          </ExtWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_ZN_2</Name>
+          <ThrmlZnRef>Perimeter_ZN_2 Thermal Zone</ThrmlZnRef>
+          <Area>724.411</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <ExtWall>
+            <Name>Perimeter_ZN_2_wall_east</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>606.043</Area>
+            <Az>90</Az>
+            <Win>
+              <Name>Perimeter_ZN_2_wall_east_Window_3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_2_wall_east_Window_4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_2_wall_east_Window_2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_2_wall_east_Window_1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+          </ExtWall>
+          <UndgrFlr>
+            <Name>Perimeter_ZN_2_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>724.411</Area>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_ZN_3</Name>
+          <ThrmlZnRef>Perimeter_ZN_3 Thermal Zone</ThrmlZnRef>
+          <Area>1221.17</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <UndgrFlr>
+            <Name>Perimeter_ZN_3_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1221.17</Area>
+          </UndgrFlr>
+          <ExtWall>
+            <Name>Perimeter_ZN_3_wall_north</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>909.065</Area>
+            <Az>0</Az>
+            <Win>
+              <Name>Perimeter_ZN_3_wall_north_Window_5</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_3_wall_north_Window_2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_3_wall_north_Window_1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_3_wall_north_Window_6</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_3_wall_north_Window_3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_3_wall_north_Window_4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_ZN_3_wall_east</Name>
+            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter_ZN_3_wall_south</Name>
+            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>580.764</Area>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Perimeter_ZN_4</Name>
+          <ThrmlZnRef>Perimeter_ZN_4 Thermal Zone</ThrmlZnRef>
+          <Area>724.411</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <IntWall>
+            <Name>Perimeter_ZN_4_wall_south</Name>
+            <AdjacentSpcRef>Perimeter_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <ExtWall>
+            <Name>Perimeter_ZN_4_wall_west</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>606.043</Area>
+            <Az>270</Az>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <Area>30</Area>
+            </Win>
+          </ExtWall>
+          <UndgrFlr>
+            <Name>Perimeter_ZN_4_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>724.411</Area>
+          </UndgrFlr>
+          <IntWall>
+            <Name>Perimeter_ZN_4_wall_east</Name>
+            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>277.742</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter_ZN_4_wall_north</Name>
+            <AdjacentSpcRef>Perimeter_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Core_ZN</Name>
+          <ThrmlZnRef>Core_ZN Thermal Zone</ThrmlZnRef>
+          <Area>1610.9</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <CommRfrgEPD>0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <UndgrFlr>
+            <Name>Core_ZN_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1610.9</Area>
+          </UndgrFlr>
+          <IntWall>
+            <Name>Core_ZN_wall_east</Name>
+            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>277.742</Area>
+          </IntWall>
+        </Spc>
+        <Spc>
+          <Name>Attic</Name>
+          <CondgType>IndirectlyConditioned</CondgType>
+          <ThrmlZnRef>Attic Thermal Zone</ThrmlZnRef>
+          <Area>428.898</Area>
+          <SpcFunc>Unoccupied-Exclude from Gross Floor Area</SpcFunc>
+          <Roof>
+            <Name>Attic_roof_north</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>2126.03</Area>
+            <Az>0</Az>
+            <Tilt>18.4524</Tilt>
+          </Roof>
+          <IntFlr>
+            <Name>Attic_floor_core</Name>
+            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1610.9</Area>
+          </IntFlr>
+          <Roof>
+            <Name>Attic_roof_west</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>1096.48</Area>
+            <Az>270</Az>
+            <Tilt>18.4523</Tilt>
+          </Roof>
+          <ExtFlr>
+            <Name>Attic_soffit_north</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>182.706</Area>
+          </ExtFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_east</Name>
+            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>724.411</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_west</Name>
+            <AdjacentSpcRef>Perimeter_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>724.411</Area>
+          </IntFlr>
+          <Roof>
+            <Name>Attic_roof_east</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>1096.48</Area>
+            <Az>90</Az>
+            <Tilt>18.4523</Tilt>
+          </Roof>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_south</Name>
+            <AdjacentSpcRef>Perimeter_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1221.17</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_north</Name>
+            <AdjacentSpcRef>Perimeter_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1221.17</Area>
+          </IntFlr>
+          <ExtFlr>
+            <Name>Attic_soffit_east</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>123.096</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic_soffit_west</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>123.096</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic_soffit_south</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>182.706</Area>
+          </ExtFlr>
+          <Roof>
+            <Name>Attic_roof_south</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>2126.03</Area>
+            <Az>180</Az>
+            <Tilt>18.4523</Tilt>
+          </Roof>
+        </Spc>
+      </Story>
+      <ThrmlZn>
+        <Name>Attic Thermal Zone</Name>
+        <Type>Unconditioned</Type>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Core_ZN Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>CoreZnPSZ AirSys</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_ZN_1 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perim1ZnPSZ AirSys</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_ZN_2 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perim2ZnPSZ AirSys</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_ZN_3 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perim3ZnPSZ AirSys</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter_ZN_4 Thermal Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perim4ZnPSZ AirSys</PriAirCondgSysRef>
+        <ClgTstatSchRef>Office ClgSetPt</ClgTstatSchRef>
+        <HtgTstatSchRef>Office HtgSetPt</HtgTstatSchRef>
+      </ThrmlZn>
+      <AirSys>
+        <Name>CoreZnPSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Core_ZN Thermal Zone</CtrlZnRef>
+        <AirSeg>
+          <Name>CoreZnSysSupply AirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>CoreZnCoolingCoil</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <CapTotGrossRtd>50421</CapTotGrossRtd>
+            <CapTotNetRtd>31313</CapTotNetRtd>
+            <DXSEER>13</DXSEER>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <CoilHtg>
+            <Name>CoreZnHeatingCoil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <CapTotGrossRtd>46422</CapTotGrossRtd>
+            <CapTotNetRtd>34502.6</CapTotNetRtd>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>CoreZnSupplyFan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowCap>1126.4</FlowCap>
+            <FlowEff>0.5</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrBHP>0.888</MtrBHP>
+            <MtrHP>1</MtrHP>
+            <MtrEff>0.855</MtrEff>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>CoreZnSysReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Direct</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>CoreZn TU</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Core_ZN Thermal Zone</ZnServedRef>
+          <PriAirSegRef>CoreZnSysSupply AirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>CoreZnOAControl</Name>
+          <AirSegSupRef>CoreZnSysSupply AirSeg</AirSegSupRef>
+          <AirSegRetRef>CoreZnSysReturnAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Perim1ZnPSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Perimeter_ZN_1 Thermal Zone</CtrlZnRef>
+        <AirSeg>
+          <Name>Perim1ZnSysSupply AirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>Perim1ZnCoolingCoil</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <CapTotGrossRtd>38222</CapTotGrossRtd>
+            <CapTotNetRtd>34125.1</CapTotNetRtd>
+            <DXSEER>13</DXSEER>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <CoilHtg>
+            <Name>Perim1ZnHeatingCoil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <CapTotGrossRtd>46790.1</CapTotGrossRtd>
+            <CapTotNetRtd>26750.1</CapTotNetRtd>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>Perim1ZnSupplyFan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowCap>1228</FlowCap>
+            <FlowEff>0.5</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrBHP>0.962</MtrBHP>
+            <MtrHP>1</MtrHP>
+            <MtrEff>0.855</MtrEff>
+          </Fan>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perim1 TU</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter_ZN_1 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Perim1ZnSysSupply AirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <AirSeg>
+          <Name>Perim1ZnSysReturn AirSeg</Name>
+          <Type>Return</Type>
+          <Path>Direct</Path>
+        </AirSeg>
+        <OACtrl>
+          <Name>Perime1OAControl</Name>
+          <EconoIntegration>Integrated</EconoIntegration>
+          <AirSegSupRef>Perim1ZnSysSupply AirSeg</AirSegSupRef>
+          <AirSegRetRef>Perim1ZnSysReturn AirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Perim2ZnPSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Perimeter_ZN_2 Thermal Zone</CtrlZnRef>
+        <AirSeg>
+          <Name>Perim2ZnSysSupply AirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>Perim2ZnCoolingCoil</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <CapTotGrossRtd>22674</CapTotGrossRtd>
+            <CapTotNetRtd>21111.6</CapTotNetRtd>
+            <DXSEER>13</DXSEER>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <CoilHtg>
+            <Name>Perim2ZnHeatingCoil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <CapTotGrossRtd>27608.5</CapTotGrossRtd>
+            <CapTotNetRtd>15699.6</CapTotNetRtd>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>Perim2ZnSupplyFan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowCap>723</FlowCap>
+            <FlowEff>0.5</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrBHP>0.571</MtrBHP>
+            <MtrHP>0.75</MtrHP>
+            <MtrEff>0.855</MtrEff>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perim2ZnSysReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Direct</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perim2 TU</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter_ZN_2 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Perim2ZnSysSupply AirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>Perim2OAControl</Name>
+          <AirSegSupRef>Perim2ZnSysSupply AirSeg</AirSegSupRef>
+          <AirSegRetRef>Perim2ZnSysReturnAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Perim3ZnPSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Perimeter_ZN_3 Thermal Zone</CtrlZnRef>
+        <AirSeg>
+          <Name>Perim3ZnSysSupply AirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>Perim3ZnCoolingCoil</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <CapTotGrossRtd>38222</CapTotGrossRtd>
+            <CapTotNetRtd>35447.8</CapTotNetRtd>
+            <DXSEER>13</DXSEER>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <CoilHtg>
+            <Name>Perim3ZnHeatingCoil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <CapTotGrossRtd>41047.9</CapTotGrossRtd>
+            <CapTotNetRtd>23224.2</CapTotNetRtd>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>Perim3ZnSupplyFan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowCap>1040.19</FlowCap>
+            <FlowEff>0.5</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrBHP>0.962</MtrBHP>
+            <MtrHP>1</MtrHP>
+            <MtrEff>0.855</MtrEff>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perim3ZnSysReturn AirSeg</Name>
+          <Type>Return</Type>
+          <Path>Direct</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perim3 TU</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter_ZN_3 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Perim3ZnSysSupply AirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>Perim3 OAControl</Name>
+          <AirSegSupRef>Perim3ZnSysSupply AirSeg</AirSegSupRef>
+          <AirSegRetRef>Perim3ZnSysReturn AirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Perim4ZnPSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Perimeter_ZN_4 Thermal Zone</CtrlZnRef>
+        <AirSeg>
+          <Name>Perim4ZnSysSupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>Perim4ZnCoolingCoil</Name>
+            <Type>DirectExpansion</Type>
+            <FuelSrc>Electric</FuelSrc>
+            <CapTotGrossRtd>22674</CapTotGrossRtd>
+            <CapTotNetRtd>25159.9</CapTotNetRtd>
+            <DXSEER>13</DXSEER>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <CoilHtg>
+            <Name>Perim4ZnHeatingCoil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <CapTotGrossRtd>30354.7</CapTotGrossRtd>
+            <CapTotNetRtd>17704.6</CapTotNetRtd>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>Perim4ZnSupplyFan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowCap>813</FlowCap>
+            <FlowEff>0.5</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrBHP>0.571</MtrBHP>
+            <MtrHP>0.75</MtrHP>
+            <MtrEff>0.855</MtrEff>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perim4ZnSysReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Direct</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perim4 TU</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter_ZN_4 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Perim4ZnSysSupplyAirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>Perim4 OAControl</Name>
+          <AirSegSupRef>Perim4ZnSysSupplyAirSeg</AirSegSupRef>
+          <AirSegRetRef>Perim4ZnSysReturnAirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+    </Bldg>
+    <FluidSys>
+      <Name>SHWFluidSys1</Name>
+      <Type>ServiceHotWater</Type>
+      <WtrHtr>
+        <Name>WaterHeater1</Name>
+        <FluidSegOutRef>SHWSupply1</FluidSegOutRef>
+        <FluidSegMakeupRef>SHWMakeup1</FluidSegMakeupRef>
+        <StorCap>5</StorCap>
+        <EF>0.66</EF>
+        <RE>0.78</RE>
+        <TankOffCycleLossCoef>10</TankOffCycleLossCoef>
+        <CapRtd>3993</CapRtd>
+        <PilotEnergy>750</PilotEnergy>
+      </WtrHtr>
+      <FluidSeg>
+        <Name>SHWSupply1</Name>
+        <Type>PrimarySupply</Type>
+      </FluidSeg>
+      <FluidSeg>
+        <Name>SHWMakeup1</Name>
+        <Type>MakeupFluid</Type>
+        <Src>MunicipalWater</Src>
+      </FluidSeg>
+    </FluidSys>
+    <CrvQuad>
+      <Name>WtHtrStorFIRRatio_fQRatio</Name>
+      <Coef1>0.021826</Coef1>
+      <Coef2>0.97763</Coef2>
+      <Coef3>0.000543</Coef3>
+      <MaxOut>1</MaxOut>
+      <MaxVar1>1</MaxVar1>
+      <MinOut>0.1</MinOut>
+      <MinVar1>0.1</MinVar1>
+    </CrvQuad>
+    <SpcFuncDefaults>
+      <Name>Office Defaults</Name>
+      <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+      <OccSchRef>Office Occupancy</OccSchRef>
+      <IntLtgRegSchRef>Office Lights</IntLtgRegSchRef>
+      <RecptSchRef>Office Receptacle</RecptSchRef>
+      <ProcElecSchRef>Office Receptacle</ProcElecSchRef>
+      <CommRfrgEqpSchRef>Office Receptacle</CommRfrgEqpSchRef>
+      <ElevSchRef>Office Elevator</ElevSchRef>
+      <ProcGasSchRef>Office Receptacle</ProcGasSchRef>
+      <HotWtrHtgSchRef>Office ServiceHotWater</HotWtrHtgSchRef>
+    </SpcFuncDefaults>
+    <Lum>
+      <Name>4x2 T-8 Recessed</Name>
+      <Pwr>64</Pwr>
+    </Lum>
+    <EUseSummary>
+      <Name>EUseSummary</Name>
+      <Title1 index="1">Proposed</Title1>
+      <Title1 index="2">Proposed</Title1>
+      <Title1 index="3">Proposed</Title1>
+      <Title1 index="4">Standard</Title1>
+      <Title1 index="5">Standard</Title1>
+      <Title1 index="6">Standard</Title1>
+      <Title1 index="7">Compliance</Title1>
+      <Title2 index="1">Design</Title2>
+      <Title2 index="2">Design</Title2>
+      <Title2 index="3">Design TDV</Title2>
+      <Title2 index="4">Design</Title2>
+      <Title2 index="5">Design</Title2>
+      <Title2 index="6">Design TDV</Title2>
+      <Title2 index="7">TDV Margin</Title2>
+      <Title3 index="0">End Use</Title3>
+      <Title3 index="1">Site (MWh)</Title3>
+      <Title3 index="2">Site (therms)</Title3>
+      <Title3 index="3">(kBtu/ft�-yr)</Title3>
+      <Title3 index="4">Site (MWh)</Title3>
+      <Title3 index="5">Site (therms)</Title3>
+      <Title3 index="6">(kBtu/ft�-yr)</Title3>
+      <Title3 index="7">(kBtu/ft�-yr)</Title3>
+      <Enduse1 index="0">Space Heating</Enduse1>
+      <Enduse1 index="1">--</Enduse1>
+      <Enduse1 index="2">208</Enduse1>
+      <Enduse1 index="3">7.1</Enduse1>
+      <Enduse1 index="4">--</Enduse1>
+      <Enduse1 index="5">210</Enduse1>
+      <Enduse1 index="6">7.2</Enduse1>
+      <Enduse1 index="7">0.1</Enduse1>
+      <Enduse2 index="0">Space Cooling</Enduse2>
+      <Enduse2 index="1">10.6</Enduse2>
+      <Enduse2 index="2">--</Enduse2>
+      <Enduse2 index="3">75.3</Enduse2>
+      <Enduse2 index="4">10.6</Enduse2>
+      <Enduse2 index="5">--</Enduse2>
+      <Enduse2 index="6">75.2</Enduse2>
+      <Enduse2 index="7">-0.1</Enduse2>
+      <Enduse3 index="0">Indoor Fans</Enduse3>
+      <Enduse3 index="1">21.4</Enduse3>
+      <Enduse3 index="2">--</Enduse3>
+      <Enduse3 index="3">88.6</Enduse3>
+      <Enduse3 index="4">21.4</Enduse3>
+      <Enduse3 index="5">--</Enduse3>
+      <Enduse3 index="6">88.5</Enduse3>
+      <Enduse3 index="7">-0.1</Enduse3>
+      <Enduse4 index="0">Heat Rejection</Enduse4>
+      <Enduse4 index="1">--</Enduse4>
+      <Enduse4 index="2">--</Enduse4>
+      <Enduse4 index="3">--</Enduse4>
+      <Enduse4 index="4">--</Enduse4>
+      <Enduse4 index="5">--</Enduse4>
+      <Enduse4 index="6">--</Enduse4>
+      <Enduse4 index="7">--</Enduse4>
+      <Enduse5 index="0">Pumps &amp; Misc.</Enduse5>
+      <Enduse5 index="1">--</Enduse5>
+      <Enduse5 index="2">--</Enduse5>
+      <Enduse5 index="3">--</Enduse5>
+      <Enduse5 index="4">--</Enduse5>
+      <Enduse5 index="5">--</Enduse5>
+      <Enduse5 index="6">--</Enduse5>
+      <Enduse5 index="7">--</Enduse5>
+      <Enduse6 index="0">Domestic Hot Water</Enduse6>
+      <Enduse6 index="1">--</Enduse6>
+      <Enduse6 index="2">223</Enduse6>
+      <Enduse6 index="3">6.6</Enduse6>
+      <Enduse6 index="4">--</Enduse6>
+      <Enduse6 index="5">220</Enduse6>
+      <Enduse6 index="6">6.5</Enduse6>
+      <Enduse6 index="7">-0.1</Enduse6>
+      <Enduse7 index="0">Indoor Lighting</Enduse7>
+      <Enduse7 index="1">9.3</Enduse7>
+      <Enduse7 index="2">--</Enduse7>
+      <Enduse7 index="3">42.5</Enduse7>
+      <Enduse7 index="4">9.3</Enduse7>
+      <Enduse7 index="5">--</Enduse7>
+      <Enduse7 index="6">42.5</Enduse7>
+      <Enduse7 index="7">--</Enduse7>
+      <Enduse8 index="0">COMPLIANCE TOTAL</Enduse8>
+      <Enduse8 index="1">41.3</Enduse8>
+      <Enduse8 index="2">431</Enduse8>
+      <Enduse8 index="3">220.1</Enduse8>
+      <Enduse8 index="4">41.3</Enduse8>
+      <Enduse8 index="5">430</Enduse8>
+      <Enduse8 index="6">219.9</Enduse8>
+      <Enduse8 index="7">-0.2</Enduse8>
+      <Enduse9 index="0">Receptacle</Enduse9>
+      <Enduse9 index="1">23.6</Enduse9>
+      <Enduse9 index="2">--</Enduse9>
+      <Enduse9 index="3">109.8</Enduse9>
+      <Enduse9 index="4">23.6</Enduse9>
+      <Enduse9 index="5">--</Enduse9>
+      <Enduse9 index="6">109.8</Enduse9>
+      <Enduse10 index="0">Process</Enduse10>
+      <Enduse10 index="1">--</Enduse10>
+      <Enduse10 index="2">--</Enduse10>
+      <Enduse10 index="3">--</Enduse10>
+      <Enduse10 index="4">--</Enduse10>
+      <Enduse10 index="5">--</Enduse10>
+      <Enduse10 index="6">--</Enduse10>
+      <Enduse11 index="0">Process Ltg</Enduse11>
+      <Enduse11 index="1">--</Enduse11>
+      <Enduse11 index="2">--</Enduse11>
+      <Enduse11 index="3">--</Enduse11>
+      <Enduse11 index="4">--</Enduse11>
+      <Enduse11 index="5">--</Enduse11>
+      <Enduse11 index="6">--</Enduse11>
+      <Enduse12 index="0">TOTAL</Enduse12>
+      <Enduse12 index="1">64.9</Enduse12>
+      <Enduse12 index="2">431</Enduse12>
+      <Enduse12 index="3">329.9</Enduse12>
+      <Enduse12 index="4">64.9</Enduse12>
+      <Enduse12 index="5">430</Enduse12>
+      <Enduse12 index="6">329.7</Enduse12>
+      <ZoneUMLHsLoaded index="0">1</ZoneUMLHsLoaded>
+      <ZoneUMLHsLoaded index="1">1</ZoneUMLHsLoaded>
+      <ZoneUMLHs index="0">clg: 0  htg: 0  'Attic Thermal Zone'
+clg: 0  htg: 0  'Core_ZN Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_1 Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_2 Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_3 Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_4 Thermal Zone'</ZoneUMLHs>
+      <ZoneUMLHs index="1">clg: 0  htg: 0  'Attic Thermal Zone'
+clg: 0  htg: 0  'Core_ZN Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_1 Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_2 Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_3 Thermal Zone'
+clg: 0  htg: 0  'Perimeter_ZN_4 Thermal Zone'</ZoneUMLHs>
+      <SimSummary index="0">Successful (103 warnings)</SimSummary>
+      <SimSummary index="2">Unsuccessful</SimSummary>
+      <PassFail>FAIL</PassFail>
+    </EUseSummary>
+  </Proj>
+</SDDXML>
