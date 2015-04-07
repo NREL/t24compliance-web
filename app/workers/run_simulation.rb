@@ -34,7 +34,8 @@ class RunSimulation
       Docker.url = ENV['DOCKER_HOST']
       logger.info "Docker options are set to #{Docker.options}"
     else
-      logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux) if not, set DOCKER_HOST ENV variable to the Docker socket'
+      ENV['DOCKER_URL'] = 'unix:///var/run/docker.sock' unless ENV['DOCKER_URL']
+      logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux with a socket) if not, set DOCKER_HOST ENV variable to the Docker socket'
     end
 
     # Kill after 1 hour at the moment
@@ -51,6 +52,7 @@ class RunSimulation
       logger.info "Current working directory is: #{Dir.getwd}"
 
       run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename})
+      logger.info "Docker run method is: #{run_command}"
       c = Docker::Container.create({'Cmd' => run_command,
                                    'Image' => 'nllong/cbecc-com',
                                    'AttachStdout' => true}

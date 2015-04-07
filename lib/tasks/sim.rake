@@ -1,6 +1,10 @@
 namespace :sim do
   desc 'test docker'
   task docker_test: :environment do
+
+
+
+
     if ENV['DOCKER_HOST']
       puts "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
     else

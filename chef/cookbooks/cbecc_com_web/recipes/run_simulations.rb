@@ -9,7 +9,7 @@ include_recipe 'redis2'
 redis_instance 'cbecc_com_queue'
 
 # docker
-include_recipe 'docker'
+include_recipe 'docker' # need to make sure that we upgrade
 
 # add users in a deploy group
 node[:cbecc_com_web][:deploy_users].each do |u|
