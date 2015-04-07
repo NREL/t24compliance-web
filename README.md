@@ -140,7 +140,6 @@ sudo chef-client
 Currently the worker is the same of the server, however, this does not need the case. To start a worker on the server run the following in the background
 
 ```
-export DOCKER_HOST=tcp://localhost:2376
 cd /var/www/cbecc-com-web/current/
 bundle exec sidekiq -e production
 ```
