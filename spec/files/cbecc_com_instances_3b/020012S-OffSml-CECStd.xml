@@ -124,7 +124,7 @@
       <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
     </Mat>
     <FenCons>
-      <Name>OperableWindow DoublePane NonMetalFraming TintedGlazing</Name>
+      <Name>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</Name>
       <FenType>VerticalFenestration</FenType>
       <FenProdType>FixedWindow</FenProdType>
       <AssmContext>Manufactured</AssmContext>
@@ -134,7 +134,7 @@
       <VT>0.42</VT>
     </FenCons>
     <FenCons>
-      <Name>GlazedDoor SinglePane MetalFraming ClearGlazing</Name>
+      <Name>GlazedDoor SinglePane MetalFraming NoDivider ClearGlazing</Name>
       <FenType>VerticalFenestration</FenType>
       <FenProdType>GlazedDoor</FenProdType>
       <AssmContext>Manufactured</AssmContext>
@@ -1217,37 +1217,37 @@
             <Az>180</Az>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_door</Name>
-              <FenConsRef>GlazedDoor SinglePane MetalFraming ClearGlazing</FenConsRef>
+              <FenConsRef>GlazedDoor SinglePane MetalFraming NoDivider ClearGlazing</FenConsRef>
               <Area>42</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_5</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_6</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
           </ExtWall>
@@ -1267,22 +1267,22 @@
             <Az>90</Az>
             <Win>
               <Name>Perimeter_ZN_2_wall_east_Window_3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_2_wall_east_Window_4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_2_wall_east_Window_2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_2_wall_east_Window_1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
           </ExtWall>
@@ -1312,32 +1312,32 @@
             <Az>0</Az>
             <Win>
               <Name>Perimeter_ZN_3_wall_north_Window_5</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_3_wall_north_Window_2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_3_wall_north_Window_1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_3_wall_north_Window_6</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_3_wall_north_Window_3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_3_wall_north_Window_4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
           </ExtWall>
@@ -1375,22 +1375,22 @@
             <Az>270</Az>
             <Win>
               <Name>Perimeter_ZN_4_wall_west_Window_1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_4_wall_west_Window_2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_4_wall_west_Window_4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_4_wall_west_Window_3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30</Area>
             </Win>
           </ExtWall>
