@@ -135,6 +135,16 @@ sudo chef-client
   bundle exec cap production nginx:restart
   ```
 
+#### Worker Nodes
+
+Currently the worker is the same of the server, however, this does not need the case. To start a worker on the server run the following in the background
+
+```
+export DOCKER_HOST=tcp://localhost:2376
+cd /var/www/cbecc-com-web/current/
+bundle exec sidekiq -e production
+```
+
 ### Asset Pipeline Hints
 
 * In your Sass file, use 'font-path' to include font libraries.  This may be a problem when importing 3rd-party css into your project (ex: ui-grid)
@@ -163,4 +173,5 @@ sudo chef-client
     ```
     localStorage.clear()
     ```
+
 

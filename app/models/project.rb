@@ -3,6 +3,7 @@ class Project
   include Mongoid::Timestamps
 
   field :name, type: String
+  field :import_filename, type: String
   field :building_energy_model_version, type: Integer
   field :geometry_input_type, type: String
   field :number_time_steps_per_hour, type: Integer
@@ -604,6 +605,7 @@ class Project
       meta = {model_name: 'project', xml_name: 'Proj'}
       if h && h['SDDXML'] && h['SDDXML']['Proj']
         p = Project.create_from_sdd_json(meta, h['SDDXML']['Proj'])
+        p.import_filename = filename
         if p
           p.create_children_from_sdd_json(meta, h['SDDXML']['Proj'])
           p.save!

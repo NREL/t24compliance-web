@@ -10,13 +10,15 @@ namespace :sim do
     # This section needs to go into an initializer
     # If you are using boot2docker, then you have to deal with all these shananigans
     # https://github.com/swipely/docker-api/issues/202
-    cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
-    Docker.options = {
-      client_cert: File.join(cert_path, 'cert.pem'),
-      client_key: File.join(cert_path, 'key.pem'),
-      ssl_ca_file: File.join(cert_path, 'ca.pem'),
-      scheme: 'https' # This is important when the URL starts with tcp://
-    }
+    if ENV['DOCKER_CERT_PATH']
+      cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
+      Docker.options = {
+        client_cert: File.join(cert_path, 'cert.pem'),
+        client_key: File.join(cert_path, 'key.pem'),
+        ssl_ca_file: File.join(cert_path, 'ca.pem'),
+        scheme: 'https' # This is important when the URL starts with tcp://
+      }
+    end
 
     Docker.url = ENV['DOCKER_HOST']
 
@@ -60,8 +62,12 @@ namespace :sim do
     # import some cbecc com models
     u = User.find_by(email: 'test@nrel.gov')
 
-    # are we sure that we want to destroy all the users projects?
-    u.projects.destroy_all
+
+    # remove the old projects
+    projects = u.projects.exists(import_filename: true)
+    puts "Removing #{projects.count} projects"
+
+    projects.each {|p| p.delete}
 
     files = []
     #files += [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
