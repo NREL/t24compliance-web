@@ -7,6 +7,7 @@ class Simulation
   field :percent_complete, type: Float
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
+  field :error_messages, type: Array
 
   # compliance report
   field :compliance_report_pdf_path, type: String
@@ -20,11 +21,14 @@ class Simulation
   def run
     ## Temp Code
     # clear out the queue until we have proper queue management
-    require 'sidekiq/api'
-    Sidekiq::Queue.new.clear
+    # require 'sidekiq/api'
+    #Sidekiq::Queue.new.clear
     # For now just copy in the example model that we are running into the folder under the new filename
     ## End Temp Code
 
+    # clear out the object
+
+    clear_results
     RunSimulation.perform_async(id)
   end
 
@@ -34,6 +38,16 @@ class Simulation
       logger.info "Removing simulation run directory #{run_path}"
       FileUtils.rm_rf run_path
     end
+  end
+
+  def clear_results
+    self.status = 'init'
+    self.percent_complete = 0
+    self.cbecc_code = nil
+    self.cbecc_code_description = ''
+    self.error_messages = []
+
+    save!
   end
 
   def run_path

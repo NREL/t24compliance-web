@@ -13,7 +13,7 @@ cbecc.controller('ModalConstructionLibraryCtrl', ['$scope', '$modalInstance', '$
   } else if (params.type == 'Underground Wall Construction') {
     $scope.type = 'UndergroundWall';
   } else if (params.type == 'Roof Construction') {
-    $scope.type = 'ExteriorRoof';
+    $scope.type = 'Roof';
   } else if (params.type == 'Interior Floor Construction') {
     $scope.type = 'InteriorFloor';
   } else if (params.type == 'Exterior Floor Construction') {

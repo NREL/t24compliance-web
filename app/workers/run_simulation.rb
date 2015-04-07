@@ -93,6 +93,15 @@ class RunSimulation
       File.delete File.join(simulation.run_path, f) if File.exist? File.join(simulation.run_path, f)
     end
 
+    process_results simulation
+
+    simulation.save!
+  end
+
+  private
+
+  def process_results(simulation)
+    log_file = nil
     Dir["#{simulation.run_path}/*"].each do |f|
       if f =~ /AnalysisResults-BEES.pdf/
         logger.info 'saving the compliance report path to model'
@@ -109,7 +118,7 @@ class RunSimulation
         simulation.cbecc_code = j.keys.first.to_s.to_i
         simulation.cbecc_code_description = j.values.first
       elsif f =~ /.*.log/
-
+        log_file = f
       elsif f =~ /.*\s-\sab.*/
         logger.info "Annual baseline results #{f}"
       elsif f =~ /.*\s-\szb.*/
@@ -119,6 +128,16 @@ class RunSimulation
       end
     end
 
-    simulation.save!
+    # parse the log file for any errors
+    errors = []
+    if log_file && File.exist?(log_file)
+      s = File.read log_file
+      s.scan(/Error:\s{2}.*$/).each do |error|
+        errors << error
+      end
+
+      simulation.error_messages = errors
+    end
   end
+
 end

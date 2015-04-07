@@ -55,7 +55,7 @@
     </ConsAssm>
     <ConsAssm>
       <Name>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</Name>
-      <CompatibleSurfType>ExteriorRoof</CompatibleSurfType>
+      <CompatibleSurfType>Roof</CompatibleSurfType>
       <MatRef index="0">Asphalt shingles - 1/4 in.</MatRef>
       <MatRef index="1">Building Paper - 1/16 in.</MatRef>
       <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
