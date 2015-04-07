@@ -28,13 +28,16 @@ class RunSimulation
       fail 'No Docker IP found. Set DOCKER_HOST ENV variable to the Docker socket'
     end
 
-    cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
-    Docker.options = {
-      client_cert: File.join(cert_path, 'cert.pem'),
-      client_key: File.join(cert_path, 'key.pem'),
-      ssl_ca_file: File.join(cert_path, 'ca.pem'),
-      scheme: 'https' # This is important when the URL starts with tcp://
-    }
+    if ENV['DOCKER_CERT_PATH']
+      cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
+      Docker.options = {
+        client_cert: File.join(cert_path, 'cert.pem'),
+        client_key: File.join(cert_path, 'key.pem'),
+        ssl_ca_file: File.join(cert_path, 'ca.pem'),
+        scheme: 'https' # This is important when the URL starts with tcp://
+      }
+    end
+
     Docker.url = ENV['DOCKER_HOST']
 
     logger.info "Docker options are set to #{Docker.options}"
