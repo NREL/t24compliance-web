@@ -24,23 +24,18 @@ class RunSimulation
     # https://github.com/swipely/docker-api/issues/202
     if ENV['DOCKER_HOST']
       logger.info "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
-    else
-      fail 'No Docker IP found. Set DOCKER_HOST ENV variable to the Docker socket'
-    end
-
-    if ENV['DOCKER_CERT_PATH']
       cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
       Docker.options = {
-        client_cert: File.join(cert_path, 'cert.pem'),
-        client_key: File.join(cert_path, 'key.pem'),
-        ssl_ca_file: File.join(cert_path, 'ca.pem'),
-        scheme: 'https' # This is important when the URL starts with tcp://
+          client_cert: File.join(cert_path, 'cert.pem'),
+          client_key: File.join(cert_path, 'key.pem'),
+          ssl_ca_file: File.join(cert_path, 'ca.pem'),
+          scheme: 'https' # This is important when the URL starts with tcp://
       }
+      Docker.url = ENV['DOCKER_HOST']
+      logger.info "Docker options are set to #{Docker.options}"
+    else
+      logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux) if not, set DOCKER_HOST ENV variable to the Docker socket'
     end
-
-    Docker.url = ENV['DOCKER_HOST']
-
-    logger.info "Docker options are set to #{Docker.options}"
 
     # Kill after 1 hour at the moment
     docker_container_timeout = 60 * 60 # 60 minutes  # how to catch a timeout error?  test this?
