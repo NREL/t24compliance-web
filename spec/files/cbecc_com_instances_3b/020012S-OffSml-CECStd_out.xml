@@ -13,7 +13,7 @@
     <DefaultDayltgCtrls>0</DefaultDayltgCtrls>
     <CompType>NewComplete</CompType>
     <SoftwareVersion>CBECC-Com 2013-3b (717)</SoftwareVersion>
-    <CreateDate>1428422035</CreateDate>
+    <CreateDate>1428422627</CreateDate>
     <AutoHardSize>1</AutoHardSize>
     <AutoEffInput>1</AutoEffInput>
     <ConsAssm>
@@ -168,352 +168,6 @@
       <UFactor>0.36</UFactor>
       <VT>0.42</VT>
     </FenCons>
-    <FenCons>
-      <Name>GlazedDoor SinglePane MetalFraming NoDivider ClearGlazing</Name>
-      <FenType>VerticalFenestration</FenType>
-      <FenProdType>GlazedDoor</FenProdType>
-      <AssmContext>Manufactured</AssmContext>
-      <CertificationMthd>NFRCRated</CertificationMthd>
-      <SHGC>0.25</SHGC>
-      <UFactor>0.36</UFactor>
-      <VT>0.42</VT>
-    </FenCons>
-    <SchDay>
-      <Name>OfficeOccupancySun</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0</Hr>
-      <Hr index="1">0</Hr>
-      <Hr index="2">0</Hr>
-      <Hr index="3">0</Hr>
-      <Hr index="4">0</Hr>
-      <Hr index="5">0</Hr>
-      <Hr index="6">0.05</Hr>
-      <Hr index="7">0.05</Hr>
-      <Hr index="8">0.05</Hr>
-      <Hr index="9">0.05</Hr>
-      <Hr index="10">0.05</Hr>
-      <Hr index="11">0.05</Hr>
-      <Hr index="12">0.05</Hr>
-      <Hr index="13">0.05</Hr>
-      <Hr index="14">0.05</Hr>
-      <Hr index="15">0.05</Hr>
-      <Hr index="16">0.05</Hr>
-      <Hr index="17">0.05</Hr>
-      <Hr index="18">0</Hr>
-      <Hr index="19">0</Hr>
-      <Hr index="20">0</Hr>
-      <Hr index="21">0</Hr>
-      <Hr index="22">0</Hr>
-      <Hr index="23">0</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeOccupancyWD</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0</Hr>
-      <Hr index="1">0</Hr>
-      <Hr index="2">0</Hr>
-      <Hr index="3">0</Hr>
-      <Hr index="4">0</Hr>
-      <Hr index="5">0</Hr>
-      <Hr index="6">0.1</Hr>
-      <Hr index="7">0.2</Hr>
-      <Hr index="8">0.95</Hr>
-      <Hr index="9">0.95</Hr>
-      <Hr index="10">0.95</Hr>
-      <Hr index="11">0.95</Hr>
-      <Hr index="12">0.5</Hr>
-      <Hr index="13">0.95</Hr>
-      <Hr index="14">0.95</Hr>
-      <Hr index="15">0.95</Hr>
-      <Hr index="16">0.95</Hr>
-      <Hr index="17">0.3</Hr>
-      <Hr index="18">0.1</Hr>
-      <Hr index="19">0.1</Hr>
-      <Hr index="20">0.1</Hr>
-      <Hr index="21">0.1</Hr>
-      <Hr index="22">0.05</Hr>
-      <Hr index="23">0.05</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeOccupancySat</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0</Hr>
-      <Hr index="1">0</Hr>
-      <Hr index="2">0</Hr>
-      <Hr index="3">0</Hr>
-      <Hr index="4">0</Hr>
-      <Hr index="5">0</Hr>
-      <Hr index="6">0.1</Hr>
-      <Hr index="7">0.1</Hr>
-      <Hr index="8">0.3</Hr>
-      <Hr index="9">0.3</Hr>
-      <Hr index="10">0.3</Hr>
-      <Hr index="11">0.3</Hr>
-      <Hr index="12">0.1</Hr>
-      <Hr index="13">0.1</Hr>
-      <Hr index="14">0.1</Hr>
-      <Hr index="15">0.1</Hr>
-      <Hr index="16">0.1</Hr>
-      <Hr index="17">0.05</Hr>
-      <Hr index="18">0.05</Hr>
-      <Hr index="19">0</Hr>
-      <Hr index="20">0</Hr>
-      <Hr index="21">0</Hr>
-      <Hr index="22">0</Hr>
-      <Hr index="23">0</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeReceptacleSun</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0.05</Hr>
-      <Hr index="1">0.05</Hr>
-      <Hr index="2">0.05</Hr>
-      <Hr index="3">0.05</Hr>
-      <Hr index="4">0.05</Hr>
-      <Hr index="5">0.05</Hr>
-      <Hr index="6">0.05</Hr>
-      <Hr index="7">0.05</Hr>
-      <Hr index="8">0.05</Hr>
-      <Hr index="9">0.05</Hr>
-      <Hr index="10">0.05</Hr>
-      <Hr index="11">0.05</Hr>
-      <Hr index="12">0.05</Hr>
-      <Hr index="13">0.05</Hr>
-      <Hr index="14">0.05</Hr>
-      <Hr index="15">0.05</Hr>
-      <Hr index="16">0.05</Hr>
-      <Hr index="17">0.05</Hr>
-      <Hr index="18">0.05</Hr>
-      <Hr index="19">0.05</Hr>
-      <Hr index="20">0.05</Hr>
-      <Hr index="21">0.05</Hr>
-      <Hr index="22">0.05</Hr>
-      <Hr index="23">0.05</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeReceptacleWD</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0.05</Hr>
-      <Hr index="1">0.05</Hr>
-      <Hr index="2">0.05</Hr>
-      <Hr index="3">0.05</Hr>
-      <Hr index="4">0.05</Hr>
-      <Hr index="5">0.1</Hr>
-      <Hr index="6">0.1</Hr>
-      <Hr index="7">0.3</Hr>
-      <Hr index="8">0.9</Hr>
-      <Hr index="9">0.9</Hr>
-      <Hr index="10">0.9</Hr>
-      <Hr index="11">0.9</Hr>
-      <Hr index="12">0.9</Hr>
-      <Hr index="13">0.9</Hr>
-      <Hr index="14">0.9</Hr>
-      <Hr index="15">0.9</Hr>
-      <Hr index="16">0.9</Hr>
-      <Hr index="17">0.5</Hr>
-      <Hr index="18">0.3</Hr>
-      <Hr index="19">0.3</Hr>
-      <Hr index="20">0.2</Hr>
-      <Hr index="21">0.2</Hr>
-      <Hr index="22">0.1</Hr>
-      <Hr index="23">0.05</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeReceptacleSat</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0.05</Hr>
-      <Hr index="1">0.05</Hr>
-      <Hr index="2">0.05</Hr>
-      <Hr index="3">0.05</Hr>
-      <Hr index="4">0.05</Hr>
-      <Hr index="5">0.05</Hr>
-      <Hr index="6">0.1</Hr>
-      <Hr index="7">0.1</Hr>
-      <Hr index="8">0.3</Hr>
-      <Hr index="9">0.3</Hr>
-      <Hr index="10">0.3</Hr>
-      <Hr index="11">0.3</Hr>
-      <Hr index="12">0.15</Hr>
-      <Hr index="13">0.15</Hr>
-      <Hr index="14">0.15</Hr>
-      <Hr index="15">0.15</Hr>
-      <Hr index="16">0.15</Hr>
-      <Hr index="17">0.05</Hr>
-      <Hr index="18">0.05</Hr>
-      <Hr index="19">0.05</Hr>
-      <Hr index="20">0.05</Hr>
-      <Hr index="21">0.05</Hr>
-      <Hr index="22">0.05</Hr>
-      <Hr index="23">0.05</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeServiceHotWaterSun</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0.04</Hr>
-      <Hr index="1">0.04</Hr>
-      <Hr index="2">0.04</Hr>
-      <Hr index="3">0.04</Hr>
-      <Hr index="4">0.04</Hr>
-      <Hr index="5">0.07</Hr>
-      <Hr index="6">0.04</Hr>
-      <Hr index="7">0.04</Hr>
-      <Hr index="8">0.04</Hr>
-      <Hr index="9">0.04</Hr>
-      <Hr index="10">0.04</Hr>
-      <Hr index="11">0.06</Hr>
-      <Hr index="12">0.06</Hr>
-      <Hr index="13">0.09</Hr>
-      <Hr index="14">0.06</Hr>
-      <Hr index="15">0.04</Hr>
-      <Hr index="16">0.04</Hr>
-      <Hr index="17">0.04</Hr>
-      <Hr index="18">0.04</Hr>
-      <Hr index="19">0.04</Hr>
-      <Hr index="20">0.04</Hr>
-      <Hr index="21">0.07</Hr>
-      <Hr index="22">0.04</Hr>
-      <Hr index="23">0.04</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeServiceHotWaterWD</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0.05</Hr>
-      <Hr index="1">0.05</Hr>
-      <Hr index="2">0.05</Hr>
-      <Hr index="3">0.05</Hr>
-      <Hr index="4">0.05</Hr>
-      <Hr index="5">0.08</Hr>
-      <Hr index="6">0.07</Hr>
-      <Hr index="7">0.19</Hr>
-      <Hr index="8">0.35</Hr>
-      <Hr index="9">0.38</Hr>
-      <Hr index="10">0.39</Hr>
-      <Hr index="11">0.47</Hr>
-      <Hr index="12">0.57</Hr>
-      <Hr index="13">0.54</Hr>
-      <Hr index="14">0.34</Hr>
-      <Hr index="15">0.33</Hr>
-      <Hr index="16">0.44</Hr>
-      <Hr index="17">0.26</Hr>
-      <Hr index="18">0.21</Hr>
-      <Hr index="19">0.15</Hr>
-      <Hr index="20">0.17</Hr>
-      <Hr index="21">0.08</Hr>
-      <Hr index="22">0.05</Hr>
-      <Hr index="23">0.05</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeServiceHotWaterSat</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0.05</Hr>
-      <Hr index="1">0.05</Hr>
-      <Hr index="2">0.05</Hr>
-      <Hr index="3">0.05</Hr>
-      <Hr index="4">0.05</Hr>
-      <Hr index="5">0.08</Hr>
-      <Hr index="6">0.07</Hr>
-      <Hr index="7">0.11</Hr>
-      <Hr index="8">0.15</Hr>
-      <Hr index="9">0.21</Hr>
-      <Hr index="10">0.19</Hr>
-      <Hr index="11">0.23</Hr>
-      <Hr index="12">0.2</Hr>
-      <Hr index="13">0.19</Hr>
-      <Hr index="14">0.15</Hr>
-      <Hr index="15">0.12</Hr>
-      <Hr index="16">0.14</Hr>
-      <Hr index="17">0.07</Hr>
-      <Hr index="18">0.07</Hr>
-      <Hr index="19">0.07</Hr>
-      <Hr index="20">0.07</Hr>
-      <Hr index="21">0.09</Hr>
-      <Hr index="22">0.05</Hr>
-      <Hr index="23">0.05</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeElevatorWD</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0</Hr>
-      <Hr index="1">0</Hr>
-      <Hr index="2">0</Hr>
-      <Hr index="3">0</Hr>
-      <Hr index="4">0</Hr>
-      <Hr index="5">0</Hr>
-      <Hr index="6">0</Hr>
-      <Hr index="7">0.35</Hr>
-      <Hr index="8">0.69</Hr>
-      <Hr index="9">0.43</Hr>
-      <Hr index="10">0.37</Hr>
-      <Hr index="11">0.43</Hr>
-      <Hr index="12">0.58</Hr>
-      <Hr index="13">0.48</Hr>
-      <Hr index="14">0.37</Hr>
-      <Hr index="15">0.37</Hr>
-      <Hr index="16">0.46</Hr>
-      <Hr index="17">0.62</Hr>
-      <Hr index="18">0.2</Hr>
-      <Hr index="19">0.12</Hr>
-      <Hr index="20">0.04</Hr>
-      <Hr index="21">0.04</Hr>
-      <Hr index="22">0</Hr>
-      <Hr index="23">0</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeElevatorSat</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0</Hr>
-      <Hr index="1">0</Hr>
-      <Hr index="2">0</Hr>
-      <Hr index="3">0</Hr>
-      <Hr index="4">0</Hr>
-      <Hr index="5">0</Hr>
-      <Hr index="6">0</Hr>
-      <Hr index="7">0.16</Hr>
-      <Hr index="8">0.14</Hr>
-      <Hr index="9">0.21</Hr>
-      <Hr index="10">0.18</Hr>
-      <Hr index="11">0.25</Hr>
-      <Hr index="12">0.21</Hr>
-      <Hr index="13">0.13</Hr>
-      <Hr index="14">0.08</Hr>
-      <Hr index="15">0.04</Hr>
-      <Hr index="16">0.05</Hr>
-      <Hr index="17">0.06</Hr>
-      <Hr index="18">0</Hr>
-      <Hr index="19">0</Hr>
-      <Hr index="20">0</Hr>
-      <Hr index="21">0</Hr>
-      <Hr index="22">0</Hr>
-      <Hr index="23">0</Hr>
-    </SchDay>
-    <SchDay>
-      <Name>OfficeElevatorSun</Name>
-      <Type>Fraction</Type>
-      <Hr index="0">0</Hr>
-      <Hr index="1">0</Hr>
-      <Hr index="2">0</Hr>
-      <Hr index="3">0</Hr>
-      <Hr index="4">0</Hr>
-      <Hr index="5">0</Hr>
-      <Hr index="6">0</Hr>
-      <Hr index="7">0</Hr>
-      <Hr index="8">0</Hr>
-      <Hr index="9">0</Hr>
-      <Hr index="10">0</Hr>
-      <Hr index="11">0</Hr>
-      <Hr index="12">0</Hr>
-      <Hr index="13">0</Hr>
-      <Hr index="14">0</Hr>
-      <Hr index="15">0</Hr>
-      <Hr index="16">0</Hr>
-      <Hr index="17">0</Hr>
-      <Hr index="18">0</Hr>
-      <Hr index="19">0</Hr>
-      <Hr index="20">0</Hr>
-      <Hr index="21">0</Hr>
-      <Hr index="22">0</Hr>
-      <Hr index="23">0</Hr>
-    </SchDay>
     <SchDay>
       <Name>OfficeLightsSun</Name>
       <Type>Fraction</Type>
@@ -1018,6 +672,342 @@
       <Hr index="22">135</Hr>
       <Hr index="23">135</Hr>
     </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancySun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancyWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.2</Hr>
+      <Hr index="8">0.95</Hr>
+      <Hr index="9">0.95</Hr>
+      <Hr index="10">0.95</Hr>
+      <Hr index="11">0.95</Hr>
+      <Hr index="12">0.5</Hr>
+      <Hr index="13">0.95</Hr>
+      <Hr index="14">0.95</Hr>
+      <Hr index="15">0.95</Hr>
+      <Hr index="16">0.95</Hr>
+      <Hr index="17">0.3</Hr>
+      <Hr index="18">0.1</Hr>
+      <Hr index="19">0.1</Hr>
+      <Hr index="20">0.1</Hr>
+      <Hr index="21">0.1</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeOccupancySat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.1</Hr>
+      <Hr index="13">0.1</Hr>
+      <Hr index="14">0.1</Hr>
+      <Hr index="15">0.1</Hr>
+      <Hr index="16">0.1</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.05</Hr>
+      <Hr index="7">0.05</Hr>
+      <Hr index="8">0.05</Hr>
+      <Hr index="9">0.05</Hr>
+      <Hr index="10">0.05</Hr>
+      <Hr index="11">0.05</Hr>
+      <Hr index="12">0.05</Hr>
+      <Hr index="13">0.05</Hr>
+      <Hr index="14">0.05</Hr>
+      <Hr index="15">0.05</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.1</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.3</Hr>
+      <Hr index="8">0.9</Hr>
+      <Hr index="9">0.9</Hr>
+      <Hr index="10">0.9</Hr>
+      <Hr index="11">0.9</Hr>
+      <Hr index="12">0.9</Hr>
+      <Hr index="13">0.9</Hr>
+      <Hr index="14">0.9</Hr>
+      <Hr index="15">0.9</Hr>
+      <Hr index="16">0.9</Hr>
+      <Hr index="17">0.5</Hr>
+      <Hr index="18">0.3</Hr>
+      <Hr index="19">0.3</Hr>
+      <Hr index="20">0.2</Hr>
+      <Hr index="21">0.2</Hr>
+      <Hr index="22">0.1</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeReceptacleSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.05</Hr>
+      <Hr index="6">0.1</Hr>
+      <Hr index="7">0.1</Hr>
+      <Hr index="8">0.3</Hr>
+      <Hr index="9">0.3</Hr>
+      <Hr index="10">0.3</Hr>
+      <Hr index="11">0.3</Hr>
+      <Hr index="12">0.15</Hr>
+      <Hr index="13">0.15</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.15</Hr>
+      <Hr index="16">0.15</Hr>
+      <Hr index="17">0.05</Hr>
+      <Hr index="18">0.05</Hr>
+      <Hr index="19">0.05</Hr>
+      <Hr index="20">0.05</Hr>
+      <Hr index="21">0.05</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.04</Hr>
+      <Hr index="1">0.04</Hr>
+      <Hr index="2">0.04</Hr>
+      <Hr index="3">0.04</Hr>
+      <Hr index="4">0.04</Hr>
+      <Hr index="5">0.07</Hr>
+      <Hr index="6">0.04</Hr>
+      <Hr index="7">0.04</Hr>
+      <Hr index="8">0.04</Hr>
+      <Hr index="9">0.04</Hr>
+      <Hr index="10">0.04</Hr>
+      <Hr index="11">0.06</Hr>
+      <Hr index="12">0.06</Hr>
+      <Hr index="13">0.09</Hr>
+      <Hr index="14">0.06</Hr>
+      <Hr index="15">0.04</Hr>
+      <Hr index="16">0.04</Hr>
+      <Hr index="17">0.04</Hr>
+      <Hr index="18">0.04</Hr>
+      <Hr index="19">0.04</Hr>
+      <Hr index="20">0.04</Hr>
+      <Hr index="21">0.07</Hr>
+      <Hr index="22">0.04</Hr>
+      <Hr index="23">0.04</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.08</Hr>
+      <Hr index="6">0.07</Hr>
+      <Hr index="7">0.19</Hr>
+      <Hr index="8">0.35</Hr>
+      <Hr index="9">0.38</Hr>
+      <Hr index="10">0.39</Hr>
+      <Hr index="11">0.47</Hr>
+      <Hr index="12">0.57</Hr>
+      <Hr index="13">0.54</Hr>
+      <Hr index="14">0.34</Hr>
+      <Hr index="15">0.33</Hr>
+      <Hr index="16">0.44</Hr>
+      <Hr index="17">0.26</Hr>
+      <Hr index="18">0.21</Hr>
+      <Hr index="19">0.15</Hr>
+      <Hr index="20">0.17</Hr>
+      <Hr index="21">0.08</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeServiceHotWaterSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0.05</Hr>
+      <Hr index="1">0.05</Hr>
+      <Hr index="2">0.05</Hr>
+      <Hr index="3">0.05</Hr>
+      <Hr index="4">0.05</Hr>
+      <Hr index="5">0.08</Hr>
+      <Hr index="6">0.07</Hr>
+      <Hr index="7">0.11</Hr>
+      <Hr index="8">0.15</Hr>
+      <Hr index="9">0.21</Hr>
+      <Hr index="10">0.19</Hr>
+      <Hr index="11">0.23</Hr>
+      <Hr index="12">0.2</Hr>
+      <Hr index="13">0.19</Hr>
+      <Hr index="14">0.15</Hr>
+      <Hr index="15">0.12</Hr>
+      <Hr index="16">0.14</Hr>
+      <Hr index="17">0.07</Hr>
+      <Hr index="18">0.07</Hr>
+      <Hr index="19">0.07</Hr>
+      <Hr index="20">0.07</Hr>
+      <Hr index="21">0.09</Hr>
+      <Hr index="22">0.05</Hr>
+      <Hr index="23">0.05</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorWD</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.35</Hr>
+      <Hr index="8">0.69</Hr>
+      <Hr index="9">0.43</Hr>
+      <Hr index="10">0.37</Hr>
+      <Hr index="11">0.43</Hr>
+      <Hr index="12">0.58</Hr>
+      <Hr index="13">0.48</Hr>
+      <Hr index="14">0.37</Hr>
+      <Hr index="15">0.37</Hr>
+      <Hr index="16">0.46</Hr>
+      <Hr index="17">0.62</Hr>
+      <Hr index="18">0.2</Hr>
+      <Hr index="19">0.12</Hr>
+      <Hr index="20">0.04</Hr>
+      <Hr index="21">0.04</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorSat</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0.16</Hr>
+      <Hr index="8">0.14</Hr>
+      <Hr index="9">0.21</Hr>
+      <Hr index="10">0.18</Hr>
+      <Hr index="11">0.25</Hr>
+      <Hr index="12">0.21</Hr>
+      <Hr index="13">0.13</Hr>
+      <Hr index="14">0.08</Hr>
+      <Hr index="15">0.04</Hr>
+      <Hr index="16">0.05</Hr>
+      <Hr index="17">0.06</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
+    <SchDay>
+      <Name>OfficeElevatorSun</Name>
+      <Type>Fraction</Type>
+      <Hr index="0">0</Hr>
+      <Hr index="1">0</Hr>
+      <Hr index="2">0</Hr>
+      <Hr index="3">0</Hr>
+      <Hr index="4">0</Hr>
+      <Hr index="5">0</Hr>
+      <Hr index="6">0</Hr>
+      <Hr index="7">0</Hr>
+      <Hr index="8">0</Hr>
+      <Hr index="9">0</Hr>
+      <Hr index="10">0</Hr>
+      <Hr index="11">0</Hr>
+      <Hr index="12">0</Hr>
+      <Hr index="13">0</Hr>
+      <Hr index="14">0</Hr>
+      <Hr index="15">0</Hr>
+      <Hr index="16">0</Hr>
+      <Hr index="17">0</Hr>
+      <Hr index="18">0</Hr>
+      <Hr index="19">0</Hr>
+      <Hr index="20">0</Hr>
+      <Hr index="21">0</Hr>
+      <Hr index="22">0</Hr>
+      <Hr index="23">0</Hr>
+    </SchDay>
     <SchWeek>
       <Name>OfficeOccupancyWk</Name>
       <Type>Fraction</Type>
@@ -1145,32 +1135,6 @@
       <SchDayHtgDDRef>OfficeWtrHtrSetPtWD</SchDayHtgDDRef>
     </SchWeek>
     <Sch>
-      <Name>Office Occupancy</Name>
-      <Type>Fraction</Type>
-      <EndMonth index="0">12</EndMonth>
-      <EndDay index="0">31</EndDay>
-      <SchWeekRef index="0">OfficeOccupancyWk</SchWeekRef>
-    </Sch>
-    <Sch>
-      <Name>Office Receptacle</Name>
-      <Type>Fraction</Type>
-      <EndMonth index="0">12</EndMonth>
-      <EndDay index="0">31</EndDay>
-      <SchWeekRef index="0">OfficeReceptacleWk</SchWeekRef>
-    </Sch>
-    <Sch>
-      <Name>Office ServiceHotWater</Name>
-      <Type>Fraction</Type>
-      <EndMonth index="0">12</EndMonth>
-      <EndDay index="0">31</EndDay>
-      <SchWeekRef index="0">OfficeServiceHotWaterWk</SchWeekRef>
-    </Sch>
-    <Sch>
-      <Name>Office Elevator</Name>
-      <Type>Fraction</Type>
-      <SchWeekRef index="0">OfficeElevatorWk</SchWeekRef>
-    </Sch>
-    <Sch>
       <Name>Office Lights</Name>
       <Type>Fraction</Type>
       <EndMonth index="0">12</EndMonth>
@@ -1210,6 +1174,32 @@
       <EndDay index="0">31</EndDay>
       <SchWeekRef index="0">OfficeWtrHtrSetPtWk</SchWeekRef>
     </Sch>
+    <Sch>
+      <Name>Office Occupancy</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeOccupancyWk</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Office Receptacle</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeReceptacleWk</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Office ServiceHotWater</Name>
+      <Type>Fraction</Type>
+      <EndMonth index="0">12</EndMonth>
+      <EndDay index="0">31</EndDay>
+      <SchWeekRef index="0">OfficeServiceHotWaterWk</SchWeekRef>
+    </Sch>
+    <Sch>
+      <Name>Office Elevator</Name>
+      <Type>Fraction</Type>
+      <SchWeekRef index="0">OfficeElevatorWk</SchWeekRef>
+    </Sch>
     <SpcFuncDefaults>
       <Name>Office Defaults</Name>
       <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
@@ -1247,6 +1237,169 @@
         <FlrToFlrHgt>10.7</FlrToFlrHgt>
         <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
         <Spc>
+          <Name>Perimeter_ZN_4</Name>
+          <ThrmlZnRef>Perimeter_ZN_4 Thermal Zone</ThrmlZnRef>
+          <Area>724.411</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <SecSide100PctControlled>1</SecSide100PctControlled>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <ExtWall>
+            <Name>Perimeter_ZN_4_wall_west</Name>
+            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <Area>606.043</Area>
+            <Az>270.0</Az>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_1</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_2</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_4</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+            <Win>
+              <Name>Perimeter_ZN_4_wall_west_Window_3</Name>
+              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
+              <Area>30.0</Area>
+            </Win>
+          </ExtWall>
+          <IntWall>
+            <Name>Perimeter_ZN_4_wall_south</Name>
+            <AdjacentSpcRef>Perimeter_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter_ZN_4_wall_east</Name>
+            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>277.742</Area>
+          </IntWall>
+          <IntWall>
+            <Name>Perimeter_ZN_4_wall_north</Name>
+            <AdjacentSpcRef>Perimeter_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>232.144</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Perimeter_ZN_4_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>724.411</Area>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Core_ZN</Name>
+          <ThrmlZnRef>Core_ZN Thermal Zone</ThrmlZnRef>
+          <Area>1610.9</Area>
+          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
+          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
+          <CommRfrgEPD>0.0</CommRfrgEPD>
+          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
+          <IntWall>
+            <Name>Core_ZN_wall_east</Name>
+            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
+            <Area>277.742</Area>
+          </IntWall>
+          <UndgrFlr>
+            <Name>Core_ZN_floor</Name>
+            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <Area>1610.9</Area>
+          </UndgrFlr>
+        </Spc>
+        <Spc>
+          <Name>Attic</Name>
+          <CondgType>IndirectlyConditioned</CondgType>
+          <ThrmlZnRef>Attic Thermal Zone</ThrmlZnRef>
+          <Area>428.898</Area>
+          <SpcFunc>Unoccupied-Exclude from Gross Floor Area</SpcFunc>
+          <ExtFlr>
+            <Name>Attic_soffit_north</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>182.706</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic_soffit_east</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>123.096</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic_soffit_west</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>123.096</Area>
+          </ExtFlr>
+          <ExtFlr>
+            <Name>Attic_soffit_south</Name>
+            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <Area>182.706</Area>
+          </ExtFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_west</Name>
+            <AdjacentSpcRef>Perimeter_ZN_4</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>724.411</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_south</Name>
+            <AdjacentSpcRef>Perimeter_ZN_1</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1221.17</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_north</Name>
+            <AdjacentSpcRef>Perimeter_ZN_3</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1221.17</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic_floor_core</Name>
+            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>1610.9</Area>
+          </IntFlr>
+          <IntFlr>
+            <Name>Attic_floor_perimeter_east</Name>
+            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
+            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
+            <Area>724.411</Area>
+          </IntFlr>
+          <Roof>
+            <Name>Attic_roof_north</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>2126.03</Area>
+            <Az>0.0</Az>
+            <Tilt>18.4524</Tilt>
+          </Roof>
+          <Roof>
+            <Name>Attic_roof_west</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>1096.48</Area>
+            <Az>270.0</Az>
+            <Tilt>18.4523</Tilt>
+          </Roof>
+          <Roof>
+            <Name>Attic_roof_east</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>1096.48</Area>
+            <Az>90.0</Az>
+            <Tilt>18.4523</Tilt>
+          </Roof>
+          <Roof>
+            <Name>Attic_roof_south</Name>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <Area>2126.03</Area>
+            <Az>180.0</Az>
+            <Tilt>18.4523</Tilt>
+          </Roof>
+        </Spc>
+        <Spc>
           <Name>Perimeter_ZN_1</Name>
           <ThrmlZnRef>Perimeter_ZN_1 Thermal Zone</ThrmlZnRef>
           <Area>1221.17</Area>
@@ -1263,11 +1416,6 @@
               <Name>Perimeter_ZN_1_wall_south_Window_1</Name>
               <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
               <Area>30.0</Area>
-            </Win>
-            <Win>
-              <Name>Perimeter_ZN_1_wall_south_door</Name>
-              <FenConsRef>GlazedDoor SinglePane MetalFraming NoDivider ClearGlazing</FenConsRef>
-              <Area>42.0</Area>
             </Win>
             <Win>
               <Name>Perimeter_ZN_1_wall_south_Window_5</Name>
@@ -1414,169 +1562,6 @@
             <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
             <Area>1221.17</Area>
           </UndgrFlr>
-        </Spc>
-        <Spc>
-          <Name>Perimeter_ZN_4</Name>
-          <ThrmlZnRef>Perimeter_ZN_4 Thermal Zone</ThrmlZnRef>
-          <Area>724.411</Area>
-          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
-          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
-          <SecSide100PctControlled>1</SecSide100PctControlled>
-          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
-          <ExtWall>
-            <Name>Perimeter_ZN_4_wall_west</Name>
-            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
-            <Area>606.043</Area>
-            <Az>270.0</Az>
-            <Win>
-              <Name>Perimeter_ZN_4_wall_west_Window_1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
-              <Area>30.0</Area>
-            </Win>
-            <Win>
-              <Name>Perimeter_ZN_4_wall_west_Window_2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
-              <Area>30.0</Area>
-            </Win>
-            <Win>
-              <Name>Perimeter_ZN_4_wall_west_Window_4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
-              <Area>30.0</Area>
-            </Win>
-            <Win>
-              <Name>Perimeter_ZN_4_wall_west_Window_3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming NoDivider TintedGlazing</FenConsRef>
-              <Area>30.0</Area>
-            </Win>
-          </ExtWall>
-          <IntWall>
-            <Name>Perimeter_ZN_4_wall_south</Name>
-            <AdjacentSpcRef>Perimeter_ZN_1</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
-            <Area>232.144</Area>
-          </IntWall>
-          <IntWall>
-            <Name>Perimeter_ZN_4_wall_east</Name>
-            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
-            <Area>277.742</Area>
-          </IntWall>
-          <IntWall>
-            <Name>Perimeter_ZN_4_wall_north</Name>
-            <AdjacentSpcRef>Perimeter_ZN_3</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
-            <Area>232.144</Area>
-          </IntWall>
-          <UndgrFlr>
-            <Name>Perimeter_ZN_4_floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
-            <Area>724.411</Area>
-          </UndgrFlr>
-        </Spc>
-        <Spc>
-          <Name>Core_ZN</Name>
-          <ThrmlZnRef>Core_ZN Thermal Zone</ThrmlZnRef>
-          <Area>1610.9</Area>
-          <SpcFuncDefaultsRef>Office Defaults</SpcFuncDefaultsRef>
-          <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>
-          <CommRfrgEPD>0.0</CommRfrgEPD>
-          <SHWFluidSegRef>SHWSupply1</SHWFluidSegRef>
-          <IntWall>
-            <Name>Core_ZN_wall_east</Name>
-            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Wall</ConsAssmRef>
-            <Area>277.742</Area>
-          </IntWall>
-          <UndgrFlr>
-            <Name>Core_ZN_floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
-            <Area>1610.9</Area>
-          </UndgrFlr>
-        </Spc>
-        <Spc>
-          <Name>Attic</Name>
-          <CondgType>IndirectlyConditioned</CondgType>
-          <ThrmlZnRef>Attic Thermal Zone</ThrmlZnRef>
-          <Area>428.898</Area>
-          <SpcFunc>Unoccupied-Exclude from Gross Floor Area</SpcFunc>
-          <ExtFlr>
-            <Name>Attic_soffit_north</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
-            <Area>182.706</Area>
-          </ExtFlr>
-          <ExtFlr>
-            <Name>Attic_soffit_east</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
-            <Area>123.096</Area>
-          </ExtFlr>
-          <ExtFlr>
-            <Name>Attic_soffit_west</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
-            <Area>123.096</Area>
-          </ExtFlr>
-          <ExtFlr>
-            <Name>Attic_soffit_south</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
-            <Area>182.706</Area>
-          </ExtFlr>
-          <IntFlr>
-            <Name>Attic_floor_core</Name>
-            <AdjacentSpcRef>Core_ZN</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
-            <Area>1610.9</Area>
-          </IntFlr>
-          <IntFlr>
-            <Name>Attic_floor_perimeter_east</Name>
-            <AdjacentSpcRef>Perimeter_ZN_2</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
-            <Area>724.411</Area>
-          </IntFlr>
-          <IntFlr>
-            <Name>Attic_floor_perimeter_west</Name>
-            <AdjacentSpcRef>Perimeter_ZN_4</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
-            <Area>724.411</Area>
-          </IntFlr>
-          <IntFlr>
-            <Name>Attic_floor_perimeter_south</Name>
-            <AdjacentSpcRef>Perimeter_ZN_1</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
-            <Area>1221.17</Area>
-          </IntFlr>
-          <IntFlr>
-            <Name>Attic_floor_perimeter_north</Name>
-            <AdjacentSpcRef>Perimeter_ZN_3</AdjacentSpcRef>
-            <ConsAssmRef>Default Interior Floor</ConsAssmRef>
-            <Area>1221.17</Area>
-          </IntFlr>
-          <Roof>
-            <Name>Attic_roof_north</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
-            <Area>2126.03</Area>
-            <Az>0.0</Az>
-            <Tilt>18.4524</Tilt>
-          </Roof>
-          <Roof>
-            <Name>Attic_roof_west</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
-            <Area>1096.48</Area>
-            <Az>270.0</Az>
-            <Tilt>18.4523</Tilt>
-          </Roof>
-          <Roof>
-            <Name>Attic_roof_east</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
-            <Area>1096.48</Area>
-            <Az>90.0</Az>
-            <Tilt>18.4523</Tilt>
-          </Roof>
-          <Roof>
-            <Name>Attic_roof_south</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
-            <Area>2126.03</Area>
-            <Az>180.0</Az>
-            <Tilt>18.4523</Tilt>
-          </Roof>
         </Spc>
       </Story>
       <ThrmlZn>

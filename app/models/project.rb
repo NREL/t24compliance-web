@@ -546,6 +546,7 @@ class Project
         # skylight
         instances = fen_model.any_in(roof_id: roof_ids)
       end
+      puts "#{instances.size} instances of #{fen}"
       logger.info("#{instances.size} instances of #{fen}")
 
       instances.each do |instance|
