@@ -205,4 +205,13 @@ namespace :import do
   task input_fields_json: :environment do
     Input.import_from_json('lib/assets/cbecc_inputs.json')
   end
+
+  desc 'remove all constructions'
+  task remove_all_constructions: :environment do
+    Construction.delete_all
+    Fenestration.delete_all
+    DoorLookup.delete_all
+  end
+
+  # desc 'delete all projects - use this with caution!'
 end

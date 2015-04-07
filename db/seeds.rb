@@ -23,7 +23,7 @@ u.save!
 # moved test project creation to sim.rake
 
 unless SKIP_CONSTRUCTIONS
-# CONSTRUCTION LIBRARIES
+  # CONSTRUCTION LIBRARIES
   file = File.read(File.join(Rails.root, "lib/assets/construction_library.json"))
   data = JSON.parse(file)
 
