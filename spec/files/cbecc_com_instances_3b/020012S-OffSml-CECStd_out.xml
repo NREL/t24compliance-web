@@ -13,11 +13,171 @@
     <DefaultDayltgCtrls>0</DefaultDayltgCtrls>
     <CompType>NewComplete</CompType>
     <SoftwareVersion>CBECC-Com 2013-3b (717)</SoftwareVersion>
-    <CreateDate>1428368221</CreateDate>
-    <ExcptCondFanPress>No</ExcptCondFanPress>
-    <ExcptCondWCC>No</ExcptCondWCC>
+    <CreateDate>1428420814</CreateDate>
     <AutoHardSize>1</AutoHardSize>
     <AutoEffInput>1</AutoEffInput>
+    <ConsAssm>
+      <Name>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</Name>
+      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
+      <SlabType>UnheatedSlabOnGrade</SlabType>
+      <SlabInsOrientation>12inHorizontal</SlabInsOrientation>
+      <SlabInsThrmlR>R5</SlabInsThrmlR>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Default Interior Wall</Name>
+      <CompatibleSurfType>InteriorWall</CompatibleSurfType>
+      <MatRef index="0">Gypsum plaster - 80 lb/ft3 - 5/8 in.</MatRef>
+      <MatRef index="1">Air - Wall - 3 1/2 in.</MatRef>
+      <MatRef index="2">Gypsum plaster - 80 lb/ft3 - 5/8 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Default Interior Floor</Name>
+      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Concrete - 80 lb/ft3 - 4 in.</MatRef>
+      <MatRef index="1">Air - Floor - 1/2 in.</MatRef>
+      <MatRef index="2">Acoustic Tile - 3/4 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</Name>
+      <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
+      <MatRef index="0">Stucco - 3/8 in.</MatRef>
+      <MatRef index="1">Building Paper - 1/16 in.</MatRef>
+      <MatRef index="2">Expanded Polystyrene - EPS - 4 7/10 in. R20</MatRef>
+      <MatRef index="3">Metal Framed Wall - 16inOC - 2x6 - R19 ins.</MatRef>
+      <MatRef index="4">Gypsum plaster - 80 lb/ft3 - 1/2 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</Name>
+      <CompatibleSurfType>ExteriorFloor</CompatibleSurfType>
+      <MatRef index="0">Expanded Polystyrene - EPS - 3 2/5 in. R14</MatRef>
+      <MatRef index="1">Wood Framed Floor - 16inOC - 2x6 - R11 ins.</MatRef>
+      <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
+      <MatRef index="3">Carpet - 3/4 in.</MatRef>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</Name>
+      <CompatibleSurfType>Roof</CompatibleSurfType>
+      <MatRef index="0">Asphalt shingles - 1/4 in.</MatRef>
+      <MatRef index="1">Building Paper - 1/16 in.</MatRef>
+      <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
+      <MatRef index="3">Expanded Polystyrene - EPS - 6 1/10 in. R25</MatRef>
+      <MatRef index="4">Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</MatRef>
+      <MatRef index="5">Gypsum plaster - 80 lb/ft3 - 1/2 in.</MatRef>
+    </ConsAssm>
+    <Mat>
+      <Name>Carpet - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Carpet - 3/4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Acoustic Tile - 3/4 in.</Name>
+      <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Gypsum plaster - 80 lb/ft3 - 5/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Gypsum plaster - 80 lb/ft3 - 5/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Wall - 3 1/2 in.</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Wall - 3 1/2 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Concrete - 80 lb/ft3 - 4 in.</Name>
+      <CodeCat>Concrete</CodeCat>
+      <CodeItem>Concrete - 80 lb/ft3 - 4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Air - Floor - 1/2 in.</Name>
+      <CodeCat>Air</CodeCat>
+      <CodeItem>Air - Floor - 1/2 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Stucco - 3/8 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Stucco - 3/8 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Building Paper - 1/16 in.</Name>
+      <CodeCat>Building Membrane</CodeCat>
+      <CodeItem>Building Paper - 1/16 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Expanded Polystyrene - EPS - 4 7/10 in. R20</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Expanded Polystyrene - EPS - 4 7/10 in. R20</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Metal Framed Wall - 16inOC - 2x6 - R19 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Metal</FrmMat>
+      <FrmConfig>Wall16inOC</FrmConfig>
+      <FrmDepth>5_5in</FrmDepth>
+      <CavityIns>19.0</CavityIns>
+    </Mat>
+    <Mat>
+      <Name>Gypsum plaster - 80 lb/ft3 - 1/2 in.</Name>
+      <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Gypsum plaster - 80 lb/ft3 - 1/2 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Expanded Polystyrene - EPS - 3 2/5 in. R14</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Expanded Polystyrene - EPS - 3 2/5 in. R14</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Wood Framed Floor - 16inOC - 2x6 - R11 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Wood</FrmMat>
+      <FrmConfig>Floor16inOC</FrmConfig>
+      <FrmDepth>5_5In</FrmDepth>
+      <CavityIns>11.0</CavityIns>
+    </Mat>
+    <Mat>
+      <Name>Fiberboard sheathing - 1/2 in.</Name>
+      <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Fiberboard sheathing - 1/2 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Asphalt shingles - 1/4 in.</Name>
+      <CodeCat>Roofing</CodeCat>
+      <CodeItem>Asphalt shingles - 1/4 in.</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Expanded Polystyrene - EPS - 6 1/10 in. R25</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Expanded Polystyrene - EPS - 6 1/10 in. R25</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Wood</FrmMat>
+      <FrmConfig>Roof16inOC</FrmConfig>
+      <FrmDepth>9_25In</FrmDepth>
+      <CavityIns>25.0</CavityIns>
+    </Mat>
+    <FenCons>
+      <Name>OperableWindow DoublePane NonMetalFraming TintedGlazing</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>FixedWindow</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>NFRCRated</CertificationMthd>
+      <SHGC>0.25</SHGC>
+      <UFactor>0.36</UFactor>
+      <VT>0.42</VT>
+    </FenCons>
+    <FenCons>
+      <Name>GlazedDoor SinglePane MetalFraming ClearGlazing</Name>
+      <FenType>VerticalFenestration</FenType>
+      <FenProdType>GlazedDoor</FenProdType>
+      <AssmContext>Manufactured</AssmContext>
+      <CertificationMthd>NFRCRated</CertificationMthd>
+      <SHGC>0.25</SHGC>
+      <UFactor>0.36</UFactor>
+      <VT>0.42</VT>
+    </FenCons>
     <SchDay>
       <Name>OfficeOccupancySun</Name>
       <Type>Fraction</Type>
@@ -1050,149 +1210,6 @@
       <EndDay index="0">31</EndDay>
       <SchWeekRef index="0">OfficeWtrHtrSetPtWk</SchWeekRef>
     </Sch>
-    <ConsAssm>
-      <Name>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</Name>
-      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
-      <SlabType>UnheatedSlabOnGrade</SlabType>
-      <MatRef index="0">Concrete - 140 lb/ft3 - 6 in.</MatRef>
-    </ConsAssm>
-    <ConsAssm>
-      <Name>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</Name>
-      <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
-      <MatRef index="0">Stucco - 7/8 in.</MatRef>
-      <MatRef index="1">Compliance Insulation R13.99</MatRef>
-      <MatRef index="2">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
-      <MatRef index="3">Gypsum Board - 1/2 in.</MatRef>
-    </ConsAssm>
-    <ConsAssm>
-      <Name>Default Interior Wall</Name>
-      <CompatibleSurfType>InteriorWall</CompatibleSurfType>
-      <MatRef index="0">Gypsum Board - 5/8 in.</MatRef>
-      <MatRef index="1">Air - Metal Wall Framing - 16 or 24 in. OC</MatRef>
-      <MatRef index="2">Gypsum Board - 5/8 in.</MatRef>
-    </ConsAssm>
-    <ConsAssm>
-      <Name>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</Name>
-      <CompatibleSurfType>Roof</CompatibleSurfType>
-      <CRRCInitialRefl>0.2</CRRCInitialRefl>
-      <CRRCAgedRefl>0.2</CRRCAgedRefl>
-      <CRRCInitialEmittance>0.85</CRRCInitialEmittance>
-      <CRRCAgedEmittance>0.85</CRRCAgedEmittance>
-      <CRRCProdID>XXXX-XXXX</CRRCProdID>
-      <MatRef index="0">Metal Standing Seam - 1/16 in.</MatRef>
-      <MatRef index="1">Compliance Insulation R24.86</MatRef>
-    </ConsAssm>
-    <ConsAssm>
-      <Name>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</Name>
-      <CompatibleSurfType>ExteriorFloor</CompatibleSurfType>
-      <MatRef index="0">Compliance Insulation R9.83</MatRef>
-      <MatRef index="1">Plywood - 5/8 in.</MatRef>
-      <MatRef index="2">Carpet - 3/4 in.</MatRef>
-    </ConsAssm>
-    <ConsAssm>
-      <Name>Default Interior Floor</Name>
-      <CompatibleSurfType>InteriorFloor</CompatibleSurfType>
-      <MatRef index="0">Acoustic Tile - 3/4 in.</MatRef>
-    </ConsAssm>
-    <Mat>
-      <Name>Carpet - 3/4 in.</Name>
-      <CodeCat>Finish Materials</CodeCat>
-      <CodeItem>Carpet - 3/4 in.</CodeItem>
-    </Mat>
-    <Mat>
-      <Name>Acoustic Tile - 3/4 in.</Name>
-      <CodeCat>Finish Materials</CodeCat>
-      <CodeItem>Acoustic Tile - 3/4 in.</CodeItem>
-    </Mat>
-    <Mat>
-      <Name>Gypsum plaster - 80 lb/ft3 - 5/8 in.</Name>
-      <CodeCat>Plastering Materials</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Air - Wall - 3 1/2 in.</Name>
-      <CodeCat>Air</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Concrete - 80 lb/ft3 - 4 in.</Name>
-      <CodeCat>Concrete</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Air - Floor - 1/2 in.</Name>
-      <CodeCat>Air</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Stucco - 3/8 in.</Name>
-      <CodeCat>Plastering Materials</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Building Paper - 1/16 in.</Name>
-      <CodeCat>Building Membrane</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Expanded Polystyrene - EPS - 4 7/10 in. R20</Name>
-      <CodeCat>Insulation Board</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Metal Framed Wall - 16inOC - 2x6 - R19 ins.</Name>
-      <CodeCat>Composite</CodeCat>
-      <FrmMat>Metal</FrmMat>
-      <FrmConfig>Wall16inOC</FrmConfig>
-      <FrmDepth>5_5in</FrmDepth>
-    </Mat>
-    <Mat>
-      <Name>Gypsum plaster - 80 lb/ft3 - 1/2 in.</Name>
-      <CodeCat>Plastering Materials</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Expanded Polystyrene - EPS - 3 2/5 in. R14</Name>
-      <CodeCat>Insulation Board</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Wood Framed Floor - 16inOC - 2x6 - R11 ins.</Name>
-      <CodeCat>Composite</CodeCat>
-      <FrmMat>Wood</FrmMat>
-      <FrmConfig>Floor16inOC</FrmConfig>
-      <FrmDepth>5_5In</FrmDepth>
-    </Mat>
-    <Mat>
-      <Name>Fiberboard sheathing - 1/2 in.</Name>
-      <CodeCat>Bldg Board and Siding</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Asphalt shingles - 1/4 in.</Name>
-      <CodeCat>Roofing</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Expanded Polystyrene - EPS - 6 1/10 in. R25</Name>
-      <CodeCat>Insulation Board</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</Name>
-      <CodeCat>Composite</CodeCat>
-      <FrmMat>Wood</FrmMat>
-      <FrmConfig>Roof16inOC</FrmConfig>
-      <FrmDepth>9_25In</FrmDepth>
-    </Mat>
-    <FenCons>
-      <Name>OperableWindow DoublePane NonMetalFraming TintedGlazing</Name>
-      <FenType>VerticalFenestration</FenType>
-      <FenProdType>FixedWindow</FenProdType>
-      <AssmContext>Manufactured</AssmContext>
-      <CertificationMthd>NFRCRated</CertificationMthd>
-      <SHGC>0.25</SHGC>
-      <UFactor>0.36</UFactor>
-      <VT>0.42</VT>
-    </FenCons>
-    <FenCons>
-      <Name>GlazedDoor SinglePane MetalFraming ClearGlazing</Name>
-      <FenType>VerticalFenestration</FenType>
-      <FenProdType>GlazedDoor</FenProdType>
-      <AssmContext>Manufactured</AssmContext>
-      <CertificationMthd>NFRCRated</CertificationMthd>
-      <SHGC>0.25</SHGC>
-      <UFactor>0.36</UFactor>
-      <VT>0.42</VT>
-    </FenCons>
     <SpcFuncDefaults>
       <Name>Office Defaults</Name>
       <SpcFunc>Office (Greater than 250 square feet in floor area)</SpcFunc>

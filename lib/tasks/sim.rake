@@ -55,7 +55,7 @@ namespace :sim do
     end
   end
 
-  desc 'impooutrt test project'
+  desc 'import test project'
   task import_test_project: :environment do
     # import some cbecc com models
     u = User.find_by(email: 'test@nrel.gov')
@@ -66,7 +66,7 @@ namespace :sim do
     files = []
     #files += [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
     files += [File.join(Rails.root, "spec/files/cbecc_com_instances_3b/020012S-OffSml-CECStd.xml")]
-    files += Dir['spec/files/cbecc_com_web_instances/*.xml']
+    #files += Dir['spec/files/cbecc_com_web_instances/*.xml']
     files.each do |f|
       p = Project.from_sdd_xml(f)
       p.user_id = u.id
@@ -74,7 +74,9 @@ namespace :sim do
       puts "Imported #{p.name}"
 
       # round trip testing
-      p.xml_save("#{File.dirname(f)}/#{File.basename(f, '.*')}.out")
+      p.xml_save("#{File.dirname(f)}/#{File.basename(f, '.*')}_out.xml")
+
+
     end
   end
 end
