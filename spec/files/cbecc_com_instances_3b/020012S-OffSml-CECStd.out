@@ -13,7 +13,7 @@
     <DefaultDayltgCtrls>0</DefaultDayltgCtrls>
     <CompType>NewComplete</CompType>
     <SoftwareVersion>CBECC-Com 2013-3b (717)</SoftwareVersion>
-    <CreateDate>1428078725</CreateDate>
+    <CreateDate>1428368221</CreateDate>
     <ExcptCondFanPress>No</ExcptCondFanPress>
     <ExcptCondWCC>No</ExcptCondWCC>
     <AutoHardSize>1</AutoHardSize>
@@ -1107,22 +1107,18 @@
     <Mat>
       <Name>Gypsum plaster - 80 lb/ft3 - 5/8 in.</Name>
       <CodeCat>Plastering Materials</CodeCat>
-      <CodeItem>Gypsum plaster - 80 lb/ft3 - 5/8 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Air - Wall - 3 1/2 in.</Name>
       <CodeCat>Air</CodeCat>
-      <CodeItem>Air - Wall - 3 1/2 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Concrete - 80 lb/ft3 - 4 in.</Name>
       <CodeCat>Concrete</CodeCat>
-      <CodeItem>Concrete - 80 lb/ft3 - 4 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Air - Floor - 1/2 in.</Name>
       <CodeCat>Air</CodeCat>
-      <CodeItem>Air - Floor - 1/2 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Stucco - 3/8 in.</Name>
@@ -1133,7 +1129,7 @@
       <CodeCat>Building Membrane</CodeCat>
     </Mat>
     <Mat>
-      <Name>Expanded Polystyrene - EPS - 4 7/10 in.</Name>
+      <Name>Expanded Polystyrene - EPS - 4 7/10 in. R20</Name>
       <CodeCat>Insulation Board</CodeCat>
     </Mat>
     <Mat>
@@ -1148,7 +1144,7 @@
       <CodeCat>Plastering Materials</CodeCat>
     </Mat>
     <Mat>
-      <Name>Expanded Polystyrene - EPS - 3 2/5 in.</Name>
+      <Name>Expanded Polystyrene - EPS - 3 2/5 in. R14</Name>
       <CodeCat>Insulation Board</CodeCat>
     </Mat>
     <Mat>
@@ -1167,7 +1163,7 @@
       <CodeCat>Roofing</CodeCat>
     </Mat>
     <Mat>
-      <Name>Expanded Polystyrene - EPS - 6 1/10 in.</Name>
+      <Name>Expanded Polystyrene - EPS - 6 1/10 in. R25</Name>
       <CodeCat>Insulation Board</CodeCat>
     </Mat>
     <Mat>
@@ -1596,59 +1592,6 @@
         <PriAirCondgSysRef>Perim4ZnPSZ AirSys</PriAirCondgSysRef>
       </ThrmlZn>
       <AirSys>
-        <Name>Perim4ZnPSZ AirSys</Name>
-        <Type>SZAC</Type>
-        <CtrlZnRef>Perimeter_ZN_4 Thermal Zone</CtrlZnRef>
-        <AirSeg>
-          <Name>Perim4ZnSysSupplyAirSeg</Name>
-          <Type>Supply</Type>
-          <Path>Ducted</Path>
-          <CoilClg>
-            <Name>Perim4ZnCoolingCoil</Name>
-            <Type>DirectExpansion</Type>
-            <CapTotGrossRtd>22674.0</CapTotGrossRtd>
-            <CapTotNetRtd>25159.9</CapTotNetRtd>
-            <DXSEER>13.0</DXSEER>
-            <CndsrType>Air</CndsrType>
-          </CoilClg>
-          <CoilHtg>
-            <Name>Perim4ZnHeatingCoil</Name>
-            <Type>Furnace</Type>
-            <FuelSrc>NaturalGas</FuelSrc>
-            <CapTotGrossRtd>30354.7</CapTotGrossRtd>
-            <CapTotNetRtd>17704.6</CapTotNetRtd>
-            <FurnAFUE>0.78</FurnAFUE>
-          </CoilHtg>
-          <Fan>
-            <Name>Perim4ZnSupplyFan</Name>
-            <CtrlMthd>ConstantVolume</CtrlMthd>
-            <ModelingMthd>StaticPressure</ModelingMthd>
-            <FlowCap>813.0</FlowCap>
-            <FlowEff>0.5</FlowEff>
-            <TotStaticPress>2.5</TotStaticPress>
-            <MtrBHP>0.571</MtrBHP>
-            <MtrHP>0.75</MtrHP>
-            <MtrEff>0.855</MtrEff>
-          </Fan>
-        </AirSeg>
-        <AirSeg>
-          <Name>Perim4ZnSysReturnAirSeg</Name>
-          <Type>Return</Type>
-          <Path>Direct</Path>
-        </AirSeg>
-        <TrmlUnit>
-          <Name>Perim4 TU</Name>
-          <Type>Uncontrolled</Type>
-          <ZnServedRef>Perimeter_ZN_4 Thermal Zone</ZnServedRef>
-          <PriAirSegRef>Perim4ZnSysSupplyAirSeg</PriAirSegRef>
-        </TrmlUnit>
-        <OACtrl>
-          <Name>Perim4 OAControl</Name>
-          <AirSegSupRef>Perim4ZnSysSupplyAirSeg</AirSegSupRef>
-          <AirSegRetRef>Perim4ZnSysReturnAirSeg</AirSegRetRef>
-        </OACtrl>
-      </AirSys>
-      <AirSys>
         <Name>CoreZnPSZ AirSys</Name>
         <Type>SZAC</Type>
         <CtrlZnRef>Core_ZN Thermal Zone</CtrlZnRef>
@@ -1859,6 +1802,59 @@
           <Name>Perim3 OAControl</Name>
           <AirSegSupRef>Perim3ZnSysSupply AirSeg</AirSegSupRef>
           <AirSegRetRef>Perim3ZnSysReturn AirSeg</AirSegRetRef>
+        </OACtrl>
+      </AirSys>
+      <AirSys>
+        <Name>Perim4ZnPSZ AirSys</Name>
+        <Type>SZAC</Type>
+        <CtrlZnRef>Perimeter_ZN_4 Thermal Zone</CtrlZnRef>
+        <AirSeg>
+          <Name>Perim4ZnSysSupplyAirSeg</Name>
+          <Type>Supply</Type>
+          <Path>Ducted</Path>
+          <CoilClg>
+            <Name>Perim4ZnCoolingCoil</Name>
+            <Type>DirectExpansion</Type>
+            <CapTotGrossRtd>22674.0</CapTotGrossRtd>
+            <CapTotNetRtd>25159.9</CapTotNetRtd>
+            <DXSEER>13.0</DXSEER>
+            <CndsrType>Air</CndsrType>
+          </CoilClg>
+          <CoilHtg>
+            <Name>Perim4ZnHeatingCoil</Name>
+            <Type>Furnace</Type>
+            <FuelSrc>NaturalGas</FuelSrc>
+            <CapTotGrossRtd>30354.7</CapTotGrossRtd>
+            <CapTotNetRtd>17704.6</CapTotNetRtd>
+            <FurnAFUE>0.78</FurnAFUE>
+          </CoilHtg>
+          <Fan>
+            <Name>Perim4ZnSupplyFan</Name>
+            <CtrlMthd>ConstantVolume</CtrlMthd>
+            <ModelingMthd>StaticPressure</ModelingMthd>
+            <FlowCap>813.0</FlowCap>
+            <FlowEff>0.5</FlowEff>
+            <TotStaticPress>2.5</TotStaticPress>
+            <MtrBHP>0.571</MtrBHP>
+            <MtrHP>0.75</MtrHP>
+            <MtrEff>0.855</MtrEff>
+          </Fan>
+        </AirSeg>
+        <AirSeg>
+          <Name>Perim4ZnSysReturnAirSeg</Name>
+          <Type>Return</Type>
+          <Path>Direct</Path>
+        </AirSeg>
+        <TrmlUnit>
+          <Name>Perim4 TU</Name>
+          <Type>Uncontrolled</Type>
+          <ZnServedRef>Perimeter_ZN_4 Thermal Zone</ZnServedRef>
+          <PriAirSegRef>Perim4ZnSysSupplyAirSeg</PriAirSegRef>
+        </TrmlUnit>
+        <OACtrl>
+          <Name>Perim4 OAControl</Name>
+          <AirSegSupRef>Perim4ZnSysSupplyAirSeg</AirSegSupRef>
+          <AirSegRetRef>Perim4ZnSysReturnAirSeg</AirSegRetRef>
         </OACtrl>
       </AirSys>
     </Bldg>

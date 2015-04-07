@@ -470,11 +470,13 @@ class Project
             lib.layers.each do |layer|
               mat = materials.find_or_create_by(name: layer['name'])
               mat.code_category = layer['code_category']
-              mat.code_item = layer['code_identifier']
+              mat.code_item = layer['code_item']
               # save framing_configuration and material (required)
               mat.framing_depth = layer['framing_depth']
               mat.framing_configuration = layer['framing_configuration']
               mat.framing_material = layer['framing_material']
+              mat.framing_material = layer['framing_material']
+              mat.cavity_insulation = layer['cavity_insulation_r_value']
 
               mat.save
               material_refs << mat.name
