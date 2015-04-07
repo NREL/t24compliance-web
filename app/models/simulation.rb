@@ -3,7 +3,8 @@ class Simulation
   include Mongoid::Timestamps
 
   field :filename, type: String # this should be used and not passing run_path to the RunSimulation Worker
-  field :status, type: String
+  field :status, type: String # Enum of ['init', 'queued', 'started', 'completed', 'error']
+  field :percent_complete, type: Float
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
 
