@@ -22,8 +22,8 @@ class RunSimulation
     # This section needs to go into an initializer
     # If you are using boot2docker, then you have to deal with all these shananigans
     # https://github.com/swipely/docker-api/issues/202
-    if ENV['DOCKER_HOST']
-      logger.info "Docker URL is #{ENV['DOCKER_HOST']}:#{ENV['DOCKER_HOST'].class}"
+    if ENV['DOCKER_URL']
+      logger.info "Docker URL is #{ENV['DOCKER_URL']}:#{ENV['DOCKER_URL'].class}"
       cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
       Docker.options = {
           client_cert: File.join(cert_path, 'cert.pem'),
@@ -31,11 +31,10 @@ class RunSimulation
           ssl_ca_file: File.join(cert_path, 'ca.pem'),
           scheme: 'https' # This is important when the URL starts with tcp://
       }
-      Docker.url = ENV['DOCKER_HOST']
       logger.info "Docker options are set to #{Docker.options}"
     else
       ENV['DOCKER_URL'] = 'unix:///var/run/docker.sock' unless ENV['DOCKER_URL']
-      logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux with a socket) if not, set DOCKER_HOST ENV variable to the Docker socket'
+      logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux with a socket) if not, set DOCKER_URL ENV variable to the Docker socket'
     end
 
     # Kill after 1 hour at the moment
