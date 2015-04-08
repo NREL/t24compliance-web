@@ -10,9 +10,9 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
 
   // Cache update timestamps - Change this if the datasets are modified by putting in a new epoch timestamp (w/milliseconds)
   var timestamps = {
-    'constructions': 1428442998000,
-    'door_lookups': 1428442998000,
-    'fenestrations': 1428442998000,
+    'constructions': 1428508452000,
+    'door_lookups': 1428508452000,
+    'fenestrations': 1428508452000,
     'space_function_defaults': 1423760400000
   };
 
