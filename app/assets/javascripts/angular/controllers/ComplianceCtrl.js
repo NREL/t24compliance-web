@@ -1,4 +1,14 @@
-cbecc.controller('ComplianceCtrl', ['$scope', '$log', 'data', 'Shared', function ($scope, $log, data, Shared) {
+cbecc.controller('ComplianceCtrl', ['$scope', '$log', 'data', 'Shared', 'simulations', function ($scope, $log, data, Shared, simulations) {
+
+  $scope.simulation = simulations[0];
+  console.log('HI!');
+  console.log($scope.simulation);
+
+  $scope.isComplete = function() {
+    return $scope.simulation['status'] == 'completed'
+  };
+
+
   $scope.getXml = function () {
     $log.debug('Submitting simulation to run queue');
 

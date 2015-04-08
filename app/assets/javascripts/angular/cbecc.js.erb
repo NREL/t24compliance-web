@@ -364,7 +364,12 @@ cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$htt
       url: '/projects/{project_id:[0-9a-f]{24}}/buildings/{building_id:[0-9a-f]{24}}/compliance',
       controller: 'ComplianceCtrl',
       templateUrl: 'compliance/compliance.html',
-      parent: 'requirebuilding'
+      parent: 'requirebuilding',
+      resolve: {
+        simulations: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.list('simulations', Shared.defaultParams());
+        }]
+      }
     })
     .state({
       name: 'compliance_placeholder',

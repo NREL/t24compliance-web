@@ -13,25 +13,27 @@
     <button type="button" class="btn btn-success btn-block text-left" ng-click="getXml()">
       <i class="fa fa-arrow-circle-right fa-lg"></i> Run Compliance Check
     </button>
-    <div class="pad-top-20"><strong>Downloads</strong></div>
-    <button type="button" class="btn btn-info btn-block text-left">
-      <i class="fa fa-arrow-circle-o-down fa-lg"></i> Certificate of Compliance (PDF)
-    </button>
-    <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-      <i class="fa fa-arrow-circle-o-down fa-lg"></i> Full Compliance Report (XML)
-    </button>
-    <a ng-href="{{sddXmlPath()}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
-      <i class="fa fa-arrow-circle-o-down fa-lg"></i> SDD Model XML File
-    </a>
-    <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-      <i class="fa fa-arrow-circle-o-down fa-lg"></i> OpenStudio Model
-    </button>
-    <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-      <i class="fa fa-arrow-circle-o-down fa-lg"></i> EnergyPlus Output Results
-    </button>
-    <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-      <i class="fa fa-arrow-circle-o-down fa-lg"></i> All
-    </button>
+    <div ng-if="isComplete()">
+      <div class="pad-top-20"><strong>Downloads</strong></div>
+      <button type="button" class="btn btn-info btn-block text-left">
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> Certificate of Compliance (PDF)
+      </button>
+      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> Full Compliance Report (XML)
+      </button>
+      <a ng-href="{{sddXmlPath()}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> SDD Model XML File
+      </a>
+      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> OpenStudio Model
+      </button>
+      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> EnergyPlus Output Results
+      </button>
+      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> All
+      </button>
+    </div>
   </div>
   <div class="col-lg-9 col-md-8"></div>
 </div>
