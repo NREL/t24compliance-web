@@ -22,6 +22,7 @@ class RunSimulation
     # This section needs to go into an initializer
     # If you are using boot2docker, then you have to deal with all these shananigans
     # https://github.com/swipely/docker-api/issues/202
+    ENV['DOCKER_URL'] = ENV['DOCKER_HOST'] if ENV['DOCKER_HOST']
     if ENV['DOCKER_URL']
       logger.info "Docker URL is #{ENV['DOCKER_URL']}:#{ENV['DOCKER_URL'].class}"
       cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
