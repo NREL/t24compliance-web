@@ -141,6 +141,7 @@ class ZoneSystemsController < ApplicationController
             # TODO: if this is an updated air system, update terminal unit references!
 
           else
+            oas = []
             @sys = AirSystem.new(rec)
             sup_seg = AirSegment.new(name: "#{rec['name']} SupplyAirSeg", type: 'Supply')
             sup_seg.fans = fans
@@ -152,6 +153,13 @@ class ZoneSystemsController < ApplicationController
             ret_seg.save
             segments << ret_seg
             @sys.air_segments = segments
+
+            # all air systems get this defaulted outside air system
+            oa = OutsideAirControl.new(name: "#{rec['name']} OutsideAirControl", economizer_control_method: "DifferentialDryBulb", economizer_integration: "Integrated", air_segment_supply_reference: sup_seg.name, air_segment_return_reference: ret_seg.name)
+            oas << oa
+            @sys.outside_air_controls = oas
+
+
             @sys.save
           end
           air_systems << @sys
