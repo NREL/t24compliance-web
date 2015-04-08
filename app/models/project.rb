@@ -507,12 +507,12 @@ class Project
       end
     end
 
+
+    logger.info "Exterior Wall ids are #{ext_wall_ids}"
+
     # assign doors
-    door_instances = Door.any_in(interior_wall_id: int_wall_ids)
-    other_instances = Door.any_in(exterior_wall_id: ext_wall_ids)
-    other_instances.each do |o|
-      door_instances << o
-    end
+    door_instances = Door.or({:interior_wall_id.in => int_wall_ids}, {:exterior_wall_id.in => ext_wall_ids})
+
     logger.info("Door instances: #{door_instances.size}")
     door_instances.each do |instance|
       # get lib record

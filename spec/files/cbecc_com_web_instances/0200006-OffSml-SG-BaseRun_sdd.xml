@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <SDDXML>
   <Proj>
-    <Name>Simple Office Building</Name>
+    <Name>0200006-OffSml-SG-BaseRun</Name>
     <GeometryInpType>Simplified</GeometryInpType>
     <State>CA</State>
     <ZipCode>90505</ZipCode>
@@ -11,17 +11,8 @@
     <ExcptCondNarrative>No</ExcptCondNarrative>
     <CompType>NewComplete</CompType>
     <CreateDate>1423524538</CreateDate>
-    <ExcptCondFanPress>No</ExcptCondFanPress>
-    <ExcptCondWCC>No</ExcptCondWCC>
     <AutoHardSize>1</AutoHardSize>
     <AutoEffInput>1</AutoEffInput>
-    <ConsAssm>
-      <Name>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</Name>
-      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
-      <SlabType>UnheatedSlabOnGrade</SlabType>
-      <SlabInsOrientation>12inHorizontal</SlabInsOrientation>
-      <SlabInsThrmlR>R5</SlabInsThrmlR>
-    </ConsAssm>
     <ConsAssm>
       <Name>Default Interior Wall</Name>
       <CompatibleSurfType>InteriorWall</CompatibleSurfType>
@@ -37,30 +28,36 @@
       <MatRef index="2">Acoustic Tile - 3/4 in.</MatRef>
     </ConsAssm>
     <ConsAssm>
-      <Name>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</Name>
+      <Name>Heated Slab Below Grade - FullyInsulatedSlab - R40 cont. ins.</Name>
+      <CompatibleSurfType>UndergroundFloor</CompatibleSurfType>
+      <SlabType>HeatedSlabBelowGrade</SlabType>
+      <SlabInsOrientation>FullyInsulatedSlab</SlabInsOrientation>
+      <SlabInsThrmlR>R40</SlabInsThrmlR>
+    </ConsAssm>
+    <ConsAssm>
+      <Name>Metal Framed Wall - 2x8 16inOC - R25 cavity ins. - R12.53 cont. ins. - 5/8in gypsum</Name>
       <CompatibleSurfType>ExteriorWall</CompatibleSurfType>
       <MatRef index="0">Stucco - 3/8 in.</MatRef>
       <MatRef index="1">Building Paper - 1/16 in.</MatRef>
-      <MatRef index="2">Expanded Polystyrene - EPS - 4 7/10 in.</MatRef>
-      <MatRef index="3">Metal Framed Wall - 16inOC - 2x6 - R19 ins.</MatRef>
-      <MatRef index="4">Gypsum plaster - 80 lb/ft3 - 1/2 in.</MatRef>
+      <MatRef index="2">Expanded Polyurethane - 2 in. R12.6</MatRef>
+      <MatRef index="3">Metal Framed Wall - 16inOC - 2x8 - R25 ins.</MatRef>
+      <MatRef index="4">Gypsum plaster - 80 lb/ft3 - 5/8 in.</MatRef>
     </ConsAssm>
     <ConsAssm>
-      <Name>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</Name>
+      <Name>Metal Framed Floor - 2x8 24inOC - R22 cavity ins.</Name>
       <CompatibleSurfType>ExteriorFloor</CompatibleSurfType>
-      <MatRef index="0">Expanded Polystyrene - EPS - 3 2/5 in.</MatRef>
-      <MatRef index="1">Wood Framed Floor - 16inOC - 2x6 - R11 ins.</MatRef>
-      <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
-      <MatRef index="3">Carpet - 3/4 in.</MatRef>
+      <MatRef index="0">Metal Framed Floor - 24inOC - 2x8 - R22 ins.</MatRef>
+      <MatRef index="1">Fiberboard sheathing - 1/2 in.</MatRef>
+      <MatRef index="2">Carpet - 3/4 in.</MatRef>
     </ConsAssm>
     <ConsAssm>
-      <Name>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</Name>
+      <Name>Wood Framed Rafter Roof - 2x10 16inOC - R22 cavity ins. - R2.93 cont. ins.</Name>
       <CompatibleSurfType>Roof</CompatibleSurfType>
       <MatRef index="0">Asphalt shingles - 1/4 in.</MatRef>
       <MatRef index="1">Building Paper - 1/16 in.</MatRef>
       <MatRef index="2">Fiberboard sheathing - 1/2 in.</MatRef>
-      <MatRef index="3">Expanded Polystyrene - EPS - 6 1/10 in.</MatRef>
-      <MatRef index="4">Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</MatRef>
+      <MatRef index="3">Cellular polyisocyanurate (unfaced) - 1/2 in. R2.9</MatRef>
+      <MatRef index="4">Wood Framed Rafter Roof - 16inOC - 2x10 - R22 ins.</MatRef>
       <MatRef index="5">Gypsum plaster - 80 lb/ft3 - 1/2 in.</MatRef>
     </ConsAssm>
     <Mat>
@@ -91,70 +88,83 @@
     <Mat>
       <Name>Stucco - 3/8 in.</Name>
       <CodeCat>Plastering Materials</CodeCat>
+      <CodeItem>Stucco - 3/8 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Building Paper - 1/16 in.</Name>
       <CodeCat>Building Membrane</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Expanded Polystyrene - EPS - 4 7/10 in.</Name>
-      <CodeCat>Insulation Board</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Metal Framed Wall - 16inOC - 2x6 - R19 ins.</Name>
-      <CodeCat>Composite</CodeCat>
-      <FrmMat>Metal</FrmMat>
-      <FrmConfig>Wall16inOC</FrmConfig>
+      <CodeItem>Building Paper - 1/16 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Gypsum plaster - 80 lb/ft3 - 1/2 in.</Name>
       <CodeCat>Plastering Materials</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Expanded Polystyrene - EPS - 3 2/5 in.</Name>
-      <CodeCat>Insulation Board</CodeCat>
-    </Mat>
-    <Mat>
-      <Name>Wood Framed Floor - 16inOC - 2x6 - R11 ins.</Name>
-      <CodeCat>Composite</CodeCat>
-      <FrmMat>Wood</FrmMat>
-      <FrmConfig>Floor16inOC</FrmConfig>
+      <CodeItem>Gypsum plaster - 80 lb/ft3 - 1/2 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Fiberboard sheathing - 1/2 in.</Name>
       <CodeCat>Bldg Board and Siding</CodeCat>
+      <CodeItem>Fiberboard sheathing - 1/2 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Carpet - 3/4 in.</Name>
       <CodeCat>Finish Materials</CodeCat>
+      <CodeItem>Carpet - 3/4 in.</CodeItem>
     </Mat>
     <Mat>
       <Name>Asphalt shingles - 1/4 in.</Name>
       <CodeCat>Roofing</CodeCat>
+      <CodeItem>Asphalt shingles - 1/4 in.</CodeItem>
     </Mat>
     <Mat>
-      <Name>Expanded Polystyrene - EPS - 6 1/10 in.</Name>
+      <Name>Expanded Polyurethane - 2 in. R12.6</Name>
       <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Expanded Polyurethane - 2 in. R12.6</CodeItem>
     </Mat>
     <Mat>
-      <Name>Wood Framed Rafter Roof - 16inOC - 2x10 - R25 ins.</Name>
+      <Name>Metal Framed Wall - 16inOC - 2x8 - R25 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Metal</FrmMat>
+      <FrmConfig>Wall16inOC</FrmConfig>
+      <FrmDepth>7_25in</FrmDepth>
+      <CavityIns>25.0</CavityIns>
+    </Mat>
+    <Mat>
+      <Name>Metal Framed Floor - 24inOC - 2x8 - R22 ins.</Name>
+      <CodeCat>Composite</CodeCat>
+      <FrmMat>Metal</FrmMat>
+      <FrmConfig>Floor24inOC</FrmConfig>
+      <FrmDepth>7_25in</FrmDepth>
+      <CavityIns>22.0</CavityIns>
+    </Mat>
+    <Mat>
+      <Name>Cellular polyisocyanurate (unfaced) - 1/2 in. R2.9</Name>
+      <CodeCat>Insulation Board</CodeCat>
+      <CodeItem>Cellular polyisocyanurate (unfaced) - 1/2 in. R2.9</CodeItem>
+    </Mat>
+    <Mat>
+      <Name>Wood Framed Rafter Roof - 16inOC - 2x10 - R22 ins.</Name>
       <CodeCat>Composite</CodeCat>
       <FrmMat>Wood</FrmMat>
       <FrmConfig>Roof16inOC</FrmConfig>
+      <FrmDepth>9_25In</FrmDepth>
+      <CavityIns>22.0</CavityIns>
     </Mat>
     <FenCons>
-      <Name>OperableWindow DoublePane NonMetalFraming TintedGlazing</Name>
+      <Name>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</Name>
       <FenType>VerticalFenestration</FenType>
-      <FenProdType>OperableWindow</FenProdType>
+      <FenProdType>FixedWindow</FenProdType>
       <AssmContext>Manufactured</AssmContext>
       <CertificationMthd>DefaultPerformance</CertificationMthd>
       <OperableWinConfiguration>Sliding</OperableWinConfiguration>
       <GreenhouseGardenWin>0</GreenhouseGardenWin>
-      <FenFrm>NonMetalFraming</FenFrm>
+      <FenFrm>MetalFraming</FenFrm>
       <FenPanes>DoublePane</FenPanes>
       <GlzTint>TintedGlazing</GlzTint>
-      <SHGC>0.53</SHGC>
-      <UFactor>0.58</UFactor>
+      <WinDivider>DividerBtwnPanesLessThan7_16in</WinDivider>
+      <SHGC>0.6</SHGC>
+      <UFactor>0.76</UFactor>
+      <VT>0.84</VT>
+      <VTCOG>0.84</VTCOG>
     </FenCons>
     <Lum>
       <Name>4x2 T-8 Recessed</Name>
@@ -209,7 +219,7 @@
           </IntWall>
           <UndgrFlr>
             <Name>Core Floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Heated Slab Below Grade - FullyInsulatedSlab - R40 cont. ins.</ConsAssmRef>
             <Area>1610.9</Area>
             <PerimExposed>0.0</PerimExposed>
           </UndgrFlr>
@@ -240,39 +250,43 @@
           <ExhPerSpc>0.0</ExhPerSpc>
           <ExtWall>
             <Name>Perimeter 1 Wall South</Name>
-            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Wall - 2x8 16inOC - R25 cavity ins. - R12.53 cont. ins. - 5/8in gypsum</ConsAssmRef>
             <Area>909.0</Area>
             <Az>180.0</Az>
             <Win>
               <Name>Perimeter 1 Wall South Window 1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 1 Wall South Window 2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 1 Wall South Window 3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 1 Wall South Window 4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 1 Wall South Window 5</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 1 Wall South Window 6</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
+            <Dr>
+              <Name>Perimeter 1 Wall South Door 1</Name>
+              <Area>42.0</Area>
+            </Dr>
           </ExtWall>
           <IntWall>
             <Name>Perimeter 1 Wall East</Name>
@@ -288,7 +302,7 @@
           </IntWall>
           <UndgrFlr>
             <Name>Perimeter 1 Floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Heated Slab Below Grade - FullyInsulatedSlab - R40 cont. ins.</ConsAssmRef>
             <Area>1221.17</Area>
             <PerimExposed>90.0</PerimExposed>
           </UndgrFlr>
@@ -319,33 +333,33 @@
           <ExhPerSpc>0.0</ExhPerSpc>
           <ExtWall>
             <Name>Perimeter 2 Wall East</Name>
-            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Wall - 2x8 16inOC - R25 cavity ins. - R12.53 cont. ins. - 5/8in gypsum</ConsAssmRef>
             <Area>606.0</Area>
             <Az>90.0</Az>
             <Win>
               <Name>Perimeter 2 Wall East Window 1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 2 Wall East Window 2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 2 Wall East Window 3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 2 Wall East Window 4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
           </ExtWall>
           <UndgrFlr>
             <Name>Perimeter 2 Floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Heated Slab Below Grade - FullyInsulatedSlab - R40 cont. ins.</ConsAssmRef>
             <Area>724.411</Area>
             <PerimExposed>60.0</PerimExposed>
           </UndgrFlr>
@@ -376,37 +390,37 @@
           <ExhPerSpc>0.0</ExhPerSpc>
           <ExtWall>
             <Name>Perimeter 3 Wall North</Name>
-            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Wall - 2x8 16inOC - R25 cavity ins. - R12.53 cont. ins. - 5/8in gypsum</ConsAssmRef>
             <Area>909.0</Area>
             <Az>0.0</Az>
             <Win>
               <Name>Perimeter 3 Wall North Window 1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 3 Wall North Window 2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 3 Wall North Window 3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 3 Wall North Window 4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 3 Wall North Window 5</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 3 Wall North Window 6</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
           </ExtWall>
@@ -424,7 +438,7 @@
           </IntWall>
           <UndgrFlr>
             <Name>Perimeter 3 Floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Heated Slab Below Grade - FullyInsulatedSlab - R40 cont. ins.</ConsAssmRef>
             <Area>1221.17</Area>
             <PerimExposed>90.0</PerimExposed>
           </UndgrFlr>
@@ -455,27 +469,27 @@
           <ExhPerSpc>0.0</ExhPerSpc>
           <ExtWall>
             <Name>Perimeter 4 Wall West</Name>
-            <ConsAssmRef>Metal Framed Wall - 2x6 16inOC - R19 cavity ins. - R19.63 cont. ins. - 1/2in gypsum</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Wall - 2x8 16inOC - R25 cavity ins. - R12.53 cont. ins. - 5/8in gypsum</ConsAssmRef>
             <Area>606.0</Area>
             <Az>270.0</Az>
             <Win>
               <Name>Perimeter 4 Wall West Window 1</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 4 Wall West Window 2</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 4 Wall West Window 3</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
             <Win>
               <Name>Perimeter 4 Wall West Window 4</Name>
-              <FenConsRef>OperableWindow DoublePane NonMetalFraming TintedGlazing</FenConsRef>
+              <FenConsRef>FixedWindow DoublePane MetalFraming DividerBtwnPanesLessThan7_16in TintedGlazing 2</FenConsRef>
               <Area>30.0</Area>
             </Win>
           </ExtWall>
@@ -499,7 +513,7 @@
           </IntWall>
           <UndgrFlr>
             <Name>Perimeter 4 Floor</Name>
-            <ConsAssmRef>Unheated Slab On Grade - 12inHorizontal - R5 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Heated Slab Below Grade - FullyInsulatedSlab - R40 cont. ins.</ConsAssmRef>
             <Area>724.411</Area>
             <PerimExposed>60.0</PerimExposed>
           </UndgrFlr>
@@ -528,22 +542,22 @@
           <ExhPerSpc>0.0</ExhPerSpc>
           <ExtFlr>
             <Name>Attic Soffit North</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Floor - 2x8 24inOC - R22 cavity ins.</ConsAssmRef>
             <Area>182.706</Area>
           </ExtFlr>
           <ExtFlr>
             <Name>Attic Soffit East</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Floor - 2x8 24inOC - R22 cavity ins.</ConsAssmRef>
             <Area>123.096</Area>
           </ExtFlr>
           <ExtFlr>
             <Name>Attic Soffit West</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Floor - 2x8 24inOC - R22 cavity ins.</ConsAssmRef>
             <Area>123.096</Area>
           </ExtFlr>
           <ExtFlr>
             <Name>Attic Soffit South</Name>
-            <ConsAssmRef>Wood Framed Floor - 2x6 16inOC - R11 cavity ins. - R14.13 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Metal Framed Floor - 2x8 24inOC - R22 cavity ins.</ConsAssmRef>
             <Area>182.706</Area>
           </ExtFlr>
           <IntFlr>
@@ -578,28 +592,28 @@
           </IntFlr>
           <Roof>
             <Name>Attic Roof North</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R22 cavity ins. - R2.93 cont. ins.</ConsAssmRef>
             <Area>2126.03</Area>
             <Az>0.0</Az>
             <Tilt>18.0</Tilt>
           </Roof>
           <Roof>
             <Name>Attic Roof West</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R22 cavity ins. - R2.93 cont. ins.</ConsAssmRef>
             <Area>1096.48</Area>
             <Az>270.0</Az>
             <Tilt>18.0</Tilt>
           </Roof>
           <Roof>
             <Name>Attic Roof East</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R22 cavity ins. - R2.93 cont. ins.</ConsAssmRef>
             <Area>1096.48</Area>
             <Az>90.0</Az>
             <Tilt>18.0</Tilt>
           </Roof>
           <Roof>
             <Name>Attic Roof South</Name>
-            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R25 cavity ins. - R25.46 cont. ins.</ConsAssmRef>
+            <ConsAssmRef>Wood Framed Rafter Roof - 2x10 16inOC - R22 cavity ins. - R2.93 cont. ins.</ConsAssmRef>
             <Area>2126.03</Area>
             <Az>180.0</Az>
             <Tilt>18.0</Tilt>
@@ -610,6 +624,11 @@
         <Name>Core Zone</Name>
         <Type>Conditioned</Type>
         <PriAirCondgSysRef>Core PSZ AirSys</PriAirCondgSysRef>
+      </ThrmlZn>
+      <ThrmlZn>
+        <Name>Perimeter 1 Zone</Name>
+        <Type>Conditioned</Type>
+        <PriAirCondgSysRef>Perimeter 1 PSZ AirSys</PriAirCondgSysRef>
       </ThrmlZn>
       <ThrmlZn>
         <Name>Perimeter 2 Zone</Name>
@@ -625,11 +644,6 @@
         <Name>Perimeter 4 Zone</Name>
         <Type>Conditioned</Type>
         <PriAirCondgSysRef>Perimeter 4 PSZ AirSys</PriAirCondgSysRef>
-      </ThrmlZn>
-      <ThrmlZn>
-        <Name>Perimeter 1 Zone</Name>
-        <Type>Conditioned</Type>
-        <PriAirCondgSysRef>Perimeter 1 PSZ AirSys</PriAirCondgSysRef>
       </ThrmlZn>
       <ThrmlZn>
         <Name>Attic Zone</Name>
