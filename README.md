@@ -40,7 +40,19 @@ One liner (for vagrant)
   
 
 ### AWS Production via Chef / Knife / Capistrano
-   
+
+* Update the roles/cookbooks in the `chef/cookbooks, chef/roles` folder.
+* If adding a new cookbook either add it to the Berksfile or as part of the metadata under the cbec_com_web cookbook
+* Test locally using Vagrant per instruction above
+* Upload the cookbooks and roles to the Hosted Chef server
+
+```
+berks upload
+# you may need to force the cbecc_com_web unless you incremented the version
+berks upload cbec_com_web --force
+knife role from file chef/roles/cbecc_com_web_single.rb
+ ```
+
 * Cut the server. Make sure to specify your own *security group*
 
 ```
@@ -134,21 +146,7 @@ To run the CBECC-Com simulations, then start the following:
 
 ## System Configuration (Using Chef)
 
-* Update the roles/cookbooks in the /chef folder.
-* If adding a new cookbook either add it to the Berksfile or as part of the metadata under the cbec_com_web cookbook
-* Test locally using Vagrant
 
-  ```
-  vagrant up
-  cap vagrant deploy
-  ```
-* Upload the cookbooks and roles to the NREL Chef server
-
-  ```
-  berks upload
-  # you may need to force the cbecc_com_web unless you incremented the version
-  berks upload cbec_com_web --force
-  knife role from file chef/roles/cbecc_com_web_single.rb
   ```
 
 * Log into the server and run `sudo chef-client`
