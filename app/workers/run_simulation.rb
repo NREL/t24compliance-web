@@ -14,6 +14,7 @@ class RunSimulation
     @simulation = Simulation.find(simulation_id)
     @simulation.clear_results
     @simulation.remove_files
+    @simulation.save!
 
     # Make sure to initialize all the model variables
     success = false
@@ -103,7 +104,7 @@ class RunSimulation
               sleep 5
 
               if File.exist? "#{@simulation.run_path}/docker_run.receipt"
-                logger.info "Docker task has completed, killing the log watch thread"
+                logger.info "Docker task has completed, killing the Log Thread"
                 break
               end
             end
@@ -111,16 +112,15 @@ class RunSimulation
         rescue Timeout::Error
           logger.info "Log parsing raised a timeout error"
         end
-
       end
 
-      # this command is kind of weird. From what I understand, this is the container timeout (defaults to 60 seconds)
-      # This may be of interest: http://kimh.github.io/blog/en/docker/running-docker-containers-asynchronously-with-celluloid/
       logger.info "Threading Docker wait..."
       threads << Thread.new do
         # remove the 'receipt' file
         File.delete "#{@simulation.run_path}/docker_run.receipt" if File.exist? "#{@simulation.run_path}/docker_run.receipt"
         begin
+          # this command is kind of weird. From what I understand, this is the container timeout (defaults to 60 seconds)
+          # This may be of interest: http://kimh.github.io/blog/en/docker/running-docker-containers-asynchronously-with-celluloid/
           c.wait(RunSimulation::TIMEOUT)
         rescue => e
           logger.error "Docker wait thread exception #{e.message}"
@@ -130,8 +130,6 @@ class RunSimulation
         end
       end
       threads.each { |t| t.join }
-
-      # stdout, stderr = c.attach(stream: false, stdout: true, stderr: true, logs: true)
 
       logger.info 'Finished running simulation'
       success = process_results
@@ -145,7 +143,7 @@ class RunSimulation
       logger.error m
       @simulation.status_message = e.message
 
-      # make sure to fail out so sidekiq knows that this is a dead job
+      # make sure to fail out so sidekiq knows that this is a dead job and should retry if able
       fail m
     ensure
       Dir.chdir current_dir
