@@ -96,7 +96,7 @@ bundle exec sidekiq -e production
 * Deployment is assume to be on a single node. The application should work with separate worker nodes, but the Chef recipes will need to be modified
 * Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
 
-# Development Notes
+# Development Setup
 
 ## Instructions
 
@@ -143,13 +143,6 @@ To run the CBECC-Com simulations, then start the following:
 * [boot2docker](https://github.com/boot2docker/boot2docker) then `boot2docker start`. Make sure to export the docker port.
 * redis (`brew install redis`) then `redis-server`
 * sidekiq (installed with bundler) then `bundle exec sidekiq -e development` or `bundle exec sidekiq -e test`
-
-## System Configuration (Using Chef)
-
-
-  ```
-
-* Log into the server and run `sudo chef-client`
 
 ## Asset Pipeline Hints
 
