@@ -8,8 +8,9 @@ include_recipe 'redis2'
 
 redis_instance 'cbecc_com_queue'
 
-# docker
-include_recipe 'docker' # need to make sure that we upgrade
+include_recipe 'docker' # need to make sure that we upgrade the daemon to 1.5
+
+include_recipe 'supervisor'
 
 # add users in a deploy group
 node[:cbecc_com_web][:deploy_users].each do |u|
@@ -24,6 +25,19 @@ end
 docker_image 'nllong/cbecc-com' do
   tag 'latest'
   cmd_timeout 20 * 60 # 20 minutes
+end
+
+# supervisor tasks
+supervisor_service "sidekiq" do
+  command '/var/www/cbecc-com-web/current/bin/sidekiq.sh'
+  directory '/mnt/repos/cofee-grinder'
+  autostart false
+  autorestart true
+  redirect_stderr true
+  stdout_logfile '/var/log/supervisor/sidekiq.log'
+  user "deploy"
+  #pidfile '/var/www/cbecc-com-web/shared/pids/sidekiq.pid'
+  action :enable
 end
 
 # sidekiq

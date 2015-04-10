@@ -4,3 +4,6 @@
 
 default[:cbecc_com_web][:ruby][:version] = 'jruby-1.7.15'
 default[:cbecc_com_web][:deploy_users] = %w(ec2-user nlong vagrant kflemin apeterse)
+
+# gui for supervisor
+default['supervisor']['inet_port'] = 8080

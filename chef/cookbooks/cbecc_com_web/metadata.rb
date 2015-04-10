@@ -15,7 +15,7 @@ depends 'iptables'
 depends 'rbenv', '~> 1.7.1'
 depends 'redis2', '~> 0.5.1'
 depends 'docker', '~> 0.36.0'
-depends 'sidekiq', '~> 3.3.0'
+depends 'supervisor'
 
 %w(redhat centos).each do |os|
   supports os
