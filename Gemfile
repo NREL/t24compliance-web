@@ -44,6 +44,7 @@ gem 'font-awesome-rails'
 
 # For simulation of CBECC-Com Files
 gem 'docker-api', require: 'docker'
+gem 'file-tail'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', require: nil
 

@@ -4,10 +4,12 @@ class Simulation
 
   field :filename, type: String # this should be used and not passing run_path to the RunSimulation Worker
   field :status, type: String # Enum of ['init', 'queued', 'started', 'completed', 'error']
+  field :status_message, type: String # message regarding the status (e.g. why the simulation encountered an error)
   field :percent_complete, type: Float
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
   field :error_messages, type: Array
+
 
   # compliance report
   field :compliance_report_pdf_path, type: String
@@ -53,4 +55,5 @@ class Simulation
   def run_path
     File.join(Rails.root, 'data', 'simulations', Rails.env, _id)
   end
+
 end
