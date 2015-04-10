@@ -1,4 +1,5 @@
-# this is the workhorse to run the docker container.
+# The workhorse to run the docker container with CBECC-Com.
+
 # This method is run in the background as a delayed job task. If you change this file, then you will need to
 # restart SideKiq
 
@@ -6,10 +7,18 @@ class RunSimulation
   include Sidekiq::Worker
   sidekiq_options retry: 1 #, backtrace: true
 
+  # TIMEOUT for docker container (and log file)
+  TIMEOUT = 3600 # seconds
+
   def perform(simulation_id)
     @simulation = Simulation.find(simulation_id)
+    @simulation.clear_results
+    @simulation.remove_files
+
+    # Make sure to initialize all the model variables
     success = false
     status_message = ''
+
     current_dir = Dir.pwd
     File.delete "#{@simulation.run_path}/docker_run.receipt" if File.exist? "#{@simulation.run_path}/docker_run.receipt"
     threads = []
@@ -47,12 +56,10 @@ class RunSimulation
         logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux with a socket) if not, set DOCKER_URL ENV variable to the Docker socket'
       end
 
-
       # Kill after 1 hour at the moment
       logger.info "Setting Excon timeouts to #{60*60} seconds"
-      docker_container_timeout = 60 * 60 # 60 minutes  # how to catch a timeout error?  test this?
-      Excon.defaults[:write_timeout] = docker_container_timeout
-      Excon.defaults[:read_timeout] = docker_container_timeout
+      Excon.defaults[:write_timeout] = RunSimulation::TIMEOUT
+      Excon.defaults[:read_timeout] = RunSimulation::TIMEOUT
       Excon.defaults[:ssl_verify_peer] = false
 
       # check if docker is alive
@@ -70,52 +77,62 @@ class RunSimulation
       logger.info "Docker container is: #{c.inspect}"
       c.start('Binds' => ["#{@simulation.run_path}:/var/cbecc-com-files/run/"])
 
-      # Per NEM: Check for tail gem. Most likely will have to be a separate thread.
+      # Tailing thread
       threads << Thread.new do
-        # Add a Timeout!
-        # Look at File::Tail (http://flori.github.io/file-tail/doc/index.html)
-        (1..5).each do |c|
-          logger.info "Checking log file -- iteration #{c}"
-          sleep 10
+        begin
+          Timeout.timeout(RunSimulation::TIMEOUT) do
+            # Look at File::Tail (http://flori.github.io/file-tail/doc/index.html)
+            loop_count = 0
+            tail_thread = nil
+            loop do
+              # wait until the log file is found, then start a new thread for monitoring the process. Do
+              # not join this thread with the others.
 
-          if File.exist? "#{@simulation.run_path}/docker_run.receipt"
-            logger.info "Docker task has completed, killing the log watch thread"
-            break
+              if tail_thread.nil? && find_log_file && File.exist?(find_log_file)
+                tail_thread = Thread.new do
+                  logger.info "Starting thread to parse the log file"
+                  File::Tail::Logfile.tail(find_log_file) do |line|
+                    determine_percent_complete(line) if line =~ /.*PerfAnal_CECNRes.*$/
+                  end
+                end
+              else
+                logger.info "Checking for the existence of a log file -- iteration #{loop_count += 1}" if tail_thread.nil?
+              end
+
+              logger.info "Checking for completion of task from the Log Thread... waiting"
+              sleep 5
+
+              if File.exist? "#{@simulation.run_path}/docker_run.receipt"
+                logger.info "Docker task has completed, killing the log watch thread"
+                break
+              end
+            end
           end
+        rescue Timeout::Error
+          logger.info "Log parsing raised a timeout error"
         end
-
-        # File::Tail::Logfile.tail(filename) do |line|
-        #   break if File.exist("#{@simulation.run_path}/CbeccComWrapper.json")
-        #   #    puts line
-        #   #  end
-        # end
 
       end
 
       # this command is kind of weird. From what I understand, this is the container timeout (defaults to 60 seconds)
       # This may be of interest: http://kimh.github.io/blog/en/docker/running-docker-containers-asynchronously-with-celluloid/
-      logger.info "Threading docker wait..."
+      logger.info "Threading Docker wait..."
       threads << Thread.new do
         # remove the 'receipt' file
         File.delete "#{@simulation.run_path}/docker_run.receipt" if File.exist? "#{@simulation.run_path}/docker_run.receipt"
         begin
-          c.wait(docker_container_timeout)
+          c.wait(RunSimulation::TIMEOUT)
         rescue => e
-
+          logger.error "Docker wait thread exception #{e.message}"
         ensure
-          File.open( "#{@simulation.run_path}/docker_run.receipt", 'w') { |f| f << Time.now }
-          logger.info "docker wait finished"
+          File.open("#{@simulation.run_path}/docker_run.receipt", 'w') { |f| f << Time.now }
+          logger.info "Docker wait finished"
         end
       end
+      threads.each { |t| t.join }
 
-      threads.each { |t|  t.join }
+      # stdout, stderr = c.attach(stream: false, stdout: true, stderr: true, logs: true)
 
-      # Kill the monitoring thread
-      # t.kill
-
-      stdout, stderr = c.attach(stream: false, stdout: true, stderr: true, logs: true)
-
-      logger.debug stdout
       logger.info 'Finished running simulation'
       success = process_results
 
@@ -133,7 +150,7 @@ class RunSimulation
     ensure
       Dir.chdir current_dir
       @simulation.status = success ? 'completed' : 'error'
-      update_percent_complete(100)
+      update_percent_complete(100, 'completed')
       @simulation.status_message = status_message
       @simulation.save!
     end
@@ -144,7 +161,7 @@ class RunSimulation
   def process_results
     # Clean up some of the files that are not needed
     %w(runmanager.db).each do |f|
-      logger.debug "removing file: #{@simulation.run_path}/#{f}"
+      logger.debug "Removing file: #{@simulation.run_path}/#{f}"
       File.delete File.join(@simulation.run_path, f) if File.exist? File.join(@simulation.run_path, f)
     end
 
@@ -179,7 +196,7 @@ class RunSimulation
     if log_file && File.exist?(log_file)
       s = File.read log_file
       s.scan(/Error:\s{2}.*$/).each do |error|
-        errors << error.chomp
+        errors << error[/Error:\s{2}(.*)/, 1].chomp
       end
 
       @simulation.error_messages = errors
@@ -189,11 +206,55 @@ class RunSimulation
     @simulation.error_messages.empty?
   end
 
-  def update_percent_complete(percent)
+  # Parse the log string that had the perform analysis step to determine the state of the overall analysis
+  # @param log_string [String] String from the CBECC-Com log to parse
+  # @return nil
+  def determine_percent_complete(log_string)
+    message = log_string[/.*PerfAnal_CECNRes.-.(.*)$/, 1].chomp
+    update_percent_complete(5, message)
+
+    # find where we are
+    states = [
+        {/initializing ruleset/i => 0.440528634355686},
+        {/loading sdd model/i => 1.32158590308396},
+        {/back from loading sdd model/i => 1.32158590308396},
+        {/defaulting model/i => 1.76211453744387},
+        {/defaulting model/i => 2.6431718061637},
+        {/writing user input to analysis results xml/i => 3.08370044052783},
+        {/checking sdd model/i => 3.08370044052783},
+        {/preparing model zb/i => 3.08370044052783},
+        {/calling perfsim_e. for zb model/i => 3.52422907489197},
+        {/back from perfsim_e. (zb model, 0 return value)/i => 35.2422907488986},
+        {/exporting zb model details to results xml/i => 35.2422907488986},
+        {/preparing model ap/i => 35.2422907488986},
+        {/calling perfsim_e. for ap model/i => 35.6828193832585},
+        {/back from perfsim_e. (ap model, 0 return value)/i => 35.6828193832585},
+        {/preparing model ab/i => 35.6828193832585},
+        {/calling perfsim_e. for ab model/i => 35.6828193832585},
+        {/back from perfsim_e. (ab model, 0 return value)/i => 100},
+        {/umlh check on ab model/i => 100},
+        {/exporting ab model details to results xml/i => 100}
+    ]
+
+    states.reverse.each do |s|
+      if log_string =~ s.keys.first
+        update_percent_complete(s.values.first, message)
+        break
+      end
+    end
+  end
+
+  # Update the percent complete in the database and the status_message (if supplied)
+  # @param percent [Float] Value to set the simulation complete
+  # @param message [String] Message to display to the user on the current state
+  def update_percent_complete(percent, message)
+    @simulation.percent_complete_message << message if @simulation.percent_complete_message.last != message
     @simulation.percent_complete = percent
     @simulation.save!
   end
 
+  # Use glob to find the log file for the existing simulation. This assumes that CBECC-Com only writes
+  # out a single log file
   def find_log_file
     Dir["#{@simulation.run_path}/*.log"].first
   end

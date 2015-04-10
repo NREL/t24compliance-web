@@ -174,3 +174,11 @@ bundle exec sidekiq -e production
     ```
 
 
+# Known Limitations
+
+* Current timeout of 1 hour for simulations
+* Deployment is assume to be on a single node. The application should work with separate worker nodes, but the Chef recipes will need to be modified
+
+
+
+

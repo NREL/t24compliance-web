@@ -6,6 +6,7 @@ class Simulation
   field :status, type: String # Enum of ['init', 'queued', 'started', 'completed', 'error']
   field :status_message, type: String # message regarding the status (e.g. why the simulation encountered an error)
   field :percent_complete, type: Float
+  field :percent_complete_message, type: Array, default: [] # string on what the simulation is doing
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
   field :error_messages, type: Array
@@ -31,6 +32,7 @@ class Simulation
     # clear out the object
 
     clear_results
+    remove_files
     RunSimulation.perform_async(id)
   end
 
@@ -48,8 +50,9 @@ class Simulation
     self.cbecc_code = nil
     self.cbecc_code_description = ''
     self.error_messages = []
+    self.percent_complete_message = []
 
-    save!
+    self.save!
   end
 
   def run_path
