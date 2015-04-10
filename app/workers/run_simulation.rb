@@ -150,7 +150,7 @@ class RunSimulation
     ensure
       Dir.chdir current_dir
       @simulation.status = success ? 'completed' : 'error'
-      update_percent_complete(100, 'completed')
+      update_percent_complete(100, 'Completed')
       @simulation.status_message = status_message
       @simulation.save!
     end
