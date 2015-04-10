@@ -11,9 +11,7 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 *Note the use of `bundle exec` to protect against loading wrong gem dependencies*
 
 * Start the vagrant machine and make sure provision runs to completion
-* Deploy the application
-
-Call the command below. Note that on initial deployment that this will take awhile (minutes) to deploy.
+* Deploy the application by calling the command below. *Note that on initial deployment that this will take awhile (minutes) to deploy.*
 
   ```
   bundle exec cap vagrant deploy
