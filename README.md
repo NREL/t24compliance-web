@@ -4,85 +4,16 @@
 
 The CBECC-Com web app runs on JRuby and Rails 4.
 
-## Install
-
-1. Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build)
-1. rbenv install jruby-1.7.15
-1. If you don't have java installed on your machine already, install the Java Development Kit (JDK 7)
-1. Install mongo or `brew install mongodb` (not necessary if you will use remote Mongo server instead of restoring full dump locally).
-1. If you are going to run cbecc-com simulations, then install redis `brew install redis`
-    * Start the redis server `redis-server /usr/local/etc/redis.conf`
-1. Install node and bower to manage front end assets. Good article on angular/rails integration [here](http://angular-rails.com/bootstrap.html#an-empty-rails-app).
-    * `brew install node`
-    * `npm install -g bower`
-1. Clone this repository
-1. Set your local folder to use jruby `rbenv local jruby-1.7.15` or the system `rbenv global jruby-1.7.15` (not recommended for local development)
-1. Install bundler for jruby `gem install bundler`
-1. bundle
-
-## Updating Libraries
-
-CBECC-Com Web uses Bower to manage front end libraries. To add a new dependency:
-
-* Add the dependency to the Bowerfile
-    * Restrict the version if needed
-* Run `rake bower:install`
-* Remove the bootstrap that is installed because it is a dependency of angular-strap
-    * `rm -rf vendor/assets/bower_components/bootstrap`
-* Commit the updated vendor/asset files
-
-To update the dependencies (based on version restrictions in the Bowerfile):
-
-* Run `rake bower:update`
-* Remove the bootstrap that is installed because it is a dependency of angular-strap
-    * `rm -rf vendor/assets/bower_components/bootstrap`
-* Commit the updated vendor/asset files
-
-## Running
-
-### CBECC-Com Simulations
-
-To run the web application only, then start the following:
-* mongodb (`mongd`)
-* Run rails (`rails s`) * Note that rails run in JRuby with Puma *
-
-To run the CBECC-Com simulations, then start the following:
-
-* [boot2docker](https://github.com/boot2docker/boot2docker) then `boot2docker start`. Make sure to export the docker port.
-* redis (`brew install redis`) then `redis-server`
-* sidekiq (installed with bundler) then `bundle exec sidekiq -e development` or `bundle exec sidekiq -e test`
-
-## System Configuration (Using Chef)
-
-* Update the roles/cookbooks in the /chef folder.
-* If adding a new cookbook either add it to the Berksfile or as part of the metadata under the cbec_com_web cookbook
-* Test locally using Vagrant
-
-  ```
-  vagrant up
-  cap vagrant deploy
-  ```
-* Upload the cookbooks and roles to the NREL Chef server
-
-  ```
-  berks upload
-  # you may need to force the cbecc_com_web unless you incremented the version
-  berks upload cbec_com_web --force
-  knife role from file chef/roles/cbecc_com_web_single.rb
-  ```
-
-* Log into the server and run `sudo chef-client`
-
 ## Deployment
 
 ### Vagrant / Staging
+
 *Note the use of `bundle exec` to protect against loading wrong gem dependencies*
 
-* Map t24compliance.net to your vagrant IP in your hosts file
-
-* Start the vagrant machine and make sure provision runs
-
+* Start the vagrant machine and make sure provision runs to completion
 * Deploy the application
+
+Call the command below. Note that on initial deployment that this will take awhile (minutes) to deploy.
 
   ```
   bundle exec cap vagrant deploy
@@ -99,9 +30,14 @@ To run the CBECC-Com simulations, then start the following:
   bundle exec cap vagrant nginx:reload
   bundle exec cap vagrant nginx:restart
   # or
+  bundle exec cap staging deploy:seed
+  bundle exec cap staging nginx:site:add
+  bundle exec cap staging nginx:site:enable
+  bundle exec cap staging nginx:reload
   bundle exec cap staging nginx:restart
   ```
 
+One liner (for vagrant)
   `bundle exec cap vagrant nginx:site:add && bundle exec cap vagrant nginx:site:enable && bundle exec cap vagrant nginx:reload && bundle exec cap vagrant nginx:restart`
   
 
@@ -137,14 +73,89 @@ sudo chef-client
 
 #### Worker Nodes
 
-Currently the worker is the same of the server, however, this does not need the case. To start a worker on the server run the following in the background
+Currently the worker is the same as the server; however, this does not need to be the case. To start a worker on the server run the following in the background. The entire checkout of the application needs to be on the worker as well and the IP address of redis needs to be configured in the sidekiq.yml file.
 
 ```
 cd /var/www/cbecc-com-web/current/
 bundle exec sidekiq -e production
 ```
 
-### Asset Pipeline Hints
+# Known Limitations
+
+* Current timeout of 1 hour for simulations
+* Deployment is assume to be on a single node. The application should work with separate worker nodes, but the Chef recipes will need to be modified
+* Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
+
+# Development Notes
+
+## Instructions
+
+1. Install [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build)
+1. rbenv install jruby-1.7.15
+1. If you don't have java installed on your machine already, install the Java Development Kit (JDK 7)
+1. Install mongo or `brew install mongodb` (not necessary if you will use remote Mongo server instead of restoring full dump locally).
+1. If you are going to run cbecc-com simulations, then install redis `brew install redis`
+    * Start the redis server `redis-server /usr/local/etc/redis.conf`
+1. Install node and bower to manage front end assets. Good article on angular/rails integration [here](http://angular-rails.com/bootstrap.html#an-empty-rails-app).
+    * `brew install node`
+    * `npm install -g bower`
+1. Clone this repository
+1. Set your local folder to use jruby `rbenv local jruby-1.7.15` or the system `rbenv global jruby-1.7.15` (not recommended for local development)
+1. Install bundler for jruby `gem install bundler`
+1. bundle
+
+## Updating Libraries
+
+CBECC-Com Web uses Bower to manage front end libraries. To add a new dependency:
+
+* Add the dependency to the Bowerfile
+    * Restrict the version if needed
+* Run `rake bower:install`
+* Remove the bootstrap that is installed because it is a dependency of angular-strap
+    * `rm -rf vendor/assets/bower_components/bootstrap`
+* Commit the updated vendor/asset files
+
+To update the dependencies (based on version restrictions in the Bowerfile):
+
+* Run `rake bower:update`
+* Remove the bootstrap that is installed because it is a dependency of angular-strap
+    * `rm -rf vendor/assets/bower_components/bootstrap`
+* Commit the updated vendor/asset files
+
+## Running CBECC-Com Simulations
+
+To run the web application only, then start the following:
+* mongodb (`mongod`)
+* Run rails (`rails s`) * Note that rails run in JRuby with Puma *
+
+To run the CBECC-Com simulations, then start the following:
+
+* [boot2docker](https://github.com/boot2docker/boot2docker) then `boot2docker start`. Make sure to export the docker port.
+* redis (`brew install redis`) then `redis-server`
+* sidekiq (installed with bundler) then `bundle exec sidekiq -e development` or `bundle exec sidekiq -e test`
+
+## System Configuration (Using Chef)
+
+* Update the roles/cookbooks in the /chef folder.
+* If adding a new cookbook either add it to the Berksfile or as part of the metadata under the cbec_com_web cookbook
+* Test locally using Vagrant
+
+  ```
+  vagrant up
+  cap vagrant deploy
+  ```
+* Upload the cookbooks and roles to the NREL Chef server
+
+  ```
+  berks upload
+  # you may need to force the cbecc_com_web unless you incremented the version
+  berks upload cbec_com_web --force
+  knife role from file chef/roles/cbecc_com_web_single.rb
+  ```
+
+* Log into the server and run `sudo chef-client`
+
+## Asset Pipeline Hints
 
 * In your Sass file, use 'font-path' to include font libraries.  This may be a problem when importing 3rd-party css into your project (ex: ui-grid)
 
@@ -172,13 +183,5 @@ bundle exec sidekiq -e production
     ```
     localStorage.clear()
     ```
-
-
-# Known Limitations
-
-* Current timeout of 1 hour for simulations
-* Deployment is assume to be on a single node. The application should work with separate worker nodes, but the Chef recipes will need to be modified
-* Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
-
 
 
