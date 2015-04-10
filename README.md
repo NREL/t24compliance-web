@@ -178,7 +178,7 @@ bundle exec sidekiq -e production
 
 * Current timeout of 1 hour for simulations
 * Deployment is assume to be on a single node. The application should work with separate worker nodes, but the Chef recipes will need to be modified
-
+* Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
 
 
 
