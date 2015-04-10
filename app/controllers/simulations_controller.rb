@@ -9,8 +9,7 @@ class SimulationsController < ApplicationController
   # GET /simulations
   # GET /simulations.json
   def index
-    # index should return array, even though we only have 1 simulation / project
-    @simulations = (@project.simulation.present?) ? [@project.simulation] : []
+    @simulations = Simulation.all
     respond_with(@simulations)
   end
 
@@ -104,8 +103,7 @@ class SimulationsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_simulation
-    set_project
-    @simulation = Simulation.find(project_id: @project.id).first
+    @simulation = Simulation.find(params[:id])
   end
 
   def set_project

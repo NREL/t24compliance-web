@@ -1,6 +1,6 @@
-cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared', 'simulations', function ($scope, $log, $timeout, data, Shared, simulations) {
+cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared', 'simulation', function ($scope, $log, $timeout, data, Shared, simulation) {
 
-  $scope.simulation = simulations[0];
+  $scope.simulation = simulation;
   console.log($scope.simulation);
 
   $scope.errors_open = false;

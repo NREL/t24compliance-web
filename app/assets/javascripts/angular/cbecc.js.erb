@@ -366,8 +366,8 @@ cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$htt
       templateUrl: 'compliance/compliance.html',
       parent: 'requirebuilding',
       resolve: {
-        simulations: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
-          return data.list('simulations', Shared.defaultParams());
+        simulation: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          return data.show('simulations', {id: Shared.getSimulationId()});
         }]
       }
     })

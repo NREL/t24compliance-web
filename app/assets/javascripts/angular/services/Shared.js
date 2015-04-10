@@ -2,6 +2,7 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   var service = {};
   var projectId = null;
   var buildingId = null;
+  var simulationId = null;
   var modified = false;
   var fullscreen = false;
   var cache = DSCacheFactory('libraries', {
@@ -51,6 +52,18 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
   service.getBuildingId = function () {
     return buildingId;
   };
+
+  //passing in entire project
+  service.setSimulationId = function (project) {
+    if ((project.simulation_id) && (project.simulation_id != simulationId)) {
+      simulationId = project.simulation_id;
+    }
+  };
+
+  service.getSimulationId = function () {
+    return simulationId;
+  };
+
 
   service.lookupBuilding = function (data, requireBuilding) {
     var deferred = $q.defer();
