@@ -90,7 +90,7 @@ To run the CBECC-Com simulations, then start the following:
   bundle exec cap staging deploy
   ```
 
-* Configure and restart nginx (or if you changed the site config). Note that this should be a deploy:cold task someday.
+* Configure and restart nginx (or if you changed the site config). *Note that this should be a deploy:cold task someday*
 
   ```
   bundle exec cap vagrant deploy:seed
