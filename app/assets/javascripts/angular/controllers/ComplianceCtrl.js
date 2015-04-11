@@ -1,7 +1,9 @@
 cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared', 'simulation', function ($scope, $log, $timeout, data, Shared, simulation) {
 
   $scope.simulation = simulation;
-  console.log($scope.simulation);
+
+  $log.debug('simulationID: ', Shared.getSimulationId());
+  $log.debug('projectId: ', Shared.getProjectId());
 
   $scope.errors_open = false;
 
@@ -9,7 +11,7 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared
     return $scope.simulation.status  == 'completed' || $scope.simulation.status == 'errored'
   };
   $scope.isRunning = function() {
-    return (($scope.simulation.status == 'init') || ($scope.simulation['status'] == 'queued') || ($scope.simulation['status'] == 'started'))
+    return (($scope.simulation.status == 'init') || ($scope.simulation.status == 'queued') || ($scope.simulation.status == 'started'))
   };
 
   $scope.hasErrors = function() {
@@ -17,7 +19,7 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared
   };
 
   $scope.hasCompliancePDF = function()  {
-    return $scope.simulation['compliance_report_pdf_path'] == null;
+    return $scope.simulation.compliance_report_pdf_path == null;
   };
   $scope.getXml = function () {
     $log.debug('Submitting simulation to run queue');

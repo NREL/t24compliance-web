@@ -367,6 +367,7 @@ cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$htt
       parent: 'requirebuilding',
       resolve: {
         simulation: ['data', 'Shared', 'lookupbuilding', function (data, Shared, lookupbuilding) {
+          //PROBLEM HERE ON PAGE REFRESH:  simulationID seems to be getting set after the line below is called, which results in a bad API call
           return data.show('simulations', {id: Shared.getSimulationId()});
         }]
       }
@@ -386,10 +387,11 @@ cbecc.config(['$logProvider', '$urlRouterProvider', 'stateHelperProvider', '$htt
 }]);
 
 
-cbecc.run(['$rootScope', '$log', '$state', '$modal', 'toaster', 'Shared', 'api', function ($rootScope, $log, $state, $modal, toaster, Shared, api) {
+cbecc.run(['$rootScope', '$log', '$state', '$modal', 'toaster', 'Shared', 'api', 'data', function ($rootScope, $log, $state, $modal, toaster, Shared, api, data) {
   api.add(['building_stories', 'buildings', 'construction_defaults', 'constructions', 'door_lookups', 'fenestrations', 'fluid_systems', 'luminaires', 'projects', 'simulations', 'space_function_defaults', 'spaces', 'terminal_units', 'thermal_zones', 'zone_systems']);
 
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+
     // Don't prompt to save on subtab changes
     var to = toState.hasOwnProperty('parent') ? (toState.parent.hasOwnProperty('name') ? toState.parent.name : toState.name) : null;
     var from = fromState.hasOwnProperty('parent') ? (fromState.parent.hasOwnProperty('name') ? fromState.parent.name : fromState.name) : null;
@@ -410,7 +412,15 @@ cbecc.run(['$rootScope', '$log', '$state', '$modal', 'toaster', 'Shared', 'api',
         $state.go(toState, toParams);
       });
     } else {
-      Shared.setIds(toParams); //getBuilding should go into this - index request to determine building id
+      Shared.setIds(toParams); // getBuilding should go into this - index request to determine building id
+
+      //for refresh on compliance tab
+      if ((toState.name == 'requirebuilding.compliance') && (fromState.url == '^')) {
+        Shared.lookupSimulation(data).then( function(response) {
+          $log.debug("SIMULATION ID: ", Shared.getSimulationId());
+        })
+      }
+
       Shared.startSpinner();
     }
   });
@@ -433,6 +443,7 @@ cbecc.run(['$rootScope', '$log', '$state', '$modal', 'toaster', 'Shared', 'api',
       $log.error('Unhandled state change error:', error);
       Shared.setProjectId(null);
       Shared.setBuildingId(null);
+      Shared.setSimulationId(null);
       $state.go('project');
     }
   });

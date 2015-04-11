@@ -36,6 +36,7 @@ cbecc.provider('data', {
           if (response.status == 404) {
             if (resource == 'projects') return $q.reject('Invalid project ID');
             if (resource == 'buildings') return $q.reject('Invalid building ID');
+            if (resource == 'simulations') return $q.reject('Invalid simulation ID');
           }
           return $q.reject(response);
         });
