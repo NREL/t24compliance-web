@@ -64,7 +64,7 @@ namespace :sim do
   desc 'import test project'
   task import_test_project: :environment do
     # import some cbecc com models
-    u = User.find_by(email: 'test@nrel.gov')
+    u = User.where(email: 'test@nrel.gov').first
 
 
     # remove the old projects

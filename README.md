@@ -37,7 +37,15 @@ The CBECC-Com web app runs on JRuby and Rails 4.
 
 One liner (for vagrant)
   `bundle exec cap vagrant nginx:site:add && bundle exec cap vagrant nginx:site:enable && bundle exec cap vagrant nginx:reload && bundle exec cap vagrant nginx:restart`
-  
+
+* After deployment you may want to import some test projects into the test@nrel.gov:password user
+
+    ```
+    # ssh into machine
+    vagrant ssh
+    cd /var/www/cbecc-com-web
+    bundle exec rake sim:import_test_project RAILS_ENV=vagrant
+    ```
 
 ### AWS Production via Chef / Knife / Capistrano
 
@@ -80,6 +88,9 @@ sudo chef-client
   bundle exec cap production nginx:reload
   bundle exec cap production nginx:restart
   ```
+
+* After initial deploy change the default password for test@nrel.gov from password to something more secure
+*
 
 #### Worker Nodes
 
