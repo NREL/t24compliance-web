@@ -29,7 +29,7 @@ end
 
 # supervisor tasks
 supervisor_service "sidekiq" do
-  command '/var/www/cbecc-com-web/current/bin/sidekiq.sh'
+  command '/var/www/cbecc-com-web/current/sidekiq.sh'
   directory '/mnt/repos/cofee-grinder'
   autostart false
   autorestart true
