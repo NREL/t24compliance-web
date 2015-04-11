@@ -30,7 +30,7 @@ end
 # supervisor tasks
 supervisor_service "sidekiq" do
   command '/var/www/cbecc-com-web/current/sidekiq.sh'
-  directory '/mnt/repos/cofee-grinder'
+  directory '/var/www/cbecc-com-web/current'
   autostart false
   autorestart true
   redirect_stderr true
