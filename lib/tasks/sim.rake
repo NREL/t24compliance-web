@@ -68,10 +68,13 @@ namespace :sim do
 
 
     # remove the old projects
-    projects = u.projects.exists(import_filename: true)
-    puts "Removing #{projects.count} projects"
+    if u.projects
+      projects = u.projects.exists(import_filename: true)
+      puts "Removing #{projects.count} projects"
 
-    projects.each {|p| p.delete}
+      projects.each {|p| p.delete}
+    end
+
 
     files = []
     #files += [File.join(Rails.root, "spec/files/cbecc_com_instances/0200016-OffSml-SG-BaseRun.xml")]
