@@ -43,7 +43,7 @@ set :keep_releases, 50
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
-set :linked_dirs,  %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
+set :linked_dirs,  %w(bin log data tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -54,8 +54,9 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/sockets -p"
       execute "mkdir #{shared_path}/tmp/pids -p"
       execute "mkdir #{shared_path}/log -p"
+      execute "mkdir #{shared_path}/data -p"
 
-      set :file_permissions_paths, ["#{shared_path}/log", "#{shared_path}/tmp/pids", "#{shared_path}/tmp/sockets"]
+      set :file_permissions_paths, ["#{shared_path}/log", "#{shared_path}/data", "#{shared_path}/tmp/pids", "#{shared_path}/tmp/sockets"]
       # set :file_permissions_users, ["www-data"]
       set :file_permissions_groups, ['deploy']
       set :file_permissions_chmod_mode, '0664'
