@@ -94,6 +94,17 @@ sudo chef-client
 
 #### Worker Nodes
 
+The worker nodes use Sidekiq as the asynchronous task manager. To config Sidekiq for the first time call
+
+ ```
+ cap vagrant sidekiq:config
+ cap staging sidekiq:config
+ cap production sidekiq:config
+ ```
+
+Then log into the supervisor client `ip_address:8080` and click start on the task.
+
+
 Currently the worker is the same as the server; however, this does not need to be the case. To start a worker on the server run the following in the background. The entire checkout of the application needs to be on the worker as well and the IP address of redis needs to be configured in the sidekiq.yml file.
 
 ```
