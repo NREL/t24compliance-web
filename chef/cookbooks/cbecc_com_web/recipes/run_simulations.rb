@@ -29,8 +29,7 @@ end
 
 # supervisor tasks
 supervisor_service "sidekiq" do
-  command '/var/www/cbecc-com-web/current/sidekiq.sh'
-  directory '/var/www/cbecc-com-web/current'
+  command '/var/www/cbecc-com-web/shared/bin/sidekiq.sh'
   autostart false
   autorestart true
   redirect_stderr true
