@@ -10,7 +10,11 @@ redis_instance 'cbecc_com_queue'
 
 include_recipe 'docker' # need to make sure that we upgrade the daemon to 1.5
 
+# This is silly, but the supervisor cookbook uses the python prefix in the supervisor daemon
+node.set['python']['prefix_dir'] = '/usr/local'
+#node['python']['prefix_dir']
 include_recipe 'supervisor'
+node.set['python']['prefix_dir'] = '/usr'
 
 # add users in a deploy group
 node[:cbecc_com_web][:deploy_users].each do |u|
@@ -38,19 +42,3 @@ supervisor_service "sidekiq" do
   #pidfile '/var/www/cbecc-com-web/shared/pids/sidekiq.pid'
   action :enable
 end
-
-# sidekiq
-# directory "/opt/local/bin" do
-#   owner 'deploy'
-#   group 'deploy'
-#   recursive true
-#   mode '0775'
-# end
-# include_recipe "sidekiq"
-#
-# sidekiq "cbecc_com_queue_sidekiq" do
-#   user "deploy"
-#   concurrency 1
-#   processes 1
-#   queues "queue" => 5
-# end

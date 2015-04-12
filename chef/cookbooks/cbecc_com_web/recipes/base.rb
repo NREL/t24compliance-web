@@ -14,5 +14,4 @@ if node['platform'] == 'redhat'
 
   # Install yum-cron on rhel to keep the system up to date
   package 'yum-cron'
-
 end
