@@ -64,6 +64,21 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     return simulationId;
   };
 
+  service.lookupSimulation = function (data) {
+    var deferred = $q.defer();
+    if (!service.getProjectId()) {
+      deferred.reject('No project ID');
+    } else {
+      data.show('projects', {id: service.getProjectId()}).then(function(response) {
+        service.setSimulationId(response);
+        $log.debug("THE SIM ID STORED: ", service.getSimulationId());
+        deferred.resolve('success');
+      }, function (response) {
+        deferred.reject('Invalid project ID');
+      });
+    }
+    return deferred.promise;
+  };
 
   service.lookupBuilding = function (data, requireBuilding) {
     var deferred = $q.defer();
@@ -75,6 +90,12 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           function (response) {
             if (response.length && response[0].hasOwnProperty('id')) {
               service.setBuildingId(response[0].id);
+              //set simulationID here!
+              data.show('projects', {id: service.getProjectId()}).then(function(project_response) {
+                service.setSimulationId(project_response);
+                $log.debug("THE SIM ID STORED: ", service.getSimulationId());
+              });
+
               deferred.resolve('success');
             } else {
               if (requireBuilding) {

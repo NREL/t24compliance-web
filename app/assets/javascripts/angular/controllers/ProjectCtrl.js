@@ -11,8 +11,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
     }
   });
 
-  console.log("!!SIMULATION ID:");
-  console.log(Shared.getSimulationId());
+  $log.debug("SimulationID: ", Shared.getSimulationId());
 
   $scope.setModified = function (btn) {
     Shared.setModified();
