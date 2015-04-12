@@ -104,7 +104,6 @@ The worker nodes use Sidekiq as the asynchronous task manager. To config Sidekiq
 
 Then log into the supervisor client `ip_address:8080` and click start on the task.
 
-
 Currently the worker is the same as the server; however, this does not need to be the case. To start a worker on the server run the following in the background. The entire checkout of the application needs to be on the worker as well and the IP address of redis needs to be configured in the sidekiq.yml file.
 
 ```
@@ -115,7 +114,8 @@ bundle exec sidekiq -e production
 # Known Limitations
 
 * Current timeout of 1 hour for simulations
-* Deployment is assume to be on a single node. The application should work with separate worker nodes, but the Chef recipes will need to be modified
+* One must manually stop and restart the Sidekiq process (held by supervisor) on deploy. `ip_address:8080`
+* Deployment is assumed to be on a single server. The application should work with separate worker nodes, but the Chef recipes will need to be modified.
 * Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
 
 # Development Setup
