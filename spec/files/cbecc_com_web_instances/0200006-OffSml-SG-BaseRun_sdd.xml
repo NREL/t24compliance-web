@@ -166,6 +166,13 @@
       <VT>0.84</VT>
       <VTCOG>0.84</VTCOG>
     </FenCons>
+    <DrCons>
+      <Name>Swinging Door MetalUninsulatedSingleLayer</Name>
+      <Type>MetalUninsulatedSingleLayerDoor</Type>
+      <CertificationMthd>CECDefaultPerformance</CertificationMthd>
+      <UFactor>0.5</UFactor>
+      <Open>Swinging</Open>
+    </DrCons>
     <Lum>
       <Name>4x2 T-8 Recessed</Name>
       <FxtrType>RecessedOrDownlight</FxtrType>
@@ -285,6 +292,7 @@
             </Win>
             <Dr>
               <Name>Perimeter 1 Wall South Door 1</Name>
+              <DrConsRef>Swinging Door MetalUninsulatedSingleLayer</DrConsRef>
               <Area>42.0</Area>
             </Dr>
           </ExtWall>
