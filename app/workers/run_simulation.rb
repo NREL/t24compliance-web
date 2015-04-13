@@ -46,7 +46,6 @@ class RunSimulation
       run_command = %W(/var/cbecc-com-files/run.sh)
       run_command += %W(-i /var/cbecc-com-files/run/#{run_filename})
       run_command += %W(-o Verbose,1,Silent,1,ComplianceReportPDF,1,ComplianceReportXML,1,)
-      run_command += %W(> /var/cbecc-com-files/run/docker.log 2>&1)
       logger.info "Docker run method is: #{run_command.join(' ')}"
 
       c = Docker::Container.create(
@@ -174,6 +173,7 @@ class RunSimulation
       File.delete File.join(@simulation.run_path, f) if File.exist? File.join(@simulation.run_path, f)
     end
 
+    json = {}
     Dir["#{@simulation.run_path}/*"].each do |f|
       if f =~ /AnalysisResults-BEES.pdf/
         logger.info 'saving the compliance report path to model'
@@ -211,6 +211,11 @@ class RunSimulation
         errors << error[/Error:\s{2}(.*)/, 1].chomp
       end
 
+      # This appeared once, but haven't seen it since
+      #s.scan(/Error\(s\) encountered simulating.*).each do |error|
+      #  errors << error[/Error:\s{2}(.*)/, 1].chomp
+      #end
+
       @simulation.error_messages = errors
     end
 
@@ -222,7 +227,15 @@ class RunSimulation
 
 
     # success is defined as no error messages
-    @simulation.error_messages.empty?
+    if !json.keys.empty? && json.keys.first != :'0'
+      return false
+    end
+
+    if !@simulation.error_messages.empty?
+      return false
+    end
+
+    true
   end
 
   # Parse the log string that had the perform analysis step to determine the state of the overall analysis
@@ -234,22 +247,22 @@ class RunSimulation
 
     # find where we are
     states = [
-        {/initializing ruleset/i => 0.440528634355686},
-        {/loading sdd model/i => 1.32158590308396},
-        {/back from loading sdd model/i => 1.32158590308396},
-        {/defaulting model/i => 1.76211453744387},
-        {/defaulting model/i => 2.6431718061637},
-        {/writing user input to analysis results xml/i => 3.08370044052783},
-        {/checking sdd model/i => 3.08370044052783},
-        {/preparing model zb/i => 3.08370044052783},
-        {/calling perfsim_e. for zb model/i => 3.52422907489197},
-        {/back from perfsim_e. (zb model, 0 return value)/i => 35.2422907488986},
-        {/exporting zb model details to results xml/i => 35.2422907488986},
-        {/preparing model ap/i => 35.2422907488986},
-        {/calling perfsim_e. for ap model/i => 35.6828193832585},
-        {/back from perfsim_e. (ap model, 0 return value)/i => 35.6828193832585},
-        {/preparing model ab/i => 35.6828193832585},
-        {/calling perfsim_e. for ab model/i => 35.6828193832585},
+        {/initializing ruleset/i => 0.5},
+        {/loading sdd model/i => 2},
+        {/back from loading sdd model/i => 2},
+        {/defaulting model/i => 2},
+        {/defaulting model/i => 5},
+        {/writing user input to analysis results xml/i => 5},
+        {/checking sdd model/i => 5},
+        {/preparing model zb/i => 5},
+        {/calling perfsim_e. for zb model/i => 5},
+        {/back from perfsim_e. (zb model, 0 return value)/i => 35},
+        {/exporting zb model details to results xml/i => 35},
+        {/preparing model ap/i => 40},
+        {/calling perfsim_e. for ap model/i => 40},
+        {/back from perfsim_e. (ap model, 0 return value)/i => 40},
+        {/preparing model ab/i => 40},
+        {/calling perfsim_e. for ab model/i => 40},
         {/back from perfsim_e. (ab model, 0 return value)/i => 100},
         {/umlh check on ab model/i => 100},
         {/exporting ab model details to results xml/i => 100}

@@ -21,7 +21,7 @@ class SimulationsController < ApplicationController
     jobs_ahead = 0
 
     if @simulation.job_id
-      # this may be really slow if the queue gets large
+      # this may be really slow if the queue gets large - is this ordered?
       Sidekiq::Queue.new.each do |j|
         jobs_ahead += 1
         break if j.jid == @simulation.job_id
@@ -32,7 +32,6 @@ class SimulationsController < ApplicationController
       job['queue']['jobs_ahead'] = jobs_ahead
       logger.debug "queue information is #{job['queue']}"
     end
-
 
     # data # => {status: 'complete', update_time: 1360006573, vino: 'veritas'}
     # Sidekiq::Status::get     job_id, :vino #=> 'veritas'
