@@ -38,33 +38,7 @@ class RunSimulation
       @simulation.project.xml_save("#{@simulation.run_path}/#{run_filename}")
       fail "Simulation file does not exist: #{File.join(@simulation.run_path, run_filename)}" unless File.exist? File.join(@simulation.run_path, run_filename)
 
-      # This section needs to go into an initializer
-      # If you are using boot2docker, then you have to deal with all these shananigans
-      # https://github.com/swipely/docker-api/issues/202
-      ENV['DOCKER_URL'] = ENV['DOCKER_HOST'] if ENV['DOCKER_HOST']
-      if ENV['DOCKER_URL']
-        logger.info "Docker URL is #{ENV['DOCKER_URL']}:#{ENV['DOCKER_URL'].class}"
-        cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
-        Docker.options = {
-            client_cert: File.join(cert_path, 'cert.pem'),
-            client_key: File.join(cert_path, 'key.pem'),
-            ssl_ca_file: File.join(cert_path, 'ca.pem'),
-            scheme: 'https' # This is important when the URL starts with tcp://
-        }
-        logger.info "Docker options are set to #{Docker.options}"
-      else
-        ENV['DOCKER_URL'] = 'unix:///var/run/docker.sock' unless ENV['DOCKER_URL']
-        logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux with a socket) if not, set DOCKER_URL ENV variable to the Docker socket'
-      end
-
-      # Kill after 1 hour at the moment
-      logger.info "Setting Excon timeouts to #{60*60} seconds"
-      Excon.defaults[:write_timeout] = RunSimulation::TIMEOUT
-      Excon.defaults[:read_timeout] = RunSimulation::TIMEOUT
-      Excon.defaults[:ssl_verify_peer] = false
-
-      # check if docker is alive
-      fail 'Docker is not running!' unless Docker.validate_version!
+      initialize_docker
 
       Dir.chdir(@simulation.run_path)
       logger.info "Current working directory is: #{Dir.getwd}"
@@ -156,6 +130,36 @@ class RunSimulation
 
   private
 
+  # Configure the Docker socket/api. This handles the certs and timeouts for both Docker and Excon
+  # If you are using boot2docker, then you have to deal with all these shananigans
+  # https://github.com/swipely/docker-api/issues/202
+  def initialize_docker
+    ENV['DOCKER_URL'] = ENV['DOCKER_HOST'] if ENV['DOCKER_HOST']
+    if ENV['DOCKER_URL']
+      logger.info "Docker URL is #{ENV['DOCKER_URL']}:#{ENV['DOCKER_URL'].class}"
+      cert_path = File.expand_path ENV['DOCKER_CERT_PATH']
+      Docker.options = {
+          client_cert: File.join(cert_path, 'cert.pem'),
+          client_key: File.join(cert_path, 'key.pem'),
+          ssl_ca_file: File.join(cert_path, 'ca.pem'),
+          scheme: 'https' # This is important when the URL starts with tcp://
+      }
+      logger.info "Docker options are set to #{Docker.options}"
+    else
+      logger.info 'No Docker IP found. Assuming that you are running Docker locally (on linux with a socket of unix:///var/run/docker.sock). If not, set DOCKER_URL ENV variable to the Docker socket'
+    end
+
+    # Kill after 1 hour at the moment
+    logger.info "Setting Excon timeouts to #{60*60} seconds"
+    Excon.defaults[:write_timeout] = RunSimulation::TIMEOUT
+    Excon.defaults[:read_timeout] = RunSimulation::TIMEOUT
+    Excon.defaults[:ssl_verify_peer] = false
+
+    # check if docker is alive!
+    fail 'Docker is not running!' unless Docker.validate_version!
+  end
+
+  # Process the results of the simulation
   def process_results
     # Clean up some of the files that are not needed
     %w(runmanager.db).each do |f|
