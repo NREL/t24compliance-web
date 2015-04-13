@@ -43,7 +43,7 @@ class RunSimulation
       Dir.chdir(@simulation.run_path)
       logger.info "Current working directory is: #{Dir.getwd}"
 
-      run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename})
+      run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename} > run/docker.log 2>&1)
       logger.info "Docker run method is: #{run_command}"
       c = Docker::Container.create({'Cmd' => run_command,
                                     'Image' => 'nllong/cbecc-com',
@@ -185,10 +185,13 @@ class RunSimulation
         @simulation.cbecc_code_description = json.values.first
       elsif f =~ /.*\s-\sab.*/
         logger.info "Annual baseline results #{f}"
+        @simulation.openstudio_model_baseline = f if File.extname(f) == '.osm'
+
       elsif f =~ /.*\s-\szb.*/
         logger.info "Sizing simulation results #{f}"
       elsif f =~ /.*\s-\sap.*/
         logger.info "Annual proposed results #{f}"
+        @simulation.openstudio_model_proposed = f if File.extname(f) == '.osm'
       end
     end
 
@@ -203,6 +206,13 @@ class RunSimulation
 
       @simulation.error_messages = errors
     end
+
+    # zip up everything and remove what we don't care about
+
+    # reports
+    # field :compliance_report_xml, type: String
+    # field :results_zip_file, type: String
+
 
     # success is defined as no error messages
     @simulation.error_messages.empty?

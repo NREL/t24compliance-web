@@ -12,8 +12,12 @@ class Simulation
   field :error_messages, type: Array
 
 
-  # compliance report
+  # reports
   field :compliance_report_pdf_path, type: String
+  field :compliance_report_xml, type: String
+  field :openstudio_model_proposed, type: String
+  field :openstudio_model_baseline, type: String
+  field :results_zip_file, type: String
 
   # embeds_many :simulation_results
   belongs_to :project
