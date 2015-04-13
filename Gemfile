@@ -46,6 +46,7 @@ gem 'font-awesome-rails'
 gem 'docker-api', require: 'docker'
 gem 'file-tail'
 gem 'sidekiq'
+gem 'sidekiq-status'
 gem 'sinatra', '>= 1.3.0', require: nil
 
 # Use ActiveModel has_secure_password

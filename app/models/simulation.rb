@@ -10,6 +10,7 @@ class Simulation
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
   field :error_messages, type: Array
+  field :job_id, type: String
 
   # reports
   field :compliance_report_pdf_path, type: String
@@ -31,8 +32,8 @@ class Simulation
 
     #require 'sidekiq/api'
 
-    job_id = RunSimulation.perform_async(id)
-    #self.job_id = job_id
+    self.job_id = RunSimulation.perform_async(id)
+    self.save!
   end
 
   # This only runs on the server, so if we federate the systems, then this will not always work.

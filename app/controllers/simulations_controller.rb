@@ -16,7 +16,36 @@ class SimulationsController < ApplicationController
   # GET /simulations/1
   # GET /simulations/1.json
   def show
-    respond_with @simulation
+    # if there is a job_id, then grab the status of the job from sidekiq
+    job = {}
+    jobs_ahead = 0
+
+    if @simulation.job_id
+      # this may be really slow if the queue gets large
+      Sidekiq::Queue.new.each do |j|
+        jobs_ahead += 1
+        break if j.jid == @simulation.job_id
+      end
+
+      job['queue'] = Sidekiq::Status::get_all @simulation.job_id
+      job['queue']['size'] = Sidekiq::Queue.new.size
+      job['queue']['jobs_ahead'] = jobs_ahead
+      logger.debug "queue information is #{job['queue']}"
+    end
+
+
+    # data # => {status: 'complete', update_time: 1360006573, vino: 'veritas'}
+    # Sidekiq::Status::get     job_id, :vino #=> 'veritas'
+    # Sidekiq::Status::at      job_id #=> 5
+    # Sidekiq::Status::total   job_id #=> 100
+    # Sidekiq::Status::message job_id #=> "Almost done"
+    # Sidekiq::Status::pct_complete job_id #=> 5
+    @data = @simulation.as_json(except: [:_id, :created_at, :updated_at, :project_id]).merge(job)
+    @data[:id] = @simulation.id.to_s
+    @data[:created_at] = @simulation.created_at
+    @data[:updated_at] = @simulation.updated_at
+    @data[:project_id] = @simulation.project_id.to_s
+    respond_with @data
   end
 
   # GET /simulations/new

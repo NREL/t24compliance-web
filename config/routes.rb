@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'users#home'
 
   require 'sidekiq/web'
+  require 'sidekiq-status/web'
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
