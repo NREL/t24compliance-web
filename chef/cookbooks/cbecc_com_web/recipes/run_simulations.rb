@@ -33,12 +33,11 @@ end
 
 # supervisor tasks
 supervisor_service "sidekiq" do
-  command '/var/www/cbecc-com-web/shared/bin/sidekiq.sh'
+  command '/usr/local/bin/pidproxy /var/www/cbecc-com-web/shared/tmp/pids/sidekiq.pid /var/www/cbecc-com-web/shared/bin/sidekiq.sh'
   autostart false
   autorestart true
   redirect_stderr true
   stdout_logfile '/var/log/supervisor/sidekiq.log'
   user "deploy"
-  #pidfile '/var/www/cbecc-com-web/shared/pids/sidekiq.pid'
   action :enable
 end
