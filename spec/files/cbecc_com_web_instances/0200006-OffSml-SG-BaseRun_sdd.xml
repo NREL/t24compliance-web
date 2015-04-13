@@ -695,6 +695,11 @@
           <ZnServedRef>Core Zone</ZnServedRef>
           <PriAirFlowMax>1611.0</PriAirFlowMax>
         </TrmlUnit>
+        <OACtrl>
+          <Name>Core PSZ AirSys 1 OutsideAirControl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+        </OACtrl>
       </AirSys>
       <AirSys>
         <Name>Perimeter 1 PSZ AirSys</Name>
@@ -742,6 +747,11 @@
           <ZnServedRef>Perimeter 1 Zone</ZnServedRef>
           <PriAirFlowMax>1211.0</PriAirFlowMax>
         </TrmlUnit>
+        <OACtrl>
+          <Name>Perimeter 1 PSZ AirSys OutsideAirControl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+        </OACtrl>
       </AirSys>
       <AirSys>
         <Name>Perimeter 2 PSZ AirSys</Name>
@@ -789,6 +799,11 @@
           <ZnServedRef>Perimeter 2 Zone</ZnServedRef>
           <PriAirFlowMax>724.0</PriAirFlowMax>
         </TrmlUnit>
+        <OACtrl>
+          <Name>Perimeter 2 PSZ AirSys OutsideAirControl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+        </OACtrl>
       </AirSys>
       <AirSys>
         <Name>Perimeter 3 PSZ AirSys</Name>
@@ -836,6 +851,11 @@
           <ZnServedRef>Perimeter 3 Zone</ZnServedRef>
           <PriAirFlowMax>1211.0</PriAirFlowMax>
         </TrmlUnit>
+        <OACtrl>
+          <Name>Perimeter 3 PSZ AirSys OutsideAirControl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+        </OACtrl>
       </AirSys>
       <AirSys>
         <Name>Perimeter 4 PSZ AirSys</Name>
@@ -883,6 +903,11 @@
           <ZnServedRef>Perimeter 4 Zone</ZnServedRef>
           <PriAirFlowMax>724.0</PriAirFlowMax>
         </TrmlUnit>
+        <OACtrl>
+          <Name>Perimeter 4 PSZ AirSys OutsideAirControl</Name>
+          <EconoCtrlMthd>DifferentialDryBulb</EconoCtrlMthd>
+          <EconoIntegration>Integrated</EconoIntegration>
+        </OACtrl>
       </AirSys>
     </Bldg>
     <FluidSys>
