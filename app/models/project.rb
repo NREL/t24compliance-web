@@ -259,10 +259,12 @@ class Project
 
           # set some hard coded values which are not fields
           xml.send(:CreateDate, created_at.to_i)
-          #xml.send(:ExcptCondFanPress, 'No')
-          #xml.send(:ExcptCondWCC, 'No')
-          xml.send(:AutoHardSize, 1)
-          xml.send(:AutoEffInput, 1)
+
+          # Don't default these as they raise warnings and will stop the cbecc engine from producing the compliance report
+          # xml.send(:ExcptCondFanPress, 'No')
+          # xml.send(:ExcptCondWCC, 'No')
+           xml.send(:AutoHardSize, 1)
+           xml.send(:AutoEffInput, 1)
 
           # TODO: need to include analysis type and software version here too?  (required per SDD inputs)
 

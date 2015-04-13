@@ -43,8 +43,12 @@ class RunSimulation
       Dir.chdir(@simulation.run_path)
       logger.info "Current working directory is: #{Dir.getwd}"
 
-      run_command = %W(/var/cbecc-com-files/run.sh -i /var/cbecc-com-files/run/#{run_filename} > run/docker.log 2>&1)
+      run_command = %W(/var/cbecc-com-files/run.sh)
+      run_command += %W(-i /var/cbecc-com-files/run/#{run_filename})
+      run_command += %W(-o Verbose,1,Silent,1,ComplianceReportPDF,1,ComplianceReportXML,1,)
+      run_command += %W(> run/docker.log 2>&1)
       logger.info "Docker run method is: #{run_command}"
+
       c = Docker::Container.create({'Cmd' => run_command,
                                     'Image' => 'nllong/cbecc-com',
                                     'AttachStdout' => true}

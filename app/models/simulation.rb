@@ -11,7 +11,6 @@ class Simulation
   field :cbecc_code_description, type: String
   field :error_messages, type: Array
 
-
   # reports
   field :compliance_report_pdf_path, type: String
   field :compliance_report_xml, type: String
@@ -26,18 +25,14 @@ class Simulation
 
   # Run the data point
   def run
-    ## Temp Code
-    # clear out the queue until we have proper queue management
-    # require 'sidekiq/api'
-    #Sidekiq::Queue.new.clear
-    # For now just copy in the example model that we are running into the folder under the new filename
-    ## End Temp Code
-
-    # clear out the object
-
+    # clear out all the data in database and on disk (note that this is also called from the worker)
     clear_results
     remove_files
-    RunSimulation.perform_async(id)
+
+    #require 'sidekiq/api'
+
+    job_id = RunSimulation.perform_async(id)
+    #self.job_id = job_id
   end
 
   # This only runs on the server, so if we federate the systems, then this will not always work.
