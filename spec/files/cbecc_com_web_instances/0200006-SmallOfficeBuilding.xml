@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <SDDXML>
   <Proj>
-    <Name>0200006-OffSml-SG-BaseRun</Name>
+    <Name>Small Office Building</Name>
     <GeometryInpType>Simplified</GeometryInpType>
     <State>CA</State>
     <ZipCode>90505</ZipCode>
@@ -188,7 +188,6 @@
       <TotStoryCnt>1</TotStoryCnt>
       <AboveGrdStoryCnt>1</AboveGrdStoryCnt>
       <LivingUnitCnt>0</LivingUnitCnt>
-      <TotFlrArea>5502.0</TotFlrArea>
       <Story>
         <Name>Story 1</Name>
         <Z>0.0</Z>
