@@ -38,7 +38,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bower-rails'
 
-gem 'angular-rails-templates'
+# Don't update this beyond 0.1.3 for Windows compatibility
+gem 'angular-rails-templates', '=0.1.3'
 
 gem 'font-awesome-rails'
 

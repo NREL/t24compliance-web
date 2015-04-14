@@ -37,7 +37,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    angular-rails-templates (0.1.4)
+    angular-rails-templates (0.1.3)
       railties (>= 3.1)
       sprockets
       tilt
@@ -293,7 +293,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angular-rails-templates
+  angular-rails-templates (= 0.1.3)
   autoprefixer-rails
   better_errors (~> 1.1.0)
   bootstrap-sass (~> 3.3.0)

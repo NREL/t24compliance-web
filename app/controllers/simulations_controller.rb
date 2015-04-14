@@ -19,6 +19,7 @@ class SimulationsController < ApplicationController
     # if there is a job_id, then grab the status of the job from sidekiq
     job = {}
     jobs_ahead = 0
+    job['queue'] = {}
 
     if @simulation.job_id
       # this may be really slow if the queue gets large - is this ordered?
