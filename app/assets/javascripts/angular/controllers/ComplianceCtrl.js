@@ -33,12 +33,11 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$http', '$timeout', 'data
 
   $scope.calls = 0;
   $scope.poll = function () {
-    $log.debug('Polling');
     $http.get($scope.simulationPath()).then(function (response) {
-      $scope.simulation = response;
+      $scope.simulation = response.data;
       $scope.calls++;
       if (!$scope.isComplete()) {
-        $timeout($scope.poll, 1000);
+        $timeout($scope.poll, 2000);
       } else {
         $scope.calls = 0;
       }
@@ -52,4 +51,8 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$http', '$timeout', 'data
   $scope.sddXmlPath = function () {
     return '/projects/' + Shared.getProjectId() + '/download';
   };
+
+  if ($scope.isRunning()) {
+    $scope.poll();
+  }
 }]);
