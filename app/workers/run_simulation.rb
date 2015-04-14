@@ -212,10 +212,10 @@ class RunSimulation
         errors << error[/Error:\s{2}(.*)/, 1].chomp
       end
 
-      # This appeared once, but haven't seen it since
-      #s.scan(/Error\(s\) encountered simulating.*).each do |error|
-      #  errors << error[/Error:\s{2}(.*)/, 1].chomp
-      #end
+      # This appeared once, but haven't seen it since.
+      s.scan(/error\(s\) encountered simulating.*/i).each do |error|
+        errors << error.chomp
+      end
 
       @simulation.error_messages = errors
     end
