@@ -1,8 +1,9 @@
 cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$location', 'toaster', 'Shared', 'Enums', 'data', 'project', 'plants', function ($scope, $log, $stateParams, $modal, $location, toaster, Shared, Enums, data, project, plants) {
 
   Shared.setIds($stateParams);
+  Shared.setSimulationId(project.simulation_id);
+
   $scope.project = project;
-  Shared.setSimulationId($scope.project);
   $scope.plants = plants;
   _.each($scope.plants, function (plant) {
     if (plant.type == 'ServiceHotWater') {
@@ -10,8 +11,6 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
       return false;
     }
   });
-
-  $log.debug("SimulationID: ", Shared.getSimulationId());
 
   $scope.setModified = function (btn) {
     Shared.setModified();
@@ -58,9 +57,7 @@ cbecc.controller('ProjectCtrl', ['$scope', '$log', '$stateParams', '$modal', '$l
 
       var the_id = response.hasOwnProperty('id') ? response.id : response._id;
       Shared.setProjectId(the_id);
-
-      //also save simulationID (automatically created when project is created
-      Shared.setSimulationId(response);
+      Shared.setSimulationId(response.simulation_id);
 
       // remove shw based on exceptional_condition_water_heater
       if (($scope.has_shw) && ($scope.project.exceptional_condition_water_heater == 'Yes')) {

@@ -53,10 +53,9 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     return buildingId;
   };
 
-  //passing in entire project
-  service.setSimulationId = function (project) {
-    if ((project.simulation_id) && (project.simulation_id != simulationId)) {
-      simulationId = project.simulation_id;
+  service.setSimulationId = function (value) {
+    if (value != simulationId) {
+      simulationId = value;
     }
   };
 
@@ -64,38 +63,15 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
     return simulationId;
   };
 
-  service.lookupSimulation = function (data) {
-    var deferred = $q.defer();
-    if (!service.getProjectId()) {
-      deferred.reject('No project ID');
-    } else {
-      data.show('projects', {id: service.getProjectId()}).then(function(response) {
-        service.setSimulationId(response);
-        $log.debug("THE SIM ID STORED: ", service.getSimulationId());
-        deferred.resolve('success');
-      }, function (response) {
-        deferred.reject('Invalid project ID');
-      });
-    }
-    return deferred.promise;
-  };
-
   service.lookupBuilding = function (data, requireBuilding) {
     var deferred = $q.defer();
-    if (!service.getProjectId()) {
-      deferred.reject('No project ID');
-    } else {
+
+    var checkBuilding = function(data, requireBuilding, deferred) {
       if (!service.getBuildingId()) {
         data.list('buildings', service.defaultParams()).then(
           function (response) {
             if (response.length && response[0].hasOwnProperty('id')) {
               service.setBuildingId(response[0].id);
-              //set simulationID here!
-              data.show('projects', {id: service.getProjectId()}).then(function(project_response) {
-                service.setSimulationId(project_response);
-                $log.debug("THE SIM ID STORED: ", service.getSimulationId());
-              });
-
               deferred.resolve('success');
             } else {
               if (requireBuilding) {
@@ -119,6 +95,21 @@ cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$mo
           });
       } else {
         deferred.resolve('Building ID already set');
+      }
+    };
+
+    if (!service.getProjectId()) {
+      deferred.reject('No project ID');
+    } else {
+      if (!service.getSimulationId()) {
+        data.show('projects', {id: service.getProjectId()}).then(function (response) {
+          service.setSimulationId(response.simulation_id);
+          checkBuilding(data, requireBuilding, deferred);
+        }, function (response) {
+          deferred.reject('Error looking up simulation ID');
+        });
+      } else {
+        checkBuilding(data, requireBuilding, deferred);
       }
     }
     return deferred.promise;
