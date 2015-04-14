@@ -5,6 +5,7 @@
 
 class RunSimulation
   include Sidekiq::Worker
+  include Sidekiq::Status::Worker
   sidekiq_options retry: 1 #, backtrace: true
 
   # TIMEOUT for docker container (and log file)
@@ -280,6 +281,9 @@ class RunSimulation
   # @param percent [Float] Value to set the simulation complete
   # @param message [String] Message to display to the user on the current state
   def update_percent_complete(percent, message)
+    at percent, message
+
+    # save to database as well for now
     @simulation.percent_complete_message << message if @simulation.percent_complete_message.last != message
     @simulation.percent_complete = percent
     @simulation.save!
@@ -288,7 +292,7 @@ class RunSimulation
   # Use glob to find the log file for the existing simulation. This assumes that CBECC-Com only writes
   # out a single log file
   def find_log_file
-    Dir["#{@simulation.run_path}/*.log"].first
+    Dir["#{@simulation.run_path}/in.log"].first
   end
 
 end

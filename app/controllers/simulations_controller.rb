@@ -19,7 +19,6 @@ class SimulationsController < ApplicationController
     # if there is a job_id, then grab the status of the job from sidekiq
     job = {}
     jobs_ahead = 0
-    job['queue'] = {}
 
     if @simulation.job_id
       # this may be really slow if the queue gets large - is this ordered?
@@ -31,6 +30,8 @@ class SimulationsController < ApplicationController
       job['queue'] = Sidekiq::Status::get_all @simulation.job_id
       job['queue']['size'] = Sidekiq::Queue.new.size
       job['queue']['jobs_ahead'] = jobs_ahead
+      job['queue']['percent'] = Sidekiq::Status::at @simulation.job_id
+      job['queue']['message'] = Sidekiq::Status::message @simulation.job_id
       logger.debug "queue information is #{job['queue']}"
     end
 
