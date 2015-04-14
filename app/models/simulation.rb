@@ -51,6 +51,11 @@ class Simulation
     self.cbecc_code_description = ''
     self.error_messages = []
     self.percent_complete_message = []
+    self.compliance_report_pdf_path = nil
+    self.compliance_report_xml = nil
+    self.openstudio_model_baseline = nil
+    self.openstudio_model_proposed = nil
+    self.results_zip_file = nil
 
     self.save!
   end
