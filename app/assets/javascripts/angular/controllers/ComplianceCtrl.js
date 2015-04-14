@@ -1,6 +1,8 @@
-cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared', 'simulation', function ($scope, $log, $timeout, data, Shared, simulation) {
+cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$http', '$timeout', 'data', 'Shared', 'simulation', function ($scope, $log, $http, $timeout, data, Shared, simulation) {
   $scope.simulation = simulation;
   $scope.errors_open = false;
+
+  $log.debug('Simulation ID:', Shared.getSimulationId());
 
   $scope.isComplete = function () {
     return _.contains(['completed', 'errored'], $scope.simulation.status);
@@ -25,9 +27,29 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$timeout','data', 'Shared
 
     $log.debug(params);
     data.bulkSync('simulations', params);
+
+    $scope.poll();
+  };
+
+  $scope.calls = 0;
+  $scope.poll = function () {
+    $log.debug('Polling');
+    $http.get($scope.simulationPath()).then(function (response) {
+      $scope.simulation = response;
+      $scope.calls++;
+      if (!$scope.isComplete()) {
+        $timeout($scope.poll, 1000);
+      } else {
+        $scope.calls = 0;
+      }
+    });
+  };
+
+  $scope.simulationPath = function () {
+    return '/simulations/' + Shared.getSimulationId() + '.json';
   };
 
   $scope.sddXmlPath = function () {
-    return '/projects/' + Shared.defaultParams().project_id + '/download';
+    return '/projects/' + Shared.getProjectId() + '/download';
   };
 }]);
