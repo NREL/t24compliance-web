@@ -10,11 +10,13 @@ class Simulation
   field :cbecc_code, type: Integer
   field :cbecc_code_description, type: String
   field :error_messages, type: Array
+  field :warning_messages, type: Array
   field :job_id, type: String
 
   # reports
   field :compliance_report_pdf_path, type: String
   field :compliance_report_xml, type: String
+  field :analysis_results_xml, type: String
   field :openstudio_model_proposed, type: String
   field :openstudio_model_baseline, type: String
   field :results_zip_file, type: String
@@ -50,11 +52,13 @@ class Simulation
     self.cbecc_code = nil
     self.cbecc_code_description = ''
     self.error_messages = []
+    self.warning_messages = []
     self.percent_complete_message = []
     self.compliance_report_pdf_path = nil
     self.compliance_report_xml = nil
     self.openstudio_model_baseline = nil
     self.openstudio_model_proposed = nil
+    self.analysis_results_xml = nil
     self.results_zip_file = nil
 
     self.save!

@@ -128,6 +128,10 @@ class RunSimulation
       fail m
     ensure
       Dir.chdir current_dir
+
+      # TODO: ensure that the docker container is killed
+      # c.kill(:signal => "SIGHUP") if c
+
       @simulation.status = success ? 'completed' : 'error'
       update_percent_complete(100, 'Completed')
       @simulation.status_message = status_message
@@ -181,9 +185,10 @@ class RunSimulation
         @simulation.compliance_report_pdf_path = f
       elsif f =~ /.*\s-\sAnalysisResults-BEES.xml/
         logger.info "BEES XML #{f}"
-        #@simulation.
+        @simulation.compliance_report_xml = f
       elsif f =~ /.*\s-\sAnalysisResults.xml/
         logger.info "XML #{f}"
+        @simulation.analysis_results_xml = f
       elsif f =~ /CbeccComWrapper.json/
         # Save the state based on the CbeccComWrapper.json file that is persisted
         json = MultiJson.load(File.read(f), symbolize_keys: true) if File.exist?(f)
@@ -203,6 +208,8 @@ class RunSimulation
       end
     end
 
+    # TODO: remove other files
+
     # parse the log file for any errors
     errors = []
     log_file = find_log_file
@@ -217,15 +224,15 @@ class RunSimulation
         errors << error.chomp
       end
 
+      # and this error: Compliance report(s) called for but bypassed due to report generator website not accessible.
+      if s =~ /compliance report.*called for but bypassed due to report generator website not accessible/i
+        @simulation.warning_messages << "Could not generate Compliance Reports because report generate website was not accessible"
+      end
+
       @simulation.error_messages = errors
     end
 
-    # zip up everything and remove what we don't care about
-
-    # reports
-    # field :compliance_report_xml, type: String
-    # field :results_zip_file, type: String
-
+    # TODO: zip up everything and remove what we don't care about
 
     # success is defined as no error messages
     if !json.keys.empty? && json.keys.first != :'0'

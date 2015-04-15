@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     post 'bulk_sync', on: :collection
   end
   resources :simulations, only: [:show, :index] do
+    get 'download_report', on: :member
     post 'bulk_sync', on: :collection
   end
   resources :thermal_zones do

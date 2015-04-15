@@ -1,7 +1,7 @@
 class SimulationsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :project # the resource is project
-  before_action :set_simulation, only: [:show, :edit, :update, :destroy]
+  before_action :set_simulation, only: [:show, :edit, :update, :destroy, :download_report]
   before_action :set_project, only: [:bulk_sync]
 
   respond_to :json, :html
@@ -129,6 +129,38 @@ class SimulationsController < ApplicationController
     end
   end
 
+  def download_report
+    report_name = params[:report]
+
+    # TODO: how to deal with report names that are not valid
+    logger.info "seeing if #{report_name} is available for download"
+
+    file = nil
+    case report_name
+      when 'compliance_xml'
+        file = @simulation.compliance_report_xml
+      when 'compliance_pdf'
+        file = @simulation.compliance_report_pdf_path
+      when 'openstudio_proposed'
+        file = @simulation.openstudio_model_proposed
+      when 'openstudio_baseline'
+        file = @simulation.openstudio_model_baseline
+      when 'analysis_xml'
+        file = @simulation.analysis_results_xml
+      when 'results_zip'
+        file = @simulation.results_zip_file
+    end
+
+    if file && File.exist?(file)
+      # replace the "in" in the filename
+      new_filename = File.basename(file).gsub('in', @simulation.project.name.gsub(' ', '_'))
+      send_data File.read(file), filename: new_filename, type: 'text/plain'
+    else
+      # TODO: how to error out here?
+      # render :nothing => true, :status => :error
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -145,6 +177,6 @@ class SimulationsController < ApplicationController
   def simulation_params
     logger.info 'validating parameters'
     # params.require(:simulation).permit(:filename)
-    params.permit(:building_id, :project_id, :id, data: [:action])
+    params.permit(:building_id, :project_id, :id, :report, data: [:action])
   end
 end

@@ -11,57 +11,78 @@
 
 <div class="row">
   <div class="col-lg-4 col-sm-4">
-    <div ng-if="isComplete()" class="pad-top-20"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Run Complete </div>
-    <div><strong>Status</strong>  {{simulation.status}} </div>
+    <div ng-if="isComplete()" class="pad-top-20"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Run
+      Complete
+    </div>
+    <div><strong>Status</strong> {{simulation.status}}</div>
     <div ng-if="isRunning()" class="pad-top-20">
-      <div><strong>Progress</strong> <progressbar class="progress-striped active" max="100" value=simulation.percent_complete type="success"><i>{{simulation.percent_complete}}</i></progressbar></div>
+      <div><strong>Progress</strong>
+        <progressbar class="progress-striped active" max="100" value=simulation.percent_complete type="success"><i>{{simulation.percent_complete}}</i>
+        </progressbar>
+      </div>
     </div>
     <div ng-if="isComplete() && hasErrors()" class="pad-top-20">
-      <accordion >
+      <accordion>
         <accordion-group is-open="errors_open">
           <accordion-heading>
-            <i class="pull-left glyphicon pad-right-5" ng-class="{'glyphicon-chevron-down': errors_open, 'glyphicon-chevron-right': !errors_open}"></i>
+            <i class="pull-left glyphicon pad-right-5"
+               ng-class="{'glyphicon-chevron-down': errors_open, 'glyphicon-chevron-right': !errors_open}"></i>
 
             Errors
             <span class="label label-danger">{{simulation.error_messages.length}}</span>
 
           </accordion-heading>
           <table class="table table-striped">
-          <tr ng-repeat="(key, value) in simulation.error_messages">
-            <td>{{simulation.error_messages[key]}}</td>
-          </tr>
+            <tr ng-repeat="(key, value) in simulation.error_messages">
+              <td>{{simulation.error_messages[key]}}</td>
+            </tr>
           </table>
         </accordion-group>
       </accordion>
     </div>
 
 
-    <button type="button" class="btn btn-success btn-block text-left" ng-click="getXml()" data-ng-disabled="isRunning()">
-      <i class="fa fa-arrow-circle-right fa-lg"></i> <span ng-if="isComplete()">Re-Run Compliance Check</span> <span ng-if="!isComplete()">Run Compliance Check</span>
+    <button type="button" class="btn btn-success btn-block text-left" ng-click="getXml()"
+            data-ng-disabled="isRunning()">
+      <i class="fa fa-arrow-circle-right fa-lg"></i> <span ng-if="isComplete()">Re-Run Compliance Check</span> <span
+        ng-if="!isComplete()">Run Compliance Check</span>
     </button>
 
     <div ng-if="isComplete()">
       <div class="pad-top-20"><strong>Downloads</strong></div>
       <div ng-if="hasCompliancePDF()">
-        <button type="button" class="btn btn-info btn-block text-left">
+        <a ng-href="{{simulationDownloadReport('compliance_pdf')}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
           <i class="fa fa-arrow-circle-o-down fa-lg"></i> Certificate of Compliance (PDF)
-        </button>
+        </a>
       </div>
-      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-        <i class="fa fa-arrow-circle-o-down fa-lg"></i> Full Compliance Report (XML)
-      </button>
+      <div ng-if="hasComplianceXml()">
+        <a ng-href="{{simulationDownloadReport('compliance_xml')}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
+          <i class="fa fa-arrow-circle-o-down fa-lg"></i> Certificate of Compliance (XML)
+        </a>
+      </div>
       <a ng-href="{{sddXmlPath()}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
-        <i class="fa fa-arrow-circle-o-down fa-lg"></i> SDD Model XML File
+        <i class="fa fa-arrow-circle-o-down fa-lg"></i> SDD Input Model (XML)
       </a>
-      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-        <i class="fa fa-arrow-circle-o-down fa-lg"></i> OpenStudio Model
-      </button>
-      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-        <i class="fa fa-arrow-circle-o-down fa-lg"></i> EnergyPlus Output Results
-      </button>
-      <button type="button" class="btn btn-info btn-block mar-top-5 text-left">
-        <i class="fa fa-arrow-circle-o-down fa-lg"></i> All
-      </button>
+      <div ng-if="hasAnalysisXml()">
+        <a ng-href="{{simulationDownloadReport('analysis_xml')}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
+          <i class="fa fa-arrow-circle-o-down fa-lg"></i> SDD Model with Results (XML)
+        </a>
+      </div>
+      <div ng-if="hasOpenStudioProposed()">
+        <a ng-href="{{simulationDownloadReport('openstudio_proposed')}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
+          <i class="fa fa-arrow-circle-o-down fa-lg"></i> OpenStudio Model - Proposed (OSM)
+        </a>
+      </div>
+      <div ng-if="hasOpenStudioBaseline()">
+        <a ng-href="{{simulationDownloadReport('openstudio_baseline')}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
+          <i class="fa fa-arrow-circle-o-down fa-lg"></i> OpenStudio Model - Baseline (OSM)
+        </a>
+      </div>
+      <div ng-if="hasResultsZip()">
+        <a ng-href="{{simulationDownloadReport('results_zip')}}" type="button" class="btn btn-info btn-block mar-top-5 text-left">
+          <i class="fa fa-arrow-circle-o-down fa-lg"></i> All files (ZIP)
+        </a>
+      </div>
     </div>
   </div>
   <div class="col-lg-6 col-lg-offset-2 col-md-8">
