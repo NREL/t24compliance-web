@@ -41,7 +41,6 @@ namespace :sim do
         p.xml_save("#{File.dirname(f)}/#{File.basename(f, '.*')}_out.xml")
       end
     end
-
   end
 
   desc 'remove orphaned objects'
