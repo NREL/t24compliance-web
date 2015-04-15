@@ -15,6 +15,7 @@
       Complete
     </div>
     <div><strong>Status</strong> {{simulation.status}}</div>
+    <div><strong>Status Message</strong> {{simulation.percent_complete_message[simulation.percent_complete_message.length - 1]}}</div>
     <div ng-if="isRunning()" class="pad-top-20">
       <div><strong>Progress</strong>
         <progressbar class="progress-striped active" max="100" value=simulation.percent_complete type="success"><i>{{simulation.percent_complete}}</i>
@@ -35,6 +36,25 @@
           <table class="table table-striped">
             <tr ng-repeat="(key, value) in simulation.error_messages">
               <td>{{simulation.error_messages[key]}}</td>
+            </tr>
+          </table>
+        </accordion-group>
+      </accordion>
+    </div>
+    <div ng-if="isComplete() && hasWarnings()" class="pad-top-20">
+      <accordion>
+        <accordion-group is-open="warnings_open">
+          <accordion-heading>
+            <i class="pull-left glyphicon pad-right-5"
+               ng-class="{'glyphicon-chevron-down': warnings_open, 'glyphicon-chevron-right': !warnings_open}"></i>
+
+            Warnings
+            <span class="label label-danger">{{simulation.warning_messages.length}}</span>
+
+          </accordion-heading>
+          <table class="table table-striped">
+            <tr ng-repeat="(key, value) in simulation.warning_messages">
+              <td>{{simulation.warning_messages[key]}}</td>
             </tr>
           </table>
         </accordion-group>

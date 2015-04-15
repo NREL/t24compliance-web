@@ -5,13 +5,19 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$http', '$timeout', 'data
     $log.debug('Simulation ID:', Shared.getSimulationId());
 
     $scope.isComplete = function () {
-        return _.contains(['completed', 'errored'], $scope.simulation.status);
+        return _.contains(['completed', 'error'], $scope.simulation.status);
     };
     $scope.isRunning = function () {
         return _.contains(['init', 'queued', 'started'], $scope.simulation.status);
     };
     $scope.hasErrors = function () {
         return !_.isEmpty($scope.simulation.error_messages);
+    };
+    $scope.hasWarnings = function () {
+        return !_.isEmpty($scope.simulation.warning_messages);
+    };
+    $scope.hasMessages = function () {
+        return !_.isEmpty($scope.simulation.percent_complete_message);
     };
     $scope.hasCompliancePDF = function () {
         return $scope.simulation.compliance_report_pdf_path != null;
@@ -67,7 +73,7 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$http', '$timeout', 'data
         return '/projects/' + Shared.getProjectId() + '/download';
     };
 
-    $scope.simulationDownloadReport = function(report_name) {
+    $scope.simulationDownloadReport = function (report_name) {
         return '/simulations/' + Shared.getSimulationId() + '/download_report?report=' + report_name
     };
 
