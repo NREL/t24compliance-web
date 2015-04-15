@@ -32,6 +32,8 @@ namespace :sim do
         puts "Importing #{f} for #{u.email}"
         p = Project.from_sdd_xml(f)
         p.user_id = u.id
+        p.building.user_id = u.id
+        p.building.save!
         p.save!
         puts "Imported #{p.name} for #{u.email}"
 

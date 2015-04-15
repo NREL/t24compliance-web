@@ -2,7 +2,7 @@ class SimulationsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource :project # the resource is project
   before_action :set_simulation, only: [:show, :edit, :update, :destroy, :download_report]
-  before_action :set_project, only: [:bulk_sync]
+  before_action :set_project, only: [:index, :update, :create, :bulk_sync]
 
   respond_to :json, :html
 
