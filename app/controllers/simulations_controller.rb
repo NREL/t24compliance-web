@@ -112,22 +112,6 @@ class SimulationsController < ApplicationController
     else
       fail 'Could not find project to run'
     end
-
-    case clean_params[:data][:action]
-      when 'xml'
-        # a = Tempfile.new(['sdd', '.xml'])
-        # @xml_file_path = a.path
-        #
-        # @simulation.project.xml_save(a.path)
-        #
-        # respond_with(@simulation)
-      when 'run'
-
-      when 'check'
-
-      else
-        logger.warn "unknown action '#{clean_params[:data][:action]} on SimulationController.bulk_sync'"
-    end
   end
 
   def download_report
