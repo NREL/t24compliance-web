@@ -56,6 +56,7 @@ cbecc.controller('ComplianceCtrl', ['$scope', '$log', '$http', '$timeout', 'data
     $scope.poll = function () {
         $http.get($scope.simulationPath()).then(function (response) {
             $scope.simulation = response.data;
+            //$log.debug('Simulation object is:', $scope.simulation);
             $scope.calls++;
             if (!$scope.isComplete()) {
                 $timeout($scope.poll, 2000);

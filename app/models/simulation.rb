@@ -33,6 +33,8 @@ class Simulation
     remove_files
 
     self.status = 'queued' # set the status here first so that the front end knows that it will be running shortly
+    self.save!
+
     self.job_id = RunSimulation.perform_async(id)
     self.save!
   end
