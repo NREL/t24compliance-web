@@ -208,9 +208,9 @@ namespace :import do
 
   desc 'remove all constructions'
   task remove_all_constructions: :environment do
-    Construction.delete_all
-    Fenestration.delete_all
-    DoorLookup.delete_all
+    Construction.destroy_all
+    Fenestration.destroy_all
+    DoorLookup.destroy_all
   end
 
   # desc 'delete all projects - use this with caution!'

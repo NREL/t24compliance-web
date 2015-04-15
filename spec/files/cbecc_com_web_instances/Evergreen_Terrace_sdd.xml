@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<SDDXML>
+  <Proj>
+    <Name>Evergreen Terrace</Name>
+    <GeometryInpType>Simplified</GeometryInpType>
+    <State>CA</State>
+    <ZipCode>90210</ZipCode>
+    <ExcptCondNoClgSys>No</ExcptCondNoClgSys>
+    <ExcptCondRtdCap>No</ExcptCondRtdCap>
+    <ExcptCondWtrHtr>No</ExcptCondWtrHtr>
+    <ExcptCondNarrative>No</ExcptCondNarrative>
+    <CompType>NewComplete</CompType>
+    <CreateDate>1429075446</CreateDate>
+    <AutoHardSize>1</AutoHardSize>
+    <AutoEffInput>1</AutoEffInput>
+    <Bldg>
+      <Name>Test House with Errors</Name>
+      <RelocPubSchoolBldg>0</RelocPubSchoolBldg>
+      <BldgAz>0.0</BldgAz>
+      <TotStoryCnt>2</TotStoryCnt>
+      <AboveGrdStoryCnt>2</AboveGrdStoryCnt>
+      <LivingUnitCnt>0</LivingUnitCnt>
+      <TotFlrArea>0.0</TotFlrArea>
+      <Story>
+        <Name>Story 1</Name>
+        <Z>0.0</Z>
+        <FlrToFlrHgt>14.0</FlrToFlrHgt>
+        <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+      </Story>
+      <Story>
+        <Name>Story 2</Name>
+        <Z>14.0</Z>
+        <FlrToFlrHgt>14.0</FlrToFlrHgt>
+        <FlrToCeilingHgt>10.0</FlrToCeilingHgt>
+      </Story>
+    </Bldg>
+  </Proj>
+</SDDXML>

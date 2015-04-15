@@ -2,7 +2,7 @@
 <SDDXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RulesetFilename file="CEC 2013 NonRes.bin"/>
   <Proj>
-    <Name>020012S-OffSml-CECStd</Name>
+    <Name>Small Office CECStd</Name>
     <BldgEngyModelVersion>9</BldgEngyModelVersion>
     <CreateDate>1428017900</CreateDate>
     <ModDate>1428069128</ModDate>

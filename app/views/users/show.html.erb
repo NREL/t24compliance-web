@@ -15,11 +15,13 @@
   <table class="table table-striped">
     <tr>
       <th>Name</th>
+      <th>Simulation Status</th>
       <th>Actions</th>
     </tr>
     <% @projects.each do |p| %>
       <tr>
         <td><a href="/wizard#/projects/<%= p.id %>"><div class="project-link"><%= p.name %></div></a></td>
+        <td><a href="/wizard#/projects/<%= p.id %>/buildings/<%= p.building.id%>/compliance"><div class="project-link"><%= p.simulation.status %></div></a></td>
         <td><a class="btn btn-info" type="button" href="<%= download_project_path(p) %>"><i class="fa fa-arrow-circle-o-down fa-lg"></i> Download XML</a> <a class="btn btn-danger" type="button" data-confirm="Are you sure?" data-method="delete" href="/projects/<%= p.id %>" rel="nofollow">Delete</a></td>
       </tr>
     <% end %>
