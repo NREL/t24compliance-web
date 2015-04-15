@@ -89,6 +89,7 @@ body > .container {
   }
   .nav > li {
     display: inline-block;
+    float: none;
   }
   .nav > li:last-child {
     padding-right: 30px;

@@ -6,6 +6,7 @@
     <div class="navbar-header pull-right" id="navbar">
       <% if user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
+          <li><%= "Welcome, #{current_user.email}" %></li>
           <li><%= link_to 'My Account', user_path(current_user), class: "navbar-link" %></li>
           <li><%= link_to 'Sign out', logout_path %></li>
         </ul>
