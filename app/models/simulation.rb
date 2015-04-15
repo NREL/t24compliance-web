@@ -32,8 +32,7 @@ class Simulation
     clear_results
     remove_files
 
-    #require 'sidekiq/api'
-
+    self.status = 'queued' # set the status here first so that the front end knows that it will be running shortly
     self.job_id = RunSimulation.perform_async(id)
     self.save!
   end
