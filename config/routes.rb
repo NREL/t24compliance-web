@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
   root to: 'users#home'
 
-  require 'sidekiq/web'
-  require 'sidekiq-status/web'
-  mount Sidekiq::Web => '/sidekiq'
-
   devise_for :users
   resources :users do
     get 'admin', on: :collection
     get 'home', on: :collection
   end
+
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
+  end
+
+  require 'sidekiq/web'
+  require 'sidekiq-status/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   resources :inputs, only: [:index, :show] do
