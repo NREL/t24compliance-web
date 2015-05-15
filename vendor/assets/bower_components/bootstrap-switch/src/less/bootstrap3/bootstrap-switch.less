@@ -2,6 +2,7 @@
 
 .@{bootstrap-switch-base} {
   display: inline-block;
+  direction: ltr;
   cursor: pointer;
   border-radius: @border-radius-base;
   border: 1px solid;
@@ -10,6 +11,7 @@
   text-align: left;
   overflow: hidden;
   line-height: 8px;
+  z-index: 0;
   .user-select(none);
   vertical-align: middle;
   .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");

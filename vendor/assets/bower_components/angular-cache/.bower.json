@@ -26,17 +26,18 @@
   ],
   "devDependencies": {
     "angular-1.2.25": "angular#1.2.25",
+    "angular-resource": "angular-resource#1.2.25",
     "angular-mocks-1.2.25": "angular-mocks#1.2.25"
   },
   "dependencies": {
     "angular": ">=1.x"
   },
-  "version": "3.2.5",
-  "_release": "3.2.5",
+  "version": "4.2.0",
+  "_release": "4.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "3.2.5",
-    "commit": "048e7a7c3e98e174992b365542b47a1a82ffe1a2"
+    "tag": "4.2.0",
+    "commit": "e9aa4d6bcc4d2434ed67aecbb63cfa78f6e1369c"
   },
   "_source": "git://github.com/jmdobry/angular-cache.git",
   "_target": "*",

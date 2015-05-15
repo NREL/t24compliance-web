@@ -64,12 +64,8 @@ do ($ = window.jQuery, window) ->
       # indeterminate state
       @$element.prop "indeterminate", true  if @options.indeterminate
 
-      # normalize handles width
-      @_initWidth()
-
-      # set container position
-      @_containerPosition @options.state, =>
-        @$wrapper.addClass "#{@options.baseClass}-animate"  if @options.animate
+      # normalize handles width and set container position
+      @_init()
 
       # initialise handlers
       @_elementHandlers()
@@ -87,11 +83,9 @@ do ($ = window.jQuery, window) ->
       return @$element  if @options.disabled or @options.readonly
       return @$element  if @options.state and not @options.radioAllOff and @$element.is ":radio"
 
-      if @options.indeterminate
-        @indeterminate false
-        value = true
-      else
-        value = not not value
+      # remove indeterminate
+      @indeterminate false  if @options.indeterminate
+      value = not not value
 
       @$element.prop("checked", value).trigger "change.bootstrapSwitch", skip
       @$element
@@ -111,6 +105,7 @@ do ($ = window.jQuery, window) ->
       @$wrapper.removeClass "#{@options.baseClass}-#{@options.size}" if @options.size?
       @$wrapper.addClass "#{@options.baseClass}-#{value}" if value
       @_width()
+      @_containerPosition()
       @options.size = value
       @$element
 
@@ -329,15 +324,6 @@ do ($ = window.jQuery, window) ->
       @$container.width (@_handleWidth * 2) + @_labelWidth
       @$wrapper.width @_handleWidth + @_labelWidth
 
-    _initWidth: ->
-      return @_width()  if @$wrapper.is ":visible"
-
-      widthInterval = window.setInterval =>
-        if @$wrapper.is ":visible"
-          @_width()
-          window.clearInterval widthInterval
-      , 50
-
     _containerPosition: (state = @options.state, callback) ->
       @$container
       .css "margin-left", =>
@@ -352,12 +338,23 @@ do ($ = window.jQuery, window) ->
 
       return  unless callback
 
-      if $.support.transition
-        @$container
-        .one "bsTransitionEnd", callback
-        .emulateTransitionEnd 500
-      else
+      setTimeout ->
         callback()
+      , 50
+
+    _init: ->
+      init = =>
+        @_width()
+        @_containerPosition null, =>
+          @$wrapper.addClass "#{@options.baseClass}-animate"  if @options.animate
+
+      return init()  if @$wrapper.is ":visible"
+
+      initInterval = window.setInterval =>
+        if @$wrapper.is ":visible"
+          init()
+          window.clearInterval initInterval
+      , 50
 
     _elementHandlers: ->
       @$element.on
@@ -379,6 +376,7 @@ do ($ = window.jQuery, window) ->
               .not(@$element)
               .prop("checked", false)
               .trigger "change.bootstrapSwitch", true
+
             @$element.trigger "switchChange.bootstrapSwitch", [state]
 
         "focus.bootstrapSwitch": (e) =>
@@ -405,11 +403,17 @@ do ($ = window.jQuery, window) ->
               @state true
 
     _handleHandlers: ->
-      @$on.on "click.bootstrapSwitch", (e) =>
+      @$on.on "click.bootstrapSwitch", (event) =>
+        event.preventDefault()
+        event.stopPropagation()
+
         @state false
         @$element.trigger "focus.bootstrapSwitch"
 
-      @$off.on "click.bootstrapSwitch", (e) =>
+      @$off.on "click.bootstrapSwitch", (event) =>
+        event.preventDefault()
+        event.stopPropagation()
+
         @state true
         @$element.trigger "focus.bootstrapSwitch"
 
@@ -419,6 +423,7 @@ do ($ = window.jQuery, window) ->
           return  if @_dragStart or @options.disabled or @options.readonly
 
           e.preventDefault()
+          e.stopPropagation()
 
           @_dragStart = (e.pageX or e.originalEvent.touches[0].pageX) - parseInt @$container.css("margin-left"), 10
           @$wrapper.removeClass "#{@options.baseClass}-animate"  if @options.animate

@@ -1,3 +1,40 @@
+##### 4.2.0 27 April 2015
+
+###### Backwards compatible bug fixes
+- #174 - Cache not being fully emptied if using localStorage and multiple web pages
+
+##### 4.1.0 30 March 2015
+
+###### Backwards compatible API changes
+- #169 - Official support for ngResource
+
+##### 4.0.2 22 March 2015
+
+###### Backwards compatible bug fixes
+- #164 - onExpire is still called when cache is empty
+
+##### 4.0.1 20 March 2015
+
+###### Backwards compatible bug fixes
+- #163 - Configuring CacheOption storagePrefix results in "true.{key}"
+
+##### 4.0.0 15 March 2015
+
+###### Breaking API changes
+- Completely disassociated angular-cache from the deprecated angular-data (angular-data has been replaced by js-data + js-data-angular)
+- Angular module renamed to _angular-cache_
+- _DSCacheFactory_ renamed to _CacheFactory_
+- _DSBinaryHeap_ renamed to _BinaryHeap_
+- Removed `DSCacheFactoryProvider.setCacheDefaults`. You now do `angular.extend(CacheFactoryProvider.defaults, { ... });`
+- No longer exposing a `DSCache` constructor function (as it no longer exists)
+- `storageMode` can now be set dynamically, which will remove all items from current storage and insert them into the new storage
+
+###### Other
+- Fixes #161
+- Converted to ES6 and a webpack build with better umd support
+- Now exporting the module name _angular-cache_ (when you do `require('angular-cache')` you get `"angular-cache"`)
+- Deprecating angular-cache < 4.0.0
+
 ##### 3.2.5 02 February 2015
 
 ###### Backwards compatible bug fixes

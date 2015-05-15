@@ -1,11 +1,11 @@
-cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'DSCacheFactory', 'usSpinnerService', 'toaster', 'uiGridConstants', function ($log, $q, $templateCache, $sce, $window, $modal, DSCacheFactory, usSpinnerService, toaster, uiGridConstants) {
+cbecc.factory('Shared', ['$log', '$q', '$templateCache', '$sce', '$window', '$modal', 'CacheFactory', 'usSpinnerService', 'toaster', 'uiGridConstants', function ($log, $q, $templateCache, $sce, $window, $modal, CacheFactory, usSpinnerService, toaster, uiGridConstants) {
   var service = {};
   var projectId = null;
   var buildingId = null;
   var simulationId = null;
   var modified = false;
   var fullscreen = false;
-  var cache = DSCacheFactory('libraries', {
+  var cache = CacheFactory('libraries', {
     storageMode: 'localStorage'
   });
 
