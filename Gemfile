@@ -38,7 +38,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'bower-rails'
 
-# Don't update this beyond 0.1.3 for Windows compatibility
+# Don't update this beyond 0.1.3 for Windows compatibility (broken up to and including v0.2.0)
 gem 'angular-rails-templates', '=0.1.3'
 
 gem 'font-awesome-rails'
@@ -85,6 +85,7 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'teaspoon'
+  gem 'teaspoon-jasmine'
   gem 'phantomjs'
   gem 'rubocop', require: false
   gem 'rubocop-checkstyle_formatter', require: false
