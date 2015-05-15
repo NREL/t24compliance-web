@@ -27,10 +27,11 @@ unless SKIP_CONSTRUCTIONS
   file = File.read(File.join(Rails.root, "lib/assets/construction_library.json"))
   data = JSON.parse(file)
 
+  puts 'Importing Constructions'
   data['constructions'].each_with_index do |c, index|
     cons = Construction.find_or_create_by(name: c['name'])
     if cons
-      puts "Adding/Updating Construction: #{cons.name}"
+      puts "Adding/Updating Construction: #{cons.name}" if index % 100 == 0
 
       # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
       # need to be removed
@@ -45,10 +46,11 @@ unless SKIP_FENESTRATION
   file = File.read(File.join(Rails.root, "lib/assets/fenestration_library.json"))
   data = JSON.parse(file)
 
+  puts 'Importing Fenestrations'
   data['default_fenestrations'].each_with_index do |c, index|
     fens = Fenestration.find_or_create_by(name: c['name'])
     if fens
-      puts "Adding/Updating Fenestration: #{fens.name}"
+      puts "Adding/Updating Fenestration: #{fens.name}" if index % 100 == 0
 
       # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
       # need to be removed
@@ -66,10 +68,11 @@ unless SKIP_DOORS
   file = File.read(File.join(Rails.root, "lib/assets/door_construction_library.json"))
   data = JSON.parse(file)
 
+  puts 'Importing Door Constructions'
   data['door_constructions'].each_with_index do |c, index|
     door = DoorLookup.find_or_create_by(name: c['name'])
     if door
-      puts "Adding/Updating Door: #{door.name}"
+      puts "Adding/Updating Door: #{door.name}" if index % 100 == 0
 
       # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
       # need to be removed
@@ -86,10 +89,11 @@ unless SKIP_SPACES
   file = File.read(File.join(Rails.root, "lib/assets/space_function_library.json"))
   data = JSON.parse(file)
 
+  puts 'Importing Spaces'
   data['space_functions'].each_with_index do |c, index|
     sf = SpaceFunctionDefault.find_or_create_by(name: c['name'])
     if sf
-      puts "Adding/Updating Space Function Default: #{sf.name}"
+      puts "Adding/Updating Space Function Default: #{sf.name}" if index % 100 == 0
 
       # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
       # need to be removed
@@ -104,10 +108,11 @@ unless SKIP_ZIP_CODES
   file = File.read(File.join(Rails.root, "lib/assets/zip_codes.json"))
   data = JSON.parse(file)
 
+  puts 'Importing Zip Codes'
   data['zip_codes'].each_with_index do |c, index|
     zips = ZipCodes.find_or_create_by(state: c['state'])
     if zips
-      puts "Adding/Updating Zip Codes: #{zips.state}"
+      puts "Adding/Updating Zip Codes: #{zips.state}" if index % 100 == 0
 
       # Note that this is a one-way merge. It will not remove any fields that are in the current record instance that
       # need to be removed
