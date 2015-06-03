@@ -133,8 +133,6 @@ bundle exec sidekiq -e production
 * Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
 * If you restart IP tables, you must restart the docker service, else the docker container will not have internet access. This is a known docker issue
 * There is no password on mongodb (make sure ports/iptables are configured correctly)
-* Need to cleanup repo before opening up
-    * Remove secret_key
 
 # Development Setup
 
