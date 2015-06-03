@@ -103,6 +103,7 @@ To deploy new code do the following:
 
 * Change the source code, commit to git, and push to github
 * `cap production deploy`
+* Ensure that the site is running. You may have to run `cap production puma:restart`
 * go to `http://ip_address:8080` and restart the sidekiq process (this loads the code changes into the background process) 
 
 #### Worker Nodes
