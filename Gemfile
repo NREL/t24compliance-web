@@ -2,10 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.10'
-# Use jdbcsqlite3 as the database for Active Record
-# gem 'activerecord-jdbcsqlite3-adapter'
-# MongoDB Adapter ( ~> 4.0)
-gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git'
+gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git' # MongoDB Adapter ( ~> 4.0)
 
 # JSON parsing and conversion
 gem 'multi_json'
@@ -54,7 +51,9 @@ gem 'sinatra', '>= 1.3.0', require: nil
 # gem 'bcrypt', '~> 3.1.7'
 
 # use puma to run the web app in jruby
-gem 'puma'
+platforms :jruby do
+  gem 'puma'
+end
 
 # for windows
 gem 'tzinfo-data'
@@ -75,9 +74,8 @@ group :development do
   gem 'capistrano-file-permissions'
 end
 
-gem 'faker'
-
 group :test, :development do
+  gem 'faker'
   gem 'rspec', '~> 3.1.0'
   gem 'rspec-rails', '~> 3.1.0'
   # gem 'factory_girl_rails', '~> 4.5'
