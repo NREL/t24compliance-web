@@ -61,7 +61,26 @@ template '/etc/sudoers.d/jruby.sh' do
   group 'root'
 end
 
+# create a secret file for the environment
+require 'securerandom'
+template '/etc/profile.d/cbecc_secrets.sh' do
+  source 'cbecc_secrets.sh.erb'
+  mode '0750'
+  owner 'root'
+  group 'deploy'
+  variables(
+      {
+          :secret_key_base => SecureRandom.hex(64),
+          :devise_secret_key => SecureRandom.hex(64)
+      }
+  )
+end
+
+
 # set iptables
 include_recipe 'iptables'
 
 iptables_rule 'default_ip_rules'
+
+
+
