@@ -4,7 +4,6 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # TODO: Security -- remove from repo
   if Rails.env.development? || Rails.env.test?
     config.secret_key = '8a7368a7f9b2b88f9d3fa6f46c3ed430ca71d72745f58bed72461b7ae50e23c7bbe58610cdfe67d04c8d43a845df33e667c140d48fbdb93a08b9a61748db1b7b'
   else
