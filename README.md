@@ -52,12 +52,12 @@ One liner (for vagrant)
 * Update the roles/cookbooks in the `chef/cookbooks, chef/roles` folder.
 * If adding a new cookbook either add it to the Berksfile or as part of the metadata under the cbec_com_web cookbook
 * Test locally using Vagrant per instruction above
-* Upload the cookbooks and roles to the Hosted Chef server
+* Upload the cookbooks and roles to the Hosted Chef server (https://manage.chef.io)
 
 ```
 berks upload
 # you may need to force the cbecc_com_web unless you incremented the version
-berks upload cbec_com_web --force
+berks upload cbecc_com_web --force
 knife role from file chef/roles/cbecc_com_web_single.rb
  ```
 
@@ -89,8 +89,21 @@ sudo chef-client
   bundle exec cap production nginx:restart
   ```
 
-* After initial deploy change the default password for test@nrel.gov from password to something more secure
-*
+* After initial deploy change the default password for test@nrel.gov from password to a secure password
+
+#### Updating Server and Source Code
+
+To update the server use berks, chef, and chef-client
+
+* Change the Chef cookbooks
+* Upload the changes using `berks upload` and `berks upload cbecc_com_web --force`
+* Run `sudo chef-client` on the server
+
+To deploy new code do the following:
+
+* Change the source code, commit to git, and push to github
+* `cap production deploy`
+* go to `http://ip_address:8080` and restart the sidekiq process (this loads the code changes into the background process) 
 
 #### Worker Nodes
 
@@ -117,8 +130,7 @@ bundle exec sidekiq -e production
 * One must manually stop and restart the Sidekiq process (held by supervisor) on deploy. `ip_address:8080`
 * Deployment is assumed to be on a single server. The application should work with separate worker nodes, but the Chef recipes will need to be modified.
 * Simulation results are stored in /data/simulations/#{environment}/{sim_id}. These results will eventually fill up the machine since most results are being persisted.
-* ~~System email may not be working~~
-* If you restart IP tables, you must restart the docker service, else the docker container will not have internet access
+* If you restart IP tables, you must restart the docker service, else the docker container will not have internet access. This is a known docker issue
 * There is no password on mongodb (make sure ports/iptables are configured correctly)
 * Need to cleanup repo before opening up
     * Remove secret_key
