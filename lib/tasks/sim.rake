@@ -2,7 +2,7 @@ namespace :sim do
   desc 'import test project'
   task import_test_project: :environment do
     # import some cbecc com models
-    users_accounts = %w(larry.brackney@nrel.gov nllong@me.com test@nrel.gov)
+    users_accounts = %w(larry.brackney@nrel.gov nllong@me.com test@nrel.gov amir.roth@ee.doe.gov)
     users = User.where(:email.in => users_accounts)
 
     users.each do |u|
