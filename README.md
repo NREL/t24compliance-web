@@ -116,7 +116,7 @@ The worker nodes use Sidekiq as the asynchronous task manager. To config Sidekiq
  cap production sidekiq:config
  ```
 
-Then log into the supervisor client `ip_address:8080` and click start on the task.
+Then log into the supervisor client `ip_address:8080` and click start on the task. You can also log in to the machine and run `supervisorctl start sidekiq`. Note that the DEVISE_SECRET_KEY and SECRET_KEY_BASE need to be in the sidekiq.sh file to work correctly.  
 
 Currently the worker is the same as the server; however, this does not need to be the case. To start a worker on the server run the following in the background. The entire checkout of the application needs to be on the worker as well and the IP address of redis needs to be configured in the sidekiq.yml file.
 
