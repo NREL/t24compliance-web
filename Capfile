@@ -8,6 +8,7 @@ require 'capistrano/rbenv'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 require 'capistrano/puma'
+# install_plugin Capistrano::Puma  # Default puma tasks
 # do not use capistrano/puma/nginx, rather just use nginx directly
 
 require 'capistrano/nginx'
