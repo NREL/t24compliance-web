@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.10'
+gem 'rails', '4.1.16'
 gem 'mongoid', git: 'git://github.com/mongoid/mongoid.git', ref: '26f67146a7b7969a16862fa'  # MongoDB Adapter ( ~> 4.0)
 
 # JSON parsing and conversion
 gem 'multi_json', '1.11.0'
-gem 'nokogiri', '1.6.6.2'
+gem 'nokogiri', '1.6.8.1'
 
 # user auth
 gem 'devise', '~> 3.4.1'
@@ -26,7 +26,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyrhino', '2.0.4'
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '3.1.2'
+gem 'jquery-rails', '3.1.5'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 # remove turbolinks when using angular
 # gem 'turbolinks'
@@ -87,6 +87,6 @@ group :test, :development do
   gem 'teaspoon', '1.0.2'
   gem 'teaspoon-jasmine', '2.2.0'
   gem 'phantomjs', '1.9.8'
-  gem 'rubocop', '0.31.0', require: false
+  gem 'rubocop', '0.41.2', require: false
   gem 'rubocop-checkstyle_formatter', '0.2.0', require: false
 end
